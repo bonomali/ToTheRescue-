@@ -14,9 +14,9 @@ drop table ProfileProgress;
 drop table Profiles;
 drop table Users;
 drop table Animals;
-drop table Sounds;
 drop table Nodes;
 drop table Maps;
+drop table Sounds;
 drop table Images;
 
 create table Images (
@@ -25,10 +25,17 @@ create table Images (
 	, Images varbinary(max) not null
 	, ImageName varchar(50) not null);
 
+create table Sounds (
+	SoundID int primary key identity
+	, SoundClass int not null
+	, Sound varbinary(max) not null
+	, SoundName varchar(50) not null);
+
 create table Maps (
-	MapID int primary key identity
-	, MapName varchar(50) not null
-	, ImageID int references Images (ImageID));
+MapID int primary key identity
+, MapName varchar(50) not null
+, ImageID int references Images (ImageID)
+, SoundID int references Sounds (SoundID));
 
 create table Nodes (
 	MapID int references Maps (MapID)
@@ -36,12 +43,6 @@ create table Nodes (
 	, XCoordinate int not null
 	, YCoordinate int not null
 	, primary key (MapID, NodeID));
-
-create table Sounds (
-	SoundID int primary key identity
-	, SoundClass int not null
-	, Sound varbinary(max) not null
-	, SoundName varchar(50) not null);
 
 create table Animals (
 	AnimalID int primary key identity
@@ -87,12 +88,13 @@ create table MiniGames (
 	, MiniGameCode varchar(max) not null --syntax for clob
 	, MiniGameName varchar(50) not null
 	, MinDifficulty int not null
-	, MaxDifficulty int not null);
+	, MaxDifficulty int not null
+	, SoundID int references Sounds (SoundID));
 
 create table MiniGameMedia (
 	MediaID int primary key identity
 	, MiniGameID int references Minigames (MiniGameID)
-	, Difficulty int
+	, Difficulty int default null	--nulled if media is used for every instance of that game
 	, MiniGameMedia varbinary(max) not null);
 
 create table ProfileProgressHistory (
