@@ -10,8 +10,8 @@ namespace ToTheRescueDataPop
         // The directory for the images
         public static string IMAGES_PATH = "C:\\Users\\Stephanie\\Documents\\GitHub\\ToTheRescue-\\Database\\testMedia\\";
         public static string SOUND_PATH = "C:\\Users\\Stephanie\\Documents\\GitHub\\ToTheRescue-\\Database\\testMedia\\";
-        static string DB_USER_NAME = "ToTheRescue";
-        static string DB_USER_PWD = "LakebertMattenie";
+        static string DB_USER_NAME = "";
+        static string DB_USER_PWD = "";
         public static SqlConnection GetConnection()
         {
             SqlConnection connection = new SqlConnection();
