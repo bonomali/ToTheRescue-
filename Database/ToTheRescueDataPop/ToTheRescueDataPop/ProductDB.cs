@@ -8,8 +8,8 @@ namespace ToTheRescueDataPop
     class ProductDB
     {
         // The directory for the images
-        public static string IMAGES_PATH = "C:\\temp\\";
-        public static string SOUND_PATH = "C:\\temp\\";
+        public static string IMAGES_PATH = "C:\\Users\\Stephanie\\Documents\\GitHub\\ToTheRescue-\\Database\\testMedia";
+        public static string SOUND_PATH = "C:\\Users\\Stephanie\\Documents\\GitHub\\ToTheRescue-\\Database\\testMedia";
         static string DB_USER_NAME = "";
         static string DB_USER_PWD = "";
         public static SqlConnection GetConnection()
@@ -69,13 +69,13 @@ namespace ToTheRescueDataPop
                 }
             }
         }
-        public static void WriteDataImage(int ImageClass, string ImageName, int Difficulty)
+        public static void WriteMiniGameMedia(int GameID, string MediaName, int Difficulty)
         {
             SqlConnection connection = null;
             try
             {
                 // 1. Read image from file
-                string filepath = IMAGES_PATH + ImageName;
+                string filepath = IMAGES_PATH + MediaName;
                 if (File.Exists(filepath) == false)
                     throw new Exception("File Not Found: " + filepath);
                 FileStream sourceStream = new FileStream(
@@ -84,8 +84,8 @@ namespace ToTheRescueDataPop
                     FileAccess.Read);
 
                 int streamLength = (int)sourceStream.Length;
-                Byte[] productImage = new Byte[streamLength];
-                sourceStream.Read(productImage, 0, streamLength);
+                Byte[] productMedia = new Byte[streamLength];
+                sourceStream.Read(productMedia, 0, streamLength);
                 sourceStream.Close();
 
                 // 2. Write image to database
@@ -94,12 +94,12 @@ namespace ToTheRescueDataPop
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
                 command.CommandText =
-                    "INSERT INTO dbo.ImageGameData (GameCategoryID, Difficulty, GameImage) " +
-                    "VALUES (@ImageClass, @Difficulty, @ProductImage)";
+                    "INSERT INTO dbo.MiniGameMedia (GameID, Difficulty, GameMedia) " +
+                    "VALUES (@GameID, @Difficulty, @ProductMedia)";
 
-                command.Parameters.AddWithValue("@ImageClass", ImageClass);
+                command.Parameters.AddWithValue("@GameID", GameID);
                 command.Parameters.AddWithValue("@Difficulty", Difficulty);
-                command.Parameters.AddWithValue("@ProductImage", productImage);
+                command.Parameters.AddWithValue("@ProductMedia", productMedia);
 
                 connection.Open();
                 command.ExecuteNonQuery();
