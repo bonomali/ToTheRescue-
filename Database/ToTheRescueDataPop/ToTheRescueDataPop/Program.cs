@@ -63,31 +63,28 @@ namespace ToTheRescueDataPop
 
             if (dataImageIDList.Count == 0)
             {
-                ProductDB.WriteMiniGameMedia(10, "circle.jpg", 1);
-                ProductDB.WriteMiniGameMedia(10, "triangle.jpg", 1);
-                ProductDB.WriteMiniGameMedia(10, "rectangle.jpg", 1);
+                ProductDB.WriteMiniGameMedia(10, "circle.jpg", 0);
+                ProductDB.WriteMiniGameMedia(10, "triangle.jpg", 0);
+                ProductDB.WriteMiniGameMedia(10, "rectangle.jpg", 0);
 
-                ProductDB.WriteMiniGameMedia(10, "octagon.jpg", 1);
-                ProductDB.WriteMiniGameMedia(10, "rectangle.jpg", 1);
-                ProductDB.WriteMiniGameMedia(10, "star.jpg", 1);
+                ProductDB.WriteMiniGameMedia(10, "octagon.jpg", 0);
+                ProductDB.WriteMiniGameMedia(10, "rectangle.jpg", 0);
+                ProductDB.WriteMiniGameMedia(10, "star.jpg", 0);
 
-                ProductDB.WriteMiniGameMedia(10, "diamond.jpg", 1);
-                ProductDB.WriteMiniGameMedia(10, "shaperecog_shapehunt.jpg", 1);
-                ProductDB.WriteMiniGameMedia(10, "shush_shapehunt.mp3", 1);
+                ProductDB.WriteMiniGameMedia(10, "diamond.jpg", 0);
+                ProductDB.WriteMiniGameMedia(10, "shaperecog_shapehunt.jpg", 0);
+                ProductDB.WriteMiniGameMedia(10, "shush_shapehunt.mp3", 0);
 
                 ProductDB.WriteMiniGameMedia(12, "sortingBear1.jpg", 2);
                 ProductDB.WriteMiniGameMedia(12, "sortingBear2.jpg", 2);
                 ProductDB.WriteMiniGameMedia(12, "sortingBear3.jpg", 2);
                 ProductDB.WriteMiniGameMedia(12, "sortingBear4.jpg", 2);
-                ProductDB.WriteMiniGameMedia(12, "TaDa.mp3", 2);
+                ProductDB.WriteMiniGameMedia(12, "TaDa.mp3", 0);
 
                 ProductDB.WriteMiniGameMedia(1, "bubble.jpg", 1);
-                ProductDB.WriteMiniGameMedia(1, "bubble.jpg", 2);
                 ProductDB.WriteMiniGameMedia(1, "bubbles.jpg", 1);
-                ProductDB.WriteMiniGameMedia(1, "bubbles.jpg", 2);
-                ProductDB.WriteMiniGameMedia(1, "bubblepop_underthesea.jpg", 1);
-                ProductDB.WriteMiniGameMedia(1, "bubblepop_underthesea.jpg", 2);
-                ProductDB.WriteMiniGameMedia(1, "bubblepop.mp3", 1);
+                ProductDB.WriteMiniGameMedia(1, "bubblepop_underthesea.jpg", 0);
+                ProductDB.WriteMiniGameMedia(1, "bubblepop.mp3", 0);
             }
 
             if (soundIDList.Count == 0)

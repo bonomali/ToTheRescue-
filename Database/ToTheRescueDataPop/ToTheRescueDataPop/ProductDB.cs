@@ -10,8 +10,8 @@ namespace ToTheRescueDataPop
         // The directory for the images
         public static string IMAGES_PATH = "C:\\Users\\Stephanie\\Documents\\GitHub\\ToTheRescue-\\Database\\testMedia\\";
         public static string SOUND_PATH = "C:\\Users\\Stephanie\\Documents\\GitHub\\ToTheRescue-\\Database\\testMedia\\";
-        static string DB_USER_NAME = "";
-        static string DB_USER_PWD = "";
+        static string DB_USER_NAME = "ToTheRescue";
+        static string DB_USER_PWD = "LakebertMattenie";
         public static SqlConnection GetConnection()
         {
             SqlConnection connection = new SqlConnection();
@@ -93,14 +93,26 @@ namespace ToTheRescueDataPop
 
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
-                command.CommandText =
-                    "INSERT INTO dbo.MiniGameMedia (MiniGameID, Difficulty, MiniGameMedia) " +
-                    "VALUES (@GameID, @Difficulty, @ProductMedia)";
 
-                command.Parameters.AddWithValue("@GameID", GameID);
-                command.Parameters.AddWithValue("@Difficulty", Difficulty);
-                command.Parameters.AddWithValue("@ProductMedia", productMedia);
+                if (Difficulty.Equals(0))
+                {
+                    command.CommandText =
+                    "INSERT INTO dbo.MiniGameMedia (MiniGameID, MiniGameMedia) " +
+                    "VALUES (@GameID, @ProductMedia)";
 
+                    command.Parameters.AddWithValue("@GameID", GameID);
+                    command.Parameters.AddWithValue("@ProductMedia", productMedia);
+                }
+                else
+                {
+                    command.CommandText =
+                        "INSERT INTO dbo.MiniGameMedia (MiniGameID, Difficulty, MiniGameMedia) " +
+                        "VALUES (@GameID, @Difficulty, @ProductMedia)";
+
+                    command.Parameters.AddWithValue("@GameID", GameID);
+                    command.Parameters.AddWithValue("@ProductMedia", productMedia);
+                    command.Parameters.AddWithValue("@Difficulty", Difficulty);
+                }
                 connection.Open();
                 command.ExecuteNonQuery();
             }
