@@ -8,8 +8,8 @@ namespace ToTheRescueDataPop
     class ProductDB
     {
         // The directory for the images
-        public static string IMAGES_PATH = "C:\\Users\\Stephanie\\Documents\\GitHub\\ToTheRescue-\\Database\\testMedia";
-        public static string SOUND_PATH = "C:\\Users\\Stephanie\\Documents\\GitHub\\ToTheRescue-\\Database\\testMedia";
+        public static string IMAGES_PATH = "C:\\Users\\Stephanie\\Documents\\GitHub\\ToTheRescue-\\Database\\testMedia\\";
+        public static string SOUND_PATH = "C:\\Users\\Stephanie\\Documents\\GitHub\\ToTheRescue-\\Database\\testMedia\\";
         static string DB_USER_NAME = "";
         static string DB_USER_PWD = "";
         public static SqlConnection GetConnection()
@@ -22,13 +22,13 @@ namespace ToTheRescueDataPop
                 ";User ID=" + DB_USER_NAME + ";Password=" + DB_USER_PWD;
             return connection;
         }
-        public static void WriteImage(int ImageClass, string ImageName) 
+        public static void WriteImage(int ImageClass, string ImagePath, string ImageName) 
         {
             SqlConnection connection = null;
             try
             {
                 // 1. Read image from file
-                string filepath = IMAGES_PATH + ImageName;
+                string filepath = IMAGES_PATH + ImagePath;
                 if (File.Exists(filepath) == false)
                     throw new Exception("File Not Found: " + filepath);
                 FileStream sourceStream = new FileStream(
@@ -48,10 +48,10 @@ namespace ToTheRescueDataPop
                 command.Connection = connection;
                 command.CommandText =
                     "INSERT INTO dbo.Images (ImageClass, ImageName, Images) " +
-                    "VALUES (@ImageClass, @LoadedFromFile, @ProductImage)";
+                    "VALUES (@ImageClass, @ImageName, @ProductImage)";
 
                 command.Parameters.AddWithValue("@ImageClass", ImageClass);
-                command.Parameters.AddWithValue("@LoadedFromFile", filepath);
+                command.Parameters.AddWithValue("@ImageName", ImageName);
                 command.Parameters.AddWithValue("@ProductImage", productImage);
 
                 connection.Open();
@@ -94,7 +94,7 @@ namespace ToTheRescueDataPop
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
                 command.CommandText =
-                    "INSERT INTO dbo.MiniGameMedia (GameID, Difficulty, GameMedia) " +
+                    "INSERT INTO dbo.MiniGameMedia (MiniGameID, Difficulty, MiniGameMedia) " +
                     "VALUES (@GameID, @Difficulty, @ProductMedia)";
 
                 command.Parameters.AddWithValue("@GameID", GameID);
@@ -116,13 +116,13 @@ namespace ToTheRescueDataPop
                 }
             }
         }
-        public static void WriteSound(int SoundClass, string SoundName)
+        public static void WriteSound(int SoundClass, string SoundPath, string SoundName)
         {
             SqlConnection connection = null;
             try
             {
                 // 1. Read image from file
-                string filepath = SOUND_PATH + SoundName;
+                string filepath = SOUND_PATH + SoundPath;
                 if (File.Exists(filepath) == false)
                     throw new Exception("File Not Found: " + filepath);
                 FileStream sourceStream = new FileStream(
@@ -142,9 +142,9 @@ namespace ToTheRescueDataPop
                 command.Connection = connection;
                 command.CommandText =
                     "INSERT INTO dbo.Sounds (SoundClass, SoundName, Sound) " +
-                    "VALUES (@SoundClass, @LoadedFromFile, @SoundImage)";
+                    "VALUES (@SoundClass, @SoundName, @SoundImage)";
                 command.Parameters.AddWithValue("@SoundClass", SoundClass);
-                command.Parameters.AddWithValue("@LoadedFromFile", filepath);
+                command.Parameters.AddWithValue("@SoundName", SoundName);
                 command.Parameters.AddWithValue("@SoundImage", soundImage);
 
                 connection.Open();
@@ -210,8 +210,8 @@ namespace ToTheRescueDataPop
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
                 command.CommandText =
-                   "SELECT ImageDataID FROM ImageGameData " +
-                   "ORDER BY ImageDataID";
+                   "SELECT MediaID FROM MiniGameMedia " +
+                   "ORDER BY MediaID";
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();

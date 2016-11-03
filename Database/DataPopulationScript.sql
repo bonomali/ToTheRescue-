@@ -16,16 +16,17 @@ VALUES
 ('fakeUser14@gmail.com', 'hkDTYvfnl%=+2nfshgioh^&*5ryr9'),		--14
 ('fakeUser15@gmail.com', 'WeJcFMQ/8+8QJ/w0hHh+0g==');			--15
 
+--Run code to add Images & Sounds
 
 INSERT INTO Profiles (ProfileName, UserID, AvatarID, ToggleSound, ToggleMusic, Difficulty, PerformanceStat, Subjectfilter)
 VALUES
-('Sophia', 1, 2, 1, 1, 3, 34.1, 0),('Emma', 1, 4, 1, 0, 3, 36, 0),('Lily', 1, 2, 1, 1, 3, 41.2, 1),('Madison', 2, 6, 0, 0, 3, 34.3, 1),('Avery', 3, 1, 1, 1, 3, 43.9, 2),
-('Hailey', 3, 2, 1, 1, 3, 47.3, 2),('Layla', 3, 6, 1, 1, 3, 45.7, 2),('Lucas', 3, 3, 1, 1, 1, 24.2, 0),('Caleb', 4, 5, 1, 1, 1, 11.6, 2),('Alexander', 6, 1, 1, 0, 3, 54, 0),
-('Matthew', 6, 3, 1, 1, 3, 38.2, 2),('Madelyn', 6, 6, 0, 0, 1, 8.2, 0),('Eli', 7, 1, 0, 1, 1, 7.9, 0),('Isabelle', 7, 25, 1, 1, 3, 66.1, 0),('Cameron', 7, 5, 1, 1, 3, 65, 0),
-('Gavin', 7, 3 1, 0, 3, 47.1, 0),('Leah', 7, 6, 1, 1, 3, 50, 1),('Maya', 7, 2, 0, 0, 3, 48.4, 1),('Kylie', 8, 2, 1, 1, 3, 69.2, 2),('Joseph', 8, 5, 1, 1, 3, 60.3, 2),
-('Wyatt', 9, 1, 1, 1, 3, 43.7, 2),('Hunter', 10, 3, 1, 1, 1, 17.8, 0),('Natalie', 10, 4, 1, 1, 1, 19.5, 2),('Chase', 11, 35, 1, 0, 3, 64.8, 0),('Alexis', 11, 2, 1, 1, 3, 57.8, 2),
-('Adam', 11, 5, 0, 0, 1, 23.4, 0),('Alex', 12, 1, 0, 1, 1, 18, 0),('Bella', 12, 4, 1, 1, 3, 42.8, 0),('Bailey', 12, 4, 1, 1, 3, 77.7, 2),('Johnathon', 12, 5, 0, 0, 1, 13.6, 0),
-('Miles', 13, 12, 0, 1, 1, 16.3, 0),('Jasmine', 14, 4, 1, 1, 3, 79.2, 0),('Nolan', 14, 3, 1, 1, 3, 72.1, 0),('Morgan', 15, 4, 1, 0, 2, 32.9, 0);
+('Sophia', 1, 8, 1, 1, 3, 34.1, 0),('Emma', 1, 4, 1, 0, 3, 36, 0),('Lily', 1, 8, 1, 1, 3, 41.2, 1),('Madison', 2, 6, 0, 0, 3, 34.3, 1),('Avery', 3, 7, 1, 1, 3, 43.9, 2),
+('Hailey', 3, 8, 1, 1, 3, 47.3, 2),('Layla', 3, 6, 1, 1, 3, 45.7, 2),('Lucas', 3, 3, 1, 1, 1, 24.2, 0),('Caleb', 4, 5, 1, 1, 1, 11.6, 2),('Alexander', 6, 7, 1, 0, 3, 54, 0),
+('Matthew', 6, 3, 1, 1, 3, 38.2, 2),('Madelyn', 6, 6, 0, 0, 1, 8.2, 0),('Eli', 7, 7, 0, 1, 1, 7.9, 0),('Isabelle', 7, 8, 1, 1, 3, 66.1, 0),('Cameron', 7, 5, 1, 1, 3, 65, 0),
+('Gavin', 7, 3, 1, 0, 3, 47.1, 0),('Leah', 7, 6, 1, 1, 3, 50, 1),('Maya', 7, 8, 0, 0, 3, 48.4, 1),('Kylie', 8, 8, 1, 1, 3, 69.2, 2),('Joseph', 8, 5, 1, 1, 3, 60.3, 2),
+('Wyatt', 9, 7, 1, 1, 3, 43.7, 2),('Hunter', 10, 3, 1, 1, 1, 17.8, 0),('Natalie', 10, 4, 1, 1, 1, 19.5, 2),('Chase', 11, 3, 1, 0, 3, 64.8, 0),('Alexis', 11, 8, 1, 1, 3, 57.8, 2),
+('Adam', 11, 5, 0, 0, 1, 23.4, 0),('Alex', 12, 7, 0, 1, 1, 18, 0),('Bella', 12, 4, 1, 1, 3, 42.8, 0),('Bailey', 12, 4, 1, 1, 3, 77.7, 2),('Johnathon', 12, 5, 0, 0, 1, 13.6, 0),
+('Miles', 13, 7, 0, 1, 1, 16.3, 0),('Jasmine', 14, 4, 1, 1, 3, 79.2, 0),('Nolan', 14, 3, 1, 1, 3, 72.1, 0),('Morgan', 15, 4, 1, 0, 2, 32.9, 0);
 
 
 INSERT INTO Maps (MapName, ImageID)
@@ -56,7 +57,7 @@ VALUES
 ('math:addition');				 
 
 
-INSERT INTO Minigames (GameCategoryID, GameCode, GameName, minDifficulty, MaxDifficulty)
+INSERT INTO MiniGames (MiniGameCategoryID, MiniGameCode, MiniGameName, MinDifficulty, MaxDifficulty)
 VALUES
 (1, 'game code here', 'Bubble Pop', 1, 2),
 (1, 'game code here', 'Under the Sea', 1, 3),
@@ -81,7 +82,10 @@ VALUES
 (7, 'game code here', 'It All Adds Up', 3, 4);
 
 
-INSERT INTO Animals (ImageID, SoundID, GoldBit, FunFact)
+--Run code to add MiniGameMedia
+
+
+INSERT INTO Animals (ImageID, SoundID, Shiny, FunFact)
 VALUES
 (7, 6, 0, 'Frogs breathe through their skin'),
 (8, 2, 0, 'A newborn elephant can weigh up to 200 pounds'),
@@ -144,7 +148,7 @@ VALUES
 (66, 1, 1, 4),(67, 4, 8, 5),(68, 6, 1, 17),(69, 3, 4, 23);
 
 
-INSERT INTO ProfileProgressHistory(ProfileID, GameID)
+INSERT INTO ProfileProgressHistory(ProfileID, MiniGameID)
 VALUES
 (2, 41),(2, 13),(2, 32),(3, 35),(3, 38),(3, 12),(4, 34),(4, 16),(4, 2),(5, 7),(5, 13),(5, 20),
 (6, 21),(6, 18),(7, 17),(7, 2),(7, 14),(8, 10),(8, 14),(8, 7),(9, 12),(10, 21),(10, 18),(10, 4),
