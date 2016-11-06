@@ -98,15 +98,14 @@ where Profiles.ProfileID = @profileID4;
 --to be saved at the end of a map
 
 /**********************************************************************
-* Purpose: This query gets a profile's specific animal they are trying to
-* save.
+* Purpose: This query gets the last three minigames a profile played.
 ***********************************************************************/
 declare @profileID5 int = 7
 
 if not exists (select ProfileID from Profiles where ProfileID = @profileID5)
 	throw 50007, 'Invalid profile ID', 1;
 
---Pulls the last three minigames played from a specific 
+--Pulls the last three minigames played from a specific profile 
 select MiniGameID
 from ProfileProgressHistory
 where ProfileID = @profileID5;
