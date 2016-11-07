@@ -90,8 +90,10 @@ if not exists (select ProfileID from Profiles where ProfileID = @profileID4)
 Select Images
 from Profiles inner join ProfileProgress
 on Profiles.ProfileID = ProfileProgress.ProfileID
+inner join Animals
+on ProfileProgress.AnimalID = Animals.AnimalID
 inner join Images
-on ProfileProgress.AnimalID = Images.ImageID
+on Animals.ImageID = Images.ImageID
 where Profiles.ProfileID = @profileID4;
 
 --should I error check for if this doesn't return any rows? Meaning there is no animal
@@ -109,3 +111,75 @@ if not exists (select ProfileID from Profiles where ProfileID = @profileID5)
 select MiniGameID
 from ProfileProgressHistory
 where ProfileID = @profileID5;
+
+/**********************************************************************
+* Purpose: Grabs the image and sound for a map. 
+***********************************************************************/
+
+DECLARE @mapID int = 3
+
+IF NOT EXISTS (SELECT MapID FROM Maps WHERE MapID = @mapID)
+	THROW 50007, 'Invalid map ID', 1;
+
+SELECT Images, Sound
+FROM Maps
+	JOIN Images on Maps.ImageID = Images.ImageID
+	JOIN Sounds on Maps.SoundID = Sounds.SoundID
+where Maps.MapID = @mapID;
+
+/**********************************************************************
+* Purpose: Grabs the nodes for the current map.
+***********************************************************************/
+DECLARE @mapID2 int = 6
+
+IF NOT EXISTS (SELECT MapID FROM Maps WHERE MapID = @mapID2)
+	THROW 50008, 'Invalid map ID', 1;
+
+SELECT NodeID, XCoordinate, YCoordinate
+FROM Maps
+	JOIN Nodes on Maps.MapID = Nodes.MapID
+where Maps.MapID = @mapID2;
+
+/**********************************************************************
+* Purpose: Grabs all of the animals in a profile's sanctuary. 
+***********************************************************************/
+DECLARE @profileID6 int = 4
+
+IF NOT EXISTS (SELECT MapID FROM Maps WHERE MapID = @profileID6)
+	THROW 50009, 'Invalid profile ID', 1;
+SELECT Funfact, Images, Sound
+FROM ProfileAnimals
+	JOIN Animals on ProfileAnimals.AnimalID = Animals.AnimalID
+	JOIN Images on Animals.ImageID = Images.ImageID
+	JOIN Sounds on Animals.SoundID = Sounds.SoundID
+WHERE ProfileAnimals.ProfileID = @profileID6;
+
+/**********************************************************************
+* Purpose: Grabs the information about a MiniGame. 
+***********************************************************************/
+DECLARE @minigameID int = 5
+
+IF NOT EXISTS (SELECT MiniGameID FROM Minigames WHERE MiniGameID = @minigameID)
+	THROW 50011, 'Invalid game ID', 1;
+
+SELECT MiniGameCode, MiniGameName
+FROM Minigames
+WHERE Minigames.MiniGameID = @minigameID;
+
+/**********************************************************************
+* Purpose: Grabs the media for a MiniGame.
+***********************************************************************/
+
+DECLARE @minigameID2 int = 1
+DECLARE @difficulty int = 2
+
+IF NOT EXISTS (SELECT MiniGameID FROM Minigames WHERE MiniGameID = @minigameID2)
+	THROW 50012, 'Invalid game ID', 1;
+
+IF NOT EXISTS (SELECT MiniGameID FROM Minigames WHERE MiniGameID = @minigameID2 AND MinDifficulty <= @difficulty AND MaxDifficulty >= @difficulty)
+	THROW 50013, 'Invalid game ID', 1;
+
+SELECT MiniGameMedia
+FROM Minigames
+	JOIN MiniGameMedia on Minigames.MiniGameID = MiniGameMedia.MiniGameID
+WHERE Minigames.MiniGameID = @minigameID2 AND (Difficulty = @difficulty OR Difficulty IS NULL);
