@@ -2,102 +2,101 @@
 --Creation scrip
 --Description: Creates and deletes the tables of the revised ER diagram
 
---Note: Feel free to edit any of the varchar(50) to a reasonable amount of characters
-use ToTheRescue
+--Note: Feel free to edit any of the VARCHAR(50) to a reasonable amount of characters
+USE ToTheRescue;
 
-drop table ProfileProgressHistory;
-drop table MiniGameMedia;
-drop table MiniGames;
-drop table GameCategories;
-drop table ProfileAnimals;
-drop table ProfileProgress;
-drop table Profiles;
-drop table Users;
-drop table Animals;
-drop table Nodes;
-drop table Maps;
-drop table Sounds;
-drop table Images;
+DROP TABLE ProfileProgressHistory;
+DROP TABLE MiniGameMedia;
+DROP TABLE MiniGames;
+DROP TABLE GameCategories;
+DROP TABLE ProfileAnimals;
+DROP TABLE ProfileProgress;
+DROP TABLE Profiles;
+DROP TABLE Users;
+DROP TABLE Animals;
+DROP TABLE Nodes;
+DROP TABLE Maps;
+DROP TABLE Sounds;
+DROP TABLE Images;
 
-create table Images (
-	ImageID int primary key identity
-	, ImageClass int not null
-	, Images varbinary(max) not null
-	, ImageName varchar(50) not null);
+CREATE TABLE Images (
+	ImageID INT PRIMARY KEY IDENTITY
+	, ImageClass INT NOT NULL
+	, Images VARBINARY(max) NOT NULL
+	, ImageName VARCHAR(50) NOT NULL);
 
-create table Sounds (
-	SoundID int primary key identity
-	, SoundClass int not null
-	, Sound varbinary(max) not null
-	, SoundName varchar(50) not null);
+CREATE TABLE Sounds (
+	SoundID INT PRIMARY KEY IDENTITY
+	, SoundClass INT NOT NULL
+	, Sound VARBINARY(max) NOT NULL
+	, SoundName VARCHAR(50) NOT NULL);
 
-create table Maps (
-MapID int primary key identity
-, MapName varchar(50) not null
-, ImageID int references Images (ImageID)
-, SoundID int references Sounds (SoundID));
+CREATE TABLE Maps (
+MapID INT PRIMARY KEY IDENTITY
+, MapName VARCHAR(50) NOT NULL
+, ImageID INT REFERENCES Images (ImageID)
+, SoundID INT REFERENCES Sounds (SoundID));
 
-create table Nodes (
-	MapID int references Maps (MapID)
-	, NodeID int identity
-	, XCoordinate int not null
-	, YCoordinate int not null
-	, primary key (MapID, NodeID));
+CREATE TABLE Nodes (
+	MapID INT REFERENCES Maps (MapID)
+	, NodeID INT IDENTITY
+	, XCoordinate INT NOT NULL
+	, YCoordinate INT NOT NULL
+	, PRIMARY KEY (MapID, NodeID));
 
-create table Animals (
-	AnimalID int primary key identity
-	, FunFact varchar(250)
-	, Shiny bit not null --1 means it is shiny
-	, SoundID int references Sounds (SoundID)
-	, ImageID int references Images (ImageID));
+CREATE TABLE Animals (
+	AnimalID INT PRIMARY KEY IDENTITY
+	, FunFact VARCHAR(250)
+	, Shiny BIT NOT NULL --1 means it is shiny
+	, SoundID INT REFERENCES Sounds (SoundID)
+	, ImageID INT REFERENCES Images (ImageID));
 
-create table Users (
-	UserID int primary key identity
-	, UserPassword nvarchar(50) not null
-	, Username nvarchar(50) unique not null); --nvarchar allows for unicode characters in other languages
+CREATE TABLE Users (
+	UserID INT PRIMARY KEY IDENTITY
+	, UserPassword NVARCHAR(50) NOT NULL
+	, Username NVARCHAR(50) unique NOT NULL); --NVARCHAR allows for unicode characters in other languages
 
-create table Profiles (
-	ProfileID int primary key identity
-	, UserID int references Users (UserID)
-	, AvatarID int references Images (ImageID)
-	, ProfileName nvarchar(30) not null
-	, ToggleSound bit not null default 1 --0 = sound off, 1 = sound on, defualted to sound on
-	, ToggleMusic bit not null default 1
-	, Difficulty int not null
-	, PerformanceStat float not null
-	, SubjectFilter varchar(50));
+CREATE TABLE Profiles (
+	ProfileID INT PRIMARY KEY IDENTITY
+	, UserID INT REFERENCES Users (UserID)
+	, AvatarID INT REFERENCES Images (ImageID)
+	, ProfileName NVARCHAR(30) NOT NULL
+	, ToggleSound BIT NOT NULL default 1 --0 = sound off, 1 = sound on, defualted to sound on
+	, ToggleMusic BIT NOT NULL default 1
+	, Difficulty INT NOT NULL
+	, PerformanceStat float NOT NULL
+	, SubjectFilter VARCHAR(50));
 
-create table ProfileProgress (
-	ProfileID int primary key references Profiles (ProfileID)
-	, CurrentMap int references Maps (MapID)
-	, CurrentNode int not null --current node number in the map
-	, AnimalID int references Animals (AnimalID));
+CREATE TABLE ProfileProgress (
+	ProfileID INT primary key REFERENCES Profiles (ProfileID)
+	, CurrentMap INT REFERENCES Maps (MapID)
+	, CurrentNode INT NOT NULL --current node number in the map
+	, AnimalID INT REFERENCES Animals (AnimalID));
 
-create table ProfileAnimals (
-	ProfileAnimalID int primary key identity
-	, AnimalID int references Animals (AnimalID)
-	, ProfileID int references Profiles (ProfileID));
+CREATE TABLE ProfileAnimals (
+	ProfileAnimalID INT PRIMARY KEY IDENTITY
+	, AnimalID INT REFERENCES Animals (AnimalID)
+	, ProfileID INT REFERENCES Profiles (ProfileID));
 
-create table GameCategories (
-	GameCategoryID int primary key identity
-	, GameCategoryName varchar(50) not null);
+CREATE TABLE GameCategories (
+	GameCategoryID INT PRIMARY KEY IDENTITY
+	, GameCategoryName VARCHAR(50) NOT NULL);
 
-create table MiniGames (
-	MiniGameID int primary key identity
-	, MiniGameCategoryID int references GameCategories (GameCategoryID)
-	, MiniGameCode varchar(max) not null --syntax for clob
-	, MiniGameName varchar(50) not null
-	, MinDifficulty int not null
-	, MaxDifficulty int not null
-	, SoundID int references Sounds (SoundID));
+CREATE TABLE MiniGames (
+	MiniGameID INT PRIMARY KEY IDENTITY
+	, MiniGameCategoryID INT REFERENCES GameCategories (GameCategoryID)
+	, MiniGameCode VARCHAR(max) NOT NULL --syntax for clob
+	, MiniGameName VARCHAR(50) NOT NULL
+	, MinDifficulty INT NOT NULL
+	, MaxDifficulty INT NOT NULL);
 
-create table MiniGameMedia (
-	MediaID int primary key identity
-	, MiniGameID int references Minigames (MiniGameID)
-	, Difficulty int default null	--nulled if media is used for every instance of that game
-	, MiniGameMedia varbinary(max) not null);
+CREATE TABLE MiniGameMedia (
+	MediaID INT PRIMARY KEY IDENTITY
+	, MiniGameID INT REFERENCES Minigames (MiniGameID)
+	, Difficulty INT default NULL	--nulled if media is used for every instance of that game
+	, MiniGameMedia VARBINARY(max) NOT NULL);
 
-create table ProfileProgressHistory (
-	ProgressID int primary key identity
-	, ProfileID int references Profiles (ProfileID)
-	, MiniGameID int references Minigames (MiniGameID));
+CREATE TABLE ProfileProgressHistory (
+	ProgressID INT PRIMARY KEY IDENTITY
+	, ProfileID INT REFERENCES Profiles (ProfileID)
+	, MiniGameID INT REFERENCES Minigames (MiniGameID));
