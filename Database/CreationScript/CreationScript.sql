@@ -68,7 +68,7 @@ CREATE TABLE Profiles (
 	, SubjectFilter VARCHAR(50));
 
 CREATE TABLE ProfileProgress (
-	ProfileID INT PRIMARY KEY REFERENCES Profiles (ProfileID)
+	ProfileID INT PRIMARY KEY REFERENCES Profiles (ProfileID) NOT NULL
 	, CurrentMap INT REFERENCES Maps (MapID) NOT NULL
 	, CurrentNode INT NOT NULL --current node number in the map
 	, AnimalID INT REFERENCES Animals (AnimalID) NOT NULL);
