@@ -6,93 +6,97 @@
 -- to add more than eight profiles to their account
 -- Works
 --====================================
-use ToTheRescue
-go
+USE ToTheRescue
+GO
 
-drop trigger EightProfileTrigger
-go
+DROP TRIGGER EightProfileTrigger
+GO
 
-create trigger EightProfileTrigger
-	on Profiles
-	after insert
+CREATE TRIGGER EightProfileTrigger
+	ON Profiles
+	AFTER INSERT
 AS 
-	if exists (select Inserted.ProfileID 
-				from inserted 
-				join Users
-				on inserted.UserID = Users.UserID
-				join Profiles
-				on Users.UserID = Profiles.UserID
-				where inserted.UserID = Users.UserID
-				group by Inserted.ProfileID
-				having count(Profiles.UserID) > 8
+	IF EXISTS (SELECT Inserted.ProfileID 
+				FROM inserted 
+				JOIN Users
+				ON inserted.UserID = Users.UserID
+				JOIN Profiles
+				ON Users.UserID = Profiles.UserID
+				WHERE inserted.UserID = Users.UserID
+				GROUP BY Inserted.ProfileID
+				HAVING COUNT(Profiles.UserID) > 8
 				)
-	begin
-		;throw 50001, 'Too many profiles', 1;
-		rollback tran
-	end;
-go
+	BEGIN
+		;THROW 50400, 'Too many profiles', 1;
+		PRINT 'Error ' + CONVERT(VARCHAR, ERROR_NUMBER(), 1)
+			+ ': ' + ERROR_MESSAGE();
+		ROLLBACK TRAN
+	END;
+GO
 
 --====================================
 -- This Trigger fires when a > 20 animals are being 
 -- added to the sanctuary
 -- Works
 --====================================
-use ToTheRescue
-go
-drop trigger TwentyOneAnimalTrigger
-go
+USE ToTheRescue
+GO
+DROP TRIGGER TwentyOneAnimalTrigger
+GO
 
-create trigger TwentyOneAnimalTrigger
-	on ProfileAnimals
-	after insert
+CREATE TRIGGER TwentyOneAnimalTrigger
+	ON ProfileAnimals
+	AFTER INSERT
 AS 
-	if exists (select inserted.ProfileID 
-				from inserted 
-				join ProfileAnimals as PA
-				on inserted.ProfileID = PA.ProfileID
-				where inserted.ProfileID = PA.ProfileID
-				group by inserted.ProfileID
-				having count(PA.AnimalID) > 20
+	IF EXISTS (SELECT inserted.ProfileID 
+				FROM inserted 
+				JOIN ProfileAnimals AS PA
+				ON inserted.ProfileID = PA.ProfileID
+				WHERE inserted.ProfileID = PA.ProfileID
+				GROUP BY inserted.ProfileID
+				HAVING COUNT(PA.AnimalID) > 20
 				)
-	begin
-		;throw 50001, 'Too many animals', 1;
-		rollback tran
-	end;
-go
+	BEGIN
+		;THROW 50001, 'Too many animals', 1;
+		PRINT 'Error ' + CONVERT(VARCHAR, ERROR_NUMBER(), 1)
+			+ ': ' + ERROR_MESSAGE();
+		ROLLBACK TRAN
+	END;
+GO
 
 --====================================
 -- This Trigger fires when a third MiniGameID is 
 -- added to a certain ProfileID
 --Works
 --====================================
-use ToTheRescue
-go
+USE ToTheRescue
+GO
 
-drop trigger Three_MiniGame_Trigger
-go
+DROP TRIGGER Three_MiniGame_Trigger
+GO
 
-create trigger Three_MiniGame_Trigger
-	 on ProfileProgressHistory
-	 after insert
+CREATE TRIGGER Three_MiniGame_Trigger
+	 ON ProfileProgressHistory
+	 AFTER INSERT
 AS 
-	if exists (select inserted.ProfileID
-				from inserted 
-				join ProfileProgressHistory as PPH
-				on inserted.ProfileID = PPH.ProfileID
-				where inserted.ProfileID = PPH.ProfileID
-				group by inserted.ProfileID
-				having count(PPH.MiniGameID) > 3
+	IF EXISTS (SELECT inserted.ProfileID
+				FROM inserted 
+				JOIN ProfileProgressHistory AS PPH
+				ON inserted.ProfileID = PPH.ProfileID
+				WHERE inserted.ProfileID = PPH.ProfileID
+				GROUP BY inserted.ProfileID
+				HAVING COUNT(PPH.MiniGameID) > 3
 				)
-	begin
+	BEGIN
 		;
-		delete from ProfileProgressHistory
-		where ProfileID = 
-			(select ProfileID
-			where ProfileID = (select ProfileID from inserted)
-			and 
+		DELETE FROM ProfileProgressHistory
+		WHERE ProfileID = 
+			(SELECT ProfileID
+			WHERE ProfileID = (SELECT ProfileID FROM inserted)
+			AND
 			ProgressID =
-				(select min(ProgressID)
-					from ProfileProgressHistory
-					where ProfileID = (select ProfileID from inserted)))
-	end;
-go
+				(SELECT MIN(ProgressID)
+					FROM ProfileProgressHistory
+					WHERE ProfileID = (SELECT ProfileID FROM inserted)))
+	END;
+GO
