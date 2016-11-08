@@ -99,4 +99,4 @@ CREATE TABLE MiniGameMedia (
 CREATE TABLE ProfileProgressHistory (
 	ProgressID INT PRIMARY KEY IDENTITY
 	, ProfileID INT REFERENCES Profiles (ProfileID) NOT NULL
-	, MiniGameID INT REFERENCES Minigames (MiniGameID));
+	, MiniGameID INT REFERENCES Minigames (MiniGameID) NOT NULL);
