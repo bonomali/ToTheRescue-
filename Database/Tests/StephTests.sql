@@ -189,3 +189,90 @@ BEGIN CATCH
 	+ ': ' + ERROR_MESSAGE();
 END CATCH
 	PRINT '-----------------------------------------------------------'
+
+
+/**********************************************************************
+* Purpose: This functions gets the last three minigames a profile played.
+		Parameters: ProfileID
+		Returns: table
+***********************************************************************/
+DROP FUNCTION GetPrevMiniGames;
+GO
+CREATE FUNCTION GetPrevMiniGames
+		(@profileID INT)
+		RETURNS TABLE
+
+RETURN(SELECT MiniGameID
+	FROM ProfileProgressHistory
+	WHERE ProfileID = @profileID);
+
+/**********************************************************************
+* Purpose: This procedure gets the image and sound for a map. 
+		Parameters: MapID
+***********************************************************************/
+GO
+CREATE PROC GetMapMedia
+		@mapID INT
+AS
+	IF NOT EXISTS (SELECT MapID FROM Maps WHERE MapID = @mapID)
+		THROW 50007, 'Invalid map ID', 1;
+
+	SELECT Images, Sound
+	FROM Maps
+		JOIN Images ON Maps.ImageID = Images.ImageID
+		JOIN Sounds ON Maps.SoundID = Sounds.SoundID
+	WHERE Maps.MapID = @mapID;
+
+
+/**********************************************************************
+* Purpose: This procedure gets the nodes for the current map.
+		Parameters: MapID
+***********************************************************************/
+GO
+CREATE PROC GetMapNodes
+		@mapID INT
+AS
+	IF NOT EXISTS (SELECT MapID FROM Maps WHERE MapID = @mapID)
+		THROW 50008, 'Invalid map ID', 1;
+
+	SELECT NodeID, XCoordinate, YCoordinate
+	FROM Maps
+		JOIN Nodes ON Maps.MapID = Nodes.MapID
+	WHERE Maps.MapID = @mapID;
+
+
+/**********************************************************************
+* Purpose: Tests the GetPrevMiniGames procedure.
+  Should return last three minigames played for profile (or fewer if user
+  hasn't played three games)
+		Parameters: ProfileID
+***********************************************************************/
+GO
+DROP TABLE temp
+
+CREATE TABLE temp(MiniGameID INT)INSERT INTO temp
+VALUES (2), (14), (16)
+
+SELECT * 
+FROM dbo.GetPrevMiniGames(4) as B
+	JOIN (SELECT *
+	   	  FROM temp) AS S ON (B.MiniGameID = S.MiniGameID)
+WHERE B.MiniGameID <> S.MiniGameID
+
+IF	PRINT 'Success, correct MiniGameIDs returned'
+ELSE
+	PRINT 'Failure, incorrect MiniGameIDs returned'
+
+/**********************************************************************
+* Purpose: Tests the GetMapMedia procedure.
+  Should return background sound and background image for map
+		Parameters: MapID
+***********************************************************************/
+
+
+
+/**********************************************************************
+* Purpose: Tests the GetMapNodes procedure
+  Should return rows for all nodes for map
+		Parameters: MapID
+***********************************************************************/
