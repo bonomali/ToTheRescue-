@@ -248,20 +248,19 @@ AS
 		Parameters: ProfileID
 ***********************************************************************/
 GO
-DROP TABLE temp
+DROP TABLE #temp
 
-CREATE TABLE temp(MiniGameID INT)INSERT INTO temp
+CREATE TABLE #temp(MiniGameID INT)INSERT INTO #temp
 VALUES (2), (14), (16)
 
-SELECT * 
-FROM dbo.GetPrevMiniGames(4) as B
-	JOIN (SELECT *
-	   	  FROM temp) AS S ON (B.MiniGameID = S.MiniGameID)
-WHERE B.MiniGameID <> S.MiniGameID
+IF(SELECT COUNT(*) AS UnMatchedIDs
+FROM dbo.GetPrevMiniGames(4) as retTable
+	FULL OUTER JOIN (SELECT *
+	   	  FROM #temp) AS expected ON (retTable.MiniGameID = expected.MiniGameID)
+WHERE (retTable.MiniGameID IS NULL) OR (expected.MiniGameID IS NULL))
+	 > 0	PRINT 'Failure, didn''t return correct MiniGameIDs'ELSE	PRINT 'Success, correct MiniGameIDs returned'
+DROP TABLE #temp; --drop temp table
 
-IF	PRINT 'Success, correct MiniGameIDs returned'
-ELSE
-	PRINT 'Failure, incorrect MiniGameIDs returned'
 
 /**********************************************************************
 * Purpose: Tests the GetMapMedia procedure.
