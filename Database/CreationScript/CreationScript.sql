@@ -60,7 +60,7 @@ CREATE TABLE Profiles (
 	ProfileID INT PRIMARY KEY IDENTITY
 	, UserID INT REFERENCES Users (UserID) NOT NULL
 	, AvatarID INT REFERENCES Images (ImageID) NOT NULL
-	, ProfileName NVARCHAR(30) NOT NULL
+	, ProfileName NVARCHAR(30) NOT NULL UNIQUE
 	, ToggleSound BIT NOT NULL default 1 --0 = sound off, 1 = sound on, defualted to sound on
 	, ToggleMusic BIT NOT NULL default 1
 	, Difficulty INT NOT NULL
