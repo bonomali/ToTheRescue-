@@ -1,277 +1,3 @@
---==============================================================
--- Test that MiniGameCategoryID can't be null in MiniGames table
---==============================================================
-USE ToTheRescue;
-BEGIN TRY
-	INSERT INTO MiniGames(MiniGameCategoryID, MiniGameCode, MiniGameName, MinDifficulty, MaxDifficulty)
-	VALUES (NULL, 'Code here', 'MiniGameName', 1, 4);
-	PRINT 'Failure, null MiniGameCategoryID inserted in MiniGames table';
-END TRY
-BEGIN CATCH
-	PRINT 'Success, null MiniGameCategoryID not inserted in MiniGames table';
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1)
-	+ ': ' + ERROR_MESSAGE();
-END CATCH
-	PRINT '-----------------------------------------------------------'
-
---========================================================
--- Test that MiniGameCode can't be null in MiniGames table
---========================================================
-USE ToTheRescue;
-BEGIN TRY
-	INSERT INTO MiniGames(MiniGameCategoryID, MiniGameCode, MiniGameName, MinDifficulty, MaxDifficulty)
-	VALUES (3, NULL, 'MiniGameName', 1, 4);
-	PRINT 'Failure, null MiniGameCode inserted in MiniGames table';
-END TRY
-BEGIN CATCH
-	PRINT 'Success, null MiniGameCode not inserted in MiniGames table';
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1)
-	+ ': ' + ERROR_MESSAGE();
-END CATCH
-	PRINT '-----------------------------------------------------------'
-
---========================================================
--- Test that MiniGameName can't be null in MiniGames table
---========================================================
-USE ToTheRescue;
-BEGIN TRY
-	INSERT INTO MiniGames(MiniGameCategoryID, MiniGameCode, MiniGameName, MinDifficulty, MaxDifficulty)
-	VALUES (3, 'Code here', NULL, 1, 4);
-	PRINT 'Failure, null MiniGameName inserted in MiniGames table';
-END TRY
-BEGIN CATCH
-	PRINT 'Success, null MiniGameName not inserted in MiniGames table';
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1)
-	+ ': ' + ERROR_MESSAGE();
-END CATCH
-	PRINT '-----------------------------------------------------------'
-
---=============================================================================
--- Test that MiniGameName can't be longer than 50 characters in MiniGames table
---=============================================================================
-USE ToTheRescue;
-BEGIN TRY
-	INSERT INTO MiniGames(MiniGameCategoryID, MiniGameCode, MiniGameName, MinDifficulty, MaxDifficulty)
-	VALUES (3, 'Code here', 'This is a very long minigame name is not allowed!!!', 1, 4);
-	--MiniGameName 51 characters
-	PRINT 'Failure, MiniGameName length over 50 chars inserted in MiniGames table';
-END TRY
-BEGIN CATCH
-	PRINT 'Success, MiniGameName length over 50 chars not inserted in MiniGames table';
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1)
-	+ ': ' + ERROR_MESSAGE();
-END CATCH
-	PRINT '-----------------------------------------------------------'
-
---=========================================================
--- Test that MinDifficulty can't be null in MiniGames table
---=========================================================
-USE ToTheRescue;
-BEGIN TRY
-	INSERT INTO MiniGames(MiniGameCategoryID, MiniGameCode, MiniGameName, MinDifficulty, MaxDifficulty)
-	VALUES (3, 'Code here', 'MiniGameName', NULL, 4);
-	PRINT 'Failure, null MinDifficulty inserted in MiniGames table';
-END TRY
-BEGIN CATCH
-	PRINT 'Success, null MinDifficulty not inserted in MiniGames table';
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1)
-	+ ': ' + ERROR_MESSAGE();
-END CATCH
-	PRINT '-----------------------------------------------------------'
-
---=========================================================
--- Test that MaxDifficulty can't be null in MiniGames table
---=========================================================
-USE ToTheRescue;
-BEGIN TRY
-	INSERT INTO MiniGames(MiniGameCategoryID, MiniGameCode, MiniGameName, MinDifficulty, MaxDifficulty)
-	VALUES (3, 'Code here', 'MiniGameName', 1, NULL);
-	PRINT 'Failure, null MaxDifficulty inserted in MiniGames table';
-END TRY
-BEGIN CATCH
-	PRINT 'Success, null MaxDifficulty not inserted in MiniGames table';
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1)
-	+ ': ' + ERROR_MESSAGE();
-END CATCH
-	PRINT '-----------------------------------------------------------'
-
---==========================================================
--- Test that MiniGameID can't be null in MiniGameMedia table
---==========================================================
-USE ToTheRescue;
-BEGIN TRY
-	INSERT INTO MiniGameMedia(MiniGameID, Difficulty, MiniGameMedia)
-	VALUES (NULL, 3, 0xFFD8FFE00);
-	PRINT 'Failure, null MiniGameID inserted in MiniGameMedia table';
-END TRY
-BEGIN CATCH
-	PRINT 'Success, null MiniGameID not inserted in MiniGameMedia table';
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1)
-	+ ': ' + ERROR_MESSAGE();
-END CATCH
-	PRINT '-----------------------------------------------------------'
-
---==========================================================
--- Test that Difficulty defaults to null in MiniGameMedia table
---==========================================================
-USE ToTheRescue;
-BEGIN TRY
-	INSERT INTO MiniGameMedia(MiniGameID, MiniGameMedia)
-	VALUES (3, 0xFFD8FFE00);
-	
-	DECLARE @diff int
-
-	SELECT diff = Difficulty
-	FROM MiniGameMedia
-	WHERE MediaID = @@IDENTITY
-		
-	IF (@diff IS NULL)
-		PRINT 'Success, Difficulty defaulted to null in MiniGameMedia table';
-	ELSE
-		PRINT 'Failure, Difficulty didn''t default to null in MiniGameMedia table';
-
-	DELETE FROM MiniGameMedia		--Delete inserted row
-	WHERE MediaID = @@IDENTITY;
-	PRINT 'Deleted newly inserted test row'
-END TRY
-BEGIN CATCH
-	PRINT 'Failure, Difficulty didn''t default to null in MiniGameMedia table';
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1)
-	+ ': ' + ERROR_MESSAGE();
-END CATCH
-	PRINT '-----------------------------------------------------------'
-
---==========================================================
--- Test that MiniGameMedia can't be null in MiniGameMedia table
---==========================================================
-USE ToTheRescue;
-BEGIN TRY
-	INSERT INTO MiniGameMedia(MiniGameID, Difficulty, MiniGameMedia)
-	VALUES (3, 3, NULL);
-	PRINT 'Failure, null MiniGameMedia inserted in MiniGameMedia table';
-END TRY
-BEGIN CATCH
-	PRINT 'Success, null MiniGameMedia not inserted in MiniGameMedia table';
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1)
-	+ ': ' + ERROR_MESSAGE();
-END CATCH
-	PRINT '-----------------------------------------------------------'
-
---=================================================================
--- Test that GameCategoryName can't be null in GamesCateories table
---=================================================================
-USE ToTheRescue;
-BEGIN TRY
-	INSERT INTO GameCategories(GameCategoryName)
-	VALUES (NULL);
-	PRINT 'Failure, null GameCategoryName inserted in GameCateories table';
-END TRY
-BEGIN CATCH
-	PRINT 'Success, null GameCategoryName not inserted in GameCategories table';
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1)
-	+ ': ' + ERROR_MESSAGE();
-END CATCH
-	PRINT '-----------------------------------------------------------'
-
---======================================================================================
--- Test that GameCategoryName can't be longer than 50 characters in GamesCateories table
---======================================================================================
-USE ToTheRescue;
-BEGIN TRY
-	INSERT INTO GameCategories(GameCategoryName)
-	VALUES ('This is a very long game category, not allowed!!!!!');
-	--GameCategoryName 51 characters
-	PRINT 'Failure, GameCateoryName length over 50 chars inserted in GameCategories table';
-END TRY
-BEGIN CATCH
-	PRINT 'Success, GameCategoryName length over 50 chars not inserted in GameCategories table';
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1)
-	+ ': ' + ERROR_MESSAGE();
-END CATCH
-	PRINT '-----------------------------------------------------------'
-
-
---=====================================================================
--- Test that Active in Sanctuary defaults to 1 in Profile Animals table
---=====================================================================
-USE ToTheRescue;
-BEGIN TRY
-	INSERT INTO ProfileAnimals(ProfileID, AnimalID)
-	VALUES (2, 23);
-	
-	DECLARE @active int
-
-	SELECT active = Active
-	FROM ProfileAnimals
-	WHERE ProfileAnimalID = @@IDENTITY
-		
-	IF (@active = 1)
-		PRINT 'Success, Active in Sanctuary defaulted to 1 in ProfileAnimals table';
-	ELSE
-		PRINT 'Failure, Active in Sanctuary didn''t defaulted to 1 in ProfileAnimals table';
-
-	DELETE FROM ProfileAnimals		--Delete inserted row
-	WHERE ProfileAnimalID = @@IDENTITY;
-	PRINT 'Deleted newly inserted test row'
-END TRY
-BEGIN CATCH
-	PRINT 'Failure, Active in Sanctuary didn''t defaulted to 1 in ProfileAnimals table';
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1)
-	+ ': ' + ERROR_MESSAGE();
-END CATCH
-	PRINT '-----------------------------------------------------------'
-
-
-/**********************************************************************
-* Purpose: This functions gets the last three minigames a profile played.
-		Parameters: ProfileID
-		Returns: table
-***********************************************************************/
-DROP FUNCTION GetPrevMiniGames;
-GO
-CREATE FUNCTION GetPrevMiniGames
-		(@profileID INT)
-		RETURNS TABLE
-
-RETURN(SELECT MiniGameID
-	FROM ProfileProgressHistory
-	WHERE ProfileID = @profileID);
-
-/**********************************************************************
-* Purpose: This function gets the image and sound for a map. 
-		Parameters: MapID
-		Returns: table
-***********************************************************************/
-DROP FUNCTION GetMapMedia;
-GO
-CREATE FUNCTION GetMapMedia
-		(@mapID INT)
-		RETURNS TABLE
-
-RETURN(SELECT Images, Sound
-	FROM Maps
-		JOIN Images ON Maps.ImageID = Images.ImageID
-		JOIN Sounds ON Maps.SoundID = Sounds.SoundID
-	WHERE Maps.MapID = @mapID);
-
-
-/**********************************************************************
-* Purpose: This function gets the nodes for the current map.
-		Parameters: MapID
-		Returns: table
-***********************************************************************/
-DROP FUNCTION GetMapNodes
-GO
-CREATE FUNCTION GetMapNodes
-		(@mapID INT)
-		RETURNS TABLE
-
-RETURN(SELECT NodeID, XCoordinate, YCoordinate
-		FROM Maps
-			JOIN Nodes ON Maps.MapID = Nodes.MapID
-		WHERE Maps.MapID = @mapID);
-
-
 /**********************************************************************
 * Purpose: Tests the GetPrevMiniGames function.
   Should return last three minigames played for profile (or fewer if user
@@ -289,7 +15,7 @@ FROM dbo.GetPrevMiniGames(4) AS retTable
 WHERE (retTable.MiniGameID IS NULL) OR (expected.MiniGameID IS NULL))
 	 > 0	PRINT 'Failure, didn''t return correct MiniGameIDs'ELSE	PRINT 'Success, correct MiniGameIDs returned'
 DROP TABLE #temp; --drop temp table
-
+	PRINT '-----------------------------------------------------------'
 
 /**********************************************************************
 * Purpose: Tests the GetMapNodes function
@@ -310,7 +36,7 @@ WHERE (retTable.NodeID IS NULL OR retTable.XCoordinate IS NULL OR retTable.YCoor
 		(expected.NodeID IS NULL OR expected.XCoordinate IS NULL OR expected.YCoordinate IS NULL))
 	 > 0	PRINT 'Failure, didn''t return correct MiniGameNodes'ELSE	PRINT 'Success, correct MiniGameNodes returned'
 DROP TABLE #temp; --drop temp table
-
+	PRINT '-----------------------------------------------------------'
 
 /********************************************************************************
 * Purpose: Tests the GetMapMedia function.
@@ -327,6 +53,92 @@ FROM dbo.GetMapMedia(2) AS retTable
 WHERE (retTable.Images IS NULL OR expected.[Images] IS NULL))
 	 > 0	PRINT 'Failure, didn''t return correct MiniGameMedia'ELSE	PRINT 'Success, correct MiniGameMedia returned'
 DROP TABLE #temp; --drop temp table
+	PRINT '-----------------------------------------------------------'
 
+/**********************************************************************
+* Purpose: Tests the IsExistingUser function. Given an existing username
+* return that it does exist.
+***********************************************************************/
+BEGIN TRY
+	IF (dbo.IsExistingUserName('fakeUser1@gmail.com') = 1)
+		PRINT 'SUCCESS: the function said the username already existed.'; 
+	ELSE
+		PRINT 'FAILURE: the function said the username did not already existed.'; 
+END TRY
+BEGIN CATCH
+	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
+END CATCH
+PRINT '-------------------------------------------------------------------';
 
+/**********************************************************************
+* Purpose: Tests the IsExistingUser function. Given a non existing username
+* return false.
+***********************************************************************/
+BEGIN TRY
+	IF (dbo.IsExistingUserName('fakeUser1@gmail.co') = 1)
+		PRINT 'FAILURE: the function said the username already existed.'; 
+	ELSE
+		PRINT 'SUCCESS: the function said the username did not already exist.'; 
+END TRY
+BEGIN CATCH
+	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
+END CATCH
+PRINT '-------------------------------------------------------------------';
 
+/**********************************************************************
+* Purpose: Tests the IsValidPassword function. Given a valid password
+* for a given username, return true.
+***********************************************************************/
+BEGIN TRY
+	IF (dbo.IsValidPassword('fakeUser1@gmail.com', 'WeJcFMQ/8+8QJ/w0hHh+0g==') = 1)
+		PRINT 'SUCCESS: the function said the password was valid.'; 
+	ELSE
+		PRINT 'FAILURE: the function said the password not valid.'; 
+END TRY
+BEGIN CATCH
+	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
+END CATCH
+PRINT '-------------------------------------------------------------------';
+
+/**********************************************************************
+* Purpose: Tests the IsValidPassword function. Given an invalid password
+* for a given username, return false.
+***********************************************************************/
+BEGIN TRY
+	IF (dbo.IsValidPassword('fakeUser1@gmail.com', 'WeJcFMQ/8+8QJ/w0hHh+0g=') = 1)
+		PRINT 'FAILURE: the function said the password was valid.'; 
+	ELSE
+		PRINT 'SUCCESS: the function said the password was not valid.'; 
+END TRY
+BEGIN CATCH
+	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
+END CATCH
+PRINT '-------------------------------------------------------------------';
+
+/**********************************************************************
+* Purpose: Tests the GetProfileProgressInfo function. Ensures that
+* the correct CurrentMap, CurrentNode and AnimalID for a certain ProfileID
+* is returned.
+***********************************************************************/
+BEGIN TRY
+	CREATE TABLE #temp(CurrentMap INT, CurrentNode INT, AnimalID INT)
+	INSERT INTO #temp
+	VALUES (3, 6, 4);
+	IF (SELECT COUNT(*) AS UnMatchedProgress
+		FROM dbo.GetProfileProgressInfo(3) AS returnTable
+		FULL OUTER JOIN (SELECT * FROM #temp) AS expected ON
+			(returnTable.CurrentMap = expected.CurrentMap 
+			AND returnTable.CurrentNode = expected.CurrentNode AND 
+			returnTable.AnimalID = expected.AnimalID)
+		WHERE (returnTable.CurrentMap IS NULL OR returnTable.CurrentNode IS NULL OR 
+			   returnTable.AnimalID IS NULL) OR (expected.CurrentMap IS NULL OR 
+			   expected.CurrentNode IS NULL OR expected.AnimalID IS NULL)) > 0
+		PRINT 'FAILURE: did not return correct ProfileProgress information'
+	ELSE
+		PRINT 'SUCCESS: the correct ProfileProgress information was returned'
+END TRY
+BEGIN CATCH
+	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
+END CATCH
+DROP TABLE #temp;
+PRINT '-------------------------------------------------------------------';
