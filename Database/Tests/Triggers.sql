@@ -35,9 +35,10 @@ AS
 GO
 
 --====================================
--- This Trigger fires when a > 20 animals are being 
--- added to the sanctuary
--- Works
+-- This Trigger fires when a 21st animal is added
+-- to the sanctuary
+-- The default of ProfileAnimals.Active is active(1) so
+-- This trigger updates the oldest animal to 0 
 --====================================
 USE ToTheRescue
 GO
@@ -57,10 +58,13 @@ AS
 				HAVING COUNT(PA.AnimalID) > 20
 				)
 	BEGIN
-		;THROW 50001, 'Too many animals', 1;
-		PRINT 'Error ' + CONVERT(VARCHAR, ERROR_NUMBER(), 1)
-			+ ': ' + ERROR_MESSAGE();
-		ROLLBACK TRAN
+		;
+		UPDATE ProfileAnimals
+		SET Active = 0
+		WHERE ProfileAnimalID = 
+			(SELECT min(ProfileAnimalID)
+			WHERE ProfileID = (SELECT ProfileID FROM inserted)
+			AND Active != 0)
 	END;
 GO
 

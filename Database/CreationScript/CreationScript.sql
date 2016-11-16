@@ -76,7 +76,8 @@ CREATE TABLE ProfileProgress (
 CREATE TABLE ProfileAnimals (
 	ProfileAnimalID INT PRIMARY KEY IDENTITY
 	, AnimalID INT REFERENCES Animals (AnimalID) NOT NULL
-	, ProfileID INT REFERENCES Profiles (ProfileID) NOT NULL);
+	, ProfileID INT REFERENCES Profiles (ProfileID) NOT NULL
+	, Active BIT NOT NULL DEFAULT 1); -- 1 means active in sanctuary
 
 CREATE TABLE GameCategories (
 	GameCategoryID INT PRIMARY KEY IDENTITY
