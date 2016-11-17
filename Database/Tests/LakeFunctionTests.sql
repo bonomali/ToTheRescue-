@@ -1,4 +1,4 @@
-
+USE ToTheRescue
 /************************************************************
 * Purpose: Tests the GetCurrentAnimal Function
 * should return a row from the Animals table

@@ -12,6 +12,7 @@ CREATE FUNCTION GetPrevMiniGames
 RETURN(SELECT MiniGameID
 	FROM ProfileProgressHistory
 	WHERE ProfileID = @profileID);
+GO
 
 /**********************************************************************
 * Purpose: This function gets the image and sound for a map. 
@@ -29,7 +30,7 @@ RETURN(SELECT Images, Sound
 		JOIN Images ON Maps.ImageID = Images.ImageID
 		JOIN Sounds ON Maps.SoundID = Sounds.SoundID
 	WHERE Maps.MapID = @mapID);
-
+GO
 
 /**********************************************************************
 * Purpose: This function gets the nodes for the current map.
@@ -46,12 +47,9 @@ RETURN(SELECT NodeID, XCoordinate, YCoordinate
 		FROM Maps
 			JOIN Nodes ON Maps.MapID = Nodes.MapID
 		WHERE Maps.MapID = @mapID);
+GO
 
-use ToTheRescue;
 
-DROP FUNCTION IsExistingUserName;
-DROP FUNCTION IsValidPassword;
-DROP FUNCTION GetProfileProgressInfo;
 --Note, return val of 1 is true and return val of 0 is false
 
 /**********************************************************************
@@ -70,6 +68,7 @@ BEGIN
 	SET @existingUserName = 1; 
 RETURN @existingUserName;
 END;
+GO
 
 /**********************************************************************
 * Purpose: This function checks to see if the user entered a 
@@ -88,6 +87,7 @@ BEGIN
 		SET @validPassword = 1;
 RETURN @validPassword;
 END;
+GO
 
 /**********************************************************************
 * Purpose: This function gets a profile's current map, 
@@ -104,3 +104,59 @@ RETURN
 (SELECT CurrentMap, CurrentNode, AnimalID
 FROM ProfileProgress
 WHERE ProfileID = @profileID);
+GO
+
+/************************************************************
+* This Function returns the profile row associated with the 
+* provided ProfileID
+************************************************************/
+DROP FUNCTION GetProfile
+GO
+CREATE FUNCTION GetProfile
+				(@profileID2 INT)
+				RETURNS TABLE
+
+RETURN(SELECT ProfileName, AvatarID, ReadingDifficultyLevel, MathDifficultyLevel
+			, ReadingPerformanceStat, MathPerformanceStat
+			,SubjectFilter, ToggleSound, ToggleMusic
+		FROM Profiles
+		WHERE ProfileID = @profileID2);
+GO
+
+/************************************************************
+* This Function returns the avatar associated with the  
+* provided ProfileID
+************************************************************/
+DROP FUNCTION GetProfileAvatar
+GO
+CREATE FUNCTION GetProfileAvatar
+				(@profileID3 INT)
+				RETURNS TABLE
+
+RETURN(SELECT Images
+		FROM Images 
+		INNER JOIN Profiles
+		ON Images.ImageID = Profiles.AvatarID
+		WHERE Profiles.ProfileID = @profileID3);
+GO
+
+/************************************************************
+* This Function returns the the current animal a user is trying 
+* to save associated with the provided ProfileID
+************************************************************/
+DROP FUNCTION GetCurrentAnimal
+GO
+CREATE FUNCTION GetCurrentAnimal
+				(@profileID4 INT)
+				RETURNS TABLE
+
+RETURN(SELECT Images
+		FROM Profiles 
+		INNER JOIN ProfileProgress
+		ON Profiles.ProfileID = ProfileProgress.ProfileID
+		INNER JOIN Animals
+		ON ProfileProgress.AnimalID = Animals.AnimalID
+		INNER JOIN Images
+		ON Animals.ImageID = Images.ImageID
+		WHERE Profiles.ProfileID = @profileID4);
+GO
