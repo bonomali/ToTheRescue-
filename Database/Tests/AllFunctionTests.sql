@@ -60,14 +60,29 @@ DROP TABLE #temp; --drop temp table
 * return that it does exist.
 ***********************************************************************/
 BEGIN TRY
-	IF (dbo.IsExistingUserName('fakeUser1@gmail.com') = 1)
+	INSERT INTO Users
+		(Username, UserPassword)
+	VALUES
+		('hi', '123')
+
+	DECLARE @tempUser nvarchar(50)
+
+	SELECT @tempUser = Username
+	FROM Users
+	WHERE UserID = @@IDENTITY
+
+	IF (dbo.IsExistingUserName(@tempUser) = 1)
 		PRINT 'SUCCESS: the function said the username already existed.'; 
 	ELSE
 		PRINT 'FAILURE: the function said the username did not already existed.'; 
+
+		DELETE FROM Users
+		WHERE UserID = @@IDENTITY
 END TRY
 BEGIN CATCH
 	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
 END CATCH
+
 PRINT '-------------------------------------------------------------------';
 
 /**********************************************************************
@@ -75,7 +90,7 @@ PRINT '-------------------------------------------------------------------';
 * return false.
 ***********************************************************************/
 BEGIN TRY
-	IF (dbo.IsExistingUserName('fakeUser1@gmail.co') = 1)
+	IF (dbo.IsExistingUserName('fakeUser') = 1)
 		PRINT 'FAILURE: the function said the username already existed.'; 
 	ELSE
 		PRINT 'SUCCESS: the function said the username did not already exist.'; 
@@ -83,6 +98,7 @@ END TRY
 BEGIN CATCH
 	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
 END CATCH
+
 PRINT '-------------------------------------------------------------------';
 
 /**********************************************************************
@@ -90,14 +106,30 @@ PRINT '-------------------------------------------------------------------';
 * for a given username, return true.
 ***********************************************************************/
 BEGIN TRY
-	IF (dbo.IsValidPassword('fakeUser1@gmail.com', 'WeJcFMQ/8+8QJ/w0hHh+0g==') = 1)
+	INSERT INTO Users
+		(Username, UserPassword)
+	VALUES
+		('hi', '123')
+
+	DECLARE @tempPass nvarchar(50)
+	DECLARE @tempName nvarchar(50)
+
+	SELECT @tempName = Username, @tempPass = UserPassword
+	FROM Users
+	WHERE UserID = @@IDENTITY
+
+	IF (dbo.IsValidPassword(@tempName, @tempPass) = 1)
 		PRINT 'SUCCESS: the function said the password was valid.'; 
 	ELSE
 		PRINT 'FAILURE: the function said the password not valid.'; 
+
+	DELETE FROM Users
+	WHERE UserID = @@IDENTITY
 END TRY
 BEGIN CATCH
 	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
-END CATCH
+END CATCH	
+
 PRINT '-------------------------------------------------------------------';
 
 /**********************************************************************
@@ -105,15 +137,31 @@ PRINT '-------------------------------------------------------------------';
 * for a given username, return false.
 ***********************************************************************/
 BEGIN TRY
-	IF (dbo.IsValidPassword('fakeUser1@gmail.com', 'WeJcFMQ/8+8QJ/w0hHh+0g=') = 1)
+	INSERT INTO Users
+		(Username, UserPassword)
+	VALUES
+		('hi', '123')
+
+	DECLARE @name nvarchar(50)
+
+	SELECT @name = Username
+	FROM Users
+	WHERE UserID = @@IDENTITY
+
+	IF (dbo.IsValidPassword(@name, 'wrongPass') = 1)
 		PRINT 'FAILURE: the function said the password was valid.'; 
 	ELSE
 		PRINT 'SUCCESS: the function said the password was not valid.'; 
+
+	DELETE FROM Users
+	WHERE UserID = @@IDENTITY
 END TRY
 BEGIN CATCH
 	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
 END CATCH
+
 PRINT '-------------------------------------------------------------------';
+
 
 /**********************************************************************
 * Purpose: Tests the GetProfileProgressInfo function. Ensures that
