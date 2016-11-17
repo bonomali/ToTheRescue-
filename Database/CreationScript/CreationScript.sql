@@ -32,10 +32,10 @@ CREATE TABLE Sounds (
 	, SoundName VARCHAR(50) NOT NULL);
 
 CREATE TABLE Maps (
-MapID INT PRIMARY KEY IDENTITY
-, MapName VARCHAR(50) NOT NULL
-, ImageID INT REFERENCES Images (ImageID) NOT NULL
-, SoundID INT REFERENCES Sounds (SoundID) NOT NULL);
+	MapID INT PRIMARY KEY IDENTITY
+	, MapName VARCHAR(50) NOT NULL
+	, ImageID INT REFERENCES Images (ImageID) NOT NULL
+	, SoundID INT REFERENCES Sounds (SoundID) NOT NULL);
 
 CREATE TABLE Nodes (
 	MapID INT REFERENCES Maps (MapID) NOT NULL
@@ -61,10 +61,12 @@ CREATE TABLE Profiles (
 	, UserID INT REFERENCES Users (UserID) NOT NULL
 	, AvatarID INT REFERENCES Images (ImageID) NOT NULL
 	, ProfileName NVARCHAR(30) NOT NULL
-	, ToggleSound BIT NOT NULL default 1 --0 = sound off, 1 = sound on, defualted to sound on
-	, ToggleMusic BIT NOT NULL default 1
-	, Difficulty INT NOT NULL
-	, PerformanceStat float NOT NULL
+	, ToggleSound BIT NOT NULL DEFAULT 1 --0 = sound off, 1 = sound on, defualted to sound on
+	, ToggleMusic BIT NOT NULL DEFAULT 1
+	, MathDifficultyLevel INT NOT NULL DEFAULT 1 --default to the lowest difficulty level
+	, MathPerformanceStat FLOAT NOT NULL
+	, ReadingDifficultyLevel INT NOT NULL DEFAULT 1 --default to the lowest difficulty level
+	, ReadingPerformanceStat FLOAT NOT NULL
 	, SubjectFilter VARCHAR(50));
 
 CREATE TABLE ProfileProgress (
@@ -94,7 +96,7 @@ CREATE TABLE MiniGames (
 CREATE TABLE MiniGameMedia (
 	MediaID INT PRIMARY KEY IDENTITY
 	, MiniGameID INT REFERENCES Minigames (MiniGameID) NOT NULL
-	, Difficulty INT default NULL	--nulled if media is used for every instance of that game
+	, Difficulty INT DEFAULT NULL	--nulled if media is used for every instance of that game
 	, MiniGameMedia VARBINARY(max) NOT NULL);
 
 CREATE TABLE ProfileProgressHistory (
