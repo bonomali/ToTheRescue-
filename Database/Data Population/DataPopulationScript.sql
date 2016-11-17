@@ -1,5 +1,6 @@
 USE ToTheRescue
 
+
 INSERT INTO Users (Username, UserPassword)
 VALUES 
 ('fakeUser1@gmail.com', 'WeJcFMQ/8+8QJ/w0hHh+0g=='),			--1
@@ -20,7 +21,7 @@ VALUES
 
 --Run code to add Images & Sounds
 
-INSERT INTO Profiles (ProfileName, UserID, AvatarID, ToggleSound, ToggleMusic, ReadingDifficulty, MathDifficutly,
+INSERT INTO Profiles (ProfileName, UserID, AvatarID, ToggleSound, ToggleMusic, ReadingDifficultyLevel, MathDifficultyLevel,
 					  ReadingPerformanceStat, MathPerformanceStat, Subjectfilter)
 VALUES
 ('Sophia', 1, 1, 1, 1, 3, 3, 34.1, 47.3, 0),('Emma', 1, 1, 1, 0, 3, 1, 36, 12, 0),('Lily', 1, 2, 1, 1, 3, 4, 41.2, 64.8, 1),('Madison', 2, 6, 0, 0, 3, 2, 34.3, 20.3, 1),('Avery', 3, 3, 1, 1, 3, 3, 43.9, 42.1, 2),
