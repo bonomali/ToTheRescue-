@@ -42,10 +42,10 @@ GO
 --====================================
 USE ToTheRescue
 GO
-DROP TRIGGER TwentyOneAnimalTrigger
+DROP TRIGGER ActiveAnimalTrigger
 GO
 
-CREATE TRIGGER TwentyOneAnimalTrigger
+CREATE TRIGGER ActiveAnimalTrigger
 	ON ProfileAnimals
 	AFTER INSERT
 AS 
@@ -54,6 +54,7 @@ AS
 				JOIN ProfileAnimals AS PA
 				ON inserted.ProfileID = PA.ProfileID
 				WHERE inserted.ProfileID = PA.ProfileID
+				AND PA.Active = 1
 				GROUP BY inserted.ProfileID
 				HAVING COUNT(PA.AnimalID) > 20
 				)
@@ -62,9 +63,10 @@ AS
 		UPDATE ProfileAnimals
 		SET Active = 0
 		WHERE ProfileAnimalID = 
-			(SELECT min(ProfileAnimalID)
+			(SELECT MIN(ProfileAnimalID)
+			FROM ProfileAnimals
 			WHERE ProfileID = (SELECT ProfileID FROM inserted)
-			AND Active != 0)
+			AND Active = 1)
 	END;
 GO
 
