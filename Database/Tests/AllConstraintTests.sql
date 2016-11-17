@@ -222,38 +222,6 @@ END CATCH
 	PRINT '-----------------------------------------------------------'
 
 /**********************************************************************
-* Purpose: Tests that a valid row of data can be inserted into the Users table.
-***********************************************************************/
-BEGIN TRY
-	INSERT INTO Users
-		(UserPassword, Username)
-	VALUES
-		('123', 'testUser@hotmail.com');
-	PRINT 'SUCCESS: a new row was inserted into the Users table';
-END TRY
-BEGIN CATCH
-	PRINT 'FAILURE: the new row was not inserted into the Users table.';     
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
-END CATCH
-
-PRINT '-------------------------------------------------------------------';
-	
-/**********************************************************************
-* Purpose: Tests that a row of data can be deleted from the Users table.
-***********************************************************************/
-BEGIN TRY
-	DELETE FROM Users
-		WHERE Username = 'testUser@hotmail.com';
-	PRINT 'SUCCESS: a row was deleted from the Users table';
-END TRY
-BEGIN CATCH
-	PRINT 'FAILURE: a row was not deleted from the Users table.';     
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
-END CATCH
-
-PRINT '-------------------------------------------------------------------';
-
-/**********************************************************************
 * Purpose: Tests that you can't have a username longer than 50 characters.
 ***********************************************************************/
 BEGIN TRY
@@ -328,10 +296,16 @@ PRINT '-------------------------------------------------------------------';
 * table.
 ***********************************************************************/
 BEGIN TRY
+	DECLARE @tempUserName varchar(50)
+
+	SELECT @tempUserName = Username
+	FROM Users
+	where UserID = @@IDENTITY
+
 	INSERT INTO Users
 		(UserPassword, Username)
 	VALUES
-		('123', 'fakeUser1@gmail.com');
+		('123', @tempUserName);
 	PRINT 'FAILURE: a row with a non-unique username was inserted into the Users table.';
 END TRY
 BEGIN CATCH
@@ -360,47 +334,13 @@ END CATCH
 PRINT '-------------------------------------------------------------------';
 
 /**********************************************************************
-* Purpose: Tests that a valid row of data can be deleted form the ProfileProgress
-* table.
-***********************************************************************/
-BEGIN TRY
-	DELETE FROM ProfileProgress
-		WHERE ProfileID = 35;
-	PRINT 'SUCCESS: a row was deleted from the ProfileProgress table';
-END TRY
-BEGIN CATCH
-	PRINT 'FAILURE: a row was not deleted from the ProfileProgress table.';     
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
-END CATCH
-
-PRINT '-------------------------------------------------------------------';
-
-/**********************************************************************
-* Purpose: Tests that a valid row of data can be inserted into the ProfileProgress
-* table.
-***********************************************************************/
-BEGIN TRY
-	INSERT INTO ProfileProgress
-		(ProfileID, CurrentMap, CurrentNode, AnimalID)
-	VALUES
-		(35, 1, 3, 12);
-	PRINT 'SUCCESS: a new row was inserted into the ProfileProgress table';
-END TRY
-BEGIN CATCH
-	PRINT 'FAILURE: the new row was not inserted into the ProfileProgress table.';     
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
-END CATCH
-
-PRINT '-------------------------------------------------------------------';
-
-/**********************************************************************
 * Purpose: Tests that a repeated ProfileID can't be inserted into the table.
 ***********************************************************************/
 BEGIN TRY
 	INSERT INTO ProfileProgress
 		(ProfileID, CurrentMap, CurrentNode, AnimalID)
 	VALUES
-		(35, 1, 3, 12);
+		(@@IDENTITY, 1, 3, 12);
 	PRINT 'FAILURE: a repeated ProfileID was inserted into the ProfileProgress table.';
 END TRY
 BEGIN CATCH
@@ -478,59 +418,6 @@ END CATCH
 
 PRINT '-------------------------------------------------------------------';
 
---Testing ProfileProgressHistory
-/**********************************************************************
-* Purpose: Tests that a valid row of data can be deleted form the ProfileProgressHistory
-* table.
-***********************************************************************/
-BEGIN TRY
-	DELETE FROM ProfileProgressHistory
-		WHERE ProgressID = 104;
-	PRINT 'SUCCESS: a row was deleted from the ProfileProgressHistory table';
-END TRY
-BEGIN CATCH
-	PRINT 'FAILURE: a row was not deleted from the ProfileProgressHistory table.';     
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
-END CATCH
-
-PRINT '-------------------------------------------------------------------';
-
-/**********************************************************************
-* Purpose: Tests that a valid row of data can be inserted into the ProfileProgressHistory
-* table.
-***********************************************************************/
-BEGIN TRY
-	INSERT INTO ProfileProgressHistory
-		(ProfileID, MiniGameID)
-	VALUES
-		(6, 20);
-	PRINT 'SUCCESS: a new row was inserted into the ProfileProgressHistory table';
-END TRY
-BEGIN CATCH
-	PRINT 'FAILURE: the new row was not inserted into the ProfileProgressHistory table.';     
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
-END CATCH
-
-PRINT '-------------------------------------------------------------------';
-
-/**********************************************************************
-* Purpose: Tests that a valid row of data can be inserted into the ProfileProgressHistory
-* table.
-***********************************************************************/
-BEGIN TRY
-	INSERT INTO ProfileProgressHistory
-		(ProgressID, ProfileID, MiniGameID)
-	VALUES
-		(106, 6, 20);
-	PRINT 'FAILURE: an explicit Identity column value was inserted into the table';
-END TRY
-BEGIN CATCH
-	PRINT 'SUCCESS: an explicit Identity column value was not inserted into the table.';     
-	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
-END CATCH
-
-PRINT '-------------------------------------------------------------------';
-
 /**********************************************************************
 * Purpose: Tests that a null ProfileID won't be inserted into the table.
 ***********************************************************************/
@@ -563,4 +450,66 @@ BEGIN CATCH
 	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
 END CATCH
 
+PRINT '-------------------------------------------------------------------';
+
+/**********************************************************************
+* Purpose: Tests the default constraint of the MathDifficultyLevel column
+* in the Profiles. The default is 1
+***********************************************************************/
+BEGIN TRY
+	INSERT INTO Profiles
+		(UserID, AvatarID, ProfileName, ToggleSound, ToggleMusic, MathPerformanceStat, ReadingDifficultyLevel, ReadingPerformanceStat, SubjectFilter)
+	VALUES
+		(3, 2, 'Matt', 0, 1, 22.2, 3, 17.2, 0);
+
+		DECLARE @mathDiff int
+
+		SELECT @mathDiff = MathDifficultyLevel
+		FROM Profiles
+		where ProfileID = @@IDENTITY
+
+		PRINT @mathDiff;
+
+		DELETE FROM Profiles
+		WHERE ProfileID = @@IDENTITY
+
+		IF (@mathDiff = 1)
+			PRINT 'SUCCESS: MathDifficultyLevel defaulted to 1.'
+		ELSE
+			PRINT 'FAILURE: MathDifficultyLevel did not default to 1.'
+END TRY
+BEGIN CATCH   
+	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
+END CATCH
+PRINT '-------------------------------------------------------------------';
+
+/**********************************************************************
+* Purpose: Tests the default constraint of the ReadingDifficultyLevel column
+* in the Profiles. The default is 1
+***********************************************************************/
+BEGIN TRY
+	INSERT INTO Profiles
+		(UserID, AvatarID, ProfileName, ToggleSound, ToggleMusic, MathPerformanceStat, MathDifficultyLevel, ReadingPerformanceStat, SubjectFilter)
+	VALUES
+		(3, 2, 'Matt', 0, 1, 22.2, 3, 17.2, 0);
+
+		DECLARE @readDiff int
+
+		SELECT @readDiff = ReadingDifficultyLevel
+		FROM Profiles
+		where ProfileID = @@IDENTITY
+
+		PRINT @readDiff;
+
+		DELETE FROM Profiles
+		WHERE ProfileID = @@IDENTITY
+
+		IF (@readDiff = 1)
+			PRINT 'SUCCESS: ReadingDifficultyLevel defaulted to 1.'
+		ELSE
+			PRINT 'FAILURE: ReadingDifficultyLevel did not default to 1.'
+END TRY
+BEGIN CATCH   
+	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
+END CATCH
 PRINT '-------------------------------------------------------------------';
