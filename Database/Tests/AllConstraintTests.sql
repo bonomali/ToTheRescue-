@@ -296,6 +296,11 @@ PRINT '-------------------------------------------------------------------';
 * table.
 ***********************************************************************/
 BEGIN TRY
+	INSERT INTO Users
+		(UserPassword, UserName)
+	VALUES
+		('test', 'test')
+
 	DECLARE @tempUserName varchar(50)
 
 	SELECT @tempUserName = Username
@@ -305,14 +310,17 @@ BEGIN TRY
 	INSERT INTO Users
 		(UserPassword, Username)
 	VALUES
-		('123', @tempUserName);
+		('123', @tempUserName)
+
 	PRINT 'FAILURE: a row with a non-unique username was inserted into the Users table.';
 END TRY
 BEGIN CATCH
 	PRINT 'SUCCESS: a row with a non-unique username was not inserted into the Users table.';       
 	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
+	
+	DELETE FROM Users
+	WHERE UserID = @@IDENTITY
 END CATCH
-
 PRINT '-------------------------------------------------------------------';
 
 /**********************************************************************
@@ -337,19 +345,26 @@ PRINT '-------------------------------------------------------------------';
 * Purpose: Tests that a repeated ProfileID can't be inserted into the table.
 ***********************************************************************/
 BEGIN TRY
+	BEGIN TRAN;
 	INSERT INTO ProfileProgress
 		(ProfileID, CurrentMap, CurrentNode, AnimalID)
 	VALUES
-		(@@IDENTITY, 1, 3, 12);
+		(1, 1, 3, 12);
+
+	INSERT INTO ProfileProgress
+		(ProfileID, CurrentMap, CurrentNode, AnimalID)
+	VALUES (1, 2, 4, 5);
+
+	COMMIT TRAN;
 	PRINT 'FAILURE: a repeated ProfileID was inserted into the ProfileProgress table.';
 END TRY
 BEGIN CATCH
 	PRINT 'SUCCESS: a repeated ProfileID was not inserted into the ProfileProgress table.';     
 	PRINT 'Error ' + CONVERT(varchar, ERROR_NUMBER(), 1) + ': ' + ERROR_MESSAGE(); 
+	ROLLBACK TRAN;
 END CATCH
-
 PRINT '-------------------------------------------------------------------';
-
+select * from ProfileProgress
 /**********************************************************************
 * Purpose: Tests that a null CurrentMap can't be inserted into the table.
 ***********************************************************************/
