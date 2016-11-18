@@ -38,7 +38,7 @@ WHERE (retTable.NodeID IS NULL OR retTable.XCoordinate IS NULL OR retTable.YCoor
 	 > 0	PRINT 'Failure, didn''t return correct MiniGameNodes'ELSE	PRINT 'Success, correct MiniGameNodes returned'
 DROP TABLE #temp; --drop temp table
 	PRINT '-----------------------------------------------------------'
-
+GO
 /********************************************************************************
 * Purpose: Tests the GetMapMedia function.
   Should return background sound and background image for map
