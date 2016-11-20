@@ -1,0 +1,15 @@
+﻿@model ToTheRescueWebApplication.Models.ProfilesModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    //Turn an avatar's byte array into 64 bit string and give it a source string
+    var base64 = Convert.ToBase64String(Model.GetProfileAvatar(1));
+    var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+}
+
+
+<h2>@Model.GetUserProfileNames(1)[0]</h2>
+
+<img src="@imgSrc" />
