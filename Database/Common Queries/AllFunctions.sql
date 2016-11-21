@@ -3,9 +3,9 @@
 		Parameters: ProfileID
 		Returns: table
 ***********************************************************************/
-DROP FUNCTION GetPrevMiniGames;
+DROP FUNCTION func_GetPrevMiniGames;
 GO
-CREATE FUNCTION GetPrevMiniGames
+CREATE FUNCTION func_GetPrevMiniGames
 		(@profileID INT)
 		RETURNS TABLE
 
@@ -19,9 +19,9 @@ GO
 		Parameters: MapID
 		Returns: table
 ***********************************************************************/
-DROP FUNCTION GetMapMedia;
+DROP FUNCTION func_GetMapMedia;
 GO
-CREATE FUNCTION GetMapMedia
+CREATE FUNCTION func_GetMapMedia
 		(@mapID INT)
 		RETURNS TABLE
 
@@ -37,9 +37,9 @@ GO
 		Parameters: MapID
 		Returns: table
 ***********************************************************************/
-DROP FUNCTION GetMapNodes
+DROP FUNCTION func_GetMapNodes
 GO
-CREATE FUNCTION GetMapNodes
+CREATE FUNCTION func_GetMapNodes
 		(@mapID INT)
 		RETURNS TABLE
 
