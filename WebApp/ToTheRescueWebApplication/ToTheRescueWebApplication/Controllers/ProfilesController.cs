@@ -16,7 +16,7 @@ namespace ToTheRescueWebApplication.Controllers
             ProfilesModel profiles = new ProfilesModel();
 
             //will be able to have the current UserID passed into here
-            profiles.RetrieveChooseProfilePageInformation(1);
+            profiles.RetrieveChooseProfilePageInformation(7);
 
             return View(profiles);
         }
