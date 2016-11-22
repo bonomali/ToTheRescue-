@@ -1,0 +1,48 @@
+﻿@model ToTheRescueWebApplication.Models.ProfilesModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 id="ChooseProfileheader">Choose Your Profile!</h1>
+<br />
+
+
+@for (int i = 0; i < Model.GetProfileNamesForASpecificUser().Count; i++)
+{
+
+    var base64 = Convert.ToBase64String(Model.GetAllProfileAvatarsForASpecificUser()[i]);
+    var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+
+    <div id="ProfileDivs">
+        <text id="ProfileNames">@Model.GetProfileNamesForASpecificUser()[i]</text>
+        <img id="Avatar" , src="@imgSrc" />
+    </div>
+}
+
+
+<style>
+    #ProfileDivs {
+        padding-right: 45px;
+        float: left;
+        border-style: solid;
+        border-color: black;
+        border-width: 0px;
+    }
+
+    #ChooseProfileheader {
+        text-align: center;
+    }
+
+    #ProfileNames {
+        font-size: 32px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    #Avatar {
+    }
+</style>
+
+<br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

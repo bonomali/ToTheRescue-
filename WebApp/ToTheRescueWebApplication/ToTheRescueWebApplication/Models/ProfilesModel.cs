@@ -10,23 +10,19 @@ namespace ToTheRescueWebApplication.Models
 {
     public class ProfilesModel
     {
-        private List<string> m_profileNames;
-        private Byte[] m_profileAvatar;
-        
         public ProfilesModel()
         {
-            m_profileNames = null;
-            m_profileAvatar = null;
+            m_profileNamesForAUser = new List<string>();
+            m_allUserProfileAvatars = new List<byte[]>();
         }
 
         /**********************************************************************
-        * Purpose: This function grabs all of the profile names for a specific
-        * userID from the database, and returns a list of those names.
+        * Purpose: This function sets two data members to all of the profile names
+        * for a specific profile and all the avatars for each of those profiles.
         ***********************************************************************/
-        public List<string> GetUserProfileNames(int userID)
+        public void RetrieveChooseProfilePageInformation(int userID)
         {
-            m_profileNames = new List<string>();
-
+            List<int> allProfileIDs = new List<int>();
             //Connect to the database using the connection string in the web.config file
             using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
             {
@@ -34,7 +30,7 @@ namespace ToTheRescueWebApplication.Models
 
                 try
                 {
-                    cmd = new SqlCommand("SELECT ProfileName FROM Profiles WHERE UserID = " + userID + ";");
+                    cmd = new SqlCommand("SELECT ProfileName, ProfileID FROM Profiles WHERE UserID = " + userID + ";");
                     SqlDataReader reader;
 
                     cmd.CommandType = CommandType.Text;
@@ -48,12 +44,14 @@ namespace ToTheRescueWebApplication.Models
                         //add all of the profiles to the list
                         while (reader.Read())
                         {
-                            m_profileNames.Add(reader["ProfileName"].ToString());
+                            //add all of the profile names to a list
+                            m_profileNamesForAUser.Add(reader["ProfileName"].ToString());
+                            
+                            //add all of the profileIDs to the allProfileIDs list
+                            allProfileIDs.Add((int)reader["ProfileID"]);
                         }
                     }
                     //if it doesn't have rows then this user hasn't created a profile yet
-
-                    return m_profileNames;
                 }
                 catch (Exception e)
                 {
@@ -63,6 +61,12 @@ namespace ToTheRescueWebApplication.Models
                 {
                     if (connection != null)
                         connection.Close();
+                }
+
+                for (int i = 0; i < allProfileIDs.Count; i++)
+                {
+                    //add all the avatar pictures for all of the profiles to a list
+                    m_allUserProfileAvatars.Add(GetProfileAvatar(allProfileIDs[i]));
                 }
             }
         }
@@ -85,16 +89,16 @@ namespace ToTheRescueWebApplication.Models
                 connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
-                m_profileAvatar = null;
+                Byte[] profileAvatar = null;
 
                 if (reader.Read() == false)
                     throw new Exception("Unable to read image.");
 
-                m_profileAvatar = (Byte[])reader[0];
+                profileAvatar = (Byte[])reader[0];
 
                 reader.Close();
 
-                return m_profileAvatar;
+                return profileAvatar;
             }
             catch (Exception e)
             {
@@ -106,6 +110,24 @@ namespace ToTheRescueWebApplication.Models
                     connection.Close();
             }
         }
+
+        //Returns a list of all the profile names for a certain user
+        public List<String> GetProfileNamesForASpecificUser()
+        {
+            return m_profileNamesForAUser;
+        }
+
+        //Returns a list of all the avatars for each profile for a certain user
+        public List<Byte[]> GetAllProfileAvatarsForASpecificUser()
+        {
+            return m_allUserProfileAvatars;
+        }
+
+        //will hold all the profile names for a specific user
+        private List<string> m_profileNamesForAUser;
+
+        //will hold all the profile avatars for a profile for a specific user
+        private List<Byte[]> m_allUserProfileAvatars;
     }
 }
 
