@@ -115,27 +115,30 @@ GO
 
 --Original
 DECLARE @ProfileID int = 6
-DECLARE @NewDifficulty int = 3
+DECLARE @NewMathDifficulty int = 3
+DECLARE @NewReadingDifficulty int = 3
 
 UPDATE Profiles
-SET Difficulty = @NewDifficulty
+SET MathDifficultyLevel = @NewMathDifficulty , ReadingDifficultyLevel = @NewReadingDifficulty
 WHERE ProfileID = @ProfileID;
 
+
+--DROP PROCEDURE proc_UpdateDifficulty; GO  
 --Function
 USE ToTheRescue;  
 GO  
 CREATE PROCEDURE proc_UpdateDifficulty
 	@ProfileID int,
-	@NewDifficulty int
+	@NewMathDifficulty int,
+	@NewReadingDifficulty int
 AS  
 	UPDATE Profiles
-	SET Difficulty = @NewDifficulty
+	SET MathDifficultyLevel = @NewMathDifficulty , ReadingDifficultyLevel = @NewReadingDifficulty
 	WHERE ProfileID = @ProfileID;
 GO
 
-
 /**********************************************************************
-* Purpose: Updates SubjectFilter
+* Purpose: Update Filter
 ***********************************************************************/
 
 --Original
