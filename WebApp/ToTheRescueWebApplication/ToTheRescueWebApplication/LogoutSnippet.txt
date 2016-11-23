@@ -1,0 +1,5 @@
+using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { @id = "logoutForm" }))
+{
+    @Html.AntiForgeryToken()
+    <a href="Logout" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
+}

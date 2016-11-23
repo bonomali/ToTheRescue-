@@ -3,6 +3,7 @@
 
 Smtp.config
 ConnectionStrings.config
+ApplicationDBContext.cs
 
 # User-specific files
 *.suo

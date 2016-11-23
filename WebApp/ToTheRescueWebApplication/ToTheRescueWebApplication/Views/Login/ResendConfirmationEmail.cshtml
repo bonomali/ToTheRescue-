@@ -1,0 +1,11 @@
+﻿@model string
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("Email", Model)
+    <p>
+        Your account is not yet confirmed.
+        <br />
+        <button type="submit">Resend Confirmation Email</button>
+    </p>
+}

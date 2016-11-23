@@ -9,6 +9,21 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div>Welcome, @User.Identity.Name</div>
+
+        using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { @id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <a href="Logout" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
+        }
+    }
+
+    @if (!User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Login", "Login", "Login")
+    }
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
