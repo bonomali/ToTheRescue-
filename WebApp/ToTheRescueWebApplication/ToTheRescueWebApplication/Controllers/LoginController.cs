@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ToTheRescueWebApplication.Models;
 using System.Collections.Generic;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ToTheRescueWebApplication.Controllers
 {
@@ -19,6 +20,7 @@ namespace ToTheRescueWebApplication.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
+        private int userID;
 
         public LoginController()
         {
@@ -69,13 +71,18 @@ namespace ToTheRescueWebApplication.Controllers
         //
         // GET: /Login/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login(string returnUrl)//
         {
-           /* if (User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("ChooseProfilePage", "Profiles");
-            } */
+                var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var currentUser = manager.FindById(User.Identity.GetUserId());
+                userID = currentUser.UserID;
 
+                TempData["userID"] = userID;
+                return RedirectToAction("ChooseProfilePage", "Profiles");
+            }
+ 
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -204,12 +211,14 @@ namespace ToTheRescueWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var count = UserManager.Users.Count();
+                var user = new ApplicationUser { UserID = (count + 1), UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    return Redirect("/");
+                    TempData["userID"] = user.UserID;
+                    return RedirectToAction("ChooseProfilePage", "Profiles");
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -532,7 +541,7 @@ namespace ToTheRescueWebApplication.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("ChooseProfilePage", "Profiles");
+            return RedirectToAction("ChooseProfilePage", "Profiles", new { id = userID } );
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

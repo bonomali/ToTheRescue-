@@ -6,13 +6,16 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ToTheRescueWebApplication.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public int ProfileID { get; set; }
-        
+        [Index("IX_UserID", IsUnique = true)]
+        public int UserID { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

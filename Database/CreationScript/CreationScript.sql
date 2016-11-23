@@ -12,7 +12,7 @@ DROP TABLE GameCategories;
 DROP TABLE ProfileAnimals;
 DROP TABLE ProfileProgress;
 DROP TABLE Profiles;
-DROP TABLE Users;
+--DROP TABLE Users;
 DROP TABLE Animals;
 DROP TABLE Nodes;
 DROP TABLE Maps;
@@ -51,14 +51,14 @@ CREATE TABLE Animals (
 	, SoundID INT REFERENCES Sounds (SoundID) NOT NULL
 	, ImageID INT REFERENCES Images (ImageID) NOT NULL);
 
-CREATE TABLE Users (
-	UserID INT PRIMARY KEY IDENTITY
-	, UserPassword NVARCHAR(50) NOT NULL
-	, Username NVARCHAR(50) unique NOT NULL); --NVARCHAR allows for unicode characters in other languages
+--CREATE TABLE Users (
+--	UserID INT PRIMARY KEY IDENTITY
+--	, UserPassword NVARCHAR(50) NOT NULL
+--	, Username NVARCHAR(50) unique NOT NULL); --NVARCHAR allows for unicode characters in other languages
 
 CREATE TABLE Profiles (
 	ProfileID INT PRIMARY KEY IDENTITY
-	, UserID INT REFERENCES Users (UserID) NOT NULL
+	, UserID INT REFERENCES dbo.AspNetUsers (UserID) NOT NULL
 	, AvatarID INT REFERENCES Images (ImageID) NOT NULL
 	, ProfileName NVARCHAR(30) NOT NULL
 	, ToggleSound BIT NOT NULL DEFAULT 1 --0 = sound off, 1 = sound on, defualted to sound on

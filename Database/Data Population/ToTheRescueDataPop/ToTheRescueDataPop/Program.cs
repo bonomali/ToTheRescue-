@@ -61,7 +61,7 @@ namespace ToTheRescueDataPop
                 ProductDB.WriteImage(3, "map7.jpg", "pyramid");
             }
 
-            if (dataImageIDList.Count == 0)
+           if (dataImageIDList.Count == 0)
             {
                 ProductDB.WriteMiniGameMedia(10, "circle.jpg", 0);
                 ProductDB.WriteMiniGameMedia(10, "triangle.jpg", 0);
