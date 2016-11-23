@@ -115,6 +115,9 @@ namespace ToTheRescueWebApplication.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                    var currentUser = manager.FindByEmail(model.Email);
+                    TempData["userID"] = currentUser.UserID;
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -541,7 +544,8 @@ namespace ToTheRescueWebApplication.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("ChooseProfilePage", "Profiles", new { id = userID } );
+
+            return RedirectToAction("ChooseProfilePage", "Profiles");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
