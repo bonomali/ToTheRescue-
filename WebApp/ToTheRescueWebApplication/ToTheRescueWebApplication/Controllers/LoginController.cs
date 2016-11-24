@@ -224,8 +224,8 @@ namespace ToTheRescueWebApplication.Controllers
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     TempData["userID"] = user.UserID;
                     TempData["userEmail"] = user.Email;
-                    return RedirectToAction("Login", "Login");
-                    //return RedirectToAction("ChooseProfilePage", "Profiles");
+                    return RedirectToAction("ChooseProfilePage", "Profiles");
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -271,8 +271,8 @@ namespace ToTheRescueWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var user = await UserManager.FindByEmailAsync(model.Email);
+                if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
