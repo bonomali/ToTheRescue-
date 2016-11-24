@@ -7,6 +7,7 @@ using ToTheRescueWebApplication.Models;
 
 namespace ToTheRescueWebApplication.Controllers
 {
+    [Authorize]
     public class ProfilesController : Controller
     {
         private int userID;
@@ -22,7 +23,6 @@ namespace ToTheRescueWebApplication.Controllers
                 //will be able to have the current UserID passed into here
             }
             profiles.RetrieveChooseProfilePageInformation(userID);
-            
             return View(profiles);
         }
     }

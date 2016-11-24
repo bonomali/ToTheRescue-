@@ -1,9 +1,47 @@
 ﻿@model ToTheRescueWebApplication.Models.ProfilesModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ChooseProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<style>
+    #ChooseProfileheader {
+        text-align: center;
+    }
+
+    #ProfileNames {
+        font-size: 32px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    #DeleteProfileButton {
+        border-radius: 10px;
+        position: relative;
+        left: 0%;
+        visibility: hidden;
+    }
+
+    #CreateNewPorifleButton {
+        border-radius: 10px;
+        position: relative;
+        left: 35%;
+        visibility: visible;
+    }
+
+    #PlayButton {
+        border-radius: 10px;
+        position: relative;
+        left: 67%;
+        visibility: hidden;
+    }
+
+    h6 {
+        position: relative;
+        left: 42%;
+    }
+</style>
+
 
 <body id="ChooseProfileBody">
     <h1 id="ChooseProfileheader">Choose Your Profile!</h1>
@@ -19,7 +57,7 @@
                     var base64 = Convert.ToBase64String(Model.GetAllProfileAvatarsForASpecificUser()[i]);
                     var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
                     <td>
-                        <div id="@("Profile"+i)">
+                        <div id="@("Profile"+i)" , onclick="ToggleColor(@i.ToString())">
                             <text id="ProfileNames">@Model.GetProfileNamesForASpecificUser()[i]</text>
                             <img id="Avatar" , src="@imgSrc" />
                         </div>
@@ -35,9 +73,11 @@
                 {
                     var base64 = Convert.ToBase64String(Model.GetAllProfileAvatarsForASpecificUser()[i]);
                     var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
-                    <td id="@("Profile"+i)">
-                        <text id="ProfileNames">@Model.GetProfileNamesForASpecificUser()[i]</text>
-                        <img id="Avatar" , src="@imgSrc" />
+                    <td>
+                        <div id="@("Profile"+i)" , onclick="ToggleColor(@i.ToString())">
+                            <text id="ProfileNames">@Model.GetProfileNamesForASpecificUser()[i]</text>
+                            <img id="Avatar" , src="@imgSrc" />
+                        </div>
                     </td>
                 }
             </tr>
@@ -46,97 +86,78 @@
                 {
                     var base64 = Convert.ToBase64String(Model.GetAllProfileAvatarsForASpecificUser()[x]);
                     var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
-                    <td id="@("Profile"+x)">
-                        <text id="ProfileNames">@Model.GetProfileNamesForASpecificUser()[x]</text>
-                        <img id="Avatar" , src="@imgSrc" />
+                    <td>
+                        <div id="@("Profile"+x)" , onclick="ToggleColor(@x.ToString())">
+                            <text id="ProfileNames">@Model.GetProfileNamesForASpecificUser()[x]</text>
+                            <img id="Avatar" , src="@imgSrc" />
+                        </div>
                     </td>
                 }
             </tr>
         }
     </table>
 
+    <button id="DeleteProfileButton">Delete Profile</button>
+    @*<form id="DeleteProfileForm">
+        Password:
+        <input type="password" , name="password" />
+    </form>*@
+    <button id="CreateNewPorifleButton">Create New Profile</button>
+    <button id="PlayButton">Play</button>
+    
+    <br />
+    <h6>*Only 8 profiles per user permitted.</h6>
+
+    <script type="text/javascript">
+        function ToggleColor(id) {
+            var ProfileID = "Profile";
+            ProfileID = ProfileID.concat(id);
+            var profileDiv = document.getElementById(ProfileID);
+
+            //toggle the color of all the profile names
+            if (profileDiv.style.color !== "red") {
+                profileDiv.style.color = "red";
+            }
+            else {
+                profileDiv.style.color = "black";
+            }
+
+            //ensure all the other profile namees are black
+            for (var i = 0; i < 8; i++) {
+                if (i != id) {
+                    var tempProfID = "Profile";
+                    tempProfID = tempProfID.concat(i.toString());
+                    document.getElementById(tempProfID).style.color = "black";
+                }
+            }
+            DisplayButtons();
+        }
+
+        function DisplayButtons() {
+            var visible = false;
+
+            for (var i = 0; i < 8; i++) {
+                var tempProfID = "Profile";
+                tempProfID = tempProfID.concat(i.toString());
+                tempProfID = document.getElementById(tempProfID)
+                if (tempProfID.style.color === "red")
+                {
+                    visible = true;
+                }
+            }
+            if (visible === true)
+            {
+                document.getElementById("PlayButton").style.visibility = "visible";
+                document.getElementById("DeleteProfileButton").style.visibility = "visible";
+            }
+            else
+            {
+                document.getElementById("PlayButton").style.visibility = "hidden";
+                document.getElementById("DeleteProfileButton").style.visibility = "hidden";
+            }
+        }
+    </script>
+
     <br />
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 </body>
-
-<style>
-    #ChooseProfileheader {
-        text-align: center;
-    }
-
-    #ProfileNames {
-        font-size: 32px;
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    }
-</style>
-
-<script type="text/javascript">
-    function ListenForProfileClicks(clickedArr) {
-
-        document.getElementById("Profile0").onclick = function () {
-            ToggleNameColor(clickedArr);
-            document.getElementById("Profile0").style.color = "red"
-            clickedArr[0] = true;
-        }
-        document.getElementById("Profile1").onclick = function () {
-            ToggleNameColor(clickedArr);
-            document.getElementById("Profile1").style.color = "red"
-            clickedArr[1] = true;
-        }
-        document.getElementById("Profile2").onclick = function () {
-            ToggleNameColor(clickedArr);
-            document.getElementById("Profile2").style.color = "red"
-            clickedArr[2] = true;
-        }
-        document.getElementById("Profile3").onclick = function () {
-            ToggleNameColor(clickedArr);
-            document.getElementById("Profile3").style.color = "red"
-            clickedArr[3] = true;
-        }
-        document.getElementById("Profile4").onclick = function () {
-            ToggleNameColor(clickedArr);
-            document.getElementById("Profile4").style.color = "red"
-            clickedArr[4] = true;
-        }
-        document.getElementById("Profile5").onclick = function () {
-            ToggleNameColor(clickedArr);
-            document.getElementById("Profile5").style.color = "red"
-            clickedArr[5] = true;
-        }
-        document.getElementById("Profile6").onclick = function () {
-            ToggleNameColor(clickedArr);
-            document.getElementById("Profile6").style.color = "red"
-            clickedArr[6] = true;
-        }
-        document.getElementById("Profile7").onclick = function () {
-            ToggleNameColor(clickedArr);
-            document.getElementById("Profile7").style.color = "red"
-            clickedArr[7] = true;
-        }
-    }
-
-    function ToggleNameColor(clickedArr)
-    {
-        for (var i = 0; i < clickedArr.length; i++) {
-            if (clickedArr[i] === true) {
-                var elID = "Profile";
-                elID.concat(i.toString());
-                document.getElementById(elID).style.color = "black";
-                clickedArr[i] = false;
-
-            }
-        }
-    }
-
-    function main() {
-        var clickedArr = [];
-
-        for (var i = 0; i < 8; i++) {
-            clickedArr.push(false);
-        }
-        ListenForProfileClicks(clickedArr);
-    }
-
-    main()
-
-</script>
