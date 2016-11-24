@@ -36,17 +36,36 @@
         visibility: hidden;
     }
 
-    h6 {
-        position: relative;
-        left: 42%;
+    #deleteText {
+        visibility: hidden;
+    }
+
+    #deleteInput {
+        visibility: hidden;
+    }
+
+    #deleteButton {
+        visibility: hidden;
+    }
+
+    #CencelButton {
+        border-radius: 10px;
+        visibility: hidden;
+    }
+
+    #ProfileText{
+         visibility: hidden;
+    }
+
+    #ProfileInput{
+        visibility: hidden;
     }
 </style>
 
 
-<body id="ChooseProfileBody">
+<body id="ChooseProfileBody", onload="RefreshPage()">
     <h1 id="ChooseProfileheader">Choose Your Profile!</h1>
     <br />
-
 
     <table id="ProfilesTable" , style="width:100%">
         @if (Model.GetProfileNamesForASpecificUser().Count() < 4)
@@ -57,7 +76,7 @@
                     var base64 = Convert.ToBase64String(Model.GetAllProfileAvatarsForASpecificUser()[i]);
                     var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
                     <td>
-                        <div id="@("Profile"+i)" , onclick="ToggleColor(@i.ToString())">
+                        <div id="@("Profile" + i)" , onclick="ToggleColor(@i.ToString())">
                             <text id="ProfileNames">@Model.GetProfileNamesForASpecificUser()[i]</text>
                             <img id="Avatar" , src="@imgSrc" />
                         </div>
@@ -74,7 +93,7 @@
                     var base64 = Convert.ToBase64String(Model.GetAllProfileAvatarsForASpecificUser()[i]);
                     var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
                     <td>
-                        <div id="@("Profile"+i)" , onclick="ToggleColor(@i.ToString())">
+                        <div id="@("Profile" + i)" , onclick="ToggleColor(@i.ToString())">
                             <text id="ProfileNames">@Model.GetProfileNamesForASpecificUser()[i]</text>
                             <img id="Avatar" , src="@imgSrc" />
                         </div>
@@ -87,7 +106,7 @@
                     var base64 = Convert.ToBase64String(Model.GetAllProfileAvatarsForASpecificUser()[x]);
                     var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
                     <td>
-                        <div id="@("Profile"+x)" , onclick="ToggleColor(@x.ToString())">
+                        <div id="@("Profile" + x)" , onclick="ToggleColor(@x.ToString())">
                             <text id="ProfileNames">@Model.GetProfileNamesForASpecificUser()[x]</text>
                             <img id="Avatar" , src="@imgSrc" />
                         </div>
@@ -97,19 +116,26 @@
         }
     </table>
 
-    <button id="DeleteProfileButton">Delete Profile</button>
-    @*<form id="DeleteProfileForm">
-        Password:
-        <input type="password" , name="password" />
-    </form>*@
-    <button id="CreateNewPorifleButton">Create New Profile</button>
-    <button id="PlayButton">Play</button>
-    
+    <button id="DeleteProfileButton" , onclick="ClickedDelete()">Delete Profile</button>
+    <button id="CreateNewPorifleButton" , onclick="GoToCreateNewProfilePage()">Create New Profile</button>
+    <button id="PlayButton" , onclick="GoToMainMenu()">Play</button>
+    @using (Html.BeginForm())
+    {
+        <h5 id="ProfileText">Please enter the name of the profile you would like to delete</h5>
+        <input type="text" name="profName" id="ProfileInput" />
+        <h5 id="deleteText">Please enter your email to delete this profile:</h5>
+        <input type="text" name="email" id="deleteInput" />
+        <br />
+        <input type="submit" , value="Delete Profile" id="deleteButton" />
+    }
+    <button id="CencelButton" , onclick="ClickedCancel()">Cencel</button>
+
     <br />
-    <h6>*Only 8 profiles per user permitted.</h6>
+    <h6>*Only eight profiles per user permitted.</h6>
 
     <script type="text/javascript">
         function ToggleColor(id) {
+
             var ProfileID = "Profile";
             ProfileID = ProfileID.concat(id);
             var profileDiv = document.getElementById(ProfileID);
@@ -123,7 +149,7 @@
             }
 
             //ensure all the other profile namees are black
-            for (var i = 0; i < 8; i++) {
+            for (var i = 0; i < @Model.GetProfileNamesForASpecificUser().Count(); i++) {
                 if (i != id) {
                     var tempProfID = "Profile";
                     tempProfID = tempProfID.concat(i.toString());
@@ -136,7 +162,7 @@
         function DisplayButtons() {
             var visible = false;
 
-            for (var i = 0; i < 8; i++) {
+            for (var i = 0; i <  @Model.GetProfileNamesForASpecificUser().Count(); i++) {
                 var tempProfID = "Profile";
                 tempProfID = tempProfID.concat(i.toString());
                 tempProfID = document.getElementById(tempProfID)
@@ -155,9 +181,51 @@
                 document.getElementById("PlayButton").style.visibility = "hidden";
                 document.getElementById("DeleteProfileButton").style.visibility = "hidden";
             }
-        }
-    </script>
 
-    <br />
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            document.getElementById("deleteText").style.visibility = "hidden";
+            document.getElementById("deleteInput").style.visibility = "hidden";
+            document.getElementById("deleteButton").style.visibility = "hidden";
+            document.getElementById("CencelButton").style.visibility = "hidden";
+            document.getElementById("ProfileText").style.visibility = "hidden";
+            document.getElementById("ProfileInput").style.visibility = "hidden";
+        }
+
+        function ClickedDelete()
+        {
+            document.getElementById("DeleteProfileButton").style.visibility = "hidden";
+            document.getElementById("deleteText").style.visibility = "visible";
+            document.getElementById("deleteInput").style.visibility = "visible";
+            document.getElementById("deleteButton").style.visibility = "visible";
+            document.getElementById("CencelButton").style.visibility = "visible";
+            document.getElementById("ProfileText").style.visibility = "visible";
+            document.getElementById("ProfileInput").style.visibility = "visible";
+        }
+
+        function ClickedCancel()
+        {
+            document.getElementById("DeleteProfileButton").style.visibility = "visible";
+            document.getElementById("deleteText").style.visibility = "hidden";
+            document.getElementById("deleteInput").style.visibility = "hidden";
+            document.getElementById("deleteButton").style.visibility = "hidden";
+            document.getElementById("CencelButton").style.visibility = "hidden";
+            document.getElementById("ProfileText").style.visibility = "hidden";
+            document.getElementById("ProfileInput").style.visibility = "hidden";
+        }
+
+        function GoToCreateNewProfilePage()
+        {
+            document.write("Go to Create New Profile Page");
+        }
+
+        function GoToMainMenu()
+        {
+            document.write("Go to main menu");
+        }
+
+        function RefreshPage()
+        {
+            window.localStorage.reload();
+        }
+
+    </script>
 </body>

@@ -46,12 +46,13 @@ namespace ToTheRescueWebApplication.Models
                         {
                             //add all of the profile names to a list
                             m_profileNamesForAUser.Add(reader["ProfileName"].ToString());
-                            
+
                             //add all of the profileIDs to the allProfileIDs list
                             allProfileIDs.Add((int)reader["ProfileID"]);
                         }
                     }
                     //if it doesn't have rows then this user hasn't created a profile yet
+                    reader.Close();
                 }
                 catch (Exception e)
                 {
@@ -75,40 +76,107 @@ namespace ToTheRescueWebApplication.Models
         * Purpose: This function grabs the avatar for the specific profileID
         * and returns it as a byte array.
         ***********************************************************************/
-        public  Byte[] GetProfileAvatar(int profileID)
+        public Byte[] GetProfileAvatar(int profileID)
         {
-            SqlConnection connection = null;
-            try
+            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
             {
-                connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString);
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = connection;
+                    cmd.CommandText = "SELECT Images FROM dbo.GetProfileAvatar(" + profileID + ");";
 
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = connection;
-                cmd.CommandText = "SELECT Images FROM dbo.GetProfileAvatar(" + profileID + ");";
+                    connection.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
 
-                connection.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
+                    Byte[] profileAvatar = null;
 
-                Byte[] profileAvatar = null;
+                    if (reader.Read() == false)
+                        throw new Exception("Unable to read image.");
 
-                if (reader.Read() == false)
-                    throw new Exception("Unable to read image.");
+                    profileAvatar = (Byte[])reader[0];
 
-                profileAvatar = (Byte[])reader[0];
+                    reader.Close();
 
-                reader.Close();
-
-                return profileAvatar;
+                    return profileAvatar;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                finally
+                {
+                    if (connection != null)
+                        connection.Close();
+                }
             }
-            catch (Exception e)
+        }
+
+        public bool DeleteProfile(string profileName)
+        {
+            int profileID = 0;
+            bool returnVal = true;
+            UserID = 3;
+            //Get the profileID
+            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
             {
-                throw e;
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = connection;
+                    //I get an exception saying that the profile name passed into this function is an invalid column name. Makes no sense
+                    cmd.CommandText = "SELECT ProfileID FROM Profiles WHERE UserID = " + UserID + " AND ProfileName = " + profileName + ";";
+
+                    connection.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        profileID = (int)reader["ProfileID"];
+                    }
+
+                    reader.Close();
+                }
+                catch (Exception e)
+                {
+                    returnVal = false;
+                    throw e;
+                }
+                finally
+                {
+                    if (connection != null)
+                        connection.Close();
+                    returnVal = false;
+                }
             }
-            finally
+
+            //Delete that profileID out of the database
+            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
             {
-                if (connection != null)
-                    connection.Close();
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand("proc_DeleteProfile", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ProfileID", profileID);
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception e)
+                {
+                    returnVal = false;
+                    throw e;
+                }
+                finally
+                {
+                    if (connection != null)
+                        connection.Close();
+                    returnVal = false;
+                }
             }
+
+            return returnVal;
         }
 
         //Returns a list of all the profile names for a certain user
@@ -122,6 +190,14 @@ namespace ToTheRescueWebApplication.Models
         {
             return m_allUserProfileAvatars;
         }
+
+        public string UserEmail { get; set; }
+
+        public int UserID { get; set; }
+
+        public string UserInput { get; set; }
+
+        public string profileNameToDelete { get; set; }
 
         //will hold all the profile names for a specific user
         private List<string> m_profileNamesForAUser;
