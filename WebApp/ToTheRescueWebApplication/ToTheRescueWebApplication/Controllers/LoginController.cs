@@ -77,9 +77,10 @@ namespace ToTheRescueWebApplication.Controllers
             {
                 var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
                 var currentUser = manager.FindById(User.Identity.GetUserId());
-                userID = currentUser.UserID;
 
-                TempData["userID"] = userID;
+                TempData["userID"] = currentUser.UserID;
+                TempData["userEmail"] = currentUser.Email;
+
                 return RedirectToAction("ChooseProfilePage", "Profiles");
             }
  
@@ -118,6 +119,7 @@ namespace ToTheRescueWebApplication.Controllers
                     var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
                     var currentUser = manager.FindByEmail(model.Email);
                     TempData["userID"] = currentUser.UserID;
+                    TempData["userEmail"] = currentUser.Email;
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -221,7 +223,9 @@ namespace ToTheRescueWebApplication.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     TempData["userID"] = user.UserID;
-                    return RedirectToAction("ChooseProfilePage", "Profiles");
+                    TempData["userEmail"] = user.Email;
+                    return RedirectToAction("Login", "Login");
+                    //return RedirectToAction("ChooseProfilePage", "Profiles");
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -544,7 +548,7 @@ namespace ToTheRescueWebApplication.Controllers
             {
                 return Redirect(returnUrl);
             }
-
+            //return RedirectToAction("Login", "Login");
             return RedirectToAction("ChooseProfilePage", "Profiles");
         }
 
