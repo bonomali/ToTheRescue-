@@ -1,0 +1,162 @@
+﻿@model ToTheRescueWebApplication.Models.AnimalSanctuaryModel
+@{
+    ViewBag.Title = "Sanctuary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.a_ProfileName's Sanctuary!</h2>
+
+<body id="ChooseSanctuaryBody">
+    <br />
+
+    <table id="Sanctuary" , style="width:100%">
+        @if (Model.a_AnimalImg.Count() < 10)
+        {
+            <tr id="RowOneAnimals">
+                @for (int i = 0; i < Model.a_AnimalImg.Count(); i++)
+                {
+                    var base64 = Convert.ToBase64String(Model.a_AnimalImg[i]);
+                    var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+                    var base64S = Convert.ToBase64String(Model.a_AnimalSound[i]);
+                    var soundSrc = String.Format("data:audio/mpeg;base64S,{0}", base64S);
+                    <td>
+                        <div id="@("Animal"+i)">
+                            <img id="AnimalImage" , src="@imgSrc" />
+                            <audio id="AnimalSound", src="@soundSrc", type="audio/mpeg" />                           
+                        </div>
+                    </td>
+                }
+            </tr>
+        }
+        else
+        {
+            int i = 0;
+            <tr id="RowOneAnimals">
+                @for (i = 0; i < 10; i++)
+                {
+                    var base64 = Convert.ToBase64String(Model.a_AnimalImg[i]);
+                    var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+                    var base64S = Convert.ToBase64String(Model.a_AnimalSound[i]);
+                    var soundSrc = String.Format("data:audio/mpeg;base64S,{0}", base64S);
+
+                    <td id="@("Animal"+i)">
+                        <img id="AnimalImage" , src="@imgSrc" />
+                        <audio id="AnimalSound" , src="@soundSrc", type="audio/mpeg" />  
+                    </td>
+                }
+            </tr>
+            <tr id="RowTwoProfiles">
+                @for (int x = i; x < Model.a_AnimalImg[i].Count(); x++)
+                {
+                    var base64 = Convert.ToBase64String(Model.a_AnimalImg[x]);
+                    var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+                    var base64S = Convert.ToBase64String(Model.a_AnimalSound[i]);
+                    var soundSrc = String.Format("data:audio/mpeg;base64S,{0}", base64S);
+                    <td id="@("Animal"+x)">
+                        <img id="AnimalImage" , src="@imgSrc" />
+                        <audio id="AnimalSound" ,src="@soundSrc", type="audio/mpeg" />
+
+                    </td>
+                    
+                }
+            </tr>
+        }
+    </table>
+
+    <br />
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</body>
+
+<style>
+    #ChooseAnimalheader {
+        text-align: center;
+    }
+</style>
+
+<script type="text/javascript">
+    function ListenForProfileClicks(clickedArr) {
+
+        document.getElementById("Animal0").onclick = function () {
+            MakeSound(clickedArr);
+            ToggleNameColor(clickedArr);            
+            document.getElementById("Animal0").style.color = "red"
+            clickedArr[0] = true;
+        }
+        document.getElementById("Animal1").onclick = function () {
+            MakeSound(clickedArr);
+            ToggleNameColor(clickedArr);      
+            document.getElementById("Animal1").style.color = "red"
+            clickedArr[1] = true;
+        }
+        document.getElementById("Animal2").onclick = function () {
+            ToggleNameColor(clickedArr);
+            MakeSound(clickedArr);
+            document.getElementById("Animal2").style.color = "red"
+            clickedArr[2] = true;
+        }
+        document.getElementById("Animal3").onclick = function () {
+            ToggleNameColor(clickedArr);
+            MakeSound(clickedArr);
+            document.getElementById("Animal3").style.color = "red"
+            clickedArr[3] = true;
+        }
+        document.getElementById("Animal4").onclick = function () {
+            ToggleNameColor(clickedArr);
+            MakeSound(clickedArr);
+            document.getElementById("Animal4").style.color = "red"
+            clickedArr[4] = true;
+        }
+        document.getElementById("Animal5").onclick = function () {
+            ToggleNameColor(clickedArr);
+            MakeSound(clickedArr);
+            document.getElementById("Animal5").style.color = "red"
+            clickedArr[5] = true;
+        }
+        document.getElementById("Animal6").onclick = function () {
+            ToggleNameColor(clickedArr);
+            MakeSound(clickedArr);
+            document.getElementById("Animal6").style.color = "red"
+            clickedArr[6] = true;
+        }
+        document.getElementById("Animal7").onclick = function () {
+            ToggleNameColor(clickedArr);
+            MakeSound(clickedArr);
+            document.getElementById("Animal7").style.color = "red"
+            clickedArr[7] = true;
+        }
+    }
+
+    function ToggleNameColor(clickedArr)
+    {
+        for (var i = 0; i < clickedArr.length; i++) {
+            if (clickedArr[i] === true) {
+                var elID = "Animal";
+                elID.concat(i.toString());
+                document.getElementById(elID).style.color = "black";
+                clickedArr[i] = false;
+
+            }
+        }
+    }
+    function MakeSound(clickedArr)
+    {
+                
+             var elID = "Animal";
+             elID.concat(i.toString());
+             document.getElementById(elID).play();
+             clickedArr[i] = false;
+        
+    }
+
+    function main() {
+        var clickedArr = [];
+
+        for (var i = 0; i < 8; i++) {
+            clickedArr.push(false);
+        }
+        ListenForProfileClicks(clickedArr);
+    }
+
+    main()
+
+</script>
