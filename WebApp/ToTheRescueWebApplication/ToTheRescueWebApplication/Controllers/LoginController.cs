@@ -224,6 +224,7 @@ namespace ToTheRescueWebApplication.Controllers
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     TempData["userID"] = user.UserID;
                     TempData["userEmail"] = user.Email;
+                    //return RedirectToAction("Login", "Login");
                     return RedirectToAction("ChooseProfilePage", "Profiles");
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

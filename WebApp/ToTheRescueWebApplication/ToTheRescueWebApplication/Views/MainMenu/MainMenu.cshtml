@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "MainMenu";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/CSS/MainMenu.css" />
+    <title>@ViewBag.Title</title>
+</head>
+    <body>
+        <audio source src="../Audio/bensound-sunny.mp3" autoplay>
+        <embed src="../Audio/bensound-sunny.mp3" width="180" height="90" hidden="hidden" />  
+        </audio>
+        <h2>Main Menu</h2>
+        <nav id ="mainMenuNav">
+            <ul id="navLinks">
+                <li>
+                    @Html.ActionLink("Play", "Play", "Play")
+                </li>
+                <li>
+                    @Html.ActionLink("Options", "Options", "Options")
+                <li />
+                <li>
+                   @if (User.Identity.IsAuthenticated)
+                   {
+                        @Html.ActionLink("Animal Sanctuary", "Sanctuary", "AnimalSanctuary")
+                   }
+                <li />
+            </ul>
+        </nav>
+    </body>
+</html>

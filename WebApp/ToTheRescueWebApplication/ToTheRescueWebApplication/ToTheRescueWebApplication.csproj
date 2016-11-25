@@ -185,11 +185,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Audio\bensound-sunny.mp3" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="CSS\MainMenu.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\mainmenu.jpg" />
     <Content Include="LogoutSnippet.txt" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
@@ -209,6 +212,8 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\AnimalSanctuaryController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MainMenuController.cs" />
+    <Compile Include="Controllers\PlayController.cs" />
     <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -234,7 +239,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ConnectionStrings.config" />
-    <Content Include="Smtp.config" />
+    <Content Include="Smtp.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -259,6 +266,8 @@
     <Content Include="Views\Login\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\AnimalSanctuary\Sanctuary.cshtml" />
     <Content Include="Views\Profiles\CreateProfilePage.cshtml" />
+    <Content Include="Views\MainMenu\MainMenu.cshtml" />
+    <Content Include="Views\Play\Play.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
