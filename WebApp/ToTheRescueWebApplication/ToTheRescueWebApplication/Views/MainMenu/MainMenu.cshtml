@@ -8,6 +8,12 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" type="text/css" href="~/CSS/MainMenu.css" />
+    <script>
+        var elephant = new Audio();
+        elephant.src = "../Audio/Elephant.mp3";
+        var lion = new Audio();
+        lion.src = "../Audio/Lion_Roar.mp3";
+    </script>
     <title>@ViewBag.Title</title>
 </head>
     <body>
@@ -18,7 +24,7 @@
         <nav id ="mainMenuNav">
             <ul id="navLinks">
                 <li>
-                    @Html.ActionLink("Play", "Play", "Play")
+                    <a href="@Url.Action("Play", "Play")" onmouseover="elephant.play()">Play</a>
                 </li>
                 <li>
                     @Html.ActionLink("Options", "Options", "Options")
@@ -26,7 +32,7 @@
                 <li>
                    @if (User.Identity.IsAuthenticated)
                    {
-                        @Html.ActionLink("Animal Sanctuary", "Sanctuary", "AnimalSanctuary")
+                        <a href="@Url.Action("Sanctuary", "AnimalSanctuary")" onmouseover="lion.play()">Animal Sanctuary</a>
                    }
                 <li />
             </ul>
