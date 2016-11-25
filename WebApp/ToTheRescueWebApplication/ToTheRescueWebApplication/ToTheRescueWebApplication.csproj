@@ -223,7 +223,7 @@
     <Compile Include="Models\Login\LoginViewModel.cs" />
     <Compile Include="Models\Login\RegisterViewModel.cs" />
     <Compile Include="Models\Login\ResetPasswordViewModel.cs" />
-    <Compile Include="Models\ProfilesModel.cs" />
+    <Compile Include="Models\Profiles\ProfilesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -258,6 +258,7 @@
     <Content Include="Views\Login\VerifyCode.cshtml" />
     <Content Include="Views\Login\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\AnimalSanctuary\Sanctuary.cshtml" />
+    <Content Include="Views\Profiles\CreateProfilePage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

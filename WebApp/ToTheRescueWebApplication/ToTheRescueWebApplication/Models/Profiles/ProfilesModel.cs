@@ -14,6 +14,7 @@ namespace ToTheRescueWebApplication.Models
         {
             m_profileNamesForAUser = new List<string>();
             m_allUserProfileAvatars = new List<byte[]>();
+            m_allAvatars = new List<byte[]>();
         }
 
         /**********************************************************************
@@ -112,41 +113,90 @@ namespace ToTheRescueWebApplication.Models
             }
         }
 
-        public bool DeleteProfile(string profileName)
+        /**********************************************************************
+        * Purpose: This function populates the m_allAvatars list with all the 
+        * Images from the Images table that are avatars.
+        ***********************************************************************/
+        public void RetrieveAllProfileAvatars()
         {
-            int profileID = 0;
-            bool returnVal = true;
-            UserID = 3;
-            //Get the profileID
             using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
             {
                 try
                 {
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = connection;
-                    //I get an exception saying that the profile name passed into this function is an invalid column name. Makes no sense
-                    cmd.CommandText = "SELECT ProfileID FROM Profiles WHERE UserID = " + UserID + " AND ProfileName = " + profileName + ";";
+                    cmd.CommandText = "SELECT Images FROM Images WHERE ImageClass = @imgClass;";
+                    cmd.Parameters.Add(new SqlParameter("@imgClass", System.Data.SqlDbType.Int));
+                    cmd.Parameters["@imgClass"].Value = 1;
 
                     connection.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
 
+                    if (reader.Read() == false)
+                        throw new Exception("Unable to read image.");
+
                     if (reader.HasRows)
                     {
-                        profileID = (int)reader["ProfileID"];
+                        //reader doens't take the first avatar for some reason, this gets the first one
+                        m_allAvatars.Add((Byte[])reader[0]);
+
+                        //add all of the profiles to the list
+                        while (reader.Read())
+                        {
+                            m_allAvatars.Add((Byte[])reader["Images"]);
+                        }
                     }
 
                     reader.Close();
                 }
                 catch (Exception e)
                 {
-                    returnVal = false;
                     throw e;
                 }
                 finally
                 {
                     if (connection != null)
                         connection.Close();
-                    returnVal = false;
+                }
+            }
+        }
+
+        //Woo, it works!
+        public void DeleteProfile(string profileName, int uID)
+        {
+            int profileID = 0;
+            UserID = uID;
+
+            //Get the profileID
+            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            {
+                try
+                {
+                    //parameterized statement
+                    string sql = "SELECT ProfileID FROM Profiles WHERE UserID = @userID AND ProfileName = @profileName;";
+                    SqlCommand cmd = new SqlCommand(sql);
+                    
+                    cmd.Parameters.Add(new SqlParameter("@userID", System.Data.SqlDbType.Int));
+                    cmd.Parameters.Add(new SqlParameter("@profileName", System.Data.SqlDbType.VarChar));
+                    cmd.Parameters["@userID"].Value = UserID;
+                    cmd.Parameters["@profileName"].Value = profileName;
+
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = connection;
+
+                    connection.Open();
+                    //how to get a single value back
+                    profileID = (int)cmd.ExecuteScalar();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                finally
+                {
+                    if (connection != null)
+                        connection.Close();
+                   // returnVal = false;
                 }
             }
 
@@ -165,18 +215,14 @@ namespace ToTheRescueWebApplication.Models
                 }
                 catch (Exception e)
                 {
-                    returnVal = false;
                     throw e;
                 }
                 finally
                 {
                     if (connection != null)
                         connection.Close();
-                    returnVal = false;
                 }
             }
-
-            return returnVal;
         }
 
         //Returns a list of all the profile names for a certain user
@@ -191,18 +237,33 @@ namespace ToTheRescueWebApplication.Models
             return m_allUserProfileAvatars;
         }
 
+        public List<Byte[]> GetAllProfileAvatars()
+        {
+            return m_allAvatars;
+        }
+
+        //Holds the name of the profile to add to a user account
+        public string NewProfileName { get; set; }
+
+        //Holds the user inputted email in the ChooseProfiles page
         public string UserEmail { get; set; }
 
+        //Holds the user inputted UserID
         public int UserID { get; set; }
 
-        public string UserInput { get; set; }
-
-        public string profileNameToDelete { get; set; }
+        //Holds the profile name that the user wants to delete
+        public string ProfileNameToDelete { get; set; }
+        
+        //holds the index of the profile to delete
+        public string SelectedAvatarIndex { get; set; }
 
         //will hold all the profile names for a specific user
         private List<string> m_profileNamesForAUser;
 
         //will hold all the profile avatars for a profile for a specific user
         private List<Byte[]> m_allUserProfileAvatars;
+
+        //will hold all the possible avatar choices for the create profile page
+        private List<Byte[]> m_allAvatars;
     }
 }

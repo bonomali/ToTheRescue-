@@ -11,11 +11,11 @@ namespace ToTheRescueWebApplication.Controllers
     [Authorize]
     public class ProfilesController : Controller
     {
-        private int m_userID;
+        static private int m_userID;
 
-        private string m_userEmail;
+        static private string m_userEmail;
 
-        private ProfilesModel m_profiles;
+        static private ProfilesModel m_profiles;
 
         public ProfilesController()
         {
@@ -32,51 +32,96 @@ namespace ToTheRescueWebApplication.Controllers
                 //will be able to have the current UserID passed into here
             }
 
-            if(TempData["userEmail"] != null)
+            if (TempData["userEmail"] != null)
             {
                 m_userEmail = (string)TempData["userEmail"];
             }
 
-            //get the user's email
-            m_profiles.UserEmail = m_userEmail;
-
-            //get the user's id
-            m_profiles.UserID = m_userID;
-
-            //m_profiles.RetrieveChooseProfilePageInformation(m_userID);
-            m_profiles.RetrieveChooseProfilePageInformation(7);
+            m_profiles.RetrieveChooseProfilePageInformation(m_userID);
+            //m_profiles.RetrieveChooseProfilePageInformation(3);
 
             return View(m_profiles);
         }
 
-        //For some reason all of the datamembers when this function is called
-        //are set to null and zero and I don't know why. Then they stay like that after
-        //I try to repopulate them. Makes no sense
-       [HttpPost]
-       public ActionResult ChooseProfilePage(string profName, string email)
+        //Gets the input from the ChooseProfilePage
+        [HttpPost]
+        public ActionResult ChooseProfilePage(ProfilesModel mod)
         {
-            bool validProfName = false;
             bool validEmail = false;
 
-            for (int i = 0; i < m_profiles.GetProfileNamesForASpecificUser().Count(); i++)
-            {
-                if (profName == m_profiles.GetProfileNamesForASpecificUser()[i])
-                    validProfName = true;
-            }
-
-            if (email == m_userEmail)
+            if (mod.UserEmail == m_userEmail)
                 validEmail = true;
 
-            if (validEmail == true && validProfName == true)
+            if (validEmail == true)
             {
-                m_profiles.DeleteProfile(profName);
-                
-                //return to the last page and hope it updates every time 
-                return Redirect(Request.UrlReferrer.ToString());
+                try
+                {
+                    m_profiles.DeleteProfile(mod.ProfileNameToDelete, m_userID);
+                }
+                catch (Exception e)
+                {
+                    return Content("Incorrect profilename eneterd. Press back to try again.");
+                }
+            }
+            else
+            {
+                return Content("Incorrect email address  eneterd. Press back to try again.");
             }
 
-            //Display the error message for now, learn how to handle it properly later
-            return Content("Incorrect profilename and/or email address eneterd. Press back to try again.");
+            //return to the last page and hope it updates every time 
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public ActionResult CreateProfilePage()
+        {
+            m_profiles.RetrieveAllProfileAvatars();
+            int num = m_profiles.GetAllProfileAvatars().Count();
+
+            //call a function to get all of the possible avatars
+            return View(m_profiles);
+        }
+
+        //gets the user input from the Create Profile Page
+        [HttpPost]
+        public ActionResult CreateProfilePage (ProfilesModel m)
+        {
+            m.RetrieveAllProfileAvatars();
+
+            //if the user didn't enter anything
+            if (m.NewProfileName == null)
+            {
+                return Content("You must enter a profile name in order to create a new profile.");
+            }
+
+            //if the user entered potentially only spaces
+            if (m.NewProfileName[0] == ' ')
+            {
+                return Content("You can't begin a profile name with the space character.");
+            }
+
+            int selectedIndex = -1;
+
+            //convert the entered string to an integer for the avatar that the user selected
+            if (Int32.TryParse(m.SelectedAvatarIndex, out selectedIndex))
+            {
+                //if they entered a number not displayed to the screen
+                if (selectedIndex < 0 || selectedIndex > m.GetAllProfileAvatars().Count()-1)
+                {
+                    return Content("To select an avatar, you must enter a number 0 and " + (m.GetAllProfileAvatars().Count() - 1) + ".");
+                }
+                else
+                {
+                    //call a stored proc in the database that adds this profile to the database
+                }
+            }
+            else
+            {
+                //they didn't enter a number
+                return Content("To select an avatar, you must enter a number 0 and " + (m.GetAllProfileAvatars().Count() - 1) + ".");
+            }
+
+            //on success, redirect to the Choose Profiles Page where the new profile will be located
+            return RedirectToAction("ChooseProfilePage", "Profiles");
         }
     }
 }
