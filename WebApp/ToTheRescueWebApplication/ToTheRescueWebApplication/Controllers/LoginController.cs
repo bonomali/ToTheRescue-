@@ -71,13 +71,12 @@ namespace ToTheRescueWebApplication.Controllers
         //
         // GET: /Login/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)//
+        public ActionResult Login(string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
             {
                 var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
                 var currentUser = manager.FindById(User.Identity.GetUserId());
-
                 TempData["userID"] = currentUser.UserID;
                 TempData["userEmail"] = currentUser.Email;
 
