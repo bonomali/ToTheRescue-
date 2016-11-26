@@ -282,3 +282,16 @@ AS
 	WHERE ProfileID = @ProfileID;
 GO
 
+/**********************************************************************
+* Purpose: Adds a profile to a user account
+***********************************************************************/
+GO
+CREATE PROCEDURE proc_AddNewProfile
+	@UserID int,
+	@AvatarID int,
+	@ProfileName varchar(50)
+AS  
+	INSERT INTO Profiles
+	(UserID, AvatarID, ProfileName, MathPerformanceStat, ReadingPerformanceStat, SubjectFilter)
+	VALUES
+	(@UserID, @AvatarID, @ProfileName, 0, 0,'0');

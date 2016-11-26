@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "ChooseProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    
 }
 
 <style>
@@ -40,12 +41,12 @@
         visibility: hidden;
     }
 
-    #DeleteProfileForm{
+    #DeleteProfileForm {
         visibility: hidden;
     }
 </style>
 
-<body id="ChooseProfileBody" , onload="RefreshPage()">
+<body id="ChooseProfileBody">
     <h1 id="ChooseProfileheader">Choose Your Profile!</h1>
     <br />
 
@@ -57,9 +58,12 @@
                 <tr id="RowOneProfiles">
                     @for (int i = 0; i < Model.GetProfileNamesForASpecificUser().Count(); i++)
                     {
+                        ViewData["ID"] = i;
                         var base64 = Convert.ToBase64String(Model.GetAllProfileAvatarsForASpecificUser()[i]);
                         var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
                         <td>
+                            @* Work in progress *@
+                            @*<div id="@("Profile" + i)" , onclick="ToggleColor(@i.ToString());location.href='@Url.Action("SelectedProfile", "Profiles", new RouteValueDictionary(new { id = i }))'">*@
                             <div id="@("Profile" + i)" , onclick="ToggleColor(@i.ToString())">
                                 <text id="ProfileNames">@Model.GetProfileNamesForASpecificUser()[i]</text>
                                 <img id="Avatar" , src="@imgSrc" />
@@ -100,8 +104,14 @@
             }
         </table>
     }
+
     <button id="DeleteProfileButton" , onclick="ClickedDelete()">Delete Profile</button>
-    <button id="CreateNewPorifleButton" onclick="ClickedNewProfile()"/>Create New Profile</button>
+
+    @*Only display the Create New Profile button when there are less than 8 profiles*@
+    @if (Model.GetAllProfileAvatarsForASpecificUser().Count() < 8)
+    {
+        <input type="button" id="CreateNewPorifleButton" value="Create New Profiile" onclick="@("window.location.href='" + @Url.Action("CreateProfilePage", "Profiles") + "'");" />
+    }
     <button id="PlayButton" , onclick="GoToMainMenu()">Play</button>
 
     @using (Html.BeginForm("ChooseProfilePage", "Profiles", FormMethod.Post, new { id = "DeleteProfileForm" }))
@@ -157,15 +167,11 @@
             if (visible === true)
             {
                 document.getElementById("PlayButton").style.visibility = "visible";
-                //document.getElementById("DeleteProfileButton").style.visibility = "visible";
             }
             else
             {
                 document.getElementById("PlayButton").style.visibility = "hidden";
-                //document.getElementById("DeleteProfileButton").style.visibility = "hidden";
             }
-
-            //document.getElementById("CencelButton").style.visibility = "hidden";
         }
 
         function ClickedDelete()
@@ -182,28 +188,9 @@
             document.getElementById("CencelButton").style.visibility = "hidden";
         }
 
-        function GoToCreateNewProfilePage()
-        {
-            document.write("Go to Create New Profile Page");
-        }
-
         function GoToMainMenu()
         {
-            //Stephanie, once you have the Main Menu created, just comment
-            //out the document.write statement and then place the code below 
-            window.location.href = '/MainMenu/MainMenu'
-            //document.write("Go to main menu");
-        }
-
-        function RefreshPage()
-        {
-            window.localStorage.reload();
-        }
-
-        function ClickedNewProfile()
-        {
-            //Go to the create profile page
-            window.location.href = '/Profiles/CreateProfilePage'
+            window.location.href = '/MainMenu/MainMenu';
         }
     </script>
 </body>

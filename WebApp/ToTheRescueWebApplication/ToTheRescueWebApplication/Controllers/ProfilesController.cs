@@ -85,8 +85,6 @@ namespace ToTheRescueWebApplication.Controllers
         [HttpPost]
         public ActionResult CreateProfilePage (ProfilesModel m)
         {
-            m.RetrieveAllProfileAvatars();
-
             //if the user didn't enter anything
             if (m.NewProfileName == null)
             {
@@ -99,29 +97,54 @@ namespace ToTheRescueWebApplication.Controllers
                 return Content("You can't begin a profile name with the space character.");
             }
 
-            int selectedIndex = -1;
+            int selectedAvatar = -1;
+            m.RetrieveAllProfileAvatars();
 
             //convert the entered string to an integer for the avatar that the user selected
-            if (Int32.TryParse(m.SelectedAvatarIndex, out selectedIndex))
+            if (Int32.TryParse(m.SelectedAvatarNum, out selectedAvatar))
             {
                 //if they entered a number not displayed to the screen
-                if (selectedIndex < 0 || selectedIndex > m.GetAllProfileAvatars().Count()-1)
+                if (selectedAvatar < 1 || selectedAvatar > m.GetAllProfileAvatars().Count())
                 {
-                    return Content("To select an avatar, you must enter a number 0 and " + (m.GetAllProfileAvatars().Count() - 1) + ".");
+                    return Content("To select an avatar, you must enter a number between 1 and " + (m.GetAllProfileAvatars().Count()) + ".");
                 }
                 else
                 {
-                    //call a stored proc in the database that adds this profile to the database
+                    //Add the profile to the database
+                    m.AddNewProfile(m_userID, selectedAvatar, m.NewProfileName);
                 }
             }
             else
             {
                 //they didn't enter a number
-                return Content("To select an avatar, you must enter a number 0 and " + (m.GetAllProfileAvatars().Count() - 1) + ".");
+                return Content("To select an avatar, you must enter a number between 1 and " + (m.GetAllProfileAvatars().Count()) + ".");
             }
 
             //on success, redirect to the Choose Profiles Page where the new profile will be located
             return RedirectToAction("ChooseProfilePage", "Profiles");
         }
+
+        //work in progress
+        public ActionResult SelectedProfile(int? id)
+        {
+            int selectedIndex = (int)id;
+
+            m_profiles.RetrieveChooseProfilePageInformation(m_userID);
+            for (int i = 0; i < m_profiles.GetProfileNamesForASpecificUser().Count(); i++)
+            {
+                //The selected index
+                if (i == id)
+                {
+                    //Save the selected profile's name to an application variable so for the lifetime of the application
+                    //Or I could make a static class if really needed...Just need to figure out how I am going to get 
+                    //a profileID base off the user clicks.....
+                    System.Web.HttpContext.Current.Application.Lock();
+                    System.Web.HttpContext.Current.Application["ProfileName"] = m_profiles.GetProfileNamesForASpecificUser()[i];
+                    System.Web.HttpContext.Current.Application.UnLock();
+                }
+            }
+            return RedirectToAction("ChooseProfilePage", "Profiles");
+        }
+
     }
 }

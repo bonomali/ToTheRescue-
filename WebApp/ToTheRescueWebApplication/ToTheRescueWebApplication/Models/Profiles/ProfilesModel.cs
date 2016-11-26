@@ -225,6 +225,36 @@ namespace ToTheRescueWebApplication.Models
             }
         }
 
+        //Adds a new profile to users table in the database
+        public void AddNewProfile(int userID, int avatarID, string profileName)
+        {
+            //Delete that profileID out of the database
+            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            {
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand("proc_AddNewProfile", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@UserID", userID);
+                        cmd.Parameters.AddWithValue("@AvatarID", avatarID);
+                        cmd.Parameters.AddWithValue("@ProfileName", profileName);
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                finally
+                {
+                    if (connection != null)
+                        connection.Close();
+                }
+            }
+        }
+
         //Returns a list of all the profile names for a certain user
         public List<String> GetProfileNamesForASpecificUser()
         {
@@ -255,7 +285,7 @@ namespace ToTheRescueWebApplication.Models
         public string ProfileNameToDelete { get; set; }
         
         //holds the index of the profile to delete
-        public string SelectedAvatarIndex { get; set; }
+        public string SelectedAvatarNum { get; set; }
 
         //will hold all the profile names for a specific user
         private List<string> m_profileNamesForAUser;
