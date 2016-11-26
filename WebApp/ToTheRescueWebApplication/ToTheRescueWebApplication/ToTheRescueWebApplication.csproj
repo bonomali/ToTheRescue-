@@ -196,8 +196,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\animalBackground.jpg" />
-    <Content Include="Images\login.jpg" />
-    <Content Include="Images\loginbackground.jpg" />
     <Content Include="Images\mainmenu.jpg" />
     <Content Include="LogoutSnippet.txt" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
