@@ -28,6 +28,7 @@ body {
 #navLinks li a {
     text-decoration: none; 
     color: dimgrey;
+    text-shadow: 2px 2px #000;
     font-size: 25px;
     text-align: center;
     font-family: Comic Sans MS, cursive, sans-serif;
@@ -38,6 +39,7 @@ body {
 }
 h2 {
     color: darkblue;
+    text-shadow: 2px 2px #000;
     font-size: 40px;
     text-align: center;
     padding: 0;

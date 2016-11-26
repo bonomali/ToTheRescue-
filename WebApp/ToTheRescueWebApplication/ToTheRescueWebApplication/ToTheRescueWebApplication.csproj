@@ -195,7 +195,7 @@
     <Content Include="CSS\MainMenu.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Images\button.jpg" />
+    <Content Include="Images\animalBackground.jpg" />
     <Content Include="Images\login.jpg" />
     <Content Include="Images\loginbackground.jpg" />
     <Content Include="Images\mainmenu.jpg" />
