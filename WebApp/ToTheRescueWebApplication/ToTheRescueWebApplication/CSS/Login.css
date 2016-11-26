@@ -1,43 +1,152 @@
 ﻿html {
     height: 100%;
+    background-color:sandybrown;
 }
 body {
     background-image: url("../Images/loginbackground.jpg"); 
     background-repeat: no-repeat; 
+    background-size:cover;
+    border:2px;
+    border-color:burlywood;
+    border-style:ridge;
+    margin: 0;
+    padding: 0;
+}
+h2{
+    font-size: 40px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: darkorange;
+}
+h4{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 40px;
+    color: darkgreen;
+    font-weight:bold;
+}
+div {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: orange;
+}
+input {
+    text-align:center;
+    padding: 10px 75px;
+    width: 200px;
+    background-color: lightgoldenrodyellow;
+    color: black;
+    font-size: 18px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 3px 0;
+    margin: 3px 0;
+    border-radius: 25px;
+}
+label {
+    width: 300px;
+    font-size: 28px;
+    margin: 0 10px;
+}
+div .checkbox label{
+    text-align:left;
+    width: 300px;
+    font-size: 18px;
+    margin: 0 6px;
+    padding: 4px 6px;
+}
+div .checkbox input {
+    width: 20px;
+    height: 20px;
+}
+div .text-danger {
+    color: orangered;
+    font-size: 18px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 4px 10px;
+    font-weight:bolder;
+}
+   .link {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        text-decoration: none;
+        font-size: 24px;
+        font-style: normal;
+        color: orange;
+    }
+    a {
+        color: orange;
+        text-decoration: none;
+    }
+    .link:hover a {
+        color:black;
+    }
+@media only screen and (min-width: 580px) {
+body {
     background-position-x: center;
     background-size: 100% 100%;
     height: 100%;
 }
-h2{
-    text-align: center;
+h2 {
     font-size: 60px;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: darkorange;
-}
-p{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
     text-align: center;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    text-decoration: none;
-    font-size: 24px;
-    font-style:normal;
-    border-radius: 25px;
-    border-style:outset;
-    border-color: darkgreen;
-    padding: 10px;
-    width: 300px;
-    height: 30px; 
-    color: darkgreen;
-    background-color: orange;
-}
-a{
-    text-decoration: none;
 }
 div {
     text-align:center;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 36px;
+    padding: -100px;
     color: darkgreen;
+}
+div .checkbox {
+    position: relative;
+    left: 100px;
+    padding-bottom: 6px;
+    padding-top: -3px;
+}
+div .loginFields {
+    position: relative;
+    left: -75px;
+}
+#forgotPassword {
+    position: relative;
+    left: -100px;
+    padding: 6px 0;
+}
+div .errorEmail {
+    position: relative;
+    left: 120px;
+}
+div .errorPassword {
+    position: relative;
+    left: 35px;
+}
+   .link {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        text-decoration: none;
+        font-size: 24px;
+        font-style: normal;
+        color: darkgreen;
+    }
+    a {
+        color: darkgreen;
+        text-decoration: none;
+    }
+    #resetPWButton {
+        position: relative;
+        left: 30px;
+    }
+    .link {
+        border-radius: 25px;
+        border-style: outset;
+        border-color: darkgreen;
+        padding: 10px;
+        width: 300px;
+        height: 30px;
+        background-color: orange;
+    }
+    .link:hover a {
+        font-size: 28px;
+    }
+    label {
+        display: inline-block;
+        text-align:right;
+    }
 }

@@ -14,14 +14,19 @@
                 @Html.AntiForgeryToken()
                 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                <div class="loginFields">
+                    <div class="form-group">
+                       <label>Email Address</label>@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    </div>
+                    <div class="errorEmail">
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    </div>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                <div class="errorPassword">
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
@@ -34,16 +39,16 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
+                        <input id="submitBtn" type="submit" value="Log in" class="btn btn-default" />
                     </div>
                 </div>
-                <p>
+                <p class="link">
                     @Html.ActionLink("Register as a new user", "Register")
                 </p>
-                <p>
+                <p class="link">
                     @Html.ActionLink("Forgot your password?", "ForgotPassword")
                 </p>
-                <p>
+                <p class="link">
                     @Html.ActionLink("Free Play Mode", "MainMenu", "MainMenu")
                 </p>
             }

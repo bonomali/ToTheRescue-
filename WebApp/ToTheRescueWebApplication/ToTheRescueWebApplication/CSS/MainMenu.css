@@ -28,19 +28,32 @@ body {
 #navLinks li a {
     text-decoration: none; 
     color: dimgrey;
-    font-size: 35px;
+    font-size: 25px;
     text-align: center;
     font-family: Comic Sans MS, cursive, sans-serif;
 }
 #navLinks li:hover a { 
     color: darkblue;
-    font-size: 45px;
+    font-size: 30px;
 }
 h2 {
     color: darkblue;
-    font-size: 75px;
+    font-size: 40px;
     text-align: center;
     padding: 0;
     margin: 0;
     font-family: Comic Sans MS, cursive, sans-serif;
+}
+@media only screen and (min-width: 500px) 
+{
+    h2 {
+        font-size: 75px;
+    }
+    #navLinks li a {
+        font-size: 35px;
+    }
+    #navLinks li:hover a { 
+    color: darkblue;
+    font-size: 45px;
+    }
 }
