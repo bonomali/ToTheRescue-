@@ -7,6 +7,7 @@ using ToTheRescueWebApplication.Models;
 
 namespace ToTheRescueWebApplication.Controllers
 {
+    [Authorize]
     public class AnimalSanctuaryController : Controller
     {
         //GET: AnimalSanctuary/Sanctuary
@@ -14,10 +15,12 @@ namespace ToTheRescueWebApplication.Controllers
         {
             // pass the the model to the view
             AnimalSanctuaryModel sanctuary = new AnimalSanctuaryModel();
-            
-            //fills the sanctuary object with the profileID 3
-            sanctuary.fillAnimals(4);
-            
+
+           // if (TempData["profileID"] != null)
+            //{
+                sanctuary.fillAnimals(6);
+                //Needs to get profile data from application variable?
+           // }
             return View(sanctuary);
         }
     }
