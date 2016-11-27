@@ -29,9 +29,9 @@ body {
 }
 h2 {
     font-size: 50px;
-    text-shadow: 2px 2px #000;
+    text-shadow: 4px 4px darkgreen;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: darkmagenta;
+    color: orangered;
     text-align: center;
 }
 div {
@@ -124,7 +124,7 @@ p {
         bottom: 65px;
     }
     h2 {
-        font-size: 70px;
+        font-size: 80px;
         position:relative;
         bottom: 20px;
     }
@@ -142,11 +142,6 @@ p {
             padding-bottom: 6px;
             padding-top: -3px;
         }
-    #forgotPassword {
-        position: relative;
-        left: -100px;
-        padding: 6px 0;
-    }
     .link {
         display: block;
         margin-left: auto;
