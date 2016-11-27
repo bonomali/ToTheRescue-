@@ -15,6 +15,7 @@ namespace ToTheRescueWebApplication.Models
             m_profileNamesForAUser = new List<string>();
             m_allUserProfileAvatars = new List<byte[]>();
             m_allAvatars = new List<byte[]>();
+            m_profileIDsForAUser = new List<int>();
         }
 
         /**********************************************************************
@@ -23,7 +24,7 @@ namespace ToTheRescueWebApplication.Models
         ***********************************************************************/
         public void RetrieveChooseProfilePageInformation(int userID)
         {
-            List<int> allProfileIDs = new List<int>();
+            //List<int> allProfileIDs = new List<int>();
             //Connect to the database using the connection string in the web.config file
             using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
             {
@@ -49,7 +50,7 @@ namespace ToTheRescueWebApplication.Models
                             m_profileNamesForAUser.Add(reader["ProfileName"].ToString());
 
                             //add all of the profileIDs to the allProfileIDs list
-                            allProfileIDs.Add((int)reader["ProfileID"]);
+                            m_profileIDsForAUser.Add((int)reader["ProfileID"]);
                         }
                     }
                     //if it doesn't have rows then this user hasn't created a profile yet
@@ -65,10 +66,10 @@ namespace ToTheRescueWebApplication.Models
                         connection.Close();
                 }
 
-                for (int i = 0; i < allProfileIDs.Count; i++)
+                for (int i = 0; i < m_profileIDsForAUser.Count(); i++)
                 {
                     //add all the avatar pictures for all of the profiles to a list
-                    m_allUserProfileAvatars.Add(GetProfileAvatar(allProfileIDs[i]));
+                    m_allUserProfileAvatars.Add(GetProfileAvatar(m_profileIDsForAUser[i]));
                 }
             }
         }
@@ -161,13 +162,13 @@ namespace ToTheRescueWebApplication.Models
             }
         }
 
-        //Woo, it works!
+        //Deletes a profile out of the database using one of the functions in the database
         public void DeleteProfile(string profileName, int uID)
         {
             int profileID = 0;
             UserID = uID;
 
-            //Get the profileID
+            //Get the profileID to delete
             using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
             {
                 try
@@ -267,6 +268,14 @@ namespace ToTheRescueWebApplication.Models
             return m_allUserProfileAvatars;
         }
 
+        //Returns a list of all the ProfileIds for a certain user 
+        public List<int> GetAllProfileIDsForASpecificUser()
+        {
+            return m_profileIDsForAUser;
+        }
+
+        //Returns a list of all the avatars out of the database after the 
+        //RetrieveAllProfileAvatars() function is called
         public List<Byte[]> GetAllProfileAvatars()
         {
             return m_allAvatars;
@@ -283,9 +292,9 @@ namespace ToTheRescueWebApplication.Models
 
         //Holds the profile name that the user wants to delete
         public string ProfileNameToDelete { get; set; }
-        
-        //holds the index of the profile to delete
-        public string SelectedAvatarNum { get; set; }
+
+        //will hold all the profileIds for a user
+        private List<int> m_profileIDsForAUser;
 
         //will hold all the profile names for a specific user
         private List<string> m_profileNamesForAUser;

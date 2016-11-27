@@ -106,6 +106,15 @@ FROM ProfileProgress
 WHERE ProfileID = @profileID);
 GO
 
+GO
+CREATE FUNCTION GetProfileID
+	(@userID INT,
+	@profileName VARCHAR(50),
+	@avatar VARBINARY(MAX))
+	RETURNS INT
+BEGIN
+	
+
 /************************************************************
 * This Function returns the profile row associated with the 
 * provided ProfileID
