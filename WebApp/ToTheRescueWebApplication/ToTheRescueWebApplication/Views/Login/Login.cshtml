@@ -8,7 +8,7 @@
 <h2>To The Rescue!</h2>
 <div>
     <div>
-        <section id="loginForm">
+        <section class="form" id="loginForm">
             @using (Html.BeginForm("Login", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
