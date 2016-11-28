@@ -1,0 +1,55 @@
+﻿@model ToTheRescueWebApplication.Models.OptionsModel
+@{
+    ViewBag.Title = "Options";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Options for @Model.profileName</h2>
+Toggle Sound: @Html.CheckBoxFor(m => m.toggleSound)
+<br />
+Toggle Music: @Html.CheckBoxFor(m => m.toggleMusic)
+<br />
+@{SelectList readingDifficultyList = new SelectList(new List<Object>{
+                       new { Text = "Low Pre-Kindergarden", Value = "1" },
+                       new { Text = "High Pre-Kindergarden", Value = "2"  },
+                       new { Text = "Low Kindergarden", Value = "3" },
+                       new { Text = "High Kindergarden", Value = "4" }
+                                                                  },
+                                                                                "value",
+                                                                                "text",
+                                                                                 Model.ReadingDifficultyLevel);}
+@{SelectList mathDifficultyList = new SelectList(new List<Object>{
+                       new { Text = "Low Pre-Kindergarden", Value = "1" },
+                       new { Text = "High Pre-Kindergarden", Value = "2"  },
+                       new { Text = "Low Kindergarden", Value = "3" },
+                       new { Text = "High Kindergarden", Value = "4" }
+                                                  },
+                                                                "value",
+                                                                "text",
+                                                                 Model.MathDifficultyLevel);}
+<h2>Math Difficulty</h2>
+@Html.DropDownListFor(Model => Model.MathDifficultyLevel, mathDifficultyList) 
+<button id="MathDifficultyApply" , onclick="@{Model.UpdateDifficulty();}">Apply</button>
+<h2>Reading Difficulty</h2>
+@Html.DropDownListFor(Model => Model.ReadingDifficultyLevel, readingDifficultyList) 
+<button id="ReadingDifficultyApply" , onclick="@{Model.UpdateDifficulty();}">Apply</button>
+
+
+<br />
+<button id="help" , onclick="GoToMainMenu()">Help</button>
+<button id="BackToMainMenuButton" , onclick="GoToMainMenu()">Back</button>
+<button id="BackToProfileButton" , onclick="GoToProfileMenu()">To Profiles</button>
+
+<script type="text/javascript">
+    function GoToMainMenu() {
+        window.location.href = '/MainMenu/MainMenu';
+    }
+
+    function GoToProfileMenu() {
+        window.location.href = '/Profiles/ChooseProfilePage';
+    }
+
+    function main() { }
+    main()
+
+</script>

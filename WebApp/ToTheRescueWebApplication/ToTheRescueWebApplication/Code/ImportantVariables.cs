@@ -18,5 +18,8 @@ namespace ToTheRescueWebApplication.Code
         public static Byte[] ProfileAvatar { get; set; }
 
         public static string ProfileName { get; set; }
+
+        public static bool toggleSound { get; set; }
+        public static bool toggleMusic { get; set; }
     }
 }
