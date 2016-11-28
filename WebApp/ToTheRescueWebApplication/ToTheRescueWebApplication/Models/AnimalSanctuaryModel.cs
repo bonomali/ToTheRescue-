@@ -17,14 +17,19 @@ namespace ToTheRescueWebApplication.Models
         public string a_ProfileName { get; set; }
         public List<Byte[]> a_AnimalSound { get; set; }
         public List<string> a_FunFact { get; set; }
+        public List<Byte[]> a_NonActiveImg{ get; set; }
+        public List<Byte[]> a_NonActiveSound { get; set; }
+        public List<string> a_NonActiveFunFact { get; set; }
         public AnimalSanctuaryModel()
         {
             a_ProfileID = 0;
-            //a_ProfileName = "";
             a_ProfileName = "";
             a_AnimalImg = new List<Byte[]>();
             a_AnimalSound = new List<Byte[]>();
             a_FunFact = new List<string>();
+            a_NonActiveImg = new List<Byte[]>();
+            a_NonActiveSound = new List<Byte[]>();
+            a_NonActiveFunFact = new List<string>();
         }
 
         public void setProfileID(int profileID)
@@ -55,7 +60,7 @@ namespace ToTheRescueWebApplication.Models
 
                 try
                 {
-                    cmd = new SqlCommand("SELECT * FROM GrabAnimals(" + a_ProfileID + ")" + ";");
+                    cmd = new SqlCommand("SELECT * FROM GrabAnimals(" + a_ProfileID + ")" + "WHERE Active = 1;");
                     SqlDataReader reader;
 
                     cmd.CommandType = CommandType.Text;
@@ -69,7 +74,7 @@ namespace ToTheRescueWebApplication.Models
                         //add all of the profiles to the list
                         while (reader.Read())
                         {
-                            //add all of the animal images to the a_AnimalImg list
+                            //add all of the animal images to the a_AnimalImg list                           
                             a_AnimalImg.Add((Byte[])reader["Images"]);
                             a_AnimalSound.Add((Byte[])reader["Sound"]);
                             a_FunFact.Add(reader["FunFact"].ToString());
@@ -90,13 +95,56 @@ namespace ToTheRescueWebApplication.Models
                     {
                         connection.Close();
                     }
+                    fillNonActive();
                 }
             }
         }
 
-        public void displayBackground()
+        public void fillNonActive()
         {
+            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            {
+                SqlCommand cmd = null;
 
+                try
+                {
+                    cmd = new SqlCommand("SELECT * FROM GrabAnimals(" + a_ProfileID + ")" + "WHERE Active = 0;");
+                    SqlDataReader reader;
+
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = connection;
+
+                    connection.Open();
+                    reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        //add all of the profiles to the list
+                        while (reader.Read())
+                        {
+                            //add all of the animal images to the a_NonActiveImg list
+                            a_NonActiveImg.Add((Byte[])reader["Images"]);
+                            a_NonActiveSound.Add((Byte[])reader["Sound"]);
+                            a_NonActiveFunFact.Add(reader["FunFact"].ToString());
+                        }
+                    }//success
+                    else
+                    {
+                        Console.WriteLine("AnimalSancuaryModel did not recieve non active animals from database and did not throw an exception, no changes made");
+                    }//failure?
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
         }
 
         /**********************************************************************

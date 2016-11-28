@@ -18,7 +18,7 @@
     <br />
     <table id="Sanctuary" , style="width:100%">
         <tr id="RowOneAnimals">
-            @for (int i = 0; i < 10 && Model.a_AnimalImg.Count() > i; i++)
+            @for (int i = 0; i < 5 && Model.a_AnimalImg.Count() > i; i++)
             {
                 var base64 = Convert.ToBase64String(Model.a_AnimalImg[i]);
                 var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
@@ -31,8 +31,26 @@
                 </td>
             }
         </tr>
+
+
         <tr id="RowTwoAnimals">
-            @for (int x = 10; x < Model.a_AnimalImg.Count(); x++)
+            @for (int i = 5; i < 10 && Model.a_AnimalImg.Count() > i; i++)
+            {
+                var base64 = Convert.ToBase64String(Model.a_AnimalImg[i]);
+                var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+                var base64S = Convert.ToBase64String(Model.a_AnimalSound[i]);
+                var soundSrc = String.Format("data:audio/mpeg;base64,{0}", base64S);
+
+                <td id="@("Animal" + i)" , onclick="AnimalClick(@i.ToString())">
+                    <img id="AnimalImage" , src="@imgSrc" />
+                    <audio id="@("AnimalSound" + i)" , src="@soundSrc" , type="audio/mpeg" />
+                </td>
+            }
+        </tr>
+
+
+        <tr id="RowThreeAnimals">
+            @for (int x = 10; x < 15 && x < Model.a_AnimalImg.Count(); x++)
             {
                 var base64 = Convert.ToBase64String(Model.a_AnimalImg[x]);
                 var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
@@ -41,15 +59,45 @@
                 <td id="@("Animal" + x)" , onclick="AnimalClick(@x.ToString())">
                     <img id="AnimalImage" , src="@imgSrc" />
                     <audio id="@("AnimalSound" + x)" , src="@soundSrc" , type="audio/mpeg" />
-
                 </td>
+            }
+        </tr>
 
+        <tr id="RowFourAnimals">
+            @for (int x = 15; x < Model.a_AnimalImg.Count(); x++)
+            {
+                var base64 = Convert.ToBase64String(Model.a_AnimalImg[x]);
+                var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+                var base64S = Convert.ToBase64String(Model.a_AnimalSound[x]);
+                var soundSrc = String.Format("data:audio/mpeg;base64,{0}", base64S);
+                <td id="@("Animal" + x)" , onclick="AnimalClick(@x.ToString())">
+                    <img id="AnimalImage" , src="@imgSrc" />
+                    <audio id="@("AnimalSound" + x)" , src="@soundSrc" , type="audio/mpeg" />
+                </td>
             }
         </tr>
         
     </table>
+        
 
 
+    <table id="NonActive" , style="width:100%">
+        <br /><br />
+        <p>Non Active Animals!</p>
+        <tr id="RowOneNonActive">
+            @for (int x = 0; x < Model.a_NonActiveImg.Count(); x++)
+            {
+                var base64 = Convert.ToBase64String(Model.a_NonActiveImg[x]);
+                var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+                var base64S = Convert.ToBase64String(Model.a_NonActiveSound[x]);
+                var soundSrc = String.Format("data:audio/mpeg;base64,{0}", base64S);
+                <td id="@("Animal" + x)" , onclick="AnimalClick(@x.ToString())">
+                    <img id="AnimalImage" , src="@imgSrc" />
+                    <audio id="@("AnimalSound" + x)" , src="@soundSrc" , type="audio/mpeg" />
+                </td>
+            }
+        </tr>
+    </table>
 
     <br />
     <br /><br /><br /><br /><br />
@@ -84,9 +132,12 @@
         document.getElementById(elID).play();
         var funFactLocation = document.getElementById("FunFact");
 
-        @{ int index = 0;}
+         @{ int index = 0;}
         Number(@index) = id;
-        funFactLocation.innerHTML = "<p>Fun Fact!"+ @(Model.a_FunFact[index].ToString()) + " </p>";
+        @*@Html.Raw(Model.a_FunFact[index]);*@
+        @*alert(@Model.a_FunFact[index].ToString()));*@
+
+        //funFactLocation.innerHTML = "<p>Fun Fact!"+ @*@(Model.a_FunFact[].ToString())*@ + " </p>";
         //Having issues here. Need to embed html and display funfact in this function
     }
 
