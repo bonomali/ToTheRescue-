@@ -59,9 +59,9 @@
 
 
 <br /><br />
-<body id="FunFact">
+<div id="FunFact">
  
-</body>
+</div>
 
 
 
@@ -79,18 +79,21 @@
 
 <script type="text/javascript">
     function AnimalClick(id)
-    {   
+    {
         var elID = "AnimalSound" + id;
         document.getElementById(elID).play();
         var funFactLocation = document.getElementById("FunFact");
-        funFactLocation.innerHTML = "<p>Fun Fact! </p>";
+
+        @{ int index = 0;}
+        Number(@index) = id;
+        funFactLocation.innerHTML = "<p>Fun Fact!"+ @(Model.a_FunFact[index].ToString()) + " </p>";
         //Having issues here. Need to embed html and display funfact in this function
     }
 
     function GoToMainMenu() {
         window.location.href = '/MainMenu/MainMenu';
     }
-  
+
     function main() {}
     main()
 

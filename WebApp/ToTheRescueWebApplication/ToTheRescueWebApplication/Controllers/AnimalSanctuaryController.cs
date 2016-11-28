@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ToTheRescueWebApplication.Models;
+using ToTheRescueWebApplication.Code;
 
 namespace ToTheRescueWebApplication.Controllers
 {
@@ -15,12 +16,9 @@ namespace ToTheRescueWebApplication.Controllers
         {
             // pass the the model to the view
             AnimalSanctuaryModel sanctuary = new AnimalSanctuaryModel();
+            //Pass the current profile into the Sanctuary
+            sanctuary.fillAnimals(ImportantVariables.ProfileID);
 
-           // if (TempData["profileID"] != null)
-            //{
-                sanctuary.fillAnimals(6);
-                //Needs to get profile data from application variable?
-           // }
             return View(sanctuary);
         }
     }
