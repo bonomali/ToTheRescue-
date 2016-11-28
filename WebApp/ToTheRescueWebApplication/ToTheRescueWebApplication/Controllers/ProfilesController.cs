@@ -12,8 +12,6 @@ namespace ToTheRescueWebApplication.Controllers
     [Authorize]
     public class ProfilesController : Controller
     {
-        //static private byte[] m_profileAvatarSelected;
-       
         //will hold a user's selected avtar when creating a profile
         static private Byte[] m_profileAvatarSelected;
 
