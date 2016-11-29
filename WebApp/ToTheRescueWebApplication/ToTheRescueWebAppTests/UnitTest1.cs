@@ -12,14 +12,22 @@ namespace ToTheRescueWebAppTests
         [TestMethod]
         public void GetProfilesforUser()
         {
+            List<string> result = new List<string>();
+            List<string> expected = new List<string>();
+            expected.Add("Sophia");
+            expected.Add("Emma");
+            expected.Add("Lily");
+
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = "Driver={SQL Server};" +
-              "Server=Aura;" +
+              connection.ConnectionString = 
+              "Server=aura.cset.oit.edu;" +
+              "Persist Security Info = False;" +
               "DataBase=ToTheRescue;" +
-              "Uid=;" +
-              "Pwd=;";
+              "User Id=;" +
+              "Password=;";
                 int userID = 0;
+
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
@@ -35,25 +43,26 @@ namespace ToTheRescueWebAppTests
                         }
                     }
                 }
+                connection.Close();
                 using (SqlCommand command = new SqlCommand())
                 {
-                    List<string> profiles = new List<string>();
                     string name = null;
-
+                    command.Connection = connection;
                     command.CommandText = "SELECT ProfileName FROM dbo.Profiles WHERE UserID = @id";
                     command.Parameters.AddWithValue("@id", userID);
-                    //command.Connection.Open();
+                    command.Connection.Open();
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             name = (string)reader["ProfileName"];
-                            profiles.Add(name);
+                            result.Add(name);
                         }
                     }
                 }
             }
+            Assert.AreEqual(expected, result);
         }
     }
 }
