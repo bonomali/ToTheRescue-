@@ -3,29 +3,39 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ToTheRescueWebAppTests
 {
     [TestClass]
     public class Tests
     {
+        /*Test that the correct profiles are retrieved from the database when a user logs
+         into the web application. This test checks that the added UserID row to the Entity
+         Framework generated table correctly corresponds to the Profiles table 
+         (correct PK-FK relationship). The expected profiles for a UserID are stored in a List 
+         and the result profiles are queried from the database. Both lists are ordered before
+         comparision.*/
         [TestMethod]
         public void GetProfilesforUser()
         {
+            List<string> temp = new List<string>(); //put in temp array to sort
+            temp.Add("Emma");
+            temp.Add("Sophia");
+            temp.Add("Lily");
+
             List<string> result = new List<string>();
-            List<string> expected = new List<string>();
-            expected.Add("Sophia");
-            expected.Add("Emma");
-            expected.Add("Lily");
+            List<string> expected = temp.OrderBy(n => n).ToList();
+            temp.Clear();   //clear list
 
             using (SqlConnection connection = new SqlConnection())
             {
-              connection.ConnectionString = 
-              "Server=aura.cset.oit.edu;" +
-              "Persist Security Info = False;" +
-              "DataBase=ToTheRescue;" +
-              "User Id=;" +
-              "Password=;";
+                connection.ConnectionString = 
+                "Server=aura.cset.oit.edu;" +
+                "Persist Security Info = False;" +
+                "DataBase=ToTheRescue;" +
+                "User Id=;" +
+                "Password=;";
                 int userID = 0;
 
                 using (SqlCommand command = new SqlCommand())
@@ -44,6 +54,7 @@ namespace ToTheRescueWebAppTests
                     }
                 }
                 connection.Close();
+
                 using (SqlCommand command = new SqlCommand())
                 {
                     string name = null;
@@ -57,12 +68,14 @@ namespace ToTheRescueWebAppTests
                         while (reader.Read())
                         {
                             name = (string)reader["ProfileName"];
-                            result.Add(name);
+                            temp.Add(name);
+                            result = temp.OrderBy(n => n).ToList();
                         }
                     }
                 }
             }
-            Assert.AreEqual(expected, result);
+
+            CollectionAssert.AreEqual(expected, result);
         }
     }
 }
