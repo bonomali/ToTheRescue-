@@ -185,6 +185,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Audio\bensound-retrosoul.mp3" />
     <Content Include="Audio\bensound-sunny.mp3" />
     <Content Include="Audio\Elephant.mp3" />
     <Content Include="Audio\Lion_Roar.mp3" />
@@ -202,6 +203,7 @@
     <Content Include="Images\optionsIcon.png" />
     <Content Include="Images\playIcon.png" />
     <Content Include="Images\sanctuaryIcon.png" />
+    <Content Include="Images\winter-scenery-hi.png" />
     <Content Include="LogoutSnippet.txt" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />

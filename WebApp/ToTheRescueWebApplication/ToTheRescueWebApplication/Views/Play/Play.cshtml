@@ -3,33 +3,49 @@
     ViewBag.Title = "Play";
 }
 
+<audio controls loop id="playMusic" source src="../Audio/bensound-retrosoul.mp3" autoplay>
+    <embed src="../Audio/bensound-retrosoul.mp3" width="0" height="0" hidden="hidden" />
+</audio>
+<script>
+    var vid = document.getElementById("playMusic");
+    vid.volume = 0.05;
+</script>
 <nav id="playMenu">
+    <div class="profileInfo">
+        <label id="name">Name: Stephanie Derosier</label>
+        <label id="level">Grade Level: Pre-Kindergarten</label>
+        <label id="subject">Subject: Reading</label>
+    </div>
     <div class="icons">
-        <ul>
+        <ul class="buttons">
             <li id="play">
                 <img src="~/Images/playIcon.png" class="icon" alt="Play">
+                <label class="iconLbls " id="playLbl">Play</label>
             </li>
             <li id="sanctuary">
                 <a href="../AnimalSanctuary/Sanctuary">
                     <img src="~/Images/sanctuaryIcon.png" class="icon" alt="Sanctuary">
                 </a>
+                <label class="iconLbls "id="sanctuaryLbl">Sanctuary</label>
             </li>
             <li id="menu">
                 <a href="../MainMenu/MainMenu">
                     <img src="~/Images/menuIcon.png" class="icon" alt="Menu">
                 </a>
+                <label class="iconLbls " id="menuLbl">Menu</label>
             </li>
             <li id="options">
                 <a href="../Options/Options">
                     <img src="~/Images/optionsIcon.png" class="icon" alt="Options">
                 </a>
+                <label class="iconLbls " id="optionsLbl">Options</label>
             </li>
         </ul>
     </div>
 </nav>
-<main id="map">
-
-</main>
+<div .mapContainer>
+    <img src="~/Images/winter-scenery-hi.png" id="mapImg" alt="Map">
+</div>
 
 
 

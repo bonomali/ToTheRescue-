@@ -11,15 +11,21 @@
     <script>
         var elephant = new Audio();
         elephant.src = "../Audio/Elephant.mp3";
+        elephant.volume = 0.15;
         var lion = new Audio();
         lion.src = "../Audio/Lion_Roar.mp3";
+        lion.volume = 0.15;
     </script>
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    <audio source src="../Audio/bensound-sunny.mp3" autoplay>
+    <audio controls loop id="menuMusic" source src="../Audio/bensound-sunny.mp3" autoplay>
         <embed src="../Audio/bensound-sunny.mp3" width="180" height="90" hidden="hidden" />
     </audio>
+    <script>
+    var vid = document.getElementById("menuMusic");
+    vid.volume = 0.05;
+    </script>
     <h2>Main Menu</h2>
     <nav id="mainMenuNav">
         <ul id="navLinks">

@@ -1,5 +1,5 @@
 ﻿html{
-    background-color: lightgreen;
+    background-color: darkblue;
 }
 main#map {
     background-color: lightblue;
@@ -8,8 +8,6 @@ main#map {
 }
 nav#playMenu {
     background-color: darkgreen;
-    border:dashed;
-    border-color: orange;
     width: 10%;
     height: 100%;
     position: fixed; /* Stay in place */
@@ -17,26 +15,126 @@ nav#playMenu {
     top: 0;
     right: 0;
 }
+div.profileInfo {
+    background-color:lightskyblue;
+    width: 90%;
+    height: 15%;
+    min-height: 45px;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+}
+div.profileInfo label {
+    top: 3.5%;
+    font-size: 10px;
+    color: darkblue;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-weight: bold;
+    text-shadow: 1px 1px #FFF;
+}
+div.profileInfo label#name {
+    float: left;
+    position: fixed;
+    left: 3%;
+}
+div.profileInfo label#level {
+    float: left;
+    position: fixed;
+    left: 35%;
+}
+div.profileInfo label#subject {
+    position: fixed;
+    left: 70%;
+}
 nav#playMenu ul { list-style-type: none; }
+.iconLbls {
+    font-size: 8px;
+    color: lightblue;
+    text-shadow: 1px 1px #000;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
 nav#playMenu li#options { 
     position:fixed;
     bottom: 9%;
 }
+#optionsLbl {
+    position:fixed;
+    bottom: 5%;
+    margin-left: -5%;
+}
 nav#playMenu li#menu { 
     position:fixed;
-    bottom: 27%;
+    bottom: 29%;
+}
+#menuLbl {
+    position:fixed;
+    bottom: 25%;
+    margin-left: -3.52%;
 }
 nav#playMenu li#sanctuary {
     position: fixed;
-    bottom: 47%;
+    bottom: 50%;
+}
+#sanctuaryLbl {
+    position:fixed;
+    bottom: 46%;
+    margin-left: -5.5%;
 }
 nav#playMenu li#play { 
     position:fixed;
-    bottom: 80%;
+    bottom: 85%;
+}
+#playLbl {
+    position:fixed;
+    bottom: 81%;
+    margin-left: -2.95%;
 }
 .icon {
     border:groove;
     border-color:lightseagreen;
     background-color:lightseagreen;
     width: 80%;
+    min-width: 20px;
+    margin-left: -17px;
+}
+.icon:hover {
+    background-color: hotpink;
+    width: 85%;
+}
+#mapImg {
+   width: 90%;
+   max-height: 465px;
+   margin-top: 4%;
+}
+.mapContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  height: 40%;
+}
+@media only screen and (min-width: 720px) {
+    div.profileInfo label {
+        font-size: 16px;
+    }
+/*When screen is 1080px or larger, apply this CSS*/
+@media only screen and (min-width: 1080px) {
+    div.profileInfo label {
+        font-size: 24px;
+    }
+    .iconLbls {
+        font-size: 16px;
+    }
+    #optionsLbl {
+        margin-left: -5.5%;
+    }
+    #sanctuaryLbl {
+        margin-left: -6%;
+    }
+    #menuLbl {
+        margin-left: -4.5%;
+    }
+    #playLbl {
+        margin-left: -4%;
+    }
 }
