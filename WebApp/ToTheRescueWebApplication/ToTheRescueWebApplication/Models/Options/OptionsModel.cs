@@ -22,16 +22,12 @@ namespace ToTheRescueWebApplication.Models
         public float ReadingPerformanceStat { get; set; }
         public string SubjectFilter { get; set; }
 
-        public List<SelectListItem> listItems { get; set; }
-
         public OptionsModel()
         {
-            RetrieveCurrentProfileOptions(5);
-            MathDifficultyLevel = 4;
-            ReadingDifficultyLevel = 4;
-            UpdateDifficulty();
+            RetrieveCurrentProfileOptions(ImportantVariables.ProfileID);
         }
 
+        [Authorize]
         public void RetrieveCurrentProfileOptions(int ProfileID)
         {
             using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
@@ -77,6 +73,7 @@ namespace ToTheRescueWebApplication.Models
             }
         }
 
+        [Authorize]
         public void UpdateToggleSound()
         {
             using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
@@ -104,6 +101,7 @@ namespace ToTheRescueWebApplication.Models
             }
         }
 
+        [Authorize]
         public void UpdateToggleMusic()
         {
             using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
@@ -131,6 +129,7 @@ namespace ToTheRescueWebApplication.Models
             }
         }
 
+        [Authorize]
         public void UpdateDifficulty()
         {
             using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
@@ -159,6 +158,7 @@ namespace ToTheRescueWebApplication.Models
             }
         }
 
+        [Authorize]
         public void UpdateFilter()
         {
             using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
