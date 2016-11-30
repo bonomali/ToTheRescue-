@@ -27,5 +27,22 @@ namespace ToTheRescueWebApplication.Controllers
 
             return RedirectToAction("Profiles", "Profiles");
         }
+
+        [HttpPost]
+        public ActionResult Options(OptionsModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.UpdateDifficulty();
+                model.UpdateToggleMusic();
+                model.UpdateToggleSound();
+                model.UpdateFilter();
+            }
+            else
+            {
+                return View(model);
+            }
+            return RedirectToAction("Options");
+        }
     }
 }

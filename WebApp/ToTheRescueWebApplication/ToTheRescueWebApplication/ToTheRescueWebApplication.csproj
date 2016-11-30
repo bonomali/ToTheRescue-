@@ -224,6 +224,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Code\ImportantVariables.cs" />
+    <Compile Include="Code\OptionsProfile.cs" />
     <Compile Include="Controllers\AnimalSanctuaryController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MainMenuController.cs" />
