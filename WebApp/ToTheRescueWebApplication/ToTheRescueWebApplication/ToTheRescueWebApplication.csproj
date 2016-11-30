@@ -193,10 +193,15 @@
     <Content Include="Content\Site.css" />
     <Content Include="CSS\Login.css" />
     <Content Include="CSS\MainMenu.css" />
+    <Content Include="CSS\Play.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\animalBackground.jpg" />
     <Content Include="Images\mainmenu.jpg" />
+    <Content Include="Images\menuIcon.png" />
+    <Content Include="Images\optionsIcon.png" />
+    <Content Include="Images\playIcon.png" />
+    <Content Include="Images\sanctuaryIcon.png" />
     <Content Include="LogoutSnippet.txt" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
@@ -283,6 +288,7 @@
     <Content Include="Views\Play\Play.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Options\Options.cshtml" />
+    <Content Include="Views\Shared\_Layout3.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

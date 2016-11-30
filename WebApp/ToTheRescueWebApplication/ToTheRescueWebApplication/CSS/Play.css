@@ -1,0 +1,42 @@
+﻿html{
+    background-color: lightgreen;
+}
+main#map {
+    background-color: lightblue;
+    width: 70%;
+    height: 60%;
+}
+nav#playMenu {
+    background-color: darkgreen;
+    border:dashed;
+    border-color: orange;
+    width: 10%;
+    height: 100%;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    right: 0;
+}
+nav#playMenu ul { list-style-type: none; }
+nav#playMenu li#options { 
+    position:fixed;
+    bottom: 9%;
+}
+nav#playMenu li#menu { 
+    position:fixed;
+    bottom: 27%;
+}
+nav#playMenu li#sanctuary {
+    position: fixed;
+    bottom: 47%;
+}
+nav#playMenu li#play { 
+    position:fixed;
+    bottom: 80%;
+}
+.icon {
+    border:groove;
+    border-color:lightseagreen;
+    background-color:lightseagreen;
+    width: 80%;
+}
