@@ -82,7 +82,7 @@ namespace ToTheRescueWebApplication.Controllers
 
                 return RedirectToAction("ChooseProfilePage", "Profiles");
             }
- 
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -280,10 +280,10 @@ namespace ToTheRescueWebApplication.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                 var callbackUrl = Url.Action("ResetPassword", "Login", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                 await UserManager.SendEmailAsync(user.Id, "Reset Password", callbackUrl);
-                 return RedirectToAction("ForgotPasswordConfirmation", "Login");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Login", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", callbackUrl);
+                return RedirectToAction("ForgotPasswordConfirmation", "Login");
             }
 
             // If we got this far, something failed, redisplay form

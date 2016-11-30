@@ -7,7 +7,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     min-width: 300px;
-    min-height:550px;
+    min-height: 550px;
     border: 2px;
     border-color: burlywood;
     border-style: ridge;
@@ -58,7 +58,7 @@ label {
     font-size: 28px;
     margin: 0 10px;
 }
-div .loginFields input{
+div .loginFields input {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -110,6 +110,9 @@ p {
     position: relative;
     top: 90px;
 }
+div.validation ul { 
+    list-style-type: none; 
+}
 /*When screen is 960px or larger, apply this CSS*/
 @media only screen and (min-width: 960px) {
     body {
@@ -127,23 +130,21 @@ p {
     }
     h2 {
         font-size: 80px;
-        position:relative;
+        position: relative;
         bottom: 20px;
     }
-
     div {
         text-align: center;
         padding: -100px;
         color: lightcyan;
         text-shadow: 1px 1px #000;
     }
-
-   div .checkbox {
-            position: relative;
-            left: 100px;
-            padding-bottom: 6px;
-            padding-top: -3px;
-        }
+    div .checkbox {
+        position: relative;
+        left: 100px;
+        padding-bottom: 6px;
+        padding-top: -3px;
+    }
     .link {
         display: block;
         margin-left: auto;
@@ -155,7 +156,6 @@ p {
         font-style: normal;
         color: black;
     }
-
     a {
         color: ghostwhite;
         text-shadow: 2px 2px #000;
@@ -174,15 +174,14 @@ p {
         opacity: 0.9;
     }
     .link:hover a {
-            font-size: 28px;
-     } 
-
-        label {
+        font-size: 28px;
+    }
+    label {
         display: inline-block;
         text-align: right;
     }
     .passwordReset {
-    position: relative;
-    top: 280px;
-}
+        position: relative;
+        top: 280px;
+    }
 }

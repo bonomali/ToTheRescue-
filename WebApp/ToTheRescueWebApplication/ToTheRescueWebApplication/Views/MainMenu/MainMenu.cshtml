@@ -16,26 +16,26 @@
     </script>
     <title>@ViewBag.Title</title>
 </head>
-    <body>
-        <audio source src="../Audio/bensound-sunny.mp3" autoplay>
-        <embed src="../Audio/bensound-sunny.mp3" width="180" height="90" hidden="hidden" />  
-        </audio>
-        <h2>Main Menu</h2>
-        <nav id ="mainMenuNav">
-            <ul id="navLinks">
-                <li>
-                    <a href="@Url.Action("Play", "Play")" onmouseover="elephant.play()">Play</a>
-                </li>
-                <li>
-                    @Html.ActionLink("Options", "Options", "Options")
-                <li />
-                <li>
-                   @if (User.Identity.IsAuthenticated)
-                   {
-                        <a href="@Url.Action("Sanctuary", "AnimalSanctuary")" onmouseover="lion.play()">Animal Sanctuary</a>
-                   }
-                <li />
-            </ul>
-        </nav>
-    </body>
+<body>
+    <audio source src="../Audio/bensound-sunny.mp3" autoplay>
+        <embed src="../Audio/bensound-sunny.mp3" width="180" height="90" hidden="hidden" />
+    </audio>
+    <h2>Main Menu</h2>
+    <nav id="mainMenuNav">
+        <ul id="navLinks">
+            <li>
+                <a href="@Url.Action("Play", "Play")" onmouseover="elephant.play()">Play</a>
+            </li>
+            <li>
+                @Html.ActionLink("Options", "Options", "Options")
+            <li />
+            <li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a href="@Url.Action("Sanctuary", "AnimalSanctuary")" onmouseover="lion.play()">Animal Sanctuary</a>
+                }
+            <li />
+        </ul>
+    </nav>
+</body>
 </html>
