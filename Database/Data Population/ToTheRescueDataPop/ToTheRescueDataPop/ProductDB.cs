@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace ToTheRescueDataPop
 {
     class ProductDB
     {
         // The directory for the images
-        public static string IMAGES_PATH = "C:\\Users\\Stephanie\\Documents\\GitHub\\ToTheRescue-\\Database\\Data Population\\testMedia\\";
-        public static string SOUND_PATH = "C:\\Users\\Stephanie\\Documents\\GitHub\\ToTheRescue-\\Database\\Data Population\\testMedia\\";
+        public static string IMAGES_PATH = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\testMedia\\ProfileAnimals.sql");
+        public static string SOUND_PATH = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\testMedia\\ProfileAnimals.sql");
         static string DB_USER_NAME = "";
         static string DB_USER_PWD = "";
         public static SqlConnection GetConnection()
@@ -275,6 +276,43 @@ namespace ToTheRescueDataPop
                 reader.Close();
 
                 return soundIDList;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        public static void WriteSQL(string path)
+        {
+            SqlConnection connection = null;
+            try
+            {
+                string script = File.ReadAllText(path);
+
+                IEnumerable<string> commandStrings = Regex.Split(script, @"^\s*GO\s*$",
+                           RegexOptions.Multiline | RegexOptions.IgnoreCase);
+
+                // 2. Write image to database
+                connection = GetConnection();
+                connection.Open();
+                foreach (string commandString in commandStrings)
+                {
+                    if (commandString.Trim() != "")
+                    {
+                        using (var command = new SqlCommand(commandString, connection))
+                        {
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
             }
             catch (Exception e)
             {

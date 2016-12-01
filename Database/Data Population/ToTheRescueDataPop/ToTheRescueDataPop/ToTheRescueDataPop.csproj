@@ -50,6 +50,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Animals.sql" />
+    <Content Include="AspNetUsers.sql" />
+    <Content Include="GameCategories.sql" />
+    <Content Include="Maps.sql" />
+    <Content Include="Minigames.sql" />
+    <Content Include="Nodes.sql" />
+    <Content Include="ProfileAnimals.txt" />
+    <Content Include="ProfileProgress.sql" />
+    <Content Include="ProfileProgressHistory.sql" />
+    <Content Include="Profiles.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
