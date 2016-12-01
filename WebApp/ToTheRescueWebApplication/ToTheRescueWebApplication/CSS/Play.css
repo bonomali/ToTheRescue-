@@ -10,6 +10,8 @@ nav#playMenu {
     background-color: darkgreen;
     width: 10%;
     height: 100%;
+    border: 2px solid hotpink;
+    box-sizing: border-box;
     position: fixed; /* Stay in place */
     z-index: 1; /* Stay on top */
     top: 0;
@@ -20,6 +22,8 @@ div.profileInfo {
     width: 90%;
     height: 15%;
     min-height: 45px;
+    border: 2px solid blue;
+    box-sizing: border-box;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -36,18 +40,20 @@ div.profileInfo label {
 div.profileInfo label#name {
     float: left;
     position: fixed;
-    left: 3%;
+    left: 1%;
 }
 div.profileInfo label#level {
     float: left;
     position: fixed;
-    left: 35%;
+    left: 32%;
 }
 div.profileInfo label#subject {
     position: fixed;
-    left: 70%;
+    left: 68%;
 }
-nav#playMenu ul { list-style-type: none; }
+nav#playMenu ul { 
+    list-style-type: none; 
+}
 .iconLbls {
     font-size: 8px;
     color: lightblue;
@@ -70,7 +76,7 @@ nav#playMenu li#menu {
 #menuLbl {
     position:fixed;
     bottom: 25%;
-    margin-left: -3.52%;
+    margin-left: -5%;
 }
 nav#playMenu li#sanctuary {
     position: fixed;
@@ -79,24 +85,25 @@ nav#playMenu li#sanctuary {
 #sanctuaryLbl {
     position:fixed;
     bottom: 46%;
-    margin-left: -5.5%;
+    margin-left: -5%;
 }
 nav#playMenu li#play { 
     position:fixed;
-    bottom: 85%;
+    bottom: 83%;
 }
 #playLbl {
     position:fixed;
-    bottom: 81%;
-    margin-left: -2.95%;
+    bottom: 79%;
+    margin-left: -5%;
 }
 .icon {
     border:groove;
     border-color:lightseagreen;
     background-color:lightseagreen;
+    border-radius: 15px;
     width: 80%;
     min-width: 20px;
-    margin-left: -17px;
+    margin-left: -35px;
 }
 .icon:hover {
     background-color: hotpink;
@@ -105,7 +112,10 @@ nav#playMenu li#play {
 #mapImg {
    width: 90%;
    max-height: 465px;
-   margin-top: 4%;
+   margin-top: 7%;
+   border: 2px solid lightblue;
+   box-sizing: border-box;
+   border-style:outset;
 }
 .mapContainer {
   display: flex;
@@ -113,9 +123,42 @@ nav#playMenu li#play {
   width: 80%;
   height: 40%;
 }
-@media only screen and (min-width: 720px) {
+@media only screen and (min-width: 540px) {
+    #optionsLbl {
+        margin-left: -4.5%;
+    }
+    #menuLbl {
+        margin-left: -4%;
+    }
+    #sanctuaryLbl {
+        margin-left: -4.75%;
+    }
+    #playLbl {
+        bottom: 81%;
+        margin-left: -3.5%;
+    }
+    nav#playMenu li#play { 
+    bottom: 85%;
+    }
+    .icon {
+        margin-left: -28px;
+    }
+}
+@media only screen and (min-width: 620px) {
     div.profileInfo label {
-        font-size: 16px;
+        font-size: 14px;
+    }
+    div.profileInfo label#name {
+        left: 3%;
+    }
+    div.profileInfo label#level {
+        left: 35%;
+    }
+    div.profileInfo label#subject {
+        left: 70%;
+    }
+    .icon {
+        margin-left: -17px;
     }
 /*When screen is 1080px or larger, apply this CSS*/
 @media only screen and (min-width: 1080px) {
