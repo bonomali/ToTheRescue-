@@ -230,8 +230,8 @@
     <Compile Include="Controllers\MainMenuController.cs" />
     <Compile Include="Controllers\OptionsController.cs" />
     <Compile Include="Controllers\PlayController.cs" />
-    <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -247,8 +247,10 @@
     <Compile Include="Models\Login\RegisterViewModel.cs" />
     <Compile Include="Models\Login\ResetPasswordViewModel.cs" />
     <Compile Include="Models\Options\OptionsModel.cs" />
-    <Compile Include="Models\Profiles\ProfilesModel.cs" />
+    <Compile Include="Models\Profile\ProfileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ProfileDBRepository.cs" />
+    <Compile Include="Repositories\Profile.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -270,7 +272,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Profiles\ChooseProfilePage.cshtml" />
+    <Content Include="Views\Profiles\BadChooseProfilePage.cshtml" />
     <Content Include="Views\Login\AwaitingConfirmation.cshtml" />
     <Content Include="Views\Login\ConfirmEmail.cshtml" />
     <Content Include="Views\Login\ExternalLoginConfirmation.cshtml" />
@@ -286,12 +288,14 @@
     <Content Include="Views\Login\VerifyCode.cshtml" />
     <Content Include="Views\Login\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\AnimalSanctuary\Sanctuary.cshtml" />
-    <Content Include="Views\Profiles\CreateProfilePage.cshtml" />
+    <Content Include="Views\Profiles\BadCreateProfilePage.cshtml" />
     <Content Include="Views\MainMenu\MainMenu.cshtml" />
     <Content Include="Views\Play\Play.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Options\Options.cshtml" />
     <Content Include="Views\Shared\_Layout3.cshtml" />
+    <Content Include="Views\Profile\ChooseProfilePage.cshtml" />
+    <Content Include="Views\Profile\CreateProfilePage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

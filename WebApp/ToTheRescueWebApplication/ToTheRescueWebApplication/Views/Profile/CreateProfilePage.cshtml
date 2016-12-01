@@ -1,0 +1,174 @@
+﻿@using ToTheRescueWebApplication.Repositories
+
+@model List<Byte[]>
+
+@{
+    ViewBag.Title = "CreateProfilePage";
+}
+
+<style>
+    #Header {
+        text-align: center;
+    }
+
+    #CreateProfileButton {
+        border-radius: 10px;
+        visibility: hidden;
+    }
+
+    #BackButton {
+        border-radius: 10px;
+        position: relative;
+    }
+
+    div {
+        border-radius: 10px;
+    }
+
+    #emptyNameError {
+        float: right;
+        position: relative;
+        right: 450px;
+        bottom: 5px;
+        color: red;
+        visibility: hidden
+    }
+</style>
+
+<body id="CreateProfilePage">
+    <h1 id="Header">Create Your Profile!</h1>
+
+    <h3 id="EnterProfileNameText">Enter your Profile Name</h3>
+    <h5 id="emptyNameError">You must enter a profile name in order to create a new profile. Please try again.</h5>
+    <input type="text" , id="profileNameText" />
+
+    <h3 id="ChooseProfText">Choose an avatar!</h3>
+    <table id="AvatarsTable" , style="width:100%">
+        <tr id="rowOneAvatars">
+            @for (int i = 0; i < Model.Count() / 2; i++)
+            {
+                var base64 = Convert.ToBase64String(Model[i]);
+                var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+                <td>
+                    <div id="@("Avatar" + i)" , onclick="SelectedProfile(@i.ToString())">
+                        <img src="@imgSrc" />
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr id="rowTwoAvatars">
+            @for (int i = Model.Count() / 2; i < Model.Count(); i++)
+            {
+                var base64 = Convert.ToBase64String(Model[i]);
+                var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+                <td>
+                    <div id="@("Avatar" + i)" , onclick="SelectedProfile(@i.ToString())">
+                        <img src="@imgSrc" />
+                    </div>
+                </td>
+            }
+        </tr>
+    </table>
+    <br />
+    <input type="submit" value="Create Profile" id="CreateProfileButton" onclick="CreateNewProfile()" />
+    <br /><br />
+    @*if clicked back, return to choose profiles page*@
+    <input type="button" id="BackButton" value="Back" onclick="@("window.location.href='" + @Url.Action("ChooseProfilePage", "Profile") + "'");" />
+</body>
+
+<script src="~/scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    //toggles the outline of an avatar if the user selected an avatar
+    function SelectedProfile(index)
+    {
+        var avatarID = "Avatar";
+        avatarID = avatarID.concat(index);
+        var avatarDiv = document.getElementById(avatarID);
+
+        //toggle the color
+        if (avatarDiv.style.border !== "thick solid red")
+        {
+            avatarDiv.style.border = "thick solid red";
+
+            //show the create profile button
+            document.getElementById("CreateProfileButton").style.visibility = "visible";
+
+            //Call the SelectedAvatar function in the controller
+            //while not changing the view at all
+
+        }
+        else {
+            avatarDiv.style.border = "thick solid transparent";
+
+            //hide the create profile button
+            document.getElementById("CreateProfileButton").style.visibility = "hidden";
+        }
+
+        //ensure all the other avatars aren't selected
+        for (var i = 0; i < @Model.Count(); i++) {
+            if (i != index) {
+                var avatarID = "Avatar";
+                avatarID = avatarID.concat(i.toString());
+                document.getElementById(avatarID).style.border = "thick solid transparent";
+            }
+        }
+    }
+
+    function CreateNewProfile()
+    {
+        var profName = document.getElementById("profileNameText").value;
+        var avatarID = "Avatar";
+        var index = -1;
+
+        //this regular expression checks to see if there
+        //is at least one character of non whitespace
+        if (/\S/.test(profName) !== true || profName === '') {
+            //string is just white space, set it to null so an error
+            //message is displayed
+            profName = "~!null~$";
+        }
+
+        for (var i = 0; i < @Model.Count(); i++)
+        {
+            avatarID = "Avatar";
+            avatarID = avatarID.concat(i);
+            if (document.getElementById(avatarID).style.border === "thick solid red")
+            {
+                index = i;
+                break;
+            }
+        }
+
+        var route = '/createNewProfile/';
+        route = route.concat(profName);
+        route = route.concat('/');
+        route = route.concat(index);
+
+        $.ajax({
+            url: route,
+            success: function (data){
+                if (data === "Success")
+                {
+                    //go to the choose profile page
+                    window.location.href = '/Profile/ChooseProfilePage';
+                }
+                else
+                {
+                    //reload this page
+                    window.location.href = '/Profile/CreateProfilePage';
+                }
+            }
+        });
+    }
+</script>
+
+@{
+    if (TempData["EmptyNameError"] != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                document.getElementById("emptyNameError").style.visibility = "visible";
+            });
+        </script>
+    }
+}
