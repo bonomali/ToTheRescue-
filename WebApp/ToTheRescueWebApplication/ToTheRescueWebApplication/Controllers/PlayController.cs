@@ -8,7 +8,6 @@ using ToTheRescueWebApplication.Code;
 
 namespace ToTheRescueWebApplication.Controllers
 {
-    
     public class PlayController : Controller
     {
         IDataEntityRepository<Map> map;
