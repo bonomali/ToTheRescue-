@@ -45,9 +45,8 @@ namespace ToTheRescueWebApplication.Models
                     connection.Open();
                     reader = cmd.ExecuteReader();
 
-                    if (reader.HasRows)
+                    if (reader.Read())
                     {
-                        reader.Read();
                         profileID = ProfileID;
                         profileName = reader["ProfileName"].ToString();
                         toggleSound = (bool)reader["ToggleSound"];
