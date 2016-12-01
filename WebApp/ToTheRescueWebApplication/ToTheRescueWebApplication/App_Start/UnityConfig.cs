@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using ToTheRescueWebApplication.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using ToTheRescueWebApplication.Controllers;
+using ToTheRescueWebApplication.Repositories;
 
 namespace ToTheRescueWebApplication
 {
@@ -22,7 +23,7 @@ namespace ToTheRescueWebApplication
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
 
-            //container.RegisterType<IDataEntityRepository<Profile>, ProfileDBRepository>();
+            container.RegisterType<IDataEntityRepository<Profile>, ProfileDBRepository>();
             container.RegisterType<DbContext, ApplicationDbContext>(new HierarchicalLifetimeManager());
             container.RegisterType<UserManager<ApplicationUser>>(new HierarchicalLifetimeManager());
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(new HierarchicalLifetimeManager());

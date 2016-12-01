@@ -1,0 +1,303 @@
+﻿@using ToTheRescueWebApplication.Repositories
+
+@model List<Profile>
+
+@{
+    ViewBag.Title = "ChooseProfilePage";
+}
+
+<style>
+    #ChooseProfileheader {
+        text-align: center;
+    }
+
+    #ProfileNames {
+        font-size: 32px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    #profileNameError {
+        float: right;
+        position: relative;
+        right: 660px;
+        bottom: 5px;
+        color: red;
+    }
+
+    #emailError {
+        color: red;
+        visibility: hidden;
+    }
+
+    #DeleteProfileButton {
+        border-radius: 10px;
+        position: relative;
+        left: 0%;
+        visibility: hidden;
+    }
+
+    #CreateNewPorifleButton {
+        border-radius: 10px;
+        position: relative;
+        left: 35%;
+        visibility: visible;
+    }
+
+    #PlayButton {
+        border-radius: 10px;
+        position: relative;
+        left: 67%;
+        visibility: hidden;
+    }
+
+    #CancelButton {
+        border-radius: 10px;
+        visibility: hidden;
+    }
+
+    #DeleteProfileSubmit {
+        border-radius: 10px;
+        visibility: hidden;
+    }
+
+    #emailTextBox {
+        visibility: hidden;
+    }
+
+    #emailText {
+        visibility: hidden;
+    }
+</style>
+
+<body id="ChooseProfileBody">
+    <h1 id="ChooseProfileheader">Choose Your Profile!</h1>
+    <h4 id="emailError">Incorrect email address eneterd. Profile not deleted.</h4>
+    @if (Model.Count() > 0)
+    {
+        //display all of the profiles for a specific user
+        <table id="ProfilesTable" , style="width:100%">
+            @if (Model.Count() <= 4)
+            {
+                <tr id="RowOneProfiles">
+                    @for (int i = 0; i < Model.Count(); i++)
+                    {
+                        var base64 = Convert.ToBase64String(Model[i].Avatar);
+                        var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+                        <td>
+                            <div id="@("Profile" + i)" , onclick="ToggleColor(@i.ToString())">
+                                <text id="ProfileNames">@Model[i].ProfileName</text>
+                                <img id="Avatar" , src="@imgSrc" />
+                            </div>
+                        </td>
+                    }
+                </tr>
+            }
+            else
+            {
+                int i = 0;
+                <tr id="RowOneProfiles">
+                    @for (i = 0; i < 4; i++)
+                    {
+                        var base64 = Convert.ToBase64String(Model[i].Avatar);
+                        var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+                        <td>
+                            <div id="@("Profile" + i)" , onclick="ToggleColor(@i.ToString())">
+                                <text id="ProfileNames">@Model[i].ProfileName</text>
+                                <img id="Avatar" , src="@imgSrc" />
+                            </div>
+                        </td>
+                    }
+                </tr>
+                <tr id="RowTwoProfiles">
+                    @for (int x = i; x < Model.Count(); x++)
+                    {
+                        var base64 = Convert.ToBase64String(Model[x].Avatar);
+                        var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+                        <td>
+                            <div id="@("Profile" + x)" , onclick="ToggleColor(@x.ToString())">
+                                <text id="ProfileNames">@Model[x].ProfileName</text>
+                                <img id="Avatar" , src="@imgSrc" />
+                            </div>
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <script type="text/javascript">
+            document.getElementById("DeleteProfileButton").style.visibility = "hidden";
+        </script>
+    }
+
+    @*allows deletion of a profile*@
+    <button id="DeleteProfileButton" , onclick="ClickedDelete()">Delete Profile</button>
+
+    @*Only display the Create New Profile button when there are less than 8 profiles*@
+    @if (Model.Count() < 8)
+    {
+        <input type="button" id="CreateNewPorifleButton" value="Create New Profiile" onclick="@("window.location.href='" + @Url.Action("CreateProfilePage", "Profile") + "'");" />
+    }
+
+    <button id="PlayButton" , onclick="ClickedPlay()">Play</button>
+
+    <h5 id="emailText">Please enter your email to delete this profile:</h5>
+    <input type="text" , id="emailTextBox" />
+    <br /><br />
+    <input type="submit" value="Delete Profile" id="DeleteProfileSubmit" onclick="DeleteProfile()" />
+    <br /><br />
+    <button id="CancelButton" , onclick="ClickedCancel()">Cancel</button>
+</body>
+
+@*use jquery*@
+<script src="~/scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+
+    //Toggles the color of the profile name when user clicks a profile
+    function ToggleColor(id) {
+        var ProfileID = "Profile";
+        ProfileID = ProfileID.concat(id);
+        var profileDiv = document.getElementById(ProfileID);
+
+        //toggle the color of all the profile names
+        if (profileDiv.style.color !== "red") {
+            profileDiv.style.color = "red";
+            var route = '/Profile/SelectedProfile/';
+        }
+        else {
+            profileDiv.style.color = "black";
+        }
+
+        //ensure all the other profile namees are black
+        for (var i = 0; i < @Model.Count(); i++) {
+            if (i != id) {
+                var tempProfID = "Profile";
+                tempProfID = tempProfID.concat(i.toString());
+                document.getElementById(tempProfID).style.color = "black";
+            }
+        }
+        DisplayButtons();
+    }
+
+    //Displays all the buttons after a user clicks a profile
+    function DisplayButtons() {
+        var visible = false;
+
+        for (var i = 0; i <  @Model.Count(); i++) {
+            var tempProfID = "Profile";
+            tempProfID = tempProfID.concat(i.toString());
+            tempProfID = document.getElementById(tempProfID)
+            if (tempProfID.style.color === "red")
+            {
+                visible = true;
+            }
+        }
+        if (visible === true)
+        {
+            document.getElementById("PlayButton").style.visibility = "visible";
+            document.getElementById("DeleteProfileButton").style.visibility = "visible";
+        }
+        else
+        {
+            document.getElementById("PlayButton").style.visibility = "hidden";
+            document.getElementById("DeleteProfileButton").style.visibility = "hidden";
+        }
+
+        document.getElementById("emailText").style.visibility = "hidden";
+        document.getElementById("emailTextBox").style.visibility = "hidden";
+        document.getElementById("CancelButton").style.visibility = "hidden";
+        document.getElementById("DeleteProfileSubmit").style.visibility = "hidden";
+    }
+
+    //Display all the forms/buttons after a user clicked the delete button
+    function ClickedDelete()
+    {
+        document.getElementById("DeleteProfileButton").style.visibility = "hidden";
+        document.getElementById("emailText").style.visibility = "visible";
+        document.getElementById("emailTextBox").style.visibility = "visible";
+        document.getElementById("DeleteProfileSubmit").style.visibility = "visible";
+        document.getElementById("CancelButton").style.visibility = "visible";
+    }
+
+    //Displays all the button after a user clicked the cancel delete button
+    function ClickedCancel()
+    {
+        document.getElementById("DeleteProfileButton").style.visibility = "visible";
+        document.getElementById("emailText").style.visibility = "hidden";
+        document.getElementById("emailTextBox").style.visibility = "hidden";
+        document.getElementById("CancelButton").style.visibility = "hidden";
+        document.getElementById("DeleteProfileSubmit").style.visibility = "hidden";
+    }
+
+    function ClickedPlay(){
+        for (var i = 0; i <  @Model.Count(); i++) {
+            var tempProfID = "Profile";
+            tempProfID = tempProfID.concat(i.toString());
+            tempProfID = document.getElementById(tempProfID)
+            if (tempProfID.style.color === "red")
+            {
+                var route = '/Profile/ClickedPlay/';
+                route = route.concat(i);
+
+                //Call the ClickedPlay function in the profiles controller
+                $.ajax({
+                    url: route,
+                    success: function(){
+                        //go to main menu after
+                        window.location.href = '/MainMenu/MainMenu';
+                    }
+                });
+            }
+        }
+    }
+
+    function DeleteProfile() {
+
+        var enteredEmail = document.getElementById("emailTextBox").value;
+        var index = null;
+        for (var i = 0; i <  @Model.Count(); i++) {
+            var tempProfID = "Profile";
+            tempProfID = tempProfID.concat(i.toString());
+            tempProfID = document.getElementById(tempProfID)
+            if (tempProfID.style.color === "red")
+            {
+                index = i;
+                break;
+            }
+        }
+
+        //this regular expression checks to see if there
+        //is at least one character of non whitespace
+        if (/\S/.test(enteredEmail) !== true || enteredEmail === '') {
+            //string is just, set it to null so an error
+            //message is displayed
+            enteredEmail = "error";
+        }
+
+        var route = '/profile/delete/';
+        route = route.concat(enteredEmail);
+        route = route.concat('/');
+        route = route.concat(index);
+
+        //Call the ClickedDelete function in the profile controller
+        $.ajax({
+            url: route,
+            success: function(){
+                //reload the same page
+                window.location.href = '/Profile/ChooseProfilePage';
+            }
+        });
+    }
+</script>
+
+@{
+    if (TempData["emailError"] != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                document.getElementById("emailError").style.visibility = "visible";
+            });
+        </script>
+    }
+}
