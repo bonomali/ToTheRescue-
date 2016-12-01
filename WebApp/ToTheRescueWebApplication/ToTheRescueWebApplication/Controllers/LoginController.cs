@@ -80,7 +80,7 @@ namespace ToTheRescueWebApplication.Controllers
                 TempData["userID"] = currentUser.UserID;
                 TempData["userEmail"] = currentUser.Email;
 
-                return RedirectToAction("ChooseProfilePage", "Profiles");
+                return RedirectToAction("ChooseProfilePage", "Profile");
             }
 
             ViewBag.ReturnUrl = returnUrl;
@@ -224,7 +224,7 @@ namespace ToTheRescueWebApplication.Controllers
                     TempData["userID"] = user.UserID;
                     TempData["userEmail"] = user.Email;
                     //return RedirectToAction("Login", "Login");
-                    return RedirectToAction("ChooseProfilePage", "Profiles");
+                    return RedirectToAction("ChooseProfilePage", "Profile");
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -549,7 +549,7 @@ namespace ToTheRescueWebApplication.Controllers
                 return Redirect(returnUrl);
             }
             //return RedirectToAction("Login", "Login");
-            return RedirectToAction("ChooseProfilePage", "Profiles");
+            return RedirectToAction("ChooseProfilePage", "Profile");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
