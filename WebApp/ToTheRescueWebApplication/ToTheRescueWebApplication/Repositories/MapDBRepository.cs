@@ -39,33 +39,7 @@ namespace ToTheRescueWebApplication.Repositories
 
         public List<Map> GetList()
         {
-            List<Map> maps = new List<Map>();
-
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
-            {
-                using (SqlCommand command = new SqlCommand())
-                {
-                    command.Connection = connection;
-                    command.CommandText = "SELECT * FROM Maps";
-                    command.Connection.Open();
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Map map = new Map();
-
-                            map.ID = (int)reader["MapID"];
-                            map.MapName = reader["MapName"].ToString();
-                            map.ImageID = (int)reader["ImageID"];
-                            map.SoundID = (int)reader["SoundID"];
-
-                            maps.Add(map);
-                        }
-                    }
-                }
-            }
-            return maps;
+            throw new NotImplementedException();
         }
 
         public void Save(Map entity)

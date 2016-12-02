@@ -39,33 +39,7 @@ namespace ToTheRescueWebApplication.Repositories
 
         public List<Sounds> GetList()
         {
-            List<Sounds> s = new List<Sounds>();
-
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
-            {
-                using (SqlCommand command = new SqlCommand())
-                {
-                    command.Connection = connection;
-                    command.CommandText = "SELECT * FROM Sounds";
-                    command.Connection.Open();
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Sounds sound = new Sounds();
-
-                            sound.ID = (int)reader["SoundID"];
-                            sound.SoundName = reader["SoundName"].ToString();
-                            sound.Sound = (byte[])reader["Sound"];
-                            sound.SoundClass = (int)reader["SoundClass"];
-
-                            s.Add(sound);
-                        }
-                    }
-                }
-            }
-            return s;
+            throw new NotImplementedException();
         }
 
         public void Save(Sounds entity)
