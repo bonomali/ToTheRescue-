@@ -3,7 +3,7 @@
     ViewBag.Title = "Play";
 }
 
-<audio controls loop id="playMusic" source src="../Audio/bensound-retrosoul.mp3" autoplay hidden="hidden">
+<audio controls loop id="playMusic" source src="@Url.Action("LoadAudio", new { @mapID = 4 })" autoplay hidden="hidden">
 </audio>
 <script>
     var vid = document.getElementById("playMusic");
@@ -43,8 +43,11 @@
     </div>
 </nav>
 <div .mapContainer>
-    <img src="~/Images/winter-scenery-hi.png" id="mapImg" alt="Map">
+    <img src="@Url.Action("ShowMapImage", new { @mapID = 4 })" id="mapImg" alt="Map">
 </div>
+@*<div class="animal">
+    <img src="@Url.Action("ShowAnimalImage", new { @profileID = 5 })" id="animalImg" alt="animal">
+</div>*@
 
 
 

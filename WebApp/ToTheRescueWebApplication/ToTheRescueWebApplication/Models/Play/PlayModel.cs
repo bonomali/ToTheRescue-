@@ -20,15 +20,10 @@ namespace ToTheRescueWebApplication.Models.Play
         public string Subject { get; set; }
 
         [Required]
-        public HttpPostedFileWrapper MapImage { get; set; }
-
-        [Required]
         public List<Nodes> MapNodes { get; set; }
 
         //[Required]
         //public Animal animal { get; set; }
 
-        [Required]
-        public HttpPostedFileWrapper Avatar { get; set; }
     }
 }

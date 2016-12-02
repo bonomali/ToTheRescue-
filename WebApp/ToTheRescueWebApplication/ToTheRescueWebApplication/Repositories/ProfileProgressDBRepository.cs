@@ -6,19 +6,19 @@ using System.Linq;
 using System.Web;
 using ToTheRescueWebApplication.Code;
 
-namespace ToTheRescueWebApplication
+namespace ToTheRescueWebApplication.Repositories
 {
-    public class ImageDBRepository
+    public class ProfileProgressDBRepository
     {
-        public Images Get(int id)
+        public ProfileProgress Get(int id)
         {
-            Images img = new Images();
+            ProfileProgress prog = new ProfileProgress();
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
             {
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = "SELECT * FROM Images WHERE ImageID=@ID";
+                    command.CommandText = "SELECT * FROM ProfileProgress WHERE ProfileID=@ID";
                     command.Parameters.AddWithValue("@ID", id);
                     command.Connection.Open();
 
@@ -26,47 +26,47 @@ namespace ToTheRescueWebApplication
                     {
                         if (reader.Read())
                         {
-                            img.ID = (int)reader["ImageID"];
-                            img.ImageClass = (int)reader["ImageClass"];
-                            img.Image = (byte[])reader["Images"];
-                            img.ImageName = reader["ImageName"].ToString();
+                            prog.ID = (int)reader["ProfileID"];
+                            prog.CurrentMap = (int)reader["CurrentMap"];
+                            prog.CurrentNode = (int)reader["CurrentNode"];
+                            prog.AnimalID = (int)reader["AnimalID"];
                         }
                     }
                 }
             }
-            return img;
+            return prog;
         }
-        //Get all images in an Image Class
-        public List<Images> GetList(int ImageClass)
+        //Get all nodes for a map
+        public List<ProfileProgress> GetList(int profileID)
         {
-            List<Images> images = new List<Images>();
+            List<ProfileProgress> progress = new List<ProfileProgress>();
 
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
             {
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = "SELECT * FROM Images WHERE ImageClass=@Class";
-                    command.Parameters.AddWithValue("@Class", ImageClass);
+                    command.CommandText = "SELECT * FROM ProfileProgress WHERE ProfileID=@ID";
+                    command.Parameters.AddWithValue("@ID", profileID);
                     command.Connection.Open();
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            Images img = new Images();
+                            ProfileProgress prog = new ProfileProgress();
 
-                            img.ID = (int)reader["ImageID"];
-                            img.ImageClass = (int)reader["ImageClass"];
-                            img.Image = (byte[])reader["Images"];
-                            img.ImageName = reader["ImageName"].ToString();
+                            prog.ID = (int)reader["ProfileID"];
+                            prog.CurrentMap = (int)reader["CurrentMap"];
+                            prog.CurrentNode = (int)reader["CurrentNode"];
+                            prog.AnimalID = (int)reader["AnimalID"];
 
-                            images.Add(img);
+                            progress.Add(prog);
                         }
                     }
                 }
             }
-            return images;
+            return progress;
         }
     }
 }

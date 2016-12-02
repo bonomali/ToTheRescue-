@@ -123,6 +123,9 @@ nav#playMenu li#play {
   width: 80%;
   height: 40%;
 }
+#animalImg {
+    width: 5%;
+}
 @media only screen and (min-width: 540px) {
     #optionsLbl {
         margin-left: -4.5%;
