@@ -10,7 +10,7 @@
 {
     <h2>Options for @Model.profileName</h2>
 
-
+    @Html.TextBoxFor(m => m.profileName, new { style = "display: none;" })
     <text>Toggle Sound:</text> @Html.CheckBoxFor(m => m.toggleSound)
     <br />
     <text>Toggle Music:</text> @Html.CheckBoxFor(m => m.toggleMusic)
