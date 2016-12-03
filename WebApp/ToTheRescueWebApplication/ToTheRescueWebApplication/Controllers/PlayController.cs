@@ -40,15 +40,22 @@ namespace ToTheRescueWebApplication.Controllers
         }
         public ActionResult ShowAnimalImage(int profileID)
         {
-            ProfileProgress prog = _progress.Get(profileID);  //get map from database
-            Images image = _image.Get(prog.AnimalID);  //get map image from database
+            ProfileProgress prog = _progress.Get(profileID);  //get animal from database
+            Images image = _image.Get(prog.AnimalID);  //get animal image from database
 
             return File(image.Image, image.ImageName);
         }
+        /*public ActionResult ShowAvatarImage(int profileID)
+        {
+            ProfileProgress profile = _profileOptions.Get(profileID);  //get profile from database
+            Images image = _image.Get(profile.AvatarID);  //get profile image from database
+
+            return File(image.Image, image.ImageName);
+        }*/
         public ActionResult LoadAudio(int mapID)
         {
             Map currentMap = _map.Get(mapID);  //get map from database
-            Sounds audio = _music.Get(currentMap.SoundID);
+            Sounds audio = _music.Get(currentMap.SoundID);  //get sound from database
             
             return base.File(audio.Sound, audio.SoundName);
         }
