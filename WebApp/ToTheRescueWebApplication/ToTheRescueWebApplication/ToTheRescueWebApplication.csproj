@@ -228,6 +228,7 @@
     <Compile Include="Code\ImportantVariables.cs" />
     <Compile Include="Code\Map.cs" />
     <Compile Include="Code\Nodes.cs" />
+    <Compile Include="Code\Options.cs" />
     <Compile Include="Code\ProfileProgress.cs" />
     <Compile Include="Code\Sounds.cs" />
     <Compile Include="Controllers\AnimalSanctuaryController.cs" />
@@ -259,6 +260,7 @@
     <Compile Include="Repositories\AnimalDBRepository.cs" />
     <Compile Include="Repositories\MapDBRepository.cs" />
     <Compile Include="Repositories\NodeDBRepository.cs" />
+    <Compile Include="Repositories\OptionsDBRepository.cs" />
     <Compile Include="Repositories\ProfileProgressDBRepository.cs" />
     <Compile Include="Repositories\SoundDBRepository.cs" />
     <Compile Include="Repositories\ProfileDBRepository.cs" />

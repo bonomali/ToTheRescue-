@@ -5,16 +5,20 @@ using System.Web;
 using System.Web.Mvc;
 using ToTheRescueWebApplication.Code;
 using ToTheRescueWebApplication.Models;
+using ToTheRescueWebApplication.Repositories;
 
 namespace ToTheRescueWebApplication.Controllers
 {
     public class OptionsController : Controller
     {
         static private OptionsModel m_options;
+        static private OptionsDBRepository m_optionsRepository;
 
         public OptionsController()
         {
-            m_options = new OptionsModel();
+            m_optionsRepository = new OptionsDBRepository();
+            Options entity = m_optionsRepository.Get(ImportantVariables.ProfileID);
+            m_options = new OptionsModel(entity);
         }
         public ActionResult Options()
         {
@@ -33,10 +37,8 @@ namespace ToTheRescueWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.UpdateDifficulty();
-                model.UpdateToggleMusic();
-                model.UpdateToggleSound();
-                model.UpdateFilter();
+                Options o = new Options(model);
+                m_optionsRepository.Save(o);
             }
             else
             {

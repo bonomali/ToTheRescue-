@@ -295,3 +295,32 @@ AS
 	(UserID, AvatarID, ProfileName, MathPerformanceStat, ReadingPerformanceStat, SubjectFilter)
 	VALUES
 	(@UserID, @AvatarID, @ProfileName, 0, 0,'0');
+	
+/**********************************************************************
+* Purpose: Updates in total a profile. 
+***********************************************************************/
+--DROP PROCEDURE proc_UpdateProfile; GO  
+--Function
+USE ToTheRescue;  
+GO  
+CREATE PROCEDURE proc_UpdateProfile
+	@ProfileID int,
+	@ToggleSound bit,
+	@ToggleMusic bit,
+	@MathPerformanceStat float,
+	@ReadingPerformanceStat float, 
+	@SubjectFilter varchar(50),
+	@NewMathDifficulty int,
+	@NewReadingDifficulty int
+AS  
+	UPDATE Profiles
+	SET ToggleSound = @ToggleSound, ToggleMusic = @ToggleMusic,
+	MathDifficultyLevel = @NewMathDifficulty, 
+	ReadingDifficultyLevel = @NewReadingDifficulty,
+	MathPerformanceStat = @MathPerformanceStat,
+	ReadingPerformanceStat = @ReadingPerformanceStat,
+	SubjectFilter = @SubjectFilter
+	WHERE ProfileID = @ProfileID;
+GO
+
+	

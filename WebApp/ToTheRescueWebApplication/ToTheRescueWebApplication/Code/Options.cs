@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-using System.Web.Configuration;
-using System.Web.Mvc;
-using ToTheRescueWebApplication.Code;
+using ToTheRescueWebApplication.Models;
 
-namespace ToTheRescueWebApplication.Models
+namespace ToTheRescueWebApplication.Code
 {
-    public class OptionsModel
+    public class Options
     {
         public int profileID { get; set; }
         public string profileName { get; set; }
@@ -22,12 +18,7 @@ namespace ToTheRescueWebApplication.Models
         public float ReadingPerformanceStat { get; set; }
         public string SubjectFilter { get; set; }
 
-        public OptionsModel()
-        {
-
-        }
-
-        public OptionsModel(Options entity)
+        public Options(OptionsModel entity)
         {
             this.profileID = entity.profileID;
             this.profileName = entity.profileName;
@@ -39,5 +30,4 @@ namespace ToTheRescueWebApplication.Models
             this.ReadingPerformanceStat = entity.ReadingPerformanceStat;
         }
     }
-
 }
