@@ -223,6 +223,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Code\Animal.cs" />
     <Compile Include="Code\Images.cs" />
     <Compile Include="Code\ImportantVariables.cs" />
     <Compile Include="Code\Map.cs" />
@@ -255,6 +256,7 @@
     <Compile Include="Models\Options\OptionsModel.cs" />
     <Compile Include="Models\Profile\ProfileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AnimalDBRepository.cs" />
     <Compile Include="Repositories\MapDBRepository.cs" />
     <Compile Include="Repositories\NodeDBRepository.cs" />
     <Compile Include="Repositories\ProfileProgressDBRepository.cs" />
@@ -315,6 +317,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\AnimalRepository\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,151 +1,34 @@
-﻿@model ToTheRescueWebApplication.Models.AnimalSanctuaryModel
+﻿@using ToTheRescueWebApplication.Code
+@model List<Animal>
 @{
     ViewBag.Title = "Sanctuary";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<h2>Your Sanctuary!</h2>
 
-
-<h2>@Model.a_ProfileName's Sanctuary!</h2>
-
-
-
-<audio source src="../Audio/bensound-sunny.mp3" autoplay>
-    <embed src="../Audio/bensound-sunny.mp3" width="180" height="90" hidden="hidden" />
-</audio>
-@*Should probably change this from the default background music.*@
-
-<body id="ChooseSanctuaryBody">
-    <br />
-    <table id="Sanctuary" , style="width:100%">
-        <tr id="RowOneAnimals">
-            @for (int i = 0; i < 5 && Model.a_AnimalImg.Count() > i; i++)
-            {
-                var base64 = Convert.ToBase64String(Model.a_AnimalImg[i]);
-                var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
-                var base64S = Convert.ToBase64String(Model.a_AnimalSound[i]);
-                var soundSrc = String.Format("data:audio/mpeg;base64,{0}", base64S);
-
-                <td id="@("Animal" + i)" , onclick="AnimalClick(@i.ToString())">
-                    <img id="AnimalImage" , src="@imgSrc" />
-                    <audio id="@("AnimalSound" + i)" , src="@soundSrc" , type="audio/mpeg" />
-                </td>
-            }
-        </tr>
-
-
-        <tr id="RowTwoAnimals">
-            @for (int i = 5; i < 10 && Model.a_AnimalImg.Count() > i; i++)
-            {
-                var base64 = Convert.ToBase64String(Model.a_AnimalImg[i]);
-                var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
-                var base64S = Convert.ToBase64String(Model.a_AnimalSound[i]);
-                var soundSrc = String.Format("data:audio/mpeg;base64,{0}", base64S);
-
-                <td id="@("Animal" + i)" , onclick="AnimalClick(@i.ToString())">
-                    <img id="AnimalImage" , src="@imgSrc" />
-                    <audio id="@("AnimalSound" + i)" , src="@soundSrc" , type="audio/mpeg" />
-                </td>
-            }
-        </tr>
-
-
-        <tr id="RowThreeAnimals">
-            @for (int x = 10; x < 15 && x < Model.a_AnimalImg.Count(); x++)
-            {
-                var base64 = Convert.ToBase64String(Model.a_AnimalImg[x]);
-                var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
-                var base64S = Convert.ToBase64String(Model.a_AnimalSound[x]);
-                var soundSrc = String.Format("data:audio/mpeg;base64,{0}", base64S);
-                <td id="@("Animal" + x)" , onclick="AnimalClick(@x.ToString())">
-                    <img id="AnimalImage" , src="@imgSrc" />
-                    <audio id="@("AnimalSound" + x)" , src="@soundSrc" , type="audio/mpeg" />
-                </td>
-            }
-        </tr>
-
-        <tr id="RowFourAnimals">
-            @for (int x = 15; x < Model.a_AnimalImg.Count(); x++)
-            {
-                var base64 = Convert.ToBase64String(Model.a_AnimalImg[x]);
-                var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
-                var base64S = Convert.ToBase64String(Model.a_AnimalSound[x]);
-                var soundSrc = String.Format("data:audio/mpeg;base64,{0}", base64S);
-                <td id="@("Animal" + x)" , onclick="AnimalClick(@x.ToString())">
-                    <img id="AnimalImage" , src="@imgSrc" />
-                    <audio id="@("AnimalSound" + x)" , src="@soundSrc" , type="audio/mpeg" />
-                </td>
-            }
-        </tr>
-        
-    </table>
-        
-
-
-    <table id="NonActive" , style="width:100%">
-        <br /><br />
-        <p>Non Active Animals!</p>
-        <tr id="RowOneNonActive">
-            @for (int x = 0; x < Model.a_NonActiveImg.Count(); x++)
-            {
-                var base64 = Convert.ToBase64String(Model.a_NonActiveImg[x]);
-                var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
-                var base64S = Convert.ToBase64String(Model.a_NonActiveSound[x]);
-                var soundSrc = String.Format("data:audio/mpeg;base64,{0}", base64S);
-                <td id="@("Animal" + x)" , onclick="AnimalClick(@x.ToString())">
-                    <img id="AnimalImage" , src="@imgSrc" />
-                    <audio id="@("AnimalSound" + x)" , src="@soundSrc" , type="audio/mpeg" />
-                </td>
-            }
-        </tr>
-    </table>
-
-    <br />
-    <br /><br /><br /><br /><br />
-</body>
-
-<button id="BackToMainMenuButton" , onclick="GoToMainMenu()">Back</button>
-
-
-<br /><br />
-<div id="FunFact">
- 
+<div id="animalSanctuary">
+    @for (int i = 0; i < Model.Count(); i++)
+    {
+        if (Model[i].ActiveBit == true)
+        {
+        <div id="@("Div" + i)">
+        <img id="@("AnimalImage" + i)" height="70" width="70" src="@Url.Action("ShowAnimalImage", new { @animalID = Model[i].ID })" alt="Animal" onclick="AnimalClicked(@i)"/>
+        <audio id="@i" src="@Url.Action("PlayAnimalSound", new { @animalID = Model[i].ID })" />
+        </div> 
+        }
+    }
 </div>
 
-
-
-<style>
-    #ChooseAnimalheader {
-        text-align: center;
-    }
-     #BackToMainMenuButton {
-        text-align: center;
-        font-size: 22px;
-
-    }
-</style>
-
-
 <script type="text/javascript">
-    function AnimalClick(id)
+
+    function GoToMainMenu()
     {
-        var elID = "AnimalSound" + id;
-        document.getElementById(elID).play();
-        var funFactLocation = document.getElementById("FunFact");
-
-         @{ int index = 0;}
-        Number(@index) = id;
-        @*@Html.Raw(Model.a_FunFact[index]);*@
-        @*alert(@Model.a_FunFact[index].ToString()));*@
-
-        //funFactLocation.innerHTML = "<p>Fun Fact!"+ @*@(Model.a_FunFact[].ToString())*@ + " </p>";
-        //Having issues here. Need to embed html and display funfact in this function
-    }
-
-    function GoToMainMenu() {
         window.location.href = '/MainMenu/MainMenu';
     }
 
-    function main() {}
-    main()
-
+    function AnimalClicked(id)
+    {
+        document.getElementById(id).play();
+        //var funFactLocation = document.getElementById("FunFact");
+    }
 </script>
