@@ -6,11 +6,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using ToTheRescueWebApplication.Code;
+using ToTheRescueWebApplication.Models;
 
 namespace ToTheRescueWebApplication.Repositories
 {
     public class OptionsDBRepository
     {
+        
         public Options Get(int id)
         {
             Options returnable = new Options();
@@ -45,7 +47,6 @@ namespace ToTheRescueWebApplication.Repositories
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.ToString());
                     throw e;
                 }
                 finally
@@ -67,12 +68,16 @@ namespace ToTheRescueWebApplication.Repositories
                     using (SqlCommand cmd = new SqlCommand("proc_UpdateProfile", connection))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
+                        if (entity.SubjectFilter == null)
+                        {
+                            entity.SubjectFilter = "";
+                        }
                         cmd.Parameters.AddWithValue("@ProfileID", entity.profileID);
                         cmd.Parameters.AddWithValue("@ToggleSound", entity.toggleSound);
                         cmd.Parameters.AddWithValue("@ToggleMusic", entity.toggleMusic);
                         cmd.Parameters.AddWithValue("@MathPerformanceStat", entity.MathPerformanceStat);
                         cmd.Parameters.AddWithValue("@ReadingPerformanceStat", entity.ReadingPerformanceStat);
-                        cmd.Parameters.AddWithValue("@SubjectFilter", entity.SubjectFilter);
+                        cmd.Parameters.AddWithValue("@SubjectFilter", "reading");
                         cmd.Parameters.AddWithValue("@NewMathDifficulty", entity.MathDifficultyLevel);
                         cmd.Parameters.AddWithValue("@NewReadingDifficulty", entity.ReadingDifficultyLevel);
                         connection.Open();

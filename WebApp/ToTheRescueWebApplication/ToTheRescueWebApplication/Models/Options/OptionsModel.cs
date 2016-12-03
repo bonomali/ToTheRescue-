@@ -21,23 +21,24 @@ namespace ToTheRescueWebApplication.Models
         public int ReadingDifficultyLevel { get; set; }
         public float ReadingPerformanceStat { get; set; }
         public string SubjectFilter { get; set; }
-
         public OptionsModel()
         {
 
         }
 
-        public OptionsModel(Options entity)
-        {
-            this.profileID = entity.profileID;
-            this.profileName = entity.profileName;
-            this.toggleSound = entity.toggleSound;
-            this.toggleMusic = entity.toggleMusic;
-            this.MathDifficultyLevel = entity.MathDifficultyLevel;
-            this.MathPerformanceStat = entity.MathPerformanceStat;
-            this.ReadingDifficultyLevel = entity.ReadingDifficultyLevel;
-            this.ReadingPerformanceStat = entity.ReadingPerformanceStat;
+        public OptionsModel(Options options) {
+            this.profileID = options.profileID;
+            this.profileName = String.Copy(options.profileName);
+            this.toggleSound = options.toggleSound;
+            this.toggleMusic = options.toggleMusic;
+            this.MathDifficultyLevel = options.MathDifficultyLevel;
+            this.MathPerformanceStat = options.MathPerformanceStat;
+            this.ReadingDifficultyLevel = options.ReadingDifficultyLevel;
+            this.ReadingPerformanceStat = options.ReadingPerformanceStat;
+            this.SubjectFilter = String.Copy(options.SubjectFilter);
+
         }
+
     }
 
 }

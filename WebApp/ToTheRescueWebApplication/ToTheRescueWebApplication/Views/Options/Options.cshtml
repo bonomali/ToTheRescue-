@@ -4,11 +4,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Options for @Model.profileName</h2>
+
 
 @using (Html.BeginForm())
 {
-    <text>Toggle Sound:    </text> @Html.CheckBoxFor(m => m.toggleSound)
+    <h2>Options for @Model.profileName</h2>
+
+
+    <text>Toggle Sound:</text> @Html.CheckBoxFor(m => m.toggleSound)
     <br />
     <text>Toggle Music:</text> @Html.CheckBoxFor(m => m.toggleMusic)
     <br />
@@ -30,18 +33,29 @@
                                                                     "value",
                                                                     "text",
                                                                      Model.MathDifficultyLevel);
+    SelectList subjectFilterList = new SelectList(new List<Object>{
+                           new { Text = "Anything", Value = "" },
+                           new { Text = "Math Only", Value = "Math" },
+                           new { Text = "Reading Only", Value = "Reading"  },
+                                                      },
+                                                                "value",
+                                                                "text",
+                                                                 Model.SubjectFilter);
     <h2>Math Difficulty</h2>
     @Html.DropDownListFor(m => m.MathDifficultyLevel, mathDifficultyList) 
     <h2>Reading Difficulty</h2>
     @Html.DropDownListFor(m => m.ReadingDifficultyLevel, readingDifficultyList)
+    <h2>Subject Filter</h2>
+    @Html.DropDownListFor(m => m.SubjectFilter, subjectFilterList);
 
- 
     <button type="submit">Apply Options</button>
 }
 
 <br />
 <p id="addLink">@Html.ActionLink("Switch Profiles", "ChooseProfilePage", "Profiles")</p>
 <p id="addLink">@Html.ActionLink("Back to Main Menu", "MainMenu", "MainMenu")</p>
+
+
 <script type="text/javascript">
     function main() { }
     main()
