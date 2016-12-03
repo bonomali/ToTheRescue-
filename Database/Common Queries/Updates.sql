@@ -299,6 +299,26 @@ AS
 /**********************************************************************
 * Purpose: Updates in total a profile. 
 ***********************************************************************/
+
+DECLARE @ProfileID int = 32
+DECLARE @ToggleSound bit = 1
+DECLARE @ToggleMusic bit = 1
+DECLARE @MathPerformanceStat float = 12
+DECLARE @ReadingPerformanceStat float = 36
+DECLARE @SubjectFilter varchar(50) = 'Math'
+DECLARE @NewMathDifficulty int = 1
+DECLARE @NewReadingDifficulty int = 3
+
+UPDATE Profiles
+	SET ToggleSound = @ToggleSound, ToggleMusic = @ToggleMusic,
+	MathDifficultyLevel = @NewMathDifficulty, 
+	ReadingDifficultyLevel = @NewReadingDifficulty,
+	MathPerformanceStat = @MathPerformanceStat,
+	ReadingPerformanceStat = @ReadingPerformanceStat,
+	SubjectFilter = @SubjectFilter
+	WHERE ProfileID = @ProfileID;
+
+
 --DROP PROCEDURE proc_UpdateProfile; GO  
 --Function
 USE ToTheRescue;  
@@ -322,5 +342,8 @@ AS
 	SubjectFilter = @SubjectFilter
 	WHERE ProfileID = @ProfileID;
 GO
-
-	
+--attempting it.
+USE AdventureWorks2012;  
+GO  
+EXEC proc_UpdateProfile @ProfileID = 32, @ToggleSound = 0, @ToggleMusic = 1, @MathPerformanceStat = 12,
+@ReadingPerformanceStat = 36, @SubjectFilter = 'Math', @NewMathDifficulty = 1, @NewReadingDifficulty = 3;
