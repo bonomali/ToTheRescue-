@@ -3,79 +3,19 @@
 @model List<Profile>
 
 @{
+    Layout = "~/Views/Shared/_ChooseProfileLayout.cshtml";
+    // Layout = "~/Views/Shared/_Layout3.cshtml";
     ViewBag.Title = "ChooseProfilePage";
 }
 
-<style>
-    #ChooseProfileheader {
-        text-align: center;
-    }
-
-    #ProfileNames {
-        font-size: 32px;
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    }
-
-    #profileNameError {
-        float: right;
-        position: relative;
-        right: 660px;
-        bottom: 5px;
-        color: red;
-    }
-
-    #emailError {
-        color: red;
-        visibility: hidden;
-    }
-
-    #DeleteProfileButton {
-        border-radius: 10px;
-        position: relative;
-        left: 0%;
-        visibility: hidden;
-    }
-
-    #CreateNewPorifleButton {
-        border-radius: 10px;
-        position: relative;
-        left: 35%;
-        visibility: visible;
-    }
-
-    #PlayButton {
-        border-radius: 10px;
-        position: relative;
-        left: 67%;
-        visibility: hidden;
-    }
-
-    #CancelButton {
-        border-radius: 10px;
-        visibility: hidden;
-    }
-
-    #DeleteProfileSubmit {
-        border-radius: 10px;
-        visibility: hidden;
-    }
-
-    #emailTextBox {
-        visibility: hidden;
-    }
-
-    #emailText {
-        visibility: hidden;
-    }
-</style>
-
 <body id="ChooseProfileBody">
     <h1 id="ChooseProfileheader">Choose Your Profile!</h1>
+    <br />
     <h4 id="emailError">Incorrect email address eneterd. Profile not deleted.</h4>
     @if (Model.Count() > 0)
     {
         //display all of the profiles for a specific user
-        <table id="ProfilesTable" , style="width:100%">
+        <table id="ProfilesTable">
             @if (Model.Count() <= 4)
             {
                 <tr id="RowOneProfiles">
@@ -84,7 +24,7 @@
                         var base64 = Convert.ToBase64String(Model[i].Avatar);
                         var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
                         <td>
-                            <div id="@("Profile" + i)" , onclick="ToggleColor(@i.ToString())">
+                            <div id="@("Profile" + i)" class="ProfiledDiv" onclick="ToggleColor(@i.ToString())">
                                 <text id="ProfileNames">@Model[i].ProfileName</text>
                                 <img id="Avatar" , src="@imgSrc" />
                             </div>
@@ -101,7 +41,7 @@
                         var base64 = Convert.ToBase64String(Model[i].Avatar);
                         var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
                         <td>
-                            <div id="@("Profile" + i)" , onclick="ToggleColor(@i.ToString())">
+                            <div id="@("Profile" + i)" class="ProfiledDiv" onclick="ToggleColor(@i.ToString())">
                                 <text id="ProfileNames">@Model[i].ProfileName</text>
                                 <img id="Avatar" , src="@imgSrc" />
                             </div>
@@ -114,7 +54,7 @@
                         var base64 = Convert.ToBase64String(Model[x].Avatar);
                         var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
                         <td>
-                            <div id="@("Profile" + x)" , onclick="ToggleColor(@x.ToString())">
+                            <div id="@("Profile" + x)" class="ProfiledDiv" onclick="ToggleColor(@x.ToString())">
                                 <text id="ProfileNames">@Model[x].ProfileName</text>
                                 <img id="Avatar" , src="@imgSrc" />
                             </div>
@@ -132,22 +72,23 @@
     }
 
     @*allows deletion of a profile*@
-    <button id="DeleteProfileButton" , onclick="ClickedDelete()">Delete Profile</button>
+
+    <button id="DeleteProfileButton" class="Buttons" , onclick="ClickedDelete()">Delete Profile</button>
 
     @*Only display the Create New Profile button when there are less than 8 profiles*@
     @if (Model.Count() < 8)
     {
-        <input type="button" id="CreateNewPorifleButton" value="Create New Profiile" onclick="@("window.location.href='" + @Url.Action("CreateProfilePage", "Profile") + "'");" />
+        <input type="button" class="Buttons" id="CreateNewPorifleButton" value="Create New Profiile" onclick="@("window.location.href='" + @Url.Action("CreateProfilePage", "Profile") + "'");" />
     }
 
-    <button id="PlayButton" , onclick="ClickedPlay()">Play</button>
+    <button id="PlayButton" class="Buttons" onclick="ClickedPlay()">Play</button>
 
-    <h5 id="emailText">Please enter your email to delete this profile:</h5>
-    <input type="text" , id="emailTextBox" />
+    <h5 id="emailText" class="DeleteSection">Please enter your email to delete this profile:</h5><br />
+    <input type="text" , id="emailTextBox" class="DeleteSection" />
     <br /><br />
-    <input type="submit" value="Delete Profile" id="DeleteProfileSubmit" onclick="DeleteProfile()" />
+    <input type="submit" class="Buttons" value="Delete Profile" id="DeleteProfileSubmit" onclick="DeleteProfile()" />
     <br /><br />
-    <button id="CancelButton" , onclick="ClickedCancel()">Cancel</button>
+    <button id="CancelButton" class="Buttons" onclick="ClickedCancel()">Cancel</button>
 </body>
 
 @*use jquery*@
@@ -161,12 +102,12 @@
         var profileDiv = document.getElementById(ProfileID);
 
         //toggle the color of all the profile names
-        if (profileDiv.style.color !== "red") {
-            profileDiv.style.color = "red";
+        if (profileDiv.style.color !== "orange") {
+            profileDiv.style.color = "orange";
             var route = '/Profile/SelectedProfile/';
         }
         else {
-            profileDiv.style.color = "black";
+            profileDiv.style.color = "white";
         }
 
         //ensure all the other profile namees are black
@@ -174,7 +115,7 @@
             if (i != id) {
                 var tempProfID = "Profile";
                 tempProfID = tempProfID.concat(i.toString());
-                document.getElementById(tempProfID).style.color = "black";
+                document.getElementById(tempProfID).style.color = "white";
             }
         }
         DisplayButtons();
@@ -188,7 +129,7 @@
             var tempProfID = "Profile";
             tempProfID = tempProfID.concat(i.toString());
             tempProfID = document.getElementById(tempProfID)
-            if (tempProfID.style.color === "red")
+            if (tempProfID.style.color === "orange")
             {
                 visible = true;
             }
@@ -235,7 +176,7 @@
             var tempProfID = "Profile";
             tempProfID = tempProfID.concat(i.toString());
             tempProfID = document.getElementById(tempProfID)
-            if (tempProfID.style.color === "red")
+            if (tempProfID.style.color === "orange")
             {
                 var route = '/Profile/ClickedPlay/';
                 route = route.concat(i);
@@ -260,7 +201,7 @@
             var tempProfID = "Profile";
             tempProfID = tempProfID.concat(i.toString());
             tempProfID = document.getElementById(tempProfID)
-            if (tempProfID.style.color === "red")
+            if (tempProfID.style.color === "orange")
             {
                 index = i;
                 break;

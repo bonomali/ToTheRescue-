@@ -192,6 +192,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="CSS\ChooseProfile.css" />
     <Content Include="CSS\Login.css" />
     <Content Include="CSS\MainMenu.css" />
     <Content Include="CSS\Play.css" />
@@ -286,7 +287,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Profiles\BadChooseProfilePage.cshtml" />
     <Content Include="Views\Login\AwaitingConfirmation.cshtml" />
     <Content Include="Views\Login\ConfirmEmail.cshtml" />
     <Content Include="Views\Login\ExternalLoginConfirmation.cshtml" />
@@ -302,7 +302,6 @@
     <Content Include="Views\Login\VerifyCode.cshtml" />
     <Content Include="Views\Login\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\AnimalSanctuary\Sanctuary.cshtml" />
-    <Content Include="Views\Profiles\BadCreateProfilePage.cshtml" />
     <Content Include="Views\MainMenu\MainMenu.cshtml" />
     <Content Include="Views\Play\Play.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
@@ -310,6 +309,7 @@
     <Content Include="Views\Shared\_Layout3.cshtml" />
     <Content Include="Views\Profile\ChooseProfilePage.cshtml" />
     <Content Include="Views\Profile\CreateProfilePage.cshtml" />
+    <Content Include="Views\Shared\_ChooseProfileLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

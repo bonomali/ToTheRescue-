@@ -1,0 +1,204 @@
+﻿body {
+    background: forestgreen;
+}
+
+#ChooseProfileheader {
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 0px;
+    margin: 0px;
+    font-size: 40px;
+    color: white;
+    text-shadow: 4px 4px black;
+    text-decoration: solid;
+}
+
+#ProfilesTable {
+    width: 95%;
+}
+
+.ProfiledDiv {
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+    .ProfiledDiv #ProfileNames {
+        width: auto;
+        height: auto;
+    }
+
+    .ProfiledDiv #Avatar {
+        padding: 10px;
+        width: auto;
+        height: auto;
+    }
+
+.Buttons {
+    border-radius: 20px;
+    background-color: white;
+    font-size: 20px;
+    padding: 15px 15px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border-color: black;
+}
+
+    .Buttons:hover {
+        color: white;
+        background-color: orange;
+    }
+
+#ProfileNames {
+    font-size: 32px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#emailError {
+    color: orange;
+    visibility: hidden;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 0px;
+    margin: 0px;
+    font-weight: bold;
+    font-size: 25px;
+    float: left;
+    position: relative;
+    left: 100px;
+}
+
+#DeleteProfileButton {
+    position: relative;
+    left: 12%;
+    visibility: hidden;
+}
+
+#CreateNewPorifleButton {
+    position: relative;
+    left: 32%;
+    visibility: visible;
+}
+
+#PlayButton {
+    position: relative;
+    left: 50%;
+    visibility: hidden;
+}
+
+#CancelButton {
+    visibility: hidden;
+    position: relative;
+    left: 6%;
+    font-size: 20px;
+    padding: 10px 10px;
+}
+
+#DeleteProfileSubmit {
+    visibility: hidden;
+    position: relative;
+    left: 6%;
+    padding: 10px 10px;
+}
+
+#emailTextBox {
+    visibility: hidden;
+    padding: 0px;
+    margin: 0px;
+    width: 250px;
+    height: 25px;
+}
+
+#emailText {
+    visibility: hidden;
+    padding: 0px;
+    margin: 0px;
+    color: white;
+    font-size: 25px;
+}
+
+.DeleteSection {
+    position: relative;
+    left: 6%;
+}
+
+/*for phones*/
+@media only screen and (max-width: 960px) {
+    body {
+        width: 100%;
+    }
+
+    #ChooseProfileheader {
+        width: 100%;
+    }
+
+    .ProfiledDiv {
+        display: table-cell;
+    }
+
+        .ProfiledDiv #Avatar {
+            width: 75%;
+            height: 75%;
+        }
+
+        .ProfiledDiv #ProfileNames {
+            font-size: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    
+.Buttons {
+    font-size: 80%;
+    padding: 10px 10px;
+
+}
+
+#emailError{
+    left: 0%;
+    width: 100%;
+    font-size: 125%;
+}
+
+#CancelButton {
+    left: 0%;
+    font-size: 80%;
+}
+
+#DeleteProfileSubmit {
+    left: 0%;
+    padding: 10px 10px;
+}
+
+#emailTextBox {
+    padding: 0px;
+    margin: 0px;
+    left: 0%;
+}
+
+#emailText {
+    font-size: 80%;
+    left: 0%;
+    padding-top: 5%
+}
+
+
+}
+
+/*have to special stuff for the buttons to scale down when the screen gets really small*/
+@media only screen and (max-width: 620px) {
+    #DeleteProfileButton {
+    left: 0%;
+}
+
+#CreateNewPorifleButton {
+    left: 10%;
+}
+
+#PlayButton {
+    left: 19%;
+}
+
+}
