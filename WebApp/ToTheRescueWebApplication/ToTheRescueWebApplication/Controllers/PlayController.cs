@@ -17,6 +17,8 @@ namespace ToTheRescueWebApplication.Controllers
         NodeDBRepository _node;
         ImageDBRepository _image;
         ProfileProgressDBRepository _progress;
+        OptionsDBRepository _options;
+        AnimalDBRepository _animal;
 
         public PlayController()
         {
@@ -25,11 +27,45 @@ namespace ToTheRescueWebApplication.Controllers
             _node = new NodeDBRepository();
             _image = new ImageDBRepository();
             _progress = new ProfileProgressDBRepository();
+            _options = new OptionsDBRepository();
+            _animal = new AnimalDBRepository();
         }
         // GET: Play
         public ActionResult Play()
-        {            
-            return View();
+        {
+            Options options = _options.Get(ImportantVariables.ProfileID);
+            ProfileProgress progress = _progress.Get(ImportantVariables.ProfileID);
+            PlayModel model = new PlayModel();
+            int level = 0;
+
+            if (options.SubjectFilter == "Reading")
+                level = options.ReadingDifficultyLevel;
+            else if (options.SubjectFilter == "Math")
+                level = options.MathDifficultyLevel;
+            else
+                level = options.ReadingDifficultyLevel > options.MathDifficultyLevel ? 
+                        options.ReadingDifficultyLevel : options.MathDifficultyLevel;
+
+            if (level == 1)
+                model.GradeLevel = "Pre-Preschool";
+            else if (level == 2)
+                model.GradeLevel = "Preschool";
+            else if (level == 3)
+                model.GradeLevel = "Pre-Kindergarten";
+            else
+                model.GradeLevel = "Kindergarten";
+
+            model.ProfileName = options.profileName;
+            model.Subject = options.SubjectFilter;
+            if (model.Subject == "")
+                model.Subject = "All";
+
+            model.Animal = progress.AnimalID;
+            model.CurrentMap = progress.CurrentMap;
+            model.CurrentNode = progress.CurrentNode;
+            model.MapNodes = _node.GetList(progress.CurrentMap);
+
+            return View(model);
         }
         public ActionResult ShowMapImage(int mapID)
         {
@@ -38,10 +74,10 @@ namespace ToTheRescueWebApplication.Controllers
             
             return File(image.Image, image.ImageName);
         }
-        public ActionResult ShowAnimalImage(int profileID)
+        public ActionResult ShowAnimalImage(int AnimalID)
         {
-            ProfileProgress prog = _progress.Get(profileID);  //get animal from database
-            Images image = _image.Get(prog.AnimalID);  //get animal image from database
+            Animal animal = _animal.Get(AnimalID);  //get animal from database
+            Images image = _image.Get(animal.ImageID);  //get animal image from database
 
             return File(image.Image, image.ImageName);
         }

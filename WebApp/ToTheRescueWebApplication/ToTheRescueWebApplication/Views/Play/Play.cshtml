@@ -2,8 +2,9 @@
     Layout = "~/Views/Shared/_Layout3.cshtml";
     ViewBag.Title = "Play";
 }
+@model ToTheRescueWebApplication.Models.Play.PlayModel
 
-<audio controls loop id="playMusic" source src="@Url.Action("LoadAudio", new { @mapID = 4 })" autoplay hidden="hidden">
+<audio controls loop id="playMusic" source src="@Url.Action("LoadAudio", new { @mapID = Model.CurrentMap })" autoplay hidden="hidden">
 </audio>
 <script>
     var vid = document.getElementById("playMusic");
@@ -11,9 +12,9 @@
 </script>
 <nav id="playMenu">
     <div class="profileInfo">
-        <label id="name">Name: Stephanie Derosier</label>
-        <label id="level">Grade Level: Pre-Kindergarten</label>
-        <label id="subject">Subject: Reading</label>
+        <label id="name">Name: @Model.ProfileName</label>
+        <label id="level">Grade Level: @Model.GradeLevel</label>
+        <label id="subject">Subject: @Model.Subject</label>
     </div>
     <div class="icons">
         <ul class="buttons">
@@ -43,7 +44,7 @@
     </div>
 </nav>
 <div class="mapContainer">
-    <img src="@Url.Action("ShowMapImage", new { @mapID = 4 })" id="mapImg" alt="Map">
-    <img src="@Url.Action("ShowAnimalImage", new { @profileID = 5 })" id="animalImg" alt="Animal">
+    <img src="@Url.Action("ShowMapImage", new { @mapID = Model.CurrentMap })" id="mapImg" alt="Map">
+    <img src="@Url.Action("ShowAnimalImage", new { @AnimalID = Model.Animal })" id="animalImg" alt="Animal">
     @*<img src="@Url.Action("ShowAvatarImage", new { @profileID = 5 })" id="avatarImg" alt="Profile Avatar">*@
 </div>
