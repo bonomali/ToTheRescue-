@@ -22,7 +22,7 @@
     <audio id="BackgroundSound" source src="../Audio/Happy-Music.mp3" autoplay>
         <embed src="../Audio/Happy-Music.mp3" hidden="hidden" />
     </audio>
-    
+
     <div id="animalSanctuary">
         @{int x = 0; }
         @for (int i = 0; i < Model.Count(); i++)
@@ -38,7 +38,22 @@
             }
         }
     </div>
-
+    <span class="NavButtons" onclick="openNav()">Released Animals</span>
+    <div id="ReleasedAnimals" class="sidenav">
+        <button class="closebtn" onclick="closeNav()">x</button>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            if (Model[i].ActiveBit == false)
+            {
+                <div id="@("Div" + x)">
+                    <text id="@("Text" + x)" hidden="hidden"> @(Model[i].FunFact)</text>
+                    <img id="@("AnimalImage" + x)" height="70" width="70" src="@Url.Action("ShowAnimalImage", new { @animalID = Model[i].ID })" alt="Animal" onclick="AnimalClicked(@x)" />
+                    <audio id="@x" src="@Url.Action("PlayAnimalSound", new { @animalID = Model[i].ID })" />
+                </div>
+                x++;
+            }
+        }
+    </div>
     <script type="text/javascript">
 
         function GoToMainMenu() {
@@ -82,12 +97,22 @@
                     div.style.top = (425 + rand) + "px";
                 }
                 div.style.position = "absolute";
-
+                div.style.zIndex = 2;
 
                 id++;
                 var elID = "Div" + id;
                 var div = document.getElementById(elID);
             }
+        }
+
+        /* Set the width of the side navigation to 250px */
+        function openNav() {
+            document.getElementById("ReleasedAnimals").style.width = "150px";
+        }
+
+        /* Set the width of the side navigation to 0 */
+        function closeNav() {
+            document.getElementById("ReleasedAnimals").style.width = "0";
         }
 
         function main() {
