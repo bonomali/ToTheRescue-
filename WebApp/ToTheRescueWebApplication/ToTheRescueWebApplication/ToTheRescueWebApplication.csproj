@@ -194,6 +194,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="CSS\ChooseProfile.css" />
+    <Content Include="CSS\CreateProfile.css" />
     <Content Include="CSS\Login.css" />
     <Content Include="CSS\MainMenu.css" />
     <Content Include="CSS\Play.css" />
@@ -313,6 +314,7 @@
     <Content Include="Views\Profile\ChooseProfilePage.cshtml" />
     <Content Include="Views\Profile\CreateProfilePage.cshtml" />
     <Content Include="Views\Shared\_ChooseProfileLayout.cshtml" />
+    <Content Include="Views\Shared\_CreateProfileLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

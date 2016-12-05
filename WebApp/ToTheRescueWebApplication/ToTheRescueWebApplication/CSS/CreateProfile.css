@@ -1,0 +1,159 @@
+﻿body {
+    background: linear-gradient(to right, #5b99d3, #076fbf, #5b2a7c);
+}
+
+#Header {
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 0px;
+    margin: 0px;
+    font-size: 40px;
+    color: white;
+}
+
+#emptyNameError {
+    position: relative;
+    left: 15.25%;
+    color: white;
+    visibility: hidden;
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#tooLongNameError {
+    position: relative;
+    left: 15%;
+    color: white;
+    padding: 0px;
+    margin: 0px;
+    visibility: hidden;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#EnterProfileNameText {
+    position: relative;
+    left: 15%;
+    margin: 5px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 30px;
+    color: white;
+}
+
+#ProfileNameText {
+    position: relative;
+    left: 15%;
+    width: 200px;
+    height: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    border-radius: 5px;
+    border-color: black;
+}
+
+#ChooseAvatarText {
+    position: relative;
+    left: 15%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 30px;
+    margin: 0px;
+    color: white;
+}
+
+#AvatarsTable {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.AvatarDiv {
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    width: auto;
+    height: auto;
+}
+
+#CreateProfileButton {
+    visibility: hidden;
+}
+
+#BackButton {
+    position: relative;
+}
+
+.Buttons {
+    border-radius: 20px;
+    background-color: white;
+    font-size: 20px;
+    padding: 15px 15px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border-color: black;
+    position: relative;
+    left: 12%;
+}
+
+    .Buttons:hover {
+        color: white;
+        background-color: #603b9b;
+    }
+
+@media only screen and (max-width: 956px) {
+    #Header{
+         width: 100%;
+         font-size: 35px;
+    }
+
+    body {
+        width: 100%;
+    }
+
+    #emptyNameError {
+        left: 0%;
+        font-size: 17px;
+    }
+
+    #tooLongNameError {
+        left: 0%;
+        font-size: 17px;
+    }
+
+    #EnterProfileNameText {
+        left: 0%;
+    }
+
+    #ProfileNameText {
+        left: 0%;
+    }
+
+    #ChooseAvatarText {
+        left: 0%;
+    }
+
+    .Buttons {
+        left: 0%;
+        font-size: 65%;
+        padding: 10px 10px;
+    }
+
+    .AvatarDiv{
+        display: table-cell;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    /*do image stuff*/
+    img {
+        width: 75%;
+        height: 75%;
+    }
+}

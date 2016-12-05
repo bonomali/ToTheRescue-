@@ -4,71 +4,36 @@
 
 @{
     ViewBag.Title = "CreateProfilePage";
+    Layout = "~/Views/Shared/_CreateProfileLayout.cshtml";
 }
-
-<style>
-    #Header {
-        text-align: center;
-    }
-
-    #CreateProfileButton {
-        border-radius: 10px;
-        visibility: hidden;
-    }
-
-    #BackButton {
-        border-radius: 10px;
-        position: relative;
-    }
-
-    div {
-        border-radius: 10px;
-    }
-
-    #emptyNameError {
-        float: right;
-        position: relative;
-        right: 450px;
-        bottom: 5px;
-        color: red;
-        visibility: hidden;
-    }
-    #tooLongNameError{
-        float: right;
-        position: relative;
-        right: 450px;
-        bottom: 5px;
-        color: red;
-        visibility: hidden;
-    }
-</style>
 
 <body id="CreateProfilePage">
     <h1 id="Header">Create Your Profile!</h1>
 
-    <h3 id="EnterProfileNameText">Enter your Profile Name</h3>
+    <h3 id="EnterProfileNameText">Enter Your Profile Name!</h3>
 
     @if (TempData["EmptyNameError"] != null)
     {
-        <h5 id="emptyNameError">You must enter a profile name in order to create a new profile. Please try again.</h5>
+        <h5 id="emptyNameError">You must enter a profile name to create a new profile. Please try again.</h5>
     }
     else
     {
         <h5 id="tooLongNameError">You must enter a profile name that is 15 characters long or less. Please try again.</h5>
     }
     
-    <input type="text" , id="profileNameText" />
-
-    <h3 id="ChooseProfText">Choose an avatar!</h3>
-    <table id="AvatarsTable" , style="width:100%">
+    <input type="text" id="ProfileNameText"/>
+    <br /><br />
+    <h3 id="ChooseAvatarText">Choose Your Avatar!</h3>
+    <br />
+    <table id="AvatarsTable">
         <tr id="rowOneAvatars">
             @for (int i = 0; i < Model.Count() / 2; i++)
             {
                 var base64 = Convert.ToBase64String(Model[i]);
                 var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
                 <td>
-                    <div id="@("Avatar" + i)" , onclick="SelectedProfile(@i.ToString())">
-                        <img src="@imgSrc" />
+                    <div class="AvatarDiv" onclick="SelectedProfile(@i.ToString())">
+                        <img src="@imgSrc", id="@("Avatar" + i)" />
                     </div>
                 </td>
             }
@@ -79,18 +44,18 @@
                 var base64 = Convert.ToBase64String(Model[i]);
                 var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
                 <td>
-                    <div id="@("Avatar" + i)" , onclick="SelectedProfile(@i.ToString())">
-                        <img src="@imgSrc" />
+                    <div class="AvatarDiv" onclick="SelectedProfile(@i.ToString())">
+                        <img src="@imgSrc", id="@("Avatar" + i)" />
                     </div>
                 </td>
             }
         </tr>
     </table>
     <br />
-    <input type="submit" value="Create Profile" id="CreateProfileButton" onclick="CreateNewProfile()" />
+    <input type="submit" class="Buttons" value="Create Profile" id="CreateProfileButton" onclick="CreateNewProfile()" />
     <br /><br />
     @*if clicked back, return to choose profiles page*@
-    <input type="button" id="BackButton" value="Back" onclick="@("window.location.href='" + @Url.Action("ChooseProfilePage", "Profile") + "'");" />
+    <input type="button" id="BackButton" class="Buttons" value="Back" onclick="@("window.location.href='" + @Url.Action("ChooseProfilePage", "Profile") + "'");" />
 </body>
 
 <script src="~/scripts/jquery-1.10.2.min.js"></script>
@@ -133,7 +98,7 @@
 
     function CreateNewProfile()
     {
-        var profName = document.getElementById("profileNameText").value;
+        var profName = document.getElementById("ProfileNameText").value;
         var avatarID = "Avatar";
         var index = -1;
 

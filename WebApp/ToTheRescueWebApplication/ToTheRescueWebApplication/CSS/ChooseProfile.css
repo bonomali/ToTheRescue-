@@ -1,5 +1,10 @@
-﻿body {
-    background: forestgreen;
+﻿
+html {
+    border: 20px solid forestgreen;
+}
+
+body {
+    background: #43c161;
 }
 
 #ChooseProfileheader {
@@ -15,6 +20,8 @@
 
 #ProfilesTable {
     width: 95%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .ProfiledDiv {
@@ -109,6 +116,10 @@
     margin: 0px;
     width: 250px;
     height: 25px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    border-radius: 5px;
+    border-color: black;
 }
 
 #emailText {
@@ -149,56 +160,55 @@
             align-items: center;
             justify-content: center;
         }
-    
-.Buttons {
-    font-size: 80%;
-    padding: 10px 10px;
 
-}
+    .Buttons {
+        font-size: 65%;
+        padding: 10px 10px;
+    }
 
-#emailError{
-    left: 0%;
-    width: 100%;
-    font-size: 125%;
-}
+    #emailError {
+        left: 0%;
+        width: 100%;
+        font-size: 125%;
+    }
 
-#CancelButton {
-    left: 0%;
-    font-size: 80%;
-}
+    #CancelButton {
+        left: 0%;
+        font-size: 80%;
+    }
 
-#DeleteProfileSubmit {
-    left: 0%;
-    padding: 10px 10px;
-}
+    #DeleteProfileSubmit {
+        left: 0%;
+        padding: 10px 10px;
+    }
 
-#emailTextBox {
-    padding: 0px;
-    margin: 0px;
-    left: 0%;
-}
+    #emailTextBox {
+        padding: 0px;
+        margin: 0px;
+        left: 0%;
+        height: 20px;
+        width: 200px;
+        font-size: 15px;
+    }
 
-#emailText {
-    font-size: 80%;
-    left: 0%;
-    padding-top: 5%
-}
-
-
+    #emailText {
+        font-size: 80%;
+        left: 0%;
+        padding-top: 5%;
+    }
 }
 
 /*have to special stuff for the buttons to scale down when the screen gets really small*/
 @media only screen and (max-width: 620px) {
     #DeleteProfileButton {
-    left: 0%;
-}
+        left: 0%;
+    }
 
-#CreateNewPorifleButton {
-    left: 10%;
-}
+    #CreateNewPorifleButton {
+        left: 10%;
+    }
 
-#PlayButton {
-    left: 19%;
-}
-
+    #PlayButton {
+        left: 19%;
+    }
 }
