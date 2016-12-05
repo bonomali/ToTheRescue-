@@ -188,6 +188,7 @@
     <Content Include="Audio\bensound-retrosoul.mp3" />
     <Content Include="Audio\bensound-sunny.mp3" />
     <Content Include="Audio\Elephant.mp3" />
+    <Content Include="Audio\Happy-Music.mp3" />
     <Content Include="Audio\Lion_Roar.mp3" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -196,9 +197,11 @@
     <Content Include="CSS\Login.css" />
     <Content Include="CSS\MainMenu.css" />
     <Content Include="CSS\Play.css" />
+    <Content Include="CSS\Sanctuary.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\animalBackground.jpg" />
+    <Content Include="Images\landscape.png" />
     <Content Include="Images\mainmenu.jpg" />
     <Content Include="Images\menuIcon.png" />
     <Content Include="Images\optionsIcon.png" />
