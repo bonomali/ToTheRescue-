@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -12,13 +13,21 @@ namespace ToTheRescueWebApplication.Models
 {
     public class OptionsModel
     {
+        [Required]
         public int profileID { get; set; }
+        [Required]
         public string profileName { get; set; }
+        [Required]
         public bool toggleSound { get; set; }
+        [Required]
         public bool toggleMusic { get; set; }
+        [Required]
         public int MathDifficultyLevel { get; set; }
+        [Required]
         public float MathPerformanceStat { get; set; }
+        [Required]
         public int ReadingDifficultyLevel { get; set; }
+        [Required]
         public float ReadingPerformanceStat { get; set; }
         public string SubjectFilter { get; set; }
         public OptionsModel()

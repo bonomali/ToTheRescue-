@@ -77,7 +77,7 @@ namespace ToTheRescueWebApplication.Repositories
                         cmd.Parameters.AddWithValue("@ToggleMusic", entity.toggleMusic);
                         cmd.Parameters.AddWithValue("@MathPerformanceStat", entity.MathPerformanceStat);
                         cmd.Parameters.AddWithValue("@ReadingPerformanceStat", entity.ReadingPerformanceStat);
-                        cmd.Parameters.AddWithValue("@SubjectFilter", "reading");
+                        cmd.Parameters.AddWithValue("@SubjectFilter", entity.SubjectFilter);
                         cmd.Parameters.AddWithValue("@NewMathDifficulty", entity.MathDifficultyLevel);
                         cmd.Parameters.AddWithValue("@NewReadingDifficulty", entity.ReadingDifficultyLevel);
                         connection.Open();
