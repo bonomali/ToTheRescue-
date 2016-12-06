@@ -10,8 +10,8 @@ namespace ToTheRescueWebApplication.Models.Play
 {
     public class PlayModel
     {
-        //[Required]
-       // public string Profile Name { get; set; }
+        [Required]
+        public string ProfileName { get; set; }
 
         [Required]
         public string GradeLevel { get; set; }
@@ -20,10 +20,16 @@ namespace ToTheRescueWebApplication.Models.Play
         public string Subject { get; set; }
 
         [Required]
+        public int CurrentMap { get; set; }
+
+        [Required]
         public List<Nodes> MapNodes { get; set; }
 
-        //[Required]
-        //public Animal animal { get; set; }
+        [Required]
+        public int CurrentNode { get; set; }
+
+        [Required]
+        public int Animal { get; set; }
 
     }
 }

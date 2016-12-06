@@ -120,6 +120,12 @@ namespace ToTheRescueWebApplication.Controllers
                 return Content("Failure");
             }
 
+           if (profileName.Length > 15)
+            {
+                TempData["TooLongName"] = "You must enter a profile name that is 15 characters long or less. Please try again.";
+                return Content("Failure");
+            }
+
             Profile prof = new Profile();
             index++;
 

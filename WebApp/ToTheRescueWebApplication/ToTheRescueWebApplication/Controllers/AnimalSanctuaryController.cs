@@ -26,7 +26,7 @@ namespace ToTheRescueWebApplication.Controllers
         }
         public ActionResult Sanctuary()
         {
-            List<Animal> listOfAnimals = _animal.GetList(6);//subject to change
+            List<Animal> listOfAnimals = _animal.GetList(ImportantVariables.ProfileID);//subject to change
             return View(listOfAnimals);
         }
         public ActionResult ShowAnimalImage (int animalID)

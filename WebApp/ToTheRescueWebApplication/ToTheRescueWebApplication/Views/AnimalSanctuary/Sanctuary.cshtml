@@ -4,31 +4,128 @@
     ViewBag.Title = "Sanctuary";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Your Sanctuary!</h2>
 
-<div id="animalSanctuary">
-    @for (int i = 0; i < Model.Count(); i++)
-    {
-        if (Model[i].ActiveBit == true)
+<!DOCTYPE html>
+
+<h2 class="h2">Your Sanctuary!</h2>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/CSS/Sanctuary.css" />
+</head>
+
+
+
+<body onload="javascript:main()">
+    <audio id="BackgroundSound" source src="../Audio/Happy-Music.mp3" autoplay>
+        <embed src="../Audio/Happy-Music.mp3" hidden="hidden" />
+    </audio>
+
+    <div id="animalSanctuary">
+        @{int x = 0; }
+        @for (int i = 0; i < Model.Count(); i++)
         {
-        <div id="@("Div" + i)">
-        <img id="@("AnimalImage" + i)" height="70" width="70" src="@Url.Action("ShowAnimalImage", new { @animalID = Model[i].ID })" alt="Animal" onclick="AnimalClicked(@i)"/>
-        <audio id="@i" src="@Url.Action("PlayAnimalSound", new { @animalID = Model[i].ID })" />
-        </div> 
+            if (Model[i].ActiveBit == true)
+            {
+                <div id="@("Div" + x)">
+                    <text id="@("Text" + x)" hidden="hidden"> @(Model[i].FunFact)</text>
+                    <img id="@("AnimalImage" + x)" height="70" width="70" src="@Url.Action("ShowAnimalImage", new { @animalID = Model[i].ID })" alt="Animal" onclick="AnimalClicked(@x)" />
+                    <audio id="@x" src="@Url.Action("PlayAnimalSound", new { @animalID = Model[i].ID })" />
+                </div>
+                x++;
+            }
         }
-    }
-</div>
+    </div>
+    <span class="NavButtons" onclick="openNav()">Released Animals</span>
+    <div id="ReleasedAnimals" class="sidenav">
+        <button class="closebtn" onclick="closeNav()">x</button>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            if (Model[i].ActiveBit == false)
+            {
+                <div id="@("Div" + x)">
+                    <text id="@("Text" + x)" hidden="hidden"> @(Model[i].FunFact)</text>
+                    <img id="@("AnimalImage" + x)" height="70" width="70" src="@Url.Action("ShowAnimalImage", new { @animalID = Model[i].ID })" alt="Animal" onclick="AnimalClicked(@x)" />
+                    <audio id="@x" src="@Url.Action("PlayAnimalSound", new { @animalID = Model[i].ID })" />
+                </div>
+                x++;
+            }
+        }
+    </div>
+    <script type="text/javascript">
 
-<script type="text/javascript">
+        function GoToMainMenu() {
+            window.location.href = '/MainMenu/MainMenu';
+        }
 
-    function GoToMainMenu()
-    {
-        window.location.href = '/MainMenu/MainMenu';
-    }
+        function AnimalClicked(id) {
+            var sound = document.getElementById(id);
+            sound.volume = 0.3;
+            sound.play();
+            document.getElementById("FunFact").innerHTML = "Fun Fact!  " + document.getElementById("Text" + id).innerText;
+        }
 
-    function AnimalClicked(id)
-    {
-        document.getElementById(id).play();
-        //var funFactLocation = document.getElementById("FunFact");
-    }
-</script>
+        function MoveAnimals() {
+            var id = 0;
+            var elID = "Div" + id;
+            var div = document.getElementById(elID);
+            while (div != null) {
+
+                var rand = Math.random();
+                rand = rand * 50;
+                rand = Math.floor(rand);
+                if (rand % 2 === 0) rand = (rand - (rand * 2));
+                //gets a random whole number between 0 and 50
+                //if the number is even, the sign is reversed
+
+                if (id <= 4) {
+                    div.style.left = (id * 85 + 255) + "px";
+                    div.style.top = (425 + rand) + "px";
+                }
+                if (id <= 9 && id > 4) {
+                    div.style.left = (id * 85) + "px";
+                    div.style.top = (255 + rand) + "px";
+                }
+                if (id <= 14 && id > 9) {
+                    div.style.left = (id * 85) + "px";
+                    div.style.top = (255 + rand) + "px";
+                }
+                if (id <= 19 && id > 14) {
+                    div.style.left = (id * 85 - 255) + "px";
+                    div.style.top = (425 + rand) + "px";
+                }
+                div.style.position = "absolute";
+                div.style.zIndex = 2;
+
+                id++;
+                var elID = "Div" + id;
+                var div = document.getElementById(elID);
+            }
+        }
+
+        /* Set the width of the side navigation to 250px */
+        function openNav() {
+            document.getElementById("ReleasedAnimals").style.width = "150px";
+        }
+
+        /* Set the width of the side navigation to 0 */
+        function closeNav() {
+            document.getElementById("ReleasedAnimals").style.width = "0";
+        }
+
+        function main() {
+            var music = document.getElementById("BackgroundSound");
+            music.volume = 0.15;
+            MoveAnimals();
+
+        }
+    </script>
+    <button id="backButton" class="Buttons" onclick="GoToMainMenu()">Main Menu</button>
+</body>
+
+
+
+</html>
+<p id="FunFact"></p>
