@@ -1,0 +1,147 @@
+﻿html {
+    height: 100%;
+    background-color: forestgreen;
+}
+
+body {
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: center;
+    min-width: 400x;
+    min-height: 400px;
+}
+
+.form {
+    background-color: black;
+    opacity: .8;
+    width: 80%;
+    min-width: 320px;
+    max-width: 500px;
+    display: block;
+    padding: 15px 0 10px 0;
+    position: relative;
+    bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    align-items: center;
+    border-radius: 25px;
+}
+
+h2 {
+    font-size: 50px;
+    text-shadow: 4px 4px darkgreen;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: orangered;
+    text-align: center;
+}
+
+div {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: floralwhite;
+    text-shadow: 1px 1px #000;
+}
+
+input {
+    text-align: center;
+    padding: 20px 75px;
+    width: 200px;
+    background-color: #f6f6f6;
+    opacity: 0.8;
+    color: black;
+    font-size: 18px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 3px 0;
+    margin: 3px 0;
+    border-radius: 25px;
+}
+
+
+
+.submit {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    align-content: center;
+    text-align: center;
+    text-decoration: none;
+    font-size: 24px;
+    font-style: normal;
+    color: floralwhite;
+    text-shadow: 1px 1px #000;
+    border-radius: 25px;
+    border-style: outset;
+    border-color: black;
+    height: 60px;
+    background-color: forestgreen;
+    opacity: 0.9;
+}
+
+.link {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    align-content: center;
+    text-align: center;
+    text-decoration: none;
+    font-size: 24px;
+    font-style: normal;
+    color: floralwhite;
+    text-shadow: 1px 1px #000;
+    border-radius: 25px;
+    border-style: outset;
+    border-color: black;
+    padding: 10px;
+
+    height: 30px;
+
+    background-color: darkslateblue;
+    opacity: 0.9;
+}
+
+a {
+    color: floralwhite;
+    text-shadow: 1px 1px #000;
+    text-decoration: none;
+}
+
+.link:hover a {
+    color: orange;
+}
+
+
+#top, #bottom, #left, #right {
+    background: darkgreen;
+    position: fixed;
+}
+
+#left, #right {
+    top: 0;
+    bottom: 0;
+    width: 15px;
+}
+
+#left {
+    left: 0;
+}
+
+#right {
+    right: 0;
+}
+
+#top, #bottom {
+    left: 0;
+    right: 0;
+    height: 15px;
+}
+
+#top {
+    top: 0;
+}
+
+#bottom {
+    bottom: 0;
+}
+
+@media only screen and (max-width: 500px), only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    #top, #bottom, #left, #right {
+        display: none;
+    }
+}
