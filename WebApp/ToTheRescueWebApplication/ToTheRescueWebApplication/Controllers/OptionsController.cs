@@ -17,13 +17,14 @@ namespace ToTheRescueWebApplication.Controllers
         public OptionsController()
         {
             m_optionsRepository = new OptionsDBRepository();
-            m_options = new OptionsModel(m_optionsRepository.Get(ImportantVariables.ProfileID));
+            
 
         }
 
 
         public ActionResult Options()
         {
+            m_options = new OptionsModel(m_optionsRepository.Get(ImportantVariables.ProfileID));
             return View(m_options);
         }
 

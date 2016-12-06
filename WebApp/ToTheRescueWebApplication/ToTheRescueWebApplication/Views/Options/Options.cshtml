@@ -1,63 +1,93 @@
 ﻿@model ToTheRescueWebApplication.Models.OptionsModel
 @{
     ViewBag.Title = "Options";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_OptionsLayout.cshtml";
 }
+<div id="left"></div>
+<div id="right"></div>
+<div id="top"></div>
+<div id="bottom"></div>
 
-
-
-@using (Html.BeginForm())
-{
+<div>
     <h2>Options for @Model.profileName</h2>
 
-    @Html.TextBoxFor(m => m.profileName, new { style = "display: none;" })
-    <text>Toggle Sound:</text> @Html.CheckBoxFor(m => m.toggleSound)
-    <br />
-    <text>Toggle Music:</text> @Html.CheckBoxFor(m => m.toggleMusic)
-    <br />
-    SelectList readingDifficultyList = new SelectList(new List<Object>{
-                           new { Text = "Low Pre-Kindergarden", Value = "1" },
-                           new { Text = "High Pre-Kindergarden", Value = "2"  },
-                           new { Text = "Low Kindergarden", Value = "3" },
-                           new { Text = "High Kindergarden", Value = "4" }
-                                                                      },
-                                                                                    "value",
-                                                                                    "text",
-                                                                                     Model.ReadingDifficultyLevel);
-    SelectList mathDifficultyList = new SelectList(new List<Object>{
-                           new { Text = "Low Pre-Kindergarden", Value = "1" },
-                           new { Text = "High Pre-Kindergarden", Value = "2"  },
-                           new { Text = "Low Kindergarden", Value = "3" },
-                           new { Text = "High Kindergarden", Value = "4" }
-                                                      },
-                                                                    "value",
-                                                                    "text",
-                                                                     Model.MathDifficultyLevel);
-    SelectList subjectFilterList = new SelectList(new List<Object>{
-                           new { Text = "Anything", Value = "" },
-                           new { Text = "Math Only", Value = "Math" },
-                           new { Text = "Reading Only", Value = "Reading"  },
-                                                      },
-                                                                "value",
-                                                                "text",
-                                                                 Model.SubjectFilter);
-    <h2>Math Difficulty</h2>
-    @Html.DropDownListFor(m => m.MathDifficultyLevel, mathDifficultyList) 
-    <h2>Reading Difficulty</h2>
-    @Html.DropDownListFor(m => m.ReadingDifficultyLevel, readingDifficultyList)
-    <h2>Subject Filter</h2>
-    @Html.DropDownListFor(m => m.SubjectFilter, subjectFilterList);
+    <section class="form" id="loginForm">
+        @using (Html.BeginForm())
+        {
+            @Html.TextBoxFor(m => m.profileName, new { style = "display: none;" })
 
-    <button type="submit">Apply Options</button>
-}
+            <table border="0" align="center">
+                <tr>
+                    <td><text>Toggle Sound:</text></td>
+                    <td>@Html.CheckBoxFor(m => m.toggleSound)</td>
+                </tr>
+                <tr>
+                    <td><text>Toggle Music:</text></td>
+                    <td>@Html.CheckBoxFor(m => m.toggleMusic)</td>
+                </tr>
+            </table>
 
-<br />
-<p id="addLink">@Html.ActionLink("Switch Profiles", "ChooseProfilePage", "Profiles")</p>
-<p id="addLink">@Html.ActionLink("Back to Main Menu", "MainMenu", "MainMenu")</p>
+            <br />
+            SelectList readingDifficultyList = new SelectList(new List<Object>
+                {
+                new { Text = "Low Pre-Kindergarden", Value = "1" },
+                new { Text = "High Pre-Kindergarden", Value = "2"  },
+                new { Text = "Low Kindergarden", Value = "3" },
+                new { Text = "High Kindergarden", Value = "4" }
+                },
+                "value",
+                "text",
+                Model.ReadingDifficultyLevel);
+            SelectList mathDifficultyList = new SelectList(new List<Object>
+                    {
+                    new { Text = "Low Pre-Kindergarden", Value = "1" },
+                    new { Text = "High Pre-Kindergarden", Value = "2"  },
+                    new { Text = "Low Kindergarden", Value = "3" },
+                    new { Text = "High Kindergarden", Value = "4" }
+                    },
+                "value",
+                "text",
+                Model.MathDifficultyLevel);
+            SelectList subjectFilterList = new SelectList(new List<Object>
+                        {
+                        new { Text = "Anything", Value = "Any" },
+                        new { Text = "Math Only", Value = "Math" },
+                        new { Text = "Reading Only", Value = "Reading"  },
+                        },
+                "value",
+                "text",
+                Model.SubjectFilter);
+            <table border="0" align="center">
+                <tr>
+                    <td><text>Math Difficulty:    </text></td>
+                    <td>@Html.DropDownListFor(m => m.MathDifficultyLevel, mathDifficultyList)</td>
+                </tr>
+                <tr>
+                    <td><text>Reading Difficulty: </text></td>
+                    <td>@Html.DropDownListFor(m => m.ReadingDifficultyLevel, readingDifficultyList)</td>
+                </tr>
+                <tr>
+                    <td><text>Subject Filter:         </text></td>
+                    <td align="left">@Html.DropDownListFor(m => m.SubjectFilter, subjectFilterList)</td>
+                </tr>
+            </table>
+
+                <br />
+                <br />
+
+                <button id="submitBtn" type="submit" class="submit">Apply Options</button>
+                }
+
+                <br />
+
+                <p class="link">@Html.ActionLink("Switch Profiles", "ChooseProfilePage", "Profile")</p>
+                <p class="link">@Html.ActionLink("Back to Main Menu", "MainMenu", "MainMenu")</p>
 
 
-<script type="text/javascript">
-    function main() { }
-    main()
+                <script type="text/javascript">
+                    function main() { }
+                    main()
 
-</script>
+                </script>
+        </section>
+    </div>

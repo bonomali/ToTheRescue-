@@ -195,6 +195,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="CSS\ChooseProfile.css" />
     <Content Include="CSS\CreateProfile.css" />
+    <Content Include="CSS\Options.css" />
     <Content Include="CSS\Login.css" />
     <Content Include="CSS\MainMenu.css" />
     <Content Include="CSS\Play.css" />
@@ -265,7 +266,9 @@
     <Compile Include="Repositories\AnimalDBRepository.cs" />
     <Compile Include="Repositories\MapDBRepository.cs" />
     <Compile Include="Repositories\NodeDBRepository.cs" />
-    <Compile Include="Repositories\OptionsDBRepository.cs" />
+    <Compile Include="..\..\..\..\..\..\OptionsDBRepository.cs">
+      <Link>Repositories\OptionsDBRepository.cs</Link>
+    </Compile>
     <Compile Include="Repositories\ProfileProgressDBRepository.cs" />
     <Compile Include="Repositories\SoundDBRepository.cs" />
     <Compile Include="Repositories\ProfileDBRepository.cs" />
@@ -315,6 +318,7 @@
     <Content Include="Views\Profile\CreateProfilePage.cshtml" />
     <Content Include="Views\Shared\_ChooseProfileLayout.cshtml" />
     <Content Include="Views\Shared\_CreateProfileLayout.cshtml" />
+    <Content Include="Views\Shared\_OptionsLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
