@@ -61,25 +61,109 @@ namespace ToTheRescueWebApplication.Repositories
 
         public void Save(Options entity)
         {
+            UpdateToggleSound(entity);
+            UpdateToggleMusic(entity);
+            UpdateDifficulty(entity);
+            UpdateFilter(entity);
+        }
+
+        public void UpdateToggleSound(Options entity)
+        {
             using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
             {
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand("proc_UpdateProfile", connection))
+                    using (SqlCommand cmd = new SqlCommand("proc_UpdateToggleSound", connection))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        if (entity.SubjectFilter == null)
+                        cmd.Parameters.AddWithValue("@ProfileID", entity.profileID);
+                        cmd.Parameters.AddWithValue("@SoundBit", entity.toggleSound);
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                finally
+                {
+                    if (connection != null)
+                        connection.Close();
+                }
+            }
+        }
+
+        public void UpdateToggleMusic(Options entity)
+        {
+            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            {
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand("proc_UpdateToggleMusic", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ProfileID", entity.profileID);
+                        cmd.Parameters.AddWithValue("@MusicBit", entity.toggleMusic);
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                finally
+                {
+                    if (connection != null)
+                        connection.Close();
+                }
+            }
+        }
+
+        public void UpdateDifficulty(Options entity)
+        {
+            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            {
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand("proc_UpdateDifficulty", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ProfileID", entity.profileID);
+                        cmd.Parameters.AddWithValue("@NewMathDifficulty", entity.MathDifficultyLevel);
+                        cmd.Parameters.AddWithValue("@NewReadingDifficulty", entity.ReadingDifficultyLevel);
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                finally
+                {
+                    if (connection != null)
+                        connection.Close();
+                }
+            }
+        }
+
+        public void UpdateFilter(Options entity)
+        {
+            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            {
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand("proc_UpdateSubjectFilter", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        if (entity.SubjectFilter == null)   
                         {
                             entity.SubjectFilter = "";
                         }
                         cmd.Parameters.AddWithValue("@ProfileID", entity.profileID);
-                        cmd.Parameters.AddWithValue("@ToggleSound", entity.toggleSound);
-                        cmd.Parameters.AddWithValue("@ToggleMusic", entity.toggleMusic);
-                        cmd.Parameters.AddWithValue("@MathPerformanceStat", entity.MathPerformanceStat);
-                        cmd.Parameters.AddWithValue("@ReadingPerformanceStat", entity.ReadingPerformanceStat);
-                        cmd.Parameters.AddWithValue("@SubjectFilter", entity.SubjectFilter);
-                        cmd.Parameters.AddWithValue("@NewMathDifficulty", entity.MathDifficultyLevel);
-                        cmd.Parameters.AddWithValue("@NewReadingDifficulty", entity.ReadingDifficultyLevel);
+                        cmd.Parameters.AddWithValue("@Filter", entity.SubjectFilter);
                         connection.Open();
                         cmd.ExecuteNonQuery();
                     }
