@@ -1,4 +1,8 @@
-﻿body {
+﻿html{
+    overflow-x: hidden
+}
+
+body {
     background: #5b99d3;
 }
 
