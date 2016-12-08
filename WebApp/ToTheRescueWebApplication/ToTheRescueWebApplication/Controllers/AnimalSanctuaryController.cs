@@ -16,6 +16,7 @@ namespace ToTheRescueWebApplication.Controllers
         AnimalDBRepository _animal;
         IDataEntityRepository<Sounds> _sounds;
         ProfileDBRepository _profile;
+        OptionsDBRepository _options;
         
         public AnimalSanctuaryController()
         {
@@ -23,6 +24,7 @@ namespace ToTheRescueWebApplication.Controllers
             _animal = new AnimalDBRepository();
             _sounds = new SoundDBRepository();
             _profile = new ProfileDBRepository();
+            _options = new OptionsDBRepository();//used to get profile name
         }
         public ActionResult Sanctuary()
         {
@@ -43,11 +45,12 @@ namespace ToTheRescueWebApplication.Controllers
 
             return File(sounds.Sound, sounds.SoundName);
         }
-        public string getProfileName()
+        public ActionResult getProfileName()
         {
-            Profile profile = _profile.Get(ImportantVariables.ProfileID);
+            OptionsModel m_options;
+            m_options = new OptionsModel(_options.Get(ImportantVariables.ProfileID));
 
-            return profile.ProfileName;
+            return View("getProfileName", m_options.profileName);
             //return File(profile.ProfileName, profile.ProfileName);//hmm
         }
     }

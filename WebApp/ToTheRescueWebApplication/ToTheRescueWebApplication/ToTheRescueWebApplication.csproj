@@ -317,6 +317,7 @@
     <Content Include="Views\Shared\_ChooseProfileLayout.cshtml" />
     <Content Include="Views\Shared\_CreateProfileLayout.cshtml" />
     <Content Include="Views\Shared\_OptionsLayout.cshtml" />
+    <Content Include="Views\Shared\_Sanctuary.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
