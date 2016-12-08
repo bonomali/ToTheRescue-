@@ -266,9 +266,7 @@
     <Compile Include="Repositories\AnimalDBRepository.cs" />
     <Compile Include="Repositories\MapDBRepository.cs" />
     <Compile Include="Repositories\NodeDBRepository.cs" />
-    <Compile Include="..\..\..\..\..\..\OptionsDBRepository.cs">
-      <Link>Repositories\OptionsDBRepository.cs</Link>
-    </Compile>
+    <Compile Include="Repositories\OptionsDBRepository.cs" />
     <Compile Include="Repositories\ProfileProgressDBRepository.cs" />
     <Compile Include="Repositories\SoundDBRepository.cs" />
     <Compile Include="Repositories\ProfileDBRepository.cs" />
