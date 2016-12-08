@@ -72,22 +72,31 @@
                 </tr>
             </table>
 
-                <br />
+            <br />
                 <br />
 
                 <button id="submitBtn" type="submit" class="submit">Apply Options</button>
+        }
+
+        <br />
+
+        <p class="link">@Html.ActionLink("Switch Profiles", "ChooseProfilePage", "Profile")</p>
+        <p class="link">@Html.ActionLink("Back to Main Menu", "MainMenu", "MainMenu")</p>
+        
+            @if (User.Identity.IsAuthenticated)
+            {
+                using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { @id = "logoutForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <p class="link"><a href="Logout" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a></p>
                 }
+            }
+        
 
-                <br />
+        <script type="text/javascript">
+            function main() { }
+            main()
 
-                <p class="link">@Html.ActionLink("Switch Profiles", "ChooseProfilePage", "Profile")</p>
-                <p class="link">@Html.ActionLink("Back to Main Menu", "MainMenu", "MainMenu")</p>
-
-
-                <script type="text/javascript">
-                    function main() { }
-                    main()
-
-                </script>
-        </section>
-    </div>
+        </script>
+    </section>
+</div>
