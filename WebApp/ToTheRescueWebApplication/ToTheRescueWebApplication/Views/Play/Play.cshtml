@@ -45,6 +45,17 @@
 </nav>
 <div class="mapContainer">
     <img src="@Url.Action("ShowMapImage", new { @mapID = Model.CurrentMap })" id="mapImg" alt="Map">
-    <img src="@Url.Action("ShowAnimalImage", new { @AnimalID = Model.Animal })" id="animalImg" alt="Animal">
-    @*<img src="@Url.Action("ShowAvatarImage", new { @profileID = 5 })" id="avatarImg" alt="Profile Avatar">*@
+    <img src="@Url.Action("ShowAnimalImage", new { @AnimalID = Model.Animal })" id="animalImg" alt="Animal" style="margin-top: 35%;left: 70%;">
+    <img src="@Url.Action("ShowAvatarImage", new { @profileID = Model.Avatar })" id="avatarImg" alt="Profile Avatar" style="margin-top:@Model.MapNodes[Model.CurrentNode - 1].YCoordinate%; left:@Model.MapNodes[Model.CurrentNode - 1].XCoordinate%">
 </div>
+@section scripts {
+<script>
+    $(document).ready(function () {
+        $("#play").click(function () {
+            $("#avatarImg").animate({ 'margin-top': '@Model.MapNodes[Model.CurrentNode - 1].YCoordinate%' }, 'slow');
+            $("#avatarImg").animate({ 'left': '@Model.MapNodes[Model.CurrentNode - 1].XCoordinate' }, 'slow');
+            $url: '<%= Url.Action("FinishMineGame", "Play") %>'
+        });
+    });
+</script>
+}

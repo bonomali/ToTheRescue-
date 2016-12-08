@@ -45,9 +45,9 @@ input {
     padding: 20px 75px;
     width: 200px;
     background-color: #f6f6f6;
-    opacity: 0.8;
+    opacity: 0.9;
     color: black;
-    font-size: 18px;
+    font-size: 14px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     padding: 3px 0;
     margin: 3px 0;
@@ -111,7 +111,8 @@ p {
     top: 90px;
 }
 div.validation ul { 
-    list-style-type: none; 
+    list-style-type: none;
+    text-align:center; 
 }
 /*When screen is 960px or larger, apply this CSS*/
 @media only screen and (min-width: 960px) {
@@ -151,7 +152,6 @@ div.validation ul {
     a {
         color: ghostwhite;
         text-shadow: 2px 2px #000;
-        opacity: 1.0;
         text-decoration: none;
         text-shadow: none;
     }

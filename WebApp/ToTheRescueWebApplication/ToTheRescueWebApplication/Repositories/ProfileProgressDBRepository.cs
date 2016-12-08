@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -67,6 +68,19 @@ namespace ToTheRescueWebApplication.Repositories
                 }
             }
             return progress;
+        }
+        public void UpdateCurrentNode(int profileID)
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("proc_UpdateProgressNode", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ProfileID", profileID);
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

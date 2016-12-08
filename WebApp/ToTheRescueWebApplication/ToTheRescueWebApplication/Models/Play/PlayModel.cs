@@ -31,5 +31,7 @@ namespace ToTheRescueWebApplication.Models.Play
         [Required]
         public int Animal { get; set; }
 
+        [Required]
+        public int Avatar { get; set; }
     }
 }

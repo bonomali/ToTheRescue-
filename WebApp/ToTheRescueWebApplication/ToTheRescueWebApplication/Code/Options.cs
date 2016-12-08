@@ -17,6 +17,7 @@ namespace ToTheRescueWebApplication.Code
         public int ReadingDifficultyLevel { get; set; }
         public float ReadingPerformanceStat { get; set; }
         public string SubjectFilter { get; set; }
+        public int AvatarID { get; set; }
 
         public Options()
         {

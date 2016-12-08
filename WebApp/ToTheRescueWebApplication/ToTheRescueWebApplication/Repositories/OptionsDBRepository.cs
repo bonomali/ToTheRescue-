@@ -22,7 +22,7 @@ namespace ToTheRescueWebApplication.Repositories
 
                 try
                 {
-                    cmd = new SqlCommand("SELECT ProfileName, ToggleSound, ToggleMusic, MathDifficultyLevel, MathPerformanceStat, ReadingDifficultyLevel, ReadingPerformanceStat, SubjectFilter FROM profiles WHERE ProfileID = " + id + ";");
+                    cmd = new SqlCommand("SELECT ProfileName, ToggleSound, ToggleMusic, MathDifficultyLevel, MathPerformanceStat, ReadingDifficultyLevel, ReadingPerformanceStat, SubjectFilter, AvatarID FROM profiles WHERE ProfileID = " + id + ";");
                     SqlDataReader reader;
 
                     cmd.CommandType = CommandType.Text;
@@ -42,6 +42,7 @@ namespace ToTheRescueWebApplication.Repositories
                         returnable.ReadingDifficultyLevel = (int)reader["ReadingDifficultyLevel"];
                         returnable.ReadingPerformanceStat = (float)reader.GetDouble(6);
                         returnable.SubjectFilter = reader["SubjectFilter"].ToString();
+                        returnable.AvatarID = (int)reader["AvatarID"];
                     }
                     reader.Close();
                 }

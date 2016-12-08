@@ -36,6 +36,7 @@ namespace ToTheRescueWebApplication.Controllers
             Options options = _options.Get(ImportantVariables.ProfileID);
             ProfileProgress progress = _progress.Get(ImportantVariables.ProfileID);
             PlayModel model = new PlayModel();
+            List<Nodes> nodes = _node.GetList(progress.CurrentMap);
             int level = 0;
 
             if (options.SubjectFilter == "Reading")
@@ -64,6 +65,8 @@ namespace ToTheRescueWebApplication.Controllers
             model.CurrentMap = progress.CurrentMap;
             model.CurrentNode = progress.CurrentNode;
             model.MapNodes = _node.GetList(progress.CurrentMap);
+            model.Avatar = options.AvatarID;
+            model.MapNodes = nodes;
 
             return View(model);
         }
@@ -81,19 +84,23 @@ namespace ToTheRescueWebApplication.Controllers
 
             return File(image.Image, image.ImageName);
         }
-        /*public ActionResult ShowAvatarImage(int profileID)
+        public ActionResult ShowAvatarImage(int profileID)
         {
-            ProfileProgress profile = _profileOptions.Get(profileID);  //get profile from database
+            Options profile = _options.Get(ImportantVariables.ProfileID);  //get profile from database
             Images image = _image.Get(profile.AvatarID);  //get profile image from database
 
             return File(image.Image, image.ImageName);
-        }*/
+        }
         public ActionResult LoadAudio(int mapID)
         {
             Map currentMap = _map.Get(mapID);  //get map from database
             Sounds audio = _music.Get(currentMap.SoundID);  //get sound from database
             
             return base.File(audio.Sound, audio.SoundName);
+        }
+        public void FinishMiniGame()
+        {
+            _progress.UpdateCurrentNode(ImportantVariables.ProfileID);
         }
     }
 }
