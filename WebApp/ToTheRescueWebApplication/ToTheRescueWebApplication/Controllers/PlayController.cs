@@ -61,6 +61,10 @@ namespace ToTheRescueWebApplication.Controllers
             if (model.Subject == "")
                 model.Subject = "All";
 
+            if(progress.CurrentNode == nodes.Count)
+            {
+                //call functions to update
+            }
             model.Animal = progress.AnimalID;
             model.CurrentMap = progress.CurrentMap;
             model.CurrentNode = progress.CurrentNode;

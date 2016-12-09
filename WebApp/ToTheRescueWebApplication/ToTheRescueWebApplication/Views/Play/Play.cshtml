@@ -52,10 +52,25 @@
 <script>
     $(document).ready(function () {
         $("#play").click(function () {
-            $("#avatarImg").animate({ 'margin-top': '@Model.MapNodes[Model.CurrentNode - 1].YCoordinate%' }, 'slow');
-            $("#avatarImg").animate({ 'left': '@Model.MapNodes[Model.CurrentNode - 1].XCoordinate' }, 'slow');
-            $url: '<%= Url.Action("FinishMineGame", "Play") %>'
+            $.ajax({
+                url: '/Play/FinishMiniGame/',
+                success: function () {
+                    alert('moveAvatar')
+                    moveAvatar();
+                }
+            });
         });
     });
+    function moveAvatar() {
+        $.ajax({
+            @*url '/Play/Play/',*@
+            success: function () {
+                window.location.href = '/Play/Play/'
+                $("#avatarImg").animate({ 'margin-top': '@Model.MapNodes[Model.CurrentNode - 1].YCoordinate%' }, 'slow');
+                alert('@Model.MapNodes[Model.CurrentNode].YCoordinate%')
+                $("#avatarImg").animate({ 'left': '@Model.MapNodes[Model.CurrentNode - 1].XCoordinate%' }, 'slow');
+            }
+        });
+    };
 </script>
 }
