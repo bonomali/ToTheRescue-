@@ -50,25 +50,28 @@
 </div>
 @section scripts {
 <script>
+    //transfer nodes from Model into JS array
+    var nodeArr = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.MapNodes));
+    //when play button clicked: load/display minigame --> call controller function to update values --> move avatar
     $(document).ready(function () {
         $("#play").click(function () {
             $.ajax({
-                url: '/Play/FinishMiniGame/',
+                url: '/Play/FinishMiniGame/',   //update values after minigame in controller
                 success: function () {
-                    alert('moveAvatar')
-                    moveAvatar();
+                    moveAvatar();               //move avatar
                 }
             });
         });
     });
+    //Get current node from ProfileProgess table through contoller method and move avatar to current node
     function moveAvatar() {
         $.ajax({
-            @*url '/Play/Play/',*@
-            success: function () {
-                window.location.href = '/Play/Play/'
-                $("#avatarImg").animate({ 'margin-top': '@Model.MapNodes[Model.CurrentNode - 1].YCoordinate%' }, 'slow');
-                alert('@Model.MapNodes[Model.CurrentNode].YCoordinate%')
-                $("#avatarImg").animate({ 'left': '@Model.MapNodes[Model.CurrentNode - 1].XCoordinate%' }, 'slow');
+            url: '/Play/GetCurrentNode/',
+           datatype: "text",
+            type: "POST",
+            success: function (data) {
+                $("#avatarImg").animate({ 'margin-top': nodeArr[data - 1].YCoordinate + '%' }, 'slow');
+                $("#avatarImg").animate({ 'left': nodeArr[data - 1].XCoordinate + '%' }, 'slow');
             }
         });
     };

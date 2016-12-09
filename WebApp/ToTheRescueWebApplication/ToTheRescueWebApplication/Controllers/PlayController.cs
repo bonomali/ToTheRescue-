@@ -31,6 +31,7 @@ namespace ToTheRescueWebApplication.Controllers
             _animal = new AnimalDBRepository();
         }
         // GET: Play
+        // Set values from database to model, pass into Play/Map view
         public ActionResult Play()
         {
             Options options = _options.Get(ImportantVariables.ProfileID);
@@ -74,6 +75,7 @@ namespace ToTheRescueWebApplication.Controllers
 
             return View(model);
         }
+        //display map image
         public ActionResult ShowMapImage(int mapID)
         {
             Map currentMap = _map.Get(mapID);  //get map from database
@@ -81,6 +83,7 @@ namespace ToTheRescueWebApplication.Controllers
             
             return File(image.Image, image.ImageName);
         }
+        //display animal image
         public ActionResult ShowAnimalImage(int AnimalID)
         {
             Animal animal = _animal.Get(AnimalID);  //get animal from database
@@ -88,6 +91,7 @@ namespace ToTheRescueWebApplication.Controllers
 
             return File(image.Image, image.ImageName);
         }
+        //display avatar image
         public ActionResult ShowAvatarImage(int profileID)
         {
             Options profile = _options.Get(ImportantVariables.ProfileID);  //get profile from database
@@ -95,6 +99,7 @@ namespace ToTheRescueWebApplication.Controllers
 
             return File(image.Image, image.ImageName);
         }
+        //play map background music
         public ActionResult LoadAudio(int mapID)
         {
             Map currentMap = _map.Get(mapID);  //get map from database
@@ -102,9 +107,18 @@ namespace ToTheRescueWebApplication.Controllers
             
             return base.File(audio.Sound, audio.SoundName);
         }
+        //update ProfileProgress values for profile after a minigame is played
         public void FinishMiniGame()
         {
             _progress.UpdateCurrentNode(ImportantVariables.ProfileID);
+        }
+        //get the number of the current node for profile
+        [HttpPost]
+        public int GetCurrentNode ()
+        {
+            ProfileProgress p = _progress.Get(ImportantVariables.ProfileID);
+
+            return p.CurrentNode;
         }
     }
 }
