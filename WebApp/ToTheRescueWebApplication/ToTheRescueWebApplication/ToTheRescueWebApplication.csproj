@@ -318,6 +318,7 @@
     <Content Include="Views\Shared\_CreateProfileLayout.cshtml" />
     <Content Include="Views\Shared\_OptionsLayout.cshtml" />
     <Content Include="Views\Shared\_Sanctuary.cshtml" />
+    <Content Include="Views\Play\EndofGame.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

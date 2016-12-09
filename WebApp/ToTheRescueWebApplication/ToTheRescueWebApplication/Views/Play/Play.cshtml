@@ -67,13 +67,17 @@
     function moveAvatar() {
         $.ajax({
             url: '/Play/GetCurrentNode/',
-           datatype: "text",
+            datatype: "text",
             type: "POST",
             success: function (data) {
                 $("#avatarImg").animate({ 'margin-top': nodeArr[data - 1].YCoordinate + '%' }, 'slow');
                 $("#avatarImg").animate({ 'left': nodeArr[data - 1].XCoordinate + '%' }, 'slow');
+                data == @Model.MapNodes.Count() ? newMap() : null
             }
         });
     };
+    function newMap() {
+        window.location.href = '/Play/NewMap/';
+    }
 </script>
 }

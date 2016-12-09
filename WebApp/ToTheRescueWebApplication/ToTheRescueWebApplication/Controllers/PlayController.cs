@@ -19,7 +19,7 @@ namespace ToTheRescueWebApplication.Controllers
         ProfileProgressDBRepository _progress;
         OptionsDBRepository _options;
         AnimalDBRepository _animal;
-
+        const int LAST_MAP = 7;    //last map in game
         public PlayController()
         {
             _map = new MapDBRepository();
@@ -34,6 +34,13 @@ namespace ToTheRescueWebApplication.Controllers
         // Set values from database to model, pass into Play/Map view
         public ActionResult Play()
         {
+            PlayModel model = SetModel();
+
+            return View(model);
+        }
+        //set model values
+        public PlayModel SetModel()
+        {
             Options options = _options.Get(ImportantVariables.ProfileID);
             ProfileProgress progress = _progress.Get(ImportantVariables.ProfileID);
             PlayModel model = new PlayModel();
@@ -45,7 +52,7 @@ namespace ToTheRescueWebApplication.Controllers
             else if (options.SubjectFilter == "Math")
                 level = options.MathDifficultyLevel;
             else
-                level = options.ReadingDifficultyLevel > options.MathDifficultyLevel ? 
+                level = options.ReadingDifficultyLevel > options.MathDifficultyLevel ?
                         options.ReadingDifficultyLevel : options.MathDifficultyLevel;
 
             if (level == 1)
@@ -62,7 +69,7 @@ namespace ToTheRescueWebApplication.Controllers
             if (model.Subject == "")
                 model.Subject = "All";
 
-            if(progress.CurrentNode == nodes.Count)
+            if (progress.CurrentNode == nodes.Count)
             {
                 //call functions to update
             }
@@ -73,7 +80,7 @@ namespace ToTheRescueWebApplication.Controllers
             model.Avatar = options.AvatarID;
             model.MapNodes = nodes;
 
-            return View(model);
+            return model;
         }
         //display map image
         public ActionResult ShowMapImage(int mapID)
@@ -112,6 +119,22 @@ namespace ToTheRescueWebApplication.Controllers
         {
             _progress.UpdateCurrentNode(ImportantVariables.ProfileID);
         }
+        //update ProfileProgress to a new map
+        public ActionResult NewMap()
+        {
+            ProfileProgress p = _progress.Get(ImportantVariables.ProfileID);
+            //if user hasn't reached last map, go to next map
+            if (p.CurrentMap < LAST_MAP)
+            {
+                _progress.UpdateCurrentMap(ImportantVariables.ProfileID, p.CurrentMap);
+                return RedirectToAction("Play");
+            }
+            else
+            {
+                Console.WriteLine("Yay! End of game stuff here");
+                return RedirectToAction("EndofGame");
+            }
+        }
         //get the number of the current node for profile
         [HttpPost]
         public int GetCurrentNode ()
@@ -119,6 +142,10 @@ namespace ToTheRescueWebApplication.Controllers
             ProfileProgress p = _progress.Get(ImportantVariables.ProfileID);
 
             return p.CurrentNode;
+        }
+        public ActionResult EndofGame()
+        {
+            return View();
         }
     }
 }

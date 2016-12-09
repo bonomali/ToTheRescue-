@@ -62,6 +62,18 @@ AS
 GO
 
 /**********************************************************************
+* Purpose: Updates map when user rescues animal 
+***********************************************************************/
+USE ToTheRescue;
+GO
+CREATE PROCEDURE proc_UpdateCurrentMap
+	@ProfileID int
+AS
+	UPDATE ProfileProgess
+	SET CurrentMap = CurrentMap + 1
+	WHERE ProfileID = @ProfileID
+GO
+/**********************************************************************
 * Purpose: Updates toggle sound. 
 ***********************************************************************/
 

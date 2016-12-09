@@ -82,5 +82,22 @@ namespace ToTheRescueWebApplication.Repositories
                 }
             }
         }
+        public void UpdateCurrentMap(int profileID, int currentMap)
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = "UPDATE ProfileProgress SET CurrentMap=@NewMap WHERE ProfileID=@ProfileID";
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@ProfileID", profileID);
+                    cmd.Parameters.AddWithValue("@NewMap", currentMap + 1);
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
+    
