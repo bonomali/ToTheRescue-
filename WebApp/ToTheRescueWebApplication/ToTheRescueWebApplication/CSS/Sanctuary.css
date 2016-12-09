@@ -17,7 +17,7 @@
     background-color: white;
     font-size: 15px;
     position: absolute;
-    top: 105px;
+    top: 30px;
     left: 2px;
     padding: 10px 10px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -43,7 +43,7 @@ h2 {
     background-color: white;
     font-size: 15px;
     position: absolute;
-    top: 155px;
+    top: 80px;
     left: 2px;
     padding: 10px 10px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -87,8 +87,8 @@ h2 {
 /* Position and style the close button (top right corner) */
 .sidenav .closebtn {
     position: absolute;
-    top: 55px;
-    right: 25px;
+    top: 20px;
+    right: 20px;
     font-size: 36px;
     margin-left: 50px;
 }
@@ -103,4 +103,9 @@ h2 {
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+}
+
+.FunFactDiv {
+    top: 400px;
+    position: absolute;
 }

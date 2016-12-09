@@ -1,6 +1,6 @@
-﻿
-html {
+﻿html {
     border: 20px solid forestgreen;
+    /*Maybe try the four div method*/
 }
 
 body {
@@ -79,19 +79,19 @@ body {
 
 #DeleteProfileButton {
     position: relative;
-    left: 12%;
+    left: 13%;
     visibility: hidden;
 }
 
 #CreateNewPorifleButton {
     position: relative;
-    left: 32%;
+    left: 35%;
     visibility: visible;
 }
 
 #PlayButton {
     position: relative;
-    left: 50%;
+    left: 55%;
     visibility: hidden;
 }
 
@@ -136,7 +136,7 @@ body {
 }
 
 /*for phones*/
-@media only screen and (max-width: 960px) {
+@media only screen and (max-width: 1200px) {
     body {
         width: 100%;
     }
@@ -209,6 +209,6 @@ body {
     }
 
     #PlayButton {
-        left: 19%;
+        left: 15%;
     }
 }
