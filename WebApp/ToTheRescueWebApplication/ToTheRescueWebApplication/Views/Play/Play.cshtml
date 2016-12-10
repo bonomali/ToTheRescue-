@@ -45,11 +45,22 @@
 </nav>
 <div class="mapContainer">
     <img src="@Url.Action("ShowMapImage", new { @mapID = Model.CurrentMap })" id="mapImg" alt="Map">
-    <img src="@Url.Action("ShowAnimalImage", new { @AnimalID = Model.Animal })" id="animalImg" alt="Animal" style="margin-top: 35%;left: 70%;">
+    <img src="@Url.Action("ShowAnimalImage", new { @AnimalID = Model.Animal })" id="animalImg" alt="Animal" style="margin-top: @Model.MapNodes[Model.MapNodes.Count() - 1].YCoordinate%; right: @Model.MapNodes[Model.MapNodes.Count() - 1].XCoordinate%">
     <img src="@Url.Action("ShowAvatarImage", new { @profileID = Model.Avatar })" id="avatarImg" alt="Profile Avatar" style="margin-top:@Model.MapNodes[Model.CurrentNode - 1].YCoordinate%; left:@Model.MapNodes[Model.CurrentNode - 1].XCoordinate%">
+    <div id="animalSaved" style="display:none">
+        <p id="praise">You Did It!</p>
+        <img src="@Url.Action("ShowAnimalImage", new { @AnimalID = Model.Animal })" id="savedAnimalImg" alt="Saved Animal">
+        <button id="closePraise">Done</button>
+    </div>
 </div>
+
 @section scripts {
 <script>
+    //congradulatory sound when animal saved
+    var saved = new Audio();
+    saved.src = "../Audio/Ta_Da.mp3";
+    saved.volume = 0.2;
+
     //transfer nodes from Model into JS array
     var nodeArr = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.MapNodes));
     //when play button clicked: load/display minigame --> call controller function to update values --> move avatar
@@ -63,6 +74,7 @@
             });
         });
     });
+
     //Get current node from ProfileProgess table through contoller method and move avatar to current node
     function moveAvatar() {
         $.ajax({
@@ -72,12 +84,23 @@
             success: function (data) {
                 $("#avatarImg").animate({ 'margin-top': nodeArr[data - 1].YCoordinate + '%' }, 'slow');
                 $("#avatarImg").animate({ 'left': nodeArr[data - 1].XCoordinate + '%' }, 'slow');
-                data == @Model.MapNodes.Count() ? newMap() : null
+                data == @Model.MapNodes.Count() ? endofmap() : null
             }
         });
     };
-    function newMap() {
-        window.location.href = '/Play/NewMap/';
+
+    //show animal saved div
+    function endofmap() {
+        $("#animalSaved").show();
+        saved.play();
+        $("#play").hide();
     }
+
+    //when animal saved div close, go to new map
+    $("#closePraise").click(function () {
+        $("animalSaved").hide();
+        $("play").show();
+        window.location.href = '/Play/NewMap/';
+    });
 </script>
 }

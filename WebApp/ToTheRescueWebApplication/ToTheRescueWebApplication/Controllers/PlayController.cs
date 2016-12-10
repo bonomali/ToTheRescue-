@@ -69,10 +69,6 @@ namespace ToTheRescueWebApplication.Controllers
             if (model.Subject == "")
                 model.Subject = "All";
 
-            if (progress.CurrentNode == nodes.Count)
-            {
-                //call functions to update
-            }
             model.Animal = progress.AnimalID;
             model.CurrentMap = progress.CurrentMap;
             model.CurrentNode = progress.CurrentNode;
@@ -123,15 +119,19 @@ namespace ToTheRescueWebApplication.Controllers
         public ActionResult NewMap()
         {
             ProfileProgress p = _progress.Get(ImportantVariables.ProfileID);
+            Random random = new Random();
+            int newAnimal = random.Next(1, 21); //generate a number between 1 and 20
             //if user hasn't reached last map, go to next map
             if (p.CurrentMap < LAST_MAP)
             {
-                _progress.UpdateCurrentMap(ImportantVariables.ProfileID, p.CurrentMap);
-                return RedirectToAction("Play");
+                _progress.RescueAnimal(ImportantVariables.ProfileID, p.AnimalID);   //save animal to ProfileAnimals
+                _progress.UpdateCurrentMap(ImportantVariables.ProfileID, p.CurrentMap, newAnimal); //new map and animal
+                return RedirectToAction("Play");    //return to Play/Map
             }
             else
             {
                 Console.WriteLine("Yay! End of game stuff here");
+                _progress.UpdateCurrentMap(ImportantVariables.ProfileID, 1, newAnimal); //return to map1
                 return RedirectToAction("EndofGame");
             }
         }

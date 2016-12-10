@@ -139,6 +139,48 @@ nav#playMenu li#play {
     height: 12%;
     z-index: 2;
 }
+#animalSaved {
+    position:relative;
+    left: -30%;
+    margin-top: 10%;
+    width: 40%;
+    height: 50%;  
+    background-color: darkgreen;
+    z-index: 3;
+}
+#praise {
+    text-align: center;
+    color: lightblue;
+    text-shadow: 1px 1px #000;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+#savedAnimalImg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2%;
+    width: 20%;
+    height: 30%;
+}
+#closePraise {
+    width: 20%;
+    height: 10%;
+    min-width: 60px;
+    min-height: 15px;
+    background-color: lightblue;
+    color: darkblue;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    border-radius: 25px;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom: 2%;
+    font-size: 90%;
+}
+#closePraise:hover {
+    background-color: lightpink;
+     font-size: 100%;
+}
 @media only screen and (min-width: 540px) {
     #optionsLbl {
         margin-left: -4.5%;
@@ -189,6 +231,9 @@ nav#playMenu li#play {
     }
     .mapContainer #animalImg {
         margin-top: 30%;
+    }
+    #praise {
+        font-size: 36px;
     }
 /*When screen is 1080px or larger, apply this CSS*/
 @media only screen and (min-width: 1080px) {
