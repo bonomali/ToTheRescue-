@@ -23,7 +23,10 @@ namespace ToTheRescueWebApplication.Controllers
             _image = new ImageDBRepository();
             _animal = new AnimalDBRepository();
             _sounds = new SoundDBRepository();
-            _profile = new ProfileDBRepository();
+
+            //I changed this Lake, I changed the constructor to take an HTTP context in order
+            //to be able to reference the Session variables in the Profile's repository
+            _profile = new ProfileDBRepository(System.Web.HttpContext.Current);
             _options = new OptionsDBRepository();//used to get profile name
         }
         public ActionResult Sanctuary()

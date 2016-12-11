@@ -16,7 +16,8 @@ namespace ToTheRescueWebApplication.Controllers
 
         public ProfileController()
         {
-            _profileRepo = new ProfileDBRepository();
+            //pass in the http context, constructor injection
+            _profileRepo = new ProfileDBRepository(System.Web.HttpContext.Current);
         }
 
         // GET: Profile
@@ -25,12 +26,13 @@ namespace ToTheRescueWebApplication.Controllers
             //Get the UserID and the UserEmail
             if (TempData["userID"] != null)
             {
-                ImportantVariables.UserID = (int)TempData["userID"];
+                //counter intuitive, should assign directly to the session variables now on
+                Session["userID"] = (int)TempData["userID"];
             }
 
             if (TempData["userEmail"] != null)
             {
-                ImportantVariables.UserEmail = (string)TempData["userEmail"];
+                Session["userEmail"] = (string)TempData["userEmail"];
             }
 
             return View(_profileRepo.GetList());
@@ -46,7 +48,7 @@ namespace ToTheRescueWebApplication.Controllers
                 index = (int)profileIndex;
             }
 
-            if (email == ImportantVariables.UserEmail)
+            if (email == (string)Session["userEmail"])
                 validEmail = true;
 
 
@@ -54,7 +56,7 @@ namespace ToTheRescueWebApplication.Controllers
             {
                 string profileName = _profileRepo.GetList()[index].ProfileName;
 
-                _profileRepo.DeleteProfile(profileName, ImportantVariables.UserID);
+                _profileRepo.DeleteProfile(profileName, (int)Session["userID"]);
             }
             else
             {
@@ -73,15 +75,10 @@ namespace ToTheRescueWebApplication.Controllers
             //find the profile the user clicked
             for (int i = 0; i < allProfs.Count(); i++)
             {
-                //assign the important variables to the thing that holds the information 
-                //for the lifetime of the application
+                //assign the used profileID to the session variables
                 if (i == selectedIndex)
                 {
-                    //refactor to only include the profileID to add to the Important variables thing once
-                    //we figure out what to do
-                    ImportantVariables.ProfileName = allProfs[i].ProfileName;
-                    ImportantVariables.ProfileAvatar = allProfs[i].Avatar;
-                    ImportantVariables.ProfileID = allProfs[i].ID;
+                    Session["profileID"] = allProfs[i].ID;
                 }
             }
         }
@@ -89,7 +86,7 @@ namespace ToTheRescueWebApplication.Controllers
         //directs you to the choose profile page
         public ActionResult CreateProfilePage()
         {
-            
+
             return View(_profileRepo.GetAllProfileAvatars());
         }
 
@@ -114,13 +111,13 @@ namespace ToTheRescueWebApplication.Controllers
                 return Content("Failure");
             }
 
-           if (profileName == "~!null~$")
+            if (profileName == "~!null~$")
             {
                 TempData["EmptyNameError"] = "You must enter a profile name in order to create a new profile. Please try again.";
                 return Content("Failure");
             }
 
-           if (profileName.Length > 15)
+            if (profileName.Length > 15)
             {
                 TempData["TooLongName"] = "You must enter a profile name that is 15 characters long or less. Please try again.";
                 return Content("Failure");
@@ -137,6 +134,5 @@ namespace ToTheRescueWebApplication.Controllers
             //on success, redirect to the Choose Profiles Page where the new profile will be located
             return Content("Success");
         }
-
     }
 }

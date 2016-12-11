@@ -11,6 +11,16 @@ namespace ToTheRescueWebApplication.Repositories
 {
     public class ProfileDBRepository : IDataEntityRepository<Profile>
     {
+        //will hold the httpcontext in order to get a session variable's information
+        private HttpContext _ctx;
+
+        //using dependency injection to get httpcontext in order 
+        //to get a session variable's information
+        public ProfileDBRepository(HttpContext ctx)
+        {
+            _ctx = ctx;
+        }
+
         //Gets all the profile information for a certain profileID
         public Profile Get(int profileID)
         {
@@ -34,7 +44,9 @@ namespace ToTheRescueWebApplication.Repositories
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
                     cmd.Parameters.Add(new SqlParameter("@userID", System.Data.SqlDbType.Int));
-                    cmd.Parameters["@userID"].Value = ImportantVariables.UserID;
+
+                    //use the session variable to get the userID and assign it to the userID sql parameter
+                    cmd.Parameters["@userID"].Value = (int)_ctx.Session["userID"];
 
                     connection.Open();
                     reader = cmd.ExecuteReader();
@@ -86,7 +98,10 @@ namespace ToTheRescueWebApplication.Repositories
                     using (SqlCommand cmd = new SqlCommand("proc_AddNewProfile", connection))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@UserID", ImportantVariables.UserID);
+
+                        //use the session variable to assign the userID
+                        cmd.Parameters.AddWithValue("@UserID", (int)_ctx.Session["userID"]);
+
                         cmd.Parameters.AddWithValue("@AvatarID", entity.AvatarID);
                         cmd.Parameters.AddWithValue("@ProfileName", entity.ProfileName);
                         connection.Open();
@@ -254,6 +269,5 @@ namespace ToTheRescueWebApplication.Repositories
             }
             return allAvatars;
         }
-
     }
 }

@@ -271,7 +271,7 @@
     <Compile Include="Repositories\ProfileProgressDBRepository.cs" />
     <Compile Include="Repositories\SoundDBRepository.cs" />
     <Compile Include="Repositories\ProfileDBRepository.cs" />
-    <Compile Include="Repositories\Profile.cs" />
+    <Compile Include="Code\Profile.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
