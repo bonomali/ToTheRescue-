@@ -147,6 +147,7 @@ nav#playMenu li#play {
     height: 50%;  
     background-color: darkgreen;
     z-index: 3;
+    border-radius: 25px;
 }
 #praise {
     text-align: center;
@@ -179,7 +180,23 @@ nav#playMenu li#play {
 }
 #closePraise:hover {
     background-color: lightpink;
-     font-size: 100%;
+    font-size: 100%;
+}
+.miniGame {
+   background-color:lightseagreen;
+   min-width: 100%;
+   min-height: 88%;
+   border: 2px solid lightblue;
+   box-sizing: border-box;
+   border-style:outset;
+   position: absolute;
+   margin-top: 5%;
+   margin-left: -.5%;       
+}
+#miniGameDone {
+    position: fixed;
+    bottom: 2%;
+    left: 80%;
 }
 @media only screen and (min-width: 540px) {
     #optionsLbl {
@@ -213,28 +230,36 @@ nav#playMenu li#play {
     div.profileInfo label {
         font-size: 14px;
     }
+
     div.profileInfo label#name {
         left: 3%;
     }
+
     div.profileInfo label#level {
         left: 35%;
     }
+
     div.profileInfo label#subject {
         left: 70%;
     }
+
     .icon {
         margin-left: -17px;
     }
+
     .mapContainer #mapImg {
         margin-top: 9.5%;
         margin-left: 1.25%;
     }
+
     .mapContainer #animalImg {
         margin-top: 30%;
     }
+
     #praise {
         font-size: 36px;
     }
+}
 /*When screen is 1080px or larger, apply this CSS*/
 @media only screen and (min-width: 1080px) {
     div.profileInfo label {
@@ -261,5 +286,8 @@ nav#playMenu li#play {
     }
         .mapContainer #animalImg {
         margin-top: 25%;
+    }
+    #miniGameDone {
+    left: 85%;
     }
 }

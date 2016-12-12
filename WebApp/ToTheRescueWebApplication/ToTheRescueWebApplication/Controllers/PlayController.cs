@@ -36,13 +36,16 @@ namespace ToTheRescueWebApplication.Controllers
         {
             PlayModel model = SetModel();
 
+            if (model.CurrentMap == LAST_MAP)
+                return RedirectToAction("EndofGame");
+
             return View(model);
         }
         //set model values
         public PlayModel SetModel()
         {
-            Options options = _options.Get(ImportantVariables.ProfileID);
-            ProfileProgress progress = _progress.Get(ImportantVariables.ProfileID);
+            Options options = _options.Get((int)Session["profileID"]);
+            ProfileProgress progress = _progress.Get((int)Session["profileID"]);
             PlayModel model = new PlayModel();
             List<Nodes> nodes = _node.GetList(progress.CurrentMap);
             int level = 0;
@@ -97,7 +100,7 @@ namespace ToTheRescueWebApplication.Controllers
         //display avatar image
         public ActionResult ShowAvatarImage(int profileID)
         {
-            Options profile = _options.Get(ImportantVariables.ProfileID);  //get profile from database
+            Options profile = _options.Get((int)Session["profileID"]);  //get profile from database
             Images image = _image.Get(profile.AvatarID);  //get profile image from database
 
             return File(image.Image, image.ImageName);
@@ -113,36 +116,34 @@ namespace ToTheRescueWebApplication.Controllers
         //update ProfileProgress values for profile after a minigame is played
         public void FinishMiniGame()
         {
-            _progress.UpdateCurrentNode(ImportantVariables.ProfileID);
+            _progress.UpdateCurrentNode((int)Session["profileID"]);
         }
         //update ProfileProgress to a new map
-        public ActionResult NewMap()
+        public void NewMap()
         {
-            ProfileProgress p = _progress.Get(ImportantVariables.ProfileID);
+            ProfileProgress p = _progress.Get((int)Session["profileID"]);
             Random random = new Random();
             int newAnimal = random.Next(1, 21); //generate a number between 1 and 20
             //if user hasn't reached last map, go to next map
             if (p.CurrentMap < LAST_MAP)
             {
-                _progress.RescueAnimal(ImportantVariables.ProfileID, p.AnimalID);   //save animal to ProfileAnimals
-                _progress.UpdateCurrentMap(ImportantVariables.ProfileID, p.CurrentMap, newAnimal); //new map and animal
-                return RedirectToAction("Play");    //return to Play/Map
+                _progress.RescueAnimal((int)Session["profileID"], p.AnimalID);   //save animal to ProfileAnimals
+                _progress.UpdateCurrentMap((int)Session["profileID"], p.CurrentMap, newAnimal); //new map and animal
             }
             else
-            {
-                Console.WriteLine("Yay! End of game stuff here");
-                _progress.UpdateCurrentMap(ImportantVariables.ProfileID, 1, newAnimal); //return to map1
-                return RedirectToAction("EndofGame");
+            { 
+                _progress.UpdateCurrentMap((int)Session["profileID"], 1, newAnimal); //return to map1
             }
         }
         //get the number of the current node for profile
         [HttpPost]
         public int GetCurrentNode ()
         {
-            ProfileProgress p = _progress.Get(ImportantVariables.ProfileID);
+            ProfileProgress p = _progress.Get((int)Session["profileID"]);
 
             return p.CurrentNode;
         }
+        //show end of game congratulatory screen
         public ActionResult EndofGame()
         {
             return View();

@@ -23,19 +23,19 @@
                 <label class="iconLbls " id="playLbl">Play</label>
             </li>
             <li id="sanctuary">
-                <a href="../AnimalSanctuary/Sanctuary">
+                <a href="~/AnimalSanctuary/Sanctuary">
                     <img src="~/Images/sanctuaryIcon.png" class="icon" alt="Sanctuary">
                 </a>
                 <label class="iconLbls "id="sanctuaryLbl">Sanctuary</label>
             </li>
             <li id="menu">
-                <a href="../MainMenu/MainMenu">
+                <a href="~/MainMenu/MainMenu">
                     <img src="~/Images/menuIcon.png" class="icon" alt="Menu">
                 </a>
                 <label class="iconLbls " id="menuLbl">Menu</label>
             </li>
             <li id="options">
-                <a href="../Options/Options">
+                <a href="~/Options/Options">
                     <img src="~/Images/optionsIcon.png" class="icon" alt="Options">
                 </a>
                 <label class="iconLbls " id="optionsLbl">Options</label>
@@ -43,7 +43,7 @@
         </ul>
     </div>
 </nav>
-<div class="mapContainer">
+<div class="mapContainer" style="display:normal">
     <img src="@Url.Action("ShowMapImage", new { @mapID = Model.CurrentMap })" id="mapImg" alt="Map">
     <img src="@Url.Action("ShowAnimalImage", new { @AnimalID = Model.Animal })" id="animalImg" alt="Animal" style="margin-top: @Model.MapNodes[Model.MapNodes.Count() - 1].YCoordinate%; right: @Model.MapNodes[Model.MapNodes.Count() - 1].XCoordinate%">
     <img src="@Url.Action("ShowAvatarImage", new { @profileID = Model.Avatar })" id="avatarImg" alt="Profile Avatar" style="margin-top:@Model.MapNodes[Model.CurrentNode - 1].YCoordinate%; left:@Model.MapNodes[Model.CurrentNode - 1].XCoordinate%">
@@ -53,28 +53,27 @@
         <button id="closePraise">Done</button>
     </div>
 </div>
-
+<div class="miniGame" style="display:none">
+    <script src="~/MiniGameTestCode/TicTacToe.js"></script>
+    <button id="miniGameDone">Done</button>
+</div>
 @section scripts {
 <script>
     //congradulatory sound when animal saved
     var saved = new Audio();
     saved.src = "../Audio/Ta_Da.mp3";
     saved.volume = 0.2;
-
+    
     //transfer nodes from Model into JS array
     var nodeArr = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.MapNodes));
     //when play button clicked: load/display minigame --> call controller function to update values --> move avatar
     $(document).ready(function () {
         $("#play").click(function () {
-            $.ajax({
-                url: '/Play/FinishMiniGame/',   //update values after minigame in controller
-                success: function () {
-                    moveAvatar();               //move avatar
-                }
-            });
+            $('.mapContainer').hide();
+            $('#play').hide();
+            $('.miniGame').show();
         });
     });
-
     //Get current node from ProfileProgess table through contoller method and move avatar to current node
     function moveAvatar() {
         $.ajax({
@@ -88,19 +87,34 @@
             }
         });
     };
-
     //show animal saved div
     function endofmap() {
-        $("#animalSaved").show();
-        saved.play();
-        $("#play").hide();
+        $.ajax({
+            url: '/Play/NewMap/',
+            success: function () {
+                $("#animalSaved").show();
+                saved.play();
+                $("#play").hide();
+            }
+        })
     }
-
     //when animal saved div close, go to new map
     $("#closePraise").click(function () {
         $("animalSaved").hide();
         $("play").show();
-        window.location.href = '/Play/NewMap/';
+        window.location.href = '/Play/Play/';
     });
+    //when user is done playing minigame, display map and update values
+    $('#miniGameDone').click(function () {
+        $('.mapContainer').show();
+        $('#play').show();
+        $('.miniGame').hide();
+        $.ajax({
+            url: '/Play/FinishMiniGame/',   //update values after minigame in controller
+            success: function () {
+                moveAvatar();               //move avatar
+            }
+        });
+    })
 </script>
 }
