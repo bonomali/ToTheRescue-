@@ -1,7 +1,26 @@
-﻿html {
-    border: 20px solid forestgreen;
-    /*Maybe try the four div method*/
+﻿#leftBorder, #rightBorder, #topBorder, #bottomBorder{
+    background: forestgreen;
+    position: fixed;
 }
+
+#leftBorder, #rightBorder{
+    top: 0;
+    bottom: 0;
+    width: 15px;
+}
+
+#leftBorder {left: 0;}
+#rightBorder {right: 0;}
+
+#topBorder, #bottomBorder{
+    left: 0; 
+    right: 0;
+
+    height: 15px;
+}
+
+#topBorder {top: 0;}
+#bottomBorder {bottom: 0;}
 
 body {
     background: #43c161;

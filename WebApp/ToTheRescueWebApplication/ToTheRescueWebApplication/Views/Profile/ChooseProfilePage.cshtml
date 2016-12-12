@@ -5,9 +5,42 @@
 @{
     Layout = "~/Views/Shared/_ChooseProfileLayout.cshtml";
     ViewBag.Title = "ChooseProfilePage";
+
+    if (Model.Count() <= 4)
+    {
+        //I use only the top html border for the top and then 3 divs for the rest of the 
+        //border
+        <script type="text/javascript">
+            window.onload = function (){
+                document.getElementById("html").style.borderTop = "15px solid forestgreen";
+                document.getElementById("leftBorder").style.visibility = "visible";
+                document.getElementById("rightBorder").style.visibility = "visible";
+                document.getElementById("bottomBorder").style.visibility = "visible";
+            }
+        </script>
+    }
+    else
+    {
+        //I use the html filter when there are more than 4 profiles
+        <script type="text/javascript">
+            window.onload = function () {
+            document.getElementById("leftBorder").style.visibility = "hidden";
+            document.getElementById("rightBorder").style.visibility = "hidden";
+            document.getElementById("topBorder").style.visibility = "hidden";
+            document.getElementById("bottomBorder").style.visibility = "hidden";
+            document.getElementById("html").style.border = "15px solid forestgreen";
+        }
+        </script>
+    }
 }
 
 <body id="ChooseProfileBody">
+    @*Four div border only when there is 4 or less profiles*@
+    <div id="leftBorder"></div>
+    <div id="rightBorder"></div>
+    <div id="topBorder"></div>
+    <div id="bottomBorder"></div>
+
     <h1 id="ChooseProfileheader">Choose Your Profile!</h1>
     <br />
     <h4 id="emailError">Incorrect email address eneterd. Profile not deleted.</h4>
