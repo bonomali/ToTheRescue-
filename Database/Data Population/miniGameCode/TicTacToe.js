@@ -34,7 +34,7 @@ function DrawTicTacToeOutline(ctx)
     ctx.lineTo(520, 356);
     ctx.lineTo(0, 356);
     ctx.fill();
-}
+})
 
 //Adds clickable areas to the ticTacToeClickAreas array
 function AddTicTacToeClickAreas(ticTacToeClickAreas)

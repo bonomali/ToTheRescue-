@@ -54,7 +54,7 @@
     </div>
 </div>
 <div class="miniGame" style="display:none">
-    <script src="~/MiniGameTestCode/TicTacToe.js"></script>
+    @*<script src="@Url.Action("ExecMiniGame")"></script>*@
     <button id="miniGameDone">Done</button>
 </div>
 @section scripts {
@@ -63,7 +63,7 @@
     var saved = new Audio();
     saved.src = "../Audio/Ta_Da.mp3";
     saved.volume = 0.2;
-    
+
     //transfer nodes from Model into JS array
     var nodeArr = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.MapNodes));
     //when play button clicked: load/display minigame --> call controller function to update values --> move avatar
@@ -72,6 +72,7 @@
             $('.mapContainer').hide();
             $('#play').hide();
             $('.miniGame').show();
+            exec(@Model.MiniGame)
         });
     });
     //Get current node from ProfileProgess table through contoller method and move avatar to current node

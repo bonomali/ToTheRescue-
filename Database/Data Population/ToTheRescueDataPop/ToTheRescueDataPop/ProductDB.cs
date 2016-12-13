@@ -11,6 +11,7 @@ namespace ToTheRescueDataPop
         // The directory for the images
         public static string IMAGES_PATH = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\testMedia\\");
         public static string SOUND_PATH = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\testMedia\\");
+        public static string CODE_PATH = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\testMedia\\");
         static string DB_USER_NAME = "";
         static string DB_USER_PWD = "";
         public static SqlConnection GetConnection()
@@ -134,7 +135,7 @@ namespace ToTheRescueDataPop
             SqlConnection connection = null;
             try
             {
-                // 1. Read image from file
+                // 1. Read sound from file
                 string filepath = SOUND_PATH + SoundPath;
                 if (File.Exists(filepath) == false)
                     throw new Exception("File Not Found: " + filepath);
@@ -148,7 +149,7 @@ namespace ToTheRescueDataPop
                 sourceStream.Read(soundImage, 0, streamLength);
                 sourceStream.Close();
 
-                // 2. Write image to database
+                // 2. Write sound to database
                 connection = GetConnection();
 
                 SqlCommand command = new SqlCommand();
@@ -156,10 +157,60 @@ namespace ToTheRescueDataPop
                 command.CommandText =
                     "INSERT INTO dbo.Sounds (SoundClass, SoundName, Sound) " +
                     "VALUES (@SoundClass, @SoundName, @SoundImage)";
+
                 command.Parameters.AddWithValue("@SoundClass", SoundClass);
                 command.Parameters.AddWithValue("@SoundName", SoundName);
                 command.Parameters.AddWithValue("@SoundImage", soundImage);
 
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+        }
+        public static void WriteMiniGameCode(int CategoryID, string JSFileName, string GameName, int MinDifficulty, int MaxDifficulty)
+        {
+            SqlConnection connection = null;
+            try
+            {
+                // 1. Read game code from file
+                string filepath = CODE_PATH + JSFileName;
+                if (File.Exists(filepath) == false)
+                    throw new Exception("File Not Found: " + filepath);
+                FileStream sourceStream = new FileStream(
+                    filepath,
+                    FileMode.Open,
+                    FileAccess.Read);
+
+                int streamLength = (int)sourceStream.Length;
+                Byte[] gameBytes = new Byte[streamLength];
+                sourceStream.Read(gameBytes, 0, streamLength);
+                sourceStream.Close();
+
+                // 2. Write game code to database
+                connection = GetConnection();
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+
+                command.CommandText =
+                "INSERT INTO dbo.MiniGames (MiniGameCategoryID, MiniGameCode, MiniGameName, MinDifficulty, MaxDifficulty) " +
+                "VALUES (@GameCategory, @GameCode, @GameName, @MinDifficulty, @MaxDifficulty)";
+
+                command.Parameters.AddWithValue("@GameCategory", CategoryID);
+                command.Parameters.AddWithValue("@GameCode", gameBytes);
+                command.Parameters.AddWithValue("@GameName", GameName);
+                command.Parameters.AddWithValue("@MinDifficulty", MinDifficulty);
+                command.Parameters.AddWithValue("@MaxDifficulty", MaxDifficulty);
                 connection.Open();
                 command.ExecuteNonQuery();
             }

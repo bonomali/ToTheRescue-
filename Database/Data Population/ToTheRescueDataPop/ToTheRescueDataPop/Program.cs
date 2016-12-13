@@ -119,6 +119,11 @@ namespace ToTheRescueDataPop
             Console.WriteLine(path);
             ProductDB.WriteSQL(path);
 
+            //Write Mini Game JS Code
+            ProductDB.WriteMiniGameCode(3, "Simon.js", "Simon", 1, 2);
+            ProductDB.WriteMiniGameCode(3, "Snake.js", "Snake", 1, 2);
+            ProductDB.WriteMiniGameCode(3, "TicTacToe.js", "TicTacToes", 1, 2);
+
             Console.WriteLine("Uploading Minigamemedia.");
             if (dataImageIDList.Count == 0)
             {
@@ -167,7 +172,7 @@ namespace ToTheRescueDataPop
             Console.WriteLine(path);
             ProductDB.WriteSQL(path);
 
-            Console.WriteLine("-----Done!-----");
+            Console.WriteLine("-----Done!-----"); 
         }
     }
 }

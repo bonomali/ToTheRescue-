@@ -19,6 +19,8 @@ namespace ToTheRescueWebApplication.Controllers
         ProfileProgressDBRepository _progress;
         OptionsDBRepository _options;
         AnimalDBRepository _animal;
+        MiniGamesDBRepository _minigame;
+
         const int LAST_MAP = 7;    //last map in game
         public PlayController()
         {
@@ -29,6 +31,7 @@ namespace ToTheRescueWebApplication.Controllers
             _progress = new ProfileProgressDBRepository();
             _options = new OptionsDBRepository();
             _animal = new AnimalDBRepository();
+            _minigame = new MiniGamesDBRepository();
         }
         // GET: Play
         // Set values from database to model, pass into Play/Map view
@@ -79,6 +82,12 @@ namespace ToTheRescueWebApplication.Controllers
             model.Avatar = options.AvatarID;
             model.MapNodes = nodes;
 
+            //get minigame
+            List<MiniGame> minigames = _minigame.GetList(3, 1, 2); //catID, minDiff, maxDiff
+
+            model.MiniGame = minigames[2].MiniGameCode;
+            model.MiniGameID = minigames[2].ID;
+
             return model;
         }
         //display map image
@@ -112,6 +121,13 @@ namespace ToTheRescueWebApplication.Controllers
             Sounds audio = _music.Get(currentMap.SoundID);  //get sound from database
             
             return base.File(audio.Sound, audio.SoundName);
+        }
+        public ActionResult ExecMiniGame()
+        {
+            List<MiniGame> minigames = _minigame.GetList(3, 1, 2); //catID, minDiff, maxDiff
+            MiniGame game = minigames[2];
+
+            return base.File(game.MiniGameCode, game.MiniGameName);
         }
         //update ProfileProgress values for profile after a minigame is played
         public void FinishMiniGame()
