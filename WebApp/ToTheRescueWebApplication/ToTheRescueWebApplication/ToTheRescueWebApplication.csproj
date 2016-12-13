@@ -271,6 +271,7 @@
     <Compile Include="Repositories\MapDBRepository.cs" />
     <Compile Include="Repositories\NodeDBRepository.cs" />
     <Compile Include="Repositories\ProfileProgressDBRepository.cs" />
+    <Compile Include="Repositories\MiniGameMediaDBRepository.cs" />
     <Compile Include="Repositories\SoundDBRepository.cs" />
     <Compile Include="Repositories\ProfileDBRepository.cs" />
     <Compile Include="Code\Profile.cs" />

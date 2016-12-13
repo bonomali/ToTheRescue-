@@ -23,18 +23,7 @@ namespace ToTheRescueWebApplication.Controllers
         // GET: Profile
         public ActionResult ChooseProfilePage()
         {
-            //Get the UserID and the UserEmail
-            if (TempData["userID"] != null)
-            {
-                //counter intuitive, should assign directly to the session variables now on
-                Session["userID"] = (int)TempData["userID"];
-            }
-
-            if (TempData["userEmail"] != null)
-            {
-                Session["userEmail"] = (string)TempData["userEmail"];
-            }
-
+       
             return View(_profileRepo.GetList());
         }
 

@@ -10,7 +10,8 @@ namespace ToTheRescueWebApplication.Repositories
 {
     public class MiniGamesDBRepository
     {
-        public List<MiniGame> GetList(int categoryID, int minDifficulty, int maxDifficulty)
+        //get a list of playable minigames based on category and difficulty
+        public List<MiniGame> GetListPlayable(int categoryID, int minDifficulty, int maxDifficulty)
         {
             List<MiniGame> miniGames = new List<MiniGame>();
 
@@ -39,6 +40,31 @@ namespace ToTheRescueWebApplication.Repositories
                             code.MaxDifficulty = (int)reader["MaxDifficulty"];
 
                             miniGames.Add(code);
+                        }
+                    }
+                }
+            }
+            return miniGames;
+        }
+        //Get list of recently played minigames
+        public List<int> GetListRecentlyPlayed(int profileID)
+        {
+            List<int> miniGames = new List<int>();
+
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "SELECT MiniGameID FROM ProfileProgressHistory WHERE ProfileID=@profileID";
+                    command.Parameters.AddWithValue("@ProfileID", profileID);
+                    command.Connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            miniGames.Add((int)reader["MiniGameID"]);
                         }
                     }
                 }

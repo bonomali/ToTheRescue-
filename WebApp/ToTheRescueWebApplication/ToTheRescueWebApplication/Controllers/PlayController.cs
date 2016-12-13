@@ -82,8 +82,10 @@ namespace ToTheRescueWebApplication.Controllers
             model.Avatar = options.AvatarID;
             model.MapNodes = nodes;
 
-            //get minigame
-            List<MiniGame> minigames = _minigame.GetList(3, 1, 2); //catID, minDiff, maxDiff
+            //get list of playable minigames based on category and difficulty
+            List<MiniGame> minigames = _minigame.GetListPlayable(3, 1, 2); //catID, minDiff, maxDiff
+            //get list or recently played minigames
+            List<int> playedgames = _minigame.GetListRecentlyPlayed((int)Session["profileID"]);
 
             model.MiniGame = minigames[2].MiniGameCode;
             model.MiniGameID = minigames[2].ID;
@@ -124,7 +126,7 @@ namespace ToTheRescueWebApplication.Controllers
         }
         public ActionResult ExecMiniGame()
         {
-            List<MiniGame> minigames = _minigame.GetList(3, 1, 2); //catID, minDiff, maxDiff
+            List<MiniGame> minigames = _minigame.GetListPlayable(3, 1, 2); //catID, minDiff, maxDiff
             MiniGame game = minigames[2];
 
             return base.File(game.MiniGameCode, game.MiniGameName);

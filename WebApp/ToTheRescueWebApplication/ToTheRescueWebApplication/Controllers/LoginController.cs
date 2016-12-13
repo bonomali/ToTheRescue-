@@ -77,8 +77,8 @@ namespace ToTheRescueWebApplication.Controllers
             {
                 var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
                 var currentUser = manager.FindById(User.Identity.GetUserId());
-                TempData["userID"] = currentUser.UserID;
-                TempData["userEmail"] = currentUser.Email;
+                Session["userID"] = currentUser.UserID;
+                Session["userEmail"] = currentUser.Email;
 
                 return RedirectToAction("ChooseProfilePage", "Profile");
             }
@@ -117,8 +117,8 @@ namespace ToTheRescueWebApplication.Controllers
                 case SignInStatus.Success:
                     var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
                     var currentUser = manager.FindByEmail(model.Email);
-                    TempData["userID"] = currentUser.UserID;
-                    TempData["userEmail"] = currentUser.Email;
+                    Session["userID"] = currentUser.UserID;
+                    Session["userEmail"] = currentUser.Email;
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -133,7 +133,7 @@ namespace ToTheRescueWebApplication.Controllers
         [AllowAnonymous]
         public ActionResult ResendConfirmationEmail()
         {
-            string email = (string)TempData["Email"];
+            string email = (string)Session["userEmail"];
             if (!string.IsNullOrEmpty(email))
             {
                 return View((object)email);
@@ -221,8 +221,8 @@ namespace ToTheRescueWebApplication.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    TempData["userID"] = user.UserID;
-                    TempData["userEmail"] = user.Email;
+                    Session["userID"] = user.UserID;
+                    Session["userEmail"] = user.Email;
                     //return RedirectToAction("Login", "Login");
                     return RedirectToAction("ChooseProfilePage", "Profile");
 
