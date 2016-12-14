@@ -49,55 +49,15 @@ RETURN(SELECT NodeID, XCoordinate, YCoordinate
 		WHERE Maps.MapID = @mapID);
 GO
 
-
---Note, return val of 1 is true and return val of 0 is false
-
-/**********************************************************************
-* Purpose: This function checks to see if the user entered an 
-* existing username. A return value of 1 means the username exists,
-* 0 means the username does not exist.
-***********************************************************************/
-DROP FUNCTION IsExistingUserName
-GO
-CREATE FUNCTION IsExistingUserName
-	(@userName VARCHAR(50))
-	RETURNS BIT
-BEGIN
-	DECLARE @existingUserName BIT = 0;
-	IF EXISTS (SELECT UserName FROM Users WHERE Username = @userName)
-	SET @existingUserName = 1; 
-RETURN @existingUserName;
-END;
-GO
-
-/**********************************************************************
-* Purpose: This function checks to see if the user entered a 
-* correct password. A return value of 1 means that the user entered
-* a correct password, a return value of 0 means that the user entered
-* an incorrect password.
-***********************************************************************/
-DROP FUNCTION IsValidPassword
-GO 
-CREATE FUNCTION IsValidPassword
-	(@userName VARCHAR(50), @password VARCHAR(50))
-	RETURNS BIT
-BEGIN
-	DEClARE @validPassword BIT = 0;
-	IF EXISTS (SELECT UserPassword FROM Users WHERE Username = @userName AND UserPassword = @password)
-		SET @validPassword = 1;
-RETURN @validPassword;
-END;
-GO
-
 /**********************************************************************
 * Purpose: This function gets a profile's current map, 
 * current node and ID of the animal to be saved at the end of 
 * the current map (Essentially the information in the ProfileProgress 
 * table).
 ***********************************************************************/
-DROP FUNCTION GetProfileProgressInfo
+DROP FUNCTION func_GetProfileProgressInfo
 GO
-CREATE FUNCTION GetProfileProgressInfo
+CREATE FUNCTION func_GetProfileProgressInfo
 	(@profileID int)
 	RETURNS TABLE
 RETURN
@@ -105,15 +65,6 @@ RETURN
 FROM ProfileProgress
 WHERE ProfileID = @profileID);
 GO
-
-GO
-CREATE FUNCTION GetProfileID
-	(@userID INT,
-	@profileName VARCHAR(50),
-	@avatar VARBINARY(MAX))
-	RETURNS INT
-BEGIN
-	
 
 /************************************************************
 * This Function returns the profile row associated with the 
