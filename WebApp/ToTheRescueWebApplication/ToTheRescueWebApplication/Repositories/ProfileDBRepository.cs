@@ -11,23 +11,30 @@ namespace ToTheRescueWebApplication.Repositories
 {
     public class ProfileDBRepository : IDataEntityRepository<Profile>
     {
+        //needed for the get all profile avatars class
+        private const int AVTAR_IMAGE_CLASS = 1;
+
         //will hold the httpcontext in order to get a session variable's information
         private HttpContext _ctx;
 
-        //using dependency injection to get httpcontext in order 
-        //to get a session variable's information
+        /**********************************************************************
+        * Purpose: Uses dependency injection to get httpcontext in order 
+        * to get a session variable's information.
+        ***********************************************************************/
         public ProfileDBRepository(HttpContext ctx)
         {
             _ctx = ctx;
         }
 
-        //Gets all the profile information for a certain profileID
+        //Not implemented but needed due to inheritance
         public Profile Get(int profileID)
         {
             throw new NotImplementedException();
         }
 
-        //Gets a list of profiles needed for the choose profile page
+        /**********************************************************************
+        * Purpose: Gets a list of profiles needed for the choose profile page.
+        ***********************************************************************/
         public List<Profile> GetList()
         {
             List<Profile> profiles = new List<Profile>();
@@ -88,7 +95,9 @@ namespace ToTheRescueWebApplication.Repositories
             return profiles;
         }
 
-        //adds a profile to the Profiles table in the database
+        /**********************************************************************
+        * Purpose: Adds a profile to the Profiles table in the database
+        ***********************************************************************/
         public void Save(Profile entity)
         {
             using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
@@ -122,7 +131,7 @@ namespace ToTheRescueWebApplication.Repositories
 
         /**********************************************************************
         * Purpose: This function grabs the avatar for the specific profileID
-        * and returns it as a byte array.
+        * and assigns it to the Profile passed into the function.
         ***********************************************************************/
         public void GetProfileAvatar(Profile prof)
         {
@@ -158,43 +167,12 @@ namespace ToTheRescueWebApplication.Repositories
             }
         }
 
-        //Deletes a profile out of the database using one of the functions in the database
-        public void DeleteProfile(string profileName, int uID)
+        /**********************************************************************
+        * Purpose: Deletes a profile out of the database using one of the functions in the database.
+        * The parameter is the profileID.
+        ***********************************************************************/
+        public void DeleteProfile(int profileID)
         {
-            int profileID = 0;
-
-            //Get the profileID to delete
-            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
-            {
-                try
-                {
-                    //parameterized statement
-                    string sql = "SELECT ProfileID FROM Profiles WHERE UserID = @userID AND ProfileName = @profileName;";
-                    SqlCommand cmd = new SqlCommand(sql);
-
-                    cmd.Parameters.Add(new SqlParameter("@userID", System.Data.SqlDbType.Int));
-                    cmd.Parameters.Add(new SqlParameter("@profileName", System.Data.SqlDbType.VarChar));
-                    cmd.Parameters["@userID"].Value = uID;
-                    cmd.Parameters["@profileName"].Value = profileName;
-
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Connection = connection;
-
-                    connection.Open();
-                    //how to get a single value back
-                    profileID = (int)cmd.ExecuteScalar();
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-                finally
-                {
-                    if (connection != null)
-                        connection.Close();
-                }
-            }
-
             //Delete that profileID out of the database
             using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
             {
@@ -221,8 +199,7 @@ namespace ToTheRescueWebApplication.Repositories
         }
 
         /**********************************************************************
-        * Purpose: This function populates the m_allAvatars list with all the 
-        * Images from the Images table that are avatars.
+        * Purpose: This function returns a list of all the profile avatars in the database.
         ***********************************************************************/
         public List<Byte[]> GetAllProfileAvatars()
         {
@@ -235,7 +212,9 @@ namespace ToTheRescueWebApplication.Repositories
                     cmd.Connection = connection;
                     cmd.CommandText = "SELECT Images FROM Images WHERE ImageClass = @imgClass;";
                     cmd.Parameters.Add(new SqlParameter("@imgClass", System.Data.SqlDbType.Int));
-                    cmd.Parameters["@imgClass"].Value = 1;
+
+
+                    cmd.Parameters["@imgClass"].Value = AVTAR_IMAGE_CLASS;
 
                     connection.Open();
                     SqlDataReader reader = cmd.ExecuteReader();

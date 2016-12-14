@@ -11,22 +11,31 @@ namespace ToTheRescueWebApplication.Controllers
 {
     public class ProfileController : Controller
     {
-
+        //gets and puts information from/to the database
         private ProfileDBRepository _profileRepo;
 
+        /**********************************************************************
+        * Purpose: Constructor, news up the profile repository
+        ***********************************************************************/
         public ProfileController()
         {
             //pass in the http context, constructor injection
             _profileRepo = new ProfileDBRepository(System.Web.HttpContext.Current);
         }
 
-        // GET: Profile
+        /**********************************************************************
+        * Purpose: Displays the ChooseProfilePage passing in the list of profiles
+        * for a specific user
+        ***********************************************************************/
         public ActionResult ChooseProfilePage()
         {
-       
             return View(_profileRepo.GetList());
         }
 
+        /**********************************************************************
+        * Purpose: Deletes a profile out of the database or makes it so an
+        * error message is displayed saying incorrect email.
+        ***********************************************************************/
         public void ClickedDelete(string email, int? profileIndex)
         {
             int index = -10;
@@ -45,7 +54,7 @@ namespace ToTheRescueWebApplication.Controllers
             {
                 string profileName = _profileRepo.GetList()[index].ProfileName;
 
-                _profileRepo.DeleteProfile(profileName, (int)Session["userID"]);
+                _profileRepo.DeleteProfile((int)Session["profileID"]);
             }
             else
             {
@@ -53,9 +62,12 @@ namespace ToTheRescueWebApplication.Controllers
             }
         }
 
-        //Saves the name of the selected profile to the m_profileNameSelected variable, note the parameter must be a nullable
-        //The parameter passed in is an index to the profile the user selected on the choose profiles page
-        public void ClickedPlay(int? id)
+        /**********************************************************************
+        * Purpose: Saves the name of the selected profile to the session variable, 
+        * note the parameter must be nullable. The parameter passed in is an index 
+        * to the profile the user selected on the choose profiles page.
+        ***********************************************************************/
+        public void SelectedProfile(int? id)
         {
             int selectedIndex = (int)id;
 
@@ -72,14 +84,18 @@ namespace ToTheRescueWebApplication.Controllers
             }
         }
 
-        //directs you to the choose profile page
+        /**********************************************************************
+        * Purpose: Directs you to the choose profile page.
+        ***********************************************************************/
         public ActionResult CreateProfilePage()
         {
-
             return View(_profileRepo.GetAllProfileAvatars());
         }
 
-        //routes don't work seperately
+        /**********************************************************************
+        * Purpose: Creates a new profile and adds it to the database or makes
+        * it so an error message is displayed in the CreateProfilePage.
+        ***********************************************************************/
         public ActionResult CreateNewProfile(string profileName, int? avatarIndex)
         {
             int index = -10;
@@ -89,13 +105,13 @@ namespace ToTheRescueWebApplication.Controllers
             }
             else
             {
+                //go back to the Create Profile Page and display an error message
                 TempData["EmptyNameError"] = "You must enter a profile name in order to create a new profile. Please try again.";
                 return Content("Failure");
             }
 
             if (String.IsNullOrWhiteSpace(profileName))
             {
-                //go back to the Create Profile Page and display an alert
                 TempData["EmptyNameError"] = "You must enter a profile name in order to create a new profile. Please try again.";
                 return Content("Failure");
             }
@@ -113,11 +129,14 @@ namespace ToTheRescueWebApplication.Controllers
             }
 
             Profile prof = new Profile();
+
+            //get the correct index of the AvatarID
             index++;
 
             prof.AvatarID = index;
             prof.ProfileName = profileName;
 
+            //add teh profile to the database
             _profileRepo.Save(prof);
 
             //on success, redirect to the Choose Profiles Page where the new profile will be located

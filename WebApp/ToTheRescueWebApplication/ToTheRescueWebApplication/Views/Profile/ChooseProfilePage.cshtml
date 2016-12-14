@@ -9,7 +9,7 @@
     if (Model.Count() <= 4)
     {
         //I use only the top html border for the top and then 3 divs for the rest of the 
-        //border
+        //border when there is 4 or less profiles
         <script type="text/javascript">
             window.onload = function (){
                 document.getElementById("html").style.borderTop = "15px solid forestgreen";
@@ -46,7 +46,7 @@
     <h4 id="emailError">Incorrect email address eneterd. Profile not deleted.</h4>
     @if (Model.Count() > 0)
     {
-        //display all of the profiles for a specific user
+        //display all of the profiles for a specific user in a table
         <table id="ProfilesTable">
             @if (Model.Count() <= 4)
             {
@@ -99,11 +99,11 @@
     else
     {
         //add spacing because the table isn't created
+        //will place the create profile page in the middle of the page
         <br /><br />
     }
 
     @*allows deletion of a profile*@
-
     <button id="DeleteProfileButton" class="Buttons" , onclick="ClickedDelete()">Delete Profile</button>
 
     @*Only display the Create New Profile button when there are less than 8 profiles*@
@@ -113,7 +113,6 @@
     }
 
     <button id="PlayButton" class="Buttons" onclick="ClickedPlay()">Play</button>
-
     <h5 id="emailText" class="DeleteSection">Please enter your email to delete this profile:</h5><br />
     <input type="text" , id="emailTextBox" class="DeleteSection" />
     <br /><br />
@@ -135,13 +134,12 @@
         //toggle the color of all the profile names
         if (profileDiv.style.color !== "orange") {
             profileDiv.style.color = "orange";
-            var route = '/Profile/SelectedProfile/';
         }
         else {
             profileDiv.style.color = "white";
         }
 
-        //ensure all the other profile namees are black
+        //ensure all the other profile namees are white
         for (var i = 0; i < @Model.Count(); i++) {
             if (i != id) {
                 var tempProfID = "Profile";
@@ -162,9 +160,12 @@
             tempProfID = document.getElementById(tempProfID)
             if (tempProfID.style.color === "orange")
             {
+                //ensures a profile is selected
                 visible = true;
             }
         }
+
+        //if a profile is selected, display the play and delete buttons
         if (visible === true)
         {
             document.getElementById("PlayButton").style.visibility = "visible";
@@ -176,6 +177,7 @@
             document.getElementById("DeleteProfileButton").style.visibility = "hidden";
         }
 
+        //ensure the delete profile form is invisible
         document.getElementById("emailText").style.visibility = "hidden";
         document.getElementById("emailTextBox").style.visibility = "hidden";
         document.getElementById("CancelButton").style.visibility = "hidden";
@@ -202,6 +204,8 @@
         document.getElementById("DeleteProfileSubmit").style.visibility = "hidden";
     }
 
+    //Calls the SelectedProfile function in the controller
+    //before redirecting to the main menu
     function ClickedPlay(){
         for (var i = 0; i <  @Model.Count(); i++) {
             var tempProfID = "Profile";
@@ -209,10 +213,10 @@
             tempProfID = document.getElementById(tempProfID)
             if (tempProfID.style.color === "orange")
             {
-                var route = '/Profile/ClickedPlay/';
+                var route = '/Profile/SelectedProfile/';
                 route = route.concat(i);
 
-                //Call the ClickedPlay function in the profiles controller
+                //Call the SelectedProfile function in the profiles controller
                 $.ajax({
                     url: route,
                     success: function(){
@@ -224,8 +228,9 @@
         }
     }
 
+    //Essentially makes c# function calls in order to delete the selected profile
+    //out of the database
     function DeleteProfile() {
-
         var enteredEmail = document.getElementById("emailTextBox").value;
         var index = null;
         for (var i = 0; i <  @Model.Count(); i++) {
@@ -234,25 +239,40 @@
             tempProfID = document.getElementById(tempProfID)
             if (tempProfID.style.color === "orange")
             {
+                //get the index of the selected profile to delete
                 index = i;
                 break;
             }
         }
 
+        var route = '/Profile/SelectedProfile/';
+
+        route = route.concat(index);
+
+        //Call the SelectedProfile function in the profiles controller in order
+        //to assign the session variable for the selected profileID
+        $.ajax({
+            url: route,
+            success: function(){
+                //just continue with the outer function
+            }
+        });
+
         //this regular expression checks to see if there
-        //is at least one character of non whitespace
+        //is at least one character of non whitespace in the entered email
         if (/\S/.test(enteredEmail) !== true || enteredEmail === '') {
-            //string is just, set it to null so an error
-            //message is displayed
+
+            //string is all white space, set it to "error" so an error message is displayed
             enteredEmail = "error";
         }
 
-        var route = '/profile/delete/';
+        route = '/profile/delete/';
         route = route.concat(enteredEmail);
         route = route.concat('/');
         route = route.concat(index);
 
-        //Call the ClickedDelete function in the profile controller
+        //Call the ClickedDelete function in the profile controller 
+        //to delete the selected profile out of the database
         $.ajax({
             url: route,
             success: function(){
@@ -264,6 +284,8 @@
 </script>
 
 @{
+    //displays an error if the user typed in the wrong email when 
+    //trying to delete a profile
     if (TempData["emailError"] != null)
     {
         <script type="text/javascript">
