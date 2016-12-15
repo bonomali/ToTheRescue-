@@ -29,7 +29,7 @@ namespace ToTheRescueWebApplication.Controllers
         ***********************************************************************/
         public ActionResult ChooseProfilePage()
         {
-            return View(_profileRepo.GetList());
+            return View("ChooseProfilePage", _profileRepo.GetList());
         }
 
         /**********************************************************************
@@ -39,7 +39,6 @@ namespace ToTheRescueWebApplication.Controllers
         public void ClickedDelete(string email, int? profileIndex)
         {
             int index = -10;
-            bool validEmail = false;
 
             if (profileIndex.HasValue)
             {
@@ -47,10 +46,6 @@ namespace ToTheRescueWebApplication.Controllers
             }
 
             if (email == (string)Session["userEmail"])
-                validEmail = true;
-
-
-            if (validEmail == true)
             {
                 string profileName = _profileRepo.GetList()[index].ProfileName;
 
@@ -89,7 +84,7 @@ namespace ToTheRescueWebApplication.Controllers
         ***********************************************************************/
         public ActionResult CreateProfilePage()
         {
-            return View(_profileRepo.GetAllProfileAvatars());
+            return View("CreateProfilePage", _profileRepo.GetAllProfileAvatars());
         }
 
         /**********************************************************************
