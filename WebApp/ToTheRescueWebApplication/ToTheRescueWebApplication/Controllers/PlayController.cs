@@ -87,6 +87,9 @@ namespace ToTheRescueWebApplication.Controllers
             //get list or recently played minigames
             List<int> playedgames = _minigame.GetListRecentlyPlayed((int)Session["profileID"]);
 
+            //TO DO:
+            /*****randomly choose a map that isn't in list of recently played*****/
+
             model.MiniGame = minigames[2].MiniGameCode;
             model.MiniGameID = minigames[2].ID;
 
@@ -135,6 +138,11 @@ namespace ToTheRescueWebApplication.Controllers
         public void FinishMiniGame()
         {
             _progress.UpdateCurrentNode((int)Session["profileID"]);
+
+            //TO DO:
+            /*****add minigame id to previously played minigames
+            recalculate performance statistic based on value returned from minigame
+                check if difficulty needs to be adjusted*****/
         }
         //update ProfileProgress to a new map
         public void NewMap()
@@ -142,6 +150,7 @@ namespace ToTheRescueWebApplication.Controllers
             ProfileProgress p = _progress.Get((int)Session["profileID"]);
             Random random = new Random();
             int newAnimal = random.Next(1, 21); //generate a number between 1 and 20
+            
             //if user hasn't reached last map, go to next map
             if (p.CurrentMap < LAST_MAP)
             {
