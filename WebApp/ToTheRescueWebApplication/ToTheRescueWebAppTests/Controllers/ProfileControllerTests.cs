@@ -6,6 +6,10 @@ using System.IO;
 using System.Web.SessionState;
 using System.Reflection;
 using Moq;
+using System.Data.SqlClient;
+using ToTheRescueWebApplication.Repositories;
+using System.Data;
+using System.Configuration;
 
 namespace ToTheRescueWebApplication.Controllers.Tests
 {
@@ -17,6 +21,10 @@ namespace ToTheRescueWebApplication.Controllers.Tests
         private int _testUserID = 1;
         private int _testProfileID = 1;
 
+        /**********************************************************************
+        * Purpose: Fakes an http current context needed for any tests dealing with
+        * the ProfileDBRepository
+        ***********************************************************************/
         private void FakeCurrentHttpContext()
         {
             //fake an http request by making one of my onwn
@@ -47,6 +55,43 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             HttpContext.Current.Session["profileID"] = _testProfileID;
         }
 
+
+        /**********************************************************************
+        * Purpose: Deletes the test profile made in the TestCreateNewProfileSuccess() 
+        * function.
+        ***********************************************************************/
+        private void DeleteProfileOutOfDatabase()
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            {
+                SqlCommand cmd = null;
+
+                try
+                {
+                    cmd = new SqlCommand("DELETE FROM Profiles WHERE ProfileName = @profileName;");
+
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = connection;
+                    cmd.Parameters.Add(new SqlParameter("@profileName", System.Data.SqlDbType.VarChar));
+
+                    cmd.Parameters["@profileName"].Value = "testProf";
+
+                    //delete the test profile out of the database
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                finally
+                {
+                    if (connection != null)
+                        connection.Close();
+                }
+            }
+        }
+
         [TestMethod()]
         public void TestChooseProfilePageMethodReturnsChooseProfilePageView()
         {
@@ -62,7 +107,7 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             
             //ASSERT
             //Ensure the correct view was returned
-            Assert.AreEqual("ChooseProfilePage", result.ViewName);
+            Assert.AreEqual(expected: "ChooseProfilePage", actual: result.ViewName);
             
         }
 
@@ -82,7 +127,7 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             string expected = "Incorrect email address eneterd. Please try again.";
 
             //ACT
-            controller.ClickedDelete("incorrectEmail", 1);
+            controller.ClickedDelete("incorrectEmail");
             string actual = controller.TempData["emailError"].ToString();
 
             //ASSERT
@@ -93,9 +138,10 @@ namespace ToTheRescueWebApplication.Controllers.Tests
         * Purpose: Ensures that the email check is correct and then a null
         * null reference exception will be throw because I didn't set up the
         * profileID session variable becuase I don't want any data out of the
-        * database to be deleted.
+        * database to be deleted. Note, the way my methods are set up, it will be
+        * so much of a hassel in order to delete a profile out of the database.
         ***********************************************************************/
-        [TestMethod()] //WILL FINISH COMPLETELY LATER, MAKE SO IT DELETES A SPECIFIC PROFILE OUT OF DATABASE
+        [TestMethod()]
         [ExpectedException(typeof(NullReferenceException))]
         public void TestClickedDeleteEnteringCorrectEmail()
         {
@@ -110,13 +156,26 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             controller.ControllerContext = mockControllerContext.Object;
 
             //ACT
-            controller.ClickedDelete("stephanie.vetter@oit.edu", 1);
+            controller.ClickedDelete("stephanie.vetter@oit.edu");
         }
 
         [TestMethod()]
         public void TestCreateNewProfileSuccess()
         {
-            //PUT THE PROFILE I JUST CREATED BACK INTO THE DATABASE
+            //ARRANGE
+            //fake the http context
+            FakeCurrentHttpContext();
+            var controller = new ProfileController();
+            string expected = "Success";
+
+            //ACT
+            var returnVal = controller.CreateNewProfile("testProf", 2) as ContentResult;
+
+            //ASSERT
+            Assert.AreEqual(expected, returnVal.Content);
+
+            //delete the profile out of the database
+            DeleteProfileOutOfDatabase();
         }
 
         [TestMethod()]

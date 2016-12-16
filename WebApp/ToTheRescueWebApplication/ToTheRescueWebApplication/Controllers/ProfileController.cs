@@ -36,19 +36,10 @@ namespace ToTheRescueWebApplication.Controllers
         * Purpose: Deletes a profile out of the database or makes it so an
         * error message is displayed saying incorrect email.
         ***********************************************************************/
-        public void ClickedDelete(string email, int? profileIndex)
+        public void ClickedDelete(string email)
         {
-            int index = -10;
-
-            if (profileIndex.HasValue)
-            {
-                index = (int)profileIndex;
-            }
-
             if (email == (string)Session["userEmail"])
             {
-                string profileName = _profileRepo.GetList()[index].ProfileName;
-
                 _profileRepo.DeleteProfile((int)Session["profileID"]);
             }
             else
@@ -110,14 +101,12 @@ namespace ToTheRescueWebApplication.Controllers
                 TempData["EmptyNameError"] = "You must enter a profile name in order to create a new profile. Please try again.";
                 return Content("Failure");
             }
-
-            if (profileName == "~!null~$")
+            else if (profileName == "~!null~$")
             {
                 TempData["EmptyNameError"] = "You must enter a profile name in order to create a new profile. Please try again.";
                 return Content("Failure");
             }
-
-            if (profileName.Length > 15)
+            else if (profileName.Length > 15)
             {
                 TempData["TooLongName"] = "You must enter a profile name that is 15 characters long or less. Please try again.";
                 return Content("Failure");
