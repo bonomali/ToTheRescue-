@@ -11,7 +11,7 @@ namespace ToTheRescueDataPop
         // The directory for the images
         public static string IMAGES_PATH = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\testMedia\\");
         public static string SOUND_PATH = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\testMedia\\");
-        public static string CODE_PATH = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\testMedia\\");
+        public static string CODE_PATH = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\miniGameCode\\");
         static string DB_USER_NAME = "";
         static string DB_USER_PWD = "";
         public static SqlConnection GetConnection()
