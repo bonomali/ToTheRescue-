@@ -19,7 +19,7 @@
     b5.src = "../../MiniGames/Alphabet_BubblePop/sounds/e_recording.m4a"
 
     spec = {
-		width: 800,
+		width: 1100,
 		height: 600,
 		bg: {
 		    src: "../../MiniGames/Alphabet_BubblePop/images/undersea.jpg"
@@ -149,7 +149,7 @@
 		    var endOfGame = new Audio();
 		    endOfGame.src = "../../MiniGames/Alphabet_BubblePop/sounds/gameOver.m4a";
 		    endOfGame.play();
-		    alert("Game Over");
+		    EndofGame(); //function displays good job message and returns to map
 		}, 60000);
     };
 }());

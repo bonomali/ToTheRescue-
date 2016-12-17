@@ -98,6 +98,15 @@ nav#playMenu li#play {
     bottom: 79%;
     margin-left: -5%;
 }
+nav#playMenu li#back { 
+    position:fixed;
+    bottom: 83%;
+}
+#backLbl {
+    position:fixed;
+    bottom: 79%;
+    margin-left: -5%;
+}
 .icon {
     border:groove;
     border-color:lightseagreen;
@@ -163,40 +172,42 @@ nav#playMenu li#play {
     width: 20%;
     height: 30%;
 }
+div#gameOver {
+    position:relative;
+    left: 30%;
+    margin-top: -50%;
+    width: 40%;
+    height: 50%;  
+    min-height: 150px;
+    background-color: darkgreen;
+    z-index: 3;
+    border-radius: 25px;
+}
+#greatJob {
+    display: block;
+    margin-left: 41%;
+    margin-bottom: 6%;
+    width: 30%;
+    height: 45%;
+}
 #closePraise {
     width: 20%;
     height: 10%;
     min-width: 60px;
-    min-height: 15px;
+    min-height: 20px;
     background-color: lightblue;
     color: darkblue;
     font-family: "Comic Sans MS", cursive, sans-serif;
-    border-radius: 25px;
+    border-radius: 30px;
     display:block;
     margin-left:auto;
     margin-right:auto;
     margin-bottom: 2%;
-    font-size: 90%;
+    font-size: 70%;
 }
 #closePraise:hover {
     background-color: lightpink;
     font-size: 100%;
-}
-.miniGame {
-   background-color:lightseagreen;
-   min-width: 100%;
-   min-height: 88%;
-   border: 2px solid lightblue;
-   box-sizing: border-box;
-   border-style:outset;
-   position: absolute;
-   margin-top: 5%;
-   margin-left: -.5%;       
-}
-#miniGameDone {
-    position: fixed;
-    bottom: 2%;
-    left: 80%;
 }
 @media only screen and (min-width: 540px) {
     #optionsLbl {
@@ -215,6 +226,13 @@ nav#playMenu li#play {
     nav#playMenu li#play { 
     bottom: 85%;
     }
+     #backLbl {
+        bottom: 81%;
+        margin-left: -3.5%;
+    }
+    nav#playMenu li#back { 
+    bottom: 85%;
+    }
     .icon {
         margin-left: -28px;
     }
@@ -224,6 +242,9 @@ nav#playMenu li#play {
     }
     .mapContainer #animalImg {
         margin-top: 30%;
+    }
+    div#gameOver {
+        margin-top: -45%;
     }
 }
 @media only screen and (min-width: 620px) {
@@ -259,6 +280,12 @@ nav#playMenu li#play {
     #praise {
         font-size: 36px;
     }
+    div#gameOver { 
+        min-height: 250px;
+    }
+    #closePraise {
+    font-size: 90%;
+    }
 }
 /*When screen is 1080px or larger, apply this CSS*/
 @media only screen and (min-width: 1080px) {
@@ -280,14 +307,21 @@ nav#playMenu li#play {
     #playLbl {
         margin-left: -4%;
     }
+    #backLbl {
+        margin-left: -4%;
+    }
     .mapContainer #mapImg {
         margin-top: 7.5%;
         margin-left: 1.25%;
     }
-        .mapContainer #animalImg {
+    .mapContainer #animalImg {
         margin-top: 25%;
     }
     #miniGameDone {
     left: 85%;
+    }
+    div#gameOver { 
+        margin-top: -40%;
+        min-height: 270px;
     }
 }

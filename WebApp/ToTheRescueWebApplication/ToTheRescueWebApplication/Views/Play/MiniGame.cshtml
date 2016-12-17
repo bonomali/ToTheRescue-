@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_MiniGameLayout.cshtml";
+    ViewBag.Title = "Play MiniGame";
+}
+@model ToTheRescueWebApplication.Models.Play.PlayModel
+<nav id="playMenu">
+    <div class="icons">
+        <ul class="buttons">
+            <li id="back">
+                <a href="~/Play/Play">
+                    <img src="~/Images/backIcon.png" class="icon" alt="Back">
+                </a>
+                <label class="iconLbls " id="backLbl">Back</label>
+            </li>
+            <li id="sanctuary">
+                <a href="~/AnimalSanctuary/Sanctuary">
+                    <img src="~/Images/sanctuaryIcon.png" class="icon" alt="Sanctuary">
+                </a>
+                <label class="iconLbls " id="sanctuaryLbl">Sanctuary</label>
+            </li>
+            <li id="menu">
+                <a href="~/MainMenu/MainMenu">
+                    <img src="~/Images/menuIcon.png" class="icon" alt="Menu">
+                </a>
+                <label class="iconLbls " id="menuLbl">Menu</label>
+            </li>
+            <li id="options">
+                <a href="~/Options/Options">
+                    <img src="~/Images/optionsIcon.png" class="icon" alt="Options">
+                </a>
+                <label class="iconLbls " id="optionsLbl">Options</label>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div id="BlocksGame">  @*Where minigame script is executed --> this may be a path to files on the server*@
+    <script src="~/MiniGames/Alphabet_BubblePop/javascript/blockjs_framework.js"></script>
+    <script id="bubbleScript" src="~/MiniGames/Alphabet_BubblePop/javascript/bubble.js"></script>
+    
+    @*Pop up box displayed when minigame is over*@
+    <div id="gameOver" style="display:none">
+        <p id="praise">Great Job!</p>
+        <img src="~/Images/gameOver.png" id="greatJob" alt="Great Job!">
+        <button id="closePraise">Done</button>
+    </div>
+</div>
+@section scripts {
+    <script>
+        //when user is done playing minigame, display end of game message and update values
+        function EndofGame() {
+            $.ajax({
+                url: '/Play/FinishMiniGame/',   //update values after minigame in controller
+            });
+            $('#gameOver').show();
+        }
+
+        //when animal saved div close, go to new map
+        $("#closePraise").click(function () {
+            window.location.href = '/Play/Play/';
+        });
+    </script>
+}

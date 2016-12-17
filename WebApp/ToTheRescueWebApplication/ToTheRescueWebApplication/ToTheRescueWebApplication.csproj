@@ -205,6 +205,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\animalBackground.jpg" />
+    <Content Include="Images\backIcon.png" />
+    <Content Include="Images\gameOver.png" />
+    <Content Include="Images\greatJob.jpg" />
     <Content Include="Images\landscape.png" />
     <Content Include="Images\mainmenu.jpg" />
     <Content Include="Images\menuIcon.png" />
@@ -330,9 +333,9 @@
     <Content Include="Views\AnimalSanctuary\Sanctuary.cshtml" />
     <Content Include="Views\MainMenu\MainMenu.cshtml" />
     <Content Include="Views\Play\Play.cshtml" />
-    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Options\Options.cshtml" />
-    <Content Include="Views\Shared\_Layout3.cshtml" />
+    <Content Include="Views\Shared\_PlayLayout.cshtml" />
     <Content Include="Views\Profile\ChooseProfilePage.cshtml" />
     <Content Include="Views\Profile\CreateProfilePage.cshtml" />
     <Content Include="Views\Shared\_ChooseProfileLayout.cshtml" />
@@ -340,6 +343,8 @@
     <Content Include="Views\Shared\_OptionsLayout.cshtml" />
     <Content Include="Views\Shared\_Sanctuary.cshtml" />
     <Content Include="Views\Play\EndofGame.cshtml" />
+    <Content Include="Views\Play\MiniGame.cshtml" />
+    <Content Include="Views\Shared\_MiniGameLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

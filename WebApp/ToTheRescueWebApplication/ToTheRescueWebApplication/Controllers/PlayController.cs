@@ -20,6 +20,7 @@ namespace ToTheRescueWebApplication.Controllers
         OptionsDBRepository _options;
         AnimalDBRepository _animal;
         MiniGamesDBRepository _minigame;
+        PlayModel _model;
 
         const int LAST_MAP = 7;    //last map in game
         public PlayController()
@@ -32,24 +33,21 @@ namespace ToTheRescueWebApplication.Controllers
             _options = new OptionsDBRepository();
             _animal = new AnimalDBRepository();
             _minigame = new MiniGamesDBRepository();
+            _model = new PlayModel();
         }
         // GET: Play
         // Set values from database to model, pass into Play/Map view
         public ActionResult Play()
         {
-            PlayModel model = SetModel();
+            _model = SetModel();
 
-            if (model.CurrentMap == LAST_MAP)
-                return RedirectToAction("EndofGame");
-
-            return View(model);
+            return View(_model);
         }
         //set model values
         public PlayModel SetModel()
         {
             Options options = _options.Get((int)Session["profileID"]);
             ProfileProgress progress = _progress.Get((int)Session["profileID"]);
-            PlayModel model = new PlayModel();
             List<Nodes> nodes = _node.GetList(progress.CurrentMap);
             int level = 0;
 
@@ -62,25 +60,25 @@ namespace ToTheRescueWebApplication.Controllers
                         options.ReadingDifficultyLevel : options.MathDifficultyLevel;
 
             if (level == 1)
-                model.GradeLevel = "Pre-Preschool";
+                _model.GradeLevel = "Pre-Preschool";
             else if (level == 2)
-                model.GradeLevel = "Preschool";
+                _model.GradeLevel = "Preschool";
             else if (level == 3)
-                model.GradeLevel = "Pre-Kindergarten";
+                _model.GradeLevel = "Pre-Kindergarten";
             else
-                model.GradeLevel = "Kindergarten";
+                _model.GradeLevel = "Kindergarten";
 
-            model.ProfileName = options.profileName;
-            model.Subject = options.SubjectFilter;
-            if (model.Subject == "")
-                model.Subject = "All";
+            _model.ProfileName = options.profileName;
+            _model.Subject = options.SubjectFilter;
+            if (_model.Subject == "")
+                _model.Subject = "All";
 
-            model.Animal = progress.AnimalID;
-            model.CurrentMap = progress.CurrentMap;
-            model.CurrentNode = progress.CurrentNode;
-            model.MapNodes = _node.GetList(progress.CurrentMap);
-            model.Avatar = options.AvatarID;
-            model.MapNodes = nodes;
+            _model.Animal = progress.AnimalID;
+            _model.CurrentMap = progress.CurrentMap;
+            _model.CurrentNode = progress.CurrentNode;
+            _model.MapNodes = _node.GetList(progress.CurrentMap);
+            _model.Avatar = options.AvatarID;
+            _model.MapNodes = nodes;
 
             //get list of playable minigames based on category and difficulty
             List<MiniGame> minigames = _minigame.GetListPlayable(3, 1, 2); //catID, minDiff, maxDiff
@@ -88,12 +86,10 @@ namespace ToTheRescueWebApplication.Controllers
             List<int> playedgames = _minigame.GetListRecentlyPlayed((int)Session["profileID"]);
 
             //TO DO:
-            /*****randomly choose a map that isn't in list of recently played*****/
+            /*****randomly choose a minigame that isn't in list of recently played
+                  assign a minigame to the model******/
 
-            model.MiniGame = minigames[2].MiniGameCode;
-            model.MiniGameID = minigames[2].ID;
-
-            return model;
+            return _model;
         }
         //display map image
         public ActionResult ShowMapImage(int mapID)
@@ -126,13 +122,6 @@ namespace ToTheRescueWebApplication.Controllers
             Sounds audio = _music.Get(currentMap.SoundID);  //get sound from database
             
             return base.File(audio.Sound, audio.SoundName);
-        }
-        public ActionResult ExecMiniGame()
-        {
-            List<MiniGame> minigames = _minigame.GetListPlayable(3, 1, 2); //catID, minDiff, maxDiff
-            MiniGame game = minigames[2];
-
-            return base.File(game.MiniGameCode, game.MiniGameName);
         }
         //update ProfileProgress values for profile after a minigame is played
         public void FinishMiniGame()
@@ -174,6 +163,12 @@ namespace ToTheRescueWebApplication.Controllers
         public ActionResult EndofGame()
         {
             return View();
+        }
+        //page that executes minigame script
+        public ActionResult MiniGame(PlayModel model)
+        {
+            _model = SetModel();
+            return View(model);
         }
     }
 }
