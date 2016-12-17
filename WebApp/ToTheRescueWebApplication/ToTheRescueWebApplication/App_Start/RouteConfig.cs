@@ -13,9 +13,12 @@ namespace ToTheRescueWebApplication
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //I need the extra / so I don't get routing information confused
+            //when the user's email gets passed into the {email} parameter as
+            //the last thing in the route
             routes.MapRoute(
                 name: "DeleteProfileRoute",
-                url: "profile/delete/{email}/{profileIndex}",
+                url: "profile/delete/{email}/",
                 defaults: new { controller = "Profile", action = "ClickedDelete"}
             );
 

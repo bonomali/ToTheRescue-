@@ -13,9 +13,6 @@ namespace ToTheRescueWebApplication.Repositories
         //Holds the name of a profile
         public string ProfileName { get; set; }
 
-        //Holds the user inputted email in the ChooseProfiles page
-        public string InputtedUserEmail { get; set; }
-
         //The current Avatar's ID
         public int AvatarID { get; set; }
 
