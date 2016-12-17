@@ -5,7 +5,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
-using ToTheRescueWebApplication.Code;
 
 namespace ToTheRescueWebApplication.Repositories
 {
