@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -70,6 +71,21 @@ namespace ToTheRescueWebApplication.Repositories
                 }
             }
             return miniGames;
+        }
+        //add recently played minigame to list of recently played minigames
+        public void UpdateRecentlyPlayedMiniGames(int profileID, int miniGameID)
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("proc_UpdateProgressHistory  ", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ProfileID", profileID);
+                    cmd.Parameters.AddWithValue("@MiniGameID", miniGameID);
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

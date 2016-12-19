@@ -32,9 +32,6 @@ namespace ToTheRescueWebApplication.Models.Play
         public int Animal { get; set; }
 
         [Required]
-        public string AnimalName { get; set; }
-
-        [Required]
         public int Avatar { get; set; }
 
         public string MiniGame { get; set; }

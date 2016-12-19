@@ -149,7 +149,8 @@
 		    var endOfGame = new Audio();
 		    endOfGame.src = "../../MiniGames/Alphabet_BubblePop/sounds/gameOver.m4a";
 		    endOfGame.play();
+		    document.getElementById('score').value = score; //save score in html element
 		    EndofGame(); //function displays good job message and returns to map
-		}, 60000);
+		}, 6000);
     };
 }());

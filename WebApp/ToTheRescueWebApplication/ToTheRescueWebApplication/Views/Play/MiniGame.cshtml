@@ -36,7 +36,8 @@
 <div id="BlocksGame">  @*Where minigame script is executed --> this may be a path to files on the server*@
     <script src="~/MiniGames/Alphabet_BubblePop/javascript/blockjs_framework.js"></script>
     <script id="bubbleScript" src="~/MiniGames/Alphabet_BubblePop/javascript/bubble.js"></script>
-    
+    <input type="text" id="score" />   @*score from minigame saved in value for tag*@
+
     @*Pop up box displayed when minigame is over*@
     <div id="gameOver" style="display:none">
         <p id="praise">Great Job!</p>
@@ -47,13 +48,17 @@
 @section scripts {
     <script>
         //when user is done playing minigame, display end of game message and update values
-        function EndofGame() {
+        function EndofGame(score) {
+            var score = document.getElementById('score').value //score returned by minigame
             $.ajax({
-                url: '/Play/FinishMiniGame/',   //update values after minigame in controller
+                url: '@Url.Action("FinishMiniGame", "Play")',   //update values after minigame in controller
+                data: {'score' : score, 'miniGameID' : @Model.MiniGameID },
+                type: 'POST',
+                success: function displayGameOver() {   //display game over dialog
+                     $('#gameOver').show();
+                }
             });
-            $('#gameOver').show();
         }
-
         //when animal saved div close, go to new map
         $("#closePraise").click(function () {
             window.location.href = '/Play/Play/';

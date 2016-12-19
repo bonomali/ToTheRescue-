@@ -11,6 +11,7 @@ namespace ToTheRescueWebApplication.Repositories
 {
     public class ProfileProgressDBRepository
     {
+        //get profile progress for a profile by profileID
         public ProfileProgress Get(int id)
         {
             ProfileProgress prog = new ProfileProgress();
@@ -69,6 +70,7 @@ namespace ToTheRescueWebApplication.Repositories
             }
             return progress;
         }
+        //update profile's current node
         public void UpdateCurrentNode(int profileID)
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
@@ -82,6 +84,7 @@ namespace ToTheRescueWebApplication.Repositories
                 }
             }
         }
+        //update profile's current map
         public void UpdateCurrentMap(int profileID, int currentMap, int newAnimal)
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
@@ -100,6 +103,7 @@ namespace ToTheRescueWebApplication.Repositories
                 }
             }
         }
+        //add rescued animalID to ProfileAnimals table for the profile, by ProfileID
         public void RescueAnimal(int profileID, int animalID)
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
@@ -109,6 +113,25 @@ namespace ToTheRescueWebApplication.Repositories
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ProfileID", profileID);
                     cmd.Parameters.AddWithValue("@AnimalID", animalID);
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        //Add an entry for new profile in ProfileProgress table, assign map, current node, and an animal to rescue
+        public void AddProfileProgress(int profileID, int newAnimal)
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = "INSERT INTO ProfileProgress(ProfileID, CurrentMap, CurrentNode, AnimalID) VALUES(@ProfileID, @NewMap, @NewNode, @newAnimal)";
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@ProfileID", profileID);
+                    cmd.Parameters.AddWithValue("@NewMap", 1);
+                    cmd.Parameters.AddWithValue("@NewNode", 1);
+                    cmd.Parameters.AddWithValue("@newAnimal", newAnimal);
                     connection.Open();
                     cmd.ExecuteNonQuery();
                 }
