@@ -10,6 +10,7 @@ namespace ToTheRescueWebApplication.Repositories
 {
     public class MapDBRepository : IDataEntityRepository<Map>
     {
+        //get a map by MapID
         public Map Get(int id)
         {
             Map map = new Map();

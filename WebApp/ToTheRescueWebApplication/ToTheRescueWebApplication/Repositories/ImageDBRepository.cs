@@ -10,6 +10,7 @@ namespace ToTheRescueWebApplication
 {
     public class ImageDBRepository
     {
+        //get an image by ImageID
         public Images Get(int id)
         {
             Images img = new Images();

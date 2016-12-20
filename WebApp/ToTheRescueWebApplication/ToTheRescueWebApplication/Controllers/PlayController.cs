@@ -208,7 +208,7 @@ namespace ToTheRescueWebApplication.Controllers
             Random random = new Random();
             int catID = 0;
 
-            //get a list of minigames that adheres to subject filter and is between one less than difficulty and 1 higher than difficulty
+            //get a list of minigames that adheres to subject filter and ????is between one less than difficulty and 1 higher than difficulty????
             if (profileSettings.SubjectFilter == "Reading")
                 catID = 1;
             else if (profileSettings.SubjectFilter == "Math")

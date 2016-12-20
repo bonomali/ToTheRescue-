@@ -10,6 +10,7 @@ namespace ToTheRescueWebApplication.Repositories
 {
     public class SoundDBRepository : IDataEntityRepository<Sounds>
     {
+        //get a sound by SoundID
         public Sounds Get(int id)
         {
             Sounds sound = new Sounds();
