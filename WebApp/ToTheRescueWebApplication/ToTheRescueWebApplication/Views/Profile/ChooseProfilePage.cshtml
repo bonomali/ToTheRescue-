@@ -6,52 +6,38 @@
     Layout = "~/Views/Shared/_ChooseProfileLayout.cshtml";
     ViewBag.Title = "ChooseProfilePage";
 
+    //I need to re-adjust the html border height based on the number of profile there are
     if (Model.Count() <= 4)
     {
-        //I use only the top html border for the top and then 3 divs for the rest of the 
-        //border when there is 4 or less profiles
         <script type="text/javascript">
-            window.onload = function (){
-                document.getElementById("html").style.borderTop = "15px solid forestgreen";
-                document.getElementById("leftBorder").style.visibility = "visible";
-                document.getElementById("rightBorder").style.visibility = "visible";
-                document.getElementById("bottomBorder").style.visibility = "visible";
-            }
-        </script>
+                window.onload = function (){
+                    document.getElementById("html").style.height = "100%";
+                }
+            </script>
     }
     else
     {
-        //I use the html filter when there are more than 4 profiles
         <script type="text/javascript">
-            window.onload = function () {
-            document.getElementById("leftBorder").style.visibility = "hidden";
-            document.getElementById("rightBorder").style.visibility = "hidden";
-            document.getElementById("topBorder").style.visibility = "hidden";
-            document.getElementById("bottomBorder").style.visibility = "hidden";
-            document.getElementById("html").style.border = "15px solid forestgreen";
-        }
-        </script>
+                window.onload = function () {
+                    document.getElementById("html").style.height = "auto";
+                }
+            </script>
     }
 }
 
+<html id="html">
 <body id="ChooseProfileBody">
-    @*Four div border only when there is 4 or less profiles*@
-    <div id="leftBorder"></div>
-    <div id="rightBorder"></div>
-    <div id="topBorder"></div>
-    <div id="bottomBorder"></div>
-
     <h1 id="ChooseProfileheader">Choose Your Profile!</h1>
     <br />
     <h4 id="emailError">Incorrect email address eneterd. Profile not deleted.</h4>
     @if (Model.Count() > 0)
     {
-        //display all of the profiles for a specific user in a table
+        int i = 0;
         <table id="ProfilesTable">
             @if (Model.Count() <= 4)
             {
                 <tr id="RowOneProfiles">
-                    @for (int i = 0; i < Model.Count(); i++)
+                    @for (i = 0; i < Model.Count(); i++)
                     {
                         var base64 = Convert.ToBase64String(Model[i].Avatar);
                         var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
@@ -62,11 +48,19 @@
                             </div>
                         </td>
                     }
+
+                    @if (i < 4)
+                    {
+                        for (int x = i; x < 4; x++)
+                        {
+                            //make some empty cells so spacing looks normal
+                            <td>&nbsp;</td>
+                        }
+                    }
                 </tr>
             }
             else
             {
-                int i = 0;
                 <tr id="RowOneProfiles">
                     @for (i = 0; i < 4; i++)
                     {
@@ -102,24 +96,25 @@
         //will place the create profile page in the middle of the page
         <br /><br />
     }
-
+    <br />
     @*allows deletion of a profile*@
     <button id="DeleteProfileButton" class="Buttons" , onclick="ClickedDelete()">Delete Profile</button>
 
     @*Only display the Create New Profile button when there are less than 8 profiles*@
     @if (Model.Count() < 8)
     {
-        <input type="button" class="Buttons" id="CreateNewPorifleButton" value="Create New Profiile" onclick="@("window.location.href='" + @Url.Action("CreateProfilePage", "Profile") + "'");" />
+        <input type="button" class="Buttons" id="CreateNewPorifleButton" value="Create New Profile" onclick="@("window.location.href='" + @Url.Action("CreateProfilePage", "Profile") + "'");" />
     }
 
     <button id="PlayButton" class="Buttons" onclick="ClickedPlay()">Play</button>
-    <h5 id="emailText" class="DeleteSection">Please enter your email to delete this profile:</h5><br />
+    <h5 id="emailText" class="DeleteSection">Please enter your email to delete this profile:</h5>
     <input type="text" , id="emailTextBox" class="DeleteSection" />
-    <br /><br />
+    <br />
     <input type="submit" class="Buttons" value="Delete Profile" id="DeleteProfileSubmit" onclick="DeleteProfile()" />
-    <br /><br />
+    <br />
     <button id="CancelButton" class="Buttons" onclick="ClickedCancel()">Cancel</button>
 </body>
+</html>
 
 @*use jquery*@
 <script src="~/scripts/jquery-1.10.2.min.js"></script>
@@ -270,7 +265,7 @@
         route = route.concat(enteredEmail);
         route = route.concat('/');
 
-        //Call the ClickedDelete function in the profile controller 
+        //Call the ClickedDelete function in the profile controller
         //to delete the selected profile out of the database
         $.ajax({
             url: route,
@@ -283,10 +278,10 @@
 </script>
 
 @{
-    //displays an error if the user typed in the wrong email when 
-    //trying to delete a profile
-    if (TempData["emailError"] != null)
-    {
+            //displays an error if the user typed in the wrong email when
+            //trying to delete a profile
+            if (TempData["emailError"] != null)
+            {
         <script type="text/javascript">
             $(document).ready(function () {
                 document.getElementById("emailError").style.visibility = "visible";

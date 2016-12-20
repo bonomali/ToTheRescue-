@@ -51,9 +51,9 @@
             }
         </tr>
     </table>
-    <br />
+    @*<br />*@
     <input type="submit" class="Buttons" value="Create Profile" id="CreateProfileButton" onclick="CreateNewProfile()" />
-    <br /><br />
+    <br /> @*<br />*@ 
     @*if clicked back, return to choose profiles page*@
     <input type="button" id="BackButton" class="Buttons" value="Back" onclick="@("window.location.href='" + @Url.Action("ChooseProfilePage", "Profile") + "'");" />
 </body>

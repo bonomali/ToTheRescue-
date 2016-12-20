@@ -1,26 +1,6 @@
-﻿#leftBorder, #rightBorder, #topBorder, #bottomBorder{
-    background: forestgreen;
-    position: fixed;
+﻿html{
+    border: 15px solid forestgreen;
 }
-
-#leftBorder, #rightBorder{
-    top: 0;
-    bottom: 0;
-    width: 15px;
-}
-
-#leftBorder {left: 0;}
-#rightBorder {right: 0;}
-
-#topBorder, #bottomBorder{
-    left: 0; 
-    right: 0;
-
-    height: 15px;
-}
-
-#topBorder {top: 0;}
-#bottomBorder {bottom: 0;}
 
 body {
     background: #43c161;
@@ -39,26 +19,32 @@ body {
 
 #ProfilesTable {
     width: 95%;
-    margin-left: auto;
+    /*makes it look like everything is centered*/
+    margin-left: 9%;
     margin-right: auto;
+    table-layout: fixed;
+}
+
+td {
+    width: auto;
 }
 
 .ProfiledDiv {
     width: auto;
     height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: table-cell;
     color: white;
 }
 
     .ProfiledDiv #ProfileNames {
         width: auto;
         height: auto;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
     }
 
     .ProfiledDiv #Avatar {
-        padding: 10px;
         width: auto;
         height: auto;
     }
@@ -67,7 +53,7 @@ body {
     border-radius: 20px;
     background-color: white;
     font-size: 20px;
-    padding: 15px 15px;
+    padding: 10px 10px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     border-color: black;
 }
@@ -119,26 +105,29 @@ body {
     position: relative;
     left: 6%;
     font-size: 20px;
-    padding: 10px 10px;
+    padding: 5px 5px;
+    margin-top: 5px;
 }
 
 #DeleteProfileSubmit {
     visibility: hidden;
     position: relative;
     left: 6%;
-    padding: 10px 10px;
+    padding: 5px 5px;
+    margin-top: 5px;
 }
 
 #emailTextBox {
     visibility: hidden;
     padding: 0px;
     margin: 0px;
-    width: 250px;
-    height: 25px;
+    width: 225px;
+    height: 20px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 20px;
+    font-size: 15px;
     border-radius: 5px;
     border-color: black;
+    margin-top: 5px;
 }
 
 #emailText {
@@ -146,7 +135,7 @@ body {
     padding: 0px;
     margin: 0px;
     color: white;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .DeleteSection {
@@ -164,21 +153,14 @@ body {
         width: 100%;
     }
 
-    .ProfiledDiv {
-        display: table-cell;
+    .ProfiledDiv #Avatar {
+        width: 75%;
+        height: 75%;
     }
 
-        .ProfiledDiv #Avatar {
-            width: 75%;
-            height: 75%;
-        }
-
-        .ProfiledDiv #ProfileNames {
-            font-size: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    .ProfiledDiv #ProfileNames {
+        font-size: 100%;
+    }
 
     .Buttons {
         font-size: 65%;
@@ -219,6 +201,10 @@ body {
 
 /*have to special stuff for the buttons to scale down when the screen gets really small*/
 @media only screen and (max-width: 620px) {
+    #ProfilesTable {
+        margin-left: 3%;
+    }
+
     #DeleteProfileButton {
         left: 0%;
     }
@@ -229,5 +215,9 @@ body {
 
     #PlayButton {
         left: 15%;
+    }
+
+    .ProfiledDiv #ProfileNames {
+        font-size: 78%;
     }
 }
