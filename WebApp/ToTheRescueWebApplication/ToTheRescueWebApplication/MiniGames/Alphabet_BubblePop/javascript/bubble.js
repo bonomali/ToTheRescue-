@@ -104,7 +104,6 @@
 	game = BLOCKS.game(spec);
     
     game.prepare = function () {
-    
 		var bg, 
 			index = 0, 
 			bubbles = [],

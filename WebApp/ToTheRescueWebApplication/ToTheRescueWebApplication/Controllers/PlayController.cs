@@ -217,9 +217,9 @@ namespace ToTheRescueWebApplication.Controllers
                 catID = random.Next(1, 3); //no subject filter, randomly choose a minigame category        
             
             if(catID == 1)
-                minigames = _minigame.GetListPlayable(catID, profileSettings.ReadingDifficultyLevel - 1, profileSettings.ReadingDifficultyLevel + 1); //catID, minDiff, maxDiff
+                minigames = _minigame.GetListPlayable(catID, profileSettings.ReadingDifficultyLevel, profileSettings.ReadingDifficultyLevel); //catID, minDiff, maxDiff
             else if(catID ==2)
-                minigames = _minigame.GetListPlayable(catID, profileSettings.MathDifficultyLevel - 1, profileSettings.MathDifficultyLevel + 1); //catID, minDiff, maxDiff    
+                minigames = _minigame.GetListPlayable(catID, profileSettings.MathDifficultyLevel, profileSettings.MathDifficultyLevel); //catID, minDiff, maxDiff    
             
             
             //get list or recently played minigames

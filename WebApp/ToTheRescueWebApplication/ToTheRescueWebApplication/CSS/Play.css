@@ -209,6 +209,10 @@ div#gameOver {
     background-color: lightpink;
     font-size: 100%;
 }
+div#BlocksGame
+{
+    margin-left: -5%;
+}
 @media only screen and (min-width: 540px) {
     #optionsLbl {
         margin-left: -4.5%;
