@@ -85,6 +85,7 @@ body {
 img {
     width: auto;
     height: auto;
+    border: thick solid transparent;
 }
 
 #CreateProfileButton {
@@ -99,11 +100,12 @@ img {
     border-radius: 20px;
     background-color: white;
     font-size: 20px;
-    padding: 15px 15px;
+    padding: 10px 10px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     border-color: black;
     position: relative;
     left: 12%;
+    margin-top: 5px;
 }
 
     .Buttons:hover {
@@ -155,7 +157,6 @@ img {
 }
 
 @media only screen and (max-width: 650px) {
-    /*do image stuff*/
     img {
         width: 75%;
         height: 75%;
