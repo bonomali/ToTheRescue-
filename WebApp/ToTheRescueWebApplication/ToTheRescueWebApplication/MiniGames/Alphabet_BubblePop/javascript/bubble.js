@@ -79,10 +79,10 @@
 			top = -game.height * 2,
 			
 			gameTapped = function (point) {
-				var i;
+			    var i;
 				for (i = 0; i < bubbles.length; i += 1) {
 				    if (bubbles[i].isPointInside(point) && bubbles[i].name == "targetBubble") {
-					    b5.play();
+				        b5.play();
 						bubbles[i].removeMotors();
 						game.addMotor("alpha", {
 							object: bubbles[i],
@@ -151,6 +151,6 @@
 		    endOfGame.play();
 		    document.getElementById('score').value = score; //save score in html element
 		    EndofGame(); //function displays good job message and returns to map
-		}, 6000);
+		}, 60000);
     };
 }());
