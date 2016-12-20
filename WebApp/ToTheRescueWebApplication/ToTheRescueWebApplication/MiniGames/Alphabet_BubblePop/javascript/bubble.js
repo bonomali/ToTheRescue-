@@ -1,70 +1,102 @@
 (function () {
-    var audioInstructions = new Audio();
-    audioInstructions.src = "../../MiniGames/Alphabet_BubblePop/sounds/BubbleGameInstructions.m4a"
-    audioInstructions.volume = 0.1;
-    audioInstructions.play();
-				
+    var audioClips = ["../../MiniGames/Alphabet_BubblePop/sounds/a_recording.mp3", "../../MiniGames/Alphabet_BubblePop/sounds/c_recording.mp3",
+    "../../MiniGames/Alphabet_BubblePop/sounds/i_recording.mp3", "../../MiniGames/Alphabet_BubblePop/sounds/m_recording.mp3",
+    "../../MiniGames/Alphabet_BubblePop/sounds/p_recording.mp3", "../../MiniGames/Alphabet_BubblePop/sounds/r_recording.mp3",
+    "../../MiniGames/Alphabet_BubblePop/sounds/s_recording.mp3", "../../MiniGames/Alphabet_BubblePop/sounds/t_recording.mp3",
+    "../../MiniGames/Alphabet_BubblePop/sounds/b_recording.mp3", "../../MiniGames/Alphabet_BubblePop/sounds/f_recording.mp3"];
+
+    var bubbleImages = ["../../MiniGames/Alphabet_Bubblepop/images/a_bubble.png", "../../MiniGames/Alphabet_Bubblepop/images/c_bubble.png",
+    "../../MiniGames/Alphabet_Bubblepop/images/i_bubble.png", "../../MiniGames/Alphabet_Bubblepop/images/m_bubble.png",
+    "../../MiniGames/Alphabet_Bubblepop/images/p_bubble.png", "../../MiniGames/Alphabet_Bubblepop/images/r_bubble.png",
+    "../../MiniGames/Alphabet_Bubblepop/images/s_bubble.png", "../../MiniGames/Alphabet_Bubblepop/images/t_bubble.png",
+    "../../MiniGames/Alphabet_Bubblepop/images/b_bubble.png", "../../MiniGames/Alphabet_Bubblepop/images/f_bubble.png"];
+
+    //randomly choose letters for game
+    var index1 = Math.floor((Math.random() * 10) + 1) - 1; //random number between 1 and 10, sub 1 for array index
+    var index2 = Math.floor((Math.random() * 10) + 1) - 1; //random number between 1 and 10, sub 1 for array index
+    var index3 = Math.floor((Math.random() * 10) + 1) - 1; //random number between 1 and 10, sub 1 for array index
+    var index4 = Math.floor((Math.random() * 10) + 1) - 1; //random number between 1 and 10, sub 1 for array index
+    var index5 = Math.floor((Math.random() * 10) + 1) - 1; //random number between 1 and 10, sub 1 for array index
+    var index6 = Math.floor((Math.random() * 10) + 1) - 1; //random number between 1 and 10, sub 1 for array index
+
     var game, spec;
     var score = 0;
 
     var b1 = new Audio()
-    b1.src = "../../MiniGames/Alphabet_BubblePop/sounds/a_recording.m4a"
+    b1.src = audioClips[index1];
     var b2 = new Audio()
-    b2.src = "../../MiniGames/Alphabet_BubblePop/sounds/b_recording.m4a"
+    b2.src = audioClips[index2];
     var b3 = new Audio()
-    b3.src = "../../MiniGames/Alphabet_BubblePop/sounds/c_recording.m4a"
+    b3.src = audioClips[index3];
     var b4 = new Audio()
-    b4.src = "../../MiniGames/Alphabet_BubblePop/sounds/d_recording.m4a"
+    b4.src = audioClips[index4];
     var b5 = new Audio()
-    b5.src = "../../MiniGames/Alphabet_BubblePop/sounds/e_recording.m4a"
+    b5.src = audioClips[index5];
+    var b6 = new Audio()                //target letter
+    b6.src = audioClips[index6];
+
+    var audioInstructions = new Audio();
+    audioInstructions.src = "../../MiniGames/Alphabet_BubblePop/sounds/BubblePopInstructions.mp3"
+
+    //play generic instructions for game
+    audioInstructions.addEventListener('ended', function () {
+        b6.play();  //play target letter after generic instructions
+    });
+    audioInstructions.play();
 
     spec = {
 		width: 1100,
 		height: 600,
 		bg: {
-		    src: "../../MiniGames/Alphabet_BubblePop/images/undersea.jpg"
+		    src: "../../MiniGames/Alphabet_BubblePop/images/ocean_background.png"
 		},
 		bubbles:[{
 			name: "bubble1",
 			slices: [{
 				name: "b1",
-				src: "../../MiniGames/Alphabet_BubblePop/images/a_bubble.png"
+				src: bubbleImages[index1]
 			}]
 		}, {
 			name: "bubble2",
 			slices: [{
 				name: "b2",
-				src: "../../MiniGames/Alphabet_BubblePop/images/b_bubble.png"
+				src: bubbleImages[index2]
 			}]
 		}, {
 			name: "bubble3",
 			slices: [{
 				name: "b3",
-				src: "../../MiniGames/Alphabet_BubblePop/images/c_bubble.png"
+				src: bubbleImages[index3]
 			}]
 		}, {
 		    name: "bubble4",
 		    slices: [{
 		        name: "b4",
-		        src: "../../MiniGames/Alphabet_BubblePop/images/d_bubble.png"
+		        src: bubbleImages[index4]
+		    }]
+		}, {
+		    name: "bubble5",
+		    slices: [{
+		        name: "b5",
+		        src: bubbleImages[index5]
 		    }]
 		}, {
 		    name: "targetBubble",
 		    slices: [{
-		        name: "b5",
-		        src: "../../MiniGames/Alphabet_BubblePop/images/e_bubble.png"
+		        name: "b6",
+		        src: bubbleImages[index6]
 		    }]
             }, {
 		    name: "targetBubble",
 		    slices: [{
-		        name: "b5",
-		        src: "../../MiniGames/Alphabet_BubblePop/images/e_bubble.png"
+		        name: "b6",
+		        src: bubbleImages[index6]
 		    }]
             }, {
             name: "targetBubble",
             slices: [{
-                name: "b5",
-                src: "../../MiniGames/Alphabet_BubblePop/images/e_bubble.png"
+                name: "b6",
+                src: bubbleImages[index6]
             }]
 		}]
 	};
@@ -82,7 +114,7 @@
 			    var i;
 				for (i = 0; i < bubbles.length; i += 1) {
 				    if (bubbles[i].isPointInside(point) && bubbles[i].name == "targetBubble") {
-				        b5.play();
+				        b6.play();
 						bubbles[i].removeMotors();
 						game.addMotor("alpha", {
 							object: bubbles[i],
@@ -101,6 +133,8 @@
 					        b3.play();
 					    else if (bubbles[i].name == "bubble4")
 					        b4.play();
+					    else if (bubbles[i].name == "bubble5")
+					        b5.play();
 					    score = score - 2;
 					}
 				}
@@ -147,7 +181,7 @@
 
 		setTimeout(function GameOver() {
 		    var endOfGame = new Audio();
-		    endOfGame.src = "../../MiniGames/Alphabet_BubblePop/sounds/gameOver.m4a";
+		    endOfGame.src = "../../MiniGames/Alphabet_BubblePop/sounds/EndOfGame.mp3";
 		    endOfGame.play();
 		    document.getElementById('score').value = score; //save score in html element
 		    EndofGame(); //function displays good job message and returns to map
