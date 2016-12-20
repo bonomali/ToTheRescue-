@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/_MiniGameLayout.cshtml";
     ViewBag.Title = "Play MiniGame";
 }
-@model ToTheRescueWebApplication.Models.Play.PlayModel
+@model ToTheRescueWebApplication.Models.Play.MiniGameModel
 <nav id="playMenu">
     <div class="icons">
         <ul class="buttons">
@@ -52,7 +52,7 @@
             var score = document.getElementById('score').value //score returned by minigame
             $.ajax({
                 url: '@Url.Action("FinishMiniGame", "Play")',   //update values after minigame in controller
-                data: {'score' : score, 'miniGameID' : @Model.MiniGameID },
+                data: {'score' : score, 'miniGameID' : @Model.MiniGameID, 'categoryID' : @Model.CategoryID },
                 type: 'POST',
                 success: function displayGameOver() {   //display game over dialog
                      $('#gameOver').show();

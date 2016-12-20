@@ -33,9 +33,5 @@ namespace ToTheRescueWebApplication.Models.Play
 
         [Required]
         public int Avatar { get; set; }
-
-        public string MiniGame { get; set; }
-
-        public int MiniGameID { get; set; }
     }
 }

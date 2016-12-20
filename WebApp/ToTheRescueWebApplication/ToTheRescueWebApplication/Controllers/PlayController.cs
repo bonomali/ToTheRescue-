@@ -20,9 +20,9 @@ namespace ToTheRescueWebApplication.Controllers
         OptionsDBRepository _options;
         AnimalDBRepository _animal;
         MiniGamesDBRepository _minigame;
-        PlayModel _model;   //model for view
-        Options _stats;      //stats for updating difficulty after minigame
-        const int LAST_MAP = 7;    //last map in game
+        PlayModel _model;        //model for view
+        Options _stats;          //stats for updating difficulty after minigame
+        const int LAST_MAP = 7;  //last map in game
 
         public PlayController()
         {
@@ -54,7 +54,7 @@ namespace ToTheRescueWebApplication.Controllers
             {
                 NewMap();                   //call function to set map and animal to save
                 progress = _progress.Get((int)Session["profileID"]); //requery progress
-                _model.CurrentMap = progress.CurrentMap;             //set current map
+                _model.CurrentMap = progress.CurrentMap;             //set current map for model
             }
 
             List<Nodes> nodes = _node.GetList(progress.CurrentMap);
@@ -92,15 +92,6 @@ namespace ToTheRescueWebApplication.Controllers
             if (_model.Subject == "")
                 _model.Subject = "All";
 
-            //get list of playable minigames based on category and difficulty
-            List<MiniGame> minigames = _minigame.GetListPlayable(3, 1, 2); //catID, minDiff, maxDiff
-            //get list or recently played minigames
-            List<int> playedgames = _minigame.GetListRecentlyPlayed((int)Session["profileID"]);
-
-            //TO DO:
-            /*****randomly choose a minigame that isn't in list of recently played
-                  assign a minigame to the model******/
-
             return _model;
         }
         //display map image
@@ -137,18 +128,41 @@ namespace ToTheRescueWebApplication.Controllers
         }
         //update ProfileProgress values for profile after a minigame is played
         [HttpPost]
-        public void FinishMiniGame(int score, int miniGameID)
+        public void FinishMiniGame(int score, int miniGameID, int categoryID)
         {
+            float newStat = 0;
+
             //update current node (move to next node on map)
             _progress.UpdateCurrentNode((int)Session["profileID"]);
 
             //add minigame to recenlty played
-            //_minigame.UpdateRecentlyPlayedMiniGames((int)Session["profileID"], miniGameID);
+            _minigame.UpdateRecentlyPlayedMiniGames((int)Session["profileID"], miniGameID);
 
-            // recalculate performance statistic based on value returned from minigame
-            //_stats = _options.Get((int)Session["profileID"]);
-            
-            //   check if difficulty needs to be adjusted*****/
+            //recalculate performance statistic based on value returned from minigame
+            /*************************************WE NEED AN ACTUAL ALGORTHIM HERE***************************/
+            _stats = _options.Get((int)Session["profileID"]);
+            if(categoryID == 1)
+            {
+                newStat = _stats.ReadingPerformanceStat + score;
+                _minigame.UpdatePerformanceStats((int)Session["profileID"], newStat, _stats.MathPerformanceStat);
+              
+                //check if difficulty needs to be adjusted up or down   
+                if (newStat > 100 && _stats.ReadingPerformanceStat < 4)
+                    _stats.ReadingPerformanceStat = _stats.ReadingPerformanceStat + 1;
+                else if (newStat < 0 && _stats.ReadingPerformanceStat > 1)
+                    _stats.ReadingPerformanceStat = _stats.ReadingPerformanceStat - 1;
+            }
+            else
+            {
+                newStat = _stats.MathPerformanceStat + score;
+                _minigame.UpdatePerformanceStats((int)Session["profileID"], _stats.ReadingPerformanceStat, newStat);
+                
+                //check if difficulty needs to be adjusted up or down   
+                if (newStat > 100 && _stats.MathPerformanceStat < 4)
+                    _stats.MathPerformanceStat = _stats.MathPerformanceStat + 1;
+                else if (newStat < 0 && _stats.MathPerformanceStat > 1)
+                    _stats.MathPerformanceStat = _stats.MathPerformanceStat - 1;
+            }
         }
         //update ProfileProgress to a new map
         public void NewMap()
@@ -185,10 +199,60 @@ namespace ToTheRescueWebApplication.Controllers
         {
             return View();
         }
-        //page that executes minigame script
-        public ActionResult MiniGame(PlayModel model)
+        //page that executes minigame script, set MiniGame model
+        public ActionResult MiniGame()
         {
-            _model = SetModel();
+            Options profileSettings = _options.Get((int)Session["profileID"]);
+            MiniGameModel model = new MiniGameModel();
+            List<MiniGame> minigames = new List<MiniGame>();
+            Random random = new Random();
+            int catID = 0;
+
+            //get a list of minigames that adheres to subject filter and is between one less than difficulty and 1 higher than difficulty
+            if (profileSettings.SubjectFilter == "Reading")
+                catID = 1;
+            else if (profileSettings.SubjectFilter == "Math")
+                catID = 2;
+            else  
+                catID = random.Next(1, 3); //no subject filter, randomly choose a minigame category        
+            
+            if(catID == 1)
+                minigames = _minigame.GetListPlayable(catID, profileSettings.ReadingDifficultyLevel - 1, profileSettings.ReadingDifficultyLevel + 1); //catID, minDiff, maxDiff
+            else if(catID ==2)
+                minigames = _minigame.GetListPlayable(catID, profileSettings.MathDifficultyLevel - 1, profileSettings.MathDifficultyLevel + 1); //catID, minDiff, maxDiff    
+            
+            
+            //get list or recently played minigames
+            List<int> playedgames = _minigame.GetListRecentlyPlayed((int)Session["profileID"]);
+
+            //randomly choose a minigame that isn't in list of recently played, assign a minigame to the model
+            int ranGame = random.Next(1, minigames.Count()) - 1; //generate an index between 1 and num of playable games
+
+            //continue generating random gameID while recently played game is randomly selected
+            bool played = true;
+            int loopCounter = 0;
+            while (played == true)  
+            {
+                played = false;
+                for(int i = 0; i < playedgames.Count(); i++)
+                {
+                    if(minigames[ranGame].ID == playedgames[i]) 
+                    {
+                        //generate an index between 1 and num of playable games
+                        ranGame = random.Next(1, minigames.Count()) - 1;
+                        played = true; 
+                    }
+                }
+                loopCounter++;       //increment number of times through loop
+                if(loopCounter == 6) //Ensure that game doesn't get stuck in endless loop if not enough minigames
+                {
+                    played = false;
+                }
+            }
+            model.MiniGameID = minigames[ranGame].ID;
+            model.MiniGame = minigames[ranGame].MiniGameCode;
+            model.CategoryID = minigames[ranGame].MiniGameCategoryID;
+
             return View(model);
         }
     }

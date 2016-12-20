@@ -77,11 +77,27 @@ namespace ToTheRescueWebApplication.Repositories
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("proc_UpdateProgressHistory  ", connection))
+                using (SqlCommand cmd = new SqlCommand("proc_UpdateProgressHistory", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ProfileID", profileID);
                     cmd.Parameters.AddWithValue("@MiniGameID", miniGameID);
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        //update the reading and math performance statistics
+        public void UpdatePerformanceStats(int profileID, float readingStat, float mathStat)
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("proc_UpdatePerformanceStats", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ProfileID", profileID);
+                    cmd.Parameters.AddWithValue("@NewMathStat", mathStat);
+                    cmd.Parameters.AddWithValue("@NewReadingStat", readingStat);
                     connection.Open();
                     cmd.ExecuteNonQuery();
                 }

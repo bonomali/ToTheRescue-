@@ -150,6 +150,22 @@ AS
 GO
 
 /**********************************************************************
+* Purpose: Updates Math and Reading Performance Statistics
+***********************************************************************/
+--DROP PROCEDURE proc_UpdatePerformanceStats;   
+USE ToTheRescue;  
+GO  
+CREATE PROCEDURE proc_UpdatePerformanceStats
+	@ProfileID int,
+	@NewMathStat decimal,
+	@NewReadingStat decimal
+AS  
+	UPDATE Profiles
+	SET MathPerformanceStat = @NewMathStat, ReadingPerformanceStat = @NewReadingStat
+	WHERE ProfileID = @ProfileID;
+GO
+
+/**********************************************************************
 * Purpose: Update Filter
 ***********************************************************************/
 
