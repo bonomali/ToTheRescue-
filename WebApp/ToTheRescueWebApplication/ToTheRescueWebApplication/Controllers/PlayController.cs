@@ -23,7 +23,9 @@ namespace ToTheRescueWebApplication.Controllers
         PlayModel _model;        //model for view
         Options _stats;          //stats for updating difficulty after minigame
         const int LAST_MAP = 7;  //last map in game
-
+        const int FIRST_MAP = 1; //first map in game
+        const int HIGHEST_DIFF = 4; //highest diff level
+        const int LOWEST_DIFF = 1;  //lowest diff level
         public PlayController()
         {
             _map = new MapDBRepository();
@@ -141,27 +143,40 @@ namespace ToTheRescueWebApplication.Controllers
             //recalculate performance statistic based on value returned from minigame
             /*************************************WE NEED AN ACTUAL ALGORTHIM HERE***************************/
             _stats = _options.Get((int)Session["profileID"]);
-            if(categoryID == 1)
+
+            if (categoryID == 1) //Reading category
             {
                 newStat = _stats.ReadingPerformanceStat + score;
                 _minigame.UpdatePerformanceStats((int)Session["profileID"], newStat, _stats.MathPerformanceStat);
-              
+
                 //check if difficulty needs to be adjusted up or down   
-                if (newStat > 100 && _stats.ReadingPerformanceStat < 4)
-                    _stats.ReadingPerformanceStat = _stats.ReadingPerformanceStat + 1;
-                else if (newStat < 0 && _stats.ReadingPerformanceStat > 1)
-                    _stats.ReadingPerformanceStat = _stats.ReadingPerformanceStat - 1;
+                if (newStat > 100 && _stats.ReadingDifficultyLevel < HIGHEST_DIFF)
+                {
+                    _stats.ReadingDifficultyLevel = _stats.ReadingDifficultyLevel + 1;
+                    _options.UpdateDifficulty(_stats);
+                }
+                else if (newStat < 0 && _stats.ReadingDifficultyLevel > LOWEST_DIFF)
+                {
+                    _stats.ReadingDifficultyLevel = _stats.ReadingDifficultyLevel - 1;
+                    _options.UpdateDifficulty(_stats);
+                }
             }
-            else
+            else  //Math category
             {
                 newStat = _stats.MathPerformanceStat + score;
                 _minigame.UpdatePerformanceStats((int)Session["profileID"], _stats.ReadingPerformanceStat, newStat);
-                
+
                 //check if difficulty needs to be adjusted up or down   
-                if (newStat > 100 && _stats.MathPerformanceStat < 4)
-                    _stats.MathPerformanceStat = _stats.MathPerformanceStat + 1;
-                else if (newStat < 0 && _stats.MathPerformanceStat > 1)
-                    _stats.MathPerformanceStat = _stats.MathPerformanceStat - 1;
+                if (newStat > 100 && _stats.MathDifficultyLevel < HIGHEST_DIFF)
+                {
+                    _stats.MathDifficultyLevel = _stats.MathDifficultyLevel + 1;
+                    _options.UpdateDifficulty(_stats);
+                }
+                else if (newStat < 0 && _stats.MathDifficultyLevel > LOWEST_DIFF)
+                {
+                    _stats.MathDifficultyLevel = _stats.MathDifficultyLevel - 1;
+                    _options.UpdateDifficulty(_stats);
+                }
             }
         }
         //update ProfileProgress to a new map
@@ -182,9 +197,9 @@ namespace ToTheRescueWebApplication.Controllers
                 _progress.RescueAnimal((int)Session["profileID"], p.AnimalID);   //save animal to ProfileAnimals
                 _progress.UpdateCurrentMap((int)Session["profileID"], p.CurrentMap, newAnimal); //new map and animal
             }
-            else
+            else //pass in FIRST_MAP - 1 so increment in UpdateCurrentMap function will increment to MapID = 1
             { 
-                _progress.UpdateCurrentMap((int)Session["profileID"], 1, newAnimal); //return to map1
+                _progress.UpdateCurrentMap((int)Session["profileID"], (FIRST_MAP - 1), newAnimal); //return to map1
             }
         }
         //get the number of the current node for profile
@@ -199,6 +214,9 @@ namespace ToTheRescueWebApplication.Controllers
         {
             return View();
         }
+        /***********************THIS IS NOT FULLY FUNCTIONAL, WE NEED MINIGAMES*******************/
+        /*******************************MAY BREAK FOR SOME PROFILES*******************************/
+        /*************************************NOT YET TESTED**************************************/
         //page that executes minigame script, set MiniGame model
         public ActionResult MiniGame()
         {
@@ -206,22 +224,22 @@ namespace ToTheRescueWebApplication.Controllers
             MiniGameModel model = new MiniGameModel();
             List<MiniGame> minigames = new List<MiniGame>();
             Random random = new Random();
-            int catID = 0;
+            int catID = 0;  //category id
 
-            //get a list of minigames that adheres to subject filter and ????is between one less than difficulty and 1 higher than difficulty????
+            //get subject filter for profile, if no filter, randomly choose a subject for minigame
             if (profileSettings.SubjectFilter == "Reading")
                 catID = 1;
             else if (profileSettings.SubjectFilter == "Math")
                 catID = 2;
             else  
                 catID = random.Next(1, 3); //no subject filter, randomly choose a minigame category        
-            
-            if(catID == 1)
+
+            //get a list of minigames that adheres to subject filter and ????is between one less than difficulty and 1 higher than difficulty????
+            if (catID == 1)
                 minigames = _minigame.GetListPlayable(catID, profileSettings.ReadingDifficultyLevel, profileSettings.ReadingDifficultyLevel); //catID, minDiff, maxDiff
             else if(catID ==2)
                 minigames = _minigame.GetListPlayable(catID, profileSettings.MathDifficultyLevel, profileSettings.MathDifficultyLevel); //catID, minDiff, maxDiff    
-            
-            
+             
             //get list or recently played minigames
             List<int> playedgames = _minigame.GetListRecentlyPlayed((int)Session["profileID"]);
 
