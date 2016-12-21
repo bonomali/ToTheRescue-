@@ -8,7 +8,7 @@ using System.Linq;
 namespace ToTheRescueWebAppTests
 {
     [TestClass]
-    public class Tests
+    public class LoginControllerTests
     {
         /*Test that the correct profiles are retrieved from the database when a user logs
          into the web application. This test checks that the added UserID row to the Entity
@@ -28,16 +28,9 @@ namespace ToTheRescueWebAppTests
             List<string> expected = temp.OrderBy(n => n).ToList();
             temp.Clear();   //clear list
 
-            using (SqlConnection connection = new SqlConnection())
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
             {
-                connection.ConnectionString = 
-                "Server=aura.cset.oit.edu;" +
-                "Persist Security Info = False;" +
-                "DataBase=ToTheRescue;" +
-                "User Id=;" +
-                "Password=;";
                 int userID = 0;
-
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;

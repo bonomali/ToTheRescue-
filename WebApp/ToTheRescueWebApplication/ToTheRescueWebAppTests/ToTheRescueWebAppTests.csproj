@@ -51,6 +51,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
@@ -89,10 +90,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Controllers\PlayControllerTests.cs" />
     <Compile Include="Controllers\ProfileControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ProfileDBRepositoryTests.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Controllers\LoginControllerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ToTheRescueWebApplication\ToTheRescueWebApplication.csproj">
