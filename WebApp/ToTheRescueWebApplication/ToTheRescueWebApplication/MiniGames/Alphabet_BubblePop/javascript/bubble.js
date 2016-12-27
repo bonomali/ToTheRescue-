@@ -1,16 +1,19 @@
 (function () {
-    //arrays containing paths to audio files and image files for bubbles
-    var audioClips = ["../../MiniGames/Alphabet_BubblePop/sounds/a_recording.mp3", "../../MiniGames/Alphabet_BubblePop/sounds/c_recording.mp3",
-    "../../MiniGames/Alphabet_BubblePop/sounds/i_recording.mp3", "../../MiniGames/Alphabet_BubblePop/sounds/m_recording.mp3",
-    "../../MiniGames/Alphabet_BubblePop/sounds/p_recording.mp3", "../../MiniGames/Alphabet_BubblePop/sounds/r_recording.mp3",
-    "../../MiniGames/Alphabet_BubblePop/sounds/s_recording.mp3", "../../MiniGames/Alphabet_BubblePop/sounds/t_recording.mp3",
-    "../../MiniGames/Alphabet_BubblePop/sounds/b_recording.mp3", "../../MiniGames/Alphabet_BubblePop/sounds/f_recording.mp3"];
+    //set correct margin for div
+    document.getElementById('BlocksGame').style.marginLeft = '-5%';
 
-    var bubbleImages = ["../../MiniGames/Alphabet_Bubblepop/images/a_bubble.png", "../../MiniGames/Alphabet_Bubblepop/images/c_bubble.png",
-    "../../MiniGames/Alphabet_Bubblepop/images/i_bubble.png", "../../MiniGames/Alphabet_Bubblepop/images/m_bubble.png",
-    "../../MiniGames/Alphabet_Bubblepop/images/p_bubble.png", "../../MiniGames/Alphabet_Bubblepop/images/r_bubble.png",
-    "../../MiniGames/Alphabet_Bubblepop/images/s_bubble.png", "../../MiniGames/Alphabet_Bubblepop/images/t_bubble.png",
-    "../../MiniGames/Alphabet_Bubblepop/images/b_bubble.png", "../../MiniGames/Alphabet_Bubblepop/images/f_bubble.png"];
+    var imagePath = '../../MiniGames/Alphabet_Bubblepop/images/';
+    var audioPath = '../../MiniGames/Alphabet_BubblePop/sounds/';
+
+    //arrays containing paths to audio files and image files for bubbles
+    var audioClips = [audioPath + "a_recording.mp3", audioPath + "c_recording.mp3", audioPath + "i_recording.mp3",
+        audioPath + "m_recording.mp3", audioPath + "p_recording.mp3", audioPath + "r_recording.mp3",
+        audioPath + "s_recording.mp3", audioPath + "t_recording.mp3", audioPath + "b_recording.mp3",
+        audioPath + "f_recording.mp3"];
+
+    var bubbleImages = [imagePath + "a_bubble.png", imagePath + "c_bubble.png", imagePath + "i_bubble.png",
+        imagePath + "m_bubble.png", imagePath + "p_bubble.png", imagePath + "r_bubble.png",
+        imagePath + "s_bubble.png", imagePath + "t_bubble.png", imagePath + "b_bubble.png", imagePath + "f_bubble.png"];
 
     
     //randomly choose target bubble
@@ -51,7 +54,7 @@
     b6.src = audioClips[index6];
 
     var audioInstructions = new Audio();
-    audioInstructions.src = "../../MiniGames/Alphabet_BubblePop/sounds/BubblePopInstructions.mp3"
+    audioInstructions.src = audioPath + "BubblePopInstructions.mp3"
 
     //play generic instructions for game
     audioInstructions.addEventListener('ended', function () {
@@ -64,7 +67,7 @@
 		width: 1100,
 		height: 600,
 		bg: {
-		    src: "../../MiniGames/Alphabet_BubblePop/images/ocean_background.png"
+		    src: imagePath + "ocean_background.png"
 		},
 		bubbles:[{
 			name: "bubble1",
@@ -205,7 +208,7 @@
         //end the game after time interval
 		setTimeout(function GameOver() {
 		    var endOfGame = new Audio();
-		    endOfGame.src = "../../MiniGames/Alphabet_BubblePop/sounds/EndOfGame.mp3";
+		    endOfGame.src = audioPath + "EndOfGame.mp3";
 		    endOfGame.play();
 		    document.getElementById('score').value = score; //save score in html element
 		    EndofGame(); //function displays good job message and returns to map

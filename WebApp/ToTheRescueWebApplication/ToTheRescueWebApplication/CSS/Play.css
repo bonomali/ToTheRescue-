@@ -209,9 +209,8 @@ div#gameOver {
     background-color: lightpink;
     font-size: 100%;
 }
-div#BlocksGame
-{
-    margin-left: -5%;
+button {
+    background-size: 100%;
 }
 @media only screen and (min-width: 540px) {
     #optionsLbl {
