@@ -17,26 +17,26 @@
 
     
     //randomly choose target bubble
-    var index6 = Math.floor((Math.random() * 10) + 1) - 1; //random number between 1 and 10, sub 1 for array index
+    var index6 = Math.floor((Math.random() * bubbleImages.length)); //random number for array index
 
     //randomly choose addition letters for game that aren't target and aren't duplicates
-    var index1 = Math.floor((Math.random() * 10) + 1) - 1; //random number between 1 and 10, sub 1 for array index
+    var index1 = Math.floor((Math.random() * bubbleImages.length)); //random number for array index
     while (index1 == index6)
-        var index1 = Math.floor((Math.random() * 10) + 1) - 1; //random number between 1 and 10, sub 1 for array index
-    var index2 = Math.floor((Math.random() * 10) + 1) - 1; //random number between 1 and 10, sub 1 for array index
+        var index1 = Math.floor((Math.random() * bubbleImages.length)); //random number for array index
+    var index2 = Math.floor((Math.random() * bubbleImages.length)); //random number for array index
     while (index2 == index6 || index2 == index1)
-        var index2 = Math.floor((Math.random() * 10) + 1) - 1; //random number between 1 and 10, sub 1 for array index
-    var index3 = Math.floor((Math.random() * 10) + 1) - 1; //random number between 1 and 10, sub 1 for array index
+        var index2 = Math.floor((Math.random() * bubbleImages.length)); //random number for array index
+    var index3 = Math.floor((Math.random() * bubbleImages.length)); //random number for array index
     while (index3 == index6 || index3 == index1 || index3 == index2)
-        var index3 = Math.floor((Math.random() * 10) + 1) - 1; //random number between 1 and 10, sub 1 for array index
-    var index4 = Math.floor((Math.random() * 10) + 1) - 1; //random number between 1 and 10, sub 1 for array index
+        var index3 = Math.floor((Math.random() * bubbleImages.length)); //random number for array index
+    var index4 = Math.floor((Math.random() * bubbleImages.length)); //random number for array index
     while (index4 == index6 || index4 == index1 || index4 == index2 || index4 == index3)
-        var index4 = Math.floor((Math.random() * 10) + 1) - 1; //random number between 1 and 10, sub 1 for array index
-    var index5 = Math.floor((Math.random() * 10) + 1) - 1; //random number between 1 and 10, sub 1 for array index
+        var index4 = Math.floor((Math.random() * bubbleImages.length)); //random number for array index
+    var index5 = Math.floor((Math.random() * bubbleImages.length)); //random number for array index
     while(index5 == index6 || index5 == index1 || index5 == index2 || index5 == index3 || index5 == index4)
-        var index5 = Math.floor((Math.random() * 10) + 1) - 1; //random number between 1 and 10, sub 1 for array index
+        var index5 = Math.floor((Math.random() * bubbleImages.length)); //random number for array index
 
-    var game, spec;
+    var game, images;
     var score = 0;
 
     //bubble sounds
@@ -63,7 +63,7 @@
     audioInstructions.play();
 
     //background image and bubble images
-    spec = {
+    images = {
 		width: 1100,
 		height: 600,
 		bg: {
@@ -120,7 +120,7 @@
 		}]
 	};
     
-	game = BLOCKS.game(spec);   //add images to game
+	game = BLOCKS.game(images);   //add images to game
     
     //game flow, float bubble, tap bubble, pop bubble
     game.prepare = function () {
@@ -178,7 +178,7 @@
 				var bubble,
 
                 //randomly select a bubble from array of bubbles and add to game view
-				bubble = BLOCKS.block(spec.bubbles[Math.floor(Math.random() * spec.bubbles.length)]);
+				bubble = BLOCKS.block(images.bubbles[Math.floor(Math.random() * images.bubbles.length)]);
 				bubble.layer = game.layers[2];
 				game.stage.addView(bubble);
 				bubbles.push(bubble);
@@ -196,7 +196,7 @@
 			};
 
         //add background to bottom layer of game
-		bg = BLOCKS.slice(spec.bg);
+		bg = BLOCKS.slice(images.bg);
 		bg.layer = game.layers[0];
 		game.stage.addView(bg);
 		
