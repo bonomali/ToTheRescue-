@@ -1,0 +1,118 @@
+#background {
+    z-index: 1;
+}
+
+.comparison {
+    opacity: .75;
+}
+
+.comparison:hover {
+    opacity: 1;
+}
+
+
+#lessThan {
+    z-index: 3;
+    position: absolute;
+    top: 425px;
+    left: 60px;
+    
+}
+
+#greaterThan {
+    z-index: 3;
+    position: absolute;
+    top: 425px;
+    left: 792px;
+}
+
+#equalTo {
+    z-index: 3;
+    position: absolute;
+    top: 475px;
+    left: 425px;
+}
+
+#questionMark {
+    z-index: 3;
+    position: absolute;
+    top: 180px;
+    left: 425px;
+}
+
+#goodJob {
+    z-index: 3;
+    position: absolute;
+    left: 409px;
+    top: 350px;
+    visibility: hidden;
+}
+
+#oops {
+    z-index: 3;
+    position: absolute;
+    left: 442px;
+    top: 345px;
+    visibility: hidden;
+}
+
+#trophy0 {
+    left: 375px;
+    top: 45px;
+    position: absolute;
+    opacity: .4;
+    z-index: 3;
+}
+
+#trophy1 {
+    left: 425px;
+    top: 45px;
+    position: absolute;
+    opacity: .4;
+    z-index: 3;
+}
+
+#trophy2 {
+    left: 475px;
+    top: 45px;
+    position: absolute;
+    opacity: .4;
+    z-index: 3;
+}
+
+#trophy3 {
+    left: 525px;
+    top: 45px;
+    position: absolute;
+    opacity: .4;
+    z-index: 3;
+}
+
+#trophy4 {
+    left: 575px;
+    top: 45px;
+    position: absolute;
+    opacity: .4;
+    z-index: 3;
+}
+
+.message {
+    position: absolute;
+    z-index: 3;   
+    font-family: 'Comic Sans MS';
+    color:yellowgreen;
+}
+
+#intro {
+    top: 43px;
+    left: 225px;
+}
+
+#endGame {
+    top: 43px;
+    left: 375px;
+}
+
+.chalk {
+    visibility: hidden;
+}
