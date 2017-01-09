@@ -4,6 +4,7 @@
 var isSelected = false;
 var rightSide, leftSide, selectedName;
 var numberCorrect = 0;
+var numberWrong = 0;
 
 //Wait till the browser has parsed all html and turned in to document tree.
 document.addEventListener('DOMContentLoaded', function () {
@@ -37,10 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
             checkAnswer();
         }
     };
-    //you can also attach a click listener using this syntax
-    //greaterThanImg.addEventListener('click', function () {
-    //    console.log('alternate way to attach an event handler.');
-    //});
 });
 var setupGame = function () {
     var maxNumber = 9; //subject to change, will probably use dataset for minigame
@@ -53,15 +50,75 @@ var setupGame = function () {
 
     document.querySelector('#oops').style.visibility = "hidden";
     document.querySelector('#goodJob').style.visibility = "hidden"; //hides goodJob if it came out
-    document.querySelector('#questionMark').src = "images/question.png"; //puts the question mark back out in center
-    
+    document.querySelector('#questionMark').src = "images/question.png"; //puts the question mark back out in center   
+
+    removeChalk();
     setChalk();
 
     isSelected = false; //allows the user to make a selection again
 }
 
-var setChalk = function () {
+var removeChalk = function () {
+    var node = document.getElementById('leftSideContainer');
 
+    while (node.firstChild) {
+        node.removeChild(node.firstChild);
+    }
+    var node2 = document.getElementById('rightSideContainer');
+    while (node2.firstChild) {
+        node2.removeChild(node2.firstChild);
+    }
+}//clean this up!
+
+var setChalk = function () {
+    
+    var styling = { position: 'absolute', zIndex: '3' };
+    var sourcePath = 'images/chalk.jpg';
+    var container = 'leftSideContainer';//left container first
+
+    var i, modifier = 1;
+    var x = true;
+    var side = leftSide; //start with left side
+
+    while (x) {
+        for (i = 0; i < side; i++) {
+            if (i == 0) {
+                styling.top = '145px';
+            }
+            if (i == 3) {
+                modifier -= 3;
+                styling.top = '215px';
+            }
+            if (i == 6) {
+                modifier -= 3;
+                styling.top = '285px';
+            }
+            styling.left = ((modifier * 50) + 60) + 'px';          
+            createChalk(sourcePath, styling, container);
+            modifier++;
+        }
+
+        if (side == leftSide) {
+            modifier = 14;
+            container = 'rightSideContainer';
+            side = rightSide;
+        }
+        else {
+            x = false;
+        }
+    }
+}
+
+var createChalk = function (source, styling, container) {
+    var container = document.querySelector('#' + container);
+    var chalkImg = document.createElement('img');
+    chalkImg.src = source;
+    for (var key in styling) {
+        if (styling.hasOwnProperty(key)) {
+            chalkImg.style[key] = styling[key];
+        }
+    }//loops through the styling object to apply the styles to the chalkImg  
+    container.appendChild(chalkImg);
 }
 
 var checkAnswer = function () {
@@ -81,15 +138,16 @@ var correctAnswer = function () {
     numberCorrect++;
     adjustTrophies();
     if (numberCorrect == 5) {
-        endGame();
+        setTimeout(endGame, 4500);
     }
-    setTimeout(setupGame, 4500);
+    else setTimeout(setupGame, 4500);
 }
 
 var wrongAnswer = function () {
     document.querySelector('#oops').style.visibility = "visible";
     numberCorrect = 0;
     adjustTrophies();
+    numberWrong++;// not being used yet, might factor into score/game duration
     setTimeout(setupGame, 4500);
 }
 
@@ -120,6 +178,7 @@ var adjustTrophies = function () {
 }
 
 var endGame = function() {
+    removeChalk();
     document.querySelector('#content').style.visibility = "hidden";
     document.querySelector('#endGame').style.visibility = "visible";
    //send off score return back to map
