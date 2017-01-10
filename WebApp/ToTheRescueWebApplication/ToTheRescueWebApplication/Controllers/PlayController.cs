@@ -268,7 +268,8 @@ namespace ToTheRescueWebApplication.Controllers
                 }
             }
             model.MiniGameID = minigames[ranGame].ID;
-            model.MiniGame = minigames[ranGame].MiniGameCode;
+            //model.MiniGame = minigames[ranGame].MiniGameCode;
+            model.MiniGame = "../../MiniGames/Shape_ColoringBook/javascript/colorbook.js"; //path to minigame (eventually on server)
             model.CategoryID = minigames[ranGame].MiniGameCategoryID;
 
             return View(model);
