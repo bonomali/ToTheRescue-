@@ -249,6 +249,16 @@
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\r_recording.mp3" />
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\s_recording.mp3" />
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\t_recording.mp3" />
+    <Content Include="MiniGames\IdentifyShapeGame\audio\Circle.m4a" />
+    <Content Include="MiniGames\IdentifyShapeGame\audio\Hexagon.m4a" />
+    <Content Include="MiniGames\IdentifyShapeGame\audio\Intro.m4a" />
+    <Content Include="MiniGames\IdentifyShapeGame\audio\Octagon.m4a" />
+    <Content Include="MiniGames\IdentifyShapeGame\audio\Pentagon.m4a" />
+    <Content Include="MiniGames\IdentifyShapeGame\audio\Rectangle.m4a" />
+    <Content Include="MiniGames\IdentifyShapeGame\audio\Square.m4a" />
+    <Content Include="MiniGames\IdentifyShapeGame\audio\Triangle.m4a" />
+    <Content Include="MiniGames\IdentifyShapeGame\css\IdentifyShapeGame.css" />
+    <Content Include="MiniGames\IdentifyShapeGame\javascript\IdentifyShapeGame.js" />
     <Content Include="MiniGames\Shape_ColoringBook\images\black-crayon.png" />
     <Content Include="MiniGames\Shape_ColoringBook\images\blue-crayon.png" />
     <Content Include="MiniGames\Shape_ColoringBook\images\circle.png" />
@@ -421,6 +431,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="MiniGames\IdentifyShapeGame\images\" />
     <Folder Include="Views\AnimalRepository\" />
   </ItemGroup>
   <PropertyGroup>
