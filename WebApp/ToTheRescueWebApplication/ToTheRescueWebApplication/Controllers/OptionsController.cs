@@ -24,7 +24,7 @@ namespace ToTheRescueWebApplication.Controllers
 
         public ActionResult Options()
         {
-            m_options = new OptionsModel(m_optionsRepository.Get(ImportantVariables.ProfileID));
+            m_options = new OptionsModel(m_optionsRepository.Get((int)Session["profileID"]));
             return View(m_options);
         }
 
