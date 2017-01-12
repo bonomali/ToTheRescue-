@@ -224,6 +224,10 @@
     <Content Include="Images\sanctuaryIcon.png" />
     <Content Include="Images\winter-scenery-hi.png" />
     <Content Include="LogoutSnippet.txt" />
+    <Content Include="MiniGames\AdditionMiniGame\audio\intro.m4a" />
+    <Content Include="MiniGames\AdditionMiniGame\css\AdditionMiniGame.css" />
+    <Content Include="MiniGames\AdditionMiniGame\img\giraffeImg.png" />
+    <Content Include="MiniGames\AdditionMiniGame\javascript\AdditionMiniGame.js" />
     <Content Include="MiniGames\Alphabet_BubblePop\images\a_bubble.png" />
     <Content Include="MiniGames\Alphabet_BubblePop\images\b_bubble.png" />
     <Content Include="MiniGames\Alphabet_BubblePop\images\c_bubble.png" />
@@ -309,6 +313,11 @@
     <Content Include="MiniGames\Shape_ColoringBook\sounds\triangleFact_recording.mp3" />
     <Content Include="MiniGames\Shape_ColoringBook\sounds\triangle_recording.mp3" />
     <Content Include="MiniGames\Shape_ColoringBook\sounds\yellow_recording.mp3" />
+    <Content Include="MiniGames\SubtractionMiniGame\audio\intro.m4a" />
+    <Content Include="MiniGames\SubtractionMiniGame\css\SubtractionMiniGame.css" />
+    <Content Include="MiniGames\SubtractionMiniGame\img\eatenApple.png" />
+    <Content Include="MiniGames\SubtractionMiniGame\img\wholeApple.png" />
+    <Content Include="MiniGames\SubtractionMiniGame\javascript\SubtractionMiniGame.js" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\bootstrap.js" />
@@ -431,7 +440,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="MiniGames\IdentifyShapeGame\images\" />
     <Folder Include="Views\AnimalRepository\" />
   </ItemGroup>
   <PropertyGroup>

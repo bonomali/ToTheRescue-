@@ -1,0 +1,257 @@
+html{
+    height: 100%;
+	width: 100%;
+	background-color: #4ABDAC;
+	overflow: hidden;
+}
+
+ body{
+    height: 100%;
+	width: 100%;
+	background-color: #4ABDAC;
+	margin: auto;
+}
+
+ #BlocksGame{
+    height: 100%;
+    width: 90%;
+}
+
+#header{
+	text-align: center;
+	color: white;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	font-size: 300%;
+	margin-top: 0;
+}
+
+#visualContainer{
+	width: 95%;
+	height: 25%;
+	position: relative;
+	z-index: 1;
+	visibility: hidden;
+    margin: auto;
+}
+
+.helpers{
+	height: 100%;
+	vertical-align: middle;
+	visibility: visible;
+}
+
+.giraffeImgs{
+	height: 50%;
+	width: 4%;
+	vertical-align: middle;
+	
+	visibility: hidden;
+	
+	display:block;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-left: 0.25%;
+	margin-right: 0.25%;
+}
+
+#imgPlus{
+	width: 13%;
+	height: 100%;
+	float: left;
+	margin-left: 0%;
+	text-align: center;
+	color: white;
+}
+
+#numOneImgContainer{
+	width: 43.5%;
+	height: 100%;
+	margin-left: 0%;
+	float: left;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+#numTwoImgContainer{
+	width: 43.5%;
+	height: 100%;
+	float: left;
+	margin-left: 0%;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+#questionContainer{
+	width: 90%;
+	height: 25%;
+	background-color: #F7B733;
+	position: relative;
+	z-index: 1;
+	border: 2px solid;
+	border-radius: 25px;
+	margin: auto;
+}
+
+.question{
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#addr1{
+	width: 13%;
+	height: 100%;
+	margin-left: 7%;
+	float: left;
+	text-align: center;
+	color: white;
+}
+
+#plus{
+	width: 13%;
+	height: 100%;
+	float: left;
+	margin-left: 5%;
+	text-align: center;
+	color: white;
+	visibility: hidden;
+}
+
+#addr2{
+	width: 13%;
+	height: 100%;
+	float: left;
+	margin-left: 5%;
+	text-align: center;
+	color: white;
+}
+
+#equal{
+	width: 13%;
+	height: 100%;
+	float: left;
+	margin-left: 5%;
+	text-align: center;
+	color: white;
+	visibility: hidden;
+}
+
+#question{
+	width: 13%;
+	height: 100%;
+	float: left;
+	margin-left: 5%;
+	text-align: center;
+	color: white;
+	visibility: hidden;
+}
+
+#answerContainer{
+	width: 100%;
+	height: 25%;
+	position: relative;
+	z-index: 1;
+}
+
+.answer{
+	border: 2px solid black;
+	border-radius: 35px;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	background-color: #F7B733;
+}
+
+#answer1{
+	width: 13%;
+	height: 100%;
+	margin-left: 14%;
+	float: left;
+	text-align: center;
+	color: white;
+}
+
+#answer2{
+	width: 13%;
+	height: 100%;
+	float: left;
+	margin-left: 5%;
+	text-align: center;
+	color: white;
+}
+
+#answer3{
+	width: 13%;
+	height: 100%;
+	float: left;
+	margin-left: 5%;
+	text-align: center;
+	color: white;
+}
+
+#answer4{
+	width: 13%;
+	height: 100%;
+	float: left;
+	margin-left: 5%;
+	text-align: center;
+	color: white;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#endingDiv{
+	width: 20%;
+	height: 30%;
+	background-color: #F7B733;
+	position: absolute;
+	z-index: 2;
+	top: 37%;
+	left: 41%;
+	z-index: -1;
+	text-align: center;
+	color: white;
+	border: 2px solid black;
+	border-radius: 35px;
+	font-size: 200%;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#backButton{
+	border-radius: 20px;
+    background-color: white;
+    font-size: 50%;
+    padding: 10px 10px;
+	margin-top: 15px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border-color: black;
+}
+#backButton:hover {
+        color: white;
+        background-color: #FC4A1A;
+    }
+
+#performanceStat{
+	visibility: hidden;
+}
+
+@media only screen and (max-width: 860px) {
+	#endingDiv{
+		font-size: 95%;
+	}
+	
+	#backButton{
+		padding: 5px 5px;
+	}
+	
+	#header{
+		font-size: 200%;
+	}
+	
+	html{
+		overflow: visible;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	#endingDiv{
+		font-size: 80%;
+	}
+}
