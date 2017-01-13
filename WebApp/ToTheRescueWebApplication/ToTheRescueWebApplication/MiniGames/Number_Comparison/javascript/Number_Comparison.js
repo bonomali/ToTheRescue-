@@ -5,6 +5,7 @@ var isSelected = false;
 var rightSide, leftSide, selectedName;
 var numberCorrect = 0;
 var numberWrong = 0;
+var imgPath = '../../MiniGames/Number_Comparison/';
 
 //Wait till the browser has parsed all html and turned in to document tree.
 document.addEventListener('DOMContentLoaded', function () {
@@ -50,7 +51,7 @@ var setupGame = function () {
 
     document.querySelector('#oops').style.visibility = "hidden";
     document.querySelector('#goodJob').style.visibility = "hidden"; //hides goodJob if it came out
-    document.querySelector('#questionMark').src = "images/question.png"; //puts the question mark back out in center   
+    document.querySelector('#questionMark').src = imgPath + "images/question.png"; //puts the question mark back out in center   
 
     removeChalk();
     setChalk();
@@ -68,12 +69,12 @@ var removeChalk = function () {
     while (node2.firstChild) {
         node2.removeChild(node2.firstChild);
     }
-}//clean this up!
+}
 
 var setChalk = function () {
     
     var styling = { position: 'absolute', zIndex: '3' };
-    var sourcePath = 'images/chalk.jpg';
+    var sourcePath = imgPath + 'images/chalk.jpg';
     var container = 'leftSideContainer';//left container first
 
     var i, modifier = 1;
@@ -183,4 +184,103 @@ var endGame = function() {
     document.querySelector('#endGame').style.visibility = "visible";
    //send off score return back to map
 }
+var createHtmlElement = function () {
+
+    //css
+    var fileRef = document.createElement("link");
+    fileRef.setAttribute("rel", "stylesheet");
+    fileRef.setAttribute("type", "text/css");
+        //gonnna be stored on the server at some point
+    fileRef.setAttribute("href", "../../Minigames/Number_Comparison/CSS/NumberComparison.css");
+        //add the css file to the html
+    document.getElementsByTagName("head")[0].appendChild(fileRef);
+
+    var divContainer = document.getElementById("BlocksGame");
+    divContainer.style.width = "50%";
+    //contents of divContainer
+        //intro header
+    var header = document.createElement("h1");
+    header.setAttribute("id", "intro");
+    header.setAttribute("class", "message");
+    header.innerHTML = "Greater Than, Less Than, Equal To!";
+
+        //end game header
+    var header1 = document.createElement("h1");
+    header1.setAttribute("id", "endGame");
+    header1.setAttribute("class", "message");
+    header1.innerHTML = "Wow! Great Job!";
+
+        //background
+    var background = document.createElement("img");
+    background.setAttribute("id", "background");
+    background.setAttribute("src", imgPath + "images/chalkboard.png");
+
+        //content div
+    var contentDiv = document.createElement("div");
+    contentDiv.setAttribute("id", "content");
+
+        //images belonging in the content div
+            //question mark
+    var questionMark = document.createElement("img");
+    questionMark.setAttribute("id", "questionMark");
+    questionMark.setAttribute("src", imgPath + "images/question.png");
+            //oops
+    var oops = document.createElement("img");
+    oops.setAttribute("id", "oops");
+    oops.setAttribute("src", imgPath + "images/oops.jpg");
+            //goodJob
+    var goodJob = document.createElement("goodJob");
+    goodJob.setAttribute("id", "goodJob");
+    goodJob.setAttribute("src", imgPath + "images/goodJob.jpg");
+        //trophies
+    var id = "trophy";
+    for (var i = 0; i < 5; i++) {
+        var trophy = document.createElement("img");
+        
+        trophy.setAttribute("id", id + i);
+        trophy.setAttribute("src", imgPath + "images/trophy.jpg");
+        contentDiv.appendChild(trophy);
+    }
+            //greater than
+    var greaterThan = document.createElement("img");
+    greaterThan.setAttribute("id", "greaterThan");
+    greaterThan.setAttribute("class", "comparison");
+    greaterThan.setAttribute("src", imgPath + "images/greaterThan.png");
+            //less than
+    var lessThan = document.createElement("img");
+    lessThan.setAttribute("id", "lessThan");
+    lessThan.setAttribute("class", "comparison");
+    lessThan.setAttribute("src", imgPath + "images/lessThan.png");
+            //equal to
+    var equalTo = document.createElement("img");
+    equalTo.setAttribute("id", "equalTo");
+    equalTo.setAttribute("class", "comparison");
+    equalTo.setAttribute("src", imgPath + "images/equalTo.png");
+
+    contentDiv.appendChild(questionMark);
+    contentDiv.appendChild(oops);
+    contentDiv.appendChild(goodJob);
+    contentDiv.appendChild(greaterThan);
+    contentDiv.appendChild(lessThan);
+    contentDiv.appendChild(equalTo);
+        //end contentDiv
+
+        //leftside container
+    var rightSideContainer = document.createElement("div");
+    rightSideContainer.setAttribute("id", "rightSideContainer");
+
+        //rightside container
+    var leftSideContainer = document.createElement("div");
+    leftSideContainer.setAttribute("id", "leftSideContainer");
+
+
+    //append all content 
+    divContainer.appendChild(background);
+    divContainer.appendChild(header);
+    divContainer.appendChild(header1);
+    divContainer.appendChild(contentDiv);
+    divContainer.appendChild(leftSideContainer);
+    divContainer.appendChild(rightSideContainer);
+}
+createHtmlElement();
 beginIntro();
