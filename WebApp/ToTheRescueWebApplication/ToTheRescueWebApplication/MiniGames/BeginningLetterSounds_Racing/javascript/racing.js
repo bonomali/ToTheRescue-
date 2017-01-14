@@ -19,20 +19,39 @@
     var carRevvingAudio = new Audio();   //revving sound when light changes
     var endAudio = new Audio();          //audio after round of game
 
+
     //array of flag images
-    flagImages = [imagePath + "at_flag.jpg", imagePath + "big_flag.jpg", imagePath + "egg_flag.jpg", imagePath + "fun_flag.jpg",
-        imagePath + "go_flag.jpg", imagePath + "help_flag.jpg", imagePath + "little_flag.jpg", imagePath + "not_flag.jpg",
-        imagePath + "on_flag.jpg", imagePath + "quit_flag.jpg", imagePath + "see_flag.jpg", imagePath + "up_flag.jpg",
-        imagePath + "we_flag.jpg"];
+    flagImages = [imagePath + "at_flag.jpg", imagePath + "big_flag.jpg", imagePath + "fun_flag.jpg",
+        imagePath + "go_flag.jpg", imagePath + "help_flag.jpg", imagePath + "on_flag.jpg", imagePath + "see_flag.jpg", 
+        imagePath + "can_flag.jpg", imagePath + "in_flag.jpg", imagePath + "me_flag.jpg", imagePath + "play_flag.jpg",
+        imagePath + "run_flag.jpg", imagePath + "two_flag.jpg"];
 
-    wordSounds = [soundPath + "at_recording.mp3", soundPath + "big_recording.mp3", soundPath + "egg_recording.mp3", soundPath + "fun_recording.mp3",
-        soundPath + "go_recording.mp3", soundPath + "help_recording.mp3", soundPath + "little_recording.mp3", soundPath + "not_recording.mp3",
-        soundPath + "on_recording.mp3", soundPath + "quit_recording.mp3", soundPath + "see_recording.mp3", soundPath + "up_recording.mp3",
-        soundPath + "we_recording.mp3"];
+    wordSounds = [soundPath + "at_recording.mp3", soundPath + "big_recording.mp3", soundPath + "fun_recording.mp3",
+        soundPath + "go_recording.mp3", soundPath + "help_recording.mp3", soundPath + "on_recording.mp3", soundPath + "see_recording.mp3",
+        soundPath + "can_recording.mp3", soundPath + "in_recording.mp3", soundPath + "me_recording.mp3", soundPath + "play_recording.mp3",
+        soundPath + "run_recording.mp3", imagePath + "two_recording.mp3"];
 
-    letterSounds = [soundPath + "a_sound.mp3", soundPath + "b_sound.mp3", soundPath + "e_sound.mp3", soundPath + "f_sound.mp3",
-        soundPath + "g_sound.mp3", soundPath + "h_sound.mp3", soundPath + "l_sound.mp3", soundPath + "n_sound.mp3", soundPath + "o_sound.mp3",
-        soundPath + "q_sound.mp3", soundPath + "s_sound.mp3", soundPath + "u_sound.mp3", soundPath + "w_sound.mp3"];
+    letterSounds = [soundPath + "a_sound.mp3", soundPath + "b_sound.mp3", soundPath + "f_sound.mp3",
+        soundPath + "g_sound.mp3", soundPath + "h_sound.mp3", soundPath + "o_sound.mp3", soundPath + "s_sound.mp3",
+        soundPath + "c_sound.mp3", soundPath + "i_sound.mp3", soundPath + "m_sound.mp3", soundPath + "p_sound.mp3",
+        soundPath + "r_sound.mp3", soundPath + "t_sound.mp3"];
+
+    //difficulty level 2
+   /* //array of flag images
+    flagImages = [imagePath + "down_flag.jpg", imagePath + "jump_flag.jpg", imagePath + "kite_flag.jpg",
+        imagePath + "little_flag.jpg", imagePath + "not_flag.jpg", imagePath + "quit_flag.jpg", imagePath + "up_flag.jpg",
+        imagePath + "very_flag.jpg", imagePath + "we_flag.jpg", imagePath + "xray_flag.jpg", imagePath + "you_flag.jpg",
+        imagePath + "zebra_flag.jpg", imagePath + "egg_flag.jpg"];
+
+    wordSounds = [soundPath + "down_recording.mp3", soundPath + "jump_recording.mp3", soundPath + "kite_recording.mp3",
+        soundPath + "little_recording.mp3", soundPath + "not_recording.mp3", soundPath + "quit_recording.mp3", soundPath + "up_recording.mp3",
+        soundPath + "very_recording.mp3", soundPath + "we_recording.mp3", soundPath + "xray_recording.mp3", soundPath + "you_recording.mp3",
+        soundPath + "zebra_recording.mp3", imagePath + "egg_recording.mp3"];
+
+    letterSounds = [soundPath + "d_sound.mp3", soundPath + "j_sound.mp3", soundPath + "k_sound.mp3",
+        soundPath + "l_sound.mp3", soundPath + "n_sound.mp3", soundPath + "q_sound.mp3", soundPath + "u_sound.mp3",
+        soundPath + "v_sound.mp3", soundPath + "w_sound.mp3", soundPath + "x_sound.mp3", soundPath + "y_sound.mp3",
+        soundPath + "z_sound.mp3", soundPath + "e_sound.mp3"];*/
 
     //randomly generate flags and target flag (create flag slices)
     generateRandom = function () {

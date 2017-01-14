@@ -9,11 +9,25 @@
     var audioClips = [audioPath + "a_recording.mp3", audioPath + "c_recording.mp3", audioPath + "i_recording.mp3",
         audioPath + "m_recording.mp3", audioPath + "p_recording.mp3", audioPath + "r_recording.mp3",
         audioPath + "s_recording.mp3", audioPath + "t_recording.mp3", audioPath + "b_recording.mp3",
-        audioPath + "f_recording.mp3"];
+        audioPath + "f_recording.mp3", audioPath + "o_recording.mp3", audioPath + "g_recording.mp3",
+        audioPath + "h_recording.mp3"];
 
     var bubbleImages = [imagePath + "a_bubble.png", imagePath + "c_bubble.png", imagePath + "i_bubble.png",
         imagePath + "m_bubble.png", imagePath + "p_bubble.png", imagePath + "r_bubble.png",
-        imagePath + "s_bubble.png", imagePath + "t_bubble.png", imagePath + "b_bubble.png", imagePath + "f_bubble.png"];
+        imagePath + "s_bubble.png", imagePath + "t_bubble.png", imagePath + "b_bubble.png", imagePath + "f_bubble.png",
+        imagePath + "o_bubble.png", imagePath + "g_bubble.png", imagePath + "h_bubble.png"];
+
+    //difficulty level 2
+/*    var audioClips = [audioPath + "d_recording.mp3", audioPath + "j_recording.mp3", audioPath + "k_recording.mp3",
+        audioPath + "l_recording.mp3", audioPath + "n_recording.mp3", audioPath + "q_recording.mp3",
+        audioPath + "u_recording.mp3", audioPath + "v_recording.mp3", audioPath + "w_recording.mp3",
+        audioPath + "x_recording.mp3", audioPath + "y_recording.mp3", audioPath + "z_recording.mp3",
+        audioPath + "e_recording.mp3"];
+
+    var bubbleImages = [imagePath + "d_bubble.png", imagePath + "j_bubble.png", imagePath + "k_bubble.png",
+        imagePath + "l_bubble.png", imagePath + "n_bubble.png", imagePath + "q_bubble.png",
+        imagePath + "u_bubble.png", imagePath + "v_bubble.png", imagePath + "w_bubble.png", imagePath + "x_bubble.png",
+        imagePath + "y_bubble.png", imagePath + "z_bubble.png", imagePath + "e_bubble.png"];*/
 
     
     //randomly choose target bubble
