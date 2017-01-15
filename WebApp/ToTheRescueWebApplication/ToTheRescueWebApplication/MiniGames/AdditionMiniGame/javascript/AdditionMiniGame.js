@@ -245,7 +245,7 @@ function GameLoop(AdditionGame)
 
 function CreateHtmlElements()
 {
-    //gonnna be stored on the server at some point
+    //going to be stored on the server at some point
     var imgSrc = "../../MiniGames/AdditionMiniGame/img/giraffeImg.png";
 
     //set up the CSS file needed for this minigame
