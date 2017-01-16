@@ -1,16 +1,30 @@
 const NUM_IMGS = 30;
+
+//used for game logic
 var mostRecentDragColor = null;
 
+//used to calculate performance stat
+var numCorrectDrags = 0;
+var totalDrags = 0;
+
+
+//allows the dropping ability
 function AllowDrop(ev) 
 {
 	ev.preventDefault();
 }
 
+
+//allows the ghost image to be dragged across the screen
 function Drag(ev) 
 {
-	var dragID = ev.target.id;
+    var dragID = ev.target.id;
+
+    //if true, user dragged something valid, if false, the 
+    //user tried to drag something illegal
 	var flag = false;
 	
+    //regular expression to see what color is being dragged
 	if (/^red/.test(dragID) === true)
 	{
 		mostRecentDragColor = "red";
@@ -44,10 +58,14 @@ function Drag(ev)
 		
 }
 
+//Allows the actual dorp to happen
 function Drop(ev) 
 {
-	var targetColor = '';
-	
+    var targetColor = '';
+
+    //increment the number of drags the user had
+    totalDrags++;
+
 	//if the class is a drop area that is being dropped into
 	if (/.*DropAreas.*/.test(ev.target.className) === true)
 	{
@@ -81,13 +99,20 @@ function Drop(ev)
 			var data = ev.dataTransfer.getData("content");
 			ev.target.appendChild(document.getElementById(data));
 			
+            //increment the number of correct drags
+			numCorrectDrags++;
+
+            //don't allow the old div to be dragged
 			PreventClickInEmptyDiv();
+
+            //see if the user won the game
 			CheckIfWon();
 		}
 	}
 	mostRecentDragColor = null;
 }
 
+//Doesn't allow the  user to click where the old img was located
 function PreventClickInEmptyDiv()
 {
 	for (var i = 1; i < NUM_IMGS + 1; i++)
@@ -109,6 +134,7 @@ function PreventClickInEmptyDiv()
 	}
 }
 
+//checks to see if the user won the game
 function CheckIfWon()
 {
 	var won = true;
@@ -170,10 +196,21 @@ function CheckIfWon()
 	
 	if (won === true)
 	{
-		console.log("You Won! WOO!");
+        //stop the game
+	    StopGame();
 	}
 }
 
+//Displays the ending game div and allows the user to exit
+//the game
+function StopGame()
+{
+    var performanceStat = (5 * numCorrectDrags) - (2 * totalDrags);
+    document.getElementById("score").value = performanceStat;
+    EndofGame(); //function displays good job message and returns to map
+}
+
+//used for placeing all of the images in the correct places
 function GetImgSrcArray()
 {
     var imgArr = ["red/apple.png", "blue/bear.png", "blue/key.png", "purple/grapes.png", "yellow/bee.png"
@@ -186,6 +223,7 @@ function GetImgSrcArray()
     return imgArr;
 }
 
+//makes the html elements needed for the game
 function CreateHtml()
 {
     //gonnna be stored on the server at some point
@@ -370,7 +408,24 @@ function CreateHtml()
 
 function Main()
 {
+    //intro instructions
+    var audioSrc = "../../MiniGames/ColorSortingGame/audio/intro.m4a";
+    var audio = new Audio();
+
+    //make the html elements
     CreateHtml();
+
+    window.onload = function () {
+        //play the instructions
+        audio.src = audioSrc;
+        audio.play();
+    };
+
+    //if the user didn't finish the game in 2 minuets
+    setTimeout(function () {
+        //end the game
+        StopGame();
+    }, 123500);
 }
 
 Main();

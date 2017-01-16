@@ -16,6 +16,7 @@ html{
 	padding-top: 0;
 	padding-bottom: 0;
 	margin-bottom: 3px;
+    font-size: 250%;
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 	-webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Chrome/Safari/Opera */
@@ -52,7 +53,7 @@ html{
 
 #answerContainer{
 	width: 100%;
-	height: 51.75%;
+	height: 51.1%;
 	margin: auto;
 	padding: 0;
 	margin-top: 0.25%;
@@ -68,7 +69,7 @@ html{
 }
 
 #red{
-	margin-left: .5%;
+	margin-left: .75%;
 	border-color: red;
 }
 
@@ -118,7 +119,62 @@ html{
 	float: left;
 }
 
+/*stephanies stuff*/
  #BlocksGame{
     height: 100%;
     width: 90%;
+}
+
+/*I need to fix this since it is so messed up */
+#gameOver{
+    display: table;
+    top: -75%;
+}
+
+#praise{
+    margin-top: 3%;
+}
+
+@media only screen and (max-width: 1390px) {
+    .answerAreas{
+        width: 18%;
+        height: 90%;
+    }
+    #red{
+        margin-left: 2%;
+    }
+    #purple{
+        margin-right: auto;
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    .answerAreas{
+        width: 18%;
+        border: 5px solid;
+    }
+    #red{
+        margin-left:2%;
+    }
+}
+
+@media only screen and (max-width: 690px) {
+    .answerAreas{
+        width: 17.75%;
+        border: 4px solid;
+        height: 88%;
+    }
+    #red{
+        margin-left:2%;
+    }
+}
+
+@media only screen and (max-width: 475px) {
+    .answerAreas{
+        width: 18.5%;
+         border: 2px solid;
+    }
+    #red{
+        margin-left:2%;
+    }
 }

@@ -458,7 +458,6 @@ function Main()
 			var totalAttempts = AdditionGame.numClicks;
 			
 			var performanceStat = (5 * totalCorrect) - (2 * totalAttempts);
-			
 			document.getElementById("score").value = performanceStat;
 			EndofGame(); //function displays good job message and returns to map
        }, 60000);	
