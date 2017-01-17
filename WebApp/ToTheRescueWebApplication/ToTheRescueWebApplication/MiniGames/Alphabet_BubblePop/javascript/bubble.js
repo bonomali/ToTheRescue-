@@ -70,6 +70,9 @@
     var audioInstructions = new Audio();
     audioInstructions.src = audioPath + "BubblePopInstructions.mp3"
 
+    var popped = new Audio();   //pop sound
+    popped.src = audioPath + "bubble_pop.mp3";
+
     //play generic instructions for game
     audioInstructions.addEventListener('ended', function () {
         b6.play();  //play target letter after generic instructions
@@ -148,7 +151,7 @@
 			    var i;
 				for (i = 0; i < bubbles.length; i += 1) {
 				    if (bubbles[i].isPointInside(point) && bubbles[i].name == "targetBubble") {
-				        b6.play();
+				        popped.play();
 						bubbles[i].removeMotors();  //remove floating motion
 						game.addMotor("alpha", {    //add fading motion
 							object: bubbles[i],

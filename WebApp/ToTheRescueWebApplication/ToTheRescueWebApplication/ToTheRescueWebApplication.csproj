@@ -246,6 +246,7 @@
     <Content Include="MiniGames\Alphabet_BubblePop\javascript\bubble.js" />
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\a_recording.mp3" />
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\BubblePopInstructions.mp3" />
+    <Content Include="MiniGames\Alphabet_BubblePop\sounds\bubble_pop.mp3" />
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\b_recording.mp3" />
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\c_recording.mp3" />
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\EndOfGame.mp3" />
