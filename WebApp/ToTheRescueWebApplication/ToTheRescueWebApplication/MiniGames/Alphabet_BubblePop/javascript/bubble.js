@@ -18,18 +18,18 @@
         imagePath + "o_bubble.png", imagePath + "g_bubble.png", imagePath + "h_bubble.png"];
 
     //difficulty level 2
-/*    var audioClips = [audioPath + "d_recording.mp3", audioPath + "j_recording.mp3", audioPath + "k_recording.mp3",
-        audioPath + "l_recording.mp3", audioPath + "n_recording.mp3", audioPath + "q_recording.mp3",
-        audioPath + "u_recording.mp3", audioPath + "v_recording.mp3", audioPath + "w_recording.mp3",
-        audioPath + "x_recording.mp3", audioPath + "y_recording.mp3", audioPath + "z_recording.mp3",
-        audioPath + "e_recording.mp3"];
-
-    var bubbleImages = [imagePath + "d_bubble.png", imagePath + "j_bubble.png", imagePath + "k_bubble.png",
-        imagePath + "l_bubble.png", imagePath + "n_bubble.png", imagePath + "q_bubble.png",
-        imagePath + "u_bubble.png", imagePath + "v_bubble.png", imagePath + "w_bubble.png", imagePath + "x_bubble.png",
-        imagePath + "y_bubble.png", imagePath + "z_bubble.png", imagePath + "e_bubble.png"];*/
-
+    /*    var audioClips = [audioPath + "d_recording.mp3", audioPath + "j_recording.mp3", audioPath + "k_recording.mp3",
+            audioPath + "l_recording.mp3", audioPath + "n_recording.mp3", audioPath + "q_recording.mp3",
+            audioPath + "u_recording.mp3", audioPath + "v_recording.mp3", audioPath + "w_recording.mp3",
+            audioPath + "x_recording.mp3", audioPath + "y_recording.mp3", audioPath + "z_recording.mp3",
+            audioPath + "e_recording.mp3"];
     
+        var bubbleImages = [imagePath + "d_bubble.png", imagePath + "j_bubble.png", imagePath + "k_bubble.png",
+            imagePath + "l_bubble.png", imagePath + "n_bubble.png", imagePath + "q_bubble.png",
+            imagePath + "u_bubble.png", imagePath + "v_bubble.png", imagePath + "w_bubble.png", imagePath + "x_bubble.png",
+            imagePath + "y_bubble.png", imagePath + "z_bubble.png", imagePath + "e_bubble.png"];*/
+
+
     //randomly choose target bubble
     var index6 = Math.floor((Math.random() * bubbleImages.length)); //random number for array index
 
@@ -47,7 +47,7 @@
     while (index4 == index6 || index4 == index1 || index4 == index2 || index4 == index3)
         var index4 = Math.floor((Math.random() * bubbleImages.length)); //random number for array index
     var index5 = Math.floor((Math.random() * bubbleImages.length)); //random number for array index
-    while(index5 == index6 || index5 == index1 || index5 == index2 || index5 == index3 || index5 == index4)
+    while (index5 == index6 || index5 == index1 || index5 == index2 || index5 == index3 || index5 == index4)
         var index5 = Math.floor((Math.random() * bubbleImages.length)); //random number for array index
 
     var game, images;
@@ -73,6 +73,9 @@
     var popped = new Audio();   //pop sound
     popped.src = audioPath + "bubble_pop.mp3";
 
+    var bubbles_sound = new Audio();  //bubbles sound effect
+    bubbles_sound.src = audioPath + "bubbles.mp3";
+
     //play generic instructions for game
     audioInstructions.addEventListener('ended', function () {
         b6.play();  //play target letter after generic instructions
@@ -81,154 +84,176 @@
 
     //background image and bubble images
     images = {
-		width: 1100,
-		height: 600,
-		bg: {
-		    src: imagePath + "ocean_background.png"
-		},
-		bubbles:[{
-			name: "bubble1",
-			slices: [{
-				name: "b1",
-				src: bubbleImages[index1]
-			}]
-		}, {
-			name: "bubble2",
-			slices: [{
-				name: "b2",
-				src: bubbleImages[index2]
-			}]
-		}, {
-			name: "bubble3",
-			slices: [{
-				name: "b3",
-				src: bubbleImages[index3]
-			}]
-		}, {
-		    name: "bubble4",
-		    slices: [{
-		        name: "b4",
-		        src: bubbleImages[index4]
-		    }]
-		}, {
-		    name: "bubble5",
-		    slices: [{
-		        name: "b5",
-		        src: bubbleImages[index5]
-		    }]
-		}, {
-		    name: "targetBubble",
-		    slices: [{
-		        name: "b6",
-		        src: bubbleImages[index6]
-		    }]
-            }, {
-		    name: "targetBubble",
-		    slices: [{
-		        name: "b6",
-		        src: bubbleImages[index6]
-		    }]
-            }, {
+        width: 1100,
+        height: 600,
+        bg: {
+            src: imagePath + "ocean_background.png"
+        },
+        bubbles: [{
+            name: "bubble1",
+            slices: [{
+                name: "b1",
+                src: bubbleImages[index1]
+            }]
+        }, {
+            name: "bubble2",
+            slices: [{
+                name: "b2",
+                src: bubbleImages[index2]
+            }]
+        }, {
+            name: "bubble3",
+            slices: [{
+                name: "b3",
+                src: bubbleImages[index3]
+            }]
+        }, {
+            name: "bubble4",
+            slices: [{
+                name: "b4",
+                src: bubbleImages[index4]
+            }]
+        }, {
+            name: "bubble5",
+            slices: [{
+                name: "b5",
+                src: bubbleImages[index5]
+            }]
+        }, {
             name: "targetBubble",
             slices: [{
                 name: "b6",
                 src: bubbleImages[index6]
             }]
-		}]
-	};
-    
-	game = BLOCKS.game(images);   //add images to game
-    
+        }, {
+            name: "targetBubble",
+            slices: [{
+                name: "b6",
+                src: bubbleImages[index6]
+            }]
+        }, {
+            name: "targetBubble",
+            slices: [{
+                name: "b6",
+                src: bubbleImages[index6]
+            }]
+        }]
+    };
+
+    game = BLOCKS.game(images);   //add images to game
+
     //game flow, float bubble, tap bubble, pop bubble
     game.prepare = function () {
-		var bg, 
-			index = 0, 
+        var bg,
+			index = 0,
 			bubbles = [],
 			top = -game.height * 2,
-			
+
             //handle tapped bubbles, call popBubble function if target bubble, play sound for each tapped bubble
 			gameTapped = function (point) {
 			    var i;
-				for (i = 0; i < bubbles.length; i += 1) {
-				    if (bubbles[i].isPointInside(point) && bubbles[i].name == "targetBubble") {
-				        popped.play();
-						bubbles[i].removeMotors();  //remove floating motion
-						game.addMotor("alpha", {    //add fading motion
-							object: bubbles[i],
-							duration: 3000,
-							amount: 1
-						});
-						score = score + 5;      //increment score for correct bubble
-						game.addTicker(popBubble, 500, bubbles[i]); //call function to pop bubble
-					}
-					else if (bubbles[i].isPointInside(point)) {
-					    if (bubbles[i].name == "bubble1")
-					        b1.play();
-					    else if (bubbles[i].name == "bubble2")
-					        b2.play();
-					    else if (bubbles[i].name == "bubble3")
-					        b3.play();
-					    else if (bubbles[i].name == "bubble4")
-					        b4.play();
-					    else if (bubbles[i].name == "bubble5")
-					        b5.play();
-					    score = score - 2;      //decrement score for incorrect bubble
-					}
-				}
+			    for (i = 0; i < bubbles.length; i += 1) {
+			        if (bubbles[i].isPointInside(point) && bubbles[i].name == "targetBubble") {
+			            popped.play();
+			            bubbles[i].removeMotors();  //remove floating motion
+			            game.addMotor("alpha", {    //add fading motion
+			                object: bubbles[i],
+			                duration: 3000,
+			                amount: 1
+			            });
+			            score = score + 5;      //increment score for correct bubble
+			            game.addTicker(popBubble, 500, bubbles[i]); //call function to pop bubble
+			        }
+			        else if (bubbles[i].isPointInside(point)) {
+			            if (bubbles[i].name == "bubble1")
+			                b1.play();
+			            else if (bubbles[i].name == "bubble2")
+			                b2.play();
+			            else if (bubbles[i].name == "bubble3")
+			                b3.play();
+			            else if (bubbles[i].name == "bubble4")
+			                b4.play();
+			            else if (bubbles[i].name == "bubble5")
+			                b5.play();
+			            score = score - 2;      //decrement score for incorrect bubble
+			        }
+			    }
 			},
             //destory popped bubble, remove from memory
 			popBubble = function (bubble) {
-				var i;
-				for (i = 0; i < bubbles.length; i += 1) {
-					if (bubble === bubbles[i]) {
-						bubbles.splice(i, 1);
-						break;
-					}
-				}
-				game.stage.removeView(bubble);
-				bubble.destroy();
-				bubble = null;
+			    var i;
+			    for (i = 0; i < bubbles.length; i += 1) {
+			        if (bubble === bubbles[i]) {
+			            bubbles.splice(i, 1);
+			            break;
+			        }
+			    }
+			    game.stage.removeView(bubble);
+			    bubble.destroy();
+			    bubble = null;
 			},
             //add bubbles to game screen and float upward on y-axis
 			floatBubbles = function () {
 
-				var bubble,
+			    var bubble,
 
                 //randomly select a bubble from array of bubbles and add to game view
 				bubble = BLOCKS.block(images.bubbles[Math.floor(Math.random() * images.bubbles.length)]);
-				bubble.layer = game.layers[2];
-				game.stage.addView(bubble);
-				bubbles.push(bubble);
+			    bubble.layer = game.layers[2];
+			    game.stage.addView(bubble);
+			    bubbles.push(bubble);
 
-                //randomly start bubble along bottom of screen
-				bubble.x = Math.random() * (game.width - bubble.width);
-				bubble.y = game.height + bubble.height;
-				game.addMotor("y", {    //float upward until reaches top of screen
-					object: bubble,
-					duration: 20000,
-					amount: top
-				});
-				
-				game.addTicker(floatBubbles, 1100); //add another bubble every 1100ms
-			};
+			    //randomly start bubble along bottom of screen
+			    bubble.x = Math.random() * (game.width - bubble.width);
+			    bubble.y = game.height + bubble.height;
+			    game.addMotor("y", {    //float upward until reaches top of screen
+			        object: bubble,
+			        duration: 20000,
+			        amount: top
+			    });
+
+			    game.addTicker(moveLeft, 6000, bubble);   //move to left
+			    game.addTicker(moveRight, 3000, bubble);  //move to right
+			    game.addTicker(floatBubbles, 1100); //add another bubble every 1100ms
+			},
+            moveLeft = function (bubble) {    //move bubble to the left
+                game.addMotor("x", {
+                    object: bubble,
+                    duration: 8000,
+                    amount: -Math.random() * ((game.width - bubble.width)/3)
+                });
+            },
+            moveRight = function (bubble) {  //move bubble to the right
+                game.addMotor("x", {
+                    object: bubble,
+                    duration: 8000,
+                    amount: -Math.random() * ((game.width - bubble.width)/3)
+                });
+            };
 
         //add background to bottom layer of game
 		bg = BLOCKS.slice(images.bg);
-		bg.layer = game.layers[0];
-		game.stage.addView(bg);
-		
+        bg.layer = game.layers[0];
+        game.stage.addView(bg);
+
         //add an event listener for bubble taps
-		game.controller.addEventListener("tap", gameTapped);
-		
-		floatBubbles();
+        game.controller.addEventListener("tap", gameTapped);
+
+        floatBubbles();
+
+        //play bubbles sound effect sound every 10000 ms
+        setInterval(function () {
+            bubbles_sound.volume = .2;
+            bubbles_sound.play();
+        }, 10000);
 
         //end the game after time interval
-		setTimeout(function GameOver() {
-		    var endOfGame = new Audio();
-		    endOfGame.src = audioPath + "EndOfGame.mp3";
-		    endOfGame.play();
-		    document.getElementById('score').value = score; //save score in html element
-		    EndofGame(); //function displays good job message and returns to map
-		}, 60000);
+        setTimeout(function GameOver() {
+            var endOfGame = new Audio();
+            endOfGame.src = audioPath + "EndOfGame.mp3";
+            endOfGame.play();
+            document.getElementById('score').value = score; //save score in html element
+            EndofGame(); //function displays good job message and returns to map
+        }, 60000);
     };
 }());
