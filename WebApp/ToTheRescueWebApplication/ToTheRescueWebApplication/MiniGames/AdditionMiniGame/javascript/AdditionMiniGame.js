@@ -245,7 +245,7 @@ function GameLoop(AdditionGame)
 
 function CreateHtmlElements()
 {
-    //gonnna be stored on the server at some point
+    //going to be stored on the server at some point
     var imgSrc = "../../MiniGames/AdditionMiniGame/img/giraffeImg.png";
 
     //set up the CSS file needed for this minigame
@@ -458,7 +458,6 @@ function Main()
 			var totalAttempts = AdditionGame.numClicks;
 			
 			var performanceStat = (5 * totalCorrect) - (2 * totalAttempts);
-			
 			document.getElementById("score").value = performanceStat;
 			EndofGame(); //function displays good job message and returns to map
        }, 60000);	
