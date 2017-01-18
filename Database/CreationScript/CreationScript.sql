@@ -64,9 +64,9 @@ CREATE TABLE Profiles (
 	, ToggleSound BIT NOT NULL DEFAULT 1 --0 = sound off, 1 = sound on, defualted to sound on
 	, ToggleMusic BIT NOT NULL DEFAULT 1
 	, MathDifficultyLevel INT NOT NULL DEFAULT 1 --default to the lowest difficulty level
-	, MathPerformanceStat FLOAT NOT NULL
+	, MathPerformanceStat FLOAT NOT NULL DEFAULT 100 --default to 100
 	, ReadingDifficultyLevel INT NOT NULL DEFAULT 1 --default to the lowest difficulty level
-	, ReadingPerformanceStat FLOAT NOT NULL
+	, ReadingPerformanceStat FLOAT NOT NULL DEFAULT 100 --default to 100
 	, SubjectFilter VARCHAR(50));
 
 CREATE TABLE ProfileProgress (
@@ -88,16 +88,16 @@ CREATE TABLE GameCategories (
 CREATE TABLE MiniGames (
 	MiniGameID INT PRIMARY KEY IDENTITY
 	, MiniGameCategoryID INT REFERENCES GameCategories (GameCategoryID) NOT NULL
-	, MiniGameCode VARCHAR(max) NOT NULL --syntax for clob
+	, MiniGamePath VARCHAR(100) NOT NULL 
 	, MiniGameName VARCHAR(50) NOT NULL
 	, MinDifficulty INT NOT NULL
 	, MaxDifficulty INT NOT NULL);
 
-CREATE TABLE MiniGameMedia (
-	MediaID INT PRIMARY KEY IDENTITY
-	, MiniGameID INT REFERENCES Minigames (MiniGameID) NOT NULL
-	, Difficulty INT DEFAULT NULL	--nulled if media is used for every instance of that game
-	, MiniGameMedia VARBINARY(max) NOT NULL);
+--CREATE TABLE MiniGameMedia (
+--	MediaID INT PRIMARY KEY IDENTITY
+--	, MiniGameID INT REFERENCES Minigames (MiniGameID) NOT NULL
+--	, Difficulty INT DEFAULT NULL	--nulled if media is used for every instance of that game
+--	, MiniGameMedia VARBINARY(max) NOT NULL);
 
 CREATE TABLE ProfileProgressHistory (
 	ProgressID INT PRIMARY KEY IDENTITY

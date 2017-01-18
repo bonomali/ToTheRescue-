@@ -11,7 +11,7 @@ namespace ToTheRescueDataPop
         // The directory for the images
         public static string IMAGES_PATH = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\testMedia\\");
         public static string SOUND_PATH = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\testMedia\\");
-        public static string CODE_PATH = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\miniGameCode\\");
+        //public static string CODE_PATH = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\miniGameCode\\");
         static string DB_USER_NAME = "";
         static string DB_USER_PWD = "";
         public static SqlConnection GetConnection()
@@ -71,65 +71,7 @@ namespace ToTheRescueDataPop
                 }
             }
         }
-        public static void WriteMiniGameMedia(int GameID, string MediaName, int Difficulty)
-        {
-            SqlConnection connection = null;
-            try
-            {
-                // 1. Read image from file
-                string filepath = IMAGES_PATH + MediaName;
-                if (File.Exists(filepath) == false)
-                    throw new Exception("File Not Found: " + filepath);
-                FileStream sourceStream = new FileStream(
-                    filepath,
-                    FileMode.Open,
-                    FileAccess.Read);
-
-                int streamLength = (int)sourceStream.Length;
-                Byte[] productMedia = new Byte[streamLength];
-                sourceStream.Read(productMedia, 0, streamLength);
-                sourceStream.Close();
-
-                // 2. Write image to database
-                connection = GetConnection();
-
-                SqlCommand command = new SqlCommand();
-                command.Connection = connection;
-
-                if (Difficulty.Equals(0))
-                {
-                    command.CommandText =
-                    "INSERT INTO dbo.MiniGameMedia (MiniGameID, MiniGameMedia) " +
-                    "VALUES (@GameID, @ProductMedia)";
-
-                    command.Parameters.AddWithValue("@GameID", GameID);
-                    command.Parameters.AddWithValue("@ProductMedia", productMedia);
-                }
-                else
-                {
-                    command.CommandText =
-                        "INSERT INTO dbo.MiniGameMedia (MiniGameID, Difficulty, MiniGameMedia) " +
-                        "VALUES (@GameID, @Difficulty, @ProductMedia)";
-
-                    command.Parameters.AddWithValue("@GameID", GameID);
-                    command.Parameters.AddWithValue("@ProductMedia", productMedia);
-                    command.Parameters.AddWithValue("@Difficulty", Difficulty);
-                }
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-                if (connection != null)
-                {
-                    connection.Close();
-                }
-            }
-        }
+   
         public static void WriteSound(int SoundClass, string SoundPath, string SoundName)
         {
             SqlConnection connection = null;
@@ -177,37 +119,22 @@ namespace ToTheRescueDataPop
                 }
             }
         }
-        public static void WriteMiniGameCode(int CategoryID, string JSFileName, string GameName, int MinDifficulty, int MaxDifficulty)
+        public static void WriteMiniGames(int CategoryID, string JSFilePath, string GameName, int MinDifficulty, int MaxDifficulty)
         {
             SqlConnection connection = null;
             try
             {
-                // 1. Read game code from file
-                string filepath = CODE_PATH + JSFileName;
-                if (File.Exists(filepath) == false)
-                    throw new Exception("File Not Found: " + filepath);
-                FileStream sourceStream = new FileStream(
-                    filepath,
-                    FileMode.Open,
-                    FileAccess.Read);
-
-                int streamLength = (int)sourceStream.Length;
-                Byte[] gameBytes = new Byte[streamLength];
-                sourceStream.Read(gameBytes, 0, streamLength);
-                sourceStream.Close();
-
-                // 2. Write game code to database
                 connection = GetConnection();
 
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
 
                 command.CommandText =
-                "INSERT INTO dbo.MiniGames (MiniGameCategoryID, MiniGameCode, MiniGameName, MinDifficulty, MaxDifficulty) " +
-                "VALUES (@GameCategory, @GameCode, @GameName, @MinDifficulty, @MaxDifficulty)";
+                "INSERT INTO dbo.MiniGames (MiniGameCategoryID, MiniGamePath, MiniGameName, MinDifficulty, MaxDifficulty) " +
+                "VALUES (@GameCategory, @GamePath, @GameName, @MinDifficulty, @MaxDifficulty)";
 
                 command.Parameters.AddWithValue("@GameCategory", CategoryID);
-                command.Parameters.AddWithValue("@GameCode", gameBytes);
+                command.Parameters.AddWithValue("@GamePath", JSFilePath);
                 command.Parameters.AddWithValue("@GameName", GameName);
                 command.Parameters.AddWithValue("@MinDifficulty", MinDifficulty);
                 command.Parameters.AddWithValue("@MaxDifficulty", MaxDifficulty);
@@ -251,44 +178,6 @@ namespace ToTheRescueDataPop
                 reader.Close();
 
                 return imageIDList;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-                if (connection != null)
-                {
-                    connection.Close();
-                }
-            }
-        }
-        public static List<int> GetDataImageIDList()
-        {
-            SqlConnection connection = null;
-            try
-            {
-                connection = GetConnection();
-
-                SqlCommand command = new SqlCommand();
-                command.Connection = connection;
-                command.CommandText =
-                   "SELECT MediaID FROM MiniGameMedia " +
-                   "ORDER BY MediaID";
-
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                List<int> dataImageIDList = new List<int>();
-                while (reader.Read())
-                {
-                    int imageID = (int)reader[0];
-                    dataImageIDList.Add(imageID);
-                }
-                reader.Close();
-
-                return dataImageIDList;
             }
             catch (Exception e)
             {

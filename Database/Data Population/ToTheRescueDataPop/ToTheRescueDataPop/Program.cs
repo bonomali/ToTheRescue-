@@ -12,7 +12,6 @@ namespace ToTheRescueDataPop
             // initialize data if no data exists
             List<int> soundIDList = ProductDB.GetSoundIDList();
             List<int> imageIDList = ProductDB.GetImageIDList();
-            List<int> dataImageIDList = ProductDB.GetDataImageIDList();
 
             Console.WriteLine("Uploading Images.");
             if (imageIDList.Count == 0)
@@ -113,58 +112,26 @@ namespace ToTheRescueDataPop
             path = Path.Combine(Environment.CurrentDirectory, "GameCategories.sql");
             Console.WriteLine(path);
             ProductDB.WriteSQL(path);
+            
             //minigames
-            Console.WriteLine("Uploading Minigames.");
-            path = Path.Combine(Environment.CurrentDirectory, "Minigames.sql");
-            Console.WriteLine(path);
-            ProductDB.WriteSQL(path);
+            //Console.WriteLine("Uploading Minigames.");
+            //path = Path.Combine(Environment.CurrentDirectory, "Minigames.sql");
+            //Console.WriteLine(path);
+            //ProductDB.WriteSQL(path);
 
-            //Write Mini Game JS Code
-            ProductDB.WriteMiniGameCode(3, "Simon.js", "Simon", 1, 2);
-            ProductDB.WriteMiniGameCode(3, "Snake.js", "Snake", 1, 2);
-            ProductDB.WriteMiniGameCode(3, "TicTacToe.js", "TicTacToes", 1, 2);
-            ProductDB.WriteMiniGameCode(1, "bubbles2.js", "Alphabet Bubble Pop", 1, 1);
-
-            Console.WriteLine("Uploading Minigamemedia.");
-            if (dataImageIDList.Count == 0)
-            {
-                ProductDB.WriteMiniGameMedia(10, "circle.png", 0);
-                ProductDB.WriteMiniGameMedia(10, "triangle.png", 0);
-                ProductDB.WriteMiniGameMedia(10, "rectangle.png", 0);
-
-                ProductDB.WriteMiniGameMedia(10, "octagon.png", 0);
-                ProductDB.WriteMiniGameMedia(10, "rectangle.png", 0);
-                ProductDB.WriteMiniGameMedia(10, "star.png", 0);
-
-                ProductDB.WriteMiniGameMedia(10, "diamond.png", 0);
-                ProductDB.WriteMiniGameMedia(10, "shaperecog_shapehunt.jpg", 0);
-                ProductDB.WriteMiniGameMedia(10, "shush_shapehunt.mp3", 0);
-
-                ProductDB.WriteMiniGameMedia(12, "sortingBear1.png", 2);
-                ProductDB.WriteMiniGameMedia(12, "sortingBear2.png", 2);
-                ProductDB.WriteMiniGameMedia(12, "sortingBear3.png", 2);
-                ProductDB.WriteMiniGameMedia(12, "sortingBear4.png", 2);
-                ProductDB.WriteMiniGameMedia(12, "TaDa.mp3", 0);
-
-                ProductDB.WriteMiniGameMedia(1, "bubble.png", 1);
-                ProductDB.WriteMiniGameMedia(1, "bubbles.png", 1);
-                ProductDB.WriteMiniGameMedia(1, "bubblepop_underthesea.png", 0);
-                ProductDB.WriteMiniGameMedia(1, "bubblepop.mp3", 0);
-
-                ProductDB.WriteMiniGameMedia(31, "a_bubble.png", 1);
-                ProductDB.WriteMiniGameMedia(31, "b_bubble.png", 1);
-                ProductDB.WriteMiniGameMedia(31, "c_bubble.png", 1);
-                ProductDB.WriteMiniGameMedia(31, "d_bubble.png", 1);
-                ProductDB.WriteMiniGameMedia(31, "e_bubble.png", 1);
-
-                ProductDB.WriteMiniGameMedia(31, "a_recording.m4a", 0);
-                ProductDB.WriteMiniGameMedia(31, "b_recording.m4a", 0);
-                ProductDB.WriteMiniGameMedia(31, "c_recording.m4a", 0);
-                ProductDB.WriteMiniGameMedia(31, "d_recording.m4a", 0);
-                ProductDB.WriteMiniGameMedia(31, "e_recording.m4a", 0);
-                ProductDB.WriteMiniGameMedia(31, "bubbleGameInstructions.m4a", 0);
-                ProductDB.WriteMiniGameMedia(31, "gameOver.m4a", 0);
-            }
+            string file_path = "../../MiniGames/AdditionMiniGame/javascript/";
+            //Write Mini Games
+            ProductDB.WriteMiniGames(2, file_path + "AdditionMiniGame.js", "AdditionMiniGame", 3, 4);
+            ProductDB.WriteMiniGames(1, file_path + "bubble.js", "AlphabetBubblePop", 1, 2);
+            ProductDB.WriteMiniGames(1, file_path + "alphabet_tracing.js", "AlphabetTracing", 1, 2);
+            ProductDB.WriteMiniGames(1, file_path + "racing.js", "BeginningLetterSoundsRacing", 3, 4);
+            ProductDB.WriteMiniGames(1, file_path + "ColorSortingGame.js", "ColorSortingGame", 1, 2);
+            ProductDB.WriteMiniGames(2, file_path + "IdentifyShapeGame.js", "IdentifyShapeGame", 1, 2);
+            ProductDB.WriteMiniGames(1, file_path + "mosquitoswat.js", "MosquitoSwatLetterSounds", 3, 4);
+            ProductDB.WriteMiniGames(2, file_path + "Number_Comparision.js", "NumberComparison", 3, 4);
+            ProductDB.WriteMiniGames(2, file_path + "number_tracing.js", "NumberTracing", 1, 2);
+            ProductDB.WriteMiniGames(1, file_path + "colorbook.js", "ShapeColoringBook", 1, 2);
+            ProductDB.WriteMiniGames(2, file_path + "SubtractionMiniGame.js", "SubtractionMiniGame", 3, 4);
 
             //Animals
             Console.WriteLine("Uploading Animals.");
