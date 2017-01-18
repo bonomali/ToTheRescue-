@@ -9,7 +9,7 @@ namespace ToTheRescueWebApplication.Code
     {
         public int ID { get; set; } //minigame id
         public int MiniGameCategoryID { get; set; }
-        public string MiniGameCode { get; set; }
+        public string MiniGamePath { get; set; }
         public string MiniGameName { get; set; }
         public int MinDifficulty { get; set; }
         public int MaxDifficulty { get; set; }

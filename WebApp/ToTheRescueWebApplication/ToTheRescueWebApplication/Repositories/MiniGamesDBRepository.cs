@@ -34,7 +34,7 @@ namespace ToTheRescueWebApplication.Repositories
 
                             code.ID = (int)reader["MiniGameID"];
                             code.MiniGameCategoryID = (int)reader["MiniGameCategoryID"];
-                            code.MiniGameCode = reader["MiniGameCode"].ToString();
+                            code.MiniGamePath = reader["MiniGamePath"].ToString();
                             code.MiniGameName = reader["MiniGameName"].ToString();
                             code.MinDifficulty = (int)reader["MinDifficulty"];
                             code.MaxDifficulty = (int)reader["MaxDifficulty"];
