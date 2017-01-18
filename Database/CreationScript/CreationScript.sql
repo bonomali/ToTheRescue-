@@ -6,9 +6,7 @@
 USE ToTheRescue;
 
 DROP TABLE ProfileProgressHistory;
-DROP TABLE MiniGameMedia;
 DROP TABLE MiniGames;
-DROP TABLE GameCategories;
 DROP TABLE ProfileAnimals;
 DROP TABLE ProfileProgress;
 DROP TABLE Profiles;
@@ -18,6 +16,8 @@ DROP TABLE Nodes;
 DROP TABLE Maps;
 DROP TABLE Sounds;
 DROP TABLE Images;
+
+DELETE FROM AspNetUsers;
 
 CREATE TABLE Images (
 	ImageID INT PRIMARY KEY IDENTITY
@@ -81,13 +81,14 @@ CREATE TABLE ProfileAnimals (
 	, ProfileID INT REFERENCES Profiles (ProfileID) NOT NULL
 	, Active BIT NOT NULL DEFAULT 1); -- 1 means active in sanctuary
 
-CREATE TABLE GameCategories (
-	GameCategoryID INT PRIMARY KEY IDENTITY
-	, GameCategoryName VARCHAR(50) NOT NULL);
+--CREATE TABLE GameCategories (
+--	GameCategoryID INT PRIMARY KEY IDENTITY
+--	, GameCategoryName VARCHAR(50) NOT NULL);
 
 CREATE TABLE MiniGames (
 	MiniGameID INT PRIMARY KEY IDENTITY
-	, MiniGameCategoryID INT REFERENCES GameCategories (GameCategoryID) NOT NULL
+	--, MiniGameCategoryID INT REFERENCES GameCategories (GameCategoryID) NOT NULL
+	, MiniGameCategoryID INT NOT NULL
 	, MiniGamePath VARCHAR(100) NOT NULL 
 	, MiniGameName VARCHAR(50) NOT NULL
 	, MinDifficulty INT NOT NULL

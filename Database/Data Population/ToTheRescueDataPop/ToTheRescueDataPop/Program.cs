@@ -92,6 +92,7 @@ namespace ToTheRescueDataPop
             path = Path.Combine(Environment.CurrentDirectory, "AspNetUsers.sql");
             Console.WriteLine(path);
             ProductDB.WriteSQL(path);
+            
             //profiles
             Console.WriteLine("Uploading Profiles.");
             path = Path.Combine(Environment.CurrentDirectory, "Profiles.sql");
@@ -107,18 +108,19 @@ namespace ToTheRescueDataPop
             path = Path.Combine(Environment.CurrentDirectory, "Nodes.sql");
             Console.WriteLine(path);
             ProductDB.WriteSQL(path);
+            
             //gamecategories
-            Console.WriteLine("Uploading GameCategories.");
-            path = Path.Combine(Environment.CurrentDirectory, "GameCategories.sql");
-            Console.WriteLine(path);
-            ProductDB.WriteSQL(path);
+            //Console.WriteLine("Uploading GameCategories.");
+            //path = Path.Combine(Environment.CurrentDirectory, "GameCategories.sql");
+            //Console.WriteLine(path);
+            //ProductDB.WriteSQL(path);
             
             //minigames
             //Console.WriteLine("Uploading Minigames.");
             //path = Path.Combine(Environment.CurrentDirectory, "Minigames.sql");
             //Console.WriteLine(path);
             //ProductDB.WriteSQL(path);
-
+            
             string file_path = "../../MiniGames/AdditionMiniGame/javascript/";
             //Write Mini Games
             ProductDB.WriteMiniGames(2, file_path + "AdditionMiniGame.js", "AdditionMiniGame", 3, 4);
@@ -132,15 +134,15 @@ namespace ToTheRescueDataPop
             ProductDB.WriteMiniGames(2, file_path + "number_tracing.js", "NumberTracing", 1, 2);
             ProductDB.WriteMiniGames(1, file_path + "colorbook.js", "ShapeColoringBook", 1, 2);
             ProductDB.WriteMiniGames(2, file_path + "SubtractionMiniGame.js", "SubtractionMiniGame", 3, 4);
-
+            
             //Animals
             Console.WriteLine("Uploading Animals.");
             path = Path.Combine(Environment.CurrentDirectory, "Animals.sql");
             Console.WriteLine(path);
-            ProductDB.WriteSQL(path);
+            ProductDB.WriteSQL(path); 
             //ProfileAnimals
             Console.WriteLine("Uploading ProfileAnimals.");
-            path = Path.Combine(Environment.CurrentDirectory, "ProfileAnimals.sql");
+            path = Path.Combine(Environment.CurrentDirectory, "ProfileAnimals.txt");
             Console.WriteLine(path);
             ProductDB.WriteSQL(path);
             //ProfileProgress
@@ -153,7 +155,7 @@ namespace ToTheRescueDataPop
             path = Path.Combine(Environment.CurrentDirectory, "ProfileProgressHistory.sql");
             Console.WriteLine(path);
             ProductDB.WriteSQL(path);
-
+            
             Console.WriteLine("-----Done!-----");
         }
     }
