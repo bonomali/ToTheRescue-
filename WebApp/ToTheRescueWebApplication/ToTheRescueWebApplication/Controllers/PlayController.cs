@@ -147,36 +147,52 @@ namespace ToTheRescueWebApplication.Controllers
             if (categoryID == 1) //Reading category
             {
                 newStat = _stats.ReadingPerformanceStat + score;
-                _minigame.UpdatePerformanceStats((int)Session["profileID"], newStat, _stats.MathPerformanceStat);
-
+                
                 //check if difficulty needs to be adjusted up or down   
-                if (newStat > 100 && _stats.ReadingDifficultyLevel < HIGHEST_DIFF)
+                if (newStat > 125 && _stats.ReadingDifficultyLevel < HIGHEST_DIFF)  //increase difficulty
                 {
                     _stats.ReadingDifficultyLevel = _stats.ReadingDifficultyLevel + 1;
                     _options.UpdateDifficulty(_stats);
+                    newStat = 100;  //reset stat
                 }
-                else if (newStat < 0 && _stats.ReadingDifficultyLevel > LOWEST_DIFF)
+                else if (newStat < 75 && _stats.ReadingDifficultyLevel > LOWEST_DIFF)
                 {
-                    _stats.ReadingDifficultyLevel = _stats.ReadingDifficultyLevel - 1;
+                    _stats.ReadingDifficultyLevel = _stats.ReadingDifficultyLevel - 1;  //decrease difficulty
                     _options.UpdateDifficulty(_stats);
+                    newStat = 100;  //reset stat
                 }
+                else if(newStat < 75 && _stats.ReadingDifficultyLevel == LOWEST_DIFF ||
+                        newStat > 125 && _stats.ReadingDifficultyLevel == HIGHEST_DIFF)
+                {
+                    newStat = 100;  //already at boundary, reset stat
+                }
+                //write stats to DB
+                _minigame.UpdatePerformanceStats((int)Session["profileID"], newStat, _stats.MathPerformanceStat);
             }
             else  //Math category
             {
                 newStat = _stats.MathPerformanceStat + score;
-                _minigame.UpdatePerformanceStats((int)Session["profileID"], _stats.ReadingPerformanceStat, newStat);
 
                 //check if difficulty needs to be adjusted up or down   
-                if (newStat > 100 && _stats.MathDifficultyLevel < HIGHEST_DIFF)
+                if (newStat > 125 && _stats.MathDifficultyLevel < HIGHEST_DIFF) //increase difficulty
                 {
                     _stats.MathDifficultyLevel = _stats.MathDifficultyLevel + 1;
                     _options.UpdateDifficulty(_stats);
+                    newStat = 100;  //reset stat
                 }
-                else if (newStat < 0 && _stats.MathDifficultyLevel > LOWEST_DIFF)
+                else if (newStat < 75 && _stats.MathDifficultyLevel > LOWEST_DIFF)
                 {
-                    _stats.MathDifficultyLevel = _stats.MathDifficultyLevel - 1;
+                    _stats.MathDifficultyLevel = _stats.MathDifficultyLevel - 1;    //decrease difficulty
                     _options.UpdateDifficulty(_stats);
+                    newStat = 100;  //reset stat
                 }
+                else if (newStat < 75 && _stats.MathDifficultyLevel == LOWEST_DIFF ||
+                         newStat > 125 && _stats.MathDifficultyLevel == HIGHEST_DIFF)
+                {
+                    newStat = 100;  //already at boundary, reset stat
+                }
+                //write stats to DB
+                _minigame.UpdatePerformanceStats((int)Session["profileID"], _stats.ReadingPerformanceStat, newStat);
             }
         }
         //update ProfileProgress to a new map
@@ -234,12 +250,17 @@ namespace ToTheRescueWebApplication.Controllers
             else  
                 catID = random.Next(1, 3); //no subject filter, randomly choose a minigame category        
 
-            //get a list of minigames that adheres to subject filter and ????is between one less than difficulty and 1 higher than difficulty????
+            //get a list of minigames that adheres to subject filter and difficulty level
             if (catID == 1)
-                minigames = _minigame.GetListPlayable(catID, profileSettings.ReadingDifficultyLevel, profileSettings.ReadingDifficultyLevel); //catID, minDiff, maxDiff
-            else if(catID ==2)
-                minigames = _minigame.GetListPlayable(catID, profileSettings.MathDifficultyLevel, profileSettings.MathDifficultyLevel); //catID, minDiff, maxDiff    
-             
+            {
+                minigames = _minigame.GetListPlayable(catID, profileSettings.ReadingDifficultyLevel); //catID, difficulty level
+                model.Difficulty = profileSettings.ReadingDifficultyLevel;  //difficult level for model
+            }
+            else if (catID == 2)
+            {
+                minigames = _minigame.GetListPlayable(catID, profileSettings.MathDifficultyLevel); //catID, difficulty level   
+                model.Difficulty = profileSettings.MathDifficultyLevel; //difficulty level for model
+            }
             //get list or recently played minigames
             List<int> playedgames = _minigame.GetListRecentlyPlayed((int)Session["profileID"]);
 
@@ -269,10 +290,10 @@ namespace ToTheRescueWebApplication.Controllers
             }
             model.MiniGameID = minigames[ranGame].ID;
             //model.MiniGame = minigames[ranGame].MiniGameCode;
-            //model.MiniGame = "../../MiniGames/Alphabet_BubblePop/javascript/bubble.js"; //path to minigame (eventually on server)
-            model.MiniGame = "../../MiniGames/Number_Comparison/javascript/Number_Comparison.js"; //path to minigame (eventually on server)
+            model.MiniGame = "../../MiniGames/Alphabet_BubblePop/javascript/bubble.js"; //path to minigame (eventually on server)
+            //model.MiniGame = "../../MiniGames/Number_Comparison/javascript/Number_Comparison.js"; //path to minigame (eventually on server)
             model.CategoryID = minigames[ranGame].MiniGameCategoryID;
-
+            
             return View(model);
         }
     }

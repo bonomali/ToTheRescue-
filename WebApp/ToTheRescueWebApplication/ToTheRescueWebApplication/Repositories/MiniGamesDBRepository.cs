@@ -12,7 +12,7 @@ namespace ToTheRescueWebApplication.Repositories
     public class MiniGamesDBRepository
     {
         //get a list of playable minigames based on category and difficulty
-        public List<MiniGame> GetListPlayable(int categoryID, int minDifficulty, int maxDifficulty)
+        public List<MiniGame> GetListPlayable(int categoryID, int difficulty)
         {
             List<MiniGame> miniGames = new List<MiniGame>();
 
@@ -21,10 +21,9 @@ namespace ToTheRescueWebApplication.Repositories
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = "SELECT * FROM MiniGames WHERE MiniGameCategoryID=@categoryID AND MinDifficulty=@minDifficulty AND MaxDifficulty=@maxDifficulty";
+                    command.CommandText = "SELECT * FROM MiniGames WHERE MiniGameCategoryID=@categoryID AND MinDifficulty <= @difficulty AND MaxDifficulty >= @difficulty";
                     command.Parameters.AddWithValue("@categoryID", categoryID);
-                    command.Parameters.AddWithValue("@minDifficulty", minDifficulty);
-                    command.Parameters.AddWithValue("@maxDifficulty", maxDifficulty);
+                    command.Parameters.AddWithValue("@difficulty", difficulty);
                     command.Connection.Open();
 
                     using (SqlDataReader reader = command.ExecuteReader())

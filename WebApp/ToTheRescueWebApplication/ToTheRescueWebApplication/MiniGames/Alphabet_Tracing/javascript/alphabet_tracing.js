@@ -2,32 +2,37 @@
     var imagePath = '../../MiniGames/Alphabet_Tracing/images/';
     var soundPath = '../../MiniGames/Alphabet_BubblePop/sounds/';
 
+    var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
+    var audioClips;
+    var tracingImages;
 
     //arrays containing paths to audio files and image files for alphabet outlines
-    var audioClips = [soundPath + "a_recording.mp3", soundPath + "c_recording.mp3", soundPath + "i_recording.mp3",
-        soundPath + "m_recording.mp3", soundPath + "p_recording.mp3", soundPath + "r_recording.mp3",
-        soundPath + "s_recording.mp3", soundPath + "t_recording.mp3", soundPath + "b_recording.mp3",
-        soundPath + "f_recording.mp3", soundPath + "o_recording.mp3", soundPath + "g_recording.mp3",
-        soundPath + "h_recording.mp3"];
+    if (difficulty_level == 2) {
+        audioClips = [audioPath + "d_recording.mp3", audioPath + "j_recording.mp3", audioPath + "k_recording.mp3",
+            audioPath + "l_recording.mp3", audioPath + "n_recording.mp3", audioPath + "q_recording.mp3",
+            audioPath + "u_recording.mp3", audioPath + "v_recording.mp3", audioPath + "w_recording.mp3",
+            audioPath + "x_recording.mp3", audioPath + "y_recording.mp3", audioPath + "z_recording.mp3",
+            audioPath + "e_recording.mp3"];
 
-    var tracingImages = [imagePath + "a_tracing.png", imagePath + "c_tracing.png", imagePath + "i_tracing.png",
-        imagePath + "m_tracing.png", imagePath + "p_tracing.png", imagePath + "r_tracing.png",
-        imagePath + "s_tracing.png", imagePath + "t_tracing.png", imagePath + "b_tracing.png",
-        imagePath + "f_tracing.png", imagePath + "o_tracing.png", imagePath + "g_tracing.png",
-        imagePath + "h_tracing.png"];
+        tracingImages = [imagePath + "d_tracing.png", imagePath + "j_tracing.png", imagePath + "k_tracing.png",
+            imagePath + "l_tracing.png", imagePath + "n_tracing.png", imagePath + "q_tracing.png",
+            imagePath + "u_tracing.png", imagePath + "v_tracing.png", imagePath + "w_tracing.png",
+            imagePath + "x_tracing.png", imagePath + "y_tracing.png", imagePath + "z_tracing.png",
+            imagePath + "e_tracing.png"];
+    }
+    else {
+        audioClips = [soundPath + "a_recording.mp3", soundPath + "c_recording.mp3", soundPath + "i_recording.mp3",
+            soundPath + "m_recording.mp3", soundPath + "p_recording.mp3", soundPath + "r_recording.mp3",
+            soundPath + "s_recording.mp3", soundPath + "t_recording.mp3", soundPath + "b_recording.mp3",
+            soundPath + "f_recording.mp3", soundPath + "o_recording.mp3", soundPath + "g_recording.mp3",
+            soundPath + "h_recording.mp3"];
 
-    //difficulty level 2
- /*   var audioClips = [audioPath + "d_recording.mp3", audioPath + "j_recording.mp3", audioPath + "k_recording.mp3",
-        audioPath + "l_recording.mp3", audioPath + "n_recording.mp3", audioPath + "q_recording.mp3",
-        audioPath + "u_recording.mp3", audioPath + "v_recording.mp3", audioPath + "w_recording.mp3",
-        audioPath + "x_recording.mp3", audioPath + "y_recording.mp3", audioPath + "z_recording.mp3",
-        audioPath + "e_recording.mp3"];
-
-    var tracingImages = [imagePath + "d_tracing.png", imagePath + "j_tracing.png", imagePath + "k_tracing.png",
-        imagePath + "l_tracing.png", imagePath + "n_tracing.png", imagePath + "q_tracing.png",
-        imagePath + "u_tracing.png", imagePath + "v_tracing.png", imagePath + "w_tracing.png",
-        imagePath + "x_tracing.png", imagePath + "y_tracing.png", imagePath + "z_tracing.png",
-        imagePath + "e_tracing.png"];*/
+        tracingImages = [imagePath + "a_tracing.png", imagePath + "c_tracing.png", imagePath + "i_tracing.png",
+            imagePath + "m_tracing.png", imagePath + "p_tracing.png", imagePath + "r_tracing.png",
+            imagePath + "s_tracing.png", imagePath + "t_tracing.png", imagePath + "b_tracing.png",
+            imagePath + "f_tracing.png", imagePath + "o_tracing.png", imagePath + "g_tracing.png",
+            imagePath + "h_tracing.png"];
+    }
 
     //randomly choose index for tracing number
     var index = Math.floor((Math.random() * tracingImages.length)); //random number for array index
@@ -111,7 +116,7 @@
             var endOfGame = new Audio();
             endOfGame.src = soundPath + "praise_recording.mp3";
             endOfGame.play();
-            document.getElementById('score').value = 15; //save score in html element
+            document.getElementById('score').value = 2; //save score in html element
             EndofGame(); //function displays good job message and returns to map
         });
         buttonDone.style.backgroundImage = 'url(' + imagePath + 'done-image.jpg)';

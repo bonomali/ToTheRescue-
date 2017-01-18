@@ -2,28 +2,34 @@
     var imagePath = '../../MiniGames/Number_Tracing/images/';
     var soundPath = '../../MiniGames/Number_Tracing/sounds/';
 
-    //arrays containing paths to audio files and image files for number outlines
-    var audioClips = [soundPath + "zero_recording.mp3", soundPath + "one_recording.mp3", soundPath + "two_recording.mp3", soundPath + "three_recording.mp3",
-        soundPath + "four_recording.mp3", soundPath + "five_recording.mp3", soundPath + "six_recording.mp3",
-        soundPath + "seven_recording.mp3", soundPath + "eight_recording.mp3", soundPath + "nine_recording.mp3",
-        soundPath + "ten_recording.mp3"];
+    var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
+    var audioClips;
+    var tracingImages;
 
-    var tracingImages = [imagePath + "zero_tracing.png", imagePath + "one_tracing.png", imagePath + "two_tracing.png", imagePath + "three_tracing.png",
-        imagePath + "four_tracing.png", imagePath + "five_tracing.png", imagePath + "six_tracing.png",
-        imagePath + "seven_tracing.png", imagePath + "eight_tracing.png", imagePath + "nine_tracing.png",
-        imagePath + "ten_tracing.png"];
+    if (difficulty_level == 2) {
+        audioClips = [soundPath + "eleven_recording.mp3", soundPath + "twelve_recording.mp3", soundPath + "thirteen_recording.mp3",
+             soundPath + "fourteen_recording.mp3", soundPath + "fifteen_recording.mp3", soundPath + "sixteen_recording.mp3",
+             soundPath + "seventeen_recording.mp3", soundPath + "eighteen_recording.mp3", soundPath + "nineteen_recording.mp3",
+             soundPath + "twenty_recording.mp3"];
 
-    //difficulty level 2
-   /* var audioClips = [soundPath + "eleven_recording.mp3", soundPath + "twelve_recording.mp3", soundPath + "thirteen_recording.mp3",
-        soundPath + "fourteen_recording.mp3", soundPath + "fifteen_recording.mp3", soundPath + "sixteen_recording.mp3",
-        soundPath + "seventeen_recording.mp3", soundPath + "eighteen_recording.mp3", soundPath + "nineteen_recording.mp3",
-        soundPath + "twenty_recording.mp3"];
+        tracingImages = [imagePath + "eleven_tracing.png", imagePath + "twelve_tracing.png", imagePath + "thirteen_tracing.png",
+             imagePath + "fourteen_tracing.png", imagePath + "fifteen_tracing.png", imagePath + "sixteen_tracing.png",
+             imagePath + "seventeen_tracing.png", imagePath + "eighteen_tracing.png", imagePath + "nineteen_tracing.png",
+             imagePath + "twenty_tracing.png"];
+    }
+    else {
+        //arrays containing paths to audio files and image files for number outlines
+        var audioClips = [soundPath + "zero_recording.mp3", soundPath + "one_recording.mp3", soundPath + "two_recording.mp3", soundPath + "three_recording.mp3",
+            soundPath + "four_recording.mp3", soundPath + "five_recording.mp3", soundPath + "six_recording.mp3",
+            soundPath + "seven_recording.mp3", soundPath + "eight_recording.mp3", soundPath + "nine_recording.mp3",
+            soundPath + "ten_recording.mp3"];
 
-    var tracingImages = [imagePath + "eleven_tracing.png", imagePath + "twelve_tracing.png", imagePath + "thirteen_tracing.png",
-        imagePath + "fourteen_tracing.png", imagePath + "fifteen_tracing.png", imagePath + "sixteen_tracing.png",
-        imagePath + "seventeen_tracing.png", imagePath + "eighteen_tracing.png", imagePath + "nineteen_tracing.png",
-        imagePath + "twenty_tracing.png"];*/
-
+        var tracingImages = [imagePath + "zero_tracing.png", imagePath + "one_tracing.png", imagePath + "two_tracing.png", imagePath + "three_tracing.png",
+            imagePath + "four_tracing.png", imagePath + "five_tracing.png", imagePath + "six_tracing.png",
+            imagePath + "seven_tracing.png", imagePath + "eight_tracing.png", imagePath + "nine_tracing.png",
+            imagePath + "ten_tracing.png"];
+    }
+   
     //randomly choose index for tracing number
     var index = Math.floor((Math.random() * tracingImages.length)); //random number for array index
 
@@ -106,7 +112,7 @@
             var endOfGame = new Audio();
             endOfGame.src = soundPath + "praise_recording.mp3";
             endOfGame.play();
-            document.getElementById('score').value = 15; //save score in html element
+            document.getElementById('score').value = 2; //save score in html element
             EndofGame(); //function displays good job message and returns to map
         });
         buttonDone.style.backgroundImage = 'url(' + imagePath + 'done-image.jpg)';

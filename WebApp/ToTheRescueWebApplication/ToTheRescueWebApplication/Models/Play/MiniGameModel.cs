@@ -10,5 +10,6 @@ namespace ToTheRescueWebApplication.Models.Play
         public int MiniGameID { get; set; }
         public string MiniGame { get; set; }
         public int CategoryID { get; set; }
+        public int Difficulty { get; set; }
     }
 }

@@ -2,31 +2,35 @@
     //set correct margin for div
     document.getElementById('BlocksGame').style.marginLeft = '-5%';
     
+    var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
     var imagePath = '../../MiniGames/MosquitoSwat_LetterSounds/images/';
     var audioPath = '../../MiniGames/MosquitoSwat_LetterSounds/sounds/';
+    var audioClips;
+    var mosquitoImages;
 
-    //arrays containing paths to audio files and image files for mosquitoes
-    var audioClips = [audioPath + "a_sound.mp3", audioPath + "c_sound.mp3", audioPath + "i_sound.mp3", audioPath + "m_sound.mp3",
-        audioPath + "p_sound.mp3", audioPath + "r_sound.mp3", audioPath + "s_sound.mp3", audioPath + "t_sound.mp3",
-        audioPath + "b_sound.mp3", audioPath + "f_sound.mp3", audioPath + "o_sound.mp3", audioPath + "g_sound.mp3",
-        audioPath + "h_sound.mp3"];
+    if (difficulty_level == 4) {
+        audioClips = [audioPath + "d_sound.mp3", audioPath + "j_sound.mp3", audioPath + "k_sound.mp3", audioPath + "l_sound.mp3",
+            audioPath + "n_sound.mp3", audioPath + "q_sound.mp3", audioPath + "u_sound.mp3", audioPath + "v_sound.mp3",
+            audioPath + "w_sound.mp3", audioPath + "x_sound.mp3", audioPath + "y_sound.mp3", audioPath + "z_sound.mp3",
+            audioPath + "e_sound.mp3"];
 
-    var mosquitoImages = [imagePath + "A_mosquito.png", imagePath + "C_mosquito.png", imagePath + "I_mosquito.png",
-        imagePath + "M_mosquito.png", imagePath + "P_mosquito.png", imagePath + "R_mosquito.png",
-        imagePath + "S_mosquito.png", imagePath + "T_mosquito.png", imagePath + "B_mosquito.png", imagePath + "F_mosquito.png",
-        imagePath + "O_mosquito.png", imagePath + "G_mosquito.png", imagePath + "H_mosquito.png"];
+        mosquitoImages = [imagePath + "D_mosquito.png", imagePath + "J_mosquito.png", imagePath + "K_mosquito.png",
+            imagePath + "L_mosquito.png", imagePath + "N_mosquito.png", imagePath + "Q_mosquito.png",
+            imagePath + "U_mosquito.png", imagePath + "V_mosquito.png", imagePath + "W_mosquito.png", imagePath + "X_mosquito.png",
+            imagePath + "Y_mosquito.png", imagePath + "Z_mosquito.png", imagePath + "E_mosquito.png"];
+    }
+    else {
+        //arrays containing paths to audio files and image files for mosquitoes
+        audioClips = [audioPath + "a_sound.mp3", audioPath + "c_sound.mp3", audioPath + "i_sound.mp3", audioPath + "m_sound.mp3",
+            audioPath + "p_sound.mp3", audioPath + "r_sound.mp3", audioPath + "s_sound.mp3", audioPath + "t_sound.mp3",
+            audioPath + "b_sound.mp3", audioPath + "f_sound.mp3", audioPath + "o_sound.mp3", audioPath + "g_sound.mp3",
+            audioPath + "h_sound.mp3"];
 
-    //difficulty level 2
-    /*    var audioClips = [audioPath + "d_sound.mp3", audioPath + "j_sound.mp3", audioPath + "k_sound.mp3", audioPath + "l_sound.mp3",
-        audioPath + "n_sound.mp3", audioPath + "q_sound.mp3", audioPath + "u_sound.mp3", audioPath + "v_sound.mp3",
-        audioPath + "w_sound.mp3", audioPath + "x_sound.mp3", audioPath + "y_sound.mp3", audioPath + "z_sound.mp3",
-        audioPath + "e_sound.mp3"];
-    
-    var mosquitoImages = [imagePath + "D_mosquito.png", imagePath + "J_mosquito.png", imagePath + "K_mosquito.png",
-        imagePath + "L_mosquito.png", imagePath + "N_mosquito.png", imagePath + "Q_mosquito.png",
-        imagePath + "U_mosquito.png", imagePath + "V_mosquito.png", imagePath + "W_mosquito.png", imagePath + "X_mosquito.png",
-        imagePath + "Y_mosquito.png", imagePath + "Z_mosquito.png", imagePath + "E_mosquito.png"];*/
-
+        mosquitoImages = [imagePath + "A_mosquito.png", imagePath + "C_mosquito.png", imagePath + "I_mosquito.png",
+            imagePath + "M_mosquito.png", imagePath + "P_mosquito.png", imagePath + "R_mosquito.png",
+            imagePath + "S_mosquito.png", imagePath + "T_mosquito.png", imagePath + "B_mosquito.png", imagePath + "F_mosquito.png",
+            imagePath + "O_mosquito.png", imagePath + "G_mosquito.png", imagePath + "H_mosquito.png"];
+    }
 
     //randomly choose target mosquito
     var index6 = Math.floor((Math.random() * mosquitoImages.length)); //random number for array index
@@ -260,15 +264,25 @@
 
         addMosquitos(); //begin adding mosquitos to screen
 
-        //play buzzing sound every 3000 ms
-        setInterval(function () { buzz.play(); }, 3000);
+        //play buzzing sound every 8000 ms
+        setInterval(function () { buzz.play(); }, 8000);
 
         //end the game after time interval
         setTimeout(function GameOver() {
             var endOfGame = new Audio();
             endOfGame.src = audioPath + "praise_recording.mp3";
             endOfGame.play();
-            document.getElementById('score').value = score; //save score in html element
+
+            var finalScore; //calculate final score
+            if (score >= 60)
+                finalScore = 5;
+            else if (score >= 30)
+                finalScore = 3;
+            else if (score >= 10)
+                finalScore = 0;
+            else
+                finalScore = -5;
+            document.getElementById('score').value = finalScore; //save score in html element
             EndofGame(); //function displays good job message and returns to map
         }, 60000);
     };
