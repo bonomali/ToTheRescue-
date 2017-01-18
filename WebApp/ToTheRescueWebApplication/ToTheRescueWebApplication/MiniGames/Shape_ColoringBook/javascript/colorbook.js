@@ -232,7 +232,7 @@
                 repeatName.play();
             });
             endOfGame.play();
-            document.getElementById('score').value = 15; //save score in html element
+            document.getElementById('score').value = 2; //save score in html element
             EndofGame(); //function displays good job message and returns to map
         });
         buttonDone.style.backgroundImage = 'url(' + imagePath + 'done-image.jpg)';
