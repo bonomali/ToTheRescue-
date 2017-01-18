@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 
-<h2 class="h2">Hailey's Sanctuary!</h2>
+<h2 class="h2" id="name">Sanctuary!</h2>
 
 <html>
 
@@ -17,9 +17,8 @@
 </head>
 
 
-
-<body onload="javascript:main()">
-    <audio id="BackgroundSound" source src="../Audio/Happy-Music.mp3" autoplay>
+<body>
+    <audio controls loop id="BackgroundSound" source src="../Audio/Happy-Music.mp3" autoplay hidden ="hidden">
         <embed src="../Audio/Happy-Music.mp3" hidden="hidden" />
     </audio>
 
@@ -31,7 +30,7 @@
             {
                 <div id="@("Div" + x)">
                     <text id="@("Text" + x)" hidden="hidden"> @(Model[i].FunFact)</text>
-                    <img id="@("AnimalImage" + x)" height="70" width="70" src="@Url.Action("ShowAnimalImage", new { @animalID = Model[i].ID })" alt="Animal" onclick="AnimalClicked(@x)" />
+                    <img id="@("AnimalImage" + x)" height="70" width="70" src="@Url.Action("ShowAnimalImage", new { @animalID = Model[i].ID })" alt="Animal" onclick="AnimalClicked(@x)" visibility="hidden" />
                     <audio id="@x" src="@Url.Action("PlayAnimalSound", new { @animalID = Model[i].ID })" />
                 </div>
                 x++;
@@ -96,16 +95,17 @@
                     div.style.left = (id * 85 - 255) + "px";
                     div.style.top = (425 + rand) + "px";
                 }
-                div.style.position = "absolute";
-                div.style.zIndex = 2;
-
+                if (id < 20) {
+                    div.style.position = "absolute";
+                    div.style.zIndex = 2;
+                }
                 id++;
                 var elID = "Div" + id;
                 var div = document.getElementById(elID);
             }
         }
 
-        /* Set the width of the side navigation to 250px */
+        /* Set the width of the side navigation to 150px */
         function openNav() {
             document.getElementById("ReleasedAnimals").style.width = "150px";
         }
@@ -114,13 +114,17 @@
         function closeNav() {
             document.getElementById("ReleasedAnimals").style.width = "0";
         }
-
+        function setName() {
+            var name = document.getElementById("name");
+  
+        }
         function main() {
             var music = document.getElementById("BackgroundSound");
-            music.volume = 0.15;
+            music.volume = 0.2;
+            setName();
             MoveAnimals();
-
         }
+        main();
     </script>
     <button id="backButton" class="Buttons" onclick="GoToMainMenu()">Main Menu</button>
 </body>

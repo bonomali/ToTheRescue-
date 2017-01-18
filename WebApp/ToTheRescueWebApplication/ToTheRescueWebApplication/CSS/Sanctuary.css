@@ -4,7 +4,7 @@
     background-size: cover;
     min-width: 650px;
     min-height: 550px;
-    position: relative;
+    position: fixed;
     background-position-x: center;
     background-size: 100% 100%;
     height: 100%;
@@ -63,7 +63,7 @@ h2 {
     z-index: 1; /* Stay on top */
     top: 0;
     left: 0;
-    background-color: yellow; /* Black*/
+    background-color: aqua; 
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
@@ -86,8 +86,7 @@ h2 {
 
 /* Position and style the close button (top right corner) */
 .sidenav .closebtn {
-    position: absolute;
-    top: 20px;
+ 
     right: 20px;
     font-size: 36px;
     margin-left: 50px;
@@ -105,7 +104,8 @@ h2 {
     .sidenav a {font-size: 18px;}
 }
 
-.FunFactDiv {
+#FunFactDiv {
     top: 400px;
     position: absolute;
+    right: 7%;
 }

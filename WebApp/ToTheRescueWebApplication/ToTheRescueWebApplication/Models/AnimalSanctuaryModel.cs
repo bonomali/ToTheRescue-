@@ -21,6 +21,7 @@ namespace ToTheRescueWebApplication.Models
 
         public bool ShinyBit { get; set; }
 
-        public bool ActiveBit { get; set; }      
+        public bool ActiveBit { get; set; }       
+        public string ProfileName { get; set; } 
     }
 }

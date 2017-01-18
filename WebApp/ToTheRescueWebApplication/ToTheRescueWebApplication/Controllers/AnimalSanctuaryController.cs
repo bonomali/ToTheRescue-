@@ -23,15 +23,13 @@ namespace ToTheRescueWebApplication.Controllers
             _image = new ImageDBRepository();
             _animal = new AnimalDBRepository();
             _sounds = new SoundDBRepository();
-
-            //I changed this Lake, I changed the constructor to take an HTTP context in order
-            //to be able to reference the Session variables in the Profile's repository
             _profile = new ProfileDBRepository(System.Web.HttpContext.Current);
-            _options = new OptionsDBRepository();//used to get profile name
+            _options = new OptionsDBRepository();
         }
         public ActionResult Sanctuary()
         {
-            List<Animal> listOfAnimals = _animal.GetList(ImportantVariables.ProfileID);//subject to change
+            List<Animal> listOfAnimals = _animal.GetList((int)Session["profileID"]);//subject to change
+
             return View(listOfAnimals);
         }
         public ActionResult ShowAnimalImage (int animalID)
@@ -48,13 +46,12 @@ namespace ToTheRescueWebApplication.Controllers
 
             return File(sounds.Sound, sounds.SoundName);
         }
-        public ActionResult getProfileName()
-        {
-            OptionsModel m_options;
-            m_options = new OptionsModel(_options.Get(ImportantVariables.ProfileID));
 
-            return View("getProfileName", m_options.profileName);
-            //return File(profile.ProfileName, profile.ProfileName);//hmm
+        public string getProfileName()
+        {
+            Options options = _options.Get((int)Session["profileID"]);
+
+            return options.profileName;
         }
     }
 }

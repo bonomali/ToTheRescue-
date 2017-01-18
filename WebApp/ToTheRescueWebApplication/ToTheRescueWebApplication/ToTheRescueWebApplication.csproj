@@ -373,6 +373,7 @@
     <Content Include="scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="SQLScripts\DropIdentity.sql" />
+    <Content Include="Views\AnimalSanctuary\AnimalSanctuary.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
