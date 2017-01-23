@@ -205,8 +205,47 @@ function CheckIfWon()
 //the game
 function StopGame()
 {
-    var performanceStat = (5 * numCorrectDrags) - (2 * totalDrags);
-    document.getElementById("score").value = performanceStat;
+    var percentage = numCorrectDrags / totalDrags;
+    var returnVal = null;
+
+    if (percentage >= 0.10 && percentage <= 0.20) {
+        returnVal = -4;
+    }
+    else if (percentage > 0.20 && percentage <= 0.30) {
+        returnVal = -3;
+    }
+    else if (percentage > 0.30 && percentage <= 0.40) {
+        returnVal = -2;
+    }
+    else if (percentage > 0.40 && percentage <= 0.50) {
+        returnVal = -1;
+    }
+    else if (percentage > 0.50 && percentage <= 0.60) {
+        returnVal = 0;
+    }
+    else if (percentage > 0.60 && percentage <= 0.70) {
+        returnVal = 1;
+    }
+    else if (percentage > 0.70 && percentage <= 0.80) {
+        returnVal = 2;
+    }
+    else if (percentage > 0.80 && percentage <= 0.90) {
+        returnVal = 3;
+    }
+    else if (percentage > 0.90 && percentage <= 0.95) {
+        returnVal = 4;
+    }
+    else if (percentage < 0.10) {
+        returnVal = -5;
+    }
+    else {
+        returnVal = 5;
+    }
+
+    if (totalDrags === 0)
+        returnVal = 0;
+
+    document.getElementById("score").value = returnVal;
     EndofGame(); //function displays good job message and returns to map
 }
 

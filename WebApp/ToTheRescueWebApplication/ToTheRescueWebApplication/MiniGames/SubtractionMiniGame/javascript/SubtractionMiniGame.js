@@ -417,17 +417,14 @@ function Main()
 		numCorrect: 0,
 		numClicks: 0
 	};
-	
-	// if (difficulty === "easyPreK")
-		// SubtractionGame.upperBound = 5;
-	// else if (difficulty === "hardPreK")
-		// SubtractionGame.upperBound = 10;
-	// else if (difficulty === "easyKindergarten")
-		// SubtractionGame.upperBound = 15;
-	// else
-		// SubtractionGame.upperBound = 20;
-	
-	SubtractionGame.upperBound = 20;
+
+    //get the game's difficulty level and modify the dataset for that difficulty level
+	var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
+
+	if (difficulty <= 3)
+	    SubtractionGame.upperBound = 5;
+	else
+	    SubtractionGame.upperBound = 10;
 	
 	CreateHtmlElements();
 
@@ -460,13 +457,50 @@ function Main()
 			document.getElementById("answerContainer").style.zIndex = "-1";
 			document.getElementById("visualContainer").style.zIndex = "-1";
 			
-			//do something with these values later
 			var totalCorrect = SubtractionGame.numCorrect;
 			var totalAttempts = SubtractionGame.numClicks;
+			var percentage = totalCorrect / totalAttempts;
+			var returnVal = null;
+
+
+			if (percentage >= 0.10 && percentage <= 0.20) {
+			    returnVal = -4;
+			}
+			else if (percentage > 0.20 && percentage <= 0.30) {
+			    returnVal = -3;
+			}
+			else if (percentage > 0.30 && percentage <= 0.40) {
+			    returnVal = -2;
+			}
+			else if (percentage > 0.40 && percentage <= 0.50) {
+			    returnVal = -1;
+			}
+			else if (percentage > 0.50 && percentage <= 0.60) {
+			    returnVal = 0;
+			}
+			else if (percentage > 0.60 && percentage <= 0.70) {
+			    returnVal = 1;
+			}
+			else if (percentage > 0.70 && percentage <= 0.80) {
+			    returnVal = 2;
+			}
+			else if (percentage > 0.80 && percentage <= 0.90) {
+			    returnVal = 3;
+			}
+			else if (percentage > 0.90 && percentage <= 0.95) {
+			    returnVal = 4;
+			}
+			else if (percentage < 0.10) {
+			    returnVal = -5;
+			}
+			else {
+			    returnVal = 5;
+			}
+
+			if (totalAttempts === 0)
+			    returnVal = 0;
 			
-			var performanceStat = (5 * totalCorrect) - (2 * totalAttempts);
-			
-			document.getElementById("score").value = performanceStat;
+			document.getElementById("score").value = returnVal;
 			EndofGame(); //function displays good job message and returns to map
        }, 60000);	
 }
