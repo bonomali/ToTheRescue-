@@ -18,7 +18,7 @@ function GetRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function MakeShapes() {
+function MakeShapes(difficulty) {
     var shapeArr = [];
 
     var Square = {
@@ -66,8 +66,6 @@ function MakeShapes() {
         }
     };
 
-    shapeArr.push(Square);
-
     var Rectangle = {
         x: window.innerWidth,
         y: window.innerHeight,
@@ -111,8 +109,6 @@ function MakeShapes() {
             return (mouseX >= this.x) && (mouseX <= this.x + this.width) && (mouseY >= this.y) && (mouseY <= this.y + this.height);
         }
     };
-
-    shapeArr.push(Rectangle);
 
     var Triangle = {
         x: window.innerWidth / 2,
@@ -165,8 +161,6 @@ function MakeShapes() {
         }
     };
 
-    shapeArr.push(Triangle);
-
     var Circle = {
         x: window.innerWidth / 2,
         y: 0,
@@ -213,8 +207,6 @@ function MakeShapes() {
             return Math.sqrt((mouseX - this.x) * (mouseX - this.x) + (mouseY - this.y) * (mouseY - this.y)) < this.radius;
         }
     };
-
-    shapeArr.push(Circle);
 
     var Pentagon = {
         x: 0,
@@ -269,8 +261,6 @@ function MakeShapes() {
             return (mouseX >= (this.x - this.widthTop)) && (mouseX <= (this.x + this.widthTop)) && (mouseY >= this.y) && (mouseY <= this.y + this.heightBottom);
         }
     };
-
-    shapeArr.push(Pentagon);
 
     var Hexagon = {
         x: window.innerWidth,
@@ -328,8 +318,6 @@ function MakeShapes() {
 					&& (mouseY >= this.y) && (mouseY <= this.y + this.bottomHeight);
         }
     };
-
-    shapeArr.push(Hexagon);
 
     var Octagon = {
         x: window.innerWidth / 2.25,
@@ -391,7 +379,17 @@ function MakeShapes() {
         }
     };
 
-    shapeArr.push(Octagon);
+    shapeArr.push(Square);
+    shapeArr.push(Rectangle);
+    shapeArr.push(Triangle);
+    shapeArr.push(Circle);
+
+    if (difficulty > 2)
+    {
+        shapeArr.push(Pentagon);
+        shapeArr.push(Hexagon);
+        shapeArr.push(Octagon);
+    }
 
     return shapeArr;
 }
@@ -441,22 +439,25 @@ function ResizeCanvas(canvas, ctx, shapeArr) {
 
     shapeArr[CIRCLE].radius = window.innerWidth / 11;
 
-    shapeArr[PENTAGON].widthTop = window.innerWidth / 12;
-    shapeArr[PENTAGON].heightTop = window.innerHeight / 7;
-    shapeArr[PENTAGON].widthBottom = window.innerWidth / 16;
-    shapeArr[PENTAGON].heightBottom = window.innerHeight / 3;
+    if (shapeArr.length > 4)
+    {
+        shapeArr[PENTAGON].widthTop = window.innerWidth / 12;
+        shapeArr[PENTAGON].heightTop = window.innerHeight / 7;
+        shapeArr[PENTAGON].widthBottom = window.innerWidth / 16;
+        shapeArr[PENTAGON].heightBottom = window.innerHeight / 3;
 
 
-    shapeArr[HEXAGON].topWidth = window.innerWidth / 12;
-    shapeArr[HEXAGON].midWidth = window.innerWidth / 25;
-    shapeArr[HEXAGON].midHeight = window.innerHeight / 7;
-    shapeArr[HEXAGON].bottomHeight = window.innerHeight / 3.5;
+        shapeArr[HEXAGON].topWidth = window.innerWidth / 12;
+        shapeArr[HEXAGON].midWidth = window.innerWidth / 25;
+        shapeArr[HEXAGON].midHeight = window.innerHeight / 7;
+        shapeArr[HEXAGON].bottomHeight = window.innerHeight / 3.5;
 
-    shapeArr[OCTAGON].topWidth = window.innerWidth / 13;
-    shapeArr[OCTAGON].midWidth = window.innerWidth / 28;
-    shapeArr[OCTAGON].midHeightOne = window.innerHeight / 13.5;
-    shapeArr[OCTAGON].midHeightTwo = window.innerHeight / 4.5;
-    shapeArr[OCTAGON].bottomHeight = window.innerHeight / 3.25;
+        shapeArr[OCTAGON].topWidth = window.innerWidth / 13;
+        shapeArr[OCTAGON].midWidth = window.innerWidth / 28;
+        shapeArr[OCTAGON].midHeightOne = window.innerHeight / 13.5;
+        shapeArr[OCTAGON].midHeightTwo = window.innerHeight / 4.5;
+        shapeArr[OCTAGON].bottomHeight = window.innerHeight / 3.25;
+    }
 }
 
 //do what you need to do here with regards to clicking
@@ -585,8 +586,11 @@ function Main()
     canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
 	
+    //get the game's difficulty level and modify the dataset for that difficulty level
+	var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
+
 	//need to pass in diffculty to determine the length of shapeArr
-	var shapeArr = MakeShapes();
+	var shapeArr = MakeShapes(difficulty);
 	
 	window.addEventListener('resize', function(){
 		ResizeCanvas(canvas, ctx, shapeArr);
@@ -616,13 +620,50 @@ function Main()
 			clickable = false;
 			document.getElementById("header").innerHTML = "Identify The Shape!";
 			
-			//do something with these values later
 			var totalCorrect = numOfCorrectClicks;
 			var totalAttempts = clickCount;
-			
-			var performanceStat = (5 * totalCorrect) - (2 * totalAttempts);
+			var percentage = totalCorrect / totalAttempts;
+			var returnVal = null;
 
-			document.getElementById('score').value = performanceStat;
+			if (percentage >= 0.10 && percentage <= 0.20) {
+			    returnVal = -4;
+			}
+			else if (percentage > 0.20 && percentage <= 0.30) {
+			    returnVal = -3;
+			}
+			else if (percentage > 0.30 && percentage <= 0.40) {
+			    returnVal = -2;
+			}
+			else if (percentage > 0.40 && percentage <= 0.50) {
+			    returnVal = -1;
+			}
+			else if (percentage > 0.50 && percentage <= 0.60) {
+			    returnVal = 0;
+			}
+			else if (percentage > 0.60 && percentage <= 0.70) {
+			    returnVal = 1;
+			}
+			else if (percentage > 0.70 && percentage <= 0.80) {
+			    returnVal = 2;
+			}
+			else if (percentage > 0.80 && percentage <= 0.90) {
+			    returnVal = 3;
+			}
+			else if (percentage > 0.90 && percentage <= 0.95) {
+			    returnVal = 4;
+			}
+			else if (percentage < 0.10) {
+			    returnVal = -5;
+			}
+			else {
+			    returnVal = 5;
+			}
+
+			if (totalAttempts === 0)
+			    returnVal = 0;
+			
+
+			document.getElementById('score').value = returnVal;
 			EndofGame(); //function displays good job message and returns to map
        }, 60000);	
 }

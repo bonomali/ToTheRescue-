@@ -2,6 +2,8 @@
 //Greater Than, Less Than, Equal To! JavaScript file
 
 var isSelected = false;
+var difficulty = 4; //needs to be connected to main program
+var maxNumber = difficulty * 2;
 var rightSide, leftSide, selectedName;
 var numberCorrect = 0;
 var numberWrong = 0;
@@ -41,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 });
 var setupGame = function () {
-    var maxNumber = 9; //subject to change, will probably use dataset for minigame
 
     leftSide = Math.floor(Math.random() * maxNumber) + 1; //a number from 1 - 10
     rightSide = Math.floor(Math.random() * maxNumber) + 1;
@@ -138,18 +139,22 @@ var correctAnswer = function () {
     goodJob.style.visibility = "visible";
     numberCorrect++;
     adjustTrophies();
+    var prng = document.getElementById("prng");
+    prng.play();
     if (numberCorrect == 5) {
-        setTimeout(endGame, 4500);
+        setTimeout(endGame, 3500);
     }
-    else setTimeout(setupGame, 4500);
+    else setTimeout(setupGame, 3500);
 }
 
 var wrongAnswer = function () {
     document.querySelector('#oops').style.visibility = "visible";
     numberCorrect = 0;
     adjustTrophies();
+    var woops = document.getElementById("woopsAudio");
+    woops.play();
     numberWrong++;// not being used yet, might factor into score/game duration
-    setTimeout(setupGame, 4500);
+    setTimeout(setupGame, 3500);
 }
 
 var beginIntro = function () {
@@ -179,10 +184,16 @@ var adjustTrophies = function () {
 }
 
 var endGame = function() {
+    var wow = document.getElementById("wow");
+    wow.play();
     removeChalk();
     document.querySelector('#content').style.visibility = "hidden";
     document.querySelector('#endGame').style.visibility = "visible";
-   //send off score return back to map
+    
+    var performanceStat = 5 - numberWrong;
+    if (performanceStat < -5) performanceStat = -5;
+    //return performanceStat;
+    //send off score return back to map
 }
 var createHtmlElement = function () {
 
@@ -229,7 +240,7 @@ var createHtmlElement = function () {
     oops.setAttribute("id", "oops");
     oops.setAttribute("src", imgPath + "images/oops.jpg");
             //goodJob
-    var goodJob = document.createElement("goodJob");
+    var goodJob = document.createElement("img");
     goodJob.setAttribute("id", "goodJob");
     goodJob.setAttribute("src", imgPath + "images/goodJob.jpg");
         //trophies
@@ -273,6 +284,40 @@ var createHtmlElement = function () {
     var leftSideContainer = document.createElement("div");
     leftSideContainer.setAttribute("id", "leftSideContainer");
 
+    //audio content
+    var audioDiv = document.createElement("div");
+    audioDiv.setAttribute("id", "audioDiv");
+
+    var backgroundMusic = document.createElement('audio');
+    backgroundMusic.setAttribute('src', imgPath + 'sounds/background.mp3');
+    backgroundMusic.setAttribute('autoplay', 'autoplay');
+    backgroundMusic.loop = true;
+    backgroundMusic.volume = '0.3';
+    backgroundMusic.play();
+
+    backgroundMusic.addEventListener('ended', function () {
+        this.currentTime = 0;
+        this.play();
+        this.volume = '0.3';
+    }, false);//keeps background music alive
+
+    var prng = document.createElement('audio');
+    prng.setAttribute('src', imgPath + 'sounds/prng.m4a');
+    prng.setAttribute('id', 'prng');
+
+    var woopsAudio = document.createElement('audio');
+    woopsAudio.setAttribute('src', imgPath + 'sounds/woops.m4a');
+    woopsAudio.setAttribute('id', 'woopsAudio');
+
+    var wow = document.createElement('audio');
+    wow.setAttribute('src', imgPath + 'sounds/wow.m4a');
+    wow.setAttribute('id', 'wow');
+
+    audioDiv.appendChild(backgroundMusic);
+    audioDiv.appendChild(prng);
+    audioDiv.appendChild(wow);
+    audioDiv.appendChild(woopsAudio);
+
 
     //append all content 
     divContainer.appendChild(background);
@@ -281,6 +326,7 @@ var createHtmlElement = function () {
     divContainer.appendChild(contentDiv);
     divContainer.appendChild(leftSideContainer);
     divContainer.appendChild(rightSideContainer);
+    divContainer.appendChild(audioDiv);
 }
 createHtmlElement();
 beginIntro();
