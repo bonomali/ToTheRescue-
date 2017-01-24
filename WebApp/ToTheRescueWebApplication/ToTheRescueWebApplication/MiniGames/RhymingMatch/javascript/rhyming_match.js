@@ -2,6 +2,10 @@
     var imagePath = '../../MiniGames/RhymingMatch/images/';
     var soundPath = '../../MiniGames/Rhymingmatch/sounds/';
     var targetIndex, word1Index, word2Index;   //indicies for word cards
+    var targetWord, matchingWord, correctAudio; //audio clips for repeating rhyme when create
+    var InstructionsPart1;
+    var score = 0;
+    var finalScore = 0;
 
     //sets of rhyming words and corresponding sounds
     var wordsSet1 = [imagePath + "ball.png", imagePath + "bat.png", imagePath + "bed.png", imagePath + "chick.png", imagePath + "dish.png",
@@ -42,7 +46,6 @@
         top[i].style.marginTop = '1%';
         top[i].style.width = '25%';
         top[i].style.height = '40%';
-        top[i].style.zIndex = 2;
         top[i].style.border = "thick solid #000"
     }
 
@@ -68,7 +71,6 @@
         cards[i].style.marginTop = '30%';
         cards[i].style.width = '25%';
         cards[i].style.height = '40%';
-        cards[i].style.zIndex = 2;
         cards[i].style.border = "thick solid #000"
     }
 
@@ -80,7 +82,7 @@
 
     //create, style, and add first word option to div and set draggable to true
     var card1Image = document.createElement('img');
-    card1Image.setAttribute('id', 'matchingImg');
+    card1Image.setAttribute('id', 'draggableImg1');
     card1Image.style.height = '100%';
     card1Image.style.width = '100%';
     card1Image.setAttribute('draggable', true);
@@ -96,7 +98,7 @@
 
     //create, style, and add third word option to div and set draggable to true
     var card3Image = document.createElement('img');
-    card3Image.setAttribute('id', 'draggableImg3');
+    card3Image.setAttribute('id', 'matchingImg');
     card3Image.style.height = '100%';
     card3Image.style.width = '100%';
     card3Image.setAttribute('draggable', true);
@@ -110,26 +112,25 @@
     matchingRhyme.ondragover = function allowDrop(ev) {
         ev.preventDefault();
     }
-    //handle dragging action for non-matching word card 1
-    card1Image.ondragstart = function drag(ev) {
-        tryAgain.play();
-    }
-    //handle dragging action for non-matching word card 2
-    card2Image.ondragstart = function drag(ev) {
-        tryAgain.play();
-    }
     //handle dragging action for matching word card
     card3Image.ondragstart = function drag(ev) {
         ev.dataTransfer.setData("text", ev.target.id);
-        correct.play();
     }
     //handle dropping action
     matchingRhyme.ondrop = function drop(ev) {
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
-        ev.target.appendChild(document.getElementById(data));
+        if (data == "matchingImg") {        //increment score and play correct audio if correct card
+            ev.target.appendChild(document.getElementById(data));
+            score = score + 5;  //increment score for correct answer
+            setTimeout(function () { correct.play() }, 500);
+        }
+        else {  //decrement score and play incorrect audio if incorrect card
+            setTimeout(function () { tryAgain.play() }, 500);
+            score = score - 2;  //decrement score for incorrect answer
+        }
     }
-
+    //randomly choose and play all word cards
     function InitGame() {
         card3.appendChild(card3Image);
 
@@ -161,8 +162,9 @@
 
         GameIntro();    //call function to play directions
     }
+    //play game intro and directions
     function GameIntro() {
-        var InstructionsPart1 = new Audio();
+        InstructionsPart1 = new Audio();
         InstructionsPart1.src = soundPath + "audio_instructionsPart1.mp3";
         var InstructionsPart2 = new Audio();
         InstructionsPart2.src = soundsSet1[targetIndex];    //play target rhyming word
@@ -176,10 +178,38 @@
         });
         InstructionsPart1.play();
     }
-
+    //play audio to reinforce rhyme
+    targetWord = new Audio();
     correct.addEventListener('ended', function () {
-        InitGame();
+        targetWord.src = soundsSet1[targetIndex];
+        targetWord.play();
+    });
+    correctAudio = new Audio();
+    correctAudio.src = soundPath + "rhymesWith_recording.mp3";
+    targetWord.addEventListener('ended', function () {
+        correctAudio.play();
+    });
+    matchingWord = new Audio();
+    correctAudio.addEventListener('ended', function () {
+        matchingWord.src = soundsSet2[targetIndex];
+        matchingWord.play();
+    });
+    matchingWord.addEventListener('ended', function () {
+        setTimeout(InitGame(), 500);    //init a new game
     });
 
-    InitGame();
+    InitGame(); //initialize game
+
+    setTimeout(function GameOver() {
+        if (score >= 20)    //calculate final score
+            finalScore = 5;
+        else if (score >= 14)
+            finalScore = 3;
+        else if (score >= 5)
+            finalScore = 0;
+        else
+            finalScore = -5;
+        document.getElementById('score').value = finalScore; //save score in html element
+        EndofGame(); //function displays good job message and returns to map
+    }, 30000);
 }());
