@@ -8,95 +8,39 @@
 <div id="top"></div>
 <div id="bottom"></div>
 
-<div>
+<html id="html">
+<body id="OptionsBody">
     <h2>Options for @Model.profileName</h2>
-
     <section class="form" id="loginForm">
-        @using (Html.BeginForm())
-        {
-            @Html.TextBoxFor(m => m.profileName, new { style = "display: none;" })
+        <h5 id="emailText" ,>Please enter your email to access Options:</h5>
+        <input type="text" , id="emailTextBox" />
+        <input type="submit" class="Buttons" value="Continue" id="CheckEmail" onclick="CheckEmail()" />
 
-            <table border="0" align="center">
-                <tr>
-                    <td><text>Toggle Sound:</text></td>
-                    <td>@Html.CheckBoxFor(m => m.toggleSound)</td>
-                </tr>
-                <tr>
-                    <td><text>Toggle Music:</text></td>
-                    <td>@Html.CheckBoxFor(m => m.toggleMusic)</td>
-                </tr>
-            </table>
-
-            <br />
-            SelectList readingDifficultyList = new SelectList(new List<Object>
-                {
-                new { Text = "Low Pre-Kindergarden", Value = "1" },
-                new { Text = "High Pre-Kindergarden", Value = "2"  },
-                new { Text = "Low Kindergarden", Value = "3" },
-                new { Text = "High Kindergarden", Value = "4" }
-                },
-                "value",
-                "text",
-                Model.ReadingDifficultyLevel);
-            SelectList mathDifficultyList = new SelectList(new List<Object>
-                    {
-                    new { Text = "Low Pre-Kindergarden", Value = "1" },
-                    new { Text = "High Pre-Kindergarden", Value = "2"  },
-                    new { Text = "Low Kindergarden", Value = "3" },
-                    new { Text = "High Kindergarden", Value = "4" }
-                    },
-                "value",
-                "text",
-                Model.MathDifficultyLevel);
-            SelectList subjectFilterList = new SelectList(new List<Object>
-                        {
-                        new { Text = "Anything", Value = "Any" },
-                        new { Text = "Math Only", Value = "Math" },
-                        new { Text = "Reading Only", Value = "Reading"  },
-                        },
-                "value",
-                "text",
-                Model.SubjectFilter);
-            <table border="0" align="center">
-                <tr>
-                    <td><text>Math Difficulty:    </text></td>
-                    <td>@Html.DropDownListFor(m => m.MathDifficultyLevel, mathDifficultyList)</td>
-                </tr>
-                <tr>
-                    <td><text>Reading Difficulty: </text></td>
-                    <td>@Html.DropDownListFor(m => m.ReadingDifficultyLevel, readingDifficultyList)</td>
-                </tr>
-                <tr>
-                    <td><text>Subject Filter:         </text></td>
-                    <td align="left">@Html.DropDownListFor(m => m.SubjectFilter, subjectFilterList)</td>
-                </tr>
-            </table>
-
-            <br />
-                <br />
-
-                <button id="submitBtn" type="submit" class="submit">Apply Options</button>
-        }
-
-        <br />
-
-        <p class="link">@Html.ActionLink("Switch Profiles", "ChooseProfilePage", "Profile")</p>
-        <p class="link">@Html.ActionLink("Back to Main Menu", "MainMenu", "MainMenu")</p>
-        
-            @if (User.Identity.IsAuthenticated)
-            {
-                using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { @id = "logoutForm" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <p class="link"><a href="Logout" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a></p>
-                }
-            }
-        
-
-        <script type="text/javascript">
-            function main() { }
-            main()
-
-        </script>
+        <p class="link" style=""><a href="/MainMenu/MainMenu" style="">Back to Main Menu</a></p>
     </section>
-</div>
+</body>
+</html>
+
+@*use jquery*@
+<script src="~/scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+            function CheckEmail() {
+                var enteredEmail = document.getElementById("emailTextBox").value;
+                //this regular expression checks to see if there
+                //is at least one character of non whitespace in the entered email
+                if (/\S/.test(enteredEmail) !== true || enteredEmail === '') {
+
+                    //string is all white space, set it to "error" so an error message is displayed
+                    enteredEmail = "error";
+                }
+
+                route = '/options/options/';
+                route = route.concat(enteredEmail);
+                route = route.concat('/');
+
+                //Call the ClickedDelete function in the profile controller
+                //to delete the selected profile out of the database
+                window.location.href = route;
+
+            }
+</script>

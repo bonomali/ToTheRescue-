@@ -22,6 +22,12 @@ namespace ToTheRescueWebApplication.Controllers
         }
 
 
+        public ActionResult InnerOptions()
+        {
+            m_options = new OptionsModel(m_optionsRepository.Get((int)Session["profileID"]));
+            return View(m_options);
+        }
+
         public ActionResult Options()
         {
             m_options = new OptionsModel(m_optionsRepository.Get((int)Session["profileID"]));
@@ -42,6 +48,7 @@ namespace ToTheRescueWebApplication.Controllers
             if (ModelState.IsValid)
             {
                 Options o = new Code.Options(model);
+                o.profileID = (int)Session["profileID"];
                 m_optionsRepository.Save(o);
             }
             else
@@ -49,6 +56,34 @@ namespace ToTheRescueWebApplication.Controllers
                 return View(model);
             }
             return RedirectToAction("Options");
+        }
+        [HttpPost]
+        public ActionResult InnerOptions(OptionsModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                Options o = new Code.Options(model);
+                o.profileID = (int)Session["profileID"];
+                m_optionsRepository.Save(o);
+            }
+            else
+            {
+                return View(model);
+            }
+            return RedirectToAction("InnerOptions");
+        }
+
+        public ActionResult EnteredEmail(string email)
+        {
+            if (email == (string)Session["userEmail"])
+            {
+                return RedirectToAction("InnerOptions");
+            }
+            else
+            {
+                return RedirectToAction("Options");
+            }
         }
     }
 }

@@ -476,6 +476,8 @@
     <Content Include="Views\Play\EndofGame.cshtml" />
     <Content Include="Views\Play\MiniGame.cshtml" />
     <Content Include="Views\Shared\_MiniGameLayout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Options\InnerOptions.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
