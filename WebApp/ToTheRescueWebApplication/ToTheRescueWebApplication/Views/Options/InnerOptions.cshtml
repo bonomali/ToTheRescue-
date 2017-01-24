@@ -1,7 +1,35 @@
 ﻿@model ToTheRescueWebApplication.Models.OptionsModel
 @{
-    ViewBag.Title = "InnerOptions";
+    ViewBag.Title = "Options";
     Layout = "~/Views/Shared/_OptionsLayout.cshtml";
+
+    SelectList readingDifficultyList = new SelectList(new List<Object>{
+                           new { Text = "Low Pre-Kindergarden", Value = "1" },
+                           new { Text = "High Pre-Kindergarden", Value = "2"  },
+                           new { Text = "Low Kindergarden", Value = "3" },
+                           new { Text = "High Kindergarden", Value = "4" }
+                                                                      },
+                                                                                            "value",
+                                                                                            "text",
+                                                                                             Model.ReadingDifficultyLevel);
+    SelectList mathDifficultyList = new SelectList(new List<Object>{
+                           new { Text = "Low Pre-Kindergarden", Value = "1" },
+                           new { Text = "High Pre-Kindergarden", Value = "2"  },
+                           new { Text = "Low Kindergarden", Value = "3" },
+                           new { Text = "High Kindergarden", Value = "4" }
+                                                      },
+                                                                    "value",
+                                                                    "text",
+                                                                     Model.MathDifficultyLevel);
+    SelectList subjectFilterList = new SelectList(new List<Object>
+                        {
+                        new { Text = "Anything", Value = "Any" },
+                        new { Text = "Math Only", Value = "Math" },
+                        new { Text = "Reading Only", Value = "Reading"  },
+                        },
+        "value",
+        "text",
+        Model.SubjectFilter);
 }
 <div id="left"></div>
 <div id="right"></div>
@@ -12,61 +40,24 @@
     <h2>Options for @Model.profileName</h2>
 
     <section class="form" id="loginForm">
-        <form action="/Options/Options" method="post" class="">
-            <input data-val="true" data-val-required="The profileName field is required." id="profileName" name="profileName" style="display: none;" type="text" value="PleaseWork">            <table border="0" align="center" class="">
-                <tbody>
-                    <tr>
-                        <td><text>Toggle Sound:</text></td>
-                        <td><input checked="checked" data-val="true" data-val-required="The toggleSound field is required." id="toggleSound" name="toggleSound" type="checkbox" value="true"><input name="toggleSound" type="hidden" value="false"></td>
-                    </tr>
-                    <tr>
-                        <td><text>Toggle Music:</text></td>
-                        <td class=""><input data-val="true" data-val-required="The toggleMusic field is required." id="toggleMusic" name="toggleMusic" type="checkbox" value="true"><input name="toggleMusic" type="hidden" value="false"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <br>
-            <table border="0" align="center" class="">
-                <tbody>
-                    <tr>
-                        <td class=""><text class="">Math Difficulty:    </text></td>
-                        <td>
-                            <select data-val="true" data-val-number="The field MathDifficultyLevel must be a number." data-val-required="The MathDifficultyLevel field is required." id="MathDifficultyLevel" name="MathDifficultyLevel">
-                                <option selected="selected" value="1">Low Pre-Kindergarden</option>
-                                <option value="2">High Pre-Kindergarden</option>
-                                <option value="3">Low Kindergarden</option>
-                                <option value="4">High Kindergarden</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class=""><text class="">Reading Difficulty: </text></td>
-                        <td>
-                            <select data-val="true" data-val-number="The field ReadingDifficultyLevel must be a number." data-val-required="The ReadingDifficultyLevel field is required." id="ReadingDifficultyLevel" name="ReadingDifficultyLevel">
-                                <option selected="selected" value="1">Low Pre-Kindergarden</option>
-                                <option value="2">High Pre-Kindergarden</option>
-                                <option value="3">Low Kindergarden</option>
-                                <option value="4">High Kindergarden</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><text class="">Subject Filter:         </text></td>
-                        <td align="left">
-                            <select id="SubjectFilter" name="SubjectFilter">
-                                <option value="Any">Anything</option>
-                                <option selected="selected" value="Math">Math Only</option>
-                                <option value="Reading">Reading Only</option>
-                            </select>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <br>
-            <br>
-            <button id="submitBtn" type="submit" class="submit">Apply Options</button>
-        </form>
-        <br>
+        @using (Html.BeginForm())
+        {
+            @Html.TextBoxFor(m => m.profileName, new { style = "display: none;" })
+
+
+            <text>Toggle Sound:    </text> @Html.CheckBoxFor(m => m.toggleSound)
+            <br />
+            <text>Toggle Music:     </text> @Html.CheckBoxFor(m => m.toggleMusic)
+            <br />
+            
+            <Text>Math Difficulty:   </text>  @Html.DropDownListFor(m => m.MathDifficultyLevel, mathDifficultyList)
+            <br />
+            <Text>Reading Difficulty:    </text>  @Html.DropDownListFor(m => m.ReadingDifficultyLevel, readingDifficultyList)
+            <br />
+           <Text>Subject Filter:    </text>    @Html.DropDownListFor(m => m.SubjectFilter, subjectFilterList)
+            <br />
+            <button type="submit">Apply Options</button>
+        }
         <p class="link" style=""><a href="/Profile/ChooseProfilePage" style="">Switch Profiles</a></p>
         <p class="link" style=""><a href="/MainMenu/MainMenu" style="">Back to Main Menu</a></p>
 
