@@ -29,6 +29,12 @@ namespace ToTheRescueWebApplication
             );
 
             routes.MapRoute(
+                name: "EnteredEmail",
+                url: "options/options/{email}/",
+                defaults: new { controller = "Options", action = "EnteredEmail" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Login", action = "Login", id = UrlParameter.Optional }

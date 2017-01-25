@@ -29,7 +29,7 @@ namespace ToTheRescueWebApplication.Repositories
                     cmd.Connection = connection;
 
                     connection.Open();
-                    reader = cmd.ExecuteReader();
+                    reader = cmd.ExecuteReader(); ;
 
                     if (reader.Read())
                     {

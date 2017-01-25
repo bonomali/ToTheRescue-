@@ -44,7 +44,7 @@ namespace ToTheRescueWebApplication.Controllers
             }
             else
             {
-                TempData["emailError"] = "Incorrect email address eneterd. Please try again.";
+                TempData["emailError"] = "Incorrect email address entered. Please try again.";
             }
         }
 

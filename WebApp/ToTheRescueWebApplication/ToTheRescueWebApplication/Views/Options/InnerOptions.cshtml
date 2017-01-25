@@ -1,0 +1,82 @@
+﻿@model ToTheRescueWebApplication.Models.OptionsModel
+@{
+    ViewBag.Title = "InnerOptions";
+    Layout = "~/Views/Shared/_OptionsLayout.cshtml";
+}
+<div id="left"></div>
+<div id="right"></div>
+<div id="top"></div>
+<div id="bottom"></div>
+
+<div>
+    <h2>Options for @Model.profileName</h2>
+
+    <section class="form" id="loginForm">
+        <form action="/Options/Options" method="post" class="">
+            <input data-val="true" data-val-required="The profileName field is required." id="profileName" name="profileName" style="display: none;" type="text" value="PleaseWork">            <table border="0" align="center" class="">
+                <tbody>
+                    <tr>
+                        <td><text>Toggle Sound:</text></td>
+                        <td><input checked="checked" data-val="true" data-val-required="The toggleSound field is required." id="toggleSound" name="toggleSound" type="checkbox" value="true"><input name="toggleSound" type="hidden" value="false"></td>
+                    </tr>
+                    <tr>
+                        <td><text>Toggle Music:</text></td>
+                        <td class=""><input data-val="true" data-val-required="The toggleMusic field is required." id="toggleMusic" name="toggleMusic" type="checkbox" value="true"><input name="toggleMusic" type="hidden" value="false"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <table border="0" align="center" class="">
+                <tbody>
+                    <tr>
+                        <td class=""><text class="">Math Difficulty:    </text></td>
+                        <td>
+                            <select data-val="true" data-val-number="The field MathDifficultyLevel must be a number." data-val-required="The MathDifficultyLevel field is required." id="MathDifficultyLevel" name="MathDifficultyLevel">
+                                <option selected="selected" value="1">Low Pre-Kindergarden</option>
+                                <option value="2">High Pre-Kindergarden</option>
+                                <option value="3">Low Kindergarden</option>
+                                <option value="4">High Kindergarden</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=""><text class="">Reading Difficulty: </text></td>
+                        <td>
+                            <select data-val="true" data-val-number="The field ReadingDifficultyLevel must be a number." data-val-required="The ReadingDifficultyLevel field is required." id="ReadingDifficultyLevel" name="ReadingDifficultyLevel">
+                                <option selected="selected" value="1">Low Pre-Kindergarden</option>
+                                <option value="2">High Pre-Kindergarden</option>
+                                <option value="3">Low Kindergarden</option>
+                                <option value="4">High Kindergarden</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><text class="">Subject Filter:         </text></td>
+                        <td align="left">
+                            <select id="SubjectFilter" name="SubjectFilter">
+                                <option value="Any">Anything</option>
+                                <option selected="selected" value="Math">Math Only</option>
+                                <option value="Reading">Reading Only</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <br>
+            <button id="submitBtn" type="submit" class="submit">Apply Options</button>
+        </form>
+        <br>
+        <p class="link" style=""><a href="/Profile/ChooseProfilePage" style="">Switch Profiles</a></p>
+        <p class="link" style=""><a href="/MainMenu/MainMenu" style="">Back to Main Menu</a></p>
+
+        <form action="/Login/LogOff" id="logoutForm" method="post">
+            <input name="__RequestVerificationToken" type="hidden" value="0IroiH1oICn8ixL7krnrwM-xTHoN3WfCobBEMBZzG61GpSaX5Jl4ghjXFRBEireLZuMauG0APKL-KkTd6vNZjujHPGuvZGAvpn_ocvHE5nZel7y6Qz4zGlBONYNenLRAixCVBLl0azzd7WonfCRLYg2">                    <p class="link" style=""><a href="Logout" onclick="document.getElementById('logoutForm').submit(); return false;" style="">Logout</a></p>
+        </form>
+        <script type="text/javascript">
+            function main() { }
+            main()
+
+        </script>
+    </section>
+</div>
