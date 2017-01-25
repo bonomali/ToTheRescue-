@@ -198,6 +198,7 @@
         setTimeout(InitGame(), 500);    //init a new game
     });
 
+
     InitGame(); //initialize game
 
     setTimeout(function GameOver() {
@@ -210,6 +211,8 @@
         else
             finalScore = -5;
         document.getElementById('score').value = finalScore; //save score in html element
+        document.getElementById('BlocksGame').style.top = '68%';
+        document.getElementById('gameOver').style.top = '20%';
         EndofGame(); //function displays good job message and returns to map
-    }, 30000);
+    }, 60000);
 }());

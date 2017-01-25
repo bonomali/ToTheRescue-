@@ -3,8 +3,10 @@
     document.getElementById('BlocksGame').style.marginLeft = '-5%';
 
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
+
     var imagePath = "../../MiniGames/BeginningLetterSounds_Racing/images/";
     var soundPath = "../../MiniGames/BeginningLetterSounds_Racing/sounds/";
+
     var game, images;
     var score = 0;      //player's score
     var counter = 0;    //count number of loops through game
