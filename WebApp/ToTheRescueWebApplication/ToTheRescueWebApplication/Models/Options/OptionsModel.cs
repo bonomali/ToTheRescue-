@@ -13,9 +13,7 @@ namespace ToTheRescueWebApplication.Models
 {
     public class OptionsModel
     {
-        [Required]
         public int profileID { get; set; }
-        [Required]
         public string profileName { get; set; }
         [Required]
         public bool toggleSound { get; set; }

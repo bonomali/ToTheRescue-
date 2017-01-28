@@ -17,10 +17,7 @@ namespace ToTheRescueWebApplication.Controllers
         public OptionsController()
         {
             m_optionsRepository = new OptionsDBRepository();
-            
-
         }
-
 
         public ActionResult InnerOptions()
         {
@@ -42,22 +39,6 @@ namespace ToTheRescueWebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult Options(OptionsModel model)
-        {
-
-            if (ModelState.IsValid)
-            {
-                Options o = new Code.Options(model);
-                o.profileID = (int)Session["profileID"];
-                m_optionsRepository.Save(o);
-            }
-            else
-            {
-                return View(model);
-            }
-            return RedirectToAction("Options");
-        }
-        [HttpPost]
         public ActionResult InnerOptions(OptionsModel model)
         {
 
@@ -71,6 +52,7 @@ namespace ToTheRescueWebApplication.Controllers
             {
                 return View(model);
             }
+            m_options = new OptionsModel(m_optionsRepository.Get((int)Session["profileID"]));
             return RedirectToAction("InnerOptions");
         }
 
