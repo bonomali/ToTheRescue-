@@ -1,0 +1,149 @@
+html{
+	margin: auto;
+	height: 100%;
+	width: 100%;
+}
+
+body{
+	margin: auto;
+	height: 100%;
+	width: 100%;
+	background-color: #BFD8D2
+}
+
+#BlocksGame{
+    width: 90%;
+    height: 100%;
+}
+
+#container{
+	width: 100%;
+	height: 20%;
+	margin-top: 2%;
+    margin: 0;
+    padding: 0;
+	
+}
+
+#question{
+	float:left;
+	margin-left: 32%;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	font-size:300%;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.letters{
+	float:left;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	font-size: 300%;
+	display: inline;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+#p1{
+	text-decoration: underline;
+	margin-left: 2%;
+}
+
+#input{
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	width: 50%;
+	height: 25%;
+	text-align: center;
+	font-size:300%;
+	outline: none;
+	border: none;
+	border-color: transparent;
+	border-radius: 75%;
+	background-color: #FEDCD2;
+	margin-top: 7%;
+}
+
+.imgContainers{
+	position: fixed;
+	width: 15%;
+	height: 25%;
+}
+
+#turtleContainer{
+	bottom: 0;
+	right: 10%;
+}
+
+#antContainer{
+	top: 0;
+	left: 0;
+}
+
+#octopusContainer{
+	top: 0;
+	right: 10%;
+}
+
+#beeContainer{
+	bottom: 0;
+	left:0;
+}
+
+#gameOver{
+    top: 35%;
+    position:relative;
+}
+
+@media only screen and (max-width: 1100px)
+{
+    #question{
+        margin-left: 30%;
+        font-size: 250%;
+    }
+
+    .letters{
+        font-size: 250%;
+    }
+
+
+    #input{
+        font-size: 250%;
+    }
+} 
+
+@media only screen and (max-width: 750px)
+{
+    #question{
+        margin-left: 25%;
+        font-size: 150%;
+    }
+
+      .letters{
+        font-size: 150%;
+    }
+
+    #input{
+        font-size: 150%;
+    }
+}
+
+@media only screen and (max-width: 450px)
+{
+    #question{
+        margin-left: 25%;
+        font-size: 100%;
+    }
+
+    .letters{
+        font-size: 100%;
+    }
+
+    #input{
+        font-size: 100%;
+    }
+
+    #gameOver{
+        top: 15%;
+    }
+}
