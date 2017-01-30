@@ -293,7 +293,8 @@ namespace ToTheRescueWebApplication.Controllers
             //model.MiniGame = "../../MiniGames/Alphabet_BubblePop/javascript/bubble.js"; //path to minigame (eventually on server)
             //model.MiniGame = "../../MiniGames/ColorSortingGame/javascript/ColorSortingGame.js"; //path to minigame (eventually on server)
             //model.MiniGame = "../../MiniGames/Number_Comparison/javascript/Number_Comparison.js"; //path to minigame (eventually on server)
-            model.MiniGame = "../../MiniGames/Number_ComparisonEZ/javascript/Number_ComparisonEZ.js"; //path to minigame (eventually on server)
+            //model.MiniGame = "../../MiniGames/Number_ComparisonEZ/javascript/Number_ComparisonEZ.js"; //path to minigame (eventually on server)
+            model.MiniGame = "../../MiniGames/Dino_SightWords/javascript/dino_sightwords.js";
             model.CategoryID = minigames[ranGame].MiniGameCategoryID;
             return View(model);
         }
