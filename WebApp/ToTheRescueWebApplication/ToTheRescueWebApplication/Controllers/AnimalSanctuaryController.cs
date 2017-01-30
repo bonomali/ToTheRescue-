@@ -28,8 +28,9 @@ namespace ToTheRescueWebApplication.Controllers
         }
         public ActionResult Sanctuary()
         {
-            List<Animal> listOfAnimals = _animal.GetList((int)Session["profileID"]);//subject to change
-
+            List<Animal> listOfAnimals = _animal.GetList((int)Session["profileID"]);
+            Options options = _options.Get((int)Session["profileID"]);
+            TempData["profileName"] = options.profileName;
             return View(listOfAnimals);
         }
         public ActionResult ShowAnimalImage (int animalID)
@@ -45,13 +46,6 @@ namespace ToTheRescueWebApplication.Controllers
             Sounds sounds = _sounds.Get(animal.SoundID);
 
             return File(sounds.Sound, sounds.SoundName);
-        }
-
-        public string getProfileName()
-        {
-            Options options = _options.Get((int)Session["profileID"]);
-
-            return options.profileName;
         }
     }
 }

@@ -192,7 +192,8 @@ var endGame = function() {
     
     var performanceStat = 5 - numberWrong;
     if (performanceStat < -5) performanceStat = -5;
-    //return performanceStat;
+    document.getElementById("score").value = returnVal;
+    EndofGame(); //function displays good job message and returns to map
     //send off score return back to map
 }
 var createHtmlElement = function () {
