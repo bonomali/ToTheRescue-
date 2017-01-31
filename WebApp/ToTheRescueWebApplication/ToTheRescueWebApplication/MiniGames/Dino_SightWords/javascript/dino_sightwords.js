@@ -15,10 +15,12 @@
     var pteroSound = new Audio();
     var babyDino_sound = new Audio();
     var momDino_sound = new Audio();
+    var eggCracking_sound = new Audio();
 
     pteroSound.src = "../../MiniGames/Dino_SightWords/sounds/" + "Pterodactyl.mp3";
     babyDino_sound.src = "../../MiniGames/Dino_SightWords/sounds/" + "babyDino_recording.mp3";
     momDino_sound.src = "../../MiniGames/Dino_SightWords/sounds/" + "Tyrannosaurus.mp3";
+    eggCracking_sound.src = "../../MiniGames/Dino_SightWords/sounds/" + "Short_Egg_Cracking.mp3";
 
     //array of egg images
     eggImages = [imagePath + "at_egg.png", imagePath + "can_egg.png", imagePath + "fun_egg.png", imagePath + "go_egg.png",
@@ -147,21 +149,21 @@
             egg1.layer = game.layers[2];
             game.stage.addView(egg1);
             wordEggs.push(egg1);
-            egg1.x = 375;
+            egg1.x = 420;
             egg1.y = game.height - 310;
 
             egg2 = eggs.getSlice("egg2");
             egg2.layer = game.layers[2];
             game.stage.addView(egg2);
             wordEggs.push(egg2);
-            egg2.x = 555;
+            egg2.x = 600;
             egg2.y = game.height - 310;
 
             egg3 = eggs.getSlice("egg3");
             egg3.layer = game.layers[2];
             game.stage.addView(egg3);
             wordEggs.push(egg3);
-            egg3.x = 735;
+            egg3.x = 780;
             egg3.y = game.height - 310;
         },
 
@@ -184,16 +186,12 @@
                     score = score + 5;  //increment score
                     correct = true;
 
+                    eggCracking_sound.play();
                     game.stage.addView(hatching);   //add hatched egg to view
                     hatching.x = wordEggs[i].x;
                     hatching.y = wordEggs[i].y;
                     wordEggs[i].x = -200;
-
-                    setTimeout(function () {    //show hatched egg
-                        hatching.setSlice("hatched");
-                        babyDino_sound.play();
-                    }, 1000);
-                }
+                } 
                 else if (wordEggs[i].isPointInside(point) && wordEggs[i].name != targetEgg.name)
                 {
                     wordAudio = new Audio();    //play word audio for incorrect choice
@@ -224,6 +222,10 @@
                 audioWord.src = wordSounds[index3];
            
             audioWord.play();   //play target word after generic instructions
+        });
+        eggCracking_sound.addEventListener('ended', function () {
+            hatching.setSlice("hatched");   //show hatched egg
+            babyDino_sound.play();   //play baby dino sound after egg cracking sound
         });
         babyDino_sound.addEventListener('ended', function () {
             momDino_sound.play();   //play mom dino sound after baby

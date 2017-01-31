@@ -322,6 +322,7 @@
     <Content Include="MiniGames\Dino_SightWords\sounds\babyDino_recording.mp3" />
     <Content Include="MiniGames\Dino_SightWords\sounds\praise_recording.mp3" />
     <Content Include="MiniGames\Dino_SightWords\sounds\Pterodactyl.mp3" />
+    <Content Include="MiniGames\Dino_SightWords\sounds\Short_Egg_Cracking.mp3" />
     <Content Include="MiniGames\Dino_SightWords\sounds\Tyrannosaurus.mp3" />
     <Content Include="MiniGames\IdentifyShapeGame\audio\Circle.m4a" />
     <Content Include="MiniGames\IdentifyShapeGame\audio\Hexagon.m4a" />
