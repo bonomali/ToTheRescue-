@@ -2,7 +2,7 @@
 //Greater Than, Less Than, Equal To! JavaScript file
 
 var isSelected = false;
-var difficulty = 4; //needs to be connected to main program
+var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
 var maxNumber = difficulty * 2;
 var rightSide, leftSide, selectedName;
 var numberCorrect = 0;
