@@ -33,12 +33,23 @@
         </ul>
     </div>
 </nav>
-<div id="BlocksGame">  @*Where minigame script is executed --> this may be a path to files on the server*@
+<div id="BlocksGame">
+    @*Where minigame script is executed --> this may be a path to files on the server*@
     <script src="~/MiniGames/Alphabet_BubblePop/javascript/blockjs_framework.js"></script>
     @*use jquery*@
     <script src="~/scripts/jquery-1.10.2.min.js"></script>
     <script id="minigameScript" src=@Model.MiniGame difficulty=@Model.Difficulty></script>
-    <input type="text" id="score" style="display:none"/>   @*score from minigame saved in value for tag*@
+    <!--<script id="minigameScript" src="~/MiniGames/Number_Comparison/javascript/Number_Comparison.js" difficulty=4></script>-->
+    <!--<script id="minigameScript" src="~/MiniGames/AdditionMiniGame/javascript/AdditionMiniGame.js" difficulty=4></script>-->
+    <!--<script id="minigameScript" src="~/MiniGames/ColorSortingGame/javascript/ColorSortingGame.js" difficulty=4></script>-->
+    @*<script id="minigameScript" src="~/MiniGames/IdentifyShapeGame/javascript/IdentifyShapeGame.js"></script>*@
+    @*<script id="minigameScript" src="~/MiniGames/TypingGame/javascript/TypingGame.js"></script>*@
+    @*<script id="minigameScript" src="~/MiniGames/BeginningLetterSounds_Racing/javascript/racing.js"></script>*@
+    @*<script id="minigameScript" src="~/MiniGames/MosquitoSwat_LetterSounds/javascript/mosquitoswat.js"></script>*@
+    @*<script id="minigameScript" src="~/MiniGames/Supah_Counting/javascript/SupahCounting.js"></script>*@
+
+    <script id="minigameScript" src="~/MiniGames/"></script>
+    <input type="text" id="score" style="display:none" />   @*score from minigame saved in value for tag*@
 
     @*Pop up box displayed when minigame is over*@
     <div id="gameOver" style="display:none">
@@ -57,7 +68,7 @@
                 data: {'score' : score, 'miniGameID' : @Model.MiniGameID, 'categoryID' : @Model.CategoryID },
                 type: 'POST',
                 success: function displayGameOver() {   //display game over dialog
-                     $('#gameOver').show();
+                    $('#gameOver').show();
                 }
             });
         }
