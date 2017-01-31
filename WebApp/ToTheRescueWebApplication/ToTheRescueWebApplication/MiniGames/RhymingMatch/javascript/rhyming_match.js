@@ -3,7 +3,7 @@
     var soundPath = '../../MiniGames/Rhymingmatch/sounds/';
     var targetIndex, word1Index, word2Index;   //indicies for word cards
     var targetWord, matchingWord, correctAudio; //audio clips for repeating rhyme when create
-    var InstructionsPart1;
+    var InstructionsPart1, InstructionsPart2, InstructionsPart3;
     var score = 0;
     var finalScore = 0;
 
@@ -166,9 +166,9 @@
     function GameIntro() {
         InstructionsPart1 = new Audio();
         InstructionsPart1.src = soundPath + "audio_instructionsPart1.mp3";
-        var InstructionsPart2 = new Audio();
+        InstructionsPart2 = new Audio();
         InstructionsPart2.src = soundsSet1[targetIndex];    //play target rhyming word
-        var InstructionsPart3 = new Audio();
+        InstructionsPart3 = new Audio();
         InstructionsPart3.src = soundPath + "audio_instructionsPart2.mp3";
         InstructionsPart1.addEventListener('ended', function () {
             InstructionsPart2.play()
@@ -202,6 +202,10 @@
     InitGame(); //initialize game
 
     setTimeout(function GameOver() {
+        InstructionsPart1.src = null  //set all insructions to null so don't play after game over
+        InstructionsPart2.src = null;
+        InstructionsPart3.src = null;
+
         if (score >= 20)    //calculate final score
             finalScore = 5;
         else if (score >= 14)
