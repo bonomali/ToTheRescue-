@@ -32,7 +32,7 @@
         wordSounds = [soundPath + "down_recording.mp3", soundPath + "jump_recording.mp3", soundPath + "kite_recording.mp3",
             soundPath + "little_recording.mp3", soundPath + "not_recording.mp3", soundPath + "quit_recording.mp3", soundPath + "up_recording.mp3",
             soundPath + "very_recording.mp3", soundPath + "we_recording.mp3", soundPath + "xray_recording.mp3", soundPath + "you_recording.mp3",
-            soundPath + "zebra_recording.mp3", imagePath + "egg_recording.mp3"];
+            soundPath + "zebra_recording.mp3", soundPath + "egg_recording.mp3"];
 
         letterSounds = [soundPath + "d_sound.mp3", soundPath + "j_sound.mp3", soundPath + "k_sound.mp3",
             soundPath + "l_sound.mp3", soundPath + "n_sound.mp3", soundPath + "q_sound.mp3", soundPath + "u_sound.mp3",
@@ -49,7 +49,7 @@
         wordSounds = [soundPath + "at_recording.mp3", soundPath + "big_recording.mp3", soundPath + "fun_recording.mp3",
             soundPath + "go_recording.mp3", soundPath + "help_recording.mp3", soundPath + "on_recording.mp3", soundPath + "see_recording.mp3",
             soundPath + "can_recording.mp3", soundPath + "in_recording.mp3", soundPath + "me_recording.mp3", soundPath + "play_recording.mp3",
-            soundPath + "run_recording.mp3", imagePath + "two_recording.mp3"];
+            soundPath + "run_recording.mp3", soundPath + "two_recording.mp3"];
 
         letterSounds = [soundPath + "a_sound.mp3", soundPath + "b_sound.mp3", soundPath + "f_sound.mp3",
             soundPath + "g_sound.mp3", soundPath + "h_sound.mp3", soundPath + "o_sound.mp3", soundPath + "s_sound.mp3",
