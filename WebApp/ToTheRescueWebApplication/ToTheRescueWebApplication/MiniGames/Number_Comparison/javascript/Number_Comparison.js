@@ -162,10 +162,14 @@ var beginIntro = function () {
     document.querySelector('#intro').style.visibility = "visible";
     document.querySelector('#endGame').style.visibility = "hidden";
     setTimeout(hideIntro, 5000);
+    var clickThePic = document.getElementById("clickThePic");
+    clickThePic.play();
     setTimeout(setupGame, 5000);
 }
 
 var hideIntro = function () {
+    var bgMusic = document.getElementById('bgMusic');
+    bgMusic.play();
     document.querySelector('#intro').style.visibility = "hidden";
     document.querySelector('#content').style.visibility = "visible";
 }
@@ -192,7 +196,7 @@ var endGame = function() {
     
     var performanceStat = 5 - numberWrong;
     if (performanceStat < -5) performanceStat = -5;
-    document.getElementById("score").value = returnVal;
+    document.getElementById("score").value = performanceStat;
     EndofGame(); //function displays good job message and returns to map
     //send off score return back to map
 }
@@ -291,10 +295,9 @@ var createHtmlElement = function () {
 
     var backgroundMusic = document.createElement('audio');
     backgroundMusic.setAttribute('src', imgPath + 'sounds/background.mp3');
-    backgroundMusic.setAttribute('autoplay', 'autoplay');
+    backgroundMusic.setAttribute('id', 'bgMusic');
     backgroundMusic.loop = true;
     backgroundMusic.volume = '0.3';
-    backgroundMusic.play();
 
     backgroundMusic.addEventListener('ended', function () {
         this.currentTime = 0;
@@ -314,10 +317,15 @@ var createHtmlElement = function () {
     wow.setAttribute('src', imgPath + 'sounds/wow.m4a');
     wow.setAttribute('id', 'wow');
 
+    var clickThePic = document.createElement('audio');
+    clickThePic.setAttribute('src', imgPath + 'sounds/clickThePicture.m4a');
+    clickThePic.setAttribute('id', 'clickThePic');
+
     audioDiv.appendChild(backgroundMusic);
     audioDiv.appendChild(prng);
     audioDiv.appendChild(wow);
     audioDiv.appendChild(woopsAudio);
+    audioDiv.appendChild(clickThePic);
 
 
     //append all content 
