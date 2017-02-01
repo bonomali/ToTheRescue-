@@ -616,6 +616,7 @@
     <Content Include="MiniGames\Shape_ColoringBook\images\triangle.png" />
     <Content Include="MiniGames\Shape_ColoringBook\images\yellow-crayon.png" />
     <Content Include="MiniGames\Shape_ColoringBook\javascript\colorbook.js" />
+    <Content Include="MiniGames\Shape_ColoringBook\sounds\audioInstructions.mp3" />
     <Content Include="MiniGames\Shape_ColoringBook\sounds\black_recording.mp3" />
     <Content Include="MiniGames\Shape_ColoringBook\sounds\blue_recording.mp3" />
     <Content Include="MiniGames\Shape_ColoringBook\sounds\circle_recording.mp3" />
