@@ -125,11 +125,11 @@ function ClickedAnswer(id, AdditionGame)
 	var num = div.innerHTML;
 	num = Number(num);
 	
-	if (num === AdditionGame.answer)
-		AdditionGame.numCorrect++;
-	
-	//recall the game loop
-	GameLoop(AdditionGame);
+	if (num === AdditionGame.answer) {
+	    AdditionGame.numCorrect++;
+	    //recall the game loop
+	    GameLoop(AdditionGame);
+	}
 }
 
 function ResizeText(elementID)

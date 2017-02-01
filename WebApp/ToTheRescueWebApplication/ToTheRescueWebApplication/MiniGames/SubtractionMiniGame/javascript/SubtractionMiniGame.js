@@ -125,11 +125,12 @@ function ClickedAnswer(id, SubtractionGame)
 	var num = div.innerHTML;
 	num = Number(num);
 	
-	if (num === SubtractionGame.answer)
-		SubtractionGame.numCorrect++;
-	
-	//recall the game loop
-	GameLoop(SubtractionGame);
+	if (num === SubtractionGame.answer) {
+	    SubtractionGame.numCorrect++;
+
+	    //recall the game loop
+	    GameLoop(SubtractionGame);
+	}
 }
 
 function ResizeText(elementID)
