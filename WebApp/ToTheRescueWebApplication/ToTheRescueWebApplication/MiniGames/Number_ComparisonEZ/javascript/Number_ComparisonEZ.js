@@ -75,7 +75,7 @@ var removeChalk = function () {
 var setChalk = function () {
     
     var styling = { position: 'absolute', zIndex: '3' };
-    var sourcePath = imgPath + 'images/chalk.jpg';
+    var sourcePath = imgPath + 'images/chalk.png';
     var container = 'leftSideContainer';//left container first
 
     var i, modifier = 1;
@@ -243,18 +243,18 @@ var createHtmlElement = function () {
             //oops
     var oops = document.createElement("img");
     oops.setAttribute("id", "oops");
-    oops.setAttribute("src", imgPath + "images/oops.jpg");
+    oops.setAttribute("src", imgPath + "images/oops.png");
             //goodJob
     var goodJob = document.createElement("img");
     goodJob.setAttribute("id", "goodJob");
-    goodJob.setAttribute("src", imgPath + "images/goodJob.jpg");
+    goodJob.setAttribute("src", imgPath + "images/goodJob.png");
         //trophies
     var id = "trophy";
     for (var i = 0; i < 5; i++) {
         var trophy = document.createElement("img");
         
         trophy.setAttribute("id", id + i);
-        trophy.setAttribute("src", imgPath + "images/trophy.jpg");
+        trophy.setAttribute("src", imgPath + "images/trophy.png");
         contentDiv.appendChild(trophy);
     }
             //greater than

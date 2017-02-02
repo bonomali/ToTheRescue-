@@ -650,12 +650,30 @@
     <Content Include="MiniGames\SubtractionMiniGame\img\eatenApple.png" />
     <Content Include="MiniGames\SubtractionMiniGame\img\wholeApple.png" />
     <Content Include="MiniGames\SubtractionMiniGame\javascript\SubtractionMiniGame.js" />
+    <Content Include="MiniGames\Supah_Counting\images\Background.png" />
+    <Content Include="MiniGames\Supah_Counting\images\char_slice.png" />
+    <Content Include="MiniGames\Supah_Counting\images\Ground.png" />
+    <Content Include="MiniGames\Supah_Counting\images\Ground_old.png" />
+    <Content Include="MiniGames\Supah_Counting\images\letter.png" />
+    <Content Include="MiniGames\Supah_Counting\images\letter_1.png" />
+    <Content Include="MiniGames\Supah_Counting\images\letter_10.png" />
+    <Content Include="MiniGames\Supah_Counting\images\letter_2.png" />
+    <Content Include="MiniGames\Supah_Counting\images\letter_3.png" />
+    <Content Include="MiniGames\Supah_Counting\images\letter_4.png" />
+    <Content Include="MiniGames\Supah_Counting\images\letter_5.png" />
+    <Content Include="MiniGames\Supah_Counting\images\letter_6.png" />
+    <Content Include="MiniGames\Supah_Counting\images\letter_7.png" />
+    <Content Include="MiniGames\Supah_Counting\images\letter_8.png" />
+    <Content Include="MiniGames\Supah_Counting\images\letter_9.png" />
+    <Content Include="MiniGames\Supah_Counting\images\Mockup.png" />
+    <Content Include="MiniGames\Supah_Counting\javascript\supahcounting.js" />
     <Content Include="MiniGames\TypingGame\css\TypingGame.css" />
     <Content Include="MiniGames\TypingGame\javascript\TypingGame.js" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="MiniGames\Supah_Counting\images\letter_10.psd" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -778,6 +796,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="MiniGames\Number_ComparisonEZ\" />
+    <Folder Include="MiniGames\Supah_Counting\sounds\" />
     <Folder Include="MiniGames\TypingGame\img\" />
     <Folder Include="Views\AnimalRepository\" />
   </ItemGroup>
