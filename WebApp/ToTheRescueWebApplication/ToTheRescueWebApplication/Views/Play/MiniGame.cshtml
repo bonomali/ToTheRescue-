@@ -37,10 +37,10 @@
     @*Where minigame script is executed --> this may be a path to files on the server*@
     <script src="~/MiniGames/Alphabet_BubblePop/javascript/blockjs_framework.js"></script>
     @*Text To Speech. Breaks if we use a local copy. I tried.*@
-    <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+    @*k<script src='https://code.responsivevoice.org/responsivevoice.js'></script>*@
     @*use jquery*@
     <script src="~/scripts/jquery-1.10.2.min.js"></script>
-    @*<script id="minigameScript" src=@Model.MiniGame difficulty=@Model.Difficulty></script>*@
+    <script id="minigameScript" src=@Model.MiniGame difficulty=@Model.Difficulty></script>
     @*<script id="minigameScript" src="~/MiniGames/Number_Comparison/javascript/Number_Comparison.js" difficulty=4></script>*@
     @*<script id="minigameScript" src="~/MiniGames/AdditionMiniGame/javascript/AdditionMiniGame.js" difficulty=4></script>*@
     @*<script id="minigameScript" src="~/MiniGames/ColorSortingGame/javascript/ColorSortingGame.js" difficulty=4></script>*@

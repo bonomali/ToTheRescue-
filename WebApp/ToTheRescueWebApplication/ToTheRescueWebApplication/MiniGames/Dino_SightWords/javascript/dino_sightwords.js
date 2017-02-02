@@ -150,21 +150,21 @@
             game.stage.addView(egg1);
             wordEggs.push(egg1);
             egg1.x = 420;
-            egg1.y = game.height - 310;
+            egg1.y = game.height - 300;
 
             egg2 = eggs.getSlice("egg2");
             egg2.layer = game.layers[2];
             game.stage.addView(egg2);
             wordEggs.push(egg2);
             egg2.x = 600;
-            egg2.y = game.height - 310;
+            egg2.y = game.height - 285;
 
             egg3 = eggs.getSlice("egg3");
             egg3.layer = game.layers[2];
             game.stage.addView(egg3);
             wordEggs.push(egg3);
             egg3.x = 780;
-            egg3.y = game.height - 310;
+            egg3.y = game.height - 300;
         },
 
         //play audio instructions
