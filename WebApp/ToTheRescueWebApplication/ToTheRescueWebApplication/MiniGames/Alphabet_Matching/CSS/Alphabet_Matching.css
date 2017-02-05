@@ -1,0 +1,98 @@
+﻿#container {
+    width: 1000px;
+    height: 750px;
+    position: relative;
+    background: #808080;
+}
+
+#cat {
+    position: absolute;
+    top: 420px;
+    left: 2px;
+}
+
+#word1 {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+#word2 {
+    position: absolute;
+    top: 20px;
+    left: 135px;
+}
+
+#word3 {
+    position: absolute;
+    top: 20px;
+    left: 250px;
+}
+
+#word4 {
+    position: absolute;
+    top: 20px;
+    left: 365px;
+}
+
+#word5 {
+    position: absolute;
+    top: 20px;
+    left: 480px;
+}
+
+#word6 {
+    position: absolute;
+    top: 20px;
+    left: 595px;
+}
+
+
+#letter1 {
+    position: absolute;
+    left: 757px;
+    top: 120px;
+}
+
+#letter2 {
+    position: absolute;
+    left: 518px;
+    top: 182px;
+}
+
+#letter3 {
+    position: absolute;
+    left: 835px;
+    top: 307px;
+}
+
+#letter4 {
+    position: absolute;
+    left: 651px;
+    top: 356px;
+}
+
+#letter5 {
+    position: absolute;
+    left: 464px;
+    top: 464px;
+}
+
+
+#letter6 {
+    position: absolute;
+    left: 833px;
+    top: 545px;
+}
+
+#letter7 {
+    position: absolute;
+    left: 644px;
+    top: 587px;
+}
+
+#matchLetter {
+    position: absolute;
+    left: 248px;
+    top: 605px;
+}

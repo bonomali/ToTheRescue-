@@ -264,6 +264,9 @@
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\r_recording.mp3" />
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\s_recording.mp3" />
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\t_recording.mp3" />
+    <Content Include="MiniGames\Alphabet_Matching\CSS\Alphabet_Matching.css" />
+    <Content Include="MiniGames\Alphabet_Matching\Source\Alphabet_Matching.js" />
+    <Content Include="MiniGames\Alphabet_Matching\Source\index.html" />
     <Content Include="MiniGames\BeginningLetterSounds_Racing\images\at_flag.jpg" />
     <Content Include="MiniGames\BeginningLetterSounds_Racing\images\big_flag.jpg" />
     <Content Include="MiniGames\BeginningLetterSounds_Racing\images\can_flag.jpg" />
@@ -795,6 +798,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="MiniGames\Alphabet_Matching\Media\" />
     <Folder Include="MiniGames\Number_ComparisonEZ\" />
     <Folder Include="MiniGames\Supah_Counting\sounds\" />
     <Folder Include="MiniGames\TypingGame\img\" />
