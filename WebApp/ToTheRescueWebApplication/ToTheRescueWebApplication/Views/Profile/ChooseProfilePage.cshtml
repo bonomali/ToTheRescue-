@@ -6,6 +6,14 @@
     Layout = "~/Views/Shared/_ChooseProfileLayout.cshtml";
     ViewBag.Title = "ChooseProfilePage";
 
+    /***********************I put this in here temporarily so I can log out************************************/
+    using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { @id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <a href="Logout" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
+    }
+    /*********************************************************************************************************/
+
     //I need to re-adjust the html border height based on the number of profile there are
     if (Model.Count() <= 4)
     {
