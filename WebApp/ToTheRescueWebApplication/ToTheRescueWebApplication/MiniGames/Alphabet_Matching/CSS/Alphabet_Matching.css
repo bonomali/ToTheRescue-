@@ -15,36 +15,42 @@
     position: absolute;
     top: 20px;
     left: 20px;
+    opacity: .4;
 }
 
 #word2 {
     position: absolute;
     top: 20px;
     left: 135px;
+    opacity: .4;
 }
 
 #word3 {
     position: absolute;
     top: 20px;
     left: 250px;
+    opacity: .4;
 }
 
 #word4 {
     position: absolute;
     top: 20px;
     left: 365px;
+    opacity: .4;
 }
 
 #word5 {
     position: absolute;
     top: 20px;
     left: 480px;
+    opacity: .4;
 }
 
 #word6 {
     position: absolute;
     top: 20px;
     left: 595px;
+    opacity: .4;
 }
 
 

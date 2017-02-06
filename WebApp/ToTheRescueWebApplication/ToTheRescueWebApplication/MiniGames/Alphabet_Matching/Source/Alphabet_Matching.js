@@ -5,7 +5,8 @@
 
 //global path variables
 
-var mediaPath = "../Media";
+var generalPath = "../../MiniGames/Alphabet_Matching";
+var mediaPath = "../../MiniGames/Alphabet_Matching/Media";
 var sightWords = [];
 var sightWord = -1;
 var counter = 0;
@@ -18,11 +19,93 @@ var brownTiles = [];
 var catPics = [];
 
 //contains all game elements
-var container; 
+var container;
+
+var difficulty;
+var numberWrong;
+var isSelected; //aids in deciding whether or not an event handler should fire
+var imgSel; //aids in figuring out what button the user pressed..
 
 //listener for all dom content
 document.addEventListener('DOMContentLoaded', function () {
-    
+    //EVENT HANDLERS wish I could have done this in a for loop :/
+    //event handlers
+    var letter1 = document.getElementById("letter1");
+    letter1.onclick = function () {
+        if (!isSelected) {
+            var blueTile = document.querySelector('#matchLetter');
+            blueTile.src = brownTiles[letter1.getAttribute('tag')];
+            blueTile.setAttribute('tag', letter1.getAttribute('tag'));
+            imgSel = 1;
+            imgClicked();
+        }
+    };
+    var letter2 = document.getElementById("letter2");
+    letter2.onclick = function () {
+        if (!isSelected) {
+            var blueTile = document.querySelector('#matchLetter');
+            blueTile.src = brownTiles[letter2.getAttribute('tag')];
+            blueTile.setAttribute('tag', letter2.getAttribute('tag'));
+            imgSel = 2;
+            imgClicked();
+        }
+    };
+    var letter3 = document.getElementById("letter3");
+    letter3.onclick = function () {
+        if (!isSelected) {
+            var blueTile = document.querySelector('#matchLetter');
+            blueTile.src = brownTiles[letter3.getAttribute('tag')];
+            blueTile.setAttribute('tag', letter3.getAttribute('tag'));
+            imgSel = 3;
+            imgClicked();
+        }
+    };
+    var letter4 = document.getElementById("letter4");
+    letter4.onclick = function () {
+        if (!isSelected) {
+            var blueTile = document.querySelector('#matchLetter');
+            blueTile.src = brownTiles[letter4.getAttribute('tag')];
+            blueTile.setAttribute('tag', letter4.getAttribute('tag'));
+            imgSel = 4;
+            imgClicked();
+        }
+    };
+    var letter5 = document.getElementById("letter5");
+    letter5.onclick = function () {
+        if (!isSelected) {
+            var blueTile = document.querySelector('#matchLetter');
+            blueTile.src = brownTiles[letter5.getAttribute('tag')];
+            blueTile.setAttribute('tag', letter5.getAttribute('tag'));
+            imgSel = 5;
+            imgClicked();
+        }
+    };
+    var letter6 = document.getElementById("letter6");
+    letter6.onclick = function () {
+        if (!isSelected) {
+            var blueTile = document.querySelector('#matchLetter');
+            blueTile.src = brownTiles[letter6.getAttribute('tag')];
+            blueTile.setAttribute('tag', letter6.getAttribute('tag'));
+            imgSel = 6;
+            imgClicked();
+        }
+    };
+    var letter7 = document.getElementById("letter7");
+    letter7.onclick = function () {
+        if (!isSelected) {
+            var blueTile = document.querySelector('#matchLetter');
+            blueTile.src = brownTiles[letter7.getAttribute('tag')];
+            blueTile.setAttribute('tag', letter7.getAttribute('tag'));
+            imgSel = 7;
+            imgClicked();
+        }
+    };
+    setTimeout(function GameOver() {
+        responsiveVoice.speak("Good Attempt.");
+        var finalScore = -5;
+        document.getElementById('score').value = finalScore;
+        EndofGame();
+    }, 60000);
 });
 
 var start = function () {
@@ -30,13 +113,18 @@ var start = function () {
     container = document.createElement('div');
     container.setAttribute('id', 'container');
 
+    //some game variables
+    //difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
+    numberWrong = 0;
+    isSelected = 0;
+    imgSel = 0;
 
     //css
     var fileRef = document.createElement("link");
     fileRef.setAttribute("rel", "stylesheet");
     fileRef.setAttribute("type", "text/css");
         //gonnna be stored on the server at some point
-    fileRef.setAttribute("href", "../CSS/Alphabet_Matching.css");
+    fileRef.setAttribute("href", generalPath + "/CSS/Alphabet_Matching.css");
         //add the css file to the minigame html
     document.getElementsByTagName("head")[0].appendChild(fileRef);
 
@@ -53,8 +141,8 @@ var start = function () {
     
 
     //make the cat path array
-    catPics = ["../Media/cat1/default.png", "../Media/cat1/disapointed.png",
-        "../Media/cat1/pleased.png", "../Media/cat1/surprised.png", "../Media/cat1/oo.png"];
+    catPics = [generalPath + "/Media/cat1/default.png", generalPath + "/Media/cat1/disapointed.png",
+        generalPath + "/Media/cat1/pleased.png", generalPath + "/Media/cat1/surprised.png", generalPath + "/Media/cat1/oo.png"];
 
     //single difficulty for now. I didn't like typing this
     sightWords = ["all", "am", "are", "at", "ate", "be", "black", "brown", "but", "came", "did", "do", "eat", "four", "get", "good",
@@ -91,22 +179,18 @@ var createElements = function () {
         var wordLetter = document.createElement('img');
         wordLetter.setAttribute('id', 'letter' + i);
         container.appendChild(wordLetter);
-    }
-    
+    }   
         /*Splash screen and other audio elements should be contained here*/
         //append all elements to blocksgame div
-    //var divContainer = document.getElementById("BlocksGame");
-    //divContainer.style.width = "50%";
-    //divContainer.appendChild(container);
+    var divContainer = document.getElementById("BlocksGame");
+    divContainer.style.width = "50%";
+    divContainer.appendChild(container);
 
     //testing block
-    document.getElementsByTagName('body')[0].appendChild(container);
+    //document.getElementsByTagName('body')[0].appendChild(container);
 }
 
 var setupGame = function () {
-    //reset cat
-    var cat = document.getElementById('cat');
-    cat.src = catPics[0];//default cat
 
     //hide old sightword images
     var i = 1;
@@ -127,19 +211,20 @@ var setupGame = function () {
     }
 
     //set letter to be matched
-    setBlueLetter();
+    setCatLetter();
 
     //set letter tree
         //start with an array of possible letter blocks
     var blocks = [1, 2, 3, 4, 5, 6, 7];
 
-    //set all of the letters in the sight word into random tree locations
+    //set all of the letters in the sight word into random tree locations 
     for (i = 1; i <= sightWords[sightWord].length; i++) {
-        var index = Math.floor(Math.random() * blocks.length)
-        var letter = document.getElementById("letter" + blocks[index]);
-        letter.src = brownTiles[((sightWords[sightWord].charAt(i-1)).charCodeAt() - 97)];
-        blocks.splice(index, 1);
-        
+        var blocksIndex = Math.floor(Math.random() * blocks.length)
+        var letter = document.getElementById("letter" + blocks[blocksIndex]);
+        var tileIndex = ((sightWords[sightWord].charAt(i - 1)).charCodeAt() - 97);
+        letter.setAttribute('tag', tileIndex); // save the index
+        letter.src = brownTiles[tileIndex];
+        blocks.splice(blocksIndex, 1);
     }//gets a random number based on number of letter blocks
         //gets a sightWord letter
         // applies letter to random block, removes block from availble blocks
@@ -149,15 +234,53 @@ var setupGame = function () {
         var letter = document.getElementById("letter" + blocks[i - 1]);
         var rand = Math.floor(Math.random() * 25); //a number between 0 and 25
         letter.src = brownTiles[rand];
+        letter.setAttribute('tag', rand); // save index
     }
 }
 
-var setBlueLetter = function () {
-    var blueLetter = document.getElementById('matchLetter');
-    blueLetter.src = blueTiles[((sightWords[sightWord].charAt(counter)).charCodeAt() - 97)];
-    //really just feel like typing out what the above does
-    //takes the sightword's character in question, gets the ascii value of the char,
-    //  subtracts that number by the capital letters starting point in ascii
-    //  and results in the exact array location for that letter in the blueTiles array
+var setCatLetter = function () {
+    if (sightWords[sightWord].length == counter) {
+        var stat = 5 - numberWrong;
+        if (stat < -5) stat = -5;
+        //responsiveVoice.speak("Great Job!");
+        document.getElementById("score").value = stat;
+        setTimeout(EndofGame, 2500);
+    }//if the user won
+    else {
+        document.getElementById("cat").src = catPics[0];
+        var blueLetter = document.getElementById('matchLetter');
+        blueLetter.src = blueTiles[(sightWords[sightWord].charAt(counter).charCodeAt() - 97)];
+        isSelected = 0;
+    }
 }
+
+var imgClicked = function () {
+
+    document.getElementById("cat").src = catPics[4]; //transition cat
+    var matchLetter = document.getElementById("matchLetter");
+    isSelected = 1;
+    setTimeout(checkAnswer, 2500);
+}
+
+var checkAnswer = function () {
+
+    var matchLetter = document.getElementById("matchLetter");
+    if (matchLetter.getAttribute('tag') == (sightWords[sightWord].charAt(counter).charCodeAt() - 97)) {
+        var matchedTile = document.getElementById("word" + (counter + 1));
+        matchedTile.src = yellowTiles[matchLetter.getAttribute('tag')];
+        matchedTile.style.opacity = 1;
+        counter++ //moves the location of the sightword letter
+        document.getElementById("cat").src = catPics[2]; //happy cat
+        document.getElementById("letter" + imgSel).src = brownTiles[Math.floor(Math.random() * 25)];
+    }//if the user selected the correct letter tile
+    else {
+        numberWrong++;
+        if ((Math.floor(Math.random() * 3)) == 0)
+            document.getElementById("cat").src = catPics[3]; //surprised cat
+        else document.getElementById("cat").src = catPics[1]; //dissapointed cat      
+    }
+    setTimeout(setCatLetter, 2000);
+}
+
+
 start();
