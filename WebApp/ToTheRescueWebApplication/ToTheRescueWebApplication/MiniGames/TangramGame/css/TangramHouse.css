@@ -1,0 +1,252 @@
+html{
+	width: 100%;
+	height: 100%;
+}
+
+body{
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	background-color: #0E0B16
+}
+
+img{
+	-webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+#header
+{
+    margin: 0;
+	color: white;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#dropAreaContainer{
+	background-color: #0E0B16;
+	width: 50%;
+	height: 100%;
+	margin: 0;
+	position: absolute; 
+	left: 0;
+}
+
+#problemContainer
+{
+	position: absolute;
+	margin: auto;
+	width: 70%;
+	height: 70%;
+	top: 0%;
+	left: 8%;
+}
+
+#tangramPiecesContainer{
+	position: absolute;
+	left: 50%;
+	width: 50%;
+	height: 100%;
+}
+
+#leftCol{
+	position: absolute;
+	left: 0;
+	width:50%;
+	height: 100%;
+	background-color: #0E0B16;
+}
+
+.tangramPieces{
+	position: absolute;
+}
+
+#rhombusContainer{
+	top: 30%;
+	left: -40%;
+	width: 75%;
+	
+	-ms-transform: rotate(45deg); /*IE 9*/ 
+	-webkit-transform: rotate(45deg); /*Safari*/ 
+	transform: rotate(45deg); /*Standard syntax*/ 
+}
+
+#squareContainer{
+	top: 1%;
+	left: 20%;
+	width: 37%;
+	height: 20%;
+}
+
+#blueTriContainer{
+	bottom: 15%;
+	left: 30%;
+	width: 28%;
+	height: 28%;
+}
+
+#aquaTriContainer{
+	bottom: 15%;
+	left: -30%;
+	width: 54%;
+	height: 13%;
+	-ms-transform: rotate(90deg); /*IE 9*/ 
+	-webkit-transform: rotate(90deg); /*Safari*/ 
+	transform: rotate(90deg); /*Standard syntax*/ 
+}
+
+#rightCol{
+	position: absolute;
+	right: 0;
+	width:50%;
+	height: 100%;
+	background-color: #0E0B16;
+}
+
+#greenTriContainer{
+	top: 9%;
+	width: 96%;
+	height: 25%;
+	left: 2%;
+}
+
+#orangeTriContainer{
+	top: 30%;
+	left: -50%;
+	width: 50%;
+	height: 25%;
+	
+	-ms-transform: rotate(180deg); /*IE 9*/ 
+	-webkit-transform: rotate(180deg); /*Safari*/ 
+	transform: rotate(180deg); /*Standard syntax*/ 
+}
+
+#yellowTriContainer{
+	width: 96%;
+	height: 25%;
+	bottom: 20%;
+	left: 2%;
+}
+
+#rotateRight{
+	position: absolute;
+	width: 7%;
+	height: 15%;
+	bottom: 5%;
+	left: 18%;
+}
+
+/* drop area code goes here */
+#squareDropArea{
+	width: 26%; 
+	height: 29%;
+	position: absolute;
+	top: 0.5%; 
+	left: 26.5%; 
+	z-index: 2; 
+	/* background-color: red; */
+	
+}
+
+#greenTriDropArea{
+	width: 72%;
+	height: 40.5%;
+	top: 18%;
+	right: 1.25%;
+	position: absolute;
+	z-index: 2;
+	/* background-color:green; */
+	
+	-ms-transform: rotate(180deg); /*IE 9*/ 
+	-webkit-transform: rotate(180deg); /*Safari*/ 
+	transform: rotate(180deg); /*Standard syntax*/ 
+}
+
+#yellowTriDropArea{
+	width: 72%;
+	height: 40.5%;
+	bottom: 1%;
+	right: 13%;
+	position: absolute;
+	z-index: 2;
+	
+	-ms-transform: rotate(180deg); /*IE 9*/ 
+	-webkit-transform: rotate(180deg); /*Safari*/ 
+	transform: rotate(180deg); /*Standard syntax*/ 
+}
+
+#blueTriDropArea{
+	width: 18%;
+	height: 40%;
+	position: absolute;
+	right: 12.5%;
+	bottom: 0.5%;
+	z-index: 2;
+	/* background-color: red; */
+}
+
+#aquaTriDropArea{
+	width: 35%;
+	height: 20%;
+	position: absolute;
+	right: 13%;
+	bottom: 0.5%;
+	z-index: 2;
+	/* background-color:blue; */
+	-ms-transform: rotate(90deg);
+	-webkit-transform: rotate(90deg); 
+	transform: rotate(90deg); 
+}
+
+#rhombusDropArea{
+	position: absolute;
+	top: 29.5%;
+	left: 1.5%;
+	height: 29%;
+	width: 51%;
+	z-index: 2;
+	-ms-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg); 
+	transform: rotate(45deg); 
+}
+
+#orangeTriDropArea{
+	bottom: 0.5%;
+	left: 15%;
+	position: absolute;
+	width: 36%;
+	height: 40%;
+	z-index: 2;
+	/* background-color: orange; */
+	-ms-transform: rotate(180deg);
+	-webkit-transform: rotate(180deg); 
+	transform: rotate(180deg); 
+}
+
+ #BlocksGame{
+    height: 100%;
+    width: 90%;
+}
+
+ #gameOver{
+    top: 85%;
+    z-index: 10;
+}
+
+ @media only screen and (max-width: 800px)
+{
+
+    #gameOver{
+        top: 75%;
+    }
+}
+
+ 
+ @media only screen and (max-width: 400px)
+{
+
+    #gameOver{
+        top: 55%;
+    }
+}
