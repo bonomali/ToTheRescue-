@@ -84,424 +84,388 @@ function ToggleDroppedAndEmpty(dragId, dropAreaName) {
         yellowTriDropAreaEmpty = false;
 }
 
-function AllowDrop(ev) 
-{
-	ev.preventDefault();
+function AllowDrop(ev) {
+    ev.preventDefault();
 }
 
 //*********************** Functions specific to the House level (higher difficulty level) *************************************//
-function DragHouse(ev) 
-{
-	var flag = false;
-	
-	mostRecentDragID = ev.target.id;
-	
-	if (mostRecentDragID === "rhombus")
-	{
-		if (rotationArr[RHOMBUS_INDEX] === 135 || rotationArr[RHOMBUS_INDEX] === 315)
-		{
-			flag = true;
-		}
-	}
-	else if (mostRecentDragID === "square")
-	{
-		if (rotationArr[SQUARE_INDEX] === 0  || rotationArr[SQUARE_INDEX] === 90 ||  rotationArr[SQUARE_INDEX] === 180 || rotationArr[SQUARE_INDEX] === 270 || rotationArr[SQUARE_INDEX] === 360)
-		{
-			flag = true;
-		}
-	}
-	else if (mostRecentDragID === "blueTri")
-	{
-		if (rotationArr[BLUE_TRI_INDEX] === 0 || rotationArr[BLUE_TRI_INDEX] === 90 || rotationArr[BLUE_TRI_INDEX] === 315 || rotationArr[BLUE_TRI_INDEX] === 360)
-		{	
-	
-			if (rotationArr[BLUE_TRI_INDEX] === 90 && aquaTriDropAreaEmpty === true)
-			{
-				var dropAr = document.getElementById("aquaTriDropArea");
-				dropAr.style.webkitTransform ="rotate(270deg)";
-				dropAr.style.zIndex = "4";
-			}	
-			// else
-				// document.getElementById("aquaTriDropArea").style.webkitTransform="rotate(0deg)";
-			
-			flag = true;
-		}
-	}
-	else if (mostRecentDragID === "aquaTri")
-	{
-		if (rotationArr[AQUA_TRI_INDEX] === 270 || rotationArr[AQUA_TRI_INDEX] === 180)
-		{
-			if (rotationArr[AQUA_TRI_INDEX] === 180 && blueTriDropAreaEmpty === true)
-			{
-				var dropAr = document.getElementById("blueTriDropArea");
-				dropAr.style.webkitTransform = "rotate(180deg)";
-				dropAr.style.zIndex = "4";
-			}
-			else
-				document.getElementById("blueTriDropArea").style.webkitTransform="rotate(0deg)";
-			
-			flag = true;
-		}
-	}
-	else if (mostRecentDragID === "greenTri")
-	{
-		if (rotationArr[GREEN_TRI_INDEX] === 0 || rotationArr[GREEN_TRI_INDEX] === 180 || rotationArr[GREEN_TRI_INDEX] === 360)
-		{
-			if ((rotationArr[GREEN_TRI_INDEX] === 0 || rotationArr[GREEN_TRI_INDEX] === 360) && yellowTriDropAreaEmpty === true)
-			{
-				//document.getElementById("yellowTriDropArea").style.webkitTransform="rotate(90deg)";
-				document.getElementById("yellowTriDropArea").style.zIndex = "3";
-				document.getElementById("greenTriDropArea").style.zIndex = "2";
-			}
-			// else
-				// document.getElementById("yellowTriDropArea").style.webkitTransform="rotate(0deg)";
-			
-			flag = true;
-		}
-	}
-	else if (mostRecentDragID === "orangeTri")
-	{
-		if (rotationArr[ORANGE_TRI_INDEX] === 180)
-		{
-			flag = true;
-		}
-	}
-	else if (mostRecentDragID === "yellowTri")
-	{
-		if (rotationArr[YELLOW_TRI_INDEX] === 0 || rotationArr[YELLOW_TRI_INDEX] === 180 || rotationArr[YELLOW_TRI_INDEX] === 360)
-		{
-			if ((rotationArr[YELLOW_TRI_INDEX] === 0 || rotationArr[YELLOW_TRI_INDEX] === 360) && greenTriDropAreaEmpty === true)
-			{
-				//document.getElementById("greenTriDropArea").style.webkitTransform="rotate(180deg)";
-				document.getElementById("yellowTriDropArea").style.zIndex = "2";
-				document.getElementById("greenTriDropArea").style.zIndex = "3";
-			}
-			// else
-				// document.getElementById("greenTriDropArea").style.webkitTransform="rotate(0deg)";
-			
-			flag = true;
-		}
-	}
-	
-	if (flag === true)
-	{
-		//makes it seem like you're only dragging the object
-		document.getElementById(ev.target.id).style.opacity  = "0";
-		ev.dataTransfer.setData("content", ev.target.id);
-	}
-	else{
-		ev.preventDefault();
-	}
+function DragHouse(ev) {
+    var flag = false;
+
+    mostRecentDragID = ev.target.id;
+
+    if (mostRecentDragID === "rhombus") {
+        if (rotationArr[RHOMBUS_INDEX] === 135 || rotationArr[RHOMBUS_INDEX] === 315) {
+            flag = true;
+        }
+    }
+    else if (mostRecentDragID === "square") {
+        if (rotationArr[SQUARE_INDEX] === 0 || rotationArr[SQUARE_INDEX] === 90 || rotationArr[SQUARE_INDEX] === 180 || rotationArr[SQUARE_INDEX] === 270 || rotationArr[SQUARE_INDEX] === 360) {
+            flag = true;
+        }
+    }
+    else if (mostRecentDragID === "blueTri") {
+        if (rotationArr[BLUE_TRI_INDEX] === 0 || rotationArr[BLUE_TRI_INDEX] === 90 || rotationArr[BLUE_TRI_INDEX] === 315 || rotationArr[BLUE_TRI_INDEX] === 360) {
+
+            if (rotationArr[BLUE_TRI_INDEX] === 90 && aquaTriDropAreaEmpty === true) {
+                var dropAr = document.getElementById("aquaTriDropArea");
+
+                dropAr.style.webkitTransform = "rotate(270deg)";
+                dropAr.style.msTransform = "rotate(270deg)";
+                dropAr.style.transform = "rotate(270deg)";
+
+                dropAr.style.zIndex = "4";
+            }
+
+            flag = true;
+        }
+    }
+    else if (mostRecentDragID === "aquaTri") {
+        if (rotationArr[AQUA_TRI_INDEX] === 270 || rotationArr[AQUA_TRI_INDEX] === 180) {
+            if (rotationArr[AQUA_TRI_INDEX] === 180 && blueTriDropAreaEmpty === true) {
+                var dropAr = document.getElementById("blueTriDropArea");
+                dropAr.style.webkitTransform = "rotate(180deg)";
+                dropAr.style.msTransform = "rotate(180deg)";
+                dropAr.style.transform = "rotate(180deg)";
+
+                dropAr.style.zIndex = "4";
+            }
+            else {
+                var dropAr = document.getElementById("blueTriDropArea");
+                dropAr.style.webkitTransform = "rotate(0deg)";
+                dropAr.style.msTransform = "rotate(0deg)";
+                dropAr.style.transform = "rotate(0deg)";
+            }
+
+            flag = true;
+        }
+    }
+    else if (mostRecentDragID === "greenTri") {
+        if (rotationArr[GREEN_TRI_INDEX] === 0 || rotationArr[GREEN_TRI_INDEX] === 180 || rotationArr[GREEN_TRI_INDEX] === 360) {
+            if ((rotationArr[GREEN_TRI_INDEX] === 0 || rotationArr[GREEN_TRI_INDEX] === 360) && yellowTriDropAreaEmpty === true) {
+                document.getElementById("yellowTriDropArea").style.zIndex = "3";
+                document.getElementById("greenTriDropArea").style.zIndex = "2";
+            }
+
+            flag = true;
+        }
+    }
+    else if (mostRecentDragID === "orangeTri") {
+        if (rotationArr[ORANGE_TRI_INDEX] === 180) {
+            flag = true;
+        }
+    }
+    else if (mostRecentDragID === "yellowTri") {
+        if (rotationArr[YELLOW_TRI_INDEX] === 0 || rotationArr[YELLOW_TRI_INDEX] === 180 || rotationArr[YELLOW_TRI_INDEX] === 360) {
+            if ((rotationArr[YELLOW_TRI_INDEX] === 0 || rotationArr[YELLOW_TRI_INDEX] === 360) && greenTriDropAreaEmpty === true) {
+                document.getElementById("yellowTriDropArea").style.zIndex = "2";
+                document.getElementById("greenTriDropArea").style.zIndex = "3";
+            }
+
+            flag = true;
+        }
+    }
+
+    if (flag === true) {
+        //makes it seem like you're only dragging the object
+        document.getElementById(ev.target.id).style.opacity = "0";
+        ev.dataTransfer.setData("content", ev.target.id);
+    }
+    else {
+        ev.preventDefault();
+    }
 }
 
-//need to modify so the two small and two big triangles can be used at either location
-//then need to make it so those ghost images can look correct at different angles
-function DropHouse(ev) 
-{
-	var correctRotation = false;
-	var dropAreaName = "";
-	
-	//if you're trying to drop into a rhombus and the drop area is empty
-	if (/^rhombus/.test(ev.target.id) === true && rhombusDropAreaEmpty === true)
-	{
-		//make sure you were dragging a rhombus to begin with
-		if (mostRecentDragID === "rhombus")
-		{
-			//make sure it is at the correct angle to be dropped
-			if (rotationArr[RHOMBUS_INDEX] === 135|| rotationArr[RHOMBUS_INDEX] === 315)
-			{
-				correctRotation = true;
-				dropAreaName = "rhombus";
-			}
-		}
-	}
-	else if (/^square/.test(ev.target.id) === true && squareDropAreaEmpty === true)
-	{
-		if (mostRecentDragID === "square")
-		{
-			if (rotationArr[SQUARE_INDEX] === 0  || rotationArr[SQUARE_INDEX] === 180 ||  rotationArr[SQUARE_INDEX] === 360)
-			{
-				correctRotation = true;
-				dropAreaName = "square";
-			}
-		}
-	}
-	else if (/^blueTri/.test(ev.target.id) === true && blueTriDropAreaEmpty === true)
-	{
-		if (mostRecentDragID === "blueTri")
-		{
-			if (rotationArr[BLUE_TRI_INDEX] === 0 || rotationArr[BLUE_TRI_INDEX] === 315 || rotationArr[BLUE_TRI_INDEX] === 360)
-			{
-				correctRotation = true;
-				dropAreaName = "blueTri";
-			}
-		}
-		
-		if (mostRecentDragID === "aquaTri" && rotationArr[AQUA_TRI_INDEX] === 180)
-		{
-			correctRotation = true;
-			dropAreaName = "blueTri";
-		}
-	}
-	else if (/^aquaTri/.test(ev.target.id) === true && aquaTriDropAreaEmpty === true)
-	{
-		if (mostRecentDragID === "aquaTri")
-		{
-			if (rotationArr[AQUA_TRI_INDEX] === 270)
-			{
-				correctRotation = true;
-				dropAreaName = "aquaTri";
-			}
-		}
-		
-		if (mostRecentDragID === "blueTri" && rotationArr[BLUE_TRI_INDEX] === 90)
-		{
-			correctRotation = true;
-			dropAreaName = "aquaTri";
-		}
-	}
-	else if (/^greenTri/.test(ev.target.id) === true && greenTriDropAreaEmpty === true)
-	{
-		if (mostRecentDragID === "greenTri")
-		{
-			if (rotationArr[GREEN_TRI_INDEX] === 180)
-			{
-				correctRotation = true;
-				dropAreaName = "greenTri";
-			}
-		}
-		
-		if (mostRecentDragID === "yellowTri" && (rotationArr[YELLOW_TRI_INDEX] === 0 || rotationArr[YELLOW_TRI_INDEX] === 360))
-		{
-			document.getElementById("greenTriDropArea").style.webkitTransform="rotate(0deg)";
-			correctRotation = true;
-			dropAreaName = "greenTri";
-		}
-	}
-	else if (/^orangeTri/.test(ev.target.id) === true && orangeTriDropAreaEmpty === true)
-	{
-		if (mostRecentDragID === "orangeTri")
-		{
-			if (rotationArr[ORANGE_TRI_INDEX] === 180)
-			{
-				correctRotation = true;
-				dropAreaName = "orangeTri";
-			}
-		}
-	}
-	else if (/^yellowTri/.test(ev.target.id) === true && yellowTriDropAreaEmpty === true)
-	{
-		if (mostRecentDragID === "yellowTri")
-		{
-			if (rotationArr[YELLOW_TRI_INDEX] === 180)
-			{
-				correctRotation = true;
-				dropAreaName = "yellowTri";
-			}
-		}
-		
-		if (mostRecentDragID === "greenTri" && (rotationArr[GREEN_TRI_INDEX] === 0 || rotationArr[GREEN_TRI_INDEX] === 360))
-		{
-			document.getElementById("yellowTriDropArea").style.webkitTransform="rotate(0deg)";
-			correctRotation = true;
-			dropAreaName = "yellowTri";
-		}
-	}
-	//correct angle, allow the drop
-	if (correctRotation === true)
-	{
-		ev.preventDefault();
-		var data = ev.dataTransfer.getData("content");
-		ev.target.appendChild(document.getElementById(data));
-		ToggleDroppedAndEmpty(mostRecentDragID, dropAreaName);
-		
-		selectedContainer = null;
-		
-		if (WonGame())
-		    EndGame(true);
-		else
-		    responsiveVoice.speak("Nice!");
-	}
-	
-	document.getElementById(mostRecentDragID).style.opacity = "1";
+function DropHouse(ev) {
+    var correctRotation = false;
+    var dropAreaName = "";
+
+    //if you're trying to drop into a rhombus and the drop area is empty
+    if (/^rhombus/.test(ev.target.id) === true && rhombusDropAreaEmpty === true) {
+        //make sure you were dragging a rhombus to begin with
+        if (mostRecentDragID === "rhombus") {
+            //make sure it is at the correct angle to be dropped
+            if (rotationArr[RHOMBUS_INDEX] === 135 || rotationArr[RHOMBUS_INDEX] === 315) {
+                correctRotation = true;
+                dropAreaName = "rhombus";
+            }
+        }
+    }
+    else if (/^square/.test(ev.target.id) === true && squareDropAreaEmpty === true) {
+        if (mostRecentDragID === "square") {
+            if (rotationArr[SQUARE_INDEX] === 0 || rotationArr[SQUARE_INDEX] === 180 || rotationArr[SQUARE_INDEX] === 360) {
+                correctRotation = true;
+                dropAreaName = "square";
+            }
+        }
+    }
+    else if (/^blueTri/.test(ev.target.id) === true && blueTriDropAreaEmpty === true) {
+        if (mostRecentDragID === "blueTri") {
+            if (rotationArr[BLUE_TRI_INDEX] === 0 || rotationArr[BLUE_TRI_INDEX] === 315 || rotationArr[BLUE_TRI_INDEX] === 360) {
+                correctRotation = true;
+                dropAreaName = "blueTri";
+            }
+        }
+
+        if (mostRecentDragID === "aquaTri" && rotationArr[AQUA_TRI_INDEX] === 180) {
+            correctRotation = true;
+            dropAreaName = "blueTri";
+        }
+    }
+    else if (/^aquaTri/.test(ev.target.id) === true && aquaTriDropAreaEmpty === true) {
+        if (mostRecentDragID === "aquaTri") {
+            if (rotationArr[AQUA_TRI_INDEX] === 270) {
+                correctRotation = true;
+                dropAreaName = "aquaTri";
+            }
+        }
+
+        if (mostRecentDragID === "blueTri" && rotationArr[BLUE_TRI_INDEX] === 90) {
+            correctRotation = true;
+            dropAreaName = "aquaTri";
+        }
+    }
+    else if (/^greenTri/.test(ev.target.id) === true && greenTriDropAreaEmpty === true) {
+        if (mostRecentDragID === "greenTri") {
+            if (rotationArr[GREEN_TRI_INDEX] === 180) {
+                correctRotation = true;
+                dropAreaName = "greenTri";
+            }
+        }
+
+        if (mostRecentDragID === "yellowTri" && (rotationArr[YELLOW_TRI_INDEX] === 0 || rotationArr[YELLOW_TRI_INDEX] === 360)) {
+            var greenTri = document.getElementById("greenTriDropArea");
+            greenTri.style.webkitTransform = "rotate(0deg)";
+            greenTri.style.msTransform = "rotate(0deg)";
+            greenTri.style.transform = "rotate(0deg)";
+            correctRotation = true;
+            dropAreaName = "greenTri";
+        }
+    }
+    else if (/^orangeTri/.test(ev.target.id) === true && orangeTriDropAreaEmpty === true) {
+        if (mostRecentDragID === "orangeTri") {
+            if (rotationArr[ORANGE_TRI_INDEX] === 180) {
+                correctRotation = true;
+                dropAreaName = "orangeTri";
+            }
+        }
+    }
+    else if (/^yellowTri/.test(ev.target.id) === true && yellowTriDropAreaEmpty === true) {
+        if (mostRecentDragID === "yellowTri") {
+            if (rotationArr[YELLOW_TRI_INDEX] === 180) {
+                correctRotation = true;
+                dropAreaName = "yellowTri";
+            }
+        }
+
+        if (mostRecentDragID === "greenTri" && (rotationArr[GREEN_TRI_INDEX] === 0 || rotationArr[GREEN_TRI_INDEX] === 360)) {
+            var yellowTri = document.getElementById("yellowTriDropArea");
+
+            yellowTri.style.webkitTransform = "rotate(0deg)";
+            yellowTri.style.msTransform = "rotate(0deg)";
+            yellowTri.style.transform = "rotate(0deg)";
+
+            correctRotation = true;
+            dropAreaName = "yellowTri";
+        }
+    }
+    //correct angle, allow the drop
+    if (correctRotation === true) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("content");
+        ev.target.appendChild(document.getElementById(data));
+        ToggleDroppedAndEmpty(mostRecentDragID, dropAreaName);
+
+        selectedContainer = null;
+
+        if (WonGame())
+            EndGame(true);
+        else
+            responsiveVoice.speak("Nice!");
+    }
+
+    document.getElementById(mostRecentDragID).style.opacity = "1";
 }
 
-function HouseRotate()
-{
-	//if they selected something they can rotate
-	if (selectedContainer !== null)
-	{
-		//allow the rotations to happen
-		rotationArr[rotationArrIndex]+= 45;
+function HouseRotate() {
+    //if they selected something they can rotate
+    if (selectedContainer !== null) {
+        //allow the rotations to happen
+        rotationArr[rotationArrIndex] += 45;
 
-		if (rotationArr[rotationArrIndex] > 360)
-		{
-			rotationArr[rotationArrIndex] = 0;
-		}
-		
-		document.getElementById(selectedContainer).style.webkitTransform="rotate("+rotationArr[rotationArrIndex]+"deg)";
-	}
-	
-	if (blueTriDropped !== true)
-	{
-		if (rotationArr[BLUE_TRI_INDEX] === 90)
-		{
-			document.getElementById("blueTri").src = IMG_PATH + "blueTri2.png";
-			var container = document.getElementById("blueTriContainer");
-			container.style.width = "56%";
-			container.style.height = "15%";
-			container.style.bottom = "22%";
-			container.style.left = "18%";
-			container.style.webkitTransform="rotate(270deg)";
-		}
-		else
-		{
-			document.getElementById("blueTri").src = IMG_PATH + "blueTri.png";
-			var container = document.getElementById("blueTriContainer");
-			container.style.width = "28%";
-			container.style.height = "28%";
-			container.style.bottom = "15%";
-			container.style.left = "30%";
-			container.style.webkitTransform="rotate(0deg)";
-		}
-	}
-	
-	if (aquaTriDropped !== true)
-	{
-		if(rotationArr[AQUA_TRI_INDEX] === 180)
-		{
-			document.getElementById("aquaTri").src = IMG_PATH + "aquaTri2.png";
-			var container = document.getElementById("aquaTriContainer");
-			container.style.width = "26%";
-			container.style.height = "26%";
-			container.style.bottom = "7%";
-			container.style.left =  "-18%";
-			container.style.webkitTransform="rotate(180deg)";
-		}
-		else
-		{
-			document.getElementById("aquaTri").src = IMG_PATH + "aquaTri.png";
-			var container = document.getElementById("aquaTriContainer");
-			container.style.width = "54%";
-			container.style.height = "13%";
-			container.style.bottom = "15%";
-			container.style.left = "-30%";
-			container.style.webkitTransform="rotate(90deg)";
-		}
-	}
-	
-	if (yellowTriDropped !== true)
-	{
-		if (rotationArr[YELLOW_TRI_INDEX] === 180)
-		{
-			document.getElementById("yellowTri").src = IMG_PATH + "yellowTri3.png";
-			var container = document.getElementById("yellowTriContainer");
-			container.style.width = "96%";
-			container.style.height = "25%";	
-			container.style.webkitTransform="rotate(180deg)";
-		}
-		else
-		{
-			document.getElementById("yellowTri").src = IMG_PATH + "yellowTri.png";
-			var container = document.getElementById("yellowTriContainer");
-			container.style.width = "96%";
-			container.style.height = "25%";
-			container.style.bottom = "20%";
-			container.style.left = "2%";
-			container.style.webkitTransform="rotate(0deg)";
-		}
-	}
-	
-	if (greenTriDropped !== true)
-	{
-		if(rotationArr[GREEN_TRI_INDEX] === 180)
-		{
-			document.getElementById("greenTri").src = IMG_PATH + "greenTri3.png";
-			var container = document.getElementById("greenTriContainer");
-			container.style.webkitTransform="rotate(180deg)";
-		}
-		else
-		{
-			document.getElementById("greenTri").src = IMG_PATH + "greenTri.png";
-			var container = document.getElementById("greenTriContainer");
-			container.style.width = "96%";
-			container.style.height = "25%";
-			container.style.top = "9%";
-			container.style.left = "2%";
-			container.style.webkitTransform="rotate(0deg)";
-		}
-	}
+        if (rotationArr[rotationArrIndex] > 360) {
+            rotationArr[rotationArrIndex] = 0;
+        }
+
+        var sc = document.getElementById(selectedContainer);
+
+        sc.style.webkitTransform = "rotate(" + rotationArr[rotationArrIndex] + "deg)";
+        sc.style.msTransform = "rotate(" + rotationArr[rotationArrIndex] + "deg)";
+        sc.style.transform = "rotate(" + rotationArr[rotationArrIndex] + "deg)";
+    }
+
+    if (blueTriDropped !== true) {
+        if (rotationArr[BLUE_TRI_INDEX] === 90) {
+            document.getElementById("blueTri").src = IMG_PATH + "blueTri2.png";
+            var container = document.getElementById("blueTriContainer");
+            container.style.width = "56%";
+            container.style.height = "15%";
+            container.style.bottom = "22%";
+            container.style.left = "18%";
+            container.style.webkitTransform = "rotate(270deg)";
+            container.style.msTransform = "rotate(270deg)";
+            container.style.transform = "rotate(270deg)";
+        }
+        else {
+            document.getElementById("blueTri").src = IMG_PATH + "blueTri.png";
+            var container = document.getElementById("blueTriContainer");
+            container.style.width = "28%";
+            container.style.height = "28%";
+            container.style.bottom = "15%";
+            container.style.left = "30%";
+            container.style.webkitTransform = "rotate(0deg)";
+            container.style.msTransform = "rotate(0deg)";
+            container.style.transform = "rotate(0deg)";
+        }
+    }
+
+    if (aquaTriDropped !== true) {
+        if (rotationArr[AQUA_TRI_INDEX] === 180) {
+            document.getElementById("aquaTri").src = IMG_PATH + "aquaTri2.png";
+            var container = document.getElementById("aquaTriContainer");
+            container.style.width = "26%";
+            container.style.height = "26%";
+            container.style.bottom = "7%";
+            container.style.left = "-18%";
+            container.style.webkitTransform = "rotate(180deg)";
+            container.style.msTransform = "rotate(180deg)";
+            container.style.transform = "rotate(180deg)";
+        }
+        else {
+            document.getElementById("aquaTri").src = IMG_PATH + "aquaTri.png";
+            var container = document.getElementById("aquaTriContainer");
+            container.style.width = "54%";
+            container.style.height = "13%";
+            container.style.bottom = "15%";
+            container.style.left = "-30%";
+            container.style.webkitTransform = "rotate(90deg)";
+            container.style.msTransform = "rotate(90deg)";
+            container.style.transform = "rotate(90deg)";
+        }
+    }
+
+    if (yellowTriDropped !== true) {
+        if (rotationArr[YELLOW_TRI_INDEX] === 180) {
+            document.getElementById("yellowTri").src = IMG_PATH + "yellowTri3.png";
+            var container = document.getElementById("yellowTriContainer");
+            container.style.width = "96%";
+            container.style.height = "25%";
+            container.style.webkitTransform = "rotate(180deg)";
+            container.style.msTransform = "rotate(180deg)";
+            container.style.transform = "rotate(180deg)";
+        }
+        else {
+            document.getElementById("yellowTri").src = IMG_PATH + "yellowTri.png";
+            var container = document.getElementById("yellowTriContainer");
+            container.style.width = "96%";
+            container.style.height = "25%";
+            container.style.bottom = "20%";
+            container.style.left = "2%";
+            container.style.webkitTransform = "rotate(0deg)";
+            container.style.msTransform = "rotate(0deg)";
+            container.style.transform = "rotate(0deg)";
+        }
+    }
+
+    if (greenTriDropped !== true) {
+        if (rotationArr[GREEN_TRI_INDEX] === 180) {
+            document.getElementById("greenTri").src = IMG_PATH + "greenTri3.png";
+            var container = document.getElementById("greenTriContainer");
+            container.style.webkitTransform = "rotate(180deg)";
+            container.style.msTransform = "rotate(180deg)";
+            container.style.transform = "rotate(180deg)";
+        }
+        else {
+            document.getElementById("greenTri").src = IMG_PATH + "greenTri.png";
+            var container = document.getElementById("greenTriContainer");
+            container.style.width = "96%";
+            container.style.height = "25%";
+            container.style.top = "9%";
+            container.style.left = "2%";
+            container.style.webkitTransform = "rotate(0deg)";
+            container.style.msTransform = "rotate(0deg)";
+            container.style.transform = "rotate(0deg)";
+        }
+    }
 }
 
-function HouseMain()
-{	
-	for (var i = 0; i < NUM_OF_SHAPES; i++)
-	{
-		rotationArr.push(0);
-	}
-	
-	//make sure everything is visible after the drag
-	window.addEventListener("dragend", function() {
-		document.getElementById(mostRecentDragID).style.opacity = "1";
-	}, false);
-	
-	//keeps track of what div container you clicked on so the rotations can happen
-	$("#rhombusContainer").mousedown(function(){
-		selectedContainer = "rhombus";
-		rotationArrIndex = RHOMBUS_INDEX;
-		
-		ResetDropAreaZIndexs();
-		document.getElementById("rhombusDropArea").style.zIndex = 3;
-	});
-	
-	$("#squareContainer").mousedown(function(){
-		selectedContainer = "square";
-		rotationArrIndex = SQUARE_INDEX;
-		
-		ResetDropAreaZIndexs();
-		document.getElementById("squareDropArea").style.zIndex = 3;
-	});
-	
-	$("#blueTriContainer").mousedown(function(){
-		selectedContainer = "blueTri";
-		rotationArrIndex = BLUE_TRI_INDEX;
-		
-		ResetDropAreaZIndexs();
-		document.getElementById("blueTriDropArea").style.zIndex = 3;
-	});
-	
-	$("#aquaTriContainer").mousedown(function(){
-		selectedContainer = "aquaTri";
-		rotationArrIndex = AQUA_TRI_INDEX;
-		
-		ResetDropAreaZIndexs();
-		document.getElementById("aquaTriDropArea").style.zIndex = 3;
-	});
-	
-	$("#greenTriContainer").mousedown(function(){
-		selectedContainer = "greenTri";
-		rotationArrIndex = GREEN_TRI_INDEX;
-		
-		ResetDropAreaZIndexs();
-		document.getElementById("greenTriDropArea").style.zIndex = 3;
-	});	
-	
-	$("#orangeTriContainer").mousedown(function(){
-		selectedContainer = "orangeTri";
-		rotationArrIndex = ORANGE_TRI_INDEX;
-		
-		ResetDropAreaZIndexs();
-		document.getElementById("orangeTriDropArea").style.zIndex = 3;
-		document.getElementById("greenTriDropArea").style.zIndex = 3;
-	});
-	
-	$("#yellowTriContainer").mousedown(function(){
-		selectedContainer = "yellowTri";
-		rotationArrIndex = YELLOW_TRI_INDEX;
-		
-		ResetDropAreaZIndexs();
-		document.getElementById("yellowTriDropArea").style.zIndex = 3;
-	});
+function HouseMain() {
+    for (var i = 0; i < NUM_OF_SHAPES; i++) {
+        rotationArr.push(0);
+    }
+
+    //make sure everything is visible after the drag
+    window.addEventListener("dragend", function () {
+        document.getElementById(mostRecentDragID).style.opacity = "1";
+    }, false);
+
+    //keeps track of what div container you clicked on so the rotations can happen
+    $("#rhombusContainer").mousedown(function () {
+        selectedContainer = "rhombus";
+        rotationArrIndex = RHOMBUS_INDEX;
+
+        ResetDropAreaZIndexs();
+        document.getElementById("rhombusDropArea").style.zIndex = 3;
+    });
+
+    $("#squareContainer").mousedown(function () {
+        selectedContainer = "square";
+        rotationArrIndex = SQUARE_INDEX;
+
+        ResetDropAreaZIndexs();
+        document.getElementById("squareDropArea").style.zIndex = 3;
+    });
+
+    $("#blueTriContainer").mousedown(function () {
+        selectedContainer = "blueTri";
+        rotationArrIndex = BLUE_TRI_INDEX;
+
+        ResetDropAreaZIndexs();
+        document.getElementById("blueTriDropArea").style.zIndex = 3;
+    });
+
+    $("#aquaTriContainer").mousedown(function () {
+        selectedContainer = "aquaTri";
+        rotationArrIndex = AQUA_TRI_INDEX;
+
+        ResetDropAreaZIndexs();
+        document.getElementById("aquaTriDropArea").style.zIndex = 3;
+    });
+
+    $("#greenTriContainer").mousedown(function () {
+        selectedContainer = "greenTri";
+        rotationArrIndex = GREEN_TRI_INDEX;
+
+        ResetDropAreaZIndexs();
+        document.getElementById("greenTriDropArea").style.zIndex = 3;
+    });
+
+    $("#orangeTriContainer").mousedown(function () {
+        selectedContainer = "orangeTri";
+        rotationArrIndex = ORANGE_TRI_INDEX;
+
+        ResetDropAreaZIndexs();
+        document.getElementById("orangeTriDropArea").style.zIndex = 3;
+        document.getElementById("greenTriDropArea").style.zIndex = 3;
+    });
+
+    $("#yellowTriContainer").mousedown(function () {
+        selectedContainer = "yellowTri";
+        rotationArrIndex = YELLOW_TRI_INDEX;
+
+        ResetDropAreaZIndexs();
+        document.getElementById("yellowTriDropArea").style.zIndex = 3;
+    });
 }
 
 //*********************** Functions specific to the Square level (lower difficulty level) *************************************//
@@ -524,20 +488,31 @@ function DragSquare(ev) {
     else if (mostRecentDragID === "blueTri") {
         if (rotationArr[BLUE_TRI_INDEX] === 0 || rotationArr[BLUE_TRI_INDEX] === 90 || rotationArr[BLUE_TRI_INDEX] === 315 || rotationArr[BLUE_TRI_INDEX] === 360) {
 
-            if (rotationArr[BLUE_TRI_INDEX] === 90 && aquaTriDropAreaEmpty === true)
-                document.getElementById("aquaTriDropArea").style.webkitTransform = "rotate(270deg)";
-            // else
-            // document.getElementById("aquaTriDropArea").style.webkitTransform="rotate(0deg)";
+            if (rotationArr[BLUE_TRI_INDEX] === 90 && aquaTriDropAreaEmpty === true) {
+                var aquaTri = document.getElementById("aquaTriDropArea");
+                aquaTri.style.webkitTransform = "rotate(270deg)";
+                aquaTri.style.msTransform = "rotate(270deg)";
+                aquaTri.style.transform = "rotate(270deg)";
+            }
 
             flag = true;
         }
     }
     else if (mostRecentDragID === "aquaTri") {
         if (rotationArr[AQUA_TRI_INDEX] === 270 || rotationArr[AQUA_TRI_INDEX] === 180) {
-            if (rotationArr[AQUA_TRI_INDEX] === 180 && blueTriDropAreaEmpty === true)
-                document.getElementById("blueTriDropArea").style.webkitTransform = "rotate(180deg)";
-            else
-                document.getElementById("blueTriDropArea").style.webkitTransform = "rotate(0deg)";
+            if (rotationArr[AQUA_TRI_INDEX] === 180 && blueTriDropAreaEmpty === true) {
+                var blueTri = document.getElementById("blueTriDropArea");
+                blueTri.style.webkitTransform = "rotate(180deg)";
+                blueTri.style.msTransform = "rotate(180deg)";
+                blueTri.style.transform = "rotate(180deg)";
+            }
+            else {
+                var blueTri = document.getElementById("blueTriDropArea");
+                blueTri.style.webkitTransform = "rotate(0deg)";
+                blueTri.style.msTransform = "rotate(0deg)";
+                blueTri.style.transform = "rotate(0deg)";
+            }
+
 
             flag = true;
         }
@@ -545,12 +520,13 @@ function DragSquare(ev) {
     else if (mostRecentDragID === "greenTri") {
         if (rotationArr[GREEN_TRI_INDEX] === 0 || rotationArr[GREEN_TRI_INDEX] === 360 || rotationArr[GREEN_TRI_INDEX] === 270) {
             if (rotationArr[GREEN_TRI_INDEX] === 270 && yellowTriDropAreaEmpty === true) {
-                document.getElementById("yellowTriDropArea").style.webkitTransform = "rotate(90deg)";
-                document.getElementById("yellowTriDropArea").style.zIndex = "3";
+                var yellowTri = document.getElementById("yellowTriDropArea");
+                yellowTri.style.webkitTransform = "rotate(90deg)";
+                yellowTri.style.msTransform = "rotate(90deg)";
+                yellowTri.style.transform = "rotate(90deg)";
+                yellowTri.style.zIndex = "3";
                 document.getElementById("greenTriDropArea").style.zIndex = "2";
             }
-            // else
-            // document.getElementById("yellowTriDropArea").style.webkitTransform="rotate(0deg)";
 
             flag = true;
         }
@@ -563,12 +539,21 @@ function DragSquare(ev) {
     else if (mostRecentDragID === "yellowTri") {
         if (rotationArr[YELLOW_TRI_INDEX] === 90 || rotationArr[YELLOW_TRI_INDEX] === 180) {
             if (rotationArr[YELLOW_TRI_INDEX] === 180 && greenTriDropAreaEmpty === true) {
-                document.getElementById("greenTriDropArea").style.webkitTransform = "rotate(180deg)";
+
+                var greenTri = document.getElementById("greenTriDropArea");
+                greenTri.style.webkitTransform = "rotate(180deg)";
+                greenTri.style.msTransform = "rotate(180deg)";
+                greenTri.style.transform = "rotate(180deg)";
+
                 document.getElementById("yellowTriDropArea").style.zIndex = "2";
-                document.getElementById("greenTriDropArea").style.zIndex = "3";
+                greenTri.style.zIndex = "3";
             }
-            else
-                document.getElementById("greenTriDropArea").style.webkitTransform = "rotate(0deg)";
+            else {
+                var greenTri = document.getElementById("greenTriDropArea");
+                greenTri.style.webkitTransform = "rotate(0deg)";
+                greenTri.style.msTransform = "rotate(0deg)";
+                greenTri.style.transform = "rotate(0deg)";
+            }
 
             flag = true;
         }
@@ -695,7 +680,10 @@ function RotateSquare() {
             rotationArr[rotationArrIndex] = 0;
         }
 
-        document.getElementById(selectedContainer).style.webkitTransform = "rotate(" + rotationArr[rotationArrIndex] + "deg)";
+        var sc = document.getElementById(selectedContainer);
+        sc.style.webkitTransform = "rotate(" + rotationArr[rotationArrIndex] + "deg)";
+        sc.style.msTransform = "rotate(" + rotationArr[rotationArrIndex] + "deg)";
+        sc.style.transform = "rotate(" + rotationArr[rotationArrIndex] + "deg)";
     }
 
     if (blueTriDropped !== true) {
@@ -707,6 +695,8 @@ function RotateSquare() {
             container.style.bottom = "22%";
             container.style.left = "18%";
             container.style.webkitTransform = "rotate(270deg)";
+            container.style.msTransform = "rotate(270deg)";
+            container.style.transform = "rotate(270deg)";
         }
         else {
             document.getElementById("blueTri").src = IMG_PATH + "blueTri.png";
@@ -716,6 +706,8 @@ function RotateSquare() {
             container.style.bottom = "15%";
             container.style.left = "30%";
             container.style.webkitTransform = "rotate(0deg)";
+            container.style.msTransform = "rotate(0deg)";
+            container.style.transform = "rotate(0deg)";
         }
     }
 
@@ -728,6 +720,8 @@ function RotateSquare() {
             container.style.bottom = "7%";
             container.style.left = "-18%";
             container.style.webkitTransform = "rotate(180deg)";
+            container.style.msTransform = "rotate(180deg)";
+            container.style.transform = "rotate(180deg)";
         }
         else {
             document.getElementById("aquaTri").src = IMG_PATH + "aquaTri.png";
@@ -737,6 +731,8 @@ function RotateSquare() {
             container.style.bottom = "15%";
             container.style.left = "-30%";
             container.style.webkitTransform = "rotate(90deg)";
+            container.style.msTransform = "rotate(90deg)";
+            container.style.transform = "rotate(90deg)";
         }
     }
 
@@ -750,6 +746,8 @@ function RotateSquare() {
             container.style.bottom = "7%";
             container.style.left = "22%";
             container.style.webkitTransform = "rotate(270deg)";
+            container.style.msTransform = "rotate(270deg)";
+            container.style.transform = "rotate(270deg)";
         }
         else if (rotationArr[YELLOW_TRI_INDEX] === 180) {
             document.getElementById("yellowTri").src = IMG_PATH + "yellowTri3.png";
@@ -757,6 +755,8 @@ function RotateSquare() {
             container.style.width = "96%";
             container.style.height = "25%";
             container.style.webkitTransform = "rotate(180deg)";
+            container.style.msTransform = "rotate(180deg)";
+            container.style.transform = "rotate(180deg)";
         }
         else {
             document.getElementById("yellowTri").src = IMG_PATH + "yellowTri.png";
@@ -766,6 +766,8 @@ function RotateSquare() {
             container.style.bottom = "20%";
             container.style.left = "2%";
             container.style.webkitTransform = "rotate(0deg)";
+            container.style.msTransform = "rotate(0deg)";
+            container.style.transform = "rotate(0deg)";
         }
     }
 
@@ -779,6 +781,8 @@ function RotateSquare() {
             container.style.top = "-3%";
             container.style.left = "23%";
             container.style.webkitTransform = "rotate(90deg)";
+            container.style.msTransform = "rotate(90deg)";
+            container.style.transform = "rotate(90deg)";
         }
         else {
             document.getElementById("greenTri").src = IMG_PATH + "greenTri.png";
@@ -788,6 +792,8 @@ function RotateSquare() {
             container.style.top = "9%";
             container.style.left = "2%";
             container.style.webkitTransform = "rotate(0deg)";
+            container.style.msTransform = "rotate(0deg)";
+            container.style.transform = "rotate(0deg)";
         }
     }
 }
@@ -864,8 +870,7 @@ function SquareMain() {
 }
 
 //*********************** Driver functions of entire program *************************************//
-function  CreateHtmlElements(difficulty)
-{
+function CreateHtmlElements(difficulty) {
     var dropFuncName = "";
     var dragFuncName = "";
     var rotateFuncName = "";
@@ -877,8 +882,7 @@ function  CreateHtmlElements(difficulty)
     var orangeTriImgName = "";
     var problemImgSrc = "";
 
-    if (difficulty <= 3)
-    {
+    if (difficulty <= 3) {
         //specific to square problem
         dropFuncName = "DropSquare(event)";
         dragFuncName = "DragSquare(event)";
@@ -891,8 +895,7 @@ function  CreateHtmlElements(difficulty)
         problemImgSrc = "squareProblem.png";
         problemImgId = "squareProblem";
     }
-    else
-    {
+    else {
         //specific to house problem
         dropFuncName = "DropHouse(event)";
         dragFuncName = "DragHouse(event)";
@@ -1153,18 +1156,15 @@ function  CreateHtmlElements(difficulty)
     divContainer.appendChild(rotateRight);
 }
 
-function EndGame(finished)
-{
+function EndGame(finished) {
     var returnVal = 0;
 
     var numCorrect = 0;
 
-    if (finished)
-    {
+    if (finished) {
         returnVal = 5;
     }
-    else
-    {
+    else {
         if (!rhombusDropAreaEmpty)
             numCorrect++;
         if (!squareDropAreaEmpty)
@@ -1201,8 +1201,7 @@ function EndGame(finished)
     responsiveVoice.speak("Great job!");
 }
 
-function Main()
-{
+function Main() {
     //get the game's difficulty level and modify the dataset for that difficulty level
     var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
 
