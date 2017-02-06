@@ -23,10 +23,13 @@
                 <label class="iconLbls " id="playLbl">Play</label>
             </li>
             <li id="sanctuary">
-                <a href="~/AnimalSanctuary/Sanctuary">
-                    <img src="~/Images/sanctuaryIcon.png" class="icon" alt="Sanctuary">
-                </a>
-                <label class="iconLbls "id="sanctuaryLbl">Sanctuary</label>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a href="~/AnimalSanctuary/Sanctuary">
+                        <img src="~/Images/sanctuaryIcon.png" class="icon" alt="Sanctuary">
+                    </a>
+                    <label class="iconLbls "id="sanctuaryLbl">Sanctuary</label>
+                }
             </li>
             <li id="menu">
                 <a href="~/MainMenu/MainMenu">
@@ -60,7 +63,7 @@
         //call function to move avatar to current node when map loads
         setTimeout(function() {
             moveAvatar();
-        }, 2000);
+        }, 500);
        
 
         //congratulatory sound when animal saved

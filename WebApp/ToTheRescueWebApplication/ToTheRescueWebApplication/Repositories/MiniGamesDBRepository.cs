@@ -71,6 +71,39 @@ namespace ToTheRescueWebApplication.Repositories
             }
             return miniGames;
         }
+        //return a list of all minigames in the database
+        public List<MiniGame> GetAllMinigames()
+        {
+            List<MiniGame> miniGames = new List<MiniGame>();
+
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "SELECT * FROM MiniGames";
+                    command.Connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            MiniGame code = new MiniGame();
+
+                            code.ID = (int)reader["MiniGameID"];
+                            code.MiniGameCategoryID = (int)reader["MiniGameCategoryID"];
+                            code.MiniGamePath = reader["MiniGamePath"].ToString();
+                            code.MiniGameName = reader["MiniGameName"].ToString();
+                            code.MinDifficulty = (int)reader["MinDifficulty"];
+                            code.MaxDifficulty = (int)reader["MaxDifficulty"];
+
+                            miniGames.Add(code);
+                        }
+                    }
+                }
+            }
+            return miniGames;
+        }
         //add recently played minigame to list of recently played minigames
         public void UpdateRecentlyPlayedMiniGames(int profileID, int miniGameID)
         {

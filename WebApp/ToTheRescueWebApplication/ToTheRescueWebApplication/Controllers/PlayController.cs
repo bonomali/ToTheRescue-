@@ -12,40 +12,27 @@ namespace ToTheRescueWebApplication.Controllers
 {
     public class PlayController : Controller
     {
-        IDataEntityRepository<Map> _map;
-        IDataEntityRepository<Sounds> _music;
-        NodeDBRepository _node;
-        ImageDBRepository _image;
-        ProfileProgressDBRepository _progress;
-        OptionsDBRepository _options;
-        AnimalDBRepository _animal;
-        MiniGamesDBRepository _minigame;
-        PlayModel _model;        //model for view
-        Options _stats;          //stats for updating difficulty after minigame
-        const int LAST_MAP = 7;  //last map in game
-        const int FIRST_MAP = 1; //first map in game
+        IDataEntityRepository<Map> _map = new MapDBRepository();
+        IDataEntityRepository<Sounds> _music = new SoundDBRepository();
+        NodeDBRepository _node = new NodeDBRepository();
+        ImageDBRepository _image = new ImageDBRepository();
+        ProfileProgressDBRepository _progress = new ProfileProgressDBRepository();
+        OptionsDBRepository _options = new OptionsDBRepository();
+        AnimalDBRepository _animal = new AnimalDBRepository();
+        MiniGamesDBRepository _minigame = new MiniGamesDBRepository();
+        PlayModel _model = new PlayModel();  //model for view
+        Options _stats = new Options();      //stats for updating difficulty after minigame
+        const int LAST_MAP = 7;     //last map in game
+        const int FIRST_MAP = 1;    //first map in game
         const int HIGHEST_DIFF = 4; //highest diff level
         const int LOWEST_DIFF = 1;  //lowest diff level
-        int fp_mapID;       //values with fp_ are for free play mode
-        int fp_nodeID;
-        int fp_animalID;
-        int fp_avatarID;
+        static int fp_mapID = 1;        //values with fp_ are for free play mode
+        static int fp_nodeID = 1;
+        static int fp_animalID = 1;
+        static int fp_avatarID = 1;
 
         public PlayController()
         {            
-            _map = new MapDBRepository();
-            _music = new SoundDBRepository();
-            _node = new NodeDBRepository();
-            _image = new ImageDBRepository();
-            _animal = new AnimalDBRepository();
-            _minigame = new MiniGamesDBRepository();
-            _model = new PlayModel();
-            _progress = new ProfileProgressDBRepository();
-            _options = new OptionsDBRepository();
-            _stats = new Options();
-            fp_mapID = 1;   //set free play mode values
-            fp_nodeID = 1;
-            fp_animalID = 1;
         }
         // GET: Play
         // Set values from database to model, pass into Play/Map view
@@ -58,7 +45,7 @@ namespace ToTheRescueWebApplication.Controllers
         //set model values
         public PlayModel SetModel()
         {
-            if(User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
                 ProfileProgress progress = _progress.Get((int)Session["profileID"]);
                 _model.CurrentMap = progress.CurrentMap;
@@ -69,15 +56,13 @@ namespace ToTheRescueWebApplication.Controllers
                     _model.CurrentMap = progress.CurrentMap;             //set current map for model
                 }
 
-                List<Nodes> nodes = _node.GetList(progress.CurrentMap);
                 Options options = _options.Get((int)Session["profileID"]);
                 int level = 0;
 
                 _model.Animal = progress.AnimalID;
                 _model.CurrentNode = progress.CurrentNode;
-                _model.MapNodes = _node.GetList(progress.CurrentMap);
                 _model.Avatar = options.AvatarID;
-                _model.MapNodes = nodes;
+                _model.MapNodes = _node.GetList(progress.CurrentMap);
 
                 //set difficulty level for Play/Map display in View
                 if (options.SubjectFilter == "Reading")
@@ -104,9 +89,9 @@ namespace ToTheRescueWebApplication.Controllers
                 if (_model.Subject == "")
                     _model.Subject = "All";
             }
-            else
+            else     //set model for free play mode
             {
-                _model.ProfileName = "Free Play";   //set model for free play mode
+                _model.ProfileName = "Free Play";   
                 _model.GradeLevel = "All";
                 _model.Subject = "All";
                 _model.CurrentMap = fp_mapID;
@@ -114,6 +99,7 @@ namespace ToTheRescueWebApplication.Controllers
                 _model.Animal = fp_animalID;
                 _model.Avatar = fp_avatarID;
                 _model.CurrentNode = fp_nodeID;
+                _model.MapNodes = _node.GetList(fp_mapID);
             }
             return _model;
         }
@@ -141,7 +127,7 @@ namespace ToTheRescueWebApplication.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 Animal animal = _animal.Get(AnimalID);  //get animal from database
-                image = _image.Get(animal.ImageID);  //get animal image from database
+                image = _image.Get(animal.ImageID);     //get animal image from database
             }
             else   //free play mode
             {
@@ -250,6 +236,8 @@ namespace ToTheRescueWebApplication.Controllers
                     _minigame.UpdatePerformanceStats((int)Session["profileID"], _stats.ReadingPerformanceStat, newStat);
                 }
             }
+            else     //free play mode
+                fp_nodeID = fp_nodeID + 1;  //go to next node
         }
         //update ProfileProgress to a new map
         public void NewMap()
@@ -276,6 +264,17 @@ namespace ToTheRescueWebApplication.Controllers
                     _progress.UpdateCurrentMap((int)Session["profileID"], (FIRST_MAP - 1), newAnimal); //return to map1
                 }
             }
+            else      //free play mode
+            {
+                 //if user hasn't reached last map, go to next map
+                if (fp_mapID < LAST_MAP)
+                    fp_mapID = fp_mapID + 1;    
+                else 
+                    fp_mapID = 1;   //return to first map
+
+                fp_animalID = fp_animalID + 1;  //go to next animal
+                fp_nodeID = 1;  //reset to first node
+            }
         }
         //get the number of the current node for profile
         public int GetCurrentNode ()
@@ -285,7 +284,7 @@ namespace ToTheRescueWebApplication.Controllers
                 ProfileProgress p = _progress.Get((int)Session["profileID"]);
                 return p.CurrentNode;
             }
-            return 1;
+            return fp_nodeID;   //free play mode
         }
         //show end of game congratulatory screen
         public ActionResult EndofGame()
@@ -299,12 +298,12 @@ namespace ToTheRescueWebApplication.Controllers
         public ActionResult MiniGame()
         {
             MiniGameModel model = new MiniGameModel();
+            Random random = new Random();
+            List<MiniGame> minigames = new List<MiniGame>();
 
             if (User.Identity.IsAuthenticated)
             {
                 Options profileSettings = _options.Get((int)Session["profileID"]);
-                List<MiniGame> minigames = new List<MiniGame>();
-                Random random = new Random();
                 int catID = 0;  //category id
 
                 //get subject filter for profile, if no filter, randomly choose a subject for minigame
@@ -356,6 +355,16 @@ namespace ToTheRescueWebApplication.Controllers
                 model.MiniGameID = minigames[ranGame].ID;
                 model.MiniGame = "../../MiniGames/Shape_ColoringBook/javascript/colorbook.js";
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
+            }
+            else    //free play mode
+            {
+                minigames = _minigame.GetAllMinigames(); //get a list of all minigames from database
+                int ranGame = random.Next(1, minigames.Count()) - 1; //generate an index between 1 and num of games
+
+                model.MiniGameID = minigames[ranGame].ID;
+                model.MiniGame = "../../MiniGames/Shape_ColoringBook/javascript/colorbook.js";
+                model.CategoryID = minigames[ranGame].MiniGameCategoryID;
+                model.Difficulty = 0;   //difficulty doesn't apply to free play mode
             }
             return View(model);
         }
