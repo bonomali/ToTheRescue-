@@ -20,11 +20,9 @@ namespace ToTheRescueWebApplication.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
-        private int userID;
 
         public LoginController()
         {
-
         }
 
         public LoginController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManager roleManager)
@@ -82,7 +80,13 @@ namespace ToTheRescueWebApplication.Controllers
 
                 return RedirectToAction("ChooseProfilePage", "Profile");
             }
-
+            else    //create free play mode session variables
+            {
+                Session["fp_mapID"] = 1;
+                Session["fp_nodeID"] = 1;
+                Session["fp_animalID"] = 1;
+                Session["fp_avatarID"] = 1;
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }

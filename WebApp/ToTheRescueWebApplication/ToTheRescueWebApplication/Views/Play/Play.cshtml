@@ -38,10 +38,13 @@
                 <label class="iconLbls " id="menuLbl">Menu</label>
             </li>
             <li id="options">
-                <a href="~/Options/Options">
-                    <img src="~/Images/optionsIcon.png" class="icon" alt="Options">
-                </a>
-                <label class="iconLbls " id="optionsLbl">Options</label>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a href="~/Options/Options">
+                        <img src="~/Images/optionsIcon.png" class="icon" alt="Options">
+                    </a>
+                    <label class="iconLbls " id="optionsLbl">Options</label>
+                }
             </li>
         </ul>
     </div>

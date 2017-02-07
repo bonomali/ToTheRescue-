@@ -26,10 +26,7 @@ namespace ToTheRescueWebApplication.Controllers
         const int FIRST_MAP = 1;    //first map in game
         const int HIGHEST_DIFF = 4; //highest diff level
         const int LOWEST_DIFF = 1;  //lowest diff level
-        static int fp_mapID = 1;        //values with fp_ are for free play mode
-        static int fp_nodeID = 1;
-        static int fp_animalID = 1;
-        static int fp_avatarID = 1;
+        const int NUM_ANIMALS = 25; //number of animals to save
 
         public PlayController()
         {            
@@ -94,12 +91,11 @@ namespace ToTheRescueWebApplication.Controllers
                 _model.ProfileName = "Free Play";   
                 _model.GradeLevel = "All";
                 _model.Subject = "All";
-                _model.CurrentMap = fp_mapID;
-                _model.CurrentNode = fp_nodeID;
-                _model.Animal = fp_animalID;
-                _model.Avatar = fp_avatarID;
-                _model.CurrentNode = fp_nodeID;
-                _model.MapNodes = _node.GetList(fp_mapID);
+                _model.CurrentMap = (int)Session["fp_mapID"];
+                _model.CurrentNode = (int)Session["fp_nodeID"];
+                _model.Animal = (int)Session["fp_animalID"];
+                _model.Avatar = (int)Session["fp_avatarID"];
+                _model.MapNodes = _node.GetList((int)Session["fp_mapID"]);
             }
             return _model;
         }
@@ -114,7 +110,7 @@ namespace ToTheRescueWebApplication.Controllers
             }
             else     //free play mode
             {
-                Map currentMap = _map.Get(fp_mapID);     //get map from database
+                Map currentMap = _map.Get((int)Session["fp_mapID"]);     //get map from database
                 image = _image.Get(currentMap.ImageID);  //get map image from database
             }
 
@@ -131,7 +127,7 @@ namespace ToTheRescueWebApplication.Controllers
             }
             else   //free play mode
             {
-                Animal animal = _animal.Get(fp_animalID);  //get animal from database
+                Animal animal = _animal.Get((int)Session["fp_animalID"]);  //get animal from database
                 image = _image.Get(animal.ImageID);        //get animal image from database
             }
 
@@ -147,7 +143,7 @@ namespace ToTheRescueWebApplication.Controllers
                 image = _image.Get(profile.AvatarID);  //get profile image from database
             }
             else
-                image = _image.Get(fp_avatarID);   //free play mode avatar
+                image = _image.Get((int)Session["fp_avatarID"]);   //free play mode avatar
 
             return File(image.Image, image.ImageName);
         }
@@ -162,7 +158,7 @@ namespace ToTheRescueWebApplication.Controllers
             }
             else    //free play mode
             {
-                Map currentMap = _map.Get(fp_mapID);     //get map from database
+                Map currentMap = _map.Get((int)Session["fp_mapID"]);     //get map from database
                 audio = _music.Get(currentMap.SoundID);  //get sound from database
             }
             return base.File(audio.Sound, audio.SoundName);
@@ -237,7 +233,7 @@ namespace ToTheRescueWebApplication.Controllers
                 }
             }
             else     //free play mode
-                fp_nodeID = fp_nodeID + 1;  //go to next node
+                Session["fp_nodeID"] = (int)Session["fp_nodeID"] + 1;  //go to next node
         }
         //update ProfileProgress to a new map
         public void NewMap()
@@ -267,13 +263,17 @@ namespace ToTheRescueWebApplication.Controllers
             else      //free play mode
             {
                  //if user hasn't reached last map, go to next map
-                if (fp_mapID < LAST_MAP)
-                    fp_mapID = fp_mapID + 1;    
+                if ((int)Session["fp_mapID"] < LAST_MAP)
+                    Session["fp_mapID"] = (int)Session["fp_mapID"] + 1;    
                 else 
-                    fp_mapID = 1;   //return to first map
+                    Session["fp_mapID"] = 1;   //return to first map
 
-                fp_animalID = fp_animalID + 1;  //go to next animal
-                fp_nodeID = 1;  //reset to first node
+                if ((int)Session["fp_animalID"] == NUM_ANIMALS)
+                    Session["fp_animalID"] = 1;
+                else
+                    Session["fp_animalID"] = (int)Session["fp_animalID"] + 1;  //go to next animal
+
+                Session["fp_nodeID"] = 1;  //reset to first node
             }
         }
         //get the number of the current node for profile
@@ -284,7 +284,7 @@ namespace ToTheRescueWebApplication.Controllers
                 ProfileProgress p = _progress.Get((int)Session["profileID"]);
                 return p.CurrentNode;
             }
-            return fp_nodeID;   //free play mode
+            return (int)Session["fp_nodeID"];   //free play mode
         }
         //show end of game congratulatory screen
         public ActionResult EndofGame()
@@ -354,7 +354,7 @@ namespace ToTheRescueWebApplication.Controllers
                 }
                 model.MiniGameID = minigames[ranGame].ID;
                 model.MiniGame = "../../MiniGames/Shape_ColoringBook/javascript/colorbook.js";
-                model.MiniGame = "../../MiniGames/Alphabet_Matching/Source/Alphabet_Matching.js";
+                //model.MiniGame = "../../MiniGames/Alphabet_Matching/Source/Alphabet_Matching.js";
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
             }
             else    //free play mode
