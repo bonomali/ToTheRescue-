@@ -30,15 +30,18 @@ body {
 }
 h2 {
     font-size: 50px;
-    text-shadow: 4px 4px darkgreen;
+    text-shadow: 4px 4px black;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: orangered;
+    color: #FFC816;
     text-align: center;
 }
 div {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: floralwhite;
     text-shadow: 1px 1px #000;
+}
+div#loginForm {
+    margin-top: -3.5%;
 }
 input {
     text-align: center;

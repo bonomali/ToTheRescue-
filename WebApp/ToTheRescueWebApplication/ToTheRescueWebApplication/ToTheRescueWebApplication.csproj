@@ -222,6 +222,7 @@
     <Content Include="Images\optionsIcon.png" />
     <Content Include="Images\playIcon.png" />
     <Content Include="Images\sanctuaryIcon.png" />
+    <Content Include="Images\totherescue_title.png" />
     <Content Include="Images\winter-scenery-hi.png" />
     <Content Include="LogoutSnippet.txt" />
     <Content Include="MiniGames\AdditionMiniGame\audio\intro.m4a" />
