@@ -61,8 +61,8 @@ CREATE TABLE Profiles (
 	, UserID INT REFERENCES dbo.AspNetUsers (UserID) NOT NULL
 	, AvatarID INT REFERENCES Images (ImageID) NOT NULL
 	, ProfileName NVARCHAR(30) NOT NULL
-	, ToggleSound BIT NOT NULL DEFAULT 1 --0 = sound off, 1 = sound on, defualted to sound on
-	, ToggleMusic BIT NOT NULL DEFAULT 1
+	, ToggleSound BIT NOT NULL DEFAULT 0 --0 = sound on, 1 = sound off, defualted to sound on
+	, ToggleMusic BIT NOT NULL DEFAULT 0
 	, MathDifficultyLevel INT NOT NULL DEFAULT 1 --default to the lowest difficulty level
 	, MathPerformanceStat FLOAT NOT NULL DEFAULT 100 --default to 100
 	, ReadingDifficultyLevel INT NOT NULL DEFAULT 1 --default to the lowest difficulty level

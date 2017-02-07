@@ -54,6 +54,8 @@ namespace ToTheRescueWebApplication.Controllers
                 }
 
                 Options options = _options.Get((int)Session["profileID"]);
+                Session["toggleSound"] = options.toggleSound; //set Session variables for toggle music and sound
+                Session["toggleMusic"] = options.toggleMusic;
                 int level = 0;
 
                 _model.Animal = progress.AnimalID;
@@ -356,6 +358,8 @@ namespace ToTheRescueWebApplication.Controllers
                 model.MiniGame = "../../MiniGames/Shape_ColoringBook/javascript/colorbook.js";
                 //model.MiniGame = "../../MiniGames/Alphabet_Matching/Source/Alphabet_Matching.js";
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
+                model.ToggleMusic = (bool)Session["toggleMusic"];
+                model.ToggleSound = (bool)Session["toggleSound"];
             }
             else    //free play mode
             {
@@ -366,6 +370,8 @@ namespace ToTheRescueWebApplication.Controllers
                 model.MiniGame = "../../MiniGames/Shape_ColoringBook/javascript/colorbook.js";
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
                 model.Difficulty = 0;   //difficulty doesn't apply to free play mode
+                model.ToggleMusic = false;  //never toggle music and sound in Free Play Mode
+                model.ToggleSound = false;
             }
             return View(model);
         }

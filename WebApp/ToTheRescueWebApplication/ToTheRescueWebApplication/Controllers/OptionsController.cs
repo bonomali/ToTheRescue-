@@ -52,7 +52,7 @@ namespace ToTheRescueWebApplication.Controllers
             {
                 return View(model);
             }
-            m_options = new OptionsModel(m_optionsRepository.Get((int)Session["profileID"]));
+            m_options = new OptionsModel(m_optionsRepository.Get((int)Session["profileID"])); 
             return RedirectToAction("InnerOptions");
         }
 
