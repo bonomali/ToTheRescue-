@@ -10,6 +10,7 @@ var mediaPath = "../../MiniGames/Alphabet_Matching/Media";
 var sightWords = [];
 var sightWord = -1;
 var counter = 0;
+
 //tiles
 var yellowTiles = [];
 var blueTiles = [];
@@ -21,6 +22,7 @@ var catPics = [];
 //contains all game elements
 var container;
 
+//various game variables
 var difficulty;
 var numberWrong;
 var isSelected; //aids in deciding whether or not an event handler should fire
@@ -28,7 +30,6 @@ var imgSel; //aids in figuring out what button the user pressed..
 
 //listener for all dom content
 document.addEventListener('DOMContentLoaded', function () {
-    //EVENT HANDLERS wish I could have done this in a for loop :/
     //event handlers
     var letter1 = document.getElementById("letter1");
     letter1.onclick = function () {
@@ -109,6 +110,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 var start = function () {
+    //Voice intro
+    responsiveVoice.speak("Hello! Match the blue letter with same brown letter to make a word!");
+
     //container needs to be created here because im too lazy to modify copy and pasted code
     container = document.createElement('div');
     container.setAttribute('id', 'container');
@@ -242,7 +246,8 @@ var setCatLetter = function () {
     if (sightWords[sightWord].length == counter) {
         var stat = 5 - numberWrong;
         if (stat < -5) stat = -5;
-        //responsiveVoice.speak("Great Job!");
+        responsiveVoice.speak("The word is " + sightWords[sightWord]);
+        responsiveVoice.speak("Great Job!");
         document.getElementById("score").value = stat;
         setTimeout(EndofGame, 2500);
     }//if the user won
@@ -250,6 +255,7 @@ var setCatLetter = function () {
         document.getElementById("cat").src = catPics[0];
         var blueLetter = document.getElementById('matchLetter');
         blueLetter.src = blueTiles[(sightWords[sightWord].charAt(counter).charCodeAt() - 97)];
+        responsiveVoice.speak("The letter is, " + sightWords[sightWord].charAt(counter));
         isSelected = 0;
     }
 }
@@ -257,7 +263,6 @@ var setCatLetter = function () {
 var imgClicked = function () {
 
     document.getElementById("cat").src = catPics[4]; //transition cat
-    var matchLetter = document.getElementById("matchLetter");
     isSelected = 1;
     setTimeout(checkAnswer, 2500);
 }
@@ -272,12 +277,14 @@ var checkAnswer = function () {
         counter++ //moves the location of the sightword letter
         document.getElementById("cat").src = catPics[2]; //happy cat
         document.getElementById("letter" + imgSel).src = brownTiles[Math.floor(Math.random() * 25)];
+        responsiveVoice.speak("Nice!");
     }//if the user selected the correct letter tile
     else {
         numberWrong++;
         if ((Math.floor(Math.random() * 3)) == 0)
             document.getElementById("cat").src = catPics[3]; //surprised cat
-        else document.getElementById("cat").src = catPics[1]; //dissapointed cat      
+        else document.getElementById("cat").src = catPics[1]; //dissapointed cat     
+        responsiveVoice.speak("Uh oh");
     }
     setTimeout(setCatLetter, 2000);
 }
