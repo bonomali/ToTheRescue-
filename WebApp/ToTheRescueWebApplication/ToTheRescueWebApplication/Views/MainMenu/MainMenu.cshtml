@@ -8,6 +8,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" type="text/css" href="~/CSS/MainMenu.css" />
+    @{ string toggleSound = HttpContext.Current.Session["toggleSound"].ToString(); }
+    @{ string toggleMusic = HttpContext.Current.Session["toggleMusic"].ToString(); }
     <script>
         var elephant = new Audio();
         elephant.src = "../Audio/Elephant.mp3";
@@ -15,16 +17,27 @@
         var lion = new Audio();
         lion.src = "../Audio/Lion_Roar.mp3";
         lion.volume = 0.15;
+        @if (toggleSound == "True")
+        {
+            <text>
+                lion.volume = 0;
+                elephant.volume = 0;
+            </text>
+        }
     </script>
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    <audio controls loop id="menuMusic" source src="../Audio/bensound-sunny.mp3" autoplay hidden="hidden">
-    </audio>
-    <script>
-    var vid = document.getElementById("menuMusic");
-    vid.volume = 0.05;
-    </script>
+    @if (toggleMusic == "False")
+    {
+        <audio controls loop id="menuMusic" source src="../Audio/bensound-sunny.mp3" autoplay hidden="hidden">
+        </audio>
+
+        <script>
+            var vid = document.getElementById("menuMusic");
+            vid.volume = 0.05;
+        </script>
+    }
     <h2>Main Menu</h2>
     <nav id="mainMenuNav">
         <ul id="navLinks">

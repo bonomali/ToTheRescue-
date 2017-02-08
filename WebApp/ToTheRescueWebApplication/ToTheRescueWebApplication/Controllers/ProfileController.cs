@@ -58,6 +58,8 @@ namespace ToTheRescueWebApplication.Controllers
             int selectedIndex = (int)id;
 
             List<Profile> allProfs = _profileRepo.GetList();
+            Options options = new Options();
+            OptionsDBRepository repo = new OptionsDBRepository();
 
             //find the profile the user clicked
             for (int i = 0; i < allProfs.Count(); i++)
@@ -66,6 +68,9 @@ namespace ToTheRescueWebApplication.Controllers
                 if (i == selectedIndex)
                 {
                     Session["profileID"] = allProfs[i].ID;
+                    options = repo.Get((int)Session["profileID"]);
+                    Session["toggleSound"] = options.toggleSound; //set Session variables for toggle music and sound
+                    Session["toggleMusic"] = options.toggleMusic;
                 }
             }
         }

@@ -86,6 +86,8 @@ namespace ToTheRescueWebApplication.Controllers
                 Session["fp_nodeID"] = 1;
                 Session["fp_animalID"] = 1;
                 Session["fp_avatarID"] = 1;
+                Session["toggleSound"] = false;
+                Session["toggleMusic"] = false;
             }
             ViewBag.ReturnUrl = returnUrl;
             return View();

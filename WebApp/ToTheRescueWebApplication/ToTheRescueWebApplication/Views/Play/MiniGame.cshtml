@@ -46,16 +46,7 @@
     <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
     @*use jquery*@
     <script src="~/scripts/jquery-1.10.2.min.js"></script>
-    <script id="minigameScript" src=@Model.MiniGame difficulty=@Model.Difficulty></script>
-    @*<script id="minigameScript" src="~/MiniGames/Number_Comparison/javascript/Number_Comparison.js" difficulty=4></script>*@
-    @*<script id="minigameScript" src="~/MiniGames/AdditionMiniGame/javascript/AdditionMiniGame.js" difficulty=4></script>*@
-    @*<script id="minigameScript" src="~/MiniGames/ColorSortingGame/javascript/ColorSortingGame.js" difficulty=4></script>*@
-    @*<script id="minigameScript" src="~/MiniGames/IdentifyShapeGame/javascript/IdentifyShapeGame.js" difficulty=4></script>*@
-    @*<script id="minigameScript" src="~/MiniGames/TypingGame/javascript/TypingGame.js" difficulty=4></script>*@
-    @*<script id="minigameScript" src="~/MiniGames/BeginningLetterSounds_Racing/javascript/racing.js" difficulty=3></script>*@
-    @*<script id="minigameScript" src="~/MiniGames/Dino_SightWords/javascript/dino_sightwords.js" difficulty=4></script>*@
-    @*<script id="minigameScript" src="~/MiniGames/MosquitoSwat_LetterSounds/javascript/mosquitoswat.js" difficulty=2></script>*@
-    @*<script id="minigameScript" src="~/MiniGames/Supah_Counting/javascript/SupahCounting.js" difficulty=2></script>*@
+    <script id="minigameScript" src=@Model.MiniGame difficulty=@Model.Difficulty toggleSound=@Model.ToggleSound toggleMusic=@Model.ToggleMusic></script>
 
     <input type="text" id="score" style="display:none" />   @*score from minigame saved in value for tag*@
 

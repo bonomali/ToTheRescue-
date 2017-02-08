@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ToTheRescueWebApplication.Repositories;
+using ToTheRescueWebApplication.Code;
 
 namespace ToTheRescueWebApplication.Controllers
 {
@@ -10,7 +12,7 @@ namespace ToTheRescueWebApplication.Controllers
     {
         // GET: MainMenu
         public ActionResult MainMenu()
-        {
+        { 
             return View();
         }
     }

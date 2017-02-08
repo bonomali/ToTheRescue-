@@ -47,6 +47,8 @@ namespace ToTheRescueWebApplication.Controllers
                 Options o = new Code.Options(model);
                 o.profileID = (int)Session["profileID"];
                 m_optionsRepository.Save(o);
+                Session["toggleSound"] = o.toggleSound; //set Session variables for toggle music and sound
+                Session["toggleMusic"] = o.toggleMusic;
             }
             else
             {
