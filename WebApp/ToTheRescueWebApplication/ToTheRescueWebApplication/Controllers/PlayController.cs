@@ -353,7 +353,8 @@ namespace ToTheRescueWebApplication.Controllers
                     }
                 }
                 model.MiniGameID = minigames[ranGame].ID;
-                model.MiniGame = "../../MiniGames/Shape_ColoringBook/javascript/colorbook.js";
+                //model.MiniGame = "../../MiniGames/Shape_ColoringBook/javascript/colorbook.js";
+                model.MiniGame = "../../MiniGames/Alphabet_BubblePop/javascript/bubble.js";
                 //model.MiniGame = "../../MiniGames/Alphabet_Matching/Source/Alphabet_Matching.js";
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
             }
@@ -363,12 +364,19 @@ namespace ToTheRescueWebApplication.Controllers
                 int ranGame = random.Next(1, minigames.Count()) - 1; //generate an index between 1 and num of games
 
                 model.MiniGameID = minigames[ranGame].ID;
-                model.MiniGame = "../../MiniGames/Shape_ColoringBook/javascript/colorbook.js";
+                model.MiniGame = "../../MiniGames/MosquitoSwat_LetterSounds/javascript/mosquitoswat.js";
+                model.MiniGame = "../../MiniGames/Alphabet_BubblePop/javascript/bubble.js";
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
                 model.Difficulty = 0;   //difficulty doesn't apply to free play mode
             }
-            model.ToggleMusic = (bool)Session["toggleMusic"];
-            model.ToggleSound = (bool)Session["toggleSound"];
+
+            bool toggle = (bool)Session["toggleSound"];     //set model's toggle value for sound
+            if (toggle == true) { model.ToggleSound = 1; }
+            else { model.ToggleSound = 0; }
+
+            toggle = (bool)Session["toggleMusic"]; //set model's toggle value for music
+            if (toggle == true) { model.ToggleMusic = 1; }
+            else { model.ToggleMusic = 0; }
 
             return View(model);
         }

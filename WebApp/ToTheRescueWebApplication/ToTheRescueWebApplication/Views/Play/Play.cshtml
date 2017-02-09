@@ -4,12 +4,17 @@
 }
 @model ToTheRescueWebApplication.Models.Play.PlayModel
 
-<audio controls loop id="playMusic" source src="@Url.Action("LoadAudio", new { @mapID = Model.CurrentMap })" autoplay hidden="hidden">
-</audio>
-<script>
-    var vid = document.getElementById("playMusic");
-    vid.volume = 0.05;
-</script>
+@{ string toggleMusic = HttpContext.Current.Session["toggleMusic"].ToString(); }
+
+@if (toggleMusic == "False")
+{
+    <audio controls loop id="playMusic" source src="@Url.Action("LoadAudio", new { @mapID = Model.CurrentMap })" autoplay hidden="hidden">
+    </audio>
+    <script>
+        var vid = document.getElementById("playMusic");
+        vid.volume = 0.05;
+    </script>
+}
 <div class="profileInfo">
     <label id="name">Name: @Model.ProfileName</label>
     <label id="level">Grade Level: @Model.GradeLevel</label>

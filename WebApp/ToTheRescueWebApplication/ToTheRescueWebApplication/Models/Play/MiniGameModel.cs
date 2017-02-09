@@ -11,7 +11,7 @@ namespace ToTheRescueWebApplication.Models.Play
         public string MiniGame { get; set; }
         public int CategoryID { get; set; }
         public int Difficulty { get; set; }
-        public bool ToggleMusic { get; set; }
-        public bool ToggleSound { get; set; }
+        public int ToggleMusic { get; set; }
+        public int ToggleSound { get; set; }
     }
 }

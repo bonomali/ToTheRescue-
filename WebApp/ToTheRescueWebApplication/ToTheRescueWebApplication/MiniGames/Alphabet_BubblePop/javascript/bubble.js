@@ -3,6 +3,7 @@
     document.getElementById('BlocksGame').style.marginLeft = '-5%';
 
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
+    var toggle_sound = document.getElementById('minigameScript').getAttribute('toggleSound');
 
     var imagePath = '../../MiniGames/Alphabet_Bubblepop/images/';
     var audioPath = '../../MiniGames/Alphabet_BubblePop/sounds/';
@@ -246,11 +247,14 @@
 
         floatBubbles();
 
-        //play bubbles sound effect sound every 10000 ms
+        //play bubbles sound effect sound every 10000 ms if sound not toggled off
         setInterval(function () {
-            bubbles_sound.volume = .2;
-            bubbles_sound.play();
-        }, 10000);
+            if (toggle_sound == 0) 
+            {
+                bubbles_sound.volume = .2;
+                bubbles_sound.play();
+            }
+         }, 10000);
 
         //end the game after time interval
         setTimeout(function GameOver() {
