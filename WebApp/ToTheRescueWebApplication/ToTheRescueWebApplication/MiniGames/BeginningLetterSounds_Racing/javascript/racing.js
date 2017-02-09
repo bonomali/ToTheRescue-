@@ -3,6 +3,7 @@
     document.getElementById('BlocksGame').style.marginLeft = '-5%';
 
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
+    var toggle_sound = document.getElementById('minigameScript').getAttribute('toggleSound');
 
     var imagePath = "../../MiniGames/BeginningLetterSounds_Racing/images/";
     var soundPath = "../../MiniGames/BeginningLetterSounds_Racing/sounds/";
@@ -211,7 +212,8 @@
             for (var i = 0; i < flags.length && correct == false; i++) {
                 //if the target flag is clicked: increment score, change color of light, destroy old flags, generate new flags
                 if (flags[i].isPointInside(point) && flags[i].name == targetFlag.name) {
-                    carRevvingAudio.play();
+                    if(toggle_sound == "False")
+                        carRevvingAudio.play();
                     score = score + 5;
                     correct = true;
                     if (light.getSlice().name === "red")
@@ -252,8 +254,10 @@
 
         //race car along screen
         moveCar = function () {
-            carRacingAudio.src = soundPath + "racing_sound.mp3"
-            carRacingAudio.play();
+            if (toggle_sound == "False") {
+                carRacingAudio.src = soundPath + "racing_sound.mp3"
+                carRacingAudio.play();
+            }
 
             game.addMotor("x", {    //move car along x-axis until off screen
                 object: car,

@@ -2,6 +2,8 @@
     //set correct margin for div
     document.getElementById('BlocksGame').style.marginLeft = '-5%';
 
+    var toggle_sound = document.getElementById('minigameScript').getAttribute('toggleSound');
+
     var imagePath = "../../MiniGames/Dino_SightWords/images/";
     var soundPath = "../../MiniGames/BeginningLetterSounds_Racing/sounds/";
     var game, images;
@@ -186,6 +188,8 @@
                     score = score + 5;  //increment score
                     correct = true;
 
+                    if (toggle_sound == "True")
+                        eggCracking_sound.volume = 0;
                     eggCracking_sound.play();
                     game.stage.addView(hatching);   //add hatched egg to view
                     hatching.x = wordEggs[i].x;
@@ -211,7 +215,10 @@
         loadEggImages();         //load egg images
         playAudioInstructions(); //play audio instructions
 
-        setInterval(function () { pteroSound.play(); }, 15000);
+        setInterval(function () {
+            if(toggle_sound == "False")
+                pteroSound.play();
+        }, 15000);
 
         audioInstructions.addEventListener('ended', function () {
             if (targetIndex == 0)
@@ -225,9 +232,13 @@
         });
         eggCracking_sound.addEventListener('ended', function () {
             hatching.setSlice("hatched");   //show hatched egg
+            if (toggle_sound == "True")
+                babyDino_sound.volume = 0;
             babyDino_sound.play();   //play baby dino sound after egg cracking sound
         });
         babyDino_sound.addEventListener('ended', function () {
+            if (toggle_sound == "True")
+                momDino_sound.volume = 0;
             momDino_sound.play();   //play mom dino sound after baby
         });
         momDino_sound.addEventListener('ended', function () {

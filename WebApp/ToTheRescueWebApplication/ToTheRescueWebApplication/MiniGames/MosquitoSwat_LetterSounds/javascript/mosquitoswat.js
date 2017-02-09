@@ -2,7 +2,9 @@
     //set correct margin for div
     document.getElementById('BlocksGame').style.marginLeft = '-5%';
     
+    var toggle_sound = document.getElementById('minigameScript').getAttribute('toggleSound');
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
+
     var imagePath = '../../MiniGames/MosquitoSwat_LetterSounds/images/';
     var audioPath = '../../MiniGames/MosquitoSwat_LetterSounds/sounds/';
     var audioClips;
@@ -82,8 +84,10 @@
         m6.play();   //play target letter after generic instructions
     });
     audioInstructions.play();
-    buzz.play();
-    buzz.play();
+    if (toggle_sound == "False") {
+        buzz.play();
+        buzz.play();
+    }
 
     //background image and mosquito images
     images = {
@@ -265,7 +269,10 @@
         addMosquitos(); //begin adding mosquitos to screen
 
         //play buzzing sound every 8000 ms
-        setInterval(function () { buzz.play(); }, 8000);
+        setInterval(function () {
+            if(toggle_sound == "False")
+                buzz.play();
+        }, 8000);
 
         //end the game after time interval
         setTimeout(function GameOver() {
