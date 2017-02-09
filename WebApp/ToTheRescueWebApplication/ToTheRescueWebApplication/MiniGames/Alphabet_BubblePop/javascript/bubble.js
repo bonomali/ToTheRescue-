@@ -249,7 +249,7 @@
 
         //play bubbles sound effect sound every 10000 ms if sound not toggled off
         setInterval(function () {
-            if (toggle_sound == 0) 
+            if (toggle_sound == "False") 
             {
                 bubbles_sound.volume = .2;
                 bubbles_sound.play();

@@ -369,14 +369,8 @@ namespace ToTheRescueWebApplication.Controllers
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
                 model.Difficulty = 0;   //difficulty doesn't apply to free play mode
             }
-
-            bool toggle = (bool)Session["toggleSound"];     //set model's toggle value for sound
-            if (toggle == true) { model.ToggleSound = 1; }
-            else { model.ToggleSound = 0; }
-
-            toggle = (bool)Session["toggleMusic"]; //set model's toggle value for music
-            if (toggle == true) { model.ToggleMusic = 1; }
-            else { model.ToggleMusic = 0; }
+            model.ToggleSound = Convert.ToString((bool)Session["toggleSound"]); //set model's toggle value for sound
+            model.ToggleMusic = Convert.ToString((bool)Session["toggleMusic"]); //set model's toggle value for music
 
             return View(model);
         }
