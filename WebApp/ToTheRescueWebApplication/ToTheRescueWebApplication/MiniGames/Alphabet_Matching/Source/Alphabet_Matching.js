@@ -175,6 +175,7 @@ var createElements = function () {
     for (i; i <= 6; i++) {
         var wordLetter = document.createElement('img');
         wordLetter.setAttribute('id', 'word' + i);
+        wordLetter.setAttribute('class', 'wordLetter')
         container.appendChild(wordLetter);
     }
 
@@ -276,7 +277,9 @@ var checkAnswer = function () {
         matchedTile.style.opacity = 1;
         counter++ //moves the location of the sightword letter
         document.getElementById("cat").src = catPics[2]; //happy cat
-        document.getElementById("letter" + imgSel).src = brownTiles[Math.floor(Math.random() * 25)];
+        var rand = Math.floor(Math.random() * 25);
+        document.getElementById("letter" + imgSel).src = brownTiles[rand];
+        document.getElementById("letter" + imgSel).setAttribute("tag", rand);
         responsiveVoice.speak("Nice!");
     }//if the user selected the correct letter tile
     else {

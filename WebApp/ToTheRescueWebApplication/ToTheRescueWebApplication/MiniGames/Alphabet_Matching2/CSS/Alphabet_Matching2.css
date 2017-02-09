@@ -1,0 +1,17 @@
+﻿#container {
+    width: 1000px;
+    height: 750px;
+    position: relative;
+    background: #808080;
+}
+
+#cat {
+    position: absolute;
+    top: 420px;
+    left: 2px;
+}
+
+.matchLetter {
+    position: absolute;
+}
+
