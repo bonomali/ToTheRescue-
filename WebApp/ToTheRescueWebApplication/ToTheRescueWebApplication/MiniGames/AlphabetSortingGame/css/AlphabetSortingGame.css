@@ -1,0 +1,107 @@
+html{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+body{
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	background-image: url(../img/blackBoard.jpg);
+	background-size: cover;
+}
+
+#header{
+	margin: 0;
+	color: white;
+	font-family: Chalkboard, ‘Comic Sans’, sans-serif;
+}
+
+#dropAreaContainer{
+	width: 100%;
+	height: 60%;
+	position: relative;
+    visibility: hidden;
+}
+
+.dropRows{
+	width: 100%;
+	height: 25%;
+}
+
+.rowDropAreas{
+	position:relative;
+	width: 5%;
+	height: 70%;
+	margin-top: 1%;
+	margin-left: 1.5%;
+	float: left;
+	background-color: rgba(0, 0, 0, 0.25);
+	border-style: dashed;
+	border-width: 2px;
+	border-color: white;
+	border-radius: 4px;
+	text-align: center;
+	color: rgba(255, 255, 255, 0.2);
+	font-family: Chalkboard, ‘Comic Sans’, sans-serif;
+}
+
+#aDrop{
+	margin-left: 32%;
+}
+
+#gDrop{
+	margin-left: 25.5%;
+}
+
+#oDrop{
+	margin-left: 25.5%;
+}
+
+#wDrop{
+	margin-left: 38.5%;
+}
+
+#dragAreaContainer{
+	position: relative;
+	width: 100%;
+	height: 35%;
+    visibility: hidden;
+}
+
+.dragRows{
+	width: 100%;
+	height: 50%;
+}
+
+.dragRow1{
+	position:relative;
+	width: 5.5%;
+	height: 65%;
+	margin-top: 1.5%;
+	margin-left: 2%;
+	float: left;
+	border-radius: 4px;
+	text-align:center;
+	color: white;
+	font-family: Chalkboard, ‘Comic Sans’, sans-serif;
+}
+
+.dragRow2{
+	position:relative;
+	width: 5.5%;
+	height: 65%;
+	margin-top: 1.5%;
+	margin-left: 2%;
+	float: left;
+	border-radius: 4px;
+	text-align:center;
+	color: white;
+	font-family: Chalkboard, ‘Comic Sans’, sans-serif;
+}
+
+ #BlocksGame{
+    height: 100%;
+    width: 90%;
+}
