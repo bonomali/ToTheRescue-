@@ -30,6 +30,8 @@ var yellowTriDropAreaEmpty = true;
 
 var mostRecentDragID = null;
 
+var endGameFuncCalls = 0;
+
 //*********************** Generic functions used across both difficulty levels *************************************//
 function ResetDropAreaZIndexs() {
     document.getElementById("rhombusDropArea").style.zIndex = 2;
@@ -1157,6 +1159,8 @@ function CreateHtmlElements(difficulty) {
 }
 
 function EndGame(finished) {
+    endGameFuncCalls++;
+
     var returnVal = 0;
 
     var numCorrect = 0;
@@ -1198,7 +1202,9 @@ function EndGame(finished) {
 
     document.getElementById("score").value = returnVal;
     EndofGame(); //function displays good job message and returns to map
-    responsiveVoice.speak("Great job!");
+
+    if (endGameFuncCalls === 1)
+        responsiveVoice.speak("Great job!");
 }
 
 function Main() {
@@ -1217,6 +1223,11 @@ function Main() {
     responsiveVoice.OnVoiceReady = function () {
         responsiveVoice.speak("Solve the puzzle by clicking on a shape, rotating the shape with the rotate button, and then dragging the shape onto the puzzle.");
     };
+
+    //if the user leaves the page
+    $(window).on("beforeunload", function () {
+        responsiveVoice.cancel(); //quit doing text to speech
+    });
 
     //if the user didn't finish the game in 2 minuets
     setTimeout(function () {
