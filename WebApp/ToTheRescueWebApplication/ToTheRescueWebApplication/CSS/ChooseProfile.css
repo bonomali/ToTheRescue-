@@ -1,9 +1,11 @@
-﻿html{
+﻿html {
     border: 15px solid forestgreen;
+    overflow-x: hidden;
 }
 
 body {
     background: #43c161;
+    margin: auto;
 }
 
 #ChooseProfileheader {
@@ -18,11 +20,8 @@ body {
 }
 
 #ProfilesTable {
-    width: 95%;
-    /*makes it look like everything is centered*/
-    margin-left: 9%;
-    margin-right: auto;
-    table-layout: fixed;
+    width: 80%;
+    margin: auto;
 }
 
 td {
@@ -30,8 +29,8 @@ td {
 }
 
 .ProfiledDiv {
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 100%;
     display: table-cell;
     color: white;
 }
@@ -46,13 +45,13 @@ td {
 
     .ProfiledDiv #Avatar {
         width: auto;
-        height: auto;
+        height: 75%;
     }
 
 .Buttons {
     border-radius: 20px;
     background-color: white;
-    font-size: 20px;
+    font-size: 15px;
     padding: 10px 10px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     border-color: black;
@@ -80,23 +79,28 @@ td {
     float: left;
     position: relative;
     left: 100px;
+    display: none;
+}
+
+#buttonContainer {
+    width: 100%;
 }
 
 #DeleteProfileButton {
-    position: relative;
-    left: 13%;
+    position: absolute;
+    left: 11%;
     visibility: hidden;
 }
 
 #CreateNewPorifleButton {
-    position: relative;
-    left: 35%;
+    position: absolute;
+    left: 45%;
     visibility: visible;
 }
 
 #PlayButton {
-    position: relative;
-    left: 55%;
+    position: absolute;
+    left: 83%;
     visibility: hidden;
 }
 
@@ -104,7 +108,6 @@ td {
     visibility: hidden;
     position: relative;
     left: 6%;
-    font-size: 20px;
     padding: 5px 5px;
     margin-top: 5px;
 }
@@ -143,8 +146,7 @@ td {
     left: 6%;
 }
 
-/*for phones*/
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1000px) {
     body {
         width: 100%;
     }
@@ -154,8 +156,8 @@ td {
     }
 
     .ProfiledDiv #Avatar {
-        width: 75%;
-        height: 75%;
+        width: 70%;
+        height: 50%;
     }
 
     .ProfiledDiv #ProfileNames {
@@ -163,7 +165,7 @@ td {
     }
 
     .Buttons {
-        font-size: 65%;
+        font-size: 10px;
         padding: 10px 10px;
     }
 
@@ -173,20 +175,9 @@ td {
         font-size: 125%;
     }
 
-    #CancelButton {
-        left: 0%;
-        font-size: 80%;
-    }
-
-    #DeleteProfileSubmit {
-        left: 0%;
-        padding: 10px 10px;
-    }
-
     #emailTextBox {
         padding: 0px;
         margin: 0px;
-        left: 0%;
         height: 20px;
         width: 200px;
         font-size: 15px;
@@ -194,30 +185,50 @@ td {
 
     #emailText {
         font-size: 80%;
-        left: 0%;
         padding-top: 5%;
     }
 }
 
-/*have to special stuff for the buttons to scale down when the screen gets really small*/
 @media only screen and (max-width: 620px) {
-    #ProfilesTable {
-        margin-left: 3%;
+
+    #emailTextBox {
+        padding: 0px;
+        margin: 0px;
+        height: 15px;
+        width: 150px;
+        font-size: 15px;
     }
 
-    #DeleteProfileButton {
-        left: 0%;
+    #ChooseProfileheader {
+        font-size: 20px;
+        text-shadow: 2px 2px black;
     }
 
-    #CreateNewPorifleButton {
-        left: 10%;
-    }
-
-    #PlayButton {
-        left: 15%;
+    .ProfiledDiv #Avatar {
+        width: 60%;
+        height: 40%;
     }
 
     .ProfiledDiv #ProfileNames {
-        font-size: 78%;
+        font-size: 10px;
+    }
+
+
+    .Buttons {
+        font-size: 7px;
+        padding: 5px 5px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    #emailTextBox {
+        height: 12px;
+        width: 100px;
+        font-size: 11px;
+    }
+
+    #emailText {
+        font-size: 60%;
+        padding-top: 5%;
     }
 }

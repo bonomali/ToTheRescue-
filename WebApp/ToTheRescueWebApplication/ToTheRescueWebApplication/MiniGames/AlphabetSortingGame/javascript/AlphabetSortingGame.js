@@ -46,6 +46,12 @@ function Drop(ev) {
 
     //if the correct letter is being dropped into a correct drop area
     if (letterBeingDragged[0] === dropAreaID[0]) {
+
+        var audio = new Audio();
+        audio.src = "../../MiniGames/AlphabetSortingGame/audio/elevatorDing.mp3";
+
+        audio.play();
+
         //change the styling of the dragged div so it will drop nicely
         draggedDiv.style.width = "100%";
         draggedDiv.style.height = "100%";
