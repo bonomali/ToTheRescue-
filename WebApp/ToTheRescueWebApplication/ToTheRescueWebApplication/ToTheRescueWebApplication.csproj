@@ -655,6 +655,8 @@
     <Content Include="MiniGames\Shape_ColoringBook\sounds\triangleFact_recording.mp3" />
     <Content Include="MiniGames\Shape_ColoringBook\sounds\triangle_recording.mp3" />
     <Content Include="MiniGames\Shape_ColoringBook\sounds\yellow_recording.mp3" />
+    <Content Include="MiniGames\SightWord_Maze\images\maze.png" />
+    <Content Include="MiniGames\SightWord_Maze\javascript\sightword_maze.js" />
     <Content Include="MiniGames\SubtractionMiniGame\audio\intro.m4a" />
     <Content Include="MiniGames\SubtractionMiniGame\css\SubtractionMiniGame.css" />
     <Content Include="MiniGames\SubtractionMiniGame\img\eatenApple.png" />
@@ -830,6 +832,7 @@
     <Folder Include="MiniGames\Alphabet_Matching2\Media\" />
     <Folder Include="MiniGames\Alphabet_Matching\Media\" />
     <Folder Include="MiniGames\Number_ComparisonEZ\" />
+    <Folder Include="MiniGames\SightWord_Maze\sounds\" />
     <Folder Include="MiniGames\Supah_Counting\sounds\" />
     <Folder Include="MiniGames\TypingGame\img\" />
     <Folder Include="Views\AnimalRepository\" />
