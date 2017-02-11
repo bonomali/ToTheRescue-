@@ -3,6 +3,10 @@
     min-width: 300px;
     min-height: 260px;
 }
+body {  
+    min-width:600px;
+    min-height: 300px; 
+}
 main#map {
     background-color: lightblue;
     width: 70%;
