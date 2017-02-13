@@ -228,10 +228,6 @@ html{
         background-color: #FC4A1A;
     }
 
-#performanceStat{
-	visibility: hidden;
-}
-
 @media only screen and (max-width: 860px) {
 	#endingDiv{
 		font-size: 95%;

@@ -229,6 +229,7 @@
     <Content Include="MiniGames\AdditionMiniGame\css\AdditionMiniGame.css" />
     <Content Include="MiniGames\AdditionMiniGame\img\giraffeImg.png" />
     <Content Include="MiniGames\AdditionMiniGame\javascript\AdditionMiniGame.js" />
+    <Content Include="MiniGames\AlphabetSortingGame\audio\elevatorDing.mp3" />
     <Content Include="MiniGames\AlphabetSortingGame\css\AlphabetSortingGame.css" />
     <Content Include="MiniGames\AlphabetSortingGame\img\blackBoard.jpg" />
     <Content Include="MiniGames\AlphabetSortingGame\javascript\AlphabetSortingGame.js" />

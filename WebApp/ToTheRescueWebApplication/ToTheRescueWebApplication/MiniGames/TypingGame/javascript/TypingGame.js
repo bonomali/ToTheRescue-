@@ -2,6 +2,7 @@ var totalKeyPresses = 0;
 var correctKeyPresses = 0;
 var usedArr = [];
 
+var endGameFuncCalls = 0;
 /**
  * Returns a random integer between min (inclusive) and max (inclusive)
  * Using Math.round() will give you a non-uniform distribution!
@@ -237,8 +238,6 @@ function Main() {
         if (IsCorrectTypedLetter(typedChar) === true) {
             correctKeyPresses++;
 
-            //make sound effect for the next letter
-
             //make the next be red and underline
             if (MakeNextLetterRed() === false) {
                 return false;
@@ -253,6 +252,11 @@ function Main() {
     $("html").keydown(function (event) {
         if (event.keyCode === 8 || event.keyCode === 46)
             event.preventDefault();
+    });
+
+    //if the user leaves the page
+    $(window).on("beforeunload", function () {
+        responsiveVoice.cancel(); //quit doing text to speech
     });
 
     //play the game for 1 minuet and then end the game

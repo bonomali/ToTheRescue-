@@ -4,6 +4,7 @@
 
 body {
     background: #5b99d3;
+    margin: auto;
 }
 
 #Header {
@@ -22,9 +23,11 @@ body {
     visibility: hidden;
     padding: 0px;
     margin: 0px;
+    margin-bottom: 6px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 20px;
     font-weight: bold;
+    display: none;
 }
 
 #tooLongNameError {
@@ -33,10 +36,12 @@ body {
     color: white;
     padding: 0px;
     margin: 0px;
+    margin-bottom: 6px;
     visibility: hidden;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 20px;
     font-weight: bold;
+    display: none;
 }
 
 #EnterProfileNameText {
@@ -44,8 +49,9 @@ body {
     left: 15%;
     margin: 5px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 30px;
+    font-size: 25px;
     color: white;
+    margin: 0px;
 }
 
 #ProfileNameText {
@@ -63,44 +69,45 @@ body {
     position: relative;
     left: 15%;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 30px;
+    font-size: 25px;
     margin: 0px;
     color: white;
 }
 
 #AvatarsTable {
-    width: 95%;
-    margin-left: auto;
-    margin-right: auto;
+    width: 80%;
+    margin: auto;
+    margin-left: 15%;
 }
 
 .AvatarDiv {
-    width: auto;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    height: 100%;
+    display: table-cell;
 }
 
 img {
     width: auto;
-    height: auto;
+    height: 75%;
     border: thick solid transparent;
 }
 
 #CreateProfileButton {
     visibility: hidden;
+    margin-left: 3%;
+    margin-top: -2%;
 }
 
 #BackButton {
     position: relative;
+    margin-left: 3%;
 }
 
 .Buttons {
     border-radius: 20px;
     background-color: white;
-    font-size: 20px;
-    padding: 10px 10px;
+    font-size: 18px;
+    padding: 8px 8px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     border-color: black;
     position: relative;
@@ -124,13 +131,45 @@ img {
     }
 
     #emptyNameError {
+        font-size: 10px;
+    }
+
+    #tooLongNameError {
+        font-size: 10px;
+    }
+
+    .Buttons {
+        font-size: 65%;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    html{
+         overflow-x: hidden;
+    }
+
+    #Header{
+        font-size: 25px;
+    }
+
+    #EnterProfileNameText{
+        font-size: 15px;
+    }
+
+    #ChooseAvatarText{
+        font-size: 15px;
+    }
+
+    img{
+        height: 45%;
+    }
+
+        #emptyNameError {
         left: 0%;
-        font-size: 17px;
     }
 
     #tooLongNameError {
         left: 0%;
-        font-size: 17px;
     }
 
     #EnterProfileNameText {
@@ -147,18 +186,12 @@ img {
 
     .Buttons {
         left: 0%;
-        font-size: 65%;
-        padding: 10px 10px;
+    }
+    #Header{
+         left: 0%;
     }
 
-    .AvatarDiv{
-        display: table-cell;
-    }
-}
-
-@media only screen and (max-width: 650px) {
-    img {
-        width: 75%;
-        height: 75%;
+    #AvatarsTable{
+        margin-left: -1.5%;
     }
 }
