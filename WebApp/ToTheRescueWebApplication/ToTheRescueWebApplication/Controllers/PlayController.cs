@@ -354,7 +354,8 @@ namespace ToTheRescueWebApplication.Controllers
                 }
                 model.MiniGameID = minigames[ranGame].ID;
                 //model.MiniGame = "../../MiniGames/Shape_ColoringBook/javascript/colorbook.js";
-                model.MiniGame = "../../MiniGames/Alphabet_BubblePop/javascript/bubble.js";
+                //model.MiniGame = "../../MiniGames/Alphabet_BubblePop/javascript/bubble.js";
+                model.MiniGame = "../../MiniGames/Alphabet_Matching2/Source/Alphabet_Matching2.js";
                 //model.MiniGame = "../../MiniGames/Alphabet_Matching/Source/Alphabet_Matching.js";
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
             }
@@ -366,6 +367,7 @@ namespace ToTheRescueWebApplication.Controllers
                 model.MiniGameID = minigames[ranGame].ID;
                 model.MiniGame = "../../MiniGames/MosquitoSwat_LetterSounds/javascript/mosquitoswat.js";
                 model.MiniGame = "../../MiniGames/Alphabet_BubblePop/javascript/bubble.js";
+                model.MiniGame = "../../MiniGames/Alphabet_Matching2/Source/Alphabet_Matching2.js";
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
                 model.Difficulty = 0;   //difficulty doesn't apply to free play mode
             }

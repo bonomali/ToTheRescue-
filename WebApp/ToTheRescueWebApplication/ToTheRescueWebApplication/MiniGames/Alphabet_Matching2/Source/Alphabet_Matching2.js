@@ -5,7 +5,7 @@
 
 //global path variables
 
-var generalPath = ".."; //  ../../MiniGames/Alphabet_Matching2
+var generalPath = "../../MiniGames/Alphabet_Matching2"; //  ../../MiniGames/Alphabet_Matching2
 var mediaPath = generalPath + "/Media"; //to test in browser, had to change from ../../MiniGames/Alphabet_Matching2/Media
 var sightWords = [];
 var sightWord = -1;
@@ -29,13 +29,13 @@ var numberWrong;
 var isSelected; //aids in deciding whether or not an event handler should fire
 var imgSel; //aids in figuring out what button the user pressed..
 var imgSel2;
-var letterSel;
+var letterSel; //defines what element was selected
 var letterSel2;
 
 //listener for all dom content
 document.addEventListener('DOMContentLoaded', function () {
     setTimeout(function GameOver() {
-        //responsiveVoice.speak("Good Attempt.");
+        responsiveVoice.speak("Good Attempt.");
         var finalScore = -5;
         document.getElementById('score').value = finalScore;
         EndofGame();
@@ -45,14 +45,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var start = function () {
     //Voice intro
-    //responsiveVoice.speak("Hello! Match the blue letter with same brown letter to make a word!");
+    responsiveVoice.speak("Hello! Match the blue letter with same brown letter to make a word!");
 
     //container needs to be created here because im too lazy to modify copy and pasted code
     container = document.createElement('div');
     container.setAttribute('id', 'container');
 
     //some game variables
-    //difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
+    difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
     numberWrong = 0;
     isSelected = 0;
     imgSel = -1; 
@@ -140,12 +140,12 @@ var createElements = function () {
     }//for
         /*Splash screen and other audio elements should be contained here*/
         //append all elements to blocksgame div
-    //var divContainer = document.getElementById("BlocksGame");
-    //divContainer.style.width = "50%";
-    //divContainer.appendChild(container);
+    var divContainer = document.getElementById("BlocksGame");
+    divContainer.style.width = "50%";
+    divContainer.appendChild(container);
 
     //testing block
-    document.getElementsByTagName('body')[0].appendChild(container);
+    //document.getElementsByTagName('body')[0].appendChild(container);
 }
 
 var setupGame = function () {
@@ -164,13 +164,13 @@ var setupGame = function () {
         var letter = document.getElementById("letter" + blocks[blocksIndex]); //gets random letter tile to use
         var tileIndex = Math.floor(Math.random() * availableLetters.length); 
         var tileColor = Math.floor(Math.random() * 3);
-        letter.setAttribute('tag', tileIndex); //set the tag to the letter tile index number
+        letter.setAttribute('tag', availableLetters[tileIndex]); //set the tag to the letter tile index number
         letter.src = tiles[tileColor][availableLetters[tileIndex]]; //apply the letter to the letter tile
         blocks.splice(blocksIndex, 1); //remove the letter tile from the list of availble tiles
 
         blocksIndex = Math.floor(Math.random() * blocks.length);
         letter = document.getElementById("letter" + blocks[blocksIndex]); //gets random letter tile to use
-        letter.setAttribute('tag', tileIndex); //set the tag to the letter tile index number
+        letter.setAttribute('tag', availableLetters[tileIndex]); //set the tag to the letter tile index number
         letter.src = tiles[tileColor][availableLetters[tileIndex]]; //apply the letter to the letter tile
         blocks.splice(blocksIndex, 1); //remove the letter tile from the list of availble tiles
         availableLetters.splice(tileIndex, 1);// remove any possibility of getting duplicate letters that
@@ -181,8 +181,8 @@ var checkWin = function () {
     if (lettersMatched == 10) {
         var stat = 5 - numberWrong;
         if (stat < -5) stat = -5;
-        //responsiveVoice.speak("The word is " + sightWords[sightWord]);
-        //responsiveVoice.speak("Great Job!");
+        responsiveVoice.speak("The word is " + sightWords[sightWord]);
+        responsiveVoice.speak("Great Job!");
         document.getElementById("score").value = stat;
         setTimeout(EndofGame, 2500);
     }//if the user won
@@ -194,8 +194,9 @@ var checkWin = function () {
 }
 
 var imgClicked = function () {
-    //responsiveVoice.speak(document.getElementById(letter));
+    if (imgSel2 == -1) responsiveVoice.speak(String.fromCharCode(parseInt((document.getElementById(letterSel).getAttribute('tag'))) + 97));
     if (imgSel2 != -1) {
+        responsiveVoice.speak(String.fromCharCode(parseInt((document.getElementById(letterSel2).getAttribute('tag'))) + 97));
         var letter;
         if (letterSel2 != 1) letter = document.getElementById(letterSel2);
         else letter = document.getElementById(letterSel);
@@ -210,14 +211,14 @@ var checkAnswer = function () {
         lettersMatched++;
         document.getElementById("cat").src = catPics[2]; //happy cat  
         document.getElementById(letterSel).style.visibility = "hidden";
-        document.getElementById(letterSel2).style.visibility = "hidden";        //responsiveVoice.speak("Nice!");
+        document.getElementById(letterSel2).style.visibility = "hidden";        responsiveVoice.speak("Nice!");
     }//if the user selected the correct letter tile
     else {
         numberWrong++;
         if ((Math.floor(Math.random() * 3)) == 0)
             document.getElementById("cat").src = catPics[3]; //surprised cat
         else document.getElementById("cat").src = catPics[1]; //dissapointed cat     
-        //responsiveVoice.speak("Uh oh");
+        responsiveVoice.speak("Oh no");
     }
     imgSel = -1;
     imgSel2 = -1;
