@@ -559,6 +559,16 @@
     <Content Include="MiniGames\Number_Comparison\sounds\prng.m4a" />
     <Content Include="MiniGames\Number_Comparison\sounds\woops.m4a" />
     <Content Include="MiniGames\Number_Comparison\sounds\wow.m4a" />
+    <Content Include="MiniGames\Position_Vocabulary\images\Background.png" />
+    <Content Include="MiniGames\Position_Vocabulary\images\behind.png" />
+    <Content Include="MiniGames\Position_Vocabulary\images\below.png" />
+    <Content Include="MiniGames\Position_Vocabulary\images\front.png" />
+    <Content Include="MiniGames\Position_Vocabulary\images\i.png" />
+    <Content Include="MiniGames\Position_Vocabulary\images\left.png" />
+    <Content Include="MiniGames\Position_Vocabulary\images\Mockup.png" />
+    <Content Include="MiniGames\Position_Vocabulary\images\right.png" />
+    <Content Include="MiniGames\Position_Vocabulary\images\token_0.gif" />
+    <Content Include="MiniGames\Position_Vocabulary\javascript\positionvocabulary.js" />
     <Content Include="MiniGames\RhymingMatch\images\ball.png" />
     <Content Include="MiniGames\RhymingMatch\images\bat.png" />
     <Content Include="MiniGames\RhymingMatch\images\bed.png" />
@@ -707,6 +717,7 @@
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="MiniGames\Supah_Counting\images\letter_10.psd" />
+    <Content Include="MiniGames\Position_Vocabulary\images\position.psd" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -831,6 +842,7 @@
     <Folder Include="MiniGames\Alphabet_Matching2\Media\" />
     <Folder Include="MiniGames\Alphabet_Matching\Media\" />
     <Folder Include="MiniGames\Number_ComparisonEZ\" />
+    <Folder Include="MiniGames\Position_Vocabulary\sounds\" />
     <Folder Include="MiniGames\Supah_Counting\sounds\" />
     <Folder Include="MiniGames\TypingGame\img\" />
     <Folder Include="Views\AnimalRepository\" />
