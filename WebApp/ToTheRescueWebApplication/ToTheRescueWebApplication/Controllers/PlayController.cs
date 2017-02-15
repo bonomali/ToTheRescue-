@@ -364,7 +364,7 @@ namespace ToTheRescueWebApplication.Controllers
                 int ranGame = random.Next(1, minigames.Count()) - 1; //generate an index between 1 and num of games
 
                 model.MiniGameID = minigames[ranGame].ID;
-                model.MiniGame = "../../MiniGames/SightWord_Maze/javascript/sightword_maze.js";
+                model.MiniGame = "../../MiniGames/AlphabetSortingGame/javascript/AlphabetSortingGame.js";
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
                 model.Difficulty = 0;   //difficulty doesn't apply to free play mode
             }
