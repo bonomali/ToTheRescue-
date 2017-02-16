@@ -270,11 +270,11 @@
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\s_recording.mp3" />
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\t_recording.mp3" />
     <Content Include="MiniGames\Alphabet_Matching2\CSS\Alphabet_Matching2.css" />
-    <Content Include="MiniGames\Alphabet_Matching2\Source\Alphabet_Matching2.js" />
-    <Content Include="MiniGames\Alphabet_Matching2\Source\index.html" />
+    <Content Include="MiniGames\Alphabet_Matching2\javascript\Alphabet_Matching2.js" />
+    <Content Include="MiniGames\Alphabet_Matching2\javascript\index.html" />
     <Content Include="MiniGames\Alphabet_Matching\CSS\Alphabet_Matching.css" />
-    <Content Include="MiniGames\Alphabet_Matching\Source\Alphabet_Matching.js" />
-    <Content Include="MiniGames\Alphabet_Matching\Source\index.html" />
+    <Content Include="MiniGames\Alphabet_Matching\javascript\Alphabet_Matching.js" />
+    <Content Include="MiniGames\Alphabet_Matching\javascript\index.html" />
     <Content Include="MiniGames\BeginningLetterSounds_Racing\images\at_flag.jpg" />
     <Content Include="MiniGames\BeginningLetterSounds_Racing\images\big_flag.jpg" />
     <Content Include="MiniGames\BeginningLetterSounds_Racing\images\can_flag.jpg" />

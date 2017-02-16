@@ -121,26 +121,33 @@ namespace ToTheRescueDataPop
             //Console.WriteLine(path);
             //ProductDB.WriteSQL(path);
             
-            string file_path = "../../MiniGames/javascript/";
+            string file_path1 = "../../MiniGames/";
+            string file_path2 = "/javascript/";
+
             //Write Mini Games
-            ProductDB.WriteMiniGames(2, file_path + "AdditionMiniGame.js", "AdditionMiniGame", 3, 4);
-            ProductDB.WriteMiniGames(1, file_path + "bubble.js", "AlphabetBubblePop", 1, 2);
-            ProductDB.WriteMiniGames(1, file_path + "alphabet_tracing.js", "AlphabetTracing", 1, 2);
-            ProductDB.WriteMiniGames(1, file_path + "racing.js", "BeginningLetterSoundsRacing", 3, 4);
-            ProductDB.WriteMiniGames(1, file_path + "ColorSortingGame.js", "ColorSortingGame", 1, 2);
-            ProductDB.WriteMiniGames(2, file_path + "IdentifyShapeGame.js", "IdentifyShapeGame", 1, 2);
-            ProductDB.WriteMiniGames(1, file_path + "mosquitoswat.js", "MosquitoSwatLetterSounds", 3, 4);
-            ProductDB.WriteMiniGames(2, file_path + "Number_Comparision.js", "NumberComparison", 3, 4);
-            ProductDB.WriteMiniGames(2, file_path + "Number_ComparisionEZ.js", "NumberComparisonEZ", 2, 2);
-            ProductDB.WriteMiniGames(2, file_path + "number_tracing.js", "NumberTracing", 1, 2);
-            ProductDB.WriteMiniGames(1, file_path + "colorbook.js", "ShapeColoringBook", 1, 2);
-            ProductDB.WriteMiniGames(2, file_path + "SubtractionMiniGame.js", "SubtractionMiniGame", 3, 4);
-            ProductDB.WriteMiniGames(1, file_path + "Alphabet_Matching.js", "AlphabetMatching", 2, 3);
-            ProductDB.WriteMiniGames(1, file_path + "dino_sightwords.js", "DinoSightWords", 3, 3);
-            ProductDB.WriteMiniGames(1, file_path + "rhyming_match.js", "RhymingMatch", 4, 4);
-            ProductDB.WriteMiniGames(2, file_path + "supahcounting.js", "SupahCounting", 1, 2);
-            ProductDB.WriteMiniGames(1, file_path + "TypingGame.js", "Typing", 2, 2);
-            
+            ProductDB.WriteMiniGames(2, file_path1 + "AdditionMiniGame" + file_path2 + "AdditionMiniGame.js", "AdditionMiniGame", 3, 4);
+            ProductDB.WriteMiniGames(1, file_path1 + "Alphabet_BubblePop" + file_path2 + "bubble.js", "AlphabetBubblePop", 1, 2);
+            ProductDB.WriteMiniGames(1, file_path1 + "Alphabet_Tracing" + file_path2 + "alphabet_tracing.js", "AlphabetTracing", 1, 2);
+            ProductDB.WriteMiniGames(1, file_path1 + "BeginningLetterSounds_Racing" + file_path2 + "racing.js", "BeginningLetterSoundsRacing", 3, 4);
+            ProductDB.WriteMiniGames(1, file_path1 + "ColorSortingGame" + file_path2 + "ColorSortingGame.js", "ColorSortingGame", 1, 2);
+            ProductDB.WriteMiniGames(2, file_path1 + "IdentifyShapeGame" + file_path2 + "IdentifyShapeGame.js", "IdentifyShapeGame", 1, 2);
+            ProductDB.WriteMiniGames(1, file_path1 + "MosquitoSwat_LetterSounds" + file_path2 + "mosquitoswat.js", "MosquitoSwatLetterSounds", 3, 4);
+            ProductDB.WriteMiniGames(2, file_path1 + "Number_Comparision" + file_path2 + "Number_Comparision.js", "NumberComparison", 3, 4);
+            ProductDB.WriteMiniGames(2, file_path1 + "Number_ComparisonEZ" + file_path2 + "Number_ComparisionEZ.js", "NumberComparisonEZ", 2, 2);
+            ProductDB.WriteMiniGames(2, file_path1 + "Number_Tracing" + file_path2 + "number_tracing.js", "NumberTracing", 1, 2);
+            ProductDB.WriteMiniGames(1, file_path1 + "Shape_ColoringBook" + file_path2 + "colorbook.js", "ShapeColoringBook", 1, 2);
+            ProductDB.WriteMiniGames(2, file_path1 + "SubtractionMiniGame" + file_path2 + "SubtractionMiniGame.js", "SubtractionMiniGame", 3, 4);
+            ProductDB.WriteMiniGames(1, file_path1 + "Alphabet_Matching" + file_path2 + "Alphabet_Matching.js", "AlphabetMatching", 2, 3);
+            ProductDB.WriteMiniGames(1, file_path1 + "Alphabet_Matching2" + file_path2 + "Alphabet_Matching2.js", "AlphabetMatching", 2, 3);
+            ProductDB.WriteMiniGames(1, file_path1 + "Dino_SightWords" + file_path2 + "dino_sightwords.js", "DinoSightWords", 3, 3);
+            ProductDB.WriteMiniGames(1, file_path1 + "RhymingMatch" + file_path2 + "rhyming_match.js", "RhymingMatch", 4, 4);
+            ProductDB.WriteMiniGames(2, file_path1 + "Supah_Counting" + file_path2 + "supahcounting.js", "SupahCounting", 1, 2);
+            ProductDB.WriteMiniGames(1, file_path1 + "TypingGame" + file_path2 + "TypingGame.js", "Typing", 2, 2);
+            ProductDB.WriteMiniGames(2, file_path1 + "TangramGame" + file_path2 + "Tangram.js", "Tangram", 3, 4);
+            ProductDB.WriteMiniGames(2, file_path1 + "Position_Vocabulary" + file_path2 + "positionvocabulary.js", "PositionVocabulary", 4, 4);
+            ProductDB.WriteMiniGames(1, file_path1 + "SightWord_Maze" + file_path2 + "sightword_maze.js", "SightWordMaze", 4, 4);
+            ProductDB.WriteMiniGames(1, file_path1 + "AlphabetSortingGame" + file_path2 + "AlphabetSortingGame.js", "AlphabetMatching", 1, 2);
+
             //Animals
             Console.WriteLine("Uploading Animals.");
             path = Path.Combine(Environment.CurrentDirectory, "Animals.sql");
