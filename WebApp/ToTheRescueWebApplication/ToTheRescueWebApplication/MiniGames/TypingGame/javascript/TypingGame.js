@@ -15,7 +15,7 @@ function AskQuestion(usedArr) {
     var index = GetRandomInt(0, usedArr.length - 1);
     var count = 0;
 
-    responsiveVoice.speak(usedArr[index]);
+    responsiveVoice.speak(usedArr[index], "US English Female");
 
     for (var i = 1; i < usedArr[index].length + 1; i++) {
         var pId = "p";
@@ -182,12 +182,93 @@ function CreateHTMLElements() {
 
     turtleContainer.appendChild(img4);
 
+    ///////////////////////////////////////////////////
+    var endGameDiv = document.createElement("div");
+    endGameDiv.setAttribute("id", "endGameDiv");
+    endGameDiv.innerHTML = "Great Job!";
+    endGameDiv.appendChild(document.createElement("br"));
+
+    var endGameDivPic = document.createElement("img");
+    endGameDivPic.setAttribute("id", "endGameDivPic");
+    endGameDivPic.setAttribute("src", "../../Images/gameOver.png");
+
+    endGameDiv.appendChild(endGameDivPic);
+    endGameDiv.appendChild(document.createElement("br"));
+
+    var doneButton = document.createElement("button");
+    doneButton.innerHTML = "Done";
+    doneButton.setAttribute("id", "doneButton");
+
+    endGameDiv.appendChild(doneButton);
+    ////////////////////////////////////////////////
+
     divContainer.appendChild(container);
     divContainer.appendChild(input);
     divContainer.appendChild(antContainer);
     divContainer.appendChild(octopusContainer);
     divContainer.appendChild(beeContainer);
     divContainer.appendChild(turtleContainer);
+    divContainer.appendChild(endGameDiv);
+}
+
+function EndGame()
+{
+    $('#doneButton').click(function () {
+        window.location.href = '/Play/Play/'
+    });
+
+    responsiveVoice.speak("Great job!", "US English Female");
+
+    document.getElementById("container").style.visibility = "hidden";
+    document.getElementById("input").style.visibility = "hidden";
+
+    var percentage = correctKeyPresses / totalKeyPresses;
+
+    var returnVal = null;
+
+    if (percentage >= 0.10 && percentage <= 0.20) {
+        returnVal = -4;
+    }
+    else if (percentage > 0.20 && percentage <= 0.30) {
+        returnVal = -3;
+    }
+    else if (percentage > 0.30 && percentage <= 0.40) {
+        returnVal = -2;
+    }
+    else if (percentage > 0.40 && percentage <= 0.50) {
+        returnVal = -1;
+    }
+    else if (percentage > 0.50 && percentage <= 0.60) {
+        returnVal = 0;
+    }
+    else if (percentage > 0.60 && percentage <= 0.70) {
+        returnVal = 1;
+    }
+    else if (percentage > 0.70 && percentage <= 0.80) {
+        returnVal = 2;
+    }
+    else if (percentage > 0.80 && percentage <= 0.90) {
+        returnVal = 3;
+    }
+    else if (percentage > 0.90 && percentage <= 0.95) {
+        returnVal = 4;
+    }
+    else if (percentage < 0.10) {
+        returnVal = -5;
+    }
+    else {
+        returnVal = 5;
+    }
+
+    if (totalKeyPresses === 0)
+        returnVal = 0;
+
+    document.getElementById("score").value = returnVal;
+    EndofGame();
+    setTimeout(function () {
+        $('#gameOver').hide();
+    }, 500);
+    document.getElementById("endGameDiv").style.display = "block";
 }
 
 function Main() {
@@ -207,6 +288,8 @@ function Main() {
 
     //get the game's difficulty level and modify the dataset for that difficulty level
     var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
+    var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
+    var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
     if (difficulty <= 2)
         usedArr = preKWords;
@@ -217,7 +300,7 @@ function Main() {
     CreateHTMLElements();
 
     responsiveVoice.OnVoiceReady = function () {
-        responsiveVoice.speak("Type the word that appears on the screen.");
+        responsiveVoice.speak("Type the word that appears on the screen.", "US English Female");
     };
 
     document.getElementById("p1").style.color = "red";
@@ -259,56 +342,10 @@ function Main() {
         responsiveVoice.cancel(); //quit doing text to speech
     });
 
-    //play the game for 1 minuet and then end the game
+    //play the game for 2 minuets and then end the game
     setTimeout(function () {
-        document.getElementById("container").style.visibility = "hidden";
-        document.getElementById("input").style.visibility = "hidden";
-
-        var percentage = correctKeyPresses / totalKeyPresses;
-
-        var returnVal = null;
-
-        if (percentage >= 0.10 && percentage <= 0.20) {
-            returnVal = -4;
-        }
-        else if (percentage > 0.20 && percentage <= 0.30) {
-            returnVal = -3;
-        }
-        else if (percentage > 0.30 && percentage <= 0.40) {
-            returnVal = -2;
-        }
-        else if (percentage > 0.40 && percentage <= 0.50) {
-            returnVal = -1;
-        }
-        else if (percentage > 0.50 && percentage <= 0.60) {
-            returnVal = 0;
-        }
-        else if (percentage > 0.60 && percentage <= 0.70) {
-            returnVal = 1;
-        }
-        else if (percentage > 0.70 && percentage <= 0.80) {
-            returnVal = 2;
-        }
-        else if (percentage > 0.80 && percentage <= 0.90) {
-            returnVal = 3;
-        }
-        else if (percentage > 0.90 && percentage <= 0.95) {
-            returnVal = 4;
-        }
-        else if (percentage < 0.10) {
-            returnVal = -5;
-        }
-        else {
-            returnVal = 5;
-        }
-
-        if (totalKeyPresses === 0)
-            returnVal = 0;
-
-        document.getElementById("score").value = returnVal;
-        responsiveVoice.speak("Great job!");
-        EndofGame();
-    }, 60000);
+        EndGame();
+    }, 120000);
 }
 
 Main();

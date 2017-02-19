@@ -11,13 +11,7 @@ function Drag(ev) {
     var letterDiv = document.getElementById(ev.target.id);
 
     //say the letter they are dragging
-
-    if (letterDiv.innerHTML != "Z" || letterDiv.innerHTML != "Z") {
-        responsiveVoice.speak(letterDiv.innerHTML);
-    }
-    else {
-        responsiveVoice.speak("Zee");
-    }
+    responsiveVoice.speak(letterDiv.innerHTML, "US English Female");
 
 
     //act as if the user is dragging the shape
@@ -75,16 +69,18 @@ function Drop(ev) {
 }
 
 function EndGame(finished) {
+    $('#doneButton').click(function () {
+        window.location.href = '/Play/Play/'
+    });
 
     endGameFuncCalls++;
 
     if (endGameFuncCalls === 1)
     {
         //temporary abc song, will get an actual audio file in the future
-        responsiveVoice.speak("A, B, C, D, E, F, G, H, I, J, K, L M N O P, Q, R, S, T, U, V, W, X, Y and Zee." +
-         "now I know my A B C's, next time will you sing with me!");
+        responsiveVoice.speak("A, B, C, D, E, F, G, H, I, J, K, L M N O P, Q, R, S, T, U, V, W, X, Y and Z." +
+         "now I know my A B C's, next time will you sing with me!", "US English Female");
     }
-    
 
     var returnVal = 0;
 
@@ -140,8 +136,13 @@ function EndGame(finished) {
 
     document.getElementById("score").value = returnVal;
 
-    //not working properly
+    //do some sort of set time out before this
     EndofGame();
+    setTimeout(function () {
+        $('#gameOver').hide();
+    }, 500);
+    document.getElementById("endGameDiv").style.display = "block";
+
 }
 
 function ShuffleArr(arr) {
@@ -367,9 +368,30 @@ function CreateHtmlElements(letters) {
     dragAreaContainer.appendChild(dragAreaRow1);
     dragAreaContainer.appendChild(dragAreaRow2);
 
+    ///////////////////////////////////////////////////
+    var endGameDiv = document.createElement("div");
+    endGameDiv.setAttribute("id", "endGameDiv");
+    endGameDiv.innerHTML = "Great Job!";
+    endGameDiv.appendChild(document.createElement("br"));
+
+    var endGameDivPic = document.createElement("img");
+    endGameDivPic.setAttribute("id", "endGameDivPic");
+    endGameDivPic.setAttribute("src", "../../Images/gameOver.png");
+
+    endGameDiv.appendChild(endGameDivPic);
+    endGameDiv.appendChild(document.createElement("br"));
+
+    var doneButton = document.createElement("button");
+    doneButton.innerHTML = "Done";
+    doneButton.setAttribute("id", "doneButton");
+
+    endGameDiv.appendChild(doneButton);
+    ////////////////////////////////////////////////
+
     divContainer.appendChild(header);
     divContainer.appendChild(dropAreaContainer);
     divContainer.appendChild(dragAreaContainer);
+    divContainer.appendChild(endGameDiv);
 }
 
 function Main() {
@@ -378,6 +400,8 @@ function Main() {
 
     //this game doesn't have two difficulties so I am not going to do anything with this value
     var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
+    var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
+    var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
     CreateHtmlElements(letters);
 
@@ -389,20 +413,19 @@ function Main() {
         MakeScalable();
     }, false);
 
+    //if the user leaves the page
+    $(window).on("beforeunload", function () {
+        responsiveVoice.cancel(); //quit doing text to speech
+    });
+
     window.onload = function () {
         document.getElementById("dragAreaContainer").style.visibility = "visible";
         document.getElementById("dropAreaContainer").style.visibility = "visible";
         MakeScalable();
         responsiveVoice.OnVoiceReady = function () {
-            responsiveVoice.speak("Sort the alphabet by dragging the letters the bottom of the screen to the top!");
+            responsiveVoice.speak("Sort the alphabet by dragging the letters the bottom of the screen to the top!", "US English Female");
         };
-    }
-
-    //if the user leaves the page
-    $(window).on("beforeunload", function () {
-        responsiveVoice.cancel(); //quit doing text to speech
-    });
-    
+    }   
 
     //play the game for 1 minuet and then end the game
     setTimeout(function () {

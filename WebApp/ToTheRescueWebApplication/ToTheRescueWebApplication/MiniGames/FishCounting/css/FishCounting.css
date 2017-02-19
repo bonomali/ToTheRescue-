@@ -1,14 +1,14 @@
 html {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow:hidden;
 }
 
 body {
     width: 100%;
     height: 100%;
     margin: auto;
-    background-image: url(../img/blackBoard.jpg);
+    background-image: url(../img/background.jpg);
     background-size: cover;
     /* new body attribute in play CSS sets these two values so I am over writing the values here */
     min-height: 0px;
@@ -17,91 +17,101 @@ body {
 
 #header {
     margin: 0;
-    color: white;
-    font-family: Chalkboard, ‘Comic Sans’, sans-serif;
+    color: #073175;
 }
 
-#dropAreaContainer {
+#fishContainer {
     width: 100%;
-    height: 60%;
-    position: relative;
-    visibility: hidden;
+    height: 70%;
 }
 
-.dropRows {
+#answerContainer {
     width: 100%;
     height: 25%;
 }
 
-.rowDropAreas {
+.fish {
     position: relative;
-    width: 5%;
-    height: 70%;
-    margin-top: 1%;
-    margin-left: 1.5%;
+    width: 9%;
+    height: 25%;
     float: left;
-    background-color: rgba(0, 0, 0, 0.25);
-    border-style: dashed;
-    border-width: 2px;
-    border-color: white;
-    border-radius: 4px;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.2);
-    font-family: Chalkboard, ‘Comic Sans’, sans-serif;
-}
-
-#aDrop {
-    margin-left: 32%;
-}
-
-#gDrop {
-    margin-left: 25.5%;
-}
-
-#oDrop {
-    margin-left: 25.5%;
-}
-
-#wDrop {
-    margin-left: 38.5%;
-}
-
-#dragAreaContainer {
-    position: relative;
-    width: 100%;
-    height: 35%;
+    transition: transform 1000ms ease-in-out;
     visibility: hidden;
 }
 
-.dragRows {
-    width: 100%;
-    height: 50%;
+#one {
+    left: -10%;
+    top: 0%;
 }
 
-.dragRow1 {
-    position: relative;
-    width: 5.5%;
-    height: 65%;
-    margin-top: 1.5%;
-    margin-left: 2%;
-    float: left;
-    border-radius: 4px;
-    text-align: center;
-    color: white;
-    font-family: Chalkboard, ‘Comic Sans’, sans-serif;
+#two {
+    left: -20%;
+    top: 20%;
 }
 
-.dragRow2 {
+#three {
+    left: -30%;
+    top: 50%;
+}
+
+#four {
+    left: -40%;
+    top: 100%;
+}
+
+#five {
+    left: 65%;
+    top: 100%;
+}
+
+#six {
+    left: 55%;
+    top: 50%;
+}
+
+#seven {
+    left: 50%;
+    top: 20%;
+}
+
+#eight {
+    left: 40%;
+    top: 0%;
+}
+
+#nine {
+    left: -32%;
+    top: -35%;
+}
+
+#ten {
+    left: -30%;
+    top: 140%;
+}
+
+.answers {
     position: relative;
-    width: 5.5%;
-    height: 65%;
-    margin-top: 1.5%;
-    margin-left: 2%;
+    width: 10%;
+    height: 75%;
     float: left;
-    border-radius: 4px;
+    top: 5%;
     text-align: center;
+    background-color: #073175;
+    border: 2px solid black;
+    border-radius: 5px;
     color: white;
-    font-family: Chalkboard, ‘Comic Sans’, sans-serif;
+}
+
+#answerOne {
+    left: 28%;
+}
+
+#answerTwo {
+    left: 35%;
+}
+
+#answerThree {
+    left: 42%;
 }
 
 #BlocksGame {
