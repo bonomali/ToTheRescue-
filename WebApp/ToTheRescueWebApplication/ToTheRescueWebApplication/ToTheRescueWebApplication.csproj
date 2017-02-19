@@ -606,6 +606,7 @@
     <Content Include="MiniGames\RhymingMatch\sounds\fish_recording.mp3" />
     <Content Include="MiniGames\RhymingMatch\sounds\fox_recording.mp3" />
     <Content Include="MiniGames\RhymingMatch\sounds\frog_recording.mp3" />
+    <Content Include="MiniGames\RhymingMatch\sounds\happy_backgroundMusic.mp3" />
     <Content Include="MiniGames\RhymingMatch\sounds\house_recording.mp3" />
     <Content Include="MiniGames\RhymingMatch\sounds\in_recording.mp3" />
     <Content Include="MiniGames\RhymingMatch\sounds\lick_recording.mp3" />
@@ -648,6 +649,7 @@
     <Content Include="MiniGames\Shape_ColoringBook\images\yellow-crayon.png" />
     <Content Include="MiniGames\Shape_ColoringBook\javascript\colorbook.js" />
     <Content Include="MiniGames\Shape_ColoringBook\sounds\audioInstructions.mp3" />
+    <Content Include="MiniGames\Shape_ColoringBook\sounds\background_music.mp3" />
     <Content Include="MiniGames\Shape_ColoringBook\sounds\black_recording.mp3" />
     <Content Include="MiniGames\Shape_ColoringBook\sounds\blue_recording.mp3" />
     <Content Include="MiniGames\Shape_ColoringBook\sounds\circle_recording.mp3" />
@@ -685,6 +687,7 @@
     <Content Include="MiniGames\SightWord_Maze\sounds\bark.mp3" />
     <Content Include="MiniGames\SightWord_Maze\sounds\big_recording.mp3" />
     <Content Include="MiniGames\SightWord_Maze\sounds\can_recording.mp3" />
+    <Content Include="MiniGames\SightWord_Maze\sounds\happy_backgroundMusic.mp3" />
     <Content Include="MiniGames\SightWord_Maze\sounds\in_recording.mp3" />
     <Content Include="MiniGames\SightWord_Maze\sounds\me_recording.mp3" />
     <Content Include="MiniGames\SightWord_Maze\sounds\not_recording.mp3" />

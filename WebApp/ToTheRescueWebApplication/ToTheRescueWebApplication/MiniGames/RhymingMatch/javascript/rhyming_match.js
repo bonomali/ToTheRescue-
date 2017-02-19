@@ -1,4 +1,5 @@
 ﻿(function () {
+    var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
     var imagePath = '../../MiniGames/RhymingMatch/images/';
     var soundPath = '../../MiniGames/Rhymingmatch/sounds/';
     var targetIndex, word1Index, word2Index;   //indicies for word cards
@@ -200,6 +201,21 @@
 
 
     InitGame(); //initialize game
+    
+    //initalize and play background music
+    var backgroundMusic = new Audio();
+    backgroundMusic.src = soundPath + "background_music.mp3";
+    if (toggle_music == "False") {
+        backgroundMusic.play();
+        backgroundMusic.volume = .1;
+    }
+    //loop background music
+    backgroundMusic.addEventListener("ended", function () {
+        if (toggle_music == "False") {
+            backgroundMusic.play();
+            backgroundMusic.volume = .1;
+        }
+    })
 
     setTimeout(function GameOver() {
         InstructionsPart1.src = null  //set all insructions to null so don't play after game over

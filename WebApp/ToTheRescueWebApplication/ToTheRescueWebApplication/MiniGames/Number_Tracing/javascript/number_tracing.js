@@ -1,4 +1,5 @@
 ﻿(function () {
+    var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
     var imagePath = '../../MiniGames/Number_Tracing/images/';
     var soundPath = '../../MiniGames/Number_Tracing/sounds/';
 
@@ -216,4 +217,19 @@
         }
     }
     initButtons(); //initalize buttons
+
+    //initalize and play background music
+    var backgroundMusic = new Audio();
+    backgroundMusic.src = soundPath + "background_music.mp3";
+    if (toggle_music == "False") {
+        backgroundMusic.play();
+        backgroundMusic.volume = .15;
+    }
+    //loop background music
+    backgroundMusic.addEventListener("ended", function () {
+        if (toggle_music == "False") {
+            backgroundMusic.play();
+            backgroundMusic.volume = .15;
+        }
+    })
 }());

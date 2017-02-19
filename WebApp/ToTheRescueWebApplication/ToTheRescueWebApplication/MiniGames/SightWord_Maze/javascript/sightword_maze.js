@@ -1,4 +1,5 @@
 ﻿(function () {
+    var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
     var imagePath = '../../MiniGames/SightWord_Maze/images/';
     var soundPath = '../../MiniGames/SightWord_Maze/sounds/';
     var counter = -1;   //keep track of which word in maze the pup is on
@@ -615,4 +616,19 @@
     audioInstructions.addEventListener("ended", function() {
         correctWord.play();
     });
+
+    //initalize and play background music
+    var backgroundMusic = new Audio();
+    backgroundMusic.src = soundPath + "happy_backgroundMusic.mp3";
+    if (toggle_music == "False") {
+        backgroundMusic.play();
+        backgroundMusic.volume = .075;
+    }
+    //loop background music
+    backgroundMusic.addEventListener("ended", function () {
+        if (toggle_music == "False") {
+            backgroundMusic.play();
+            backgroundMusic.volume = .075;
+        }
+    })
 }());
