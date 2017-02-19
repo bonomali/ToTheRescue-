@@ -40,7 +40,7 @@
 
     //play audio instructions and letter to trace
     var audioInstructions = new Audio();
-    audioInstructions.src = soundPath + "audio_instructions.mp3";
+    audioInstructions.src = '../../MiniGames/Alphabet_Tracing/sounds/' + "audio_instructions.mp3";
     audioInstructions.addEventListener('ended', function () {
         var numberAudio = new Audio();
         numberAudio.src = audioClips[index];
@@ -115,7 +115,7 @@
         buttonDone.addEventListener('click', function () {
             //Play end of game audio, save score to html element, and call end of game function
             var endOfGame = new Audio();
-            endOfGame.src = soundPath + "praise_recording.mp3";
+            endOfGame.src = '../../MiniGames/Alphabet_Tracing/sounds/' + "praise_recording.mp3";
             endOfGame.play();
             document.getElementById('score').value = 2; //save score in html element
             EndofGame(); //function displays good job message and returns to map
@@ -227,13 +227,13 @@
     backgroundMusic.src = '../../MiniGames/Alphabet_Tracing/sounds/' + "background_music.mp3";
     if (toggle_music == "False") {
         backgroundMusic.play();
-        backgroundMusic.volume = .15;
+        backgroundMusic.volume = .1;
     }
     //loop background music
     backgroundMusic.addEventListener("ended", function () {
         if (toggle_music == "False") {
             backgroundMusic.play();
-            backgroundMusic.volume = .15;
+            backgroundMusic.volume = .1;
         }
     })
 }());

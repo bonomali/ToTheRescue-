@@ -223,13 +223,13 @@
     backgroundMusic.src = soundPath + "background_music.mp3";
     if (toggle_music == "False") {
         backgroundMusic.play();
-        backgroundMusic.volume = .15;
+        backgroundMusic.volume = .1;
     }
     //loop background music
     backgroundMusic.addEventListener("ended", function () {
         if (toggle_music == "False") {
             backgroundMusic.play();
-            backgroundMusic.volume = .15;
+            backgroundMusic.volume = .1;
         }
     })
 }());

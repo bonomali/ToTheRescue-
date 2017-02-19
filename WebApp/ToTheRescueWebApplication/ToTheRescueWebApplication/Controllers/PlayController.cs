@@ -369,6 +369,7 @@ namespace ToTheRescueWebApplication.Controllers
                 model.MiniGame = "../../MiniGames/Alphabet_BubblePop/javascript/bubble.js";
                 model.MiniGame = "../../MiniGames/Alphabet_Matching2/Source/Alphabet_Matching2.js";
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
+                model.CategoryID = minigames[ranGame].MiniGameCategoryID;
                 model.Difficulty = 0;   //difficulty doesn't apply to free play mode
             }
             model.ToggleSound = Convert.ToString((bool)Session["toggleSound"]); //set model's toggle value for sound
