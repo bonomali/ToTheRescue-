@@ -14,7 +14,6 @@ function AllowDrop(ev)
 	ev.preventDefault();
 }
 
-
 //allows the ghost image to be dragged across the screen
 function Drag(ev) 
 {
@@ -51,10 +50,12 @@ function Drag(ev)
 		flag = true;
 	}
 		
-	if(flag === true)
-		ev.dataTransfer.setData("content", ev.target.id);
+	if (flag === true) {
+	    responsiveVoice.speak(mostRecentDragColor, "US English Female");
+	    ev.dataTransfer.setData("content", ev.target.id);
+	}
 	else
-		mostRecentDragColor = null;
+	    mostRecentDragColor = null;
 		
 }
 
@@ -205,6 +206,12 @@ function CheckIfWon()
 //the game
 function StopGame()
 {
+    $('#doneButton').click(function () {
+        window.location.href = '/Play/Play/'
+    });
+
+    responsiveVoice.speak("Great job!", "US English Female");
+
     var percentage = numCorrectDrags / totalDrags;
     var returnVal = null;
 
@@ -247,6 +254,10 @@ function StopGame()
 
     document.getElementById("score").value = returnVal;
     EndofGame(); //function displays good job message and returns to map
+    setTimeout(function () {
+        $('#gameOver').hide();
+    }, 500);
+    document.getElementById("endGameDiv").style.display = "block";
 }
 
 //used for placeing all of the images in the correct places
@@ -439,26 +450,54 @@ function CreateHtml()
 
     answerContainer.appendChild(purple);
 
+    ///////////////////////////////////////////////////
+    var endGameDiv = document.createElement("div");
+    endGameDiv.setAttribute("id", "endGameDiv");
+    endGameDiv.innerHTML = "Great Job!";
+    endGameDiv.appendChild(document.createElement("br"));
+
+    var endGameDivPic = document.createElement("img");
+    endGameDivPic.setAttribute("id", "endGameDivPic");
+    endGameDivPic.setAttribute("src", "../../Images/gameOver.png");
+
+    endGameDiv.appendChild(endGameDivPic);
+    endGameDiv.appendChild(document.createElement("br"));
+
+    var doneButton = document.createElement("button");
+    doneButton.innerHTML = "Done";
+    doneButton.setAttribute("id", "doneButton");
+
+    endGameDiv.appendChild(doneButton);
+    ////////////////////////////////////////////////
+
     //add everything to the play area
     divContainer.appendChild(header);
     divContainer.appendChild(imgContainer);
     divContainer.appendChild(answerContainer);
+    divContainer.appendChild(endGameDiv);
 }
 
 function Main()
 {
-    //intro instructions
-    var audioSrc = "../../MiniGames/ColorSortingGame/audio/intro.m4a";
-    var audio = new Audio();
+    //this game doesn't have two difficulties so I am not going to do anything with this value
+    var difficulty = document.getElementById("minigameScript").getAttribute("difficulty"); // only one difficulty for this game so not needed
+    var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
+    var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
     //make the html elements
     CreateHtml();
 
     window.onload = function () {
         //play the instructions
-        audio.src = audioSrc;
-        audio.play();
+        responsiveVoice.OnVoiceReady = function () {
+            responsiveVoice.speak("Sort the images by dragging them to their corresponding boxes.", "US English Female");
+        };
     };
+
+    //if the user leaves the page
+    $(window).on("beforeunload", function () {
+        responsiveVoice.cancel(); //quit doing text to speech
+    });
 
     //if the user didn't finish the game in 2 minuets
     setTimeout(function () {

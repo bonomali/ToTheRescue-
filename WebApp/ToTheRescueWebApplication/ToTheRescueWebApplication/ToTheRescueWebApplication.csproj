@@ -229,7 +229,6 @@
     <Content Include="MiniGames\AdditionMiniGame\css\AdditionMiniGame.css" />
     <Content Include="MiniGames\AdditionMiniGame\img\giraffeImg.png" />
     <Content Include="MiniGames\AdditionMiniGame\javascript\AdditionMiniGame.js" />
-    <Content Include="MiniGames\AlphabetSortingGame\audio\elevatorDing.mp3" />
     <Content Include="MiniGames\AlphabetSortingGame\css\AlphabetSortingGame.css" />
     <Content Include="MiniGames\AlphabetSortingGame\img\blackBoard.jpg" />
     <Content Include="MiniGames\AlphabetSortingGame\javascript\AlphabetSortingGame.js" />
@@ -474,14 +473,6 @@
     <Content Include="MiniGames\FishCounting\img\yellowSeaHorse.png" />
     <Content Include="MiniGames\FishCounting\img\yellowStarFish.png" />
     <Content Include="MiniGames\FishCounting\javascript\FishCounting.js" />
-    <Content Include="MiniGames\IdentifyShapeGame\audio\Circle.m4a" />
-    <Content Include="MiniGames\IdentifyShapeGame\audio\Hexagon.m4a" />
-    <Content Include="MiniGames\IdentifyShapeGame\audio\Intro.m4a" />
-    <Content Include="MiniGames\IdentifyShapeGame\audio\Octagon.m4a" />
-    <Content Include="MiniGames\IdentifyShapeGame\audio\Pentagon.m4a" />
-    <Content Include="MiniGames\IdentifyShapeGame\audio\Rectangle.m4a" />
-    <Content Include="MiniGames\IdentifyShapeGame\audio\Square.m4a" />
-    <Content Include="MiniGames\IdentifyShapeGame\audio\Triangle.m4a" />
     <Content Include="MiniGames\IdentifyShapeGame\css\IdentifyShapeGame.css" />
     <Content Include="MiniGames\IdentifyShapeGame\javascript\IdentifyShapeGame.js" />
     <Content Include="MiniGames\MosquitoSwat_LetterSounds\images\amosquito.png" />
@@ -749,7 +740,7 @@
     <Content Include="MiniGames\TangramGame\img\yellowTri.png" />
     <Content Include="MiniGames\TangramGame\img\yellowTri2.png" />
     <Content Include="MiniGames\TangramGame\img\yellowTri3.png" />
-    <Content Include="MiniGames\TangramGame\javascript\Tangram.js" />
+    <Content Include="MiniGames\TangramGame\javascript\TangramGame.js" />
     <Content Include="MiniGames\TypingGame\css\TypingGame.css" />
     <Content Include="MiniGames\TypingGame\javascript\TypingGame.js" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
@@ -884,7 +875,6 @@
     <Folder Include="MiniGames\Number_ComparisonEZ\" />
     <Folder Include="MiniGames\Position_Vocabulary\sounds\" />
     <Folder Include="MiniGames\Supah_Counting\sounds\" />
-    <Folder Include="MiniGames\TypingGame\img\" />
     <Folder Include="Views\AnimalRepository\" />
   </ItemGroup>
   <PropertyGroup>

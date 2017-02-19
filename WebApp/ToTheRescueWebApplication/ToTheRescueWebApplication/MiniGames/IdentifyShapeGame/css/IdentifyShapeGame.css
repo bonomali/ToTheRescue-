@@ -1,10 +1,17 @@
 html{
     background-color: #6C648B;
+    width: 100%;
+    height: 100%;
 }
 
 body{
 	background-color: #6C648B;
 	margin: auto;
+    width: 100%;
+    height: 100%;
+    /* new body attribute in play CSS sets these two values so I am over writing the values here */
+    min-height: 0px;
+    min-width: 0px;
 }
 
 #header{
@@ -38,19 +45,68 @@ body{
     width: 100%;
 }
 
+/*my own end of game div*/
 #gameOver{
-        position: absolute;
-    	top: 15%;
-	    left: 41%;
+    visibility: hidden;
 }
 
-#backButton:hover {
-        color: white;
-        background-color: #F2D388;
-    }
+#endGameDiv{
+    display:none;
+	width: 30%;
+	height: 45%;
+	background-color: green;
+	position: absolute;
+	z-index: 100;
+	top: 20%;
+	left: 35%;
+	text-align: center;
+	color: white;
+	border-radius: 35px;
+	font-size: 200%;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	min-height: 200px;
+	min-width: 180px;
+}
 
-#performanceStat{
-	visibility: hidden;
+#endGameDivPic{
+	width: 30%;
+	height: 50%;
+	margin-left: 10%;
+	margin-top: 5%;
+}
+
+#doneButton{
+	width: 20%;
+    height: 10%;
+    min-width: 60px;
+    min-height: 20px;
+    background-color: lightblue;
+    color: darkblue;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    border-radius: 30px;
+    display:block;
+	padding-bottom: 25px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 5%;
+    font-size: 50%;
+}
+
+#doneButton:hover{
+	background-color: lightpink;
+	font-size: 55%;
+}
+
+@media only screen and (max-width: 800px) {
+	#endGameDiv{
+		font-size: 150%;
+	}
+}
+
+@media only screen and (max-width: 300px) {
+	#endGameDiv{
+		left: 20%;
+	}
 }
 
 @media only screen and (max-width: 950px) {
@@ -60,17 +116,7 @@ body{
 	}
 }
 
-@media only screen and (max-width: 600px) {
-	#endingDiv{
-		font-size: 80%;
-	}
-}
-
 @media only screen and (max-width: 490px) {
-	#endingDiv{
-		font-size: 50%;
-	}
-	
 	#header{
 		font-size: 150%;
 	}

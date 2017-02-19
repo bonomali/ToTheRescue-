@@ -10,6 +10,10 @@ const OCTAGON = 6;
 //user clicked correctly
 var numOfCorrectClicks = 0;
 
+//counts the number of times the user clicked
+var clickCount = 0;
+var clickable = true;
+
 /**
  * Returns a random integer between min (inclusive) and max (inclusive)
  * Using Math.round() will give you a non-uniform distribution!
@@ -490,8 +494,6 @@ function Clicked(mouseX, mouseY, shapeArr)
 
 function SetCurrentShape(shapeArr)
 {
-    var audioSrc = "../../MiniGames/IdentifyShapeGame/audio/"
-	var audio = new Audio();
 	
 	for (var i = 0; i < shapeArr.length; i++)
 	{
@@ -504,41 +506,40 @@ function SetCurrentShape(shapeArr)
 	
 	if (currShapeIndex === SQUARE)
 	{
-		document.getElementById("header").innerHTML = "Click The Square!";
-		audio.src = audioSrc + "Square.m4a";
+	    document.getElementById("header").innerHTML = "Click The Square!";
+
+	    responsiveVoice.speak("Square", "US English Female");
 	}
 	else if (currShapeIndex === RECTANGLE)
 	{
 		document.getElementById("header").innerHTML = "Click The Rectangle!";
-		audio.src = audioSrc + "Rectangle.m4a";
+		responsiveVoice.speak("Rectangle", "US English Female");
 	}
 	else if (currShapeIndex === TRIANGLE)
 	{
 		document.getElementById("header").innerHTML = "Click The Triangle!";
-		audio.src = audioSrc + "Triangle.m4a";
+		responsiveVoice.speak("Triangle", "US English Female");
 	}
 	else if (currShapeIndex === CIRCLE)
 	{
 		document.getElementById("header").innerHTML = "Click The Circle!";
-		audio.src = audioSrc + "Circle.m4a";
+		responsiveVoice.speak("Circle", "US English Female");
 	}
 	else if (currShapeIndex === PENTAGON)
 	{
 		document.getElementById("header").innerHTML = "Click The Pentagon!";
-		audio.src = audioSrc + "Pentagon.m4a";
+		responsiveVoice.speak("Pentagon", "US English Female");
 	}
 	else if (currShapeIndex === HEXAGON)
 	{
 		document.getElementById("header").innerHTML = "Click The Hexagon!";
-		audio.src = audioSrc + "Hexagon.m4a";
+		responsiveVoice.speak("Hexagon", "US English Female");
 	}
 	else if (currShapeIndex === OCTAGON)
 	{
 		document.getElementById("header").innerHTML = "Click The Octagon!";
-		audio.src = audioSrc + "Octagon.m4a";
+		responsiveVoice.speak("Octagon", "US English Female");
 	}
-	
-	audio.play();
 }
 
 function CreateHtmlElements()
@@ -564,9 +565,91 @@ function CreateHtmlElements()
     var canvas = document.createElement("canvas");
     canvas.setAttribute("id", "canvas");
 
+    ///////////////////////////////////////////////////
+    var endGameDiv = document.createElement("div");
+    endGameDiv.setAttribute("id", "endGameDiv");
+    endGameDiv.innerHTML = "Great Job!";
+    endGameDiv.appendChild(document.createElement("br"));
+
+    var endGameDivPic = document.createElement("img");
+    endGameDivPic.setAttribute("id", "endGameDivPic");
+    endGameDivPic.setAttribute("src", "../../Images/gameOver.png");
+
+    endGameDiv.appendChild(endGameDivPic);
+    endGameDiv.appendChild(document.createElement("br"));
+
+    var doneButton = document.createElement("button");
+    doneButton.innerHTML = "Done";
+    doneButton.setAttribute("id", "doneButton");
+
+    endGameDiv.appendChild(doneButton);
+    ////////////////////////////////////////////////
+
     //add the elements to the page
     divContainer.appendChild(header);
     divContainer.appendChild(canvas);
+    divContainer.appendChild(endGameDiv);
+}
+
+function EndGame()
+{
+    $('#doneButton').click(function () {
+        window.location.href = '/Play/Play/'
+    });
+
+    responsiveVoice.speak("Great job!", "US English Female");
+
+    clickable = false;
+    document.getElementById("header").innerHTML = "Identify The Shape!";
+
+    var totalCorrect = numOfCorrectClicks;
+    var totalAttempts = clickCount;
+    var percentage = totalCorrect / totalAttempts;
+    var returnVal = null;
+
+    if (percentage >= 0.10 && percentage <= 0.20) {
+        returnVal = -4;
+    }
+    else if (percentage > 0.20 && percentage <= 0.30) {
+        returnVal = -3;
+    }
+    else if (percentage > 0.30 && percentage <= 0.40) {
+        returnVal = -2;
+    }
+    else if (percentage > 0.40 && percentage <= 0.50) {
+        returnVal = -1;
+    }
+    else if (percentage > 0.50 && percentage <= 0.60) {
+        returnVal = 0;
+    }
+    else if (percentage > 0.60 && percentage <= 0.70) {
+        returnVal = 1;
+    }
+    else if (percentage > 0.70 && percentage <= 0.80) {
+        returnVal = 2;
+    }
+    else if (percentage > 0.80 && percentage <= 0.90) {
+        returnVal = 3;
+    }
+    else if (percentage > 0.90 && percentage <= 0.95) {
+        returnVal = 4;
+    }
+    else if (percentage < 0.10) {
+        returnVal = -5;
+    }
+    else {
+        returnVal = 5;
+    }
+
+    if (totalAttempts === 0)
+        returnVal = 0;
+
+    document.getElementById('score').value = returnVal;
+    EndofGame(); //function displays good job message and returns to map
+    setTimeout(function () {
+        $('#gameOver').hide();
+    }, 500);
+    document.getElementById("endGameDiv").style.display = "block";
 }
 
 function Main()
@@ -577,17 +660,14 @@ function Main()
     var canvas = null;
     //handels 2D rendering
     var ctx = null;
-	//counts the number of times the user clicked
-	var clickCount = 0;
-	var clickable = true;
-	var audioSrc = "../../MiniGames/IdentifyShapeGame/audio/"
-	var audio = new Audio();
 
     canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
 	
     //get the game's difficulty level and modify the dataset for that difficulty level
 	var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
+	var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
+	var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
 	//need to pass in diffculty to determine the length of shapeArr
 	var shapeArr = MakeShapes(difficulty);
@@ -603,6 +683,11 @@ function Main()
 		    Clicked(e.clientX, e.clientY, shapeArr);
 		}
 	}, false);
+
+    //if the user leaves the page
+	$(window).on("beforeunload", function () {
+	    responsiveVoice.cancel(); //quit doing text to speech
+	});
 	
 	ResizeCanvas(canvas, ctx, shapeArr);
 	Draw(shapeArr);
@@ -612,61 +697,14 @@ function Main()
 		SetCurrentShape(shapeArr);
 	},3000);
 	
-	audio.src = audioSrc + "Intro.m4a";
-	audio.play();
+	responsiveVoice.OnVoiceReady = function () {
+	    responsiveVoice.speak("Click the shape that you hear.", "US English Female");
+	};
 	
 	//play the game for 1 minuet and then end the game
 	setTimeout(function () {
-			clickable = false;
-			document.getElementById("header").innerHTML = "Identify The Shape!";
-			
-			var totalCorrect = numOfCorrectClicks;
-			var totalAttempts = clickCount;
-			var percentage = totalCorrect / totalAttempts;
-			var returnVal = null;
-
-			if (percentage >= 0.10 && percentage <= 0.20) {
-			    returnVal = -4;
-			}
-			else if (percentage > 0.20 && percentage <= 0.30) {
-			    returnVal = -3;
-			}
-			else if (percentage > 0.30 && percentage <= 0.40) {
-			    returnVal = -2;
-			}
-			else if (percentage > 0.40 && percentage <= 0.50) {
-			    returnVal = -1;
-			}
-			else if (percentage > 0.50 && percentage <= 0.60) {
-			    returnVal = 0;
-			}
-			else if (percentage > 0.60 && percentage <= 0.70) {
-			    returnVal = 1;
-			}
-			else if (percentage > 0.70 && percentage <= 0.80) {
-			    returnVal = 2;
-			}
-			else if (percentage > 0.80 && percentage <= 0.90) {
-			    returnVal = 3;
-			}
-			else if (percentage > 0.90 && percentage <= 0.95) {
-			    returnVal = 4;
-			}
-			else if (percentage < 0.10) {
-			    returnVal = -5;
-			}
-			else {
-			    returnVal = 5;
-			}
-
-			if (totalAttempts === 0)
-			    returnVal = 0;
-			
-
-			document.getElementById('score').value = returnVal;
-			EndofGame(); //function displays good job message and returns to map
+	    EndGame()
        }, 60000);	
 }
 
-//need a setTimeout to wait in order to run the audio of how to play the game
 Main();

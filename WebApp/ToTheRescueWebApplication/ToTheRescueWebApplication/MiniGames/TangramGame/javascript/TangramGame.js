@@ -282,8 +282,9 @@ function DropHouse(ev) {
 
         if (WonGame())
             EndGame(true);
-        else
-            responsiveVoice.speak("Nice!");
+        else {
+            responsiveVoice.speak("Nice!", "US English Female");
+        }
     }
 
     document.getElementById(mostRecentDragID).style.opacity = "1";
@@ -416,6 +417,8 @@ function HouseMain() {
         selectedContainer = "rhombus";
         rotationArrIndex = RHOMBUS_INDEX;
 
+        responsiveVoice.speak("rhombus", "US English Female");
+
         ResetDropAreaZIndexs();
         document.getElementById("rhombusDropArea").style.zIndex = 3;
     });
@@ -423,6 +426,8 @@ function HouseMain() {
     $("#squareContainer").mousedown(function () {
         selectedContainer = "square";
         rotationArrIndex = SQUARE_INDEX;
+
+        responsiveVoice.speak("square", "US English Female");
 
         ResetDropAreaZIndexs();
         document.getElementById("squareDropArea").style.zIndex = 3;
@@ -432,6 +437,8 @@ function HouseMain() {
         selectedContainer = "blueTri";
         rotationArrIndex = BLUE_TRI_INDEX;
 
+        responsiveVoice.speak("triangle", "US English Female");
+
         ResetDropAreaZIndexs();
         document.getElementById("blueTriDropArea").style.zIndex = 3;
     });
@@ -439,6 +446,8 @@ function HouseMain() {
     $("#aquaTriContainer").mousedown(function () {
         selectedContainer = "aquaTri";
         rotationArrIndex = AQUA_TRI_INDEX;
+
+        responsiveVoice.speak("triangle", "US English Female");
 
         ResetDropAreaZIndexs();
         document.getElementById("aquaTriDropArea").style.zIndex = 3;
@@ -448,6 +457,8 @@ function HouseMain() {
         selectedContainer = "greenTri";
         rotationArrIndex = GREEN_TRI_INDEX;
 
+        responsiveVoice.speak("triangle", "US English Female");
+
         ResetDropAreaZIndexs();
         document.getElementById("greenTriDropArea").style.zIndex = 3;
     });
@@ -455,6 +466,8 @@ function HouseMain() {
     $("#orangeTriContainer").mousedown(function () {
         selectedContainer = "orangeTri";
         rotationArrIndex = ORANGE_TRI_INDEX;
+
+        responsiveVoice.speak("triangle", "US English Female");
 
         ResetDropAreaZIndexs();
         document.getElementById("orangeTriDropArea").style.zIndex = 3;
@@ -464,6 +477,8 @@ function HouseMain() {
     $("#yellowTriContainer").mousedown(function () {
         selectedContainer = "yellowTri";
         rotationArrIndex = YELLOW_TRI_INDEX;
+
+        responsiveVoice.speak("triangle", "US English Female");
 
         ResetDropAreaZIndexs();
         document.getElementById("yellowTriDropArea").style.zIndex = 3;
@@ -666,7 +681,7 @@ function DropSquare(ev) {
         if (WonGame())
             EndGame(true);
         else
-            responsiveVoice.speak("Nice!");
+            responsiveVoice.speak("Nice!", "US English Female");
     }
 
     document.getElementById(mostRecentDragID).style.opacity = "1";
@@ -815,6 +830,8 @@ function SquareMain() {
         selectedContainer = "rhombus";
         rotationArrIndex = RHOMBUS_INDEX;
 
+        responsiveVoice.speak("rhombus", "US English Female");
+
         ResetDropAreaZIndexs();
         document.getElementById("rhombusDropArea").style.zIndex = 3;
     });
@@ -823,6 +840,8 @@ function SquareMain() {
         selectedContainer = "square";
         rotationArrIndex = SQUARE_INDEX;
 
+        responsiveVoice.speak("square", "US English Female");
+
         ResetDropAreaZIndexs();
         document.getElementById("squareDropArea").style.zIndex = 3;
     });
@@ -830,6 +849,8 @@ function SquareMain() {
     $("#blueTriContainer").mousedown(function () {
         selectedContainer = "blueTri";
         rotationArrIndex = BLUE_TRI_INDEX;
+
+        responsiveVoice.speak("triangle", "US English Female");
 
         ResetDropAreaZIndexs();
         document.getElementById("blueTriDropArea").style.zIndex = 3;
@@ -840,6 +861,8 @@ function SquareMain() {
         selectedContainer = "aquaTri";
         rotationArrIndex = AQUA_TRI_INDEX;
 
+        responsiveVoice.speak("triangle", "US English Female");
+
         ResetDropAreaZIndexs();
         document.getElementById("aquaTriDropArea").style.zIndex = 3;
         document.getElementById("blueTriDropArea").style.zIndex = 3;
@@ -849,6 +872,8 @@ function SquareMain() {
         selectedContainer = "greenTri";
         rotationArrIndex = GREEN_TRI_INDEX;
 
+        responsiveVoice.speak("triangle", "US English Female");
+
         ResetDropAreaZIndexs();
         document.getElementById("greenTriDropArea").style.zIndex = 3;
     });
@@ -856,6 +881,8 @@ function SquareMain() {
     $("#orangeTriContainer").mousedown(function () {
         selectedContainer = "orangeTri";
         rotationArrIndex = ORANGE_TRI_INDEX;
+
+        responsiveVoice.speak("triangle", "US English Female");
 
         ResetDropAreaZIndexs();
         document.getElementById("orangeTriDropArea").style.zIndex = 3;
@@ -865,6 +892,8 @@ function SquareMain() {
     $("#yellowTriContainer").mousedown(function () {
         selectedContainer = "yellowTri";
         rotationArrIndex = YELLOW_TRI_INDEX;
+
+        responsiveVoice.speak("triangle", "US English Female");
 
         ResetDropAreaZIndexs();
         document.getElementById("yellowTriDropArea").style.zIndex = 3;
@@ -1151,15 +1180,43 @@ function CreateHtmlElements(difficulty) {
     //addd to it's container
     rotateRight.appendChild(rotateImg);
 
+    ///////////////////////////////////////////////////
+    var endGameDiv = document.createElement("div");
+    endGameDiv.setAttribute("id", "endGameDiv");
+    endGameDiv.innerHTML = "Great Job!";
+    endGameDiv.appendChild(document.createElement("br"));
+
+    var endGameDivPic = document.createElement("img");
+    endGameDivPic.setAttribute("id", "endGameDivPic");
+    endGameDivPic.setAttribute("src", "../../Images/gameOver.png");
+
+    endGameDiv.appendChild(endGameDivPic);
+    endGameDiv.appendChild(document.createElement("br"));
+
+    var doneButton = document.createElement("button");
+    doneButton.innerHTML = "Done";
+    doneButton.setAttribute("id", "doneButton");
+
+    endGameDiv.appendChild(doneButton);
+    ////////////////////////////////////////////////
+
     //add them to the div container
     divContainer.appendChild(header);
     divContainer.appendChild(dropAreaContainer);
     divContainer.appendChild(tangramPiecesContainer);
     divContainer.appendChild(rotateRight);
+    divContainer.appendChild(endGameDiv);
 }
 
 function EndGame(finished) {
     endGameFuncCalls++;
+
+    if (endGameFuncCalls === 1)
+        responsiveVoice.speak("Great job!", "US English Female");
+
+    $('#doneButton').click(function () {
+        window.location.href = '/Play/Play/'
+    });
 
     var returnVal = 0;
 
@@ -1202,14 +1259,17 @@ function EndGame(finished) {
 
     document.getElementById("score").value = returnVal;
     EndofGame(); //function displays good job message and returns to map
-
-    if (endGameFuncCalls === 1)
-        responsiveVoice.speak("Great job!");
+    setTimeout(function () {
+        $('#gameOver').hide();
+    }, 500);
+    document.getElementById("endGameDiv").style.display = "block";
 }
 
 function Main() {
     //get the game's difficulty level and modify the dataset for that difficulty level
     var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
+    var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
+    var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
     //create the html
     CreateHtmlElements(difficulty);
@@ -1221,7 +1281,7 @@ function Main() {
         HouseMain();
 
     responsiveVoice.OnVoiceReady = function () {
-        responsiveVoice.speak("Solve the puzzle by clicking on a shape, rotating the shape with the rotate button, and then dragging the shape onto the puzzle.");
+        responsiveVoice.speak("Solve the puzzle by clicking on a shape, rotating the shape with the rotate button, and then dragging the shape onto the puzzle.", "US English Female");
     };
 
     //if the user leaves the page

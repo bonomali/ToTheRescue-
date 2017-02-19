@@ -466,6 +466,11 @@ function Main() {
         MakeScalable();
     }, false);
 
+    //if the user leaves the page
+    $(window).on("beforeunload", function () {
+        responsiveVoice.cancel(); //quit doing text to speech
+    });
+
     //allows the instructions to be said before execution
     setTimeout(function () {
         MakeScalable();

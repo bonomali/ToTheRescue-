@@ -1,167 +1,147 @@
-function SetAnswerLocations(answer)
-{
-	var answerArr = [null, null, null, null];
-	
-	var index = GetRandomInt(0, 3);
-	
-	answerArr[index] = answer;
-	
-	//randomly place the values of 0-3 into the array
-	if (answer <= 2)
-	{
-		if (answer !== 0)
-		{
-			while (answerArr[index] !== null)
-			{
-				index = GetRandomInt(0, 3);
-			}
-			
-			answerArr[index] = 0;
-		}
-		
-		if (answer !== 1)
-		{
-			while (answerArr[index] !== null)
-			{
-				index = GetRandomInt(0, 3);
-			}
-			
-			answerArr[index] = 1;
-		}
-		
-		if (answer !== 2)
-		{
-			while (answerArr[index] !== null)
-			{
-				index = GetRandomInt(0, 3);
-			}
-			
-			answerArr[index] = 2;
-		}
-		
-		
-		for (var i = 0; i < 4; i++)
-		{
-			if (answerArr[i] === null)
-			{
-				answerArr[i] = 3;
-				break;
-			}
-		}
-	}
-	else
-	{
-		while (answerArr[index] !== null)
-		{
-			index = GetRandomInt(0, 3);
-		}
-	
-		//handels the "close" amswer
-		if (GetRandomInt(1,2) === 1)
-		{
-			answerArr[index] = answer + 1;
-		}
-		else
-		{
-			answerArr[index] = answer - 1;
-		}
-		
-		//handels the two other answers
-		for (var i = 0; i < 4; i++)
-		{
-			if (answerArr[i] === null)
-			{
-				answerArr[i] = Math.floor(answer / 2);
-				break;
-			}
-		}
-	
-		for (var i = 0; i < 4; i++)
-		{
-			if (answerArr[i] === null)
-			{
-				answerArr[i] = Math.ceil(answer * 1.5);
-			}
-		}
-	}
-	
-	return answerArr;
+function SetAnswerLocations(answer) {
+    var answerArr = [null, null, null, null];
+
+    var index = GetRandomInt(0, 3);
+
+    answerArr[index] = answer;
+
+    //randomly place the values of 0-3 into the array
+    if (answer <= 2) {
+        if (answer !== 0) {
+            while (answerArr[index] !== null) {
+                index = GetRandomInt(0, 3);
+            }
+
+            answerArr[index] = 0;
+        }
+
+        if (answer !== 1) {
+            while (answerArr[index] !== null) {
+                index = GetRandomInt(0, 3);
+            }
+
+            answerArr[index] = 1;
+        }
+
+        if (answer !== 2) {
+            while (answerArr[index] !== null) {
+                index = GetRandomInt(0, 3);
+            }
+
+            answerArr[index] = 2;
+        }
+
+
+        for (var i = 0; i < 4; i++) {
+            if (answerArr[i] === null) {
+                answerArr[i] = 3;
+                break;
+            }
+        }
+    }
+    else {
+        while (answerArr[index] !== null) {
+            index = GetRandomInt(0, 3);
+        }
+
+        //handels the "close" amswer
+        if (GetRandomInt(1, 2) === 1) {
+            answerArr[index] = answer + 1;
+        }
+        else {
+            answerArr[index] = answer - 1;
+        }
+
+        //handels the two other answers
+        for (var i = 0; i < 4; i++) {
+            if (answerArr[i] === null) {
+                answerArr[i] = Math.floor(answer / 2);
+                break;
+            }
+        }
+
+        for (var i = 0; i < 4; i++) {
+            if (answerArr[i] === null) {
+                answerArr[i] = Math.ceil(answer * 1.5);
+            }
+        }
+    }
+
+    return answerArr;
 }
 
-function SetQuestionContent(num1, num2)
-{
-	var div = document.getElementById("addr1");
-	div.innerHTML = num1;
-	div = document.getElementById("addr2");
-	div.innerHTML = num2;
+function SetQuestionContent(num1, num2) {
+    var div = document.getElementById("addr1");
+    div.innerHTML = num1;
+    div = document.getElementById("addr2");
+    div.innerHTML = num2;
 }
 
-function SetAnswerContent(answerArr, AdditionGame)
-{
-	for (var i = 0; i < answerArr.length; i++)
-	{
-		//give it some 
-		var id = "answer";
-		var num = i + 1;
-		num = num.toString();
-		id = id.concat(num);
-		var div = document.getElementById(id);
-		div.innerHTML = answerArr[i];
-		
-		//add an onclick event to the answer divs
-		div.onclick = (function (id, AdditionGame) {
-			return function () { 
-			ClickedAnswer(id, AdditionGame);
-			}
-		})(id, AdditionGame);
-	}
+function SetAnswerContent(answerArr, AdditionGame) {
+    for (var i = 0; i < answerArr.length; i++) {
+        //give it some 
+        var id = "answer";
+        var num = i + 1;
+        num = num.toString();
+        id = id.concat(num);
+        var div = document.getElementById(id);
+        div.innerHTML = answerArr[i];
+
+        //add an onclick event to the answer divs
+        div.onclick = (function (id, AdditionGame) {
+            return function () {
+                ClickedAnswer(id, AdditionGame);
+            }
+        })(id, AdditionGame);
+    }
 }
 
-function ClickedAnswer(id, AdditionGame)
-{
-	AdditionGame.numClicks++;
-	
-	var div = document.getElementById(id);
-	var num = div.innerHTML;
-	num = Number(num);
-	
-	if (num === AdditionGame.answer) {
-	    AdditionGame.numCorrect++;
-	    //recall the game loop
-	    GameLoop(AdditionGame);
-	}
+function ClickedAnswer(id, AdditionGame) {
+    AdditionGame.numClicks++;
+
+    var div = document.getElementById(id);
+    var num = div.innerHTML;
+
+    //say the number
+    responsiveVoice.speak(num, "US English Female");
+
+    num = Number(num);
+
+    if (num === AdditionGame.answer) {
+        AdditionGame.numCorrect++;
+        //recall the game loop
+        GameLoop(AdditionGame);
+    }
 }
 
-function ResizeText(elementID)
-{
-	var div = document.getElementById(elementID);
-	var height = div.clientHeight / 2;
-	height = height.toString();
-	height = height.concat("px");
-	
-	div.style.fontSize = height;
-	
-	height = div.clientHeight;
-	height = height.toString();
-	height = height.concat("px");
-	
-	div.style.lineHeight = height;
+function ResizeText(elementID) {
+    var div = document.getElementById(elementID);
+    var height = div.clientHeight / 2;
+    height = height.toString();
+    height = height.concat("px");
+
+    div.style.fontSize = height;
+
+    height = div.clientHeight;
+    height = height.toString();
+    height = height.concat("px");
+
+    div.style.lineHeight = height;
 }
 
-function MakeScalable()
-{
-	ResizeText("addr1");
-	ResizeText("plus");
-	ResizeText("addr2");
-	ResizeText("equal");
-	ResizeText("question");
-	
-	ResizeText("answer1");
-	ResizeText("answer2");
-	ResizeText("answer3");
-	ResizeText("answer4");
-	
-	ResizeText("imgPlus");
+function MakeScalable() {
+    ResizeText("addr1");
+    ResizeText("plus");
+    ResizeText("addr2");
+    ResizeText("equal");
+    ResizeText("question");
+
+    ResizeText("answer1");
+    ResizeText("answer2");
+    ResizeText("answer3");
+    ResizeText("answer4");
+
+    ResizeText("imgPlus");
 }
 
 /**
@@ -172,79 +152,75 @@ function GetRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function SetImageContent(num1, num2)
-{	
-	//make all of the old images invisible
-	for (var i = 1; i <= 20; i++)
-	{
-		var id = "i1";
-		var num = i;
-		num = Number(i);
-		id = id.concat(num);
-		
-		var img = document.getElementById(id);
-		img.style.visibility = "hidden";
-	}
-	
-	for (var i = 1; i <= 20; i++)
-	{
-		var id = "i2";
-		var num = i;
-		num = Number(i);
-		id = id.concat(num);
-		
-		var img = document.getElementById(id);
-		img.style.visibility = "hidden";
-	}
-	
-	//show the giraffs for num1
-	for (var i = 1; i <= num1; i++)
-	{
-		var id = "i1";
-		var num = i;
-		num = Number(i);
-		id = id.concat(num);
-		
-		var img = document.getElementById(id);
-		img.style.visibility = "visible";
-	}
-	
-	//show the giraffs for num2
-	for (var i = 1; i <= num2; i++)
-	{
-		var id = "i2";
-		var num = i;
-		num = Number(i);
-		id = id.concat(num);
-		
-		var img = document.getElementById(id);
-		img.style.visibility = "visible";
-	}
+function SetImageContent(num1, num2) {
+    //make all of the old images invisible
+    for (var i = 1; i <= 20; i++) {
+        var id = "i1";
+        var num = i;
+        num = Number(i);
+        id = id.concat(num);
+
+        var img = document.getElementById(id);
+        img.style.visibility = "hidden";
+    }
+
+    for (var i = 1; i <= 20; i++) {
+        var id = "i2";
+        var num = i;
+        num = Number(i);
+        id = id.concat(num);
+
+        var img = document.getElementById(id);
+        img.style.visibility = "hidden";
+    }
+
+    //show the giraffs for num1
+    for (var i = 1; i <= num1; i++) {
+        var id = "i1";
+        var num = i;
+        num = Number(i);
+        id = id.concat(num);
+
+        var img = document.getElementById(id);
+        img.style.visibility = "visible";
+    }
+
+    //show the giraffs for num2
+    for (var i = 1; i <= num2; i++) {
+        var id = "i2";
+        var num = i;
+        num = Number(i);
+        id = id.concat(num);
+
+        var img = document.getElementById(id);
+        img.style.visibility = "visible";
+    }
 }
 
-function GameLoop(AdditionGame)
-{
-	//get the two numbers to add together
-	var num1 = GetRandomInt(AdditionGame.lowerBound, AdditionGame.upperBound);
-	var num2 = GetRandomInt(AdditionGame.lowerBound, AdditionGame.upperBound);
-	
-	//shows the giraffs for each number
-	SetImageContent(num1, num2);
-	
-	//fill the question divs with content
-	SetQuestionContent(num1, num2);
+function GameLoop(AdditionGame) {
+    //get the two numbers to add together
+    var num1 = GetRandomInt(AdditionGame.lowerBound, AdditionGame.upperBound);
+    var num2 = GetRandomInt(AdditionGame.lowerBound, AdditionGame.upperBound);
 
-	AdditionGame.answer = num1 + num2;
-	
-	//logic array of what the answers should be 
-	var answerArr = SetAnswerLocations(AdditionGame.answer);
-	
-	//fill the answer divs with content
-	SetAnswerContent(answerArr, AdditionGame);
+    //say the addition problem
+    responsiveVoice.speak(num1.toString() + "plus" + num2.toString(), "US English Female");
+
+    //shows the giraffs for each number
+    SetImageContent(num1, num2);
+
+    //fill the question divs with content
+    SetQuestionContent(num1, num2);
+
+    AdditionGame.answer = num1 + num2;
+
+    //logic array of what the answers should be 
+    var answerArr = SetAnswerLocations(AdditionGame.answer);
+
+    //fill the answer divs with content
+    SetAnswerContent(answerArr, AdditionGame);
 }
 
-function CreateHtmlElements()
-{
+function CreateHtmlElements() {
     //going to be stored on the server at some point
     var imgSrc = "../../MiniGames/AdditionMiniGame/img/giraffeImg.png";
 
@@ -388,115 +364,157 @@ function CreateHtmlElements()
     answerContainer.appendChild(answer3);
     answerContainer.appendChild(answer4);
 
+    ///////////////////////////////////////////////////
+    var endGameDiv = document.createElement("div");
+    endGameDiv.setAttribute("id", "endGameDiv");
+    endGameDiv.innerHTML = "Great Job!";
+    endGameDiv.appendChild(document.createElement("br"));
+
+    var endGameDivPic = document.createElement("img");
+    endGameDivPic.setAttribute("id", "endGameDivPic");
+    endGameDivPic.setAttribute("src", "../../Images/gameOver.png");
+
+    endGameDiv.appendChild(endGameDivPic);
+    endGameDiv.appendChild(document.createElement("br"));
+
+    var doneButton = document.createElement("button");
+    doneButton.innerHTML = "Done";
+    doneButton.setAttribute("id", "doneButton");
+
+    endGameDiv.appendChild(doneButton);
+    ////////////////////////////////////////////////
+
     //add everything to the play area
     divContainer.appendChild(header);
     divContainer.appendChild(questionContainer);
     divContainer.appendChild(visualContainer);
     divContainer.appendChild(answerContainer);
+    divContainer.appendChild(endGameDiv);
 }
 
-function Main()
-{
-    var audioSrc = "../../MiniGames/AdditionMiniGame/audio/intro.m4a";
-	var audio = new Audio();
-	
-	//object that keeps track of all the important
-	//information in the game
-	var AdditionGame = {
-		lowerBound: 0,
-		upperBound: -1,
-		answer: -1,
-		numCorrect: 0,
-		numClicks: 0
-	};
-	
-    //get the game's difficulty level and modify the dataset for that difficulty level
-	var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
+function EndGame(AdditionGame) {
+    $('#doneButton').click(function () {
+        window.location.href = '/Play/Play/'
+    });
 
-	 if (difficulty <= 3)
-	     AdditionGame.upperBound = 5;
-	 else
-	     AdditionGame.upperBound = 10;
+    responsiveVoice.speak("Great job!", "US English Female");
+
+    document.getElementById("questionContainer").style.zIndex = "-1";
+    document.getElementById("answerContainer").style.zIndex = "-1";
+    document.getElementById("visualContainer").style.zIndex = "-1";
+
+    var totalCorrect = AdditionGame.numCorrect;
+    var totalAttempts = AdditionGame.numClicks;
+    var percentage = totalCorrect / totalAttempts;
+
+    var returnVal = null;
+
+
+    if (percentage >= 0.10 && percentage <= 0.20) {
+        returnVal = -4;
+    }
+    else if (percentage > 0.20 && percentage <= 0.30) {
+        returnVal = -3;
+    }
+    else if (percentage > 0.30 && percentage <= 0.40) {
+        returnVal = -2;
+    }
+    else if (percentage > 0.40 && percentage <= 0.50) {
+        returnVal = -1;
+    }
+    else if (percentage > 0.50 && percentage <= 0.60) {
+        returnVal = 0;
+    }
+    else if (percentage > 0.60 && percentage <= 0.70) {
+        returnVal = 1;
+    }
+    else if (percentage > 0.70 && percentage <= 0.80) {
+        returnVal = 2;
+    }
+    else if (percentage > 0.80 && percentage <= 0.90) {
+        returnVal = 3;
+    }
+    else if (percentage > 0.90 && percentage <= 0.95) {
+        returnVal = 4;
+    }
+    else if (percentage < 0.10) {
+        returnVal = -5;
+    }
+    else {
+        returnVal = 5;
+    }
+
+    if (totalAttempts === 0)
+        returnVal = 0;
+
+    document.getElementById("score").value = returnVal;
+    EndofGame(); //function displays good job message and returns to map
+    setTimeout(function () {
+        $('#gameOver').hide();
+    }, 500);
+    document.getElementById("endGameDiv").style.display = "block";
+}
+
+function Main() {
+
+    //object that keeps track of all the important
+    //information in the game
+    var AdditionGame = {
+        lowerBound: 0,
+        upperBound: -1,
+        answer: -1,
+        numCorrect: 0,
+        numClicks: 0
+    };
+
+    //get the game's difficulty level and modify the dataset for that difficulty level
+    var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
+    //get the sound
+    var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
+    var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
+
+    if (difficulty <= 3)
+        AdditionGame.upperBound = 5;
+    else
+        AdditionGame.upperBound = 10;
 
     //create the html
-	CreateHtmlElements();
+    CreateHtmlElements();
 
-	window.addEventListener('resize', function(){
-		MakeScalable();
-	}, false);
-		
-	window.onload = function () {
-		//play the audio
-	    audio.src = audioSrc;
-		audio.play();
-		
-		MakeScalable();
-		
-		//allows the audio to play before the user plays the game
-		setTimeout(function () {
-			document.getElementById("visualContainer").style.visibility = "visible";
-			document.getElementById("plus").style.visibility = "visible";
-			document.getElementById("equal").style.visibility = "visible";
-			document.getElementById("question").style.visibility = "visible";
+    window.addEventListener('resize', function () {
+        MakeScalable();
+    }, false);
 
-			GameLoop(AdditionGame);
-		},3500);
-		
-	};
-	
-	//play the game for 1 minuet and then end the game
-	setTimeout(function () {
-			document.getElementById("questionContainer").style.zIndex = "-1";
-			document.getElementById("answerContainer").style.zIndex = "-1";
-			document.getElementById("visualContainer").style.zIndex = "-1";
-			
-			var totalCorrect = AdditionGame.numCorrect;
-			var totalAttempts = AdditionGame.numClicks;
-			var percentage = totalCorrect / totalAttempts;
+    //if the user leaves the page
+    $(window).on("beforeunload", function () {
+        responsiveVoice.cancel(); //quit doing text to speech
+    });
 
-			var returnVal = null;
+    window.onload = function () {
+        //give the instructions
+        responsiveVoice.OnVoiceReady = function () {
+            responsiveVoice.speak("Determine the sum by adding the two numbers together.",
+            "US English Female");
+        };
 
+        MakeScalable();
 
-			if (percentage >= 0.10 && percentage <= 0.20) {
-			    returnVal = -4;
-			}
-			else if (percentage > 0.20 && percentage <= 0.30) {
-			    returnVal = -3;
-			}
-			else if (percentage > 0.30 && percentage <= 0.40) {
-			    returnVal = -2;
-			}
-			else if (percentage > 0.40 && percentage <= 0.50) {
-			    returnVal = -1;
-			}
-			else if (percentage > 0.50 && percentage <= 0.60) {
-			    returnVal = 0;
-			}
-			else if (percentage > 0.60 && percentage <= 0.70) {
-			    returnVal = 1;
-			}
-			else if (percentage > 0.70 && percentage <= 0.80) {
-			    returnVal = 2;
-			}
-			else if (percentage > 0.80 && percentage <= 0.90) {
-			    returnVal = 3;
-			}
-			else if (percentage > 0.90 && percentage <= 0.95){
-			    returnVal = 4;
-			}
-			else if (percentage < 0.10) {
-			    returnVal = -5;
-			}
-			else{
-			    returnVal = 5;
-			}
+        //allows the audio to play before the user plays the game
+        setTimeout(function () {
+            document.getElementById("visualContainer").style.visibility = "visible";
+            document.getElementById("plus").style.visibility = "visible";
+            document.getElementById("equal").style.visibility = "visible";
+            document.getElementById("question").style.visibility = "visible";
 
-			if (totalAttempts === 0)
-			    returnVal = 0;
+            GameLoop(AdditionGame);
+        }, 3500);
 
-			document.getElementById("score").value = returnVal;
-			EndofGame(); //function displays good job message and returns to map
-       }, 60000);	
+    };
+
+    //play the game for 2 minuet and then end the game
+    setTimeout(function () {
+        EndGame(AdditionGame);
+    }, 120000);
 }
 
 Main();
