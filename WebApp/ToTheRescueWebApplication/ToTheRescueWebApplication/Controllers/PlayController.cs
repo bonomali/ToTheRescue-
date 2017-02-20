@@ -236,7 +236,7 @@ namespace ToTheRescueWebApplication.Controllers
                 Session["fp_nodeID"] = (int)Session["fp_nodeID"] + 1;  //go to next node
         }
         //update ProfileProgress to a new map
-        public ActionResult NewMap()
+        public void NewMap()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -256,10 +256,7 @@ namespace ToTheRescueWebApplication.Controllers
                     _progress.UpdateCurrentMap((int)Session["profileID"], p.CurrentMap, newAnimal); //new map and animal
                 }
                 else //pass in FIRST_MAP - 1 so increment in UpdateCurrentMap function will increment to MapID = 1
-                {
                     _progress.UpdateCurrentMap((int)Session["profileID"], (FIRST_MAP - 1), newAnimal); //return to map1
-                    return RedirectToAction("EndofGame", "Play");
-                }
             }
             else      //free play mode
             {
@@ -274,12 +271,8 @@ namespace ToTheRescueWebApplication.Controllers
                 if ((int)Session["fp_mapID"] < LAST_MAP)
                     Session["fp_mapID"] = (int)Session["fp_mapID"] + 1;
                 else
-                {
                     Session["fp_mapID"] = 1;   //return to first map
-                    return RedirectToAction("EndofGame", "Play");
-                }
             }
-            return new EmptyResult();
         }
         //get the number of the current node for profile
         public int GetCurrentNode ()
