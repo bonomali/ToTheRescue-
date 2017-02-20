@@ -117,7 +117,10 @@
         $("#closePraise").click(function () {
             $("animalSaved").hide();
             $("play").show();
-            window.location.href = '/Play/Play/';
+            if(@Model.CurrentMap == 7)  //go to end of game splash screen after last map
+                window.location.href = '/Play/EndofGame/'
+            else
+                window.location.href = '/Play/Play/';
         });
     });
 </script>
