@@ -236,7 +236,7 @@ namespace ToTheRescueWebApplication.Controllers
                 Session["fp_nodeID"] = (int)Session["fp_nodeID"] + 1;  //go to next node
         }
         //update ProfileProgress to a new map
-        public void NewMap()
+        public ActionResult NewMap()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -258,23 +258,28 @@ namespace ToTheRescueWebApplication.Controllers
                 else //pass in FIRST_MAP - 1 so increment in UpdateCurrentMap function will increment to MapID = 1
                 {
                     _progress.UpdateCurrentMap((int)Session["profileID"], (FIRST_MAP - 1), newAnimal); //return to map1
+                    return RedirectToAction("EndofGame", "Play");
                 }
             }
             else      //free play mode
             {
-                 //if user hasn't reached last map, go to next map
-                if ((int)Session["fp_mapID"] < LAST_MAP)
-                    Session["fp_mapID"] = (int)Session["fp_mapID"] + 1;    
-                else 
-                    Session["fp_mapID"] = 1;   //return to first map
-
                 if ((int)Session["fp_animalID"] == NUM_ANIMALS)
                     Session["fp_animalID"] = 1;
                 else
                     Session["fp_animalID"] = (int)Session["fp_animalID"] + 1;  //go to next animal
 
                 Session["fp_nodeID"] = 1;  //reset to first node
+
+                //if user hasn't reached last map, go to next map
+                if ((int)Session["fp_mapID"] < LAST_MAP)
+                    Session["fp_mapID"] = (int)Session["fp_mapID"] + 1;
+                else
+                {
+                    Session["fp_mapID"] = 1;   //return to first map
+                    return RedirectToAction("EndofGame", "Play");
+                }
             }
+            return new EmptyResult();
         }
         //get the number of the current node for profile
         public int GetCurrentNode ()
@@ -353,11 +358,7 @@ namespace ToTheRescueWebApplication.Controllers
                     }
                 }
                 model.MiniGameID = minigames[ranGame].ID;
-                //model.MiniGame = "../../MiniGames/Shape_ColoringBook/javascript/colorbook.js";
-                //model.MiniGame = "../../MiniGames/Alphabet_BubblePop/javascript/bubble.js";
-                //model.MiniGame = "../../MiniGames/Alphabet_Matching2/Source/Alphabet_Matching2.js";
-                model.MiniGame = "../../MiniGames/TypingGame/javascript/TypingGame.js";
-                //model.MiniGame = "../../MiniGames/Alphabet_Matching/Source/Alphabet_Matching.js";
+                model.MiniGame = "../../MiniGames/MosquitoSwat_LetterSounds/javascript/mosquitoswat.js";
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
             }
             else    //free play mode
@@ -366,9 +367,7 @@ namespace ToTheRescueWebApplication.Controllers
                 int ranGame = random.Next(1, minigames.Count()) - 1; //generate an index between 1 and num of games
 
                 model.MiniGameID = minigames[ranGame].ID;
-                model.MiniGame = "../../MiniGames/MosquitoSwat_LetterSounds/javascript/mosquitoswat.js";
-                model.MiniGame = "../../MiniGames/Alphabet_BubblePop/javascript/bubble.js";
-                model.MiniGame = "../../MiniGames/Alphabet_Matching2/Source/Alphabet_Matching2.js";
+                model.MiniGame = "../../MiniGames/SightWord_Maze/javascript/sightword_maze.js";
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
                 model.Difficulty = 0;   //difficulty doesn't apply to free play mode
