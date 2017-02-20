@@ -7,12 +7,15 @@
 
 <!DOCTYPE html>
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="../../scripts/transition.js"></script>
+<script type="text/javascript">
+    transition('#f0ffff');
+    $(window).load(function () {
+        $("#content").fadeOut("slow");
+    })
+</script>   
 <h2 class="h2" id="name">@TempData["profileName"]'s Sanctuary!</h2>
-<script src="transition.js" onload="transition('#f0ffff')">
-        document.addEventListener('DOMContentLoaded', function () {
-            hide(); //hides the transtion, revealing your page
-        }, false);
-</script>
 <html>
 
 <head>

@@ -3,6 +3,14 @@
     ViewBag.Title = "Play MiniGame";
 }
 @model ToTheRescueWebApplication.Models.Play.MiniGameModel
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="../../scripts/transition.js"></script>
+<script type="text/javascript">
+    transition('#f0ffff');
+    $(window).load(function () {
+        $("#content").fadeOut("slow");
+    })
+</script>  
 <nav id="playMenu">
     <div class="icons">
         <ul class="buttons">

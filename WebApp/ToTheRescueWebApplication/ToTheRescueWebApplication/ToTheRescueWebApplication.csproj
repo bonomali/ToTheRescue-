@@ -210,6 +210,7 @@
     <Content Include="CSS\MainMenu.css" />
     <Content Include="CSS\Play.css" />
     <Content Include="CSS\Sanctuary.css" />
+    <Content Include="CSS\Transition.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\animalBackground.jpg" />
@@ -757,6 +758,7 @@
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="SQLScripts\DropIdentity.sql" />
     <Content Include="Views\AnimalSanctuary\AnimalSanctuary.js" />
+    <Content Include="scripts\transition.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
