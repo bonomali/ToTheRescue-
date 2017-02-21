@@ -289,6 +289,11 @@ namespace ToTheRescueWebApplication.Controllers
         {
             return View();
         }
+        //return map count
+        public int GetMapCount()
+        {
+            return LAST_MAP;
+        }
         /***********************THIS IS NOT FULLY FUNCTIONAL, WE NEED MINIGAMES*******************/
         /*******************************MAY BREAK FOR SOME PROFILES*******************************/
         /*************************************NOT YET TESTED**************************************/

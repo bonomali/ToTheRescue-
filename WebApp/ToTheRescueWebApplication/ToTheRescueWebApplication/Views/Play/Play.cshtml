@@ -115,12 +115,19 @@
 
         //when animal saved div close, go to new map
         $("#closePraise").click(function () {
-            $("animalSaved").hide();
-            $("play").show();
-            if(@Model.CurrentMap == 7)  //go to end of game splash screen after last map
-                window.location.href = '/Play/EndofGame/'
-            else
-                window.location.href = '/Play/Play/';
+            $.ajax({
+                url: '/Play/GetMapCount/',
+                datatype: "text",
+                type: "GET",
+                success: function (mapCount) {
+                    $("animalSaved").hide();
+                    $("play").show();
+                    if(@Model.CurrentMap == mapCount)  //go to end of game splash screen after last map
+                        window.location.href = '/Play/EndofGame/'
+                    else
+                        window.location.href = '/Play/Play/';
+                }
+            });      
         });
     });
 </script>
