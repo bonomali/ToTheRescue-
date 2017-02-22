@@ -1266,6 +1266,9 @@ function EndGame(finished) {
 }
 
 function Main() {
+    var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSong4.mp3");
+    backgroundMusic.volume = "0.1";
+
     //get the game's difficulty level and modify the dataset for that difficulty level
     var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
     var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
@@ -1284,10 +1287,21 @@ function Main() {
         responsiveVoice.speak("Solve the puzzle by clicking on a shape, rotating the shape with the rotate button, and then dragging the shape onto the puzzle.", "US English Female");
     };
 
+    if (musicToggle === "False") {
+        //play background music
+        backgroundMusic.play();
+    }
+
     //if the user leaves the page
     $(window).on("beforeunload", function () {
         responsiveVoice.cancel(); //quit doing text to speech
     });
+
+    //reloop the audio
+    backgroundMusic.addEventListener('ended', function () {
+        this.currentTime = 0;
+        this.play();
+    }, false);
 
     //if the user didn't finish the game in 2 minuets
     setTimeout(function () {

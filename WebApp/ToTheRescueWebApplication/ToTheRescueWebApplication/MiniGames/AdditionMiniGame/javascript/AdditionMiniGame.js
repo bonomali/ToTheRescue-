@@ -457,6 +457,9 @@ function EndGame(AdditionGame) {
 
 function Main() {
 
+    var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSong1.mp3");
+    backgroundMusic.volume = "0.02";
+
     //object that keeps track of all the important
     //information in the game
     var AdditionGame = {
@@ -485,6 +488,12 @@ function Main() {
         MakeScalable();
     }, false);
 
+    //reloop the audio
+    backgroundMusic.addEventListener('ended', function () {
+        this.currentTime = 0;
+        this.play();
+    }, false);
+
     //if the user leaves the page
     $(window).on("beforeunload", function () {
         responsiveVoice.cancel(); //quit doing text to speech
@@ -496,6 +505,11 @@ function Main() {
             responsiveVoice.speak("Determine the sum by adding the two numbers together.",
             "US English Female");
         };
+
+        if (musicToggle === "False") {
+            //play background music
+            backgroundMusic.play();
+        }
 
         MakeScalable();
 

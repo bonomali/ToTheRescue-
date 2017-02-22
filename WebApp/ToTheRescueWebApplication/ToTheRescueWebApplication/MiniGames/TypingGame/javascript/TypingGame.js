@@ -286,6 +286,9 @@ function Main() {
 				  "want", "was", "well", "went", "what", "white", "who", "will",
 				  "with", "yes"];
 
+    var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSong2.mp3");
+    backgroundMusic.volume = "0.1";
+
     //get the game's difficulty level and modify the dataset for that difficulty level
     var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
     var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
@@ -303,6 +306,17 @@ function Main() {
         responsiveVoice.speak("Type the word that appears on the screen.", "US English Female");
     };
 
+    if (musicToggle === "False") {
+        //play background music
+        backgroundMusic.play();
+    }
+
+    //reloop the audio
+    backgroundMusic.addEventListener('ended', function () {
+        this.currentTime = 0;
+        this.play();
+    }, false);
+
     document.getElementById("p1").style.color = "red";
 
     setTimeout(function () {
@@ -310,8 +324,6 @@ function Main() {
     }, 4000);
 
     $("#input").focus();
-
-    //audio here for beginning of instructions.
 
     //detects what key was pressed, and allows what to be underlined to be shown
     $(document).keypress(function (event) {

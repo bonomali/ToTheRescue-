@@ -2,6 +2,7 @@ const HALF_ALPHA = 13;
 const FUlL_ALPHA = 26;
 
 var endGameFuncCalls = 0;
+var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSong2.mp3");
 
 function AllowDrop(ev) {
     ev.preventDefault();
@@ -77,10 +78,16 @@ function EndGame(finished) {
 
     if (endGameFuncCalls === 1)
     {
+        backgroundMusic.pause();
         //temporary abc song, will get an actual audio file in the future
         responsiveVoice.speak("A, B, C, D, E, F, G, H, I, J, K, L M N O P, Q, R, S, T, U, V, W, X, Y and Z." +
          "now I know my A B C's, next time will you sing with me!", "US English Female");
     }
+
+    setTimeout(function () {
+        backgroundMusic.play();
+        document.getElementById("endGameDiv").style.display = "block";
+    }, 15000);
 
     var returnVal = 0;
 
@@ -141,7 +148,6 @@ function EndGame(finished) {
     setTimeout(function () {
         $('#gameOver').hide();
     }, 500);
-    document.getElementById("endGameDiv").style.display = "block";
 
 }
 
@@ -395,6 +401,8 @@ function CreateHtmlElements(letters) {
 }
 
 function Main() {
+    backgroundMusic.volume = "0.1";
+
     var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
 				   'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
@@ -425,7 +433,18 @@ function Main() {
         responsiveVoice.OnVoiceReady = function () {
             responsiveVoice.speak("Sort the alphabet by dragging the letters the bottom of the screen to the top!", "US English Female");
         };
+
+        if (musicToggle === "False") {
+            //play background music
+            backgroundMusic.play();
+        }
     }   
+
+    //reloop the audio
+    backgroundMusic.addEventListener('ended', function () {
+        this.currentTime = 0;
+        this.play();
+    }, false);
 
     //play the game for 1 minuet and then end the game
     setTimeout(function () {

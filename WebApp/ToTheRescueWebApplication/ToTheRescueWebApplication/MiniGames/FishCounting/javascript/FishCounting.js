@@ -450,6 +450,9 @@ function EndGame() {
 }
 
 function Main() {
+    var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSong5(underwaterMario).mp3");
+    backgroundMusic.volume = "0.1";
+
     //this game doesn't have two difficulties so I am not going to do anything with this value
     var difficulty = document.getElementById("minigameScript").getAttribute("difficulty"); // only one difficulty for this game so not needed
     var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
@@ -460,10 +463,20 @@ function Main() {
     responsiveVoice.OnVoiceReady = function () {
         responsiveVoice.speak("Click the box that has the correct number of sea creatures that is displayed to the screen.",
 		"US English Female");
+        if (musicToggle === "False") {
+            //play background music
+            backgroundMusic.play();
+        }
     };
 
     window.addEventListener('resize', function () {
         MakeScalable();
+    }, false);
+
+    //reloop the audio
+    backgroundMusic.addEventListener('ended', function () {
+        this.currentTime = 0;
+        this.play();
     }, false);
 
     //if the user leaves the page

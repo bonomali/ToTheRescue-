@@ -465,6 +465,9 @@ function EndGame(SubtractionGame) {
 
 function Main() {
 
+    var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSong4.mp3");
+    backgroundMusic.volume = "0.1";
+
     //object that keeps track of all the important
     //information in the game
     var SubtractionGame = {
@@ -492,6 +495,12 @@ function Main() {
         MakeScalable();
     }, false);
 
+    //reloop the audio
+    backgroundMusic.addEventListener('ended', function () {
+        this.currentTime = 0;
+        this.play();
+    }, false);
+
     //if the user leaves the page
     $(window).on("beforeunload", function () {
         responsiveVoice.cancel(); //quit doing text to speech
@@ -504,6 +513,11 @@ function Main() {
             "US English Female");
         };
 
+        if (musicToggle === "False") {
+            //play background music
+            backgroundMusic.play();
+        }
+
         MakeScalable();
 
         //allows the audio to play before the user plays the game
@@ -514,7 +528,7 @@ function Main() {
             document.getElementById("question").style.visibility = "visible";
 
             GameLoop(SubtractionGame);
-        }, 5000);
+        }, 6500);
 
     };
 

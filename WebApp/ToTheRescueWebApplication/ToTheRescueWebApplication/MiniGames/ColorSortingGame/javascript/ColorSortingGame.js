@@ -484,6 +484,9 @@ function Main()
     var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
     var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
+    var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSound6(africa).mp3");
+    backgroundMusic.volume = "0.1";
+
     //make the html elements
     CreateHtml();
 
@@ -492,12 +495,24 @@ function Main()
         responsiveVoice.OnVoiceReady = function () {
             responsiveVoice.speak("Sort the images by dragging them to their corresponding boxes.", "US English Female");
         };
+
+        if (musicToggle === "False") {
+            //play background music
+            backgroundMusic.play();
+        }
+
     };
 
     //if the user leaves the page
     $(window).on("beforeunload", function () {
         responsiveVoice.cancel(); //quit doing text to speech
     });
+
+    //reloop the audio
+    backgroundMusic.addEventListener('ended', function () {
+        this.currentTime = 0;
+        this.play();
+    }, false);
 
     //if the user didn't finish the game in 2 minuets
     setTimeout(function () {

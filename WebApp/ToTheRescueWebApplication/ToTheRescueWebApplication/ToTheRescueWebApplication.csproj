@@ -193,6 +193,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Audio\backgroundMusic\bgSong1.mp3" />
+    <Content Include="Audio\backgroundMusic\bgSong2.mp3" />
+    <Content Include="Audio\backgroundMusic\bgSong3.mp3" />
+    <Content Include="Audio\backgroundMusic\bgSong4.mp3" />
+    <Content Include="Audio\backgroundMusic\bgSong5%28underwaterMario%29.mp3" />
+    <Content Include="Audio\backgroundMusic\bgSound6%28africa%29.mp3" />
     <Content Include="Audio\bensound-retrosoul.mp3" />
     <Content Include="Audio\bensound-sunny.mp3" />
     <Content Include="Audio\Elephant.mp3" />
@@ -227,7 +233,6 @@
     <Content Include="Images\totherescue_title.png" />
     <Content Include="Images\winter-scenery-hi.png" />
     <Content Include="LogoutSnippet.txt" />
-    <Content Include="MiniGames\AdditionMiniGame\audio\intro.m4a" />
     <Content Include="MiniGames\AdditionMiniGame\css\AdditionMiniGame.css" />
     <Content Include="MiniGames\AdditionMiniGame\img\giraffeImg.png" />
     <Content Include="MiniGames\AdditionMiniGame\javascript\AdditionMiniGame.js" />

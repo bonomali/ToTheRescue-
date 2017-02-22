@@ -654,6 +654,9 @@ function EndGame()
 
 function Main()
 {
+    var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSong3.mp3");
+    backgroundMusic.volume = "0.1";
+
     //makes the html elements needed for the game
     CreateHtmlElements();
 
@@ -684,6 +687,12 @@ function Main()
 		}
 	}, false);
 
+    //reloop the audio
+	backgroundMusic.addEventListener('ended', function () {
+	    this.currentTime = 0;
+	    this.play();
+	}, false);
+
     //if the user leaves the page
 	$(window).on("beforeunload", function () {
 	    responsiveVoice.cancel(); //quit doing text to speech
@@ -694,12 +703,17 @@ function Main()
 	
 	//allows the audio to play before the user plays the game
 	setTimeout(function () {
-		SetCurrentShape(shapeArr);
+	    SetCurrentShape(shapeArr);
 	},3000);
 	
 	responsiveVoice.OnVoiceReady = function () {
 	    responsiveVoice.speak("Click the shape that you hear.", "US English Female");
 	};
+
+	if (musicToggle === "False") {
+	    //play background music
+	    backgroundMusic.play();
+	}
 	
 	//play the game for 1 minuet and then end the game
 	setTimeout(function () {
