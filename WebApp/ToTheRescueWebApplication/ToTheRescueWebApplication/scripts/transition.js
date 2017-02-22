@@ -36,7 +36,7 @@ var transition = function (color) {
             div.appendChild(title);
             div.appendChild(gif);
             content.appendChild(div);
-            document.getElementsByTagName('body')[0].appendChild(content);
+            document.getElementsByTagName('html')[0].appendChild(content);
 
             //this line replaces having a defualt value in the argument
             color = (typeof color !== 'undefined') ? color : 'aquamarine';
