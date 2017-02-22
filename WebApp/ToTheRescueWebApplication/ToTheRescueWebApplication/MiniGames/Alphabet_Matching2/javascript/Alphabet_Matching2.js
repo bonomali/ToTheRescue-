@@ -181,7 +181,6 @@ var checkWin = function () {
     if (lettersMatched == 10) {
         var stat = 5 - numberWrong;
         if (stat < -5) stat = -5;
-        responsiveVoice.speak("The word is " + sightWords[sightWord]);
         responsiveVoice.speak("Great Job!");
         document.getElementById("score").value = stat;
         setTimeout(EndofGame, 2500);
