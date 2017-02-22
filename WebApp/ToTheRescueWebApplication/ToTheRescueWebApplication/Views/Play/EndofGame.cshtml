@@ -13,10 +13,21 @@
     </div>
     <script>
         var button = document.getElementById("mainMenu");
-        setTimeout(5000, button.style.visibility = "visible");
+        setTimeout(showButton, 5000);
+        setTimeout(playAudio, 3000);
         //wait 5 seconds until the animation is done to reveal the back button
         function GoToMainMenu() {
             window.location.href = '/MainMenu/MainMenu';
+        }
+        function showButton() {
+            button.style.visibility = "visible";
+        }
+        function playAudio() {
+            var youWon = document.createElement('audio');
+            youWon.setAttribute('src', '../../Audio/youWon.m4a');
+            youWon.volume = .2;
+            youWon.play();
+            youWon.play();
         }
     </script>
 </body>
