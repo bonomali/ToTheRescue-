@@ -1,0 +1,26 @@
+body{
+    background-color: aqua;
+}
+#endOfGameGif{
+    position: absolute;
+    height: 100%;
+    left: 15%;
+}
+#mainMenu {
+    border-radius: 15px;
+    background-color: white;
+    font-size: 15px;
+    position: absolute;
+    top: 70%;
+    left: 5%;
+    padding: 10px 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border-color: black;
+    visibility: hidden;
+}
+
+#mainMenu:hover {
+    color: white;
+    background-color: orange;
+}
+

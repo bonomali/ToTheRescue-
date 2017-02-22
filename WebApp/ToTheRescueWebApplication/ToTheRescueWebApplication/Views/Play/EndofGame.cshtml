@@ -8,8 +8,16 @@
 </head>
 <body>
     <div> 
-        You Won!
-        @Html.ActionLink("Main Menu", "MainMenu", "MainMenu")
+        <img id="endOfGameGif" src="../../Images/endOfGame.gif"/>
+        <button id="mainMenu" onclick="GoToMainMenu()">Main Menu</button>
     </div>
+    <script>
+        var button = document.getElementById("mainMenu");
+        setTimeout(5000, button.style.visibility = "visible");
+        //wait 5 seconds until the animation is done to reveal the back button
+        function GoToMainMenu() {
+            window.location.href = '/MainMenu/MainMenu';
+        }
+    </script>
 </body>
 </html>

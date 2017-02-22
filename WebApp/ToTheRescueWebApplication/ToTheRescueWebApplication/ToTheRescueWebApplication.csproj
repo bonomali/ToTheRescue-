@@ -216,6 +216,7 @@
     <Content Include="Global.asax" />
     <Content Include="Images\animalBackground.jpg" />
     <Content Include="Images\backIcon.png" />
+    <Content Include="Images\endOfGame.gif" />
     <Content Include="Images\gameOver.png" />
     <Content Include="Images\greatJob.jpg" />
     <Content Include="Images\landscape.png" />
