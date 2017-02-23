@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var start = function () {
     //Voice intro
-    responsiveVoice.speak("Hello! Match the blue letter with same brown letter to make a word!");
+    responsiveVoice.speak("Hello! Match the all the letters together to win!");
 
     //container needs to be created here because im too lazy to modify copy and pasted code
     container = document.createElement('div');
