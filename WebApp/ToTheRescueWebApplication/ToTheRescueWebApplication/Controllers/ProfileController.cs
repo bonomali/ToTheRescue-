@@ -9,6 +9,7 @@ using ToTheRescueWebApplication.Repositories;
 
 namespace ToTheRescueWebApplication.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
         //gets and puts information from/to the database

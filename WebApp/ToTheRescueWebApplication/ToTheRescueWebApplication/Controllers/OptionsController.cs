@@ -9,6 +9,7 @@ using ToTheRescueWebApplication.Repositories;
 
 namespace ToTheRescueWebApplication.Controllers
 {
+    [Authorize]
     public class OptionsController : Controller
     {
         static private OptionsModel m_options;
