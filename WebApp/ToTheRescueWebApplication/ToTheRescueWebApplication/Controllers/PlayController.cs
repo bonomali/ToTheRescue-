@@ -178,7 +178,6 @@ namespace ToTheRescueWebApplication.Controllers
                 _minigame.UpdateRecentlyPlayedMiniGames((int)Session["profileID"], miniGameID);
 
                 //recalculate performance statistic based on value returned from minigame
-                /*************************************WE NEED AN ACTUAL ALGORTHIM HERE***************************/
                 _stats = _options.Get((int)Session["profileID"]);
 
                 if (categoryID == 1) //Reading category
@@ -294,9 +293,6 @@ namespace ToTheRescueWebApplication.Controllers
         {
             return LAST_MAP;
         }
-        /***********************THIS IS NOT FULLY FUNCTIONAL, WE NEED MINIGAMES*******************/
-        /*******************************MAY BREAK FOR SOME PROFILES*******************************/
-        /*************************************NOT YET TESTED**************************************/
         //page that executes minigame script, set MiniGame model
         public ActionResult MiniGame()
         {
@@ -356,7 +352,7 @@ namespace ToTheRescueWebApplication.Controllers
                     }
                 }
                 model.MiniGameID = minigames[ranGame].ID;
-                model.MiniGame = "../../MiniGames/MosquitoSwat_LetterSounds/javascript/mosquitoswat.js";
+                model.MiniGame = minigames[ranGame].MiniGamePath;
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
             }
             else    //free play mode
@@ -365,7 +361,7 @@ namespace ToTheRescueWebApplication.Controllers
                 int ranGame = random.Next(1, minigames.Count()) - 1; //generate an index between 1 and num of games
 
                 model.MiniGameID = minigames[ranGame].ID;
-                model.MiniGame = "../../MiniGames/SightWord_Maze/javascript/sightword_maze.js";
+                model.MiniGame = minigames[ranGame].MiniGamePath;
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
                 model.Difficulty = 0;   //difficulty doesn't apply to free play mode
