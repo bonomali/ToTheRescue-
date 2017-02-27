@@ -123,7 +123,7 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             var controller = new ProfileController();
             controller.ControllerContext = mockControllerContext.Object;
 
-            string expected = "Incorrect email address eneterd. Please try again.";
+            string expected = "Incorrect email address entered. Please try again.";
 
             //ACT
             controller.ClickedDelete("incorrectEmail");

@@ -83,7 +83,7 @@ namespace ToTheRescueWebApplication.Controllers
                 //Set name and subject filter for Play/Map display in View
                 _model.ProfileName = options.profileName;
                 _model.Subject = options.SubjectFilter;
-                if (_model.Subject == "")
+                if (_model.Subject == "" || _model.Subject == "Any")
                     _model.Subject = "All";
             }
             else     //set model for free play mode

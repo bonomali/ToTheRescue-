@@ -18,11 +18,11 @@ CREATE TRIGGER EightProfileTrigger
 AS 
 	IF EXISTS (SELECT Inserted.ProfileID 
 				FROM inserted 
-				JOIN Users
-				ON inserted.UserID = Users.UserID
+				JOIN AspNetUsers
+				ON inserted.UserID = AspNetUsers.UserID
 				JOIN Profiles
-				ON Users.UserID = Profiles.UserID
-				WHERE inserted.UserID = Users.UserID
+				ON AspNetUsers.UserID = Profiles.UserID
+				WHERE inserted.UserID = AspNetUsers.UserID
 				GROUP BY Inserted.ProfileID
 				HAVING COUNT(Profiles.UserID) > 8
 				)

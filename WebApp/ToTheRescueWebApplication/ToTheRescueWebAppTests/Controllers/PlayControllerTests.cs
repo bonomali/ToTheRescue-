@@ -84,19 +84,19 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             node4.ID = 4;
             node4.MapID = mapID;
             node4.XCoordinate = -70;
-            node4.YCoordinate = 29;
+            node4.YCoordinate = 28;
             expected.MapNodes.Add(node4);
             Nodes node5 = new Nodes();
             node5.ID = 5;
             node5.MapID = mapID;
-            node5.XCoordinate = -64;
-            node5.YCoordinate = 28;
+            node5.XCoordinate = -68;
+            node5.YCoordinate = 26;
             expected.MapNodes.Add(node5);
             Nodes node6 = new Nodes();
             node6.ID = 6;
             node6.MapID = mapID;
-            node6.XCoordinate = -58;
-            node6.YCoordinate = 27;
+            node6.XCoordinate = -54;
+            node6.YCoordinate = 20;
             expected.MapNodes.Add(node6);
 
             expected.ProfileName = "Sophia";
@@ -730,6 +730,53 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             expected.Add("AlphabetMatching");
 
             CollectionAssert.AreEqual(expected, result);
+        }
+        [TestMethod]
+        //Tests that randomly selected minigame is not in list of recently played
+        public void GetRandomGameNotRecentlyPlayed()
+        {
+            int difficulty = 2;
+            int catID = 1;
+            Random random = new Random();
+
+            //get list of minigames by category id and difficulty level
+            List<MiniGame> minigames = _minigame.GetListPlayable(catID, difficulty);
+
+            List<int> recentlyPlayed = new List<int>();
+            recentlyPlayed.Add(5);
+            recentlyPlayed.Add(13);
+            recentlyPlayed.Add(18);
+
+            //add recently played MiniGameIDs to ProfileProgressHistory table for profile
+            for (int i = 0; i < recentlyPlayed.Count(); i++)
+            {
+                _minigame.UpdateRecentlyPlayedMiniGames(profileID, recentlyPlayed[i]);
+            }
+            //get list of recently played minigames from database
+            recentlyPlayed = _minigame.GetListRecentlyPlayed(profileID);
+
+            //randomly choose a minigame that isn't in list of recently played
+            int ranGame = random.Next(1, minigames.Count()) - 1; //generate an index between 1 and num of playable games
+
+            //continue generating random gameID while recently played game is randomly selected
+            bool played = true;
+            while (played == true)
+            {
+                played = false;
+                for (int i = 0; i < recentlyPlayed.Count(); i++)
+                {
+                    if (minigames[ranGame].ID == recentlyPlayed[i])
+                    {
+                        //generate an index between 1 and num of playable games
+                        ranGame = random.Next(1, minigames.Count()) - 1;
+                        played = true;
+                    }
+                }
+            }
+
+            //assert that randomly selected game is not in list of recently played
+            for (int i = 0; i < recentlyPlayed.Count(); i++)
+                Assert.AreNotEqual(minigames[ranGame].ID, recentlyPlayed[i]);
         }
     }
 }
