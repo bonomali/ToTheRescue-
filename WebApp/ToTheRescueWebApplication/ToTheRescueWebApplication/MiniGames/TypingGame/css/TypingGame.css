@@ -2,6 +2,7 @@ html{
 	margin: auto;
 	height: 100%;
 	width: 100%;
+    overflow: hidden;
 }
 
 body{
@@ -20,7 +21,7 @@ body{
 	margin-top: 2%;
     margin: 0;
     padding: 0;
-	
+    cursor: default;
 }
 
 #question{

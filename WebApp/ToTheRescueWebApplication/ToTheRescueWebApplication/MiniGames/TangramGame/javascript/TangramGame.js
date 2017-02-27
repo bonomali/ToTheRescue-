@@ -29,7 +29,7 @@ var orangeTriDropAreaEmpty = true;
 var yellowTriDropAreaEmpty = true;
 
 var mostRecentDragID = null;
-
+var audio = new Audio();
 var endGameFuncCalls = 0;
 
 //*********************** Generic functions used across both difficulty levels *************************************//
@@ -283,8 +283,15 @@ function DropHouse(ev) {
         if (WonGame())
             EndGame(true);
         else {
-            responsiveVoice.speak("Nice!", "US English Female");
+            //make cha ching sound
+            audio.src = "../../Audio/soundEffects/chaChing.mp3";
+            audio.play();
         }
+    }
+    else{
+        //make the metal clank sound
+        audio.src = "../../Audio/soundEffects/metalClang.mp3";
+        audio.play();
     }
 
     document.getElementById(mostRecentDragID).style.opacity = "1";
@@ -680,8 +687,16 @@ function DropSquare(ev) {
 
         if (WonGame())
             EndGame(true);
-        else
-            responsiveVoice.speak("Nice!", "US English Female");
+        else{
+            //make cha ching sound, incorrect answer
+            audio.src = "../../Audio/soundEffects/chaChing.mp3";
+            audio.play();
+        }
+    }
+    else{
+        //make the metal clank sound
+        audio.src = "../../Audio/soundEffects/metalClang.mp3";
+        audio.play();
     }
 
     document.getElementById(mostRecentDragID).style.opacity = "1";

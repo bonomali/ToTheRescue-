@@ -1,7 +1,8 @@
 html{
     height: 100%;
 	width: 100%;
-	overflow: hidden;
+	overflow-x: hidden;
+    background-color: #D7CEC7;
 }
 
  body{
@@ -29,6 +30,7 @@ html{
 	user-select: none; /* Non-prefixed version, currently
                                   not supported by any browser */
 	color: #76323F;
+    cursor: default;
 }
 
 #imgContainer{
@@ -194,7 +196,7 @@ html{
 
 @media only screen and (max-width: 1390px) {
     .answerAreas{
-        width: 18%;
+        width: 17.75%;
         height: 90%;
     }
     #red{
@@ -207,7 +209,7 @@ html{
 
 @media only screen and (max-width: 960px) {
     .answerAreas{
-        width: 18%;
+        width: 17.75%;
         border: 5px solid;
     }
     #red{
@@ -218,7 +220,7 @@ html{
 @media only screen and (max-width: 690px) {
     .answerAreas{
         width: 17.75%;
-        border: 4px solid;
+        border: 3px solid;
         height: 88%;
     }
     #red{
@@ -228,10 +230,20 @@ html{
 
 @media only screen and (max-width: 475px) {
     .answerAreas{
-        width: 18.5%;
+        width: 17.5%;
          border: 2px solid;
     }
     #red{
         margin-left:2%;
+    }
+    #imgContainer{
+        width: 93%;
+        margin-left: 0;
+    }
+    #answerContainer{
+        width: 93%;
+    }
+    #header{
+        font-size: 150%;
     }
 }

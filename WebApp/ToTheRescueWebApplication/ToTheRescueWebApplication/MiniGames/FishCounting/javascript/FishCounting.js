@@ -1,6 +1,7 @@
 var answer = null;
 var totalClicks = 0;
 var correctClicks = 0;
+var audio = new Audio();
 
 function GetRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -9,9 +10,15 @@ function GetRandomInt(min, max) {
 function ClickedAnswer(clickedDiv) {
     responsiveVoice.speak(clickedDiv.innerHTML, "US English Female");
     totalClicks++;
+
     if (clickedDiv.innerHTML === answer.toString()) {
         correctClicks++;
         GameLoop();
+    }
+    else {
+        //make a wrong answer sound...i don't know how i feel about it
+        audio.src = "../../Audio/soundEffects/cartoonCowbell.mp3";
+        audio.play();
     }
 }
 
@@ -461,7 +468,7 @@ function Main() {
     CreateHtmlElements();
 
     responsiveVoice.OnVoiceReady = function () {
-        responsiveVoice.speak("Click the box that has the correct number of sea creatures that is displayed to the screen.",
+        responsiveVoice.speak("Click the box that has the correct number of sea creatures.",
 		"US English Female");
         if (musicToggle === "False") {
             //play background music

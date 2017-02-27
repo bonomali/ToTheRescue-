@@ -2,6 +2,8 @@ var totalKeyPresses = 0;
 var correctKeyPresses = 0;
 var usedArr = [];
 
+var audio = new Audio();
+
 var endGameFuncCalls = 0;
 /**
  * Returns a random integer between min (inclusive) and max (inclusive)
@@ -50,7 +52,9 @@ function IsCorrectTypedLetter(typedChar) {
     }
 
     if (typedChar === currLetter)
+    {
         correct = true;
+    }
 
     return correct;
 }
@@ -82,6 +86,10 @@ function MakeNextLetterRed() {
         p.style.textDecoration = "underline";
     }
     else {
+        //make a correct answer sound
+        audio.src = "../../Audio/soundEffects/elevatorDing.mp3";
+        audio.play();
+
         //allows the audio to play before the user plays the game
         setTimeout(function () {
             AskQuestion(usedArr);

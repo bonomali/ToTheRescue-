@@ -43,7 +43,7 @@ function Drop(ev) {
     if (letterBeingDragged[0] === dropAreaID[0]) {
 
         var audio = new Audio();
-        audio.src = "../../MiniGames/AlphabetSortingGame/audio/elevatorDing.mp3";
+        audio.src = "../../Audio/soundEffects/elevatorDing.mp3";
 
         audio.play();
 

@@ -6,6 +6,8 @@ const PENTAGON = 4;
 const HEXAGON = 5;
 const OCTAGON = 6;
 
+var audio = new Audio();
+
 //global variable needed to keep track of the number of shapes the 
 //user clicked correctly
 var numOfCorrectClicks = 0;
@@ -485,6 +487,10 @@ function Clicked(mouseX, mouseY, shapeArr)
 		
 		if ((shapeArr[i].IsClicked(mouseX, mouseY) && shapeArr[i].currentShape) === true || (shapeArr[i].IsClicked(tempX, tempY) && shapeArr[i].currentShape) === true)
 		{
+		    //make a correct answer sound
+		    audio.src = "../../Audio/soundEffects/elevatorDing.mp3";
+		    audio.play();
+
 			numOfCorrectClicks++;
 			SetCurrentShape(shapeArr);
 			break;

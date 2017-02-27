@@ -1,252 +1,250 @@
-html{
-	width: 100%;
-	height: 100%;
+html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
-body{
-	width: 100%;
-	height: 100%;
-	margin: auto;
-	background-color: #0E0B16;
+body {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    background-color: #0E0B16;
     /* new body attribute in play CSS sets these two values so I am over writing the values here */
     min-height: 0px;
     min-width: 0px;
 }
 
-img{
-	-webkit-transition: all 0.3s ease-in-out;
+img {
+    -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }
 
-#header
-{
+#header {
     margin: 0;
-	color: white;
-	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    cursor: default;
 }
 
-#dropAreaContainer{
-	background-color: #0E0B16;
-	width: 50%;
-	height: 100%;
-	margin: 0;
-	position: absolute; 
-	left: 0;
+#dropAreaContainer {
+    background-color: #0E0B16;
+    width: 50%;
+    height: 100%;
+    margin: 0;
+    position: absolute;
+    left: 0;
 }
 
-#problemContainer
-{
-	position: absolute;
-	margin: auto;
-	width: 55%;
-	height: 55%;
-	top: 5%;
-	left: 17%;
+#problemContainer {
+    position: absolute;
+    margin: auto;
+    width: 55%;
+    height: 55%;
+    top: 5%;
+    left: 17%;
 }
 
-#tangramPiecesContainer{
-	position: absolute;
-	left: 50%;
-	width: 50%;
-	height: 100%;
+#tangramPiecesContainer {
+    position: absolute;
+    left: 50%;
+    width: 50%;
+    height: 100%;
 }
 
-#leftCol{
-	position: absolute;
-	left: 0;
-	width:50%;
-	height: 100%;
-	background-color: #0E0B16;
+#leftCol {
+    position: absolute;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-color: #0E0B16;
 }
 
-.tangramPieces{
-	position: absolute;
+.tangramPieces {
+    position: absolute;
 }
 
-#rhombusContainer{
-	top: 30%;
-	left: -40%;
-	width: 75%;
+#rhombusContainer {
+    top: 30%;
+    left: -40%;
+    width: 75%;
 }
 
-#squareContainer{
-	top: 1%;
-	left: 20%;
-	width: 57%;
-	height: 27%;
+#squareContainer {
+    top: 1%;
+    left: 20%;
+    width: 57%;
+    height: 27%;
 }
 
-#blueTriContainer{
-	bottom: 15%;
-	left: 30%;
-	width: 28%;
-	height: 28%;
+#blueTriContainer {
+    bottom: 15%;
+    left: 30%;
+    width: 28%;
+    height: 28%;
 }
 
-#aquaTriContainer{
-	bottom: 15%;
-	left: -30%;
-	width: 54%;
-	height: 13%;
-	-ms-transform: rotate(90deg); /*IE 9*/ 
-	-webkit-transform: rotate(90deg); /*Safari*/ 
-	transform: rotate(90deg); /*Standard syntax*/ 
+#aquaTriContainer {
+    bottom: 15%;
+    left: -30%;
+    width: 54%;
+    height: 13%;
+    -ms-transform: rotate(90deg); /*IE 9*/
+    -webkit-transform: rotate(90deg); /*Safari*/
+    transform: rotate(90deg); /*Standard syntax*/
 }
 
 
-#rightCol{
-	position: absolute;
-	right: 0;
-	width:50%;
-	height: 100%;
-	background-color: #0E0B16;
+#rightCol {
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-color: #0E0B16;
 }
 
-#greenTriContainer{
-	top: 9%;
-	width: 96%;
-	height: 25%;
-	left: 2%;
+#greenTriContainer {
+    top: 9%;
+    width: 96%;
+    height: 25%;
+    left: 2%;
 }
 
-#orangeTriContainer{
-	top: 30%;
-	left: -50%;
-	width: 50%;
-	height: 25%;
-	
-	-ms-transform: rotate(180deg); /*IE 9*/ 
-	-webkit-transform: rotate(180deg); /*Safari*/ 
-	transform: rotate(180deg); /*Standard syntax*/ 
+#orangeTriContainer {
+    top: 30%;
+    left: -50%;
+    width: 50%;
+    height: 25%;
+    -ms-transform: rotate(180deg); /*IE 9*/
+    -webkit-transform: rotate(180deg); /*Safari*/
+    transform: rotate(180deg); /*Standard syntax*/
 }
 
-#yellowTriContainer{
-	width: 96%;
-	height: 25%;
-	bottom: 20%;
-	left: 2%;
+#yellowTriContainer {
+    width: 96%;
+    height: 25%;
+    bottom: 20%;
+    left: 2%;
 }
 
-#rotateRight{
-	position: absolute;
-	width: 7%;
-	height: 15%;
-	bottom: 10%;
-	left: 18%;
+#rotateRight {
+    position: absolute;
+    width: 7%;
+    height: 15%;
+    bottom: 10%;
+    left: 18%;
 }
 
 /* drop area code goes here */
-#squareDropArea{
-	width: 49%;
-	height: 49%;
-	position: absolute;
-	right: 0.5%;
-	top: 25%;
-	z-index: 2;
-	
+#squareDropArea {
+    width: 49%;
+    height: 49%;
+    position: absolute;
+    right: 0.5%;
+    top: 25%;
+    z-index: 2;
 }
 
-#greenTriDropArea{
-	width: 100%;
-	height: 49%;
-	top: 0.5%;
-	position: absolute;
-	z-index: 2;
+#greenTriDropArea {
+    width: 100%;
+    height: 49%;
+    top: 0.5%;
+    position: absolute;
+    z-index: 2;
 }
 
-#blueTriDropArea{
-	width: 25%;
-	height: 50%;
-	position: absolute;
-	right: 0%;
-	top: 0.5%;
-	z-index: 2;
+#blueTriDropArea {
+    width: 25%;
+    height: 50%;
+    position: absolute;
+    right: 0%;
+    top: 0.5%;
+    z-index: 2;
 }
 
-#yellowTriDropArea{
-	position: absolute;
-	z-index: 2;
-	width: 48%;
-	height: 99%;
-	left: 0.5%;
-	top: 0.5%;
-	-ms-transform: rotate(270deg); 
-	-webkit-transform: rotate(270deg);
-	transform: rotate(270deg); 
+#yellowTriDropArea {
+    position: absolute;
+    z-index: 2;
+    width: 48%;
+    height: 99%;
+    left: 0.5%;
+    top: 0.5%;
+    -ms-transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
 }
 
-#rhombusDropArea{
-	position: absolute;
-	bottom: 0.1%;
-	left: 0.5%;
-	height: 25%;
-	width: 73.5%;
-	z-index: 2;
+#rhombusDropArea {
+    position: absolute;
+    bottom: 0.1%;
+    left: 0.5%;
+    height: 25%;
+    width: 73.5%;
+    z-index: 2;
 }
 
-#orangeTriDropArea{
-	bottom: 0.1%;
-	right: 0.5%;
-	position: absolute;
-	width: 50%;
-	height: 50%;
-	z-index: 2;
-	-ms-transform: rotate(180deg);
-	-webkit-transform: rotate(180deg); 
-	transform: rotate(180deg); 
+#orangeTriDropArea {
+    bottom: 0.1%;
+    right: 0.5%;
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    z-index: 2;
+    -ms-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 
-#aquaTriDropArea{
-	position: absolute;
-	bottom: 25%;
-	left: 25%;
-	width: 50%;
-	height: 25%;
-	z-index: 2;
-	-ms-transform: rotate(90deg);
-	-webkit-transform: rotate(90deg); 
-	transform: rotate(90deg); 
+#aquaTriDropArea {
+    position: absolute;
+    bottom: 25%;
+    left: 25%;
+    width: 50%;
+    height: 25%;
+    z-index: 2;
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 
- #BlocksGame{
+#BlocksGame {
     height: 100%;
     width: 90%;
 }
 
 /*my own end of game div*/
-#gameOver{
+#gameOver {
     visibility: hidden;
 }
 
-#endGameDiv{
-    display:none;
-	width: 30%;
-	height: 45%;
-	background-color: green;
-	position: absolute;
-	z-index: 100;
-	top: 20%;
-	left: 35%;
-	text-align: center;
-	color: white;
-	border-radius: 35px;
-	font-size: 200%;
-	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-	min-height: 200px;
-	min-width: 180px;
+#endGameDiv {
+    display: none;
+    width: 30%;
+    height: 45%;
+    background-color: green;
+    position: absolute;
+    z-index: 100;
+    top: 20%;
+    left: 35%;
+    text-align: center;
+    color: white;
+    border-radius: 35px;
+    font-size: 200%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    min-height: 200px;
+    min-width: 180px;
 }
 
-#endGameDivPic{
-	width: 30%;
-	height: 50%;
-	margin-left: 10%;
-	margin-top: 5%;
+#endGameDivPic {
+    width: 30%;
+    height: 50%;
+    margin-left: 10%;
+    margin-top: 5%;
 }
 
-#doneButton{
-	width: 20%;
+#doneButton {
+    width: 20%;
     height: 10%;
     min-width: 60px;
     min-height: 20px;
@@ -254,27 +252,31 @@ img{
     color: darkblue;
     font-family: "Comic Sans MS", cursive, sans-serif;
     border-radius: 30px;
-    display:block;
-	padding-bottom: 25px;
-    margin-left:auto;
-    margin-right:auto;
+    display: block;
+    padding-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 5%;
     font-size: 50%;
 }
 
-#doneButton:hover{
-	background-color: lightpink;
-	font-size: 55%;
-}
+    #doneButton:hover {
+        background-color: lightpink;
+        font-size: 55%;
+    }
 
 @media only screen and (max-width: 800px) {
-	#endGameDiv{
-		font-size: 150%;
-	}
+    #endGameDiv {
+        font-size: 150%;
+    }
 }
 
 @media only screen and (max-width: 300px) {
-	#endGameDiv{
-		left: 20%;
-	}
+    #endGameDiv {
+        left: 20%;
+    }
+
+    #BlocksGame {
+        width: 80%;
+    }
 }

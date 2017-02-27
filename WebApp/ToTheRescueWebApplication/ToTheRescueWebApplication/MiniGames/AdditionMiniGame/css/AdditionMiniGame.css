@@ -26,6 +26,7 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 300%;
     margin-top: 0;
+    cursor: default;
 }
 
 #visualContainer {
@@ -93,6 +94,7 @@ body {
     border: 2px solid;
     border-radius: 25px;
     margin: auto;
+    cursor: default;
 }
 
 .question {
@@ -152,6 +154,7 @@ body {
     height: 25%;
     position: relative;
     z-index: 1;
+    cursor: default;
 }
 
 .answer {
@@ -253,10 +256,6 @@ body {
 @media only screen and (max-width: 860px) {
     #header {
         font-size: 200%;
-    }
-
-    html {
-        overflow: visible;
     }
 }
 

@@ -204,6 +204,12 @@
     <Content Include="Audio\Elephant.mp3" />
     <Content Include="Audio\Happy-Music.mp3" />
     <Content Include="Audio\Lion_Roar.mp3" />
+    <Content Include="Audio\soundEffects\airPlaneDing.mp3" />
+    <Content Include="Audio\soundEffects\cartoonCowbell.mp3" />
+    <Content Include="Audio\soundEffects\chaChing.mp3" />
+    <Content Include="Audio\soundEffects\elevatorDing.mp3" />
+    <Content Include="Audio\soundEffects\metalClang.mp3" />
+    <Content Include="Audio\soundEffects\metallicClank.mp3" />
     <Content Include="Audio\Ta_Da.mp3" />
     <Content Include="Audio\youWon.m4a" />
     <Content Include="Content\bootstrap.css" />
@@ -441,7 +447,6 @@
     <Content Include="MiniGames\BeginningLetterSounds_Racing\sounds\zebra_recording.mp3" />
     <Content Include="MiniGames\BeginningLetterSounds_Racing\sounds\z_recording.mp3" />
     <Content Include="MiniGames\BeginningLetterSounds_Racing\sounds\z_sound.mp3" />
-    <Content Include="MiniGames\ColorSortingGame\audio\intro.m4a" />
     <Content Include="MiniGames\ColorSortingGame\css\ColorSortingGame.css" />
     <Content Include="MiniGames\ColorSortingGame\img\blue\bear.png" />
     <Content Include="MiniGames\ColorSortingGame\img\blue\bird.png" />
@@ -789,7 +794,6 @@
     <Content Include="MiniGames\SightWord_Maze\sounds\see_recording.mp3" />
     <Content Include="MiniGames\SightWord_Maze\sounds\the_recording.mp3" />
     <Content Include="MiniGames\SightWord_Maze\sounds\up_recording.mp3" />
-    <Content Include="MiniGames\SubtractionMiniGame\audio\intro.m4a" />
     <Content Include="MiniGames\SubtractionMiniGame\css\SubtractionMiniGame.css" />
     <Content Include="MiniGames\SubtractionMiniGame\img\eatenApple.png" />
     <Content Include="MiniGames\SubtractionMiniGame\img\wholeApple.png" />

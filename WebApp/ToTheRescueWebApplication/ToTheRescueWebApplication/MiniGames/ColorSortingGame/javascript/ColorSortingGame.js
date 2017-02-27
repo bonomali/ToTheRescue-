@@ -7,6 +7,7 @@ var mostRecentDragColor = null;
 var numCorrectDrags = 0;
 var totalDrags = 0;
 
+var audio = new Audio();
 
 //allows the dropping ability
 function AllowDrop(ev) 
@@ -95,6 +96,10 @@ function Drop(ev)
 		//if the two colors are the same
 		if (targetColor === mostRecentDragColor)
 		{
+            //play the correct drop sound
+		    audio.src = "../../Audio/soundEffects/airPlaneDing.mp3";
+		    audio.play();
+
 			//allow the drop to happen
 			ev.preventDefault();
 			var data = ev.dataTransfer.getData("content");
@@ -108,6 +113,12 @@ function Drop(ev)
 
             //see if the user won the game
 			CheckIfWon();
+		}
+		else
+		{
+		    //play the incorrect drop sound
+		    audio.src = "../../Audio/soundEffects/metalClang.mp3";
+		    audio.play();
 		}
 	}
 	mostRecentDragColor = null;

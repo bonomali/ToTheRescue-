@@ -1,3 +1,4 @@
+var audio = new Audio();
 function SetAnswerLocations(answer) {
     var answerArr = [null, null, null, null];
 
@@ -112,6 +113,11 @@ function ClickedAnswer(id, SubtractionGame) {
 
         //recall the game loop
         GameLoop(SubtractionGame);
+    }
+    else {
+        //make a wrong answer sound...i don't know how i feel about it
+        audio.src = "../../Audio/soundEffects/metallicClank.mp3";
+        audio.play();
     }
 }
 
