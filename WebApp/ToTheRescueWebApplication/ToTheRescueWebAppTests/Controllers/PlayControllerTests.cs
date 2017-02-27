@@ -84,19 +84,19 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             node4.ID = 4;
             node4.MapID = mapID;
             node4.XCoordinate = -70;
-            node4.YCoordinate = 29;
+            node4.YCoordinate = 28;
             expected.MapNodes.Add(node4);
             Nodes node5 = new Nodes();
             node5.ID = 5;
             node5.MapID = mapID;
-            node5.XCoordinate = -64;
-            node5.YCoordinate = 28;
+            node5.XCoordinate = -68;
+            node5.YCoordinate = 26;
             expected.MapNodes.Add(node5);
             Nodes node6 = new Nodes();
             node6.ID = 6;
             node6.MapID = mapID;
-            node6.XCoordinate = -58;
-            node6.YCoordinate = 27;
+            node6.XCoordinate = -54;
+            node6.YCoordinate = 20;
             expected.MapNodes.Add(node6);
 
             expected.ProfileName = "Sophia";
@@ -218,16 +218,16 @@ namespace ToTheRescueWebApplication.Controllers.Tests
         [TestMethod]
         public void UpdateReadingPerformanceStatTest()
         {
-            int score = 20;             //score from minigame
+            int score = 5;              //score from minigame
             float oldReadingStat = 0;   //stat for reading from database for profile
             float oldMathStat = 0;      //stat for math from database for profile
             float newStat = 0;          //new stat for profile       
-            int oldReadingDifficulty;    //reading difficulty from database for profile
+            int oldReadingDifficulty;   //reading difficulty from database for profile
             int categoryID = 1;         //minigame CategoryID (1 for Reading)
             Options _stats;             //stats for updating difficulty after minigame
           
             //set initial reading stat and math stats for profile
-            _minigame.UpdatePerformanceStats(profileID, 10, 70);
+            _minigame.UpdatePerformanceStats(profileID, 80, 70);
 
             _stats = _options.Get(profileID);   //get information for profile from database
             oldReadingStat = _stats.ReadingPerformanceStat;  //get reading stat from database
@@ -235,19 +235,18 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             oldReadingDifficulty = _stats.ReadingDifficultyLevel;   //ensure difficulty doesn't change
 
             //recalculate performance statistic based on value returned from minigame
-            /*************************************WE NEED AN ACTUAL ALGORTHIM HERE***************************/
             if (categoryID == 1) //Reading category
             {
                 newStat = _stats.ReadingPerformanceStat + score;
                 _minigame.UpdatePerformanceStats(profileID, newStat, _stats.MathPerformanceStat);
 
                 //check if difficulty needs to be adjusted up or down   
-                if (newStat > 100 && _stats.ReadingDifficultyLevel < HIGHEST_DIFF)
+                if (newStat > 125 && _stats.ReadingDifficultyLevel < HIGHEST_DIFF)
                 {
                     _stats.ReadingDifficultyLevel = _stats.ReadingDifficultyLevel + 1;
                     _options.UpdateDifficulty(_stats);
                 }
-                else if (newStat < 0 && _stats.ReadingDifficultyLevel > LOWEST_DIFF)
+                else if (newStat < 75 && _stats.ReadingDifficultyLevel > LOWEST_DIFF)
                 {
                     _stats.ReadingDifficultyLevel = _stats.ReadingDifficultyLevel - 1;
                     _options.UpdateDifficulty(_stats);
@@ -265,7 +264,7 @@ namespace ToTheRescueWebApplication.Controllers.Tests
         [TestMethod]
         public void UpdateMathPerformanceStatTest()
         {
-            int score = 20;             //score from minigame
+            int score = 5;              //score from minigame
             float oldReadingStat = 0;   //stat for reading from database for profile
             float oldMathStat = 0;      //stat for math from database for profile
             float newStat = 0;          //new stat for profile       
@@ -274,7 +273,7 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             Options _stats;             //stats for updating difficulty after minigame
            
             //set initial reading stat and math stats for profile
-            _minigame.UpdatePerformanceStats(profileID, 60, 20);
+            _minigame.UpdatePerformanceStats(profileID, 60, 80);
    
             _stats = _options.Get(profileID);   //get information for profile from database
             oldReadingStat = _stats.ReadingPerformanceStat;  //ensure that reading stat doesn't change
@@ -282,19 +281,18 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             oldMathDifficulty = _stats.MathDifficultyLevel;   //ensure difficulty doesn't change
 
             //recalculate performance statistic based on value returned from minigame
-            /*************************************WE NEED AN ACTUAL ALGORTHIM HERE***************************/
             if (categoryID == 2) //Math category
             {
                 newStat = _stats.MathPerformanceStat + score;
                 _minigame.UpdatePerformanceStats(profileID, _stats.ReadingPerformanceStat, newStat);
 
                 //check if difficulty needs to be adjusted up or down   
-                if (newStat > 100 && _stats.MathDifficultyLevel < HIGHEST_DIFF)
+                if (newStat > 125 && _stats.MathDifficultyLevel < HIGHEST_DIFF)
                 {
                     _stats.MathDifficultyLevel = _stats.MathDifficultyLevel + 1;
                     _options.UpdateDifficulty(_stats);
                 }
-                else if (newStat < 0 && _stats.MathDifficultyLevel > LOWEST_DIFF)
+                else if (newStat < 75 && _stats.MathDifficultyLevel > LOWEST_DIFF)
                 {
                     _stats.MathDifficultyLevel = _stats.MathDifficultyLevel - 1;
                     _options.UpdateDifficulty(_stats);
@@ -312,7 +310,7 @@ namespace ToTheRescueWebApplication.Controllers.Tests
         [TestMethod]
         public void IncrementDifficultyLevelTest()
         {
-            int score = 50;              //score from minigame
+            int score = 5;               //score from minigame
             float newStat = 0;           //new performance statistic      
             int oldReadingDifficulty;    //reading difficulty from database for profile
             int newReadingDifficulty;    //new difficulty level for profile
@@ -320,7 +318,7 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             Options _stats;              //stats for updating difficulty after minigame
 
             //set initial reading stat and math stats for profile
-            _minigame.UpdatePerformanceStats(profileID, 70, 10);
+            _minigame.UpdatePerformanceStats(profileID, 125, 10);
 
             _stats = _options.Get(profileID);   //get information for profile from database
             oldReadingDifficulty = _stats.ReadingDifficultyLevel;   //old difficulty level for profile
@@ -333,12 +331,12 @@ namespace ToTheRescueWebApplication.Controllers.Tests
                 _minigame.UpdatePerformanceStats(profileID, newStat, _stats.MathPerformanceStat);
 
                 //check if difficulty needs to be adjusted up or down   
-                if (newStat > 100 && _stats.ReadingDifficultyLevel < HIGHEST_DIFF)
+                if (newStat > 125 && _stats.ReadingDifficultyLevel < HIGHEST_DIFF)
                 {
                     _stats.ReadingDifficultyLevel = _stats.ReadingDifficultyLevel + 1;
                     _options.UpdateDifficulty(_stats);
                 }
-                else if (newStat < 0 && _stats.ReadingDifficultyLevel > LOWEST_DIFF)
+                else if (newStat < 75 && _stats.ReadingDifficultyLevel > LOWEST_DIFF)
                 {
                     _stats.ReadingDifficultyLevel = _stats.ReadingDifficultyLevel - 1;
                     _options.UpdateDifficulty(_stats);
@@ -360,7 +358,7 @@ namespace ToTheRescueWebApplication.Controllers.Tests
         [TestMethod]
         public void DecrementDifficultyLevelTest()
         {
-            int score = -15;             //score from minigame
+            int score = -5;              //score from minigame
             float newStat = 0;          //new stat for profile       
             int oldMathDifficulty;      //math difficulty from database for profile
             int newMathDifficulty;      //new math difficulty for profile
@@ -368,25 +366,24 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             Options _stats;             //stats for updating difficulty after minigame
 
             //set initial reading stat and math stats for profile
-            _minigame.UpdatePerformanceStats(profileID, 20, 10);
+            _minigame.UpdatePerformanceStats(profileID, 20, 75);
 
             _stats = _options.Get(profileID);   //get information for profile from database
             oldMathDifficulty = _stats.MathDifficultyLevel;   //old difficulty level for profile
 
             //recalculate performance statistic based on value returned from minigame
-            /*************************************WE NEED AN ACTUAL ALGORTHIM HERE***************************/
             if (categoryID == 2) //Math category
             {
                 newStat = _stats.MathPerformanceStat + score;
                 _minigame.UpdatePerformanceStats(profileID, _stats.ReadingPerformanceStat, newStat);
 
                 //check if difficulty needs to be adjusted up or down   
-                if (newStat > 100 && _stats.MathDifficultyLevel < HIGHEST_DIFF)
+                if (newStat > 125 && _stats.MathDifficultyLevel < HIGHEST_DIFF)
                 {
                     _stats.MathDifficultyLevel = _stats.MathDifficultyLevel + 1;
                     _options.UpdateDifficulty(_stats);
                 }
-                else if (newStat < 0 && _stats.MathDifficultyLevel > LOWEST_DIFF)
+                else if (newStat < 75 && _stats.MathDifficultyLevel > LOWEST_DIFF)
                 {
                     _stats.MathDifficultyLevel = _stats.MathDifficultyLevel - 1;
                     _options.UpdateDifficulty(_stats);
@@ -409,7 +406,7 @@ namespace ToTheRescueWebApplication.Controllers.Tests
         [TestMethod]
         public void BoundaryOfIncrementDifficultyLevelTest()
         {
-            int score = 50;              //score from minigame
+            int score = 5;               //score from minigame
             float newStat = 0;           //new performance statistic      
             int oldReadingDifficulty;    //reading difficulty from database for profile
             int newReadingDifficulty;    //new difficulty level for profile
@@ -417,7 +414,7 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             Options _stats;              //stats for updating difficulty after minigame
 
             //set initial reading stat and math stats for profile
-            _minigame.UpdatePerformanceStats(profileID, 70, 10);
+            _minigame.UpdatePerformanceStats(profileID, 125, 10);
             
             //set Reading difficulty to highest upper bound
             _stats = _options.Get(profileID);   //get information for profile from database
@@ -428,19 +425,18 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             oldReadingDifficulty = _stats.ReadingDifficultyLevel;   //old difficulty level for profile
 
             //recalculate performance statistic based on value returned from minigame
-            /*************************************WE NEED AN ACTUAL ALGORTHIM HERE***************************/
             if (categoryID == 1) //Reading category
             {
                 newStat = _stats.ReadingPerformanceStat + score;
                 _minigame.UpdatePerformanceStats(profileID, newStat, _stats.MathPerformanceStat);
 
                 //check if difficulty needs to be adjusted up or down   
-                if (newStat > 100 && _stats.ReadingDifficultyLevel < HIGHEST_DIFF)
+                if (newStat > 125 && _stats.ReadingDifficultyLevel < HIGHEST_DIFF)
                 {
                     _stats.ReadingDifficultyLevel = _stats.ReadingDifficultyLevel + 1;
                     _options.UpdateDifficulty(_stats);
                 }
-                else if (newStat < 0 && _stats.ReadingDifficultyLevel > LOWEST_DIFF)
+                else if (newStat < 75 && _stats.ReadingDifficultyLevel > LOWEST_DIFF)
                 {
                     _stats.ReadingDifficultyLevel = _stats.ReadingDifficultyLevel - 1;
                     _options.UpdateDifficulty(_stats);
@@ -463,7 +459,7 @@ namespace ToTheRescueWebApplication.Controllers.Tests
         [TestMethod]
         public void BoundaryOfDecrementDifficultyLevelTest()
         {
-            int score = -15;             //score from minigame
+            int score = -5;              //score from minigame
             float newStat = 0;          //new stat for profile       
             int oldMathDifficulty;      //math difficulty from database for profile
             int newMathDifficulty;      //new math difficulty for profile
@@ -471,7 +467,7 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             Options _stats;             //stats for updating difficulty after minigame
 
             //set initial reading stat and math stats for profile
-            _minigame.UpdatePerformanceStats(profileID, 20, 10);
+            _minigame.UpdatePerformanceStats(profileID, 20, 75);
 
             //set Math difficulty to lowest lower bound
             _stats = _options.Get(profileID);   //get information for profile from database
@@ -482,19 +478,18 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             oldMathDifficulty = _stats.MathDifficultyLevel;   //old difficulty level for profile
 
             //recalculate performance statistic based on value returned from minigame
-            /*************************************WE NEED AN ACTUAL ALGORTHIM HERE***************************/
             if (categoryID == 2) //Math category
             {
                 newStat = _stats.MathPerformanceStat + score;
                 _minigame.UpdatePerformanceStats(profileID, _stats.ReadingPerformanceStat, newStat);
 
                 //check if difficulty needs to be adjusted up or down   
-                if (newStat > 100 && _stats.MathDifficultyLevel < HIGHEST_DIFF)
+                if (newStat > 125 && _stats.MathDifficultyLevel < HIGHEST_DIFF)
                 {
                     _stats.MathDifficultyLevel = _stats.MathDifficultyLevel + 1;
                     _options.UpdateDifficulty(_stats);
                 }
-                else if (newStat < 0 && _stats.MathDifficultyLevel > LOWEST_DIFF)
+                else if (newStat < 75 && _stats.MathDifficultyLevel > LOWEST_DIFF)
                 {
                     _stats.MathDifficultyLevel = _stats.MathDifficultyLevel - 1;
                     _options.UpdateDifficulty(_stats);
@@ -711,10 +706,77 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             List<int> result = _minigame.GetListRecentlyPlayed(profileID);
 
             CollectionAssert.AreEqual(expected, result);
+       }
+        [TestMethod]
+       // Test that all minigames by subject and filter are pulled from the database
+       public void GetMiniGamesBySubjectAndFilter()
+        {
+            int difficulty = 2;
+            int catID = 1;
+
+            List<MiniGame> minigames = _minigame.GetListPlayable(catID, difficulty);
+            List<string> result = new List<string>();
+            for (int i = 0; i < minigames.Count; i++)
+                result.Add(minigames[i].MiniGameName);
+
+            List<string> expected = new List<string>();
+            expected.Add("AlphabetBubblePop");
+            expected.Add("AlphabetTracing");
+            expected.Add("ColorSortingGame");
+            expected.Add("ShapeColoringBook");
+            expected.Add("AlphabetMatching");
+            expected.Add("AlphabetMatching");
+            expected.Add("Typing");
+            expected.Add("AlphabetMatching");
+
+            CollectionAssert.AreEqual(expected, result);
         }
-       
-      
-        /******Need a test for getting all minigames by subject filter and difficulty*****/
-        /******Need a test to ensure random minigame in not in recently played*****/
+        [TestMethod]
+        //Tests that randomly selected minigame is not in list of recently played
+        public void GetRandomGameNotRecentlyPlayed()
+        {
+            int difficulty = 2;
+            int catID = 1;
+            Random random = new Random();
+
+            //get list of minigames by category id and difficulty level
+            List<MiniGame> minigames = _minigame.GetListPlayable(catID, difficulty);
+
+            List<int> recentlyPlayed = new List<int>();
+            recentlyPlayed.Add(5);
+            recentlyPlayed.Add(13);
+            recentlyPlayed.Add(18);
+
+            //add recently played MiniGameIDs to ProfileProgressHistory table for profile
+            for (int i = 0; i < recentlyPlayed.Count(); i++)
+            {
+                _minigame.UpdateRecentlyPlayedMiniGames(profileID, recentlyPlayed[i]);
+            }
+            //get list of recently played minigames from database
+            recentlyPlayed = _minigame.GetListRecentlyPlayed(profileID);
+
+            //randomly choose a minigame that isn't in list of recently played
+            int ranGame = random.Next(1, minigames.Count()) - 1; //generate an index between 1 and num of playable games
+
+            //continue generating random gameID while recently played game is randomly selected
+            bool played = true;
+            while (played == true)
+            {
+                played = false;
+                for (int i = 0; i < recentlyPlayed.Count(); i++)
+                {
+                    if (minigames[ranGame].ID == recentlyPlayed[i])
+                    {
+                        //generate an index between 1 and num of playable games
+                        ranGame = random.Next(1, minigames.Count()) - 1;
+                        played = true;
+                    }
+                }
+            }
+
+            //assert that randomly selected game is not in list of recently played
+            for (int i = 0; i < recentlyPlayed.Count(); i++)
+                Assert.AreNotEqual(minigames[ranGame].ID, recentlyPlayed[i]);
+        }
     }
 }

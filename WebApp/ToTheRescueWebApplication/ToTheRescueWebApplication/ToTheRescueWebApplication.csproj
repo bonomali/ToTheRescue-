@@ -237,6 +237,7 @@
     <Content Include="Images\menuIcon.png" />
     <Content Include="Images\optionsIcon.png" />
     <Content Include="Images\playIcon.png" />
+    <Content Include="Images\sad_puppy.png" />
     <Content Include="Images\sanctuaryIcon.png" />
     <Content Include="Images\totherescue_title.png" />
     <Content Include="Images\winter-scenery-hi.png" />
@@ -854,7 +855,9 @@
     <Content Include="SQLScripts\DropIdentity.sql" />
     <Content Include="Views\AnimalSanctuary\AnimalSanctuary.js" />
     <Content Include="scripts\transition.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -871,6 +874,7 @@
     <Compile Include="Code\ProfileProgress.cs" />
     <Compile Include="Code\Sounds.cs" />
     <Compile Include="Controllers\AnimalSanctuaryController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MainMenuController.cs" />
     <Compile Include="Controllers\OptionsController.cs" />
@@ -958,6 +962,9 @@
     <Content Include="Views\Shared\_MiniGameLayout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Options\InnerOptions.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Shared\_ErrorLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

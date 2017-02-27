@@ -67,7 +67,7 @@ CREATE TABLE Profiles (
 	, MathPerformanceStat FLOAT NOT NULL DEFAULT 100 --default to 100
 	, ReadingDifficultyLevel INT NOT NULL DEFAULT 1 --default to the lowest difficulty level
 	, ReadingPerformanceStat FLOAT NOT NULL DEFAULT 100 --default to 100
-	, SubjectFilter VARCHAR(50));
+	, SubjectFilter VARCHAR(50) DEFAULT 'Any');
 
 CREATE TABLE ProfileProgress (
 	ProfileID INT PRIMARY KEY REFERENCES Profiles (ProfileID) NOT NULL
@@ -104,3 +104,79 @@ CREATE TABLE ProfileProgressHistory (
 	ProgressID INT PRIMARY KEY IDENTITY
 	, ProfileID INT REFERENCES Profiles (ProfileID) NOT NULL
 	, MiniGameID INT REFERENCES Minigames (MiniGameID) NOT NULL);
+
+
+--------------CREATE TRIGGERS---------------------
+GO
+CREATE TRIGGER EightProfileTrigger
+	ON Profiles
+	AFTER INSERT
+AS 
+	IF EXISTS (SELECT Inserted.ProfileID 
+				FROM inserted 
+				JOIN AspNetUsers
+				ON inserted.UserID = AspNetUsers.UserID
+				JOIN Profiles
+				ON AspNetUsers.UserID = Profiles.UserID
+				WHERE inserted.UserID = AspNetUsers.UserID
+				GROUP BY Inserted.ProfileID
+				HAVING COUNT(Profiles.UserID) > 8
+				)
+	BEGIN
+		;THROW 50400, 'Too many profiles', 1;
+		PRINT 'Error ' + CONVERT(VARCHAR, ERROR_NUMBER(), 1)
+			+ ': ' + ERROR_MESSAGE();
+		ROLLBACK TRAN
+	END;
+GO
+
+CREATE TRIGGER ActiveAnimalTrigger
+	ON ProfileAnimals
+	AFTER INSERT
+AS 
+	IF EXISTS (SELECT inserted.ProfileID 
+				FROM inserted 
+				JOIN ProfileAnimals AS PA
+				ON inserted.ProfileID = PA.ProfileID
+				WHERE inserted.ProfileID = PA.ProfileID
+				AND PA.Active = 1
+				GROUP BY inserted.ProfileID
+				HAVING COUNT(PA.AnimalID) > 20
+				)
+	BEGIN
+		;
+		UPDATE ProfileAnimals
+		SET Active = 0
+		WHERE ProfileAnimalID = 
+			(SELECT MIN(ProfileAnimalID)
+			FROM ProfileAnimals
+			WHERE ProfileID = (SELECT ProfileID FROM inserted)
+			AND Active = 1)
+	END;
+GO
+
+CREATE TRIGGER Three_MiniGame_Trigger
+	 ON ProfileProgressHistory
+	 AFTER INSERT
+AS 
+	IF EXISTS (SELECT inserted.ProfileID
+				FROM inserted 
+				JOIN ProfileProgressHistory AS PPH
+				ON inserted.ProfileID = PPH.ProfileID
+				WHERE inserted.ProfileID = PPH.ProfileID
+				GROUP BY inserted.ProfileID
+				HAVING COUNT(PPH.MiniGameID) > 3
+				)
+	BEGIN
+		;
+		DELETE FROM ProfileProgressHistory
+		WHERE ProfileID = 
+			(SELECT ProfileID
+			WHERE ProfileID = (SELECT ProfileID FROM inserted)
+			AND
+			ProgressID =
+				(SELECT MIN(ProgressID)
+					FROM ProfileProgressHistory
+					WHERE ProfileID = (SELECT ProfileID FROM inserted)))
+	END;
+GO
