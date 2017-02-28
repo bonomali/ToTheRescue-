@@ -94,28 +94,18 @@ namespace ToTheRescueDataPop
             path = Path.Combine(Environment.CurrentDirectory, "Profiles.sql");
             Console.WriteLine(path);
             ProductDB.WriteSQL(path);
+
             //maps
             Console.WriteLine("Uploading Maps.");
             path = Path.Combine(Environment.CurrentDirectory, "Maps.sql");
             Console.WriteLine(path);
             ProductDB.WriteSQL(path);
+
             //nodes
             Console.WriteLine("Uploading Nodes.");
             path = Path.Combine(Environment.CurrentDirectory, "Nodes.sql");
             Console.WriteLine(path);
             ProductDB.WriteSQL(path);
-            
-            //gamecategories
-            //Console.WriteLine("Uploading GameCategories.");
-            //path = Path.Combine(Environment.CurrentDirectory, "GameCategories.sql");
-            //Console.WriteLine(path);
-            //ProductDB.WriteSQL(path);
-            
-            //minigames
-            //Console.WriteLine("Uploading Minigames.");
-            //path = Path.Combine(Environment.CurrentDirectory, "Minigames.sql");
-            //Console.WriteLine(path);
-            //ProductDB.WriteSQL(path);
             
             string file_path1 = "../../MiniGames/";
             string file_path2 = "/javascript/";
@@ -149,19 +139,10 @@ namespace ToTheRescueDataPop
             path = Path.Combine(Environment.CurrentDirectory, "Animals.sql");
             Console.WriteLine(path);
             ProductDB.WriteSQL(path); 
-            //ProfileAnimals
-            Console.WriteLine("Uploading ProfileAnimals.");
-            path = Path.Combine(Environment.CurrentDirectory, "ProfileAnimals.txt");
-            Console.WriteLine(path);
-            ProductDB.WriteSQL(path);
+            
             //ProfileProgress
             Console.WriteLine("Uploading ProfileProgress.");
             path = Path.Combine(Environment.CurrentDirectory, "ProfileProgress.sql");
-            Console.WriteLine(path);
-            ProductDB.WriteSQL(path);
-            //ProfileProgressHistory
-            Console.WriteLine("Uploading ProfileProgressHistory.");
-            path = Path.Combine(Environment.CurrentDirectory, "ProfileProgressHistory.sql");
             Console.WriteLine(path);
             ProductDB.WriteSQL(path);
             
