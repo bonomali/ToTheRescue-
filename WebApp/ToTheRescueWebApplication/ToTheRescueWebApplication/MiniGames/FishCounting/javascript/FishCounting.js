@@ -3,6 +3,9 @@ var totalClicks = 0;
 var correctClicks = 0;
 var audio = new Audio();
 
+var soundToggle = "False";
+var musicToggle = "False";
+
 function GetRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -16,9 +19,11 @@ function ClickedAnswer(clickedDiv) {
         GameLoop();
     }
     else {
-        //make a wrong answer sound...i don't know how i feel about it
-        audio.src = "../../Audio/soundEffects/cartoonCowbell.mp3";
-        audio.play();
+        if (soundToggle === "False") {
+            //make a wrong answer sound...i don't know how i feel about it
+            audio.src = "../../Audio/soundEffects/cartoonCowbell.mp3";
+            audio.play();
+        }
     }
 }
 
@@ -462,8 +467,8 @@ function Main() {
 
     //this game doesn't have two difficulties so I am not going to do anything with this value
     var difficulty = document.getElementById("minigameScript").getAttribute("difficulty"); // only one difficulty for this game so not needed
-    var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
-    var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
+    soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
+    musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
     CreateHtmlElements();
 

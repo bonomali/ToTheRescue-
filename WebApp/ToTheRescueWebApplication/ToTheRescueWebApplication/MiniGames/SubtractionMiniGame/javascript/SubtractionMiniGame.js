@@ -1,3 +1,6 @@
+var soundToggle = "False";
+var musicToggle = "False";
+
 var audio = new Audio();
 function SetAnswerLocations(answer) {
     var answerArr = [null, null, null, null];
@@ -115,9 +118,12 @@ function ClickedAnswer(id, SubtractionGame) {
         GameLoop(SubtractionGame);
     }
     else {
-        //make a wrong answer sound...i don't know how i feel about it
-        audio.src = "../../Audio/soundEffects/metallicClank.mp3";
-        audio.play();
+        if (soundToggle === "False")
+        {
+            //make a wrong answer sound...i don't know how i feel about it
+            audio.src = "../../Audio/soundEffects/metallicClank.mp3";
+            audio.play();
+        }
     }
 }
 
@@ -487,8 +493,8 @@ function Main() {
     //get the game's difficulty level and modify the dataset for that difficulty level
     var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
     //get the sound
-    var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
-    var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
+    soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
+    musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
     if (difficulty <= 3)
         SubtractionGame.upperBound = 5;

@@ -5,6 +5,10 @@ var usedArr = [];
 var audio = new Audio();
 
 var endGameFuncCalls = 0;
+
+var soundToggle = "False";
+var musicToggle = "False";
+
 /**
  * Returns a random integer between min (inclusive) and max (inclusive)
  * Using Math.round() will give you a non-uniform distribution!
@@ -86,9 +90,12 @@ function MakeNextLetterRed() {
         p.style.textDecoration = "underline";
     }
     else {
-        //make a correct answer sound
-        audio.src = "../../Audio/soundEffects/elevatorDing.mp3";
-        audio.play();
+
+        if (soundToggle === "False") {
+            //make a correct answer sound
+            audio.src = "../../Audio/soundEffects/elevatorDing.mp3";
+            audio.play();
+        }
 
         //allows the audio to play before the user plays the game
         setTimeout(function () {
@@ -299,8 +306,8 @@ function Main() {
 
     //get the game's difficulty level and modify the dataset for that difficulty level
     var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
-    var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
-    var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
+    soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
+    musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
     if (difficulty <= 2)
         usedArr = preKWords;

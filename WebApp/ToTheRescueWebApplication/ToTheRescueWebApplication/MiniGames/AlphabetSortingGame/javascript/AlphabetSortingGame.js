@@ -4,6 +4,9 @@ const FUlL_ALPHA = 26;
 var endGameFuncCalls = 0;
 var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSong2.mp3");
 
+var soundToggle = "False";
+var musicToggle = "False";
+
 function AllowDrop(ev) {
     ev.preventDefault();
 }
@@ -41,12 +44,14 @@ function Drop(ev) {
 
     //if the correct letter is being dropped into a correct drop area
     if (letterBeingDragged[0] === dropAreaID[0]) {
-
-        var audio = new Audio();
-        audio.src = "../../Audio/soundEffects/elevatorDing.mp3";
-
-        audio.play();
-
+        
+        if (soundToggle === "False")
+        {
+            var audio = new Audio();
+            audio.src = "../../Audio/soundEffects/elevatorDing.mp3";
+            audio.play();
+        }
+        
         //change the styling of the dragged div so it will drop nicely
         draggedDiv.style.width = "100%";
         draggedDiv.style.height = "100%";
@@ -408,8 +413,8 @@ function Main() {
 
     //this game doesn't have two difficulties so I am not going to do anything with this value
     var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
-    var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
-    var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
+    soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
+    musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
     CreateHtmlElements(letters);
 

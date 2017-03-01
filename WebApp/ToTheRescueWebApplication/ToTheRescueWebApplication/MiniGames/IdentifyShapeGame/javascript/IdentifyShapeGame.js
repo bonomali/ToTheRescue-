@@ -8,6 +8,9 @@ const OCTAGON = 6;
 
 var audio = new Audio();
 
+var soundToggle = "False";
+var musicToggle = "False";
+
 //global variable needed to keep track of the number of shapes the 
 //user clicked correctly
 var numOfCorrectClicks = 0;
@@ -487,9 +490,11 @@ function Clicked(mouseX, mouseY, shapeArr)
 		
 		if ((shapeArr[i].IsClicked(mouseX, mouseY) && shapeArr[i].currentShape) === true || (shapeArr[i].IsClicked(tempX, tempY) && shapeArr[i].currentShape) === true)
 		{
-		    //make a correct answer sound
-		    audio.src = "../../Audio/soundEffects/elevatorDing.mp3";
-		    audio.play();
+		    if (soundToggle === "False") {
+		        //make a correct answer sound
+		        audio.src = "../../Audio/soundEffects/elevatorDing.mp3";
+		        audio.play();
+		    }
 
 			numOfCorrectClicks++;
 			SetCurrentShape(shapeArr);
@@ -675,8 +680,8 @@ function Main()
 	
     //get the game's difficulty level and modify the dataset for that difficulty level
 	var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
-	var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
-	var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
+	soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
+	musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
 	//need to pass in diffculty to determine the length of shapeArr
 	var shapeArr = MakeShapes(difficulty);

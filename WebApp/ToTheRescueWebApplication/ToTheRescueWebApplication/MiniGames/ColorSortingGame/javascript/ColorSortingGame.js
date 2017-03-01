@@ -1,5 +1,8 @@
 const NUM_IMGS = 30;
 
+var soundToggle = "False";
+var musicToggle = "False";
+
 //used for game logic
 var mostRecentDragColor = null;
 
@@ -96,9 +99,11 @@ function Drop(ev)
 		//if the two colors are the same
 		if (targetColor === mostRecentDragColor)
 		{
-            //play the correct drop sound
-		    audio.src = "../../Audio/soundEffects/airPlaneDing.mp3";
-		    audio.play();
+		    if (soundToggle === "False") {
+		        //play the correct drop sound
+		        audio.src = "../../Audio/soundEffects/airPlaneDing.mp3";
+		        audio.play();
+		    }
 
 			//allow the drop to happen
 			ev.preventDefault();
@@ -492,8 +497,8 @@ function Main()
 {
     //this game doesn't have two difficulties so I am not going to do anything with this value
     var difficulty = document.getElementById("minigameScript").getAttribute("difficulty"); // only one difficulty for this game so not needed
-    var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
-    var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
+    soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
+    musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
     var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSound6(africa).mp3");
     backgroundMusic.volume = "0.1";

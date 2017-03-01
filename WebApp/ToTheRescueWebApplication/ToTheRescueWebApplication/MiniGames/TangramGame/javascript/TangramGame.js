@@ -28,6 +28,9 @@ var greenTriDropAreaEmpty = true;
 var orangeTriDropAreaEmpty = true;
 var yellowTriDropAreaEmpty = true;
 
+var soundToggle = "False";
+var musicToggle = "False";
+
 var mostRecentDragID = null;
 var audio = new Audio();
 var endGameFuncCalls = 0;
@@ -283,15 +286,19 @@ function DropHouse(ev) {
         if (WonGame())
             EndGame(true);
         else {
-            //make cha ching sound
-            audio.src = "../../Audio/soundEffects/chaChing.mp3";
-            audio.play();
+            if (soundToggle === "False") {
+                //make cha ching sound
+                audio.src = "../../Audio/soundEffects/chaChing.mp3";
+                audio.play();
+            }
         }
     }
-    else{
-        //make the metal clank sound
-        audio.src = "../../Audio/soundEffects/metalClang.mp3";
-        audio.play();
+    else {
+        if (soundToggle === "False") {
+            //make the metal clank sound
+            audio.src = "../../Audio/soundEffects/metalClang.mp3";
+            audio.play();
+        }
     }
 
     document.getElementById(mostRecentDragID).style.opacity = "1";
@@ -687,16 +694,20 @@ function DropSquare(ev) {
 
         if (WonGame())
             EndGame(true);
-        else{
-            //make cha ching sound, incorrect answer
-            audio.src = "../../Audio/soundEffects/chaChing.mp3";
-            audio.play();
+        else {
+            if (soundToggle === "False") {
+                //make cha ching sound, incorrect answer
+                audio.src = "../../Audio/soundEffects/chaChing.mp3";
+                audio.play();
+            }
         }
     }
-    else{
-        //make the metal clank sound
-        audio.src = "../../Audio/soundEffects/metalClang.mp3";
-        audio.play();
+    else {
+        if (soundToggle === "False") {
+            //make the metal clank sound
+            audio.src = "../../Audio/soundEffects/metalClang.mp3";
+            audio.play();
+        }
     }
 
     document.getElementById(mostRecentDragID).style.opacity = "1";
@@ -1286,8 +1297,8 @@ function Main() {
 
     //get the game's difficulty level and modify the dataset for that difficulty level
     var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
-    var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
-    var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
+    soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
+    musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
     //create the html
     CreateHtmlElements(difficulty);
