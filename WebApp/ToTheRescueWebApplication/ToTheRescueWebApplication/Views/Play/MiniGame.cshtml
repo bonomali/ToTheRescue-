@@ -58,18 +58,13 @@
     @*use jquery*@
     <script src="~/scripts/jquery-1.10.2.min.js"></script>
     <script id="minigameScript" src=@Model.MiniGame difficulty=@Model.Difficulty toggleSound=@Model.ToggleSound toggleMusic=@Model.ToggleMusic></script>
-    @*<script id="minigameScript" src="~/MiniGames/Alphabet_Matching2/javascript/Alphabet_Matching2.js" difficulty=@Model.Difficulty toggleSound=@Model.ToggleSound toggleMusic=@Model.ToggleMusic></script>*@
-    @*<script id="minigameScript" src="~/MiniGames/TangramGame/javascript/TangramGame.js" difficulty=@Model.Difficulty toggleSound=@Model.ToggleSound toggleMusic=@Model.ToggleMusic></script>*@
-    @*<script id="minigameScript" src="~/MiniGames/AlphabetSortingGame/javascript/AlphabetSortingGame.js" difficulty=@Model.Difficulty toggleSound=@Model.ToggleSound toggleMusic=@Model.ToggleMusic></script>*@
-    @*<script id="minigameScript" src="~/MiniGames/FishCounting/javascript/FishCounting.js" difficulty=@Model.Difficulty toggleSound=@Model.ToggleSound toggleMusic=@Model.ToggleMusic></script>*@
-    @*<script id="minigameScript" src="~/MiniGames/Supah_Counting/javascript/supahcounting.js" difficulty=@Model.Difficulty toggleSound=@Model.ToggleSound toggleMusic=@Model.ToggleMusic></script>*@
-    @*<script id="minigameScript" src="~/MiniGames/Position_Vocabulary/javascript/positionvocabulary.js" difficulty=@Model.Difficulty toggleSound=@Model.ToggleSound toggleMusic=@Model.ToggleMusic></script>*@
 
     <input type="text" id="score" style="display:none" />   @*score from minigame saved in value for tag*@
 
     @*Pop up box displayed when minigame is over*@
-    <div id="gameOver" style="display:none">
-        <p id="praise">Great Job!</p>
+    <div id="gameOver">
+        Good Job! :)
+        <br>
         <img src="~/Images/gameOver.png" id="greatJob" alt="Great Job!">
         <button id="closePraise">Done</button>
     </div>
