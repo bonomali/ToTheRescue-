@@ -141,13 +141,13 @@ nav#playMenu li#back {
   width: 100%;
 }
 .mapContainer #animalImg {
-    position:relative;
+    position:absolute;
     width: 5%;
     height: 7%;
     z-index:2;
 }
 .mapContainer #avatarImg {
-    position:relative;
+    position:absolute;
     width: 6%;
     height: 12%;
     z-index: 2;
