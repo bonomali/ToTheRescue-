@@ -56,7 +56,7 @@
 </nav>
 <div class="mapContainer" style="display:normal" onload="">
     <img src="@Url.Action("ShowMapImage", new { @mapID = Model.CurrentMap })" id="mapImg" alt="Map">
-    <img src="@Url.Action("ShowAnimalImage", new { @AnimalID = Model.Animal })" id="animalImg" alt="Animal" style="margin-top:@Model.MapNodes[Model.MapNodes.Count() - 1].YCoordinate%; left:75%">
+    <img src="@Url.Action("ShowAnimalImage", new { @AnimalID = Model.Animal })" id="animalImg" alt="Animal" style="margin-top:@(Model.MapNodes[Model.MapNodes.Count() - 1].YCoordinate/2)%; left:@Model.MapNodes[Model.MapNodes.Count() - 1].XCoordinate%">
     <img src="@Url.Action("ShowAvatarImage", new { @profileID = Model.Avatar })" id="avatarImg" alt="Profile Avatar" style="margin-top:@Model.MapNodes[Model.CurrentNode - 1].YCoordinate%; left:@Model.MapNodes[Model.CurrentNode - 1].XCoordinate%">
     @*Pop up box displayed when user rescues animal*@
     <div id="animalSaved" style="display:none">
@@ -89,7 +89,7 @@
                 datatype: "text",
                 type: "GET",
                 success: function (data) {
-                    $("#avatarImg").animate({ 'margin-top': nodeArr[data - 1].YCoordinate + '%' }, 'slow');
+                    $("#avatarImg").animate({ 'margin-top': (nodeArr[data - 1].YCoordinate)/2 + '%' }, 'slow');
                     $("#avatarImg").animate({ 'left': nodeArr[data - 1].XCoordinate + '%' }, 'slow');
                     data == @Model.MapNodes.Count() ? endofmap() : null
                 }
