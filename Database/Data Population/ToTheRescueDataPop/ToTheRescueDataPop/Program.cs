@@ -53,8 +53,8 @@ namespace ToTheRescueDataPop
                 ProductDB.WriteImage(2, "ShinyAnimals/snake.png", "snake"); //26
                 //10 shiny animals 
 
-                ProductDB.WriteImage(3, "Maps/Plains.jpg", "plains"); //27
-                ProductDB.WriteImage(3, "Maps/Beach.jpg", "beach"); //28
+                ProductDB.WriteImage(3, "Maps/Plains.png", "plains"); //27
+                ProductDB.WriteImage(3, "Maps/Beach.png", "beach"); //28
                 // 2 maps. 
             }
 
