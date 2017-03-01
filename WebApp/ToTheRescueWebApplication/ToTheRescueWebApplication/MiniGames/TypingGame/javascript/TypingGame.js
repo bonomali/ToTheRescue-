@@ -197,41 +197,16 @@ function CreateHTMLElements() {
 
     turtleContainer.appendChild(img4);
 
-    ///////////////////////////////////////////////////
-    var endGameDiv = document.createElement("div");
-    endGameDiv.setAttribute("id", "endGameDiv");
-    endGameDiv.innerHTML = "Great Job!";
-    endGameDiv.appendChild(document.createElement("br"));
-
-    var endGameDivPic = document.createElement("img");
-    endGameDivPic.setAttribute("id", "endGameDivPic");
-    endGameDivPic.setAttribute("src", "../../Images/gameOver.png");
-
-    endGameDiv.appendChild(endGameDivPic);
-    endGameDiv.appendChild(document.createElement("br"));
-
-    var doneButton = document.createElement("button");
-    doneButton.innerHTML = "Done";
-    doneButton.setAttribute("id", "doneButton");
-
-    endGameDiv.appendChild(doneButton);
-    ////////////////////////////////////////////////
-
     divContainer.appendChild(container);
     divContainer.appendChild(input);
     divContainer.appendChild(antContainer);
     divContainer.appendChild(octopusContainer);
     divContainer.appendChild(beeContainer);
     divContainer.appendChild(turtleContainer);
-    divContainer.appendChild(endGameDiv);
 }
 
 function EndGame()
 {
-    $('#doneButton').click(function () {
-        window.location.href = '/Play/Play/'
-    });
-
     responsiveVoice.speak("Great job!", "US English Female");
 
     document.getElementById("container").style.visibility = "hidden";
@@ -280,10 +255,6 @@ function EndGame()
 
     document.getElementById("score").value = returnVal;
     EndofGame();
-    setTimeout(function () {
-        $('#gameOver').hide();
-    }, 500);
-    document.getElementById("endGameDiv").style.display = "block";
 }
 
 function Main() {

@@ -576,38 +576,13 @@ function CreateHtmlElements()
     var canvas = document.createElement("canvas");
     canvas.setAttribute("id", "canvas");
 
-    ///////////////////////////////////////////////////
-    var endGameDiv = document.createElement("div");
-    endGameDiv.setAttribute("id", "endGameDiv");
-    endGameDiv.innerHTML = "Great Job!";
-    endGameDiv.appendChild(document.createElement("br"));
-
-    var endGameDivPic = document.createElement("img");
-    endGameDivPic.setAttribute("id", "endGameDivPic");
-    endGameDivPic.setAttribute("src", "../../Images/gameOver.png");
-
-    endGameDiv.appendChild(endGameDivPic);
-    endGameDiv.appendChild(document.createElement("br"));
-
-    var doneButton = document.createElement("button");
-    doneButton.innerHTML = "Done";
-    doneButton.setAttribute("id", "doneButton");
-
-    endGameDiv.appendChild(doneButton);
-    ////////////////////////////////////////////////
-
     //add the elements to the page
     divContainer.appendChild(header);
     divContainer.appendChild(canvas);
-    divContainer.appendChild(endGameDiv);
 }
 
 function EndGame()
 {
-    $('#doneButton').click(function () {
-        window.location.href = '/Play/Play/'
-    });
-
     responsiveVoice.speak("Great job!", "US English Female");
 
     clickable = false;
@@ -657,10 +632,6 @@ function EndGame()
 
     document.getElementById('score').value = returnVal;
     EndofGame(); //function displays good job message and returns to map
-    setTimeout(function () {
-        $('#gameOver').hide();
-    }, 500);
-    document.getElementById("endGameDiv").style.display = "block";
 }
 
 function Main()

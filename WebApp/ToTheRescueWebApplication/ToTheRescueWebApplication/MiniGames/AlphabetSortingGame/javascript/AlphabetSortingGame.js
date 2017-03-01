@@ -75,9 +75,6 @@ function Drop(ev) {
 }
 
 function EndGame(finished) {
-    $('#doneButton').click(function () {
-        window.location.href = '/Play/Play/'
-    });
 
     endGameFuncCalls++;
 
@@ -91,7 +88,9 @@ function EndGame(finished) {
 
     setTimeout(function () {
         backgroundMusic.play();
-        document.getElementById("endGameDiv").style.display = "block";
+        
+        //display the end of game stuff after the abc song is played
+        EndofGame();
     }, 15000);
 
     var returnVal = 0;
@@ -147,13 +146,6 @@ function EndGame(finished) {
     }
 
     document.getElementById("score").value = returnVal;
-
-    //do some sort of set time out before this
-    EndofGame();
-    setTimeout(function () {
-        $('#gameOver').hide();
-    }, 500);
-
 }
 
 function ShuffleArr(arr) {
@@ -379,30 +371,9 @@ function CreateHtmlElements(letters) {
     dragAreaContainer.appendChild(dragAreaRow1);
     dragAreaContainer.appendChild(dragAreaRow2);
 
-    ///////////////////////////////////////////////////
-    var endGameDiv = document.createElement("div");
-    endGameDiv.setAttribute("id", "endGameDiv");
-    endGameDiv.innerHTML = "Great Job!";
-    endGameDiv.appendChild(document.createElement("br"));
-
-    var endGameDivPic = document.createElement("img");
-    endGameDivPic.setAttribute("id", "endGameDivPic");
-    endGameDivPic.setAttribute("src", "../../Images/gameOver.png");
-
-    endGameDiv.appendChild(endGameDivPic);
-    endGameDiv.appendChild(document.createElement("br"));
-
-    var doneButton = document.createElement("button");
-    doneButton.innerHTML = "Done";
-    doneButton.setAttribute("id", "doneButton");
-
-    endGameDiv.appendChild(doneButton);
-    ////////////////////////////////////////////////
-
     divContainer.appendChild(header);
     divContainer.appendChild(dropAreaContainer);
     divContainer.appendChild(dragAreaContainer);
-    divContainer.appendChild(endGameDiv);
 }
 
 function Main() {

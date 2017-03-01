@@ -373,37 +373,12 @@ function CreateHtmlElements() {
     answerContainer.appendChild(answerTwo);
     answerContainer.appendChild(answerThree);
 
-    ///////////////////////////////////////////////////
-    var endGameDiv = document.createElement("div");
-    endGameDiv.setAttribute("id", "endGameDiv");
-    endGameDiv.innerHTML = "Great Job!";
-    endGameDiv.appendChild(document.createElement("br"));
-
-    var endGameDivPic = document.createElement("img");
-    endGameDivPic.setAttribute("id", "endGameDivPic");
-    endGameDivPic.setAttribute("src", "../../Images/gameOver.png");
-
-    endGameDiv.appendChild(endGameDivPic);
-    endGameDiv.appendChild(document.createElement("br"));
-
-    var doneButton = document.createElement("button");
-    doneButton.innerHTML = "Done";
-    doneButton.setAttribute("id", "doneButton");
-
-    endGameDiv.appendChild(doneButton);
-    ////////////////////////////////////////////////
-
     divContainer.appendChild(header);
     divContainer.appendChild(fishContainer);
     divContainer.appendChild(answerContainer);
-    divContainer.appendChild(endGameDiv);
 }
 
 function EndGame() {
-    $('#doneButton').click(function () {
-        window.location.href = '/Play/Play/'
-    });
-
     responsiveVoice.speak("Great job!", "US English Female");
     var answerAreas = document.getElementsByClassName("answers");
     var fish = document.getElementsByClassName("fish");
@@ -455,10 +430,6 @@ function EndGame() {
 
     document.getElementById("score").value = returnVal;
     EndofGame(); //function displays good job message and returns to map
-    setTimeout(function () {
-        $('#gameOver').hide();
-    }, 500);
-    document.getElementById("endGameDiv").style.display = "block";
 }
 
 function Main() {

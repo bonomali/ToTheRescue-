@@ -222,10 +222,6 @@ function CheckIfWon()
 //the game
 function StopGame()
 {
-    $('#doneButton').click(function () {
-        window.location.href = '/Play/Play/'
-    });
-
     responsiveVoice.speak("Great job!", "US English Female");
 
     var percentage = numCorrectDrags / totalDrags;
@@ -270,10 +266,6 @@ function StopGame()
 
     document.getElementById("score").value = returnVal;
     EndofGame(); //function displays good job message and returns to map
-    setTimeout(function () {
-        $('#gameOver').hide();
-    }, 500);
-    document.getElementById("endGameDiv").style.display = "block";
 }
 
 //used for placeing all of the images in the correct places
@@ -466,31 +458,10 @@ function CreateHtml()
 
     answerContainer.appendChild(purple);
 
-    ///////////////////////////////////////////////////
-    var endGameDiv = document.createElement("div");
-    endGameDiv.setAttribute("id", "endGameDiv");
-    endGameDiv.innerHTML = "Great Job!";
-    endGameDiv.appendChild(document.createElement("br"));
-
-    var endGameDivPic = document.createElement("img");
-    endGameDivPic.setAttribute("id", "endGameDivPic");
-    endGameDivPic.setAttribute("src", "../../Images/gameOver.png");
-
-    endGameDiv.appendChild(endGameDivPic);
-    endGameDiv.appendChild(document.createElement("br"));
-
-    var doneButton = document.createElement("button");
-    doneButton.innerHTML = "Done";
-    doneButton.setAttribute("id", "doneButton");
-
-    endGameDiv.appendChild(doneButton);
-    ////////////////////////////////////////////////
-
     //add everything to the play area
     divContainer.appendChild(header);
     divContainer.appendChild(imgContainer);
     divContainer.appendChild(answerContainer);
-    divContainer.appendChild(endGameDiv);
 }
 
 function Main()
