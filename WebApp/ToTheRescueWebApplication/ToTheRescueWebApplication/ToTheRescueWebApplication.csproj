@@ -662,11 +662,9 @@
     <Content Include="MiniGames\Position_Vocabulary\images\behind.png" />
     <Content Include="MiniGames\Position_Vocabulary\images\below.png" />
     <Content Include="MiniGames\Position_Vocabulary\images\front.png" />
-    <Content Include="MiniGames\Position_Vocabulary\images\i.png" />
     <Content Include="MiniGames\Position_Vocabulary\images\left.png" />
     <Content Include="MiniGames\Position_Vocabulary\images\Mockup.png" />
     <Content Include="MiniGames\Position_Vocabulary\images\right.png" />
-    <Content Include="MiniGames\Position_Vocabulary\images\token_0.gif" />
     <Content Include="MiniGames\Position_Vocabulary\javascript\positionvocabulary.js" />
     <Content Include="MiniGames\RhymingMatch\images\ball.png" />
     <Content Include="MiniGames\RhymingMatch\images\bat.png" />
@@ -853,7 +851,6 @@
     <Content Include="scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="SQLScripts\DropIdentity.sql" />
-    <Content Include="Views\AnimalSanctuary\AnimalSanctuary.js" />
     <Content Include="scripts\transition.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -960,7 +957,6 @@
     <Content Include="Views\Play\EndofGame.cshtml" />
     <Content Include="Views\Play\MiniGame.cshtml" />
     <Content Include="Views\Shared\_MiniGameLayout.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Options\InnerOptions.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\ServerError.cshtml" />
