@@ -8,8 +8,7 @@
 
 @if (toggleMusic == "False")
 {
-    <audio controls loop id="playMusic" source src="@Url.Action("LoadAudio", new { @mapID = Model.CurrentMap })" autoplay hidden="hidden">
-    </audio>
+    <audio controls loop id="playMusic" source src="@Url.Action("LoadAudio", new { @mapID = Model.CurrentMap })" autoplay hidden="hidden"></audio>
     <script>
         var vid = document.getElementById("playMusic");
         vid.volume = 0.05;
@@ -33,7 +32,7 @@
                     <a href="~/AnimalSanctuary/Sanctuary">
                         <img src="~/Images/sanctuaryIcon.png" class="icon" alt="Sanctuary">
                     </a>
-                    <label class="iconLbls "id="sanctuaryLbl">Sanctuary</label>
+                    <label class="iconLbls " id="sanctuaryLbl">Sanctuary</label>
                 }
             </li>
             <li id="menu">
@@ -54,10 +53,12 @@
         </ul>
     </div>
 </nav>
-<div class="mapContainer" style="display:normal" onload="">
-    <img src="@Url.Action("ShowMapImage", new { @mapID = Model.CurrentMap })" id="mapImg" alt="Map">
-    <img src="@Url.Action("ShowAnimalImage", new { @AnimalID = Model.Animal })" id="animalImg" alt="Animal" style="margin-top:@(Model.MapNodes[Model.MapNodes.Count() - 1].YCoordinate/2)%; left:@Model.MapNodes[Model.MapNodes.Count() - 1].XCoordinate%">
-    <img src="@Url.Action("ShowAvatarImage", new { @profileID = Model.Avatar })" id="avatarImg" alt="Profile Avatar" style="margin-top:@Model.MapNodes[Model.CurrentNode - 1].YCoordinate%; left:@Model.MapNodes[Model.CurrentNode - 1].XCoordinate%">
+<div id="container">
+    <div id="mapCont" class="mapContainer" @*style="display:normal"*@ onload="">
+        <img src="@Url.Action("ShowMapImage", new { @mapID = Model.CurrentMap })" id="mapImg" alt="Map">
+        <img src="@Url.Action("ShowAnimalImage", new { @AnimalID = Model.Animal })" id="animalImg" alt="Animal" style="top:@(Model.MapNodes[Model.MapNodes.Count() - 1].YCoordinate/2)%; left:@Model.MapNodes[Model.MapNodes.Count() - 1].XCoordinate%">
+        <img src="@Url.Action("ShowAvatarImage", new { @profileID = Model.Avatar })" id="avatarImg" alt="Profile Avatar" style="top:@Model.MapNodes[Model.CurrentNode - 1].YCoordinate%; left:@Model.MapNodes[Model.CurrentNode - 1].XCoordinate%">
+    </div>
     @*Pop up box displayed when user rescues animal*@
     <div id="animalSaved" style="display:none">
         <p id="praise">You Did It!</p>
@@ -66,69 +67,69 @@
     </div>
 </div>
 @section scripts {
-<script>
-    $(document).ready(function () {
-        //call function to move avatar to current node when map loads
-        setTimeout(function() {
-            moveAvatar();
-        }, 500);
-       
+    <script>
+        $(document).ready(function () {
+            //call function to move avatar to current node when map loads
+            setTimeout(function() {
+                moveAvatar();
+            }, 500);
 
-        //congratulatory sound when animal saved
-        var saved = new Audio();
-        saved.src = "../../Audio/Ta_Da.mp3";
-        saved.volume = 0.2;
 
-        //transfer nodes from Model into JS array
-        var nodeArr = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.MapNodes));
-    
-        //Get current node from ProfileProgess table through contoller method and move avatar to current node
-        function moveAvatar() {
-            $.ajax({
-                url: '/Play/GetCurrentNode/',
-                datatype: "text",
-                type: "GET",
-                success: function (data) {
-                    $("#avatarImg").animate({ 'margin-top': (nodeArr[data - 1].YCoordinate)/2 + '%' }, 'slow');
-                    $("#avatarImg").animate({ 'left': nodeArr[data - 1].XCoordinate + '%' }, 'slow');
-                    data == @Model.MapNodes.Count() ? endofmap() : null
-                }
+            //congratulatory sound when animal saved
+            var saved = new Audio();
+            saved.src = "../../Audio/Ta_Da.mp3";
+            saved.volume = 0.2;
+
+            //transfer nodes from Model into JS array
+            var nodeArr = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.MapNodes));
+
+            //Get current node from ProfileProgess table through contoller method and move avatar to current node
+            function moveAvatar() {
+                $.ajax({
+                    url: '/Play/GetCurrentNode/',
+                    datatype: "text",
+                    type: "GET",
+                    success: function (data) {
+                        $("#avatarImg").animate({ 'top': (nodeArr[data - 1].YCoordinate)/2 + '%' }, 'slow');
+                        $("#avatarImg").animate({ 'left': nodeArr[data - 1].XCoordinate + '%' }, 'slow');
+                        data == @Model.MapNodes.Count() ? endofmap() : null
+                    }
+                });
+            };
+
+            //show animal saved div
+            function endofmap() {
+                $.ajax({
+                    url: '/Play/NewMap/',
+                    success: function () {
+                        $("#animalSaved").show();
+                        saved.play();
+                        $("#play").hide();
+                    }
+                })
+            }
+
+            //when play button clicked: Go to play  mini game page
+            $("#play").click(function () {
+                window.location.href = '/Play/MiniGame/'
             });
-        };
 
-        //show animal saved div
-        function endofmap() {
-            $.ajax({
-                url: '/Play/NewMap/',
-                success: function () {
-                    $("#animalSaved").show();
-                    saved.play();
-                    $("#play").hide();
-                }
-            })
-        }
-
-        //when play button clicked: Go to play  mini game page
-        $("#play").click(function () {
-            window.location.href = '/Play/MiniGame/'
+            //when animal saved div close, go to new map
+            $("#closePraise").click(function () {
+                $.ajax({
+                    url: '/Play/GetMapCount/',
+                    datatype: "text",
+                    type: "GET",
+                    success: function (mapCount) {
+                        $("animalSaved").hide();
+                        $("play").show();
+                        if(@Model.CurrentMap == mapCount)  //go to end of game splash screen after last map
+                            window.location.href = '/Play/EndofGame/'
+                        else
+                            window.location.href = '/Play/Play/';
+                    }
+                });
+            });
         });
-
-        //when animal saved div close, go to new map
-        $("#closePraise").click(function () {
-            $.ajax({
-                url: '/Play/GetMapCount/',
-                datatype: "text",
-                type: "GET",
-                success: function (mapCount) {
-                    $("animalSaved").hide();
-                    $("play").show();
-                    if(@Model.CurrentMap == mapCount)  //go to end of game splash screen after last map
-                        window.location.href = '/Play/EndofGame/'
-                    else
-                        window.location.href = '/Play/Play/';
-                }
-            });      
-        });
-    });
-</script>
+    </script>
 }

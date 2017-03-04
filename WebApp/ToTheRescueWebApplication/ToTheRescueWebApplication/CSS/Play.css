@@ -2,11 +2,18 @@
     background-color: darkblue;
     min-width: 300px;
     min-height: 260px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 body {  
     /*messes up everyones games*/
     /*min-width:600px;
     min-height: 300px;*/ 
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
 }
 main#map {
     background-color: lightblue;
@@ -125,22 +132,28 @@ nav#playMenu li#back {
     background-color: hotpink;
     width: 85%;
 }
-.mapContainer #mapImg {
-   width: 86%;
-   max-width: 86%;
-   max-height: 80%;
-   border: 2px solid lightblue;
-   box-sizing: border-box;
-   border-style:outset;
-   position: absolute;
-   margin-top: 13%;
-   margin-left: .65%;
+
+#mapCont{
+    width: 95%;
+    height: 90%;
+    position: absolute;
+    top: 2.5%;
+    left: 2.5%;
 }
-.mapContainer {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+#container{
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    top: 15%;
+    margin: 0;
+    left: 0;
 }
+
+#mapImg{
+   width: 100%;
+   height: 100%;
+}
+
 .mapContainer #animalImg {
     position:absolute;
     width: 5%;
@@ -217,7 +230,7 @@ nav#playMenu li#back {
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
-    font-size: 100%;
+    font-size: 50%;
 }
 
 #closePraise:hover {
@@ -271,10 +284,6 @@ nav#playMenu li#back {
     .icon {
         margin-left: -28px;
     }
-    .mapContainer #mapImg {
-        margin-top: 11%;
-        margin-left: .75%;
-    }
 }
 @media only screen and (min-width: 620px) {
     div.profileInfo label {
@@ -295,11 +304,6 @@ nav#playMenu li#back {
 
     .icon {
         margin-left: -17px;
-    }
-
-    .mapContainer #mapImg {
-        margin-top: 9.5%;
-        margin-left: 1.25%;
     }
 }
 /*When screen is 1080px or larger, apply this CSS*/
@@ -324,10 +328,6 @@ nav#playMenu li#back {
     }
     #backLbl {
         margin-left: -4%;
-    }
-    .mapContainer #mapImg {
-        margin-top: 7.5%;
-        margin-left: 1.25%;
     }
     #miniGameDone {
     left: 85%;
