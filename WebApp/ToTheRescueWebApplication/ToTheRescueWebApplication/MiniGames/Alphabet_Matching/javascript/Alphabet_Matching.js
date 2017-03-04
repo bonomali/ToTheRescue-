@@ -27,6 +27,8 @@ var difficulty;
 var numberWrong;
 var isSelected; //aids in deciding whether or not an event handler should fire
 var imgSel; //aids in figuring out what button the user pressed..
+var soundToggle;
+var musicToggle;
 
 //listener for all dom content
 document.addEventListener('DOMContentLoaded', function () {
@@ -102,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
     setTimeout(function GameOver() {
-        responsiveVoice.speak("Good Attempt.");
+        if (soundToggle == "False") responsiveVoice.speak("Good Attempt.");
         var finalScore = -5;
         document.getElementById('score').value = finalScore;
         EndofGame();
@@ -111,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var start = function () {
     //Voice intro
-    responsiveVoice.speak("Hello! Match the blue letter with same brown letter to make a word!");
+    responsiveVoice.speak("Hello! Match the blue letter with the same brown letter to make a word!");   
 
     //container needs to be created here because im too lazy to modify copy and pasted code
     container = document.createElement('div');
@@ -122,6 +124,8 @@ var start = function () {
     numberWrong = 0;
     isSelected = 0;
     imgSel = 0;
+    soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
+    musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
     //css
     var fileRef = document.createElement("link");
@@ -188,11 +192,21 @@ var createElements = function () {
         /*Splash screen and other audio elements should be contained here*/
         //append all elements to blocksgame div
     var divContainer = document.getElementById("BlocksGame");
-    divContainer.style.width = "50%";
     divContainer.appendChild(container);
 
-    //testing block
-    //document.getElementsByTagName('body')[0].appendChild(container);
+    var backgroundMusic = document.createElement('audio');
+    backgroundMusic.setAttribute('src', mediaPath + '/Sounds/backgroundMusic.mp3');
+    backgroundMusic.setAttribute('id', 'bgMusic');
+    backgroundMusic.loop = true;
+    backgroundMusic.volume = '0.3';
+
+    if (musicToggle == "False") setTimeout(backgroundMusic.play(), 3000);
+
+    backgroundMusic.addEventListener('ended', function () {
+        this.currentTime = 0;
+        this.play();
+        this.volume = '0.3';
+    }, false);//keeps background music alive
 }
 
 var setupGame = function () {
@@ -247,8 +261,10 @@ var setCatLetter = function () {
     if (sightWords[sightWord].length == counter) {
         var stat = 5 - numberWrong;
         if (stat < -5) stat = -5;
-        responsiveVoice.speak("The word is " + sightWords[sightWord]);
-        responsiveVoice.speak("Great Job!");
+        if (soundToggle == "False") {
+            responsiveVoice.speak("The word is, " + sightWords[sightWord]);
+            responsiveVoice.speak("Great Job!");
+        }
         document.getElementById("score").value = stat;
         setTimeout(EndofGame, 2500);
     }//if the user won
@@ -256,7 +272,7 @@ var setCatLetter = function () {
         document.getElementById("cat").src = catPics[0];
         var blueLetter = document.getElementById('matchLetter');
         blueLetter.src = blueTiles[(sightWords[sightWord].charAt(counter).charCodeAt() - 97)];
-        responsiveVoice.speak("The letter is, " + sightWords[sightWord].charAt(counter));
+        if (soundToggle == "False") responsiveVoice.speak("The letter is, " + sightWords[sightWord].charAt(counter));
         isSelected = 0;
     }
 }
@@ -280,14 +296,14 @@ var checkAnswer = function () {
         var rand = Math.floor(Math.random() * 25);
         document.getElementById("letter" + imgSel).src = brownTiles[rand];
         document.getElementById("letter" + imgSel).setAttribute("tag", rand);
-        responsiveVoice.speak("Nice!");
+        if (soundToggle == "False") responsiveVoice.speak("Nice!");
     }//if the user selected the correct letter tile
     else {
         numberWrong++;
         if ((Math.floor(Math.random() * 3)) == 0)
             document.getElementById("cat").src = catPics[3]; //surprised cat
         else document.getElementById("cat").src = catPics[1]; //dissapointed cat     
-        responsiveVoice.speak("Uh oh");
+        if (soundToggle == "False") responsiveVoice.speak("Uh oh");
     }
     setTimeout(setCatLetter, 2000);
 }

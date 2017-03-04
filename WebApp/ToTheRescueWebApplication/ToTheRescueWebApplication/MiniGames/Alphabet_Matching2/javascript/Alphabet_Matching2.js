@@ -31,11 +31,13 @@ var imgSel; //aids in figuring out what button the user pressed..
 var imgSel2;
 var letterSel; //defines what element was selected
 var letterSel2;
+var soundToggle;
+var musicToggle;
 
 //listener for all dom content
 document.addEventListener('DOMContentLoaded', function () {
     setTimeout(function GameOver() {
-        responsiveVoice.speak("Good Attempt.");
+        if (soundToggle == "False") responsiveVoice.speak("Good Attempt.");
         var finalScore = -5;
         document.getElementById('score').value = finalScore;
         EndofGame();
@@ -45,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var start = function () {
     //Voice intro
-    responsiveVoice.speak("Hello! Match the all the letters together to win!");
+    responsiveVoice.speak("Hello! Match the same letters together to win!");
 
     //container needs to be created here because im too lazy to modify copy and pasted code
     container = document.createElement('div');
@@ -60,6 +62,8 @@ var start = function () {
     lettersMatched = 0;
     letterSel = -1;
     letterSel2 = -1;
+    soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
+    musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
     //css
     var fileRef = document.createElement("link");
@@ -96,6 +100,21 @@ var createElements = function () {
     var cat = document.createElement('img');
     cat.setAttribute('id', 'cat'); //css handles styling
     container.appendChild(cat);
+
+    //start music
+    var backgroundMusic = document.createElement('audio');
+    backgroundMusic.setAttribute('src', mediaPath + '/Sounds/backgroundMusic.mp3');
+    backgroundMusic.setAttribute('id', 'bgMusic');
+    backgroundMusic.loop = true;
+    backgroundMusic.volume = '0.3';
+
+    if (musicToggle == "False") setTimeout(backgroundMusic.play(), 3000);
+
+    backgroundMusic.addEventListener('ended', function () {
+        this.currentTime = 0;
+        this.play();
+        this.volume = '0.3';
+    }, false);//keeps background music alive
 
     //create letter choices
     var top = 15;
@@ -144,6 +163,7 @@ var createElements = function () {
     divContainer.style.width = "50%";
     divContainer.appendChild(container);
 
+
     //testing block
     //document.getElementsByTagName('body')[0].appendChild(container);
 }
@@ -181,7 +201,7 @@ var checkWin = function () {
     if (lettersMatched == 10) {
         var stat = 5 - numberWrong;
         if (stat < -5) stat = -5;
-        responsiveVoice.speak("Great Job!");
+        if (soundToggle == "False") responsiveVoice.speak("Great Job!");
         document.getElementById("score").value = stat;
         setTimeout(EndofGame, 2500);
     }//if the user won
@@ -193,9 +213,9 @@ var checkWin = function () {
 }
 
 var imgClicked = function () {
-    if (imgSel2 == -1) responsiveVoice.speak(String.fromCharCode(parseInt((document.getElementById(letterSel).getAttribute('tag'))) + 97));
+    if (imgSel2 == -1 && soundToggle == "False") responsiveVoice.speak(String.fromCharCode(parseInt((document.getElementById(letterSel).getAttribute('tag'))) + 97));
     if (imgSel2 != -1) {
-        responsiveVoice.speak(String.fromCharCode(parseInt((document.getElementById(letterSel2).getAttribute('tag'))) + 97));
+        if (soundToggle == "False") responsiveVoice.speak(String.fromCharCode(parseInt((document.getElementById(letterSel2).getAttribute('tag'))) + 97));
         var letter;
         if (letterSel2 != 1) letter = document.getElementById(letterSel2);
         else letter = document.getElementById(letterSel);
@@ -210,14 +230,15 @@ var checkAnswer = function () {
         lettersMatched++;
         document.getElementById("cat").src = catPics[2]; //happy cat  
         document.getElementById(letterSel).style.visibility = "hidden";
-        document.getElementById(letterSel2).style.visibility = "hidden";        responsiveVoice.speak("Nice!");
+        document.getElementById(letterSel2).style.visibility = "hidden";
+        if (soundToggle == "False") responsiveVoice.speak("Nice!");
     }//if the user selected the correct letter tile
     else {
         numberWrong++;
         if ((Math.floor(Math.random() * 3)) == 0)
             document.getElementById("cat").src = catPics[3]; //surprised cat
         else document.getElementById("cat").src = catPics[1]; //dissapointed cat     
-        responsiveVoice.speak("Oh no");
+        if (soundToggle == "False") responsiveVoice.speak("Oh no");
     }
     imgSel = -1;
     imgSel2 = -1;

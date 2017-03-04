@@ -8,6 +8,8 @@ var rightSide, leftSide, selectedName;
 var numberCorrect = 0;
 var numberWrong = 0;
 var imgPath = '../../MiniGames/Number_Comparison/';
+var soundToggle;
+var musicToggle;
 
 //Wait till the browser has parsed all html and turned in to document tree.
 document.addEventListener('DOMContentLoaded', function () {
@@ -140,7 +142,7 @@ var correctAnswer = function () {
     numberCorrect++;
     adjustTrophies();
     var prng = document.getElementById("prng");
-    prng.play();
+    if (soundToggle == "False") prng.play();
     if (numberCorrect == 5) {
         setTimeout(endGame, 3500);
     }
@@ -152,13 +154,13 @@ var wrongAnswer = function () {
     numberCorrect = 0;
     adjustTrophies();
     var woops = document.getElementById("woopsAudio");
-    woops.play();
+    if (soundToggle == "False") woops.play();
     numberWrong++;// not being used yet, might factor into score/game duration
     setTimeout(setupGame, 3500);
 }
 
 var beginIntro = function () {
-    document.querySelector('#content').style.visibility = "hidden";
+    document.querySelector('#contents').style.visibility = "hidden";
     document.querySelector('#intro').style.visibility = "visible";
     document.querySelector('#endGame').style.visibility = "hidden";
     setTimeout(hideIntro, 5000);
@@ -169,9 +171,9 @@ var beginIntro = function () {
 
 var hideIntro = function () {
     var bgMusic = document.getElementById('bgMusic');
-    bgMusic.play();
+    if (musicToggle == "False") bgMusic.play();
     document.querySelector('#intro').style.visibility = "hidden";
-    document.querySelector('#content').style.visibility = "visible";
+    document.querySelector('#contents').style.visibility = "visible";
 }
 
 var adjustTrophies = function () {
@@ -189,9 +191,9 @@ var adjustTrophies = function () {
 
 var endGame = function() {
     var wow = document.getElementById("wow");
-    wow.play();
+    if (soundToggle == "False") wow.play();
     removeChalk();
-    document.querySelector('#content').style.visibility = "hidden";
+    document.querySelector('#contents').style.visibility = "hidden";
     document.querySelector('#endGame').style.visibility = "visible";
     
     var performanceStat = 5 - numberWrong;
@@ -201,6 +203,10 @@ var endGame = function() {
     //send off score return back to map
 }
 var createHtmlElement = function () {
+
+    //grab the toggles
+    soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
+    musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
     //css
     var fileRef = document.createElement("link");
@@ -233,7 +239,7 @@ var createHtmlElement = function () {
 
         //content div
     var contentDiv = document.createElement("div");
-    contentDiv.setAttribute("id", "content");
+    contentDiv.setAttribute("id", "contents");
 
         //images belonging in the content div
             //question mark
