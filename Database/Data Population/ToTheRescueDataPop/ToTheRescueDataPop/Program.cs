@@ -118,8 +118,8 @@ namespace ToTheRescueDataPop
             ProductDB.WriteMiniGames(1, file_path1 + "ColorSortingGame" + file_path2 + "ColorSortingGame.js", "ColorSortingGame", 1, 2);
             ProductDB.WriteMiniGames(2, file_path1 + "IdentifyShapeGame" + file_path2 + "IdentifyShapeGame.js", "IdentifyShapeGame", 1, 2);
             ProductDB.WriteMiniGames(1, file_path1 + "MosquitoSwat_LetterSounds" + file_path2 + "mosquitoswat.js", "MosquitoSwatLetterSounds", 3, 4);
-            ProductDB.WriteMiniGames(2, file_path1 + "Number_Comparision" + file_path2 + "Number_Comparision.js", "NumberComparison", 3, 4);
-            ProductDB.WriteMiniGames(2, file_path1 + "Number_ComparisonEZ" + file_path2 + "Number_ComparisionEZ.js", "NumberComparisonEZ", 2, 2);
+            ProductDB.WriteMiniGames(2, file_path1 + "Number_Comparison" + file_path2 + "Number_Comparison.js", "NumberComparison", 3, 4);
+            ProductDB.WriteMiniGames(2, file_path1 + "Number_ComparisonEZ" + file_path2 + "Number_ComparisonEZ.js", "NumberComparisonEZ", 2, 2);
             ProductDB.WriteMiniGames(2, file_path1 + "Number_Tracing" + file_path2 + "number_tracing.js", "NumberTracing", 1, 2);
             ProductDB.WriteMiniGames(1, file_path1 + "Shape_ColoringBook" + file_path2 + "colorbook.js", "ShapeColoringBook", 1, 2);
             ProductDB.WriteMiniGames(2, file_path1 + "SubtractionMiniGame" + file_path2 + "SubtractionMiniGame.js", "SubtractionMiniGame", 3, 4);
