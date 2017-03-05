@@ -44,14 +44,13 @@ function Drop(ev) {
 
     //if the correct letter is being dropped into a correct drop area
     if (letterBeingDragged[0] === dropAreaID[0]) {
-        
-        if (soundToggle === "False")
-        {
+
+        if (soundToggle === "False") {
             var audio = new Audio();
             audio.src = "../../Audio/soundEffects/elevatorDing.mp3";
             audio.play();
         }
-        
+
         //change the styling of the dragged div so it will drop nicely
         draggedDiv.style.width = "100%";
         draggedDiv.style.height = "100%";
@@ -78,17 +77,19 @@ function EndGame(finished) {
 
     endGameFuncCalls++;
 
-    if (endGameFuncCalls === 1)
-    {
-        backgroundMusic.pause();
+    if (endGameFuncCalls === 1) {
+        if (musicToggle === "False")
+            backgroundMusic.pause();
+
         //temporary abc song, will get an actual audio file in the future
         responsiveVoice.speak("A, B, C, D, E, F, G, H, I, J, K, L M N O P, Q, R, S, T, U, V, W, X, Y and Z." +
          "now I know my A B C's, next time will you sing with me!", "US English Female");
     }
 
     setTimeout(function () {
-        backgroundMusic.play();
-        
+        if (musicToggle === "False")
+            backgroundMusic.play();
+
         //display the end of game stuff after the abc song is played
         EndofGame();
     }, 15000);
@@ -414,7 +415,7 @@ function Main() {
             //play background music
             backgroundMusic.play();
         }
-    }   
+    }
 
     //reloop the audio
     backgroundMusic.addEventListener('ended', function () {

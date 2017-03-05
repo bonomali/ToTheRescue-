@@ -223,69 +223,7 @@ img {
     width: 90%;
 }
 
-/*my own end of game div*/
-#gameOver {
-    visibility: hidden;
-}
-
-#endGameDiv {
-    display: none;
-    width: 30%;
-    height: 45%;
-    background-color: green;
-    position: absolute;
-    z-index: 100;
-    top: 20%;
-    left: 35%;
-    text-align: center;
-    color: white;
-    border-radius: 35px;
-    font-size: 200%;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    min-height: 200px;
-    min-width: 180px;
-}
-
-#endGameDivPic {
-    width: 30%;
-    height: 50%;
-    margin-left: 10%;
-    margin-top: 5%;
-}
-
-#doneButton {
-    width: 20%;
-    height: 10%;
-    min-width: 60px;
-    min-height: 20px;
-    background-color: lightblue;
-    color: darkblue;
-    font-family: "Comic Sans MS", cursive, sans-serif;
-    border-radius: 30px;
-    display: block;
-    padding-bottom: 25px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5%;
-    font-size: 50%;
-}
-
-    #doneButton:hover {
-        background-color: lightpink;
-        font-size: 55%;
-    }
-
-@media only screen and (max-width: 800px) {
-    #endGameDiv {
-        font-size: 150%;
-    }
-}
-
 @media only screen and (max-width: 300px) {
-    #endGameDiv {
-        left: 20%;
-    }
-
     #BlocksGame {
         width: 80%;
     }

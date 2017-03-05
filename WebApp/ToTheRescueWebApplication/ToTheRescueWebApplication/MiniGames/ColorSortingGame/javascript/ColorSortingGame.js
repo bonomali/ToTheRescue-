@@ -12,6 +12,10 @@ var totalDrags = 0;
 
 var audio = new Audio();
 
+//ensures that the good job voice doesn't 
+//go off twice
+var endGameFuncCalls = 0;
+
 //allows the dropping ability
 function AllowDrop(ev) 
 {
@@ -121,9 +125,11 @@ function Drop(ev)
 		}
 		else
 		{
-		    //play the incorrect drop sound
-		    audio.src = "../../Audio/soundEffects/metalClang.mp3";
-		    audio.play();
+		    if (soundToggle === "False") {
+		        //play the incorrect drop sound
+		        audio.src = "../../Audio/soundEffects/metalClang.mp3";
+		        audio.play();
+		    }
 		}
 	}
 	mostRecentDragColor = null;
@@ -222,7 +228,11 @@ function CheckIfWon()
 //the game
 function StopGame()
 {
-    responsiveVoice.speak("Great job!", "US English Female");
+    endGameFuncCalls++;
+
+    //makes suure that great job is only said once
+    if (endGameFuncCalls === 1)
+        responsiveVoice.speak("Great job!", "US English Female");
 
     var percentage = numCorrectDrags / totalDrags;
     var returnVal = null;

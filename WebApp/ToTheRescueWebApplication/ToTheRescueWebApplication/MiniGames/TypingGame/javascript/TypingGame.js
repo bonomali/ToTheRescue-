@@ -4,8 +4,6 @@ var usedArr = [];
 
 var audio = new Audio();
 
-var endGameFuncCalls = 0;
-
 var soundToggle = "False";
 var musicToggle = "False";
 
