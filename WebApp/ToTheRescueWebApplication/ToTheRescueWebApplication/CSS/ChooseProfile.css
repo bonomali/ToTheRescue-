@@ -25,6 +25,7 @@ body {
 #ProfilesTable {
     width: 80%;
     margin: auto;
+    margin-left: 13%;
 }
 
 td {
@@ -47,8 +48,10 @@ td {
     }
 
     .ProfiledDiv #Avatar {
-        width: auto;
-        height: 75%;
+        /*width: auto;*/
+        /*height: 75%;*/
+        width: 50%;
+        height: 50%;
     }
 
 .Buttons {
@@ -158,10 +161,10 @@ td {
         width: 100%;
     }
 
-    .ProfiledDiv #Avatar {
+    /*.ProfiledDiv #Avatar {
         width: 70%;
         height: 50%;
-    }
+    }*/
 
     .ProfiledDiv #ProfileNames {
         font-size: 100%;
@@ -208,8 +211,8 @@ td {
     }
 
     .ProfiledDiv #Avatar {
-        width: 60%;
         height: 40%;
+        width: 75%;
     }
 
     .ProfiledDiv #ProfileNames {

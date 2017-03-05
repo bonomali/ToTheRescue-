@@ -10,48 +10,43 @@ body {
 #Header {
     text-align: center;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    padding: 0px;
-    margin: 0px;
     font-size: 40px;
     color: white;
+    margin: 0;
+    padding: 0;
 }
 
 #emptyNameError {
     position: relative;
-    left: 15.25%;
+    left: 15.5%;
     color: white;
     visibility: hidden;
-    padding: 0px;
-    margin: 0px;
-    margin-bottom: 6px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 20px;
     font-weight: bold;
     display: none;
+    margin: 0;
 }
 
 #tooLongNameError {
     position: relative;
-    left: 15%;
+    left: 15.5%;
     color: white;
-    padding: 0px;
-    margin: 0px;
-    margin-bottom: 6px;
     visibility: hidden;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 20px;
     font-weight: bold;
     display: none;
+    margin: 0;
 }
 
 #EnterProfileNameText {
     position: relative;
     left: 15%;
-    margin: 5px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 25px;
     color: white;
-    margin: 0px;
+    margin: 0.5%;
 }
 
 #ProfileNameText {
@@ -63,6 +58,7 @@ body {
     font-size: 20px;
     border-radius: 5px;
     border-color: black;
+    margin: 0.5%;
 }
 
 #ChooseAvatarText {
@@ -70,8 +66,8 @@ body {
     left: 15%;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 25px;
-    margin: 0px;
     color: white;
+    margin: 0.5%;
 }
 
 #AvatarsTable {
@@ -88,14 +84,14 @@ body {
 
 img {
     width: auto;
-    height: 75%;
+    width: 50%;
+    height: 50%;
     border: thick solid transparent;
 }
 
 #CreateProfileButton {
     visibility: hidden;
     margin-left: 3%;
-    margin-top: -2%;
 }
 
 #BackButton {
@@ -161,7 +157,8 @@ img {
     }
 
     img{
-        height: 45%;
+        height: 40%;
+        width: 75%;
     }
 
         #emptyNameError {
@@ -189,9 +186,5 @@ img {
     }
     #Header{
          left: 0%;
-    }
-
-    #AvatarsTable{
-        margin-left: -1.5%;
     }
 }
