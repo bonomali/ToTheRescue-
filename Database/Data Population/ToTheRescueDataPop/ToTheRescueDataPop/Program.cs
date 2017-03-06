@@ -56,6 +56,20 @@ namespace ToTheRescueDataPop
                 ProductDB.WriteImage(3, "Maps/Plains.png", "plains"); //27
                 ProductDB.WriteImage(3, "Maps/Beach.png", "beach"); //28
                 // 2 maps. 
+
+                ProductDB.WriteImage(2, "Animals/BearNormal.png", "bear"); //29
+                ProductDB.WriteImage(2, "Animals/ClownFishNormal.png", "clown fish"); //30
+                ProductDB.WriteImage(2, "Animals/DogNormal.png", "dog"); //31
+                ProductDB.WriteImage(2, "Animals/KillerWhaleNormal.png", "killer whale"); //32
+                ProductDB.WriteImage(2, "Animals/CatNormal.png", "cat"); //33
+                ProductDB.WriteImage(2, "Animals/PolarBearNormal.png", "polar bear"); //34
+
+                ProductDB.WriteImage(2, "ShinyAnimals/BearShiny.png", "bear"); //35
+                ProductDB.WriteImage(2, "ShinyAnimals/ClownFishShiny.png", "clown fish"); //36
+                ProductDB.WriteImage(2, "ShinyAnimals/DogShiny.png", "dog"); //37
+                ProductDB.WriteImage(2, "ShinyAnimals/KillerWhaleShiny.png", "killer whale"); ; //38
+                ProductDB.WriteImage(2, "ShinyAnimals/CatShiny.png", "cat"); //39
+                ProductDB.WriteImage(2, "ShinyAnimals/PolarBearShiny.png", "polar bear"); //40
             }
 
             if (soundIDList.Count == 0)
