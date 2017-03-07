@@ -156,8 +156,8 @@ nav#playMenu li#back {
 
 .mapContainer #animalImg {
     position:absolute;
-    width: 5%;
-    height: 7%;
+    width: 5.5%;
+    height: 11%;
     z-index:2;
 }
 .mapContainer #avatarImg {

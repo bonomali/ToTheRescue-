@@ -40,8 +40,8 @@ CREATE TABLE Maps (
 CREATE TABLE Nodes (
 	MapID INT REFERENCES Maps (MapID) NOT NULL
 	, NodeID INT IDENTITY
-	, XCoordinate INT NOT NULL
-	, YCoordinate INT NOT NULL
+	, XCoordinate FLOAT NOT NULL
+	, YCoordinate FLOAT NOT NULL
 	, PRIMARY KEY (MapID, NodeID));
 
 CREATE TABLE Animals (

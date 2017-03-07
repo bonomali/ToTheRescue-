@@ -30,8 +30,8 @@ namespace ToTheRescueWebApplication.Repositories
                         {
                             node.ID = (int)reader["NodeID"];
                             node.MapID = (int)reader["MapID"];
-                            node.XCoordinate = (int)reader["XCoordinate"];
-                            node.YCoordinate = (int)reader["YCoordinate"];
+                            node.XCoordinate = (float)reader["XCoordinate"];
+                            node.YCoordinate = (float)reader["YCoordinate"];
                         }
                     }
                 }
@@ -60,8 +60,8 @@ namespace ToTheRescueWebApplication.Repositories
 
                             node.ID = (int)reader["NodeID"];
                             node.MapID = (int)reader["MapID"];
-                            node.XCoordinate = (int)reader["XCoordinate"];
-                            node.YCoordinate = (int)reader["YCoordinate"];
+                            node.XCoordinate = (double)reader["XCoordinate"];
+                            node.YCoordinate = (double)reader["YCoordinate"];
 
                             n.Add(node);
                         }
