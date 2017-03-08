@@ -231,8 +231,6 @@
         else
             finalScore = -5;
         document.getElementById('score').value = finalScore; //save score in html element
-        document.getElementById('BlocksGame').style.top = '68%';
-        document.getElementById('gameOver').style.top = '20%';
         EndofGame(); //function displays good job message and returns to map
     }, 60000);
 }());

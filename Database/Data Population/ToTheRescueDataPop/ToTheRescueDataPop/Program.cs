@@ -135,7 +135,7 @@ namespace ToTheRescueDataPop
             ProductDB.WriteMiniGames(2, file_path1 + "Number_Comparison" + file_path2 + "Number_Comparison.js", "NumberComparison", 3, 4);
             ProductDB.WriteMiniGames(2, file_path1 + "Number_ComparisonEZ" + file_path2 + "Number_ComparisonEZ.js", "NumberComparisonEZ", 2, 2);
             ProductDB.WriteMiniGames(2, file_path1 + "Number_Tracing" + file_path2 + "number_tracing.js", "NumberTracing", 1, 2);
-            ProductDB.WriteMiniGames(1, file_path1 + "Shape_ColoringBook" + file_path2 + "colorbook.js", "ShapeColoringBook", 1, 2);
+            ProductDB.WriteMiniGames(2, file_path1 + "Shape_ColoringBook" + file_path2 + "colorbook.js", "ShapeColoringBook", 1, 2);
             ProductDB.WriteMiniGames(2, file_path1 + "SubtractionMiniGame" + file_path2 + "SubtractionMiniGame.js", "SubtractionMiniGame", 3, 4);
             ProductDB.WriteMiniGames(1, file_path1 + "Alphabet_Matching" + file_path2 + "Alphabet_Matching.js", "AlphabetMatching", 2, 3);
             ProductDB.WriteMiniGames(1, file_path1 + "Alphabet_Matching2" + file_path2 + "Alphabet_Matching2.js", "AlphabetMatching", 2, 3);
@@ -147,6 +147,8 @@ namespace ToTheRescueDataPop
             ProductDB.WriteMiniGames(2, file_path1 + "Position_Vocabulary" + file_path2 + "positionvocabulary.js", "PositionVocabulary", 4, 4);
             ProductDB.WriteMiniGames(1, file_path1 + "SightWord_Maze" + file_path2 + "sightword_maze.js", "SightWordMaze", 4, 4);
             ProductDB.WriteMiniGames(1, file_path1 + "AlphabetSortingGame" + file_path2 + "AlphabetSortingGame.js", "AlphabetMatching", 1, 2);
+            ProductDB.WriteMiniGames(1, file_path1 + "Opposites_Matching" + file_path2 + "opposites_matching.js", "OppositesMatching", 4, 4);
+            ProductDB.WriteMiniGames(1, file_path1 + "Pairs_Matching" + file_path2 + "pairs_matching.js", "PairsMatching", 3, 4);
 
             //Animals
             Console.WriteLine("Uploading Animals.");

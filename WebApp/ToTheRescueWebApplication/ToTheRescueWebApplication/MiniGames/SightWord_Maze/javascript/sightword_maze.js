@@ -602,8 +602,6 @@
 
     endOfGame.addEventListener("ended", function () {
         var finalScore = -5;
-        document.getElementById('BlocksGame').style.top = '68%';
-        document.getElementById('gameOver').style.top = '20%';
         if (score > 80) { finalScore = 5; }
         else if (score > 60) { finalScore = 3; }
         else if (score > 40) { finalScore = 0; }
