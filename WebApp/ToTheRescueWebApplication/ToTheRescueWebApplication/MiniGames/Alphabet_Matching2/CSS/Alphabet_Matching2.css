@@ -1,8 +1,22 @@
 ﻿#container {
     width: 1000px;
     height: 750px;
-    position: relative;
+    -ms-transform-origin: top left;
+    -webkit-transform-origin: top left;
+    transform-origin: top left;
+    -webkit-transition: all 500ms ease-in-out !important;
+    transition: all 500ms ease-in-out !important;
+    position: absolute;
     background: #808080;
+}
+
+#BlocksGame {
+  position:absolute;
+  width: 100%;
+  left:20px;
+  top:20px;
+  right:20px;
+  bottom:20px;
 }
 
 #cat {
