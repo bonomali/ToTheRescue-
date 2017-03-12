@@ -365,6 +365,8 @@ namespace ToTheRescueWebApplication.Controllers
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
                 model.Difficulty = 0;   //difficulty doesn't apply to free play mode
+                model.MiniGame = "../../MiniGames/Pairs_Matching/javascript/pairs_matching.js";
+                model.MiniGame = "../../MiniGames/Shape_ColoringBook/javascript/colorbook.js";
             }
             model.ToggleSound = Convert.ToString((bool)Session["toggleSound"]); //set model's toggle value for sound
             model.ToggleMusic = Convert.ToString((bool)Session["toggleMusic"]); //set model's toggle value for music

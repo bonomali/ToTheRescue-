@@ -88,12 +88,8 @@ namespace ToTheRescueDataPop
                 ProductDB.WriteSound(1, "monkey.mp3", "monkey");
                 ProductDB.WriteSound(1, "rooster.mp3", "rooster");
 
-                ProductDB.WriteSound(2, "background1.mp3", "background1");
-                ProductDB.WriteSound(2, "background2.mp3", "background2");
-                ProductDB.WriteSound(2, "background3.mp3", "background3");
-
-                ProductDB.WriteSound(2, "background4.mp3", "background4");
-                ProductDB.WriteSound(2, "background5.mp3", "background5");
+                ProductDB.WriteSound(2, "MapAudio/map1_background.mp3", "map1_music");
+                ProductDB.WriteSound(2, "MapAudio/map2_background.mp3", "map2_music");
             }
 
             string path;
