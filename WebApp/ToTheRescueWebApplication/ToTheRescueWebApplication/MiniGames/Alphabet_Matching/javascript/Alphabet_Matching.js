@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var finalScore = -5;
         document.getElementById('score').value = finalScore;
         EndofGame();
-    }, 60000);
+    }, 600000);
 });
 
 var start = function () {
@@ -310,3 +310,70 @@ var checkAnswer = function () {
 
 
 start();
+
+/*Universal Minigame Scaler!*/
+var pageWidth, pageHeight;
+
+var basePage = {
+    width: 1000,
+    height: 750,
+    scale: 1,
+    scaleX: 1,
+    scaleY: 1
+};//change the height and width to match your minigame height and width
+
+$(function () {
+    //#contents should be the div that contains all visual elements of your minigame
+    var pageContent = $('#container');
+
+    getPageSize();
+    scalePages(pageContent, pageWidth, pageHeight);
+
+    //using underscore to delay resize method till finished resizing window
+    $(window).resize(_.debounce(function () {
+        getPageSize();
+        scalePages(pageContent, pageWidth, pageHeight);
+    }, 150));
+
+
+    function getPageSize() {
+        var blocksDiv = document.getElementById('BlocksGame');
+
+        var playWidth = document.getElementById('playMenu').offsetWidth;
+
+        //offsetLeft refers to the padding set in the BlocksGame css
+        var bodyWidth = $('body').width() - (blocksDiv.offsetLeft * 2);
+        var bodyHeight = $('body').height() - (blocksDiv.offsetTop * 2);
+
+        //set the blocksDiv width to adjust for the playMenu
+        var newWidth = bodyWidth - playWidth;
+        blocksDiv.style.width = newWidth.toString() + 'px';
+        blocksDiv.style.height = bodyHeight.toString() + 'px';
+
+        pageHeight = $('#BlocksGame').height();
+        pageWidth = $('#BlocksGame').width();
+    }
+
+    function scalePages(pageContent, maxWidth, maxHeight) {
+        var scaleX = 1, scaleY = 1;
+
+        //get the factor we want to scale by
+        scaleX = (maxWidth / basePage.width);
+        scaleY = (maxHeight / basePage.height);
+
+        //set the new factors
+        basePage.scaleX = scaleX;
+        basePage.scaleY = scaleY;
+
+        //take the smaller scale factor
+        basePage.scale = (scaleX > scaleY) ? scaleY : scaleX;
+
+        //set a new position
+        var newLeftPos = Math.abs(Math.floor(((basePage.width * basePage.scale) - maxWidth) / 2));
+        var newTopPos = Math.abs(Math.floor(((basePage.height * basePage.scale) - maxHeight) / 2));
+
+        //apply the new style
+        pageContent.attr('style', '-webkit-transform:scale(' + basePage.scale + ');left:' + newLeftPos + 'px;top:' + newTopPos + 'px;');
+    }
+});
+/*End Universal Minigame Scaler*/

@@ -218,7 +218,6 @@ var createHtmlElement = function () {
     document.getElementsByTagName("head")[0].appendChild(fileRef);
 
     var divContainer = document.getElementById("BlocksGame");
-    divContainer.style.width = "50%";
     //contents of divContainer
         //intro header
     var header = document.createElement("h1");
@@ -335,13 +334,116 @@ var createHtmlElement = function () {
 
 
     //append all content 
-    divContainer.appendChild(background);
-    divContainer.appendChild(header);
-    divContainer.appendChild(header1);
-    divContainer.appendChild(contentDiv);
-    divContainer.appendChild(leftSideContainer);
-    divContainer.appendChild(rightSideContainer);
+    //divContainer.appendChild(background);
+    //divContainer.appendChild(header);
+    //divContainer.appendChild(header1);
+    //divContainer.appendChild(contentDiv);
+    //divContainer.appendChild(leftSideContainer);
+    //divContainer.appendChild(rightSideContainer);
+    //divContainer.appendChild(audioDiv);
+    contentDiv.appendChild(background);
+    contentDiv.appendChild(header);
+    contentDiv.appendChild(header1);
+    contentDiv.appendChild(leftSideContainer);
+    contentDiv.appendChild(rightSideContainer);
     divContainer.appendChild(audioDiv);
+    divContainer.appendChild(contentDiv);
+
+
 }
 createHtmlElement();
 beginIntro();
+
+
+
+
+
+/*Universal Minigame Scaler!*/
+var pageWidth, pageHeight;
+
+var basePage = {
+    width: 990,
+    height: 699,
+    scale: 1,
+    scaleX: 1,
+    scaleY: 1
+};//change the height and width to match your minigame height and width
+
+$(function () {
+    //#contents should be the div that contains all visual elements of your minigame
+    var pageContent = $('#contents');
+
+    getPageSize();
+    scalePages(pageContent, pageWidth, pageHeight);
+  
+    //using underscore to delay resize method till finished resizing window
+    $(window).resize(_.debounce(function () {
+        getPageSize();
+        scalePages(pageContent, pageWidth, pageHeight);
+    }, 150));
+  
+
+    function getPageSize() {
+        var blocksDiv = document.getElementById('BlocksGame');
+
+        var playWidth = document.getElementById('playMenu').offsetWidth;
+
+        //offsetLeft refers to the padding set in the BlocksGame css
+        var bodyWidth = $('body').width() - (blocksDiv.offsetLeft * 2);
+        var bodyHeight = $('body').height() - (blocksDiv.offsetTop * 2);
+
+        //set the blocksDiv width to adjust for the playMenu
+        var newWidth = bodyWidth - playWidth;
+        blocksDiv.style.width = newWidth.toString() + 'px';
+        blocksDiv.style.height = bodyHeight.toString() + 'px';
+
+        pageHeight = $('#BlocksGame').height();
+        pageWidth = $('#BlocksGame').width();
+    }
+
+    function scalePages(pageContent, maxWidth, maxHeight) {            
+        var scaleX = 1, scaleY = 1;
+
+        //get the factor we want to scale by
+        scaleX = (maxWidth / basePage.width);
+        scaleY = (maxHeight / basePage.height);
+
+        //set the new factors
+        basePage.scaleX = scaleX;
+        basePage.scaleY = scaleY;
+
+        //take the smaller scale factor
+        basePage.scale = (scaleX > scaleY) ? scaleY : scaleX;
+
+        //set a new position
+        var newLeftPos = Math.abs(Math.floor(((basePage.width * basePage.scale) - maxWidth) / 2));
+        var newTopPos = Math.abs(Math.floor(((basePage.height * basePage.scale) - maxHeight)/2));
+
+        //apply the new style
+        pageContent.attr('style', '-webkit-transform:scale(' + basePage.scale + ');left:' + newLeftPos + 'px;top:' + newTopPos + 'px;');
+    }
+});
+/*End Universal Minigame Scaler*/
+
+//required css adds, where #contents contains all visual elements
+
+/*
+ * #BlocksGame {
+  position:absolute;
+  width: 100%;
+  left:20px;
+  top:20px;
+  right:20px;
+  bottom:20px;
+}
+#contents{
+  width:990px;
+  height:699px;
+  -ms-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 500ms ease-in-out !important;
+  transition: all 500ms ease-in-out !important;
+  position: absolute;
+}
+ */

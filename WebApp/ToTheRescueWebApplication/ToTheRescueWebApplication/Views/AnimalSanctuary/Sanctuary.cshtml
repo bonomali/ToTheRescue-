@@ -15,7 +15,6 @@
         $("#content").fadeOut("slow");
     })
 </script>   
-<h2 class="h2" id="name">@TempData["profileName"]'s Sanctuary!</h2>
 <html>
 
 <head>
@@ -25,42 +24,73 @@
 
 
 <body>
-     <audio controls loop id="BackgroundSound" source src="../Audio/Happy-Music.mp3" autoplay hidden ="hidden">
-         <embed src="../Audio/Happy-Music.mp3" hidden="hidden" />
-     </audio>
- 
-    <div id="animalSanctuary">
-        @{int x = 0; }
-        @for (int i = 0; i < Model.Count(); i++)
-        {
-            if (Model[i].ActiveBit == true)
-            {
-                <div id="@("Div" + x)">
-                    <text id="@("Text" + x)" hidden="hidden"> @(Model[i].FunFact)</text>
-                    <img id="@("AnimalImage" + x)" height="70" width="70" src="@Url.Action("ShowAnimalImage", new { @animalID = Model[i].ID })" alt="Animal" onclick="AnimalClicked(@x)" visibility="hidden" />
-                    <audio id="@x" src="@Url.Action("PlayAnimalSound", new { @animalID = Model[i].ID })" />
-                </div>
-                x++;
-            }
-        }
-    </div>
-    <span class="NavButtons" onclick="openNav()">Released Animals</span>
-    <div id="ReleasedAnimals" class="sidenav">
-        <button class="closebtn" onclick="closeNav()">x</button>
-        @for (int i = 0; i < Model.Count(); i++)
-        {
-            if (Model[i].ActiveBit == false)
-            {
-                <div id="@("Div" + x)">
-                    <text id="@("Text" + x)" hidden="hidden"> @(Model[i].FunFact)</text>
-                    <img id="@("AnimalImage" + x)" height="70" width="70" src="@Url.Action("ShowAnimalImage", new { @animalID = Model[i].ID })" alt="Animal" onclick="AnimalClicked(@x)" />
-                    <audio id="@x" src="@Url.Action("PlayAnimalSound", new { @animalID = Model[i].ID })" />
-                </div>
-                x++;
-            }
-        }
-    </div>
+    <audio controls loop id="BackgroundSound" source src="../Audio/Happy-Music.mp3" autoplay hidden="hidden">
+        <embed src="../Audio/Happy-Music.mp3" hidden="hidden" />
+    </audio>
+    <div id="BlocksGame">
+        @*Start Container Div*@
+        <div id="container">
+            <h2 class="h2" id="title">@TempData["profileName"]'s Sanctuary!</h2>
+
+            <img src="/Play/ShowMapImage?mapID=1" id="background" />
+
+            <span class="NavButtons" onclick="openNav()">Released Animals</span>
+
+            <p id="FunFact"></p>
+
+            <button id="backButton" class="Buttons" onclick="GoToMainMenu()">Menu</button>
+
+
+            @*Active animals in sanctuary*@
+            <div id="animalSanctuary" class="activeAnimals">
+                @{int x = 0; }
+
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    if (Model[i].ActiveBit == true)
+                    {
+                        <div id="@("Div" + x)" class="activeAnimals">
+                            <text id="@("Text" + x)" hidden="hidden"> @(Model[i].FunFact)</text>
+                            <img id="@("AnimalImage" + x)" class="animal"  src="@Url.Action("ShowAnimalImage", new { @animalID = Model[i].ID })" alt="Animal" onclick="AnimalClicked(@x)" visibility="hidden" />
+                            <audio id="@x" src="@Url.Action("PlayAnimalSound", new { @animalID = Model[i].ID })" />
+                        </div>
+                        x++;
+                    }
+                }
+            </div>
+
+            @*Non active animals in sanctuary*@
+            <div id="ReleasedAnimals" class="sidenav">
+                <button id="closebtn" onclick="closeNav()">x</button>
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    if (Model[i].ActiveBit == false)
+                    {
+                        
+                        <div id="@("Div" + x)" class="nonActiveAnimals">
+                            <text id="@("Text" + x)" hidden="hidden"> @(Model[i].FunFact)</text>
+                            <img id="@("AnimalImage" + x)" class="animal" src="@Url.Action("ShowAnimalImage", new { @animalID = Model[i].ID })" alt="Animal" onclick="AnimalClicked(@x)" />
+                            <audio id="@x" src="@Url.Action("PlayAnimalSound", new { @animalID = Model[i].ID })" />
+                        </div>
+                        x++;
+                    }
+                }
+            </div>
+        </div>@*End Container Div*@
+    </div>@*End blocks div*@
+
     <script type="text/javascript">
+        //TODO implement toggling
+        //var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
+        //var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
+
+        function main() {
+            var music = document.getElementById("BackgroundSound");
+            music.volume = 0.2;
+            setName();
+            MoveAnimals();
+            adjustInactive();
+        }
 
         function GoToMainMenu() {
             window.location.href = '/MainMenu/MainMenu';
@@ -73,46 +103,6 @@
             document.getElementById("FunFact").innerHTML = "Fun Fact!  " + document.getElementById("Text" + id).innerText;
         }
 
-        function MoveAnimals() {
-            var id = 0;
-            var elID = "Div" + id;
-            var div = document.getElementById(elID);
-            while (div != null) {
-
-                var rand = Math.random();
-                rand = rand * 50;
-                rand = Math.floor(rand);
-                if (rand % 2 === 0) rand = (rand - (rand * 2));
-                //gets a random whole number between 0 and 50
-                //if the number is even, the sign is reversed
-
-                if (id <= 4) {
-                    div.style.left = (id * 85 + 255) + "px";
-                    div.style.top = (425 + rand) + "px";
-                }
-                if (id <= 9 && id > 4) {
-                    div.style.left = (id * 85) + "px";
-                    div.style.top = (255 + rand) + "px";
-                }
-                if (id <= 14 && id > 9) {
-                    div.style.left = (id * 85) + "px";
-                    div.style.top = (255 + rand) + "px";
-                }
-                if (id <= 19 && id > 14) {
-                    div.style.left = (id * 85 - 255) + "px";
-                    div.style.top = (425 + rand) + "px";
-                }
-                if (id < 20) {
-                    div.style.position = "absolute";
-                    div.style.zIndex = 2;
-                }
-                id++;
-                var elID = "Div" + id;
-                var div = document.getElementById(elID);
-            }
-        }
-
-        /* Set the width of the side navigation to 150px */
         function openNav() {
             document.getElementById("ReleasedAnimals").style.width = "150px";
         }
@@ -121,24 +111,112 @@
         function closeNav() {
             document.getElementById("ReleasedAnimals").style.width = "0";
         }
+
         function setName() {
             var name = document.getElementById("name");
-  
         }
-        function main() {
-            var music = document.getElementById("BackgroundSound");
-            music.volume = 0.2;
-            setName();
-            MoveAnimals();
+
+        function MoveAnimals() {
+            var posXArray = [246, 240, 189, 241, 383, 383, 350, 403, 658, 546, 529, 812, 860, 717, 684, 851, 997, 885, 1010, 989];
+            var posYArray = [155, 281, 422, 549, 79, 230, 378, 522, 442, 177, 358, 455, 24, 136, 297, 318, 56, 179, 281, 464];
+            var modelCount = @Model.Count();
+            var numAnimals = (modelCount > 20) ? 20 : modelCount;
+            var elID, div, rand, aspectRat;
+            for(var i = 0; i < numAnimals; i++) {
+                elID = "AnimalImage" + i;
+                div = document.getElementById(elID);
+                rand = Math.floor(Math.random() * posXArray.length);
+
+                div.style.left = (posXArray[rand]) + "px";
+                div.style.top = (posYArray[rand]) + "px";
+                div.style.zIndex = 2;
+                div.style.position = "absolute";
+
+                posXArray.splice(rand, 1);
+                posYArray.splice(rand, 1);
+            }
         }
+
+        var adjustInactive = function()
+        {
+            var div, elID;
+            for(var i = 20; i < @Model.Count; i++)
+            {
+                elID = "AnimalImage" + i;
+                div = document.getElementById(elID);
+                div.style.left = ((150 - $("#" + elID).width()) / 2) + "px";
+            }
+        }
+
         main();
+
+
+        /*Universal Minigame Scaler!*/
+        var pageWidth, pageHeight;
+
+        var basePage = {
+            width: 1120,
+            height: 640,
+            scale: 1,
+            scaleX: 1,
+            scaleY: 1
+        };//change the height and width to match your minigame height and width
+
+        $(function () {
+            //#contents should be the div that contains all visual elements of your minigame
+            var pageContent = $('#container');
+
+            getPageSize();
+            scalePages(pageContent, pageWidth, pageHeight);
+
+            //using underscore to delay resize method till finished resizing window
+            $(window).resize(_.debounce(function () {
+                getPageSize();
+                scalePages(pageContent, pageWidth, pageHeight);
+            }, 150));
+
+
+            function getPageSize() {
+                var blocksDiv = document.getElementById('BlocksGame');
+
+                //offsetLeft refers to the padding set in the BlocksGame css
+                var bodyWidth = $('body').width() - (blocksDiv.offsetLeft * 3);
+                var bodyHeight = $('body').height() - (blocksDiv.offsetTop * 3);
+
+                //set the blocksDiv width to adjust for the playMenu
+                blocksDiv.style.width = bodyWidth.toString() + 'px';
+                blocksDiv.style.height = bodyHeight.toString() + 'px';
+
+                pageHeight = $('#BlocksGame').height();
+                pageWidth = $('#BlocksGame').width();
+            }
+
+            function scalePages(pageContent, maxWidth, maxHeight) {
+                var scaleX = 1, scaleY = 1;
+
+                //get the factor we want to scale by
+                scaleX = (maxWidth / basePage.width);
+                scaleY = (maxHeight / basePage.height);
+
+                //set the new factors
+                basePage.scaleX = scaleX;
+                basePage.scaleY = scaleY;
+
+                //take the smaller scale factor
+                basePage.scale = (scaleX > scaleY) ? scaleY : scaleX;
+
+                //set a new position
+                var newLeftPos = Math.abs(Math.floor(((basePage.width * basePage.scale) - maxWidth) / 2));
+                var newTopPos = Math.abs(Math.floor(((basePage.height * basePage.scale) - maxHeight) / 2));
+
+                //apply the new style
+                pageContent.attr('style', '-webkit-transform:scale(' + basePage.scale + ');left:' + newLeftPos + 'px;top:' + newTopPos + 'px;');
+            }
+        });
+        /*End Universal Minigame Scaler*/
     </script>
-    <button id="backButton" class="Buttons" onclick="GoToMainMenu()">Main Menu</button>
 </body>
 
 
 
 </html>
-<div class="FunFactDiv" style="position:absolute;top:150px;right:7%">
-    <p id="FunFact"></p>
-</div>
