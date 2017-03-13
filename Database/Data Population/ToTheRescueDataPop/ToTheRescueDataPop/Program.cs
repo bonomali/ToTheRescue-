@@ -70,34 +70,76 @@ namespace ToTheRescueDataPop
                 ProductDB.WriteImage(2, "ShinyAnimals/KillerWhaleShiny.png", "killer whale"); ; //38
                 ProductDB.WriteImage(2, "ShinyAnimals/CatShiny.png", "cat"); //39
                 ProductDB.WriteImage(2, "ShinyAnimals/PolarBearShiny.png", "polar bear"); //40
+
+                ProductDB.WriteImage(2, "Animals/NormalRhino.png", "rhino"); //41
+                ProductDB.WriteImage(2, "Animals/CrabNormal.png", "crab"); //42
+                ProductDB.WriteImage(2, "Animals/ButterflyNormal.png", "butterfly"); //43
+                ProductDB.WriteImage(2, "Animals/LionNormal.png", "lion"); //44
+                ProductDB.WriteImage(2, "Animals/SquirrelNormal.png", "squirrel"); //45
+                ProductDB.WriteImage(2, "Animals/MeerkatNormal.png", "meerkat"); //46
+                ProductDB.WriteImage(2, "Animals/CowNormal.png", "cow"); //47
+                ProductDB.WriteImage(2, "Animals/FrogNormal.png", "frog"); //48
+
+
+                ProductDB.WriteImage(2, "ShinyAnimals/RhinoShiny.png", "rhino"); //49
+                ProductDB.WriteImage(2, "ShinyAnimals/CrabShiny.png", "crab"); //50
+                ProductDB.WriteImage(2, "ShinyAnimals/ButterflyShiny.png", "butterfly"); //51
+                ProductDB.WriteImage(2, "ShinyAnimals/LionShiny.png", "lion"); //52
+                ProductDB.WriteImage(2, "ShinyAnimals/SquirrelShiny.png", "squirrel"); //53
+                ProductDB.WriteImage(2, "ShinyAnimals/MeerkatShiny.png", "meerkat"); //54
+                ProductDB.WriteImage(2, "ShinyAnimals/CowShiny.png", "cow"); //55
+                ProductDB.WriteImage(2, "ShinyAnimals/FrogShiny.png", "frog"); //56
             }
 
             if (soundIDList.Count == 0)
             {
                 //Lake's animal sounds
-                string[] soundArray = new string[] { "bear", "cat", "dog", "elephant", "fish", "giraffe", "hippo", "monkey", "panda", "parrot", "penguin",
-                    "pig", "polarBear", "rabbit", "snake", "whale", "butterfly", "cow", "crab", "frog", "lion", "meercat", "rhino", "squirrel" };
+                string[] soundArray = new string[] {
+                    "bear", //1
+                    "cat", //2
+                    "dog", //3
+                    "elephant", //4
+                    "fish", //5
+                    "giraffe", //6
+                    "hippo", //7
+                    "monkey", //8
+                    "panda", //9
+                    "parrot", //10
+                    "penguin", //11
+                    "pig", //12
+                    "polarBear", //13
+                    "rabbit", //14
+                    "snake", //15
+                    "whale", //16
+                    "butterfly", //17
+                    "cow", //18
+                    "crab", //19
+                    "frog", //20
+                    "lion", //21
+                    "meercat", //22
+                    "rhino", //23
+                    "squirrel" //24
+                };
                 for (int i = 0; i < soundArray.Length; i++)
                 {
                     ProductDB.WriteSound(1, "AnimalSounds/" + soundArray[i] + ".m4a", soundArray[i]);
                 }
 
-                // upload images
                 //ProductDB.WriteSound(1, "cat.mp3", "cat");
-                ProductDB.WriteSound(1, "chipmunk.mp3", "chipmunk");
-                ProductDB.WriteSound(1, "cow.mp3", "cow");
+                //ProductDB.WriteSound(1, "chipmunk.mp3", "chipmunk");
+                //ProductDB.WriteSound(1, "cow.mp3", "cow"); 
 
                 //ProductDB.WriteSound(1, "dog.mp3", "dog");
-                ProductDB.WriteSound(1, "frog.mp3", "frog");
-                ProductDB.WriteSound(1, "horse.mp3", "horse");
+                //ProductDB.WriteSound(1, "frog.mp3", "frog");
+                //ProductDB.WriteSound(1, "horse.mp3", "horse"); 
 
-                ProductDB.WriteSound(1, "joke.mp3", "joke");
-                ProductDB.WriteSound(1, "lion.mp3", "lion");
+                ProductDB.WriteSound(1, "joke.mp3", "joke"); //25
+                //ProductDB.WriteSound(1, "lion.mp3", "lion"); 
                 //ProductDB.WriteSound(1, "monkey.mp3", "monkey");
-                ProductDB.WriteSound(1, "rooster.mp3", "rooster");
+                //ProductDB.WriteSound(1, "rooster.mp3", "rooster"); 
 
-                ProductDB.WriteSound(2, "MapAudio/map1_background.mp3", "background1");
-                ProductDB.WriteSound(2, "MapAudio/map2_background.mp3", "background2");
+                ProductDB.WriteSound(2, "MapAudio/map1_background.mp3", "background1"); //26
+                ProductDB.WriteSound(2, "MapAudio/map2_background.mp3", "background2"); //27
             }
 
             string path;

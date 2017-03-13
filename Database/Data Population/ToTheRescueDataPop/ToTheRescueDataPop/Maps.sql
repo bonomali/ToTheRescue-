@@ -1,3 +1,3 @@
 INSERT INTO Maps (MapName, ImageID, SoundID)
 VALUES 
-('plains', 27, 11),('beach', 28, 12);
+('plains', 27, 26),('beach', 28, 27);
