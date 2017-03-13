@@ -74,18 +74,26 @@ namespace ToTheRescueDataPop
 
             if (soundIDList.Count == 0)
             {
+                //Lake's animal sounds
+                string[] soundArray = new string[] { "bear", "cat", "dog", "elephant", "fish", "giraffe", "hippo", "monkey", "panda", "parrot", "penguin",
+                    "pig", "polarBear", "rabbit", "snake", "whale", "butterfly", "cow", "crab", "frog", "lion", "meercat", "rhino", "squirrel" };
+                for (int i = 0; i < soundArray.Length; i++)
+                {
+                    ProductDB.WriteSound(1, "AnimalSounds/" + soundArray[i] + ".m4a", soundArray[i]);
+                }
+
                 // upload images
-                ProductDB.WriteSound(1, "cat.mp3", "cat");
+                //ProductDB.WriteSound(1, "cat.mp3", "cat");
                 ProductDB.WriteSound(1, "chipmunk.mp3", "chipmunk");
                 ProductDB.WriteSound(1, "cow.mp3", "cow");
 
-                ProductDB.WriteSound(1, "dog.mp3", "dog");
+                //ProductDB.WriteSound(1, "dog.mp3", "dog");
                 ProductDB.WriteSound(1, "frog.mp3", "frog");
                 ProductDB.WriteSound(1, "horse.mp3", "horse");
 
                 ProductDB.WriteSound(1, "joke.mp3", "joke");
                 ProductDB.WriteSound(1, "lion.mp3", "lion");
-                ProductDB.WriteSound(1, "monkey.mp3", "monkey");
+                //ProductDB.WriteSound(1, "monkey.mp3", "monkey");
                 ProductDB.WriteSound(1, "rooster.mp3", "rooster");
 
                 ProductDB.WriteSound(2, "background1.mp3", "background1");
@@ -94,6 +102,7 @@ namespace ToTheRescueDataPop
 
                 ProductDB.WriteSound(2, "background4.mp3", "background4");
                 ProductDB.WriteSound(2, "background5.mp3", "background5");
+
             }
 
             string path;

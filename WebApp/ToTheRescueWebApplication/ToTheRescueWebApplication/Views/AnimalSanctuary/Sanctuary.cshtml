@@ -24,6 +24,7 @@
 
 
 <body>
+    <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
     <audio controls loop id="BackgroundSound" source src="../Audio/Happy-Music.mp3" autoplay hidden="hidden">
         <embed src="../Audio/Happy-Music.mp3" hidden="hidden" />
     </audio>
@@ -51,7 +52,7 @@
                     {
                         <div id="@("Div" + x)" class="activeAnimals">
                             <text id="@("Text" + x)" hidden="hidden"> @(Model[i].FunFact)</text>
-                            <img id="@("AnimalImage" + x)" class="animal"  src="@Url.Action("ShowAnimalImage", new { @animalID = Model[i].ID })" alt="Animal" onclick="AnimalClicked(@x)" visibility="hidden" />
+                            <img id="@("AnimalImage" + x)" class="animal" src="@Url.Action("ShowAnimalImage", new { @animalID = Model[i].ID })" alt="Animal" onclick="AnimalClicked(@x)" visibility="hidden" />
                             <audio id="@x" src="@Url.Action("PlayAnimalSound", new { @animalID = Model[i].ID })" />
                         </div>
                         x++;
@@ -65,7 +66,7 @@
                 @for (int i = 0; i < Model.Count(); i++)
                 {
                     if (Model[i].ActiveBit == false)
-                    { 
+                    {
                         <div id="@("Div" + x)" class="nonActiveAnimals">
                             <text id="@("Text" + x)" hidden="hidden"> @(Model[i].FunFact)</text>
                             <img id="@("AnimalImage" + x)" class="animal" src="@Url.Action("ShowAnimalImage", new { @animalID = Model[i].ID })" alt="Animal" onclick="AnimalClicked(@x)" />
@@ -97,10 +98,12 @@
 
         function AnimalClicked(id) {
             var sound = document.getElementById(id);
+            var funFact = "Fun Fact!  " + document.getElementById("Text" + id).innerText;
             sound.volume = 0.3;
             sound.play();
+            setTimeout(function() {responsiveVoice.speak(funFact)}, 3000);
             if (id < 20) wiggle(id);
-            document.getElementById("FunFact").innerHTML = "Fun Fact!  " + document.getElementById("Text" + id).innerText;
+            document.getElementById("FunFact").innerHTML = funFact;
         }
 
         function wiggle(id) {
@@ -186,7 +189,6 @@
             function getPageSize() {
                 var blocksDiv = document.getElementById('BlocksGame');
 
-                //offsetLeft refers to the padding set in the BlocksGame css
                 var bodyWidth = $('body').width() - (blocksDiv.offsetLeft * 3);
                 var bodyHeight = $('body').height() - (blocksDiv.offsetTop * 3);
 
@@ -223,6 +225,7 @@
         /*End Universal Minigame Scaler*/
     </script>
 </body>
+
 
 
 
