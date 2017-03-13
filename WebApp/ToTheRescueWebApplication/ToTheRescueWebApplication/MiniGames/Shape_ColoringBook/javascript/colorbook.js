@@ -34,7 +34,10 @@
             shapeFact.play();  //play shape fact after shape name (if applicable)
         }
     });
-    audioInstructions.play();
+    window.onload = function () {
+        audioInstructions.play();
+    }
+
     var colorPurple = '#cb3594';
     var colorGreen = '#659b41';
     var colorYellow = '#ffcf33';

@@ -363,6 +363,8 @@
         });
 
         loadFlagImages();        //load flag images
-        playAudioInstructions(); //play audio instructions
+        window.onload = function () {
+            playAudioInstructions(); //play audio instructions
+        }
     };
 }());

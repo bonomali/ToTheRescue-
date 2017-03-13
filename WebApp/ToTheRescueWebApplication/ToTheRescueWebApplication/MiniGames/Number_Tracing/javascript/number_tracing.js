@@ -42,7 +42,9 @@
         numberAudio.src = audioClips[index];
         numberAudio.play();  
     });
-    audioInstructions.play();
+    window.onload = function () {
+        audioInstructions.play();
+    }
 
     var curColor = '#000';          //color user is drawing with
     var clickX = new Array();       //array of X-coordinates
@@ -103,6 +105,7 @@
             redraw();
         });
         buttonRetry.style.backgroundImage = 'url(' + imagePath + 'eraser-image.png)';
+        buttonRetry.style.backgroundSize = 'cover';
 
         //create done button
         var buttonDone = document.createElement('button');
@@ -117,6 +120,7 @@
             EndofGame(); //function displays good job message and returns to map
         });
         buttonDone.style.backgroundImage = 'url(' + imagePath + 'done-image.jpg)';
+        buttonDone.style.backgroundSize = 'cover';
 
         //style button elements
         var buttons = document.getElementsByClassName('toolButton');
@@ -129,6 +133,7 @@
             buttons[i].style.marginTop = '10%';
             buttons[i].style.marginLeft = '17%';
         }
+        buttonDone.style.height = '15%';
     }
 
     //add tracing image

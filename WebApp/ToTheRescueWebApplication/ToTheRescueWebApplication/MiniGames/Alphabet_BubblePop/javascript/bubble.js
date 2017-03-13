@@ -86,7 +86,9 @@
     audioInstructions.addEventListener('ended', function () {
         b6.play();  //play target letter after generic instructions
     });
-    audioInstructions.play();
+    window.onload = function () {
+        audioInstructions.play();
+    }
 
     //background image and bubble images
     images = {
