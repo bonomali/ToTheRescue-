@@ -30,7 +30,7 @@
     <div id="BlocksGame">
         @*Start Container Div*@
         <div id="container">
-            <h2 class="h2" id="title">@TempData["profileName"]'s Sanctuary!</h2>
+            <h2 class="h2" id="title">@TempData["profileName"]'s Sanctuary</h2>
 
             <img src="/Play/ShowMapImage?mapID=1" id="background" />
 
@@ -65,8 +65,7 @@
                 @for (int i = 0; i < Model.Count(); i++)
                 {
                     if (Model[i].ActiveBit == false)
-                    {
-                        
+                    { 
                         <div id="@("Div" + x)" class="nonActiveAnimals">
                             <text id="@("Text" + x)" hidden="hidden"> @(Model[i].FunFact)</text>
                             <img id="@("AnimalImage" + x)" class="animal" src="@Url.Action("ShowAnimalImage", new { @animalID = Model[i].ID })" alt="Animal" onclick="AnimalClicked(@x)" />
@@ -100,7 +99,15 @@
             var sound = document.getElementById(id);
             sound.volume = 0.3;
             sound.play();
+            if (id < 20) wiggle(id);
             document.getElementById("FunFact").innerHTML = "Fun Fact!  " + document.getElementById("Text" + id).innerText;
+        }
+
+        function wiggle(id) {
+            var elID = "AnimalImage" + id;
+            var img = document.getElementById(elID);
+            img.setAttribute('class', 'wiggleAnimation');
+            setTimeout(function() {img.setAttribute('class', 'animal'); }, 3000);
         }
 
         function openNav() {
