@@ -228,6 +228,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\animalBackground.jpg" />
+    <Content Include="Images\AnimalSanctuaryMap.png" />
     <Content Include="Images\backIcon.png" />
     <Content Include="Images\endOfGame.gif" />
     <Content Include="Images\gameOver.png" />
