@@ -1,0 +1,144 @@
+html{
+	width: 100%;
+	height: 100%;
+}
+
+body{
+	width: 100%;
+	height: 100%;
+	margin: auto;
+}
+
+#BlocksGame{
+    background-color: #9099A2;
+    width: 90%;
+    height: 100%;
+}
+
+#simon{
+	margin: 0;
+	top: 0;
+	width: 100%;
+	height: 10%;
+	color:white;
+	text-align: center;
+	position: absolute;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 40px;
+}
+
+#gameBoardContainer{
+	color: white;
+	text-align: center;
+	background-color: black;
+	width: 40%;
+	height: 80%;
+	position: absolute;
+	left: 30%;
+	top: 5%;
+	font-size: 200%;
+}
+
+.simonSquares{
+	width: 40%;
+	height: 38%;
+	position: absolute;
+}
+
+#green{
+	top: 10%;
+	left: 5%;
+	background-color: green;
+}
+
+#red{
+	top: 10%;
+	right: 5%;
+	background-color: #cc0000;
+}
+
+#purple{
+	bottom: 5%;
+	left: 5%;
+	background-color: purple;
+}
+
+#blue{
+	bottom: 5%;
+	right: 5%;
+	background-color: #2e2eb8;
+}
+
+#bestScore{
+	bottom: 6%;
+	left: 55%;
+	position: absolute;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 30px;
+    margin:0;
+    padding:0;
+}
+
+#currentScore{
+	bottom: 6%;
+	left: 30%;
+	position: absolute;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 30px;
+    margin:0;
+    padding:0;
+}
+
+@media only screen and (max-height: 600px) {
+    #simon {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-height: 400px) {
+    #simon {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    #bestScore {
+        font-size: 20px;
+        bottom: 10%;
+    }
+
+    #currentScore {
+        font-size: 20px;
+        bottom: 10%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    #bestScore {
+        font-size: 15px;
+    }
+
+    #currentScore {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #bestScore {
+        left: 50%;
+    }
+
+    #currentScore {
+        left: 20%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    #bestScore {
+        left: 60%;
+    }
+
+    #currentScore {
+        left: 5%;
+    }
+}
