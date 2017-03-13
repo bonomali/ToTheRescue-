@@ -7,9 +7,6 @@
     height: 100%;
 }
 body {  
-    /*messes up everyones games*/
-    /*min-width:600px;
-    min-height: 300px;*/ 
     position: absolute;
     width: 100%;
     height: 100%;

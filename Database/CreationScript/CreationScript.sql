@@ -10,7 +10,7 @@ DROP TABLE MiniGames;
 DROP TABLE ProfileAnimals;
 DROP TABLE ProfileProgress;
 DROP TABLE Profiles;
---DROP TABLE Users;
+
 DROP TABLE Animals;
 DROP TABLE Nodes;
 DROP TABLE Maps;

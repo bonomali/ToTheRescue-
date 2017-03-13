@@ -213,7 +213,9 @@
         //add an event listener for egg taps
         game.controller.addEventListener("tap", eggTapped);
         loadEggImages();         //load egg images
-        playAudioInstructions(); //play audio instructions
+        window.onload = function () {
+            playAudioInstructions(); //play audio instructions
+        }
 
         setInterval(function () {
             if(toggle_sound == "False")

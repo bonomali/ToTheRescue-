@@ -200,7 +200,9 @@
     });
 
 
-    InitGame(); //initialize game
+    window.onload = function () {
+        InitGame(); //initialize game
+    }
 
     //initalize and play background music
     var backgroundMusic = new Audio();

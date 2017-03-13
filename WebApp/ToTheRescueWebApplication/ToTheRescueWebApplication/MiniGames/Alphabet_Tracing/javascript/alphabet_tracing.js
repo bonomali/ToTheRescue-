@@ -46,7 +46,9 @@
         numberAudio.src = audioClips[index];
         numberAudio.play();
     });
-    audioInstructions.play();
+    window.onload = function () {
+        audioInstructions.play();
+    }
 
     var curColor = '#000';          //color user is drawing with
     var clickX = new Array();       //array of X-coordinates
@@ -57,7 +59,7 @@
 
     //Get div that script is run in
     var canvasDiv = document.getElementById('BlocksGame');  //retrieve div to place elements into
-    document.getElementById('BlocksGame').style.backgroundColor = '#98FB98'
+    document.getElementById('BlocksGame').style.backgroundColor = '#ccbadc'
     document.getElementById('BlocksGame').style.width = '88%';
     document.getElementById('BlocksGame').style.marginLeft = '1%';
 
@@ -107,6 +109,7 @@
             redraw();
         });
         buttonRetry.style.backgroundImage = 'url(' + imagePath + 'eraser-image.png)';
+        buttonRetry.style.backgroundSize = 'cover';
 
         //create done button
         var buttonDone = document.createElement('button');
@@ -121,6 +124,7 @@
             EndofGame(); //function displays good job message and returns to map
         });
         buttonDone.style.backgroundImage = 'url(' + imagePath + 'done-image.jpg)';
+        buttonDone.style.backgroundSize = 'cover';
 
         //style button elements
         var buttons = document.getElementsByClassName('toolButton');
@@ -130,9 +134,10 @@
             buttons[i].style.backgroundColor = '#fff';
             buttons[i].style.width = '70%';
             buttons[i].style.height = '5%';
-            buttons[i].style.marginTop = '10%';
+            buttons[i].style.marginTop = '15%';
             buttons[i].style.marginLeft = '17%';
         }
+        buttonDone.style.height = '15%';
     }
 
     //add tracing image

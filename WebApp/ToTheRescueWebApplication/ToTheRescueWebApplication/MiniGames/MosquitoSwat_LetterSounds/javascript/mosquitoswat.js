@@ -83,7 +83,10 @@
     audioInstructions.addEventListener('ended', function () {
         m6.play();   //play target letter after generic instructions
     });
-    audioInstructions.play();
+    window.onload = function () {
+        audioInstructions.play();
+    }
+
     if (toggle_sound == "False") {
         buzz.play();
         buzz.play();

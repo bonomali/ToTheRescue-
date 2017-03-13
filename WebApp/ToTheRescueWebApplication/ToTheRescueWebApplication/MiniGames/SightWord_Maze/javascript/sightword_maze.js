@@ -610,7 +610,9 @@
         EndofGame(); //function displays good job message and returns to map
     });
 
-    audioInstructions.play();
+    window.onload = function () {
+        audioInstructions.play();
+    }
     audioInstructions.addEventListener("ended", function() {
         correctWord.play();
     });

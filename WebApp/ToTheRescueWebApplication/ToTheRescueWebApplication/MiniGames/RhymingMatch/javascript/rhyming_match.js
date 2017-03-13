@@ -199,9 +199,10 @@
         setTimeout(InitGame(), 500);    //init a new game
     });
 
+    window.onload = function () {
+        InitGame(); //initialize game
+    }
 
-    InitGame(); //initialize game
-    
     //initalize and play background music
     var backgroundMusic = new Audio();
     backgroundMusic.src = soundPath + "background_music.mp3";
