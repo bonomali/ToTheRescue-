@@ -59,9 +59,9 @@
     <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
     @*use jquery*@
     <script src="~/scripts/jquery-1.10.2.min.js"></script>
-    <script id="minigameScript" src=@Model.MiniGame difficulty=@Model.Difficulty toggleSound=@Model.ToggleSound toggleMusic=@Model.ToggleMusic></script>
+    @*<script id="minigameScript" src=@Model.MiniGame difficulty=@Model.Difficulty toggleSound=@Model.ToggleSound toggleMusic=@Model.ToggleMusic></script>*@
     @* To play the simon game, comment the script tag above and uncomment the script tag below *@
-    @*<script id="minigameScript" src="../../MiniGames/Simon/javascript/Simon.js" difficulty=@Model.Difficulty toggleSound=@Model.ToggleSound toggleMusic=@Model.ToggleMusic></script>*@
+    <script id="minigameScript" src="../../MiniGames/Simon/javascript/Simon.js" difficulty=@Model.Difficulty toggleSound=@Model.ToggleSound toggleMusic=@Model.ToggleMusic></script>
 
     <input type="text" id="score" style="display:none" />   @*score from minigame saved in value for tag*@
 
