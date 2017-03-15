@@ -274,10 +274,10 @@
         }
         buttons[0].style.marginTop = '10%';
         buttons[buttons.length - 1].style.marginTop = '30%';
-        buttons[buttons.length - 1].style.marginLeft = '20%';
-        buttonDone.style.height = '12%';
-        buttonDone.style.width = '63%';
-        
+        buttons[buttons.length - 1].style.marginLeft = '18%';
+        buttonDone.style.height = '15%';
+        buttonDone.style.width = '65%';
+        buttonDone.style.borderRadius = '50%';
     }
 
     //add coloring outline image

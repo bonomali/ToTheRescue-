@@ -134,6 +134,8 @@
             buttons[i].style.marginLeft = '17%';
         }
         buttonDone.style.height = '15%';
+        buttonDone.style.width = '65%';
+        buttonDone.style.borderRadius = '50%';
     }
 
     //add tracing image
