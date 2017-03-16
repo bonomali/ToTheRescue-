@@ -99,9 +99,9 @@
         function AnimalClicked(id) {
             var sound = document.getElementById(id);
             var funFact = "Fun Fact!  " + document.getElementById("Text" + id).innerText;
-            sound.volume = 0.3;
+            sound.volume = .5;
             sound.play();
-            setTimeout(function() {responsiveVoice.speak(funFact)}, 3000);
+            //setTimeout(function() {responsiveVoice.speak(funFact, {volume: .3})}, 4000);
             if (id < 20) wiggle(id);
             document.getElementById("FunFact").innerHTML = funFact;
         }
@@ -158,6 +158,7 @@
             }
         }
 
+        responsiveVoice.setDefaultVoice("US English Male");
         main();
 
 
