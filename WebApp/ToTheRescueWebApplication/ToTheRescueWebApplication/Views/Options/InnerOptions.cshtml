@@ -61,9 +61,12 @@
         <p class="link" style=""><a href="/Profile/ChooseProfilePage" style="">Switch Profiles</a></p>
         <p class="link" style=""><a href="/MainMenu/MainMenu" style="">Back to Main Menu</a></p>
 
-        <form action="/Login/LogOff" id="logoutForm" method="post">
-            <input name="__RequestVerificationToken" type="hidden" value="0IroiH1oICn8ixL7krnrwM-xTHoN3WfCobBEMBZzG61GpSaX5Jl4ghjXFRBEireLZuMauG0APKL-KkTd6vNZjujHPGuvZGAvpn_ocvHE5nZel7y6Qz4zGlBONYNenLRAixCVBLl0azzd7WonfCRLYg2">                    <p class="link" style=""><a href="Logout" onclick="document.getElementById('logoutForm').submit(); return false;" style="">Logout</a></p>
-        </form>
+        @using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { @id = "logoutForm" }))
+        {
+        @Html.AntiForgeryToken()
+            <p class="link" style=""><a href="Logout" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a></p>
+        }
+
         <script type="text/javascript">
             function main() { }
             main()
