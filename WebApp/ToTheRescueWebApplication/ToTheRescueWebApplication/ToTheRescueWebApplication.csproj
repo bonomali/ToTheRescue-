@@ -263,7 +263,7 @@
     <Content Include="MiniGames\Alphabet_BubblePop\images\r_bubble.png" />
     <Content Include="MiniGames\Alphabet_BubblePop\images\s_bubble.png" />
     <Content Include="MiniGames\Alphabet_BubblePop\images\t_bubble.png" />
-    <Content Include="MiniGames\Alphabet_BubblePop\javascript\blockjs_framework.js" />
+    <Content Include="scripts\blockjs_framework.js" />
     <Content Include="MiniGames\Alphabet_BubblePop\javascript\bubble.js" />
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\a_recording.mp3" />
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\BubblePopInstructions.mp3" />
@@ -954,6 +954,7 @@
     <Content Include="MiniGames\Supah_Counting\images\letter_10.psd" />
     <Content Include="MiniGames\Position_Vocabulary\images\position.psd" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="scripts\DragDropTouch.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\jquery.unobtrusive-ajax.js" />

@@ -53,16 +53,14 @@
     @*Debounce funcion source*@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
     @*Where minigame script is executed --> this may be a path to files on the server*@
-    <script src="~/MiniGames/Alphabet_BubblePop/javascript/blockjs_framework.js">
-    </script>
+    <script src="~/scripts/blockjs_framework.js"></script>
+    @*Drag and drop*@
+    <script src="~/scripts/DragDropTouch.js"></script>
     @*Text To Speech. Breaks if we use a local copy. I tried.*@
     <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
     @*use jquery*@
     <script src="~/scripts/jquery-1.10.2.min.js"></script>
     <script id="minigameScript" src=@Model.MiniGame difficulty=@Model.Difficulty toggleSound=@Model.ToggleSound toggleMusic=@Model.ToggleMusic></script>
-    @* To play the simon game, comment the script tag above and uncomment the script tag below *@
-    @*<script id="minigameScript" src="../../MiniGames/Alphabet_Matching/javascript/Alphabet_Matching.js" difficulty=@Model.Difficulty toggleSound=@Model.ToggleSound toggleMusic=@Model.ToggleMusic></script>*@
-    @*<script id="minigameScript" src="../../MiniGames/Simon/javascript/Simon.js" difficulty=@Model.Difficulty toggleSound=@Model.ToggleSound toggleMusic=@Model.ToggleMusic></script>*@
 
     <input type="text" id="score" style="display:none" />   @*score from minigame saved in value for tag*@
 
