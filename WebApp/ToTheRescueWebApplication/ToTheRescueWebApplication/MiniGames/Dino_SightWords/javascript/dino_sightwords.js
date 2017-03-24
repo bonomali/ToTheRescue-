@@ -3,6 +3,7 @@
     document.getElementById('BlocksGame').style.marginLeft = '-5%';
 
     var toggle_sound = document.getElementById('minigameScript').getAttribute('toggleSound');
+    var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
 
     var imagePath = "../../MiniGames/Dino_SightWords/images/";
     var soundPath = "../../MiniGames/BeginningLetterSounds_Racing/sounds/";
@@ -76,6 +77,14 @@
         targetEgg = eggs.getSlice("egg" + (targetIndex + 1));
     }
     generateRandom();   //generate random indexes for word eggs and create egg slices
+
+    //initalize and play background music
+    var backgroundMusic = new Audio();
+    backgroundMusic.src = "../../MiniGames/Dino_SightWords/sounds/" + "background_music.mp3";
+    if (toggle_music == "False") {
+        backgroundMusic.play();
+        backgroundMusic.volume = .15;
+    }
 
     images = {
         width: 1100,
@@ -253,6 +262,15 @@
             playAudioInstructions();
         })
     };
+
+    //loop background music
+    backgroundMusic.addEventListener("ended", function () {
+        if (toggle_music == "False") {
+            backgroundMusic.play();
+            backgroundMusic.volume = .15;
+        }
+    });
+
     //end the game after time interval
     setTimeout(function GameOver() {
         audioInstructions.src = null;   //set sounds to null so don't play after game over

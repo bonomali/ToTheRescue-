@@ -3,18 +3,19 @@
     document.getElementById('BlocksGame').style.marginLeft = '-5%';
     
     var toggle_sound = document.getElementById('minigameScript').getAttribute('toggleSound');
+    var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
 
     var imagePath = '../../MiniGames/MosquitoSwat_LetterSounds/images/';
-    var audioPath = '../../MiniGames/MosquitoSwat_LetterSounds/sounds/';
+    var soundPath = '../../MiniGames/MosquitoSwat_LetterSounds/sounds/';
     var audioClips;
     var mosquitoImages;
 
     if (difficulty_level == 4) {
-        audioClips = [audioPath + "d_sound.mp3", audioPath + "j_sound.mp3", audioPath + "k_sound.mp3", audioPath + "l_sound.mp3",
-            audioPath + "n_sound.mp3", audioPath + "q_sound.mp3", audioPath + "u_sound.mp3", audioPath + "v_sound.mp3",
-            audioPath + "w_sound.mp3", audioPath + "x_sound.mp3", audioPath + "y_sound.mp3", audioPath + "z_sound.mp3",
-            audioPath + "e_sound.mp3"];
+        audioClips = [soundPath + "d_sound.mp3", soundPath + "j_sound.mp3", soundPath + "k_sound.mp3", soundPath + "l_sound.mp3",
+            soundPath + "n_sound.mp3", soundPath + "q_sound.mp3", soundPath + "u_sound.mp3", soundPath + "v_sound.mp3",
+            soundPath + "w_sound.mp3", soundPath + "x_sound.mp3", soundPath + "y_sound.mp3", soundPath + "z_sound.mp3",
+            soundPath + "e_sound.mp3"];
 
         mosquitoImages = [imagePath + "D_mosquito.png", imagePath + "J_mosquito.png", imagePath + "K_mosquito.png",
             imagePath + "L_mosquito.png", imagePath + "N_mosquito.png", imagePath + "Q_mosquito.png",
@@ -23,10 +24,10 @@
     }
     else {
         //arrays containing paths to audio files and image files for mosquitoes
-        audioClips = [audioPath + "a_sound.mp3", audioPath + "c_sound.mp3", audioPath + "i_sound.mp3", audioPath + "m_sound.mp3",
-            audioPath + "p_sound.mp3", audioPath + "r_sound.mp3", audioPath + "s_sound.mp3", audioPath + "t_sound.mp3",
-            audioPath + "b_sound.mp3", audioPath + "f_sound.mp3", audioPath + "o_sound.mp3", audioPath + "g_sound.mp3",
-            audioPath + "h_sound.mp3"];
+        audioClips = [soundPath + "a_sound.mp3", soundPath + "c_sound.mp3", soundPath + "i_sound.mp3", soundPath + "m_sound.mp3",
+            soundPath + "p_sound.mp3", soundPath + "r_sound.mp3", soundPath + "s_sound.mp3", soundPath + "t_sound.mp3",
+            soundPath + "b_sound.mp3", soundPath + "f_sound.mp3", soundPath + "o_sound.mp3", soundPath + "g_sound.mp3",
+            soundPath + "h_sound.mp3"];
 
         mosquitoImages = [imagePath + "A_mosquito.png", imagePath + "C_mosquito.png", imagePath + "I_mosquito.png",
             imagePath + "M_mosquito.png", imagePath + "P_mosquito.png", imagePath + "R_mosquito.png",
@@ -72,12 +73,12 @@
     m6.src = audioClips[index6];
 
     var audioInstructions = new Audio(); //audio instructions
-    audioInstructions.src = audioPath + "audio_instructions.mp3"
+    audioInstructions.src = soundPath + "audio_instructions.mp3"
 
     var buzz = new Audio(); //buzzing sound
-    buzz.src = audioPath + "Mosquito_Buzzing.mp3";
+    buzz.src = soundPath + "Mosquito_Buzzing.mp3";
     var swat = new Audio(); //swat sound for mosquito hit
-    swat.src = audioPath + "Slap_Sound.mp3";
+    swat.src = soundPath + "Slap_Sound.mp3";
 
     //play generic instructions for game
     audioInstructions.addEventListener('ended', function () {
@@ -90,6 +91,14 @@
     if (toggle_sound == "False") {
         buzz.play();
         buzz.play();
+    }
+
+    //initalize and play background music
+    var backgroundMusic = new Audio();
+    backgroundMusic.src = soundPath + "background_music.mp3";
+    if (toggle_music == "False") {
+        backgroundMusic.play();
+        backgroundMusic.volume = .08;
     }
 
     //background image and mosquito images
@@ -277,10 +286,17 @@
                 buzz.play();
         }, 8000);
 
+        //loop background music
+        backgroundMusic.addEventListener("ended", function () {
+            if (toggle_music == "False") {
+                backgroundMusic.play();
+                backgroundMusic.volume = .08;
+            }
+        });
         //end the game after time interval
         setTimeout(function GameOver() {
             var endOfGame = new Audio();
-            endOfGame.src = audioPath + "praise_recording.mp3";
+            endOfGame.src = soundPath + "praise_recording.mp3";
             endOfGame.play();
 
             var finalScore; //calculate final score

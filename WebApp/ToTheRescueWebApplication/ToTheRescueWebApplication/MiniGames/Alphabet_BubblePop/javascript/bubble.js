@@ -4,18 +4,19 @@
 
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
     var toggle_sound = document.getElementById('minigameScript').getAttribute('toggleSound');
+    var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
 
     var imagePath = '../../MiniGames/Alphabet_Bubblepop/images/';
-    var audioPath = '../../MiniGames/Alphabet_BubblePop/sounds/';
+    var soundPath = '../../MiniGames/Alphabet_BubblePop/sounds/';
     var audioClips;
     var bubbleImages;
 
     if(difficulty_level == 2) {
-        audioClips = [audioPath + "d_recording.mp3", audioPath + "j_recording.mp3", audioPath + "k_recording.mp3",
-            audioPath + "l_recording.mp3", audioPath + "n_recording.mp3", audioPath + "q_recording.mp3",
-            audioPath + "u_recording.mp3", audioPath + "v_recording.mp3", audioPath + "w_recording.mp3",
-            audioPath + "x_recording.mp3", audioPath + "y_recording.mp3", audioPath + "z_recording.mp3",
-            audioPath + "e_recording.mp3"];
+        audioClips = [soundPath + "d_recording.mp3", soundPath + "j_recording.mp3", soundPath + "k_recording.mp3",
+            soundPath + "l_recording.mp3", soundPath + "n_recording.mp3", soundPath + "q_recording.mp3",
+            soundPath + "u_recording.mp3", soundPath + "v_recording.mp3", soundPath + "w_recording.mp3",
+            soundPath + "x_recording.mp3", soundPath + "y_recording.mp3", soundPath + "z_recording.mp3",
+            soundPath + "e_recording.mp3"];
     
         bubbleImages = [imagePath + "d_bubble.png", imagePath + "j_bubble.png", imagePath + "k_bubble.png",
             imagePath + "l_bubble.png", imagePath + "n_bubble.png", imagePath + "q_bubble.png",
@@ -24,11 +25,11 @@
     }
     else {
         //arrays containing paths to audio files and image files for bubbles
-        audioClips = [audioPath + "a_recording.mp3", audioPath + "c_recording.mp3", audioPath + "i_recording.mp3",
-            audioPath + "m_recording.mp3", audioPath + "p_recording.mp3", audioPath + "r_recording.mp3",
-            audioPath + "s_recording.mp3", audioPath + "t_recording.mp3", audioPath + "b_recording.mp3",
-            audioPath + "f_recording.mp3", audioPath + "o_recording.mp3", audioPath + "g_recording.mp3",
-            audioPath + "h_recording.mp3"];
+        audioClips = [soundPath + "a_recording.mp3", soundPath + "c_recording.mp3", soundPath + "i_recording.mp3",
+            soundPath + "m_recording.mp3", soundPath + "p_recording.mp3", soundPath + "r_recording.mp3",
+            soundPath + "s_recording.mp3", soundPath + "t_recording.mp3", soundPath + "b_recording.mp3",
+            soundPath + "f_recording.mp3", soundPath + "o_recording.mp3", soundPath + "g_recording.mp3",
+            soundPath + "h_recording.mp3"];
 
         bubbleImages = [imagePath + "a_bubble.png", imagePath + "c_bubble.png", imagePath + "i_bubble.png",
             imagePath + "m_bubble.png", imagePath + "p_bubble.png", imagePath + "r_bubble.png",
@@ -74,13 +75,13 @@
     b6.src = audioClips[index6];
 
     var audioInstructions = new Audio();
-    audioInstructions.src = audioPath + "BubblePopInstructions.mp3"
+    audioInstructions.src = soundPath + "BubblePopInstructions.mp3"
 
     var popped = new Audio();   //pop sound
-    popped.src = audioPath + "bubble_pop.mp3";
+    popped.src = soundPath + "bubble_pop.mp3";
 
     var bubbles_sound = new Audio();  //bubbles sound effect
-    bubbles_sound.src = audioPath + "bubbles.mp3";
+    bubbles_sound.src = soundPath + "bubbles.mp3";
 
     //play generic instructions for game
     audioInstructions.addEventListener('ended', function () {
@@ -88,6 +89,14 @@
     });
     window.onload = function () {
         audioInstructions.play();
+    }
+
+    //initalize and play background music
+    var backgroundMusic = new Audio();
+    backgroundMusic.src = soundPath + "background_music.mp3";
+    if (toggle_music == "False") {
+        backgroundMusic.play();
+        backgroundMusic.volume = .1;
     }
 
     //background image and bubble images
@@ -258,10 +267,18 @@
             }
          }, 10000);
 
+        //loop background music
+        backgroundMusic.addEventListener("ended", function () {
+            if (toggle_music == "False") {
+                backgroundMusic.play();
+                backgroundMusic.volume = .1;
+            }
+        });
+
         //end the game after time interval
         setTimeout(function GameOver() {
             var endOfGame = new Audio();
-            endOfGame.src = audioPath + "EndOfGame.mp3";
+            endOfGame.src = soundPath + "EndOfGame.mp3";
             endOfGame.play();
 
             var finalScore; //calculate final score

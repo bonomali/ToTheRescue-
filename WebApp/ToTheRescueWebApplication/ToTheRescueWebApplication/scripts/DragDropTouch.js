@@ -140,10 +140,10 @@ var DragDropTouch;
             // listen to touch events
             if ('ontouchstart' in document) {
                 var d = document, ts = this._touchstart.bind(this), tm = this._touchmove.bind(this), te = this._touchend.bind(this);
-                d.addEventListener('touchstart', ts);
-                d.addEventListener('touchmove', tm);
-                d.addEventListener('touchend', te);
-                d.addEventListener('touchcancel', te);
+                d.addEventListener('touchstart', ts, { passive: false });
+                d.addEventListener('touchmove', tm, { passive: false });
+                d.addEventListener('touchend', te, { passive: false });
+                d.addEventListener('touchcancel', te, { passive: false });
             }
         }
         /**
@@ -210,6 +210,7 @@ var DragDropTouch;
                 // continue dragging
                 if (this._img) {
                     this._lastTouch = e;
+                    
                     e.preventDefault(); // prevent scrolling
                     if (target != this._lastTarget) {
                         this._dispatchEvent(this._lastTouch, 'dragleave', this._lastTarget);
@@ -315,12 +316,14 @@ var DragDropTouch;
             var _this = this;
             if (this._img) {
                 requestAnimationFrame(function () {
-                    var pt = _this._getPoint(e, true), s = _this._img.style;
-                    s.position = 'absolute';
-                    s.pointerEvents = 'none';
-                    s.zIndex = '999999';
-                    s.left = Math.round(pt.x - _this._imgOffset.x) + 'px';
-                    s.top = Math.round(pt.y - _this._imgOffset.y) + 'px';
+                    var pt = _this._getPoint(e, true), s = _this._img;
+                    if (s != null) {
+                        s.style.position = 'absolute';
+                        s.style.pointerEvents = 'none';
+                        s.style.zIndex = '999999';
+                        s.style.left = Math.round(pt.x - _this._imgOffset.x) + 'px';
+                        s.style.top = Math.round(pt.y - _this._imgOffset.y) + 'px';
+                    }
                 });
             }
         };

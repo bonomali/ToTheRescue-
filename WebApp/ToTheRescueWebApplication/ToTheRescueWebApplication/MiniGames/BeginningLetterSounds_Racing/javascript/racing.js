@@ -4,6 +4,7 @@
 
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
     var toggle_sound = document.getElementById('minigameScript').getAttribute('toggleSound');
+    var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
 
     var imagePath = "../../MiniGames/BeginningLetterSounds_Racing/images/";
     var soundPath = "../../MiniGames/BeginningLetterSounds_Racing/sounds/";
@@ -90,6 +91,14 @@
         targetFlag = f.getSlice("flag" + (targetIndex + 1));
     }
     generateRandom();   //generate random indexes for word flags and create flag slices
+
+    //initalize and play background music
+    var backgroundMusic = new Audio();
+    backgroundMusic.src = soundPath + "background_music.mp3";
+    if (toggle_music == "False") {
+        backgroundMusic.play();
+        backgroundMusic.volume = .1;
+    }
 
     images = {
         width: 1100,
@@ -360,6 +369,14 @@
         endAudio.addEventListener('ended', function () {
             endFlag.destroy();  //destroy racing flags
             checkGameOver();    //check for game over or start new round
+        });
+
+        //loop background music
+        backgroundMusic.addEventListener("ended", function () {
+            if (toggle_music == "False") {
+                backgroundMusic.play();
+                backgroundMusic.volume = .1;
+            }
         });
 
         loadFlagImages();        //load flag images
