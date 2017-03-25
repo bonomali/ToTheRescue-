@@ -196,6 +196,7 @@ namespace ToTheRescueDataPop
             ProductDB.WriteMiniGames(1, file_path1 + "Opposites_Matching" + file_path2 + "opposites_matching.js", "OppositesMatching", 4, 4);
             ProductDB.WriteMiniGames(1, file_path1 + "Pairs_Matching" + file_path2 + "pairs_matching.js", "PairsMatching", 3, 4);
             ProductDB.WriteMiniGames(1, file_path1 + "Simon" + file_path2 + "Simon.js", "Simon", 3, 4);
+            ProductDB.WriteMiniGames(1, file_path1 + "ISpyGame" + file_path2 + "ISpyGame.js", "ISpy", 1, 2);
 
             //Animals
             Console.WriteLine("Uploading Animals.");
