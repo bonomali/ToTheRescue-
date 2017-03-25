@@ -25,9 +25,6 @@
 
 <body>
     <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
-    <audio controls loop id="BackgroundSound" source src="../Audio/Happy-Music.mp3" autoplay hidden="hidden">
-        <embed src="../Audio/Happy-Music.mp3" hidden="hidden" />
-    </audio>
     <div id="BlocksGame">
         @*Start Container Div*@
         <div id="container">
@@ -62,7 +59,7 @@
 
             @*Non active animals in sanctuary*@
             <div id="ReleasedAnimals" class="sidenav">
-                <button id="closebtn" onclick="closeNav()">x</button>
+                <button id="closebtn" class="Buttons" onclick="closeNav()">x</button>
                 @for (int i = 0; i < Model.Count(); i++)
                 {
                     if (Model[i].ActiveBit == false)
@@ -85,8 +82,8 @@
         //var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
         function main() {
-            var music = document.getElementById("BackgroundSound");
-            music.volume = 0.2;
+            responsiveVoice.setDefaultVoice("US English Female");
+            createBackgroundMusic();
             setName();
             MoveAnimals();
             adjustInactive();
@@ -101,7 +98,7 @@
             var funFact = "Fun Fact!  " + document.getElementById("Text" + id).innerText;
             sound.volume = .5;
             sound.play();
-            //setTimeout(function() {responsiveVoice.speak(funFact, {volume: .3})}, 4000);
+            setTimeout(function() {responsiveVoice.speak(funFact)}, 4000);
             if (id < 20) wiggle(id);
             document.getElementById("FunFact").innerHTML = funFact;
         }
@@ -127,8 +124,8 @@
         }
 
         function MoveAnimals() {
-            var posXArray = [246, 240, 189, 241, 383, 383, 350, 403, 658, 546, 529, 812, 860, 717, 684, 851, 997, 885, 1010, 989];
-            var posYArray = [155, 281, 422, 549, 79, 230, 378, 522, 442, 177, 358, 455, 24, 136, 297, 318, 56, 179, 281, 464];
+            var posXArray = [209, 232, 197, 241, 383, 383, 350, 457, 658, 546, 529, 812, 561, 703, 684, 851, 747, 885, 956, 965];
+            var posYArray = [76, 210, 329, 461, 79, 230, 378, 490, 442, 209, 358, 455, 80, 199, 297, 318, 80, 179, 61, 464];
             var modelCount = @Model.Count();
             var numAnimals = (modelCount > 20) ? 20 : modelCount;
             var elID, div, rand, aspectRat;
@@ -158,7 +155,16 @@
             }
         }
 
-        responsiveVoice.setDefaultVoice("US English Male");
+        var createBackgroundMusic = function ()
+        {
+            var backgroundMusic = document.createElement('audio');
+            backgroundMusic.setAttribute('src', "../Audio/Happy-Music.mp3");
+            backgroundMusic.setAttribute('id', 'bgMusic');
+            backgroundMusic.loop = true;
+            backgroundMusic.volume = '0.1';
+            backgroundMusic.play();
+        }
+
         main();
 
 
