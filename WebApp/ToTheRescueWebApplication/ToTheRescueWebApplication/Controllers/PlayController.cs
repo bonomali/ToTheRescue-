@@ -170,9 +170,7 @@ namespace ToTheRescueWebApplication.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 float newStat = 0;
-
-                //update current node (move to next node on map)
-                _progress.UpdateCurrentNode((int)Session["profileID"]);
+                ProfileProgress p = _progress.Get((int)Session["profileID"]);
 
                 //add minigame to recenlty played
                 _minigame.UpdateRecentlyPlayedMiniGames((int)Session["profileID"], miniGameID);
@@ -230,6 +228,12 @@ namespace ToTheRescueWebApplication.Controllers
                     //write stats to DB
                     _minigame.UpdatePerformanceStats((int)Session["profileID"], _stats.ReadingPerformanceStat, newStat);
                 }
+
+                //update current node (move to next node on map)
+                if (p.CurrentNode < _node.GetList(p.CurrentMap).Count)
+                    _progress.UpdateCurrentNode((int)Session["profileID"]);
+                else  //already at last node, go to new map
+                    NewMap();
             }
             else     //free play mode
                 Session["fp_nodeID"] = (int)Session["fp_nodeID"] + 1;  //go to next node
@@ -346,7 +350,7 @@ namespace ToTheRescueWebApplication.Controllers
                         }
                     }
                     loopCounter++;       //increment number of times through loop
-                    if (loopCounter == 6) //Ensure that game doesn't get stuck in endless loop if not enough minigames
+                    if (loopCounter == 50) //Ensure that game doesn't get stuck in endless loop if not enough minigames
                     {
                         played = false;
                     }
