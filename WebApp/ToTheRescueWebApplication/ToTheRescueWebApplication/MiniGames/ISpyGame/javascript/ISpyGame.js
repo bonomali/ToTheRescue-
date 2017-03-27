@@ -394,10 +394,16 @@ function Main() {
         responsiveVoice.OnVoiceReady = function () {
             Shuffle(animalArr);
 
-            if (difficulty <= 1)
-                responsiveVoice.speak("Click the thing you are spying for.", "US English Female", { onend: GameLoopEasy });
-            else
-                responsiveVoice.speak("Click the thing you are spying for.", "US English Female", { onend: GameLoopHard });
+            responsiveVoice.speak("Click the thing you are spying for.", "US English Female");
+
+            setTimeout(function () {
+                if (difficulty <= 1) {
+                    GameLoopEasy();
+                }
+                else {
+                    GameLoopHard();
+                }
+            }, 4000);
         };
     };
 
