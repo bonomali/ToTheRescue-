@@ -86,12 +86,8 @@ body {
 }
 
 #closebtn {
-    position: absolute;
-    width: 30px;
-    height: 30px;
     top: 3px;
-    left: 110px;
-    font-size: 20px;
+    left: 10px;
 }
 
 #backButton {
