@@ -329,6 +329,7 @@
 
         //add an event listener for flag taps
         game.controller.addEventListener("tap", flagTapped);
+
         //add event listeners for audio sounds
         audioInstructions.addEventListener('ended', function () {
             if(targetIndex == 0)

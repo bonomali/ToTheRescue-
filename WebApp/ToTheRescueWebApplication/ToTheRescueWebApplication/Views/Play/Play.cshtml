@@ -83,7 +83,7 @@
             //transfer nodes from Model into JS array
             var nodeArr = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.MapNodes));
 
-            //Get current node from ProfileProgess table through contoller method and move avatar to current node
+            //Get current node from ProfileProgess table through controller method and move avatar to current node
             function moveAvatar() {
                 $.ajax({
                     url: '/Play/GetCurrentNode/',
@@ -105,7 +105,7 @@
                         $("#animalSaved").show();
                         saved.play();
                         $("#play").hide();
-                    }
+                   }
                 })
             }
 

@@ -232,11 +232,12 @@ namespace ToTheRescueWebApplication.Controllers
                 //update current node (move to next node on map)
                 if (p.CurrentNode < _node.GetList(p.CurrentMap).Count)
                     _progress.UpdateCurrentNode((int)Session["profileID"]);
-                else  //already at last node, go to new map
-                    NewMap();
             }
             else     //free play mode
-                Session["fp_nodeID"] = (int)Session["fp_nodeID"] + 1;  //go to next node
+            {
+                if ((int)Session["fp_nodeID"] < _node.GetList((int)Session["fp_mapID"]).Count)
+                    Session["fp_nodeID"] = (int)Session["fp_nodeID"] + 1;  //go to next node
+            }
         }
         //update ProfileProgress to a new map
         public void NewMap()
@@ -358,6 +359,7 @@ namespace ToTheRescueWebApplication.Controllers
                 model.MiniGameID = minigames[ranGame].ID;
                 model.MiniGame = minigames[ranGame].MiniGamePath;
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
+                model.MiniGame = "../../MiniGames/Alphabet_Tracing/javascript/alphabet_tracing.js";
             }
             else    //free play mode
             {
@@ -369,6 +371,7 @@ namespace ToTheRescueWebApplication.Controllers
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
                 model.Difficulty = 0;   //difficulty doesn't apply to free play mode
+                model.MiniGame = "../../MiniGames/Alphabet_Tracing/javascript/alphabet_tracing.js";
             }
             model.ToggleSound = Convert.ToString((bool)Session["toggleSound"]); //set model's toggle value for sound
             model.ToggleMusic = Convert.ToString((bool)Session["toggleMusic"]); //set model's toggle value for music

@@ -9,11 +9,11 @@
 
     //arrays containing paths to audio files and image files for alphabet outlines
     if (difficulty_level == 2) {
-        audioClips = [audioPath + "d_recording.mp3", audioPath + "j_recording.mp3", audioPath + "k_recording.mp3",
-            audioPath + "l_recording.mp3", audioPath + "n_recording.mp3", audioPath + "q_recording.mp3",
-            audioPath + "u_recording.mp3", audioPath + "v_recording.mp3", audioPath + "w_recording.mp3",
-            audioPath + "x_recording.mp3", audioPath + "y_recording.mp3", audioPath + "z_recording.mp3",
-            audioPath + "e_recording.mp3"];
+        audioClips = [soundPath + "d_recording.mp3", soundPath + "j_recording.mp3", soundPath + "k_recording.mp3",
+            soundPath + "l_recording.mp3", soundPath + "n_recording.mp3", soundPath + "q_recording.mp3",
+            soundPath + "u_recording.mp3", soundPath + "v_recording.mp3", soundPath + "w_recording.mp3",
+            soundPath + "x_recording.mp3", soundPath + "y_recording.mp3", soundPath + "z_recording.mp3",
+            soundPath + "e_recording.mp3"];
 
         tracingImages = [imagePath + "d_tracing.png", imagePath + "j_tracing.png", imagePath + "k_tracing.png",
             imagePath + "l_tracing.png", imagePath + "n_tracing.png", imagePath + "q_tracing.png",
