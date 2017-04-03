@@ -676,9 +676,10 @@ function Main()
 	}, false);
 
     //if the user leaves the page
-	$(window).on("beforeunload", function () {
+	window.onbeforeunload = function () {
 	    responsiveVoice.cancel(); //quit doing text to speech
-	});
+	    return null;
+	};
 	
 	ResizeCanvas(canvas, ctx, shapeArr);
 	Draw(shapeArr);

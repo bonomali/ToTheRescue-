@@ -334,9 +334,10 @@ function Main() {
     });
 
     //if the user leaves the page
-    $(window).on("beforeunload", function () {
+    window.onbeforeunload = function () {
         responsiveVoice.cancel(); //quit doing text to speech
-    });
+        return null;
+    };
 
     //play the game for 2 minuets and then end the game
     setTimeout(function () {
