@@ -15,7 +15,20 @@
 
 .nonActiveAnimals {
     position: relative;
-    left: 22%;
+    width: 100px;
+    height: 100px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    left: 11%;
+}
+
+#playPen {
+    position: fixed;
+    top: 0%;
+    width: 945px;
+    height: 640px;
+    left: 150px;
 }
 
 @-webkit-keyframes wiggle
@@ -104,8 +117,7 @@ body {
 
 #title {
     font-size: 26px;
-    left: 470px;
-    top: 0px;
+    top: -35px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: gold;
     text-align: center;
@@ -145,6 +157,7 @@ body {
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+
 }
 
     /* The navigation menu links */
@@ -171,10 +184,10 @@ body {
 
 
 #FunFact {
-    top: 568px;
+    top: 600px;
     position: absolute;
-    right: 20px;
     font-size: 19px;
+    left: 20px;    
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: 800;
     color: palegoldenrod;

@@ -28,13 +28,19 @@
     <div id="BlocksGame">
         @*Start Container Div*@
         <div id="container">
-            <h2 class="h2" id="title">@TempData["profileName"]'s Sanctuary</h2>
-
-            <img src="~/Images/AnimalSanctuaryMap.png" id="background" />
+            <div id="background">
+                <img src="~/Images/AnimalSanctuaryMap.png" id="background" />
+                <div id="playPen">
+                    <div style="display:flex;justify-content:flex-start;align-items:flex-end;">
+                        <p id="FunFact"></p>
+                    </div>
+                    <div style="display:flex;justify-content:center;align-items:flex-end;font-size:19px;">
+                        <h2 class="h2" id="title">@TempData["profileName"]'s Sanctuary</h2>
+                    </div>
+                </div>
+            </div>
 
             <span class="NavButtons" onclick="openNav()">Released Animals</span>
-
-            <p id="FunFact"></p>
 
             <button id="backButton" class="Buttons" onclick="GoToMainMenu()">Menu</button>
 
@@ -81,6 +87,7 @@
         //var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
         //var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
+
         function main() {
             responsiveVoice.setDefaultVoice("US English Female");
             createBackgroundMusic();
@@ -93,12 +100,22 @@
             window.location.href = '/MainMenu/MainMenu';
         }
 
+        var voiceCounter = 0;
         function AnimalClicked(id) {
+            voiceCounter++;
             var sound = document.getElementById(id);
             var funFact = "Fun Fact!  " + document.getElementById("Text" + id).innerText;
             sound.volume = .5;
             sound.play();
-            setTimeout(function() {responsiveVoice.speak(funFact)}, 4000);
+            setTimeout(function() {
+                if (voiceCounter == 1){
+                    responsiveVoice.speak(funFact);
+                    voiceCounter--;
+                }               
+                else {
+                    voiceCounter--;
+                }
+            }, 4000);
             if (id < 20) wiggle(id);
             document.getElementById("FunFact").innerHTML = funFact;
         }
