@@ -12,10 +12,6 @@ var DragDropTouch;
      * accessible through the @see:dataTransfer property of all drag events.
      */
 
-    $(document).ready(function () {
-        $(window).on('touchmove', function (e) { e.preventDefault(); });
-    });
-
     var DataTransfer = (function () {
         function DataTransfer() {
             this._dropEffect = 'move';

@@ -37,10 +37,16 @@
     //play audio instructions and number to trace
     var audioInstructions = new Audio();
     audioInstructions.src = soundPath + "audio_instructions.mp3";
+    var audioInstructions2 = new Audio();
+    audioInstructions2.src = soundPath + "audioinstructions_Part2.mp3";
+    var numberAudio = new Audio();
+
     audioInstructions.addEventListener('ended', function () {
-        var numberAudio = new Audio();
         numberAudio.src = audioClips[index];
         numberAudio.play();  
+    });
+    numberAudio.addEventListener('ended', function () {
+        audioInstructions2.play();
     });
     window.onload = function () {
         audioInstructions.play();

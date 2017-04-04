@@ -4,6 +4,8 @@
     var soundPath = '../../MiniGames/Shape_ColoringBook/sounds/';
     var audioInstructions = new Audio();
     audioInstructions.src = soundPath + "audioInstructions.mp3";
+    var audioInstructions2 = new Audio();
+    audioInstructions2.src = soundPath + "audioinstructions_Part2.mp3";
 
     //arrays containing paths to audio files and image files for shape outlines
     var audioClips = [soundPath + "circle_recording.mp3", soundPath + "diamond_recording.mp3", soundPath + "heart_recording.mp3",
@@ -26,13 +28,19 @@
     //play audio shape name and fact if applicable
     var shapeName = new Audio();
     shapeName.src = audioClips[index];
+    var shapeFact = new Audio();
+
     audioInstructions.addEventListener('ended', function () { shapeName.play() })
     shapeName.addEventListener('ended', function () {
         if (audioFact[index] != null) {
-            var shapeFact = new Audio();
             shapeFact.src = audioFact[index];
             shapeFact.play();  //play shape fact after shape name (if applicable)
         }
+        else
+            audioInstructions2.play();
+    });
+    shapeFact.addEventListener('ended', function () {
+        audioInstructions2.play();
     });
     window.onload = function () {
         audioInstructions.play();

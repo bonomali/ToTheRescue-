@@ -34,7 +34,7 @@ namespace ToTheRescueWebApplication.Controllers.Tests
         int animalID = 2;        //original animalID
         int mapID = 1;           //original mapID
         int currentNode = 1;     //original nodeID
-        const int LAST_MAP = 7;  //last map in the game
+        const int LAST_MAP = 2;  //last map in the game
         const int FIRST_MAP = 1; //first map in game
         const int HIGHEST_DIFF = 4; //highest diff level
         const int LOWEST_DIFF = 1;  //lowest diff level
@@ -65,39 +65,33 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             Nodes node1 = new Nodes();
             node1.ID = 1;
             node1.MapID = mapID;
-            node1.XCoordinate = -90;
-            node1.YCoordinate = 32;
+            node1.XCoordinate = 1.25;
+            node1.YCoordinate = 86.5;
             expected.MapNodes.Add(node1);
             Nodes node2 = new Nodes();
             node2.ID = 2;
             node2.MapID = mapID;
-            node2.XCoordinate = -82;
-            node2.YCoordinate = 31;
+            node2.XCoordinate = 15.75;
+            node2.YCoordinate = 56.25;
             expected.MapNodes.Add(node2);
             Nodes node3 = new Nodes();
             node3.ID = 3;
             node3.MapID = mapID;
-            node3.XCoordinate = -76;
-            node3.YCoordinate = 30;
+            node3.XCoordinate = 30;
+            node3.YCoordinate = 31.25;
             expected.MapNodes.Add(node3);
             Nodes node4 = new Nodes();
             node4.ID = 4;
             node4.MapID = mapID;
-            node4.XCoordinate = -70;
-            node4.YCoordinate = 28;
+            node4.XCoordinate = 61.25;
+            node4.YCoordinate = 31.25;
             expected.MapNodes.Add(node4);
             Nodes node5 = new Nodes();
             node5.ID = 5;
             node5.MapID = mapID;
-            node5.XCoordinate = -68;
-            node5.YCoordinate = 26;
+            node5.XCoordinate = 81.5;
+            node5.YCoordinate = 61.25;
             expected.MapNodes.Add(node5);
-            Nodes node6 = new Nodes();
-            node6.ID = 6;
-            node6.MapID = mapID;
-            node6.XCoordinate = -54;
-            node6.YCoordinate = 20;
-            expected.MapNodes.Add(node6);
 
             expected.ProfileName = "Sophia";
             expected.Subject = "All";

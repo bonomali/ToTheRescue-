@@ -264,6 +264,7 @@
     <Content Include="MiniGames\Alphabet_BubblePop\images\s_bubble.png" />
     <Content Include="MiniGames\Alphabet_BubblePop\images\t_bubble.png" />
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\background_music.mp3" />
+    <Content Include="MiniGames\Alphabet_Tracing\sounds\audioInstructions_Part2.mp3" />
     <Content Include="MiniGames\BeginningLetterSounds_Racing\sounds\background_music.mp3" />
     <Content Include="MiniGames\Dino_SightWords\sounds\background_music.mp3" />
     <Content Include="MiniGames\ISpyGame\css\iSpy.css" />
@@ -283,6 +284,8 @@
     <Content Include="MiniGames\MosquitoSwat_LetterSounds\sounds\x_sound.mp3" />
     <Content Include="MiniGames\MosquitoSwat_LetterSounds\sounds\y_sound.mp3" />
     <Content Include="MiniGames\MosquitoSwat_LetterSounds\sounds\z_sound.mp3" />
+    <Content Include="MiniGames\Number_Tracing\sounds\audioInstructions_Part2.mp3" />
+    <Content Include="MiniGames\Shape_ColoringBook\sounds\audioInstructions_Part2.mp3" />
     <Content Include="scripts\blockjs_framework.js" />
     <Content Include="MiniGames\Alphabet_BubblePop\javascript\bubble.js" />
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\a_recording.mp3" />
