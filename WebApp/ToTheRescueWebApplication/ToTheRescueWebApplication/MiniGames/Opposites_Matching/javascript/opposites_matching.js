@@ -19,7 +19,7 @@
         soundPath + "hard_recording.mp3", soundPath + "high_recording.mp3", soundPath + "hot_recording.mp3", soundPath + "young_recording.mp3"];
     var soundsSet2 = [soundPath + "awake_recording.mp3", soundPath + "front_recording.mp3", soundPath + "small_recording.mp3",
         soundPath + "dirty_recording.mp3", soundPath + "full_recording.mp3", soundPath + "slow_recording.mp3", soundPath + "sad_recording.mp3",
-        soundPath + "soft_recording.mp3", soundPath + "low_recording.mp3", soundPath + "cold_recording.mp3", + soundPath + "old_recording.mp3"];
+        soundPath + "soft_recording.mp3", soundPath + "low_recording.mp3", soundPath + "cold_recording.mp3", soundPath + "old_recording.mp3"];
 
     //set correct margin for div and div styling
     document.getElementById('BlocksGame').style.marginLeft = '-5%';
@@ -212,7 +212,7 @@
         backgroundMusic.volume = .05;
     }
     //loop background music
-    backgroundMusic.addEventListener("ended", function () {
+    backgroundMusic.addEventListener('ended', function () {
         if (toggle_music == "False") {
             backgroundMusic.play();
             backgroundMusic.volume = .05;

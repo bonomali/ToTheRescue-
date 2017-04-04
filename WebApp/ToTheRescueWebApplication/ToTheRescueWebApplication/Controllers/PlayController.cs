@@ -260,7 +260,10 @@ namespace ToTheRescueWebApplication.Controllers
                     _progress.UpdateCurrentMap((int)Session["profileID"], p.CurrentMap, newAnimal); //new map and animal
                 }
                 else //pass in FIRST_MAP - 1 so increment in UpdateCurrentMap function will increment to MapID = 1
+                {
+                    _progress.RescueAnimal((int)Session["profileID"], p.AnimalID);   //save animal to ProfileAnimals
                     _progress.UpdateCurrentMap((int)Session["profileID"], (FIRST_MAP - 1), newAnimal); //return to map1
+                }
             }
             else      //free play mode
             {
