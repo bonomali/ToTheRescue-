@@ -237,7 +237,7 @@
         backgroundMusic.volume = .1;
     }
     //loop background music
-    backgroundMusic.addEventListener("ended", function () {
+    backgroundMusic.addEventListener('ended', function () {
         if (toggle_music == "False") {
             backgroundMusic.play();
             backgroundMusic.volume = .1;
