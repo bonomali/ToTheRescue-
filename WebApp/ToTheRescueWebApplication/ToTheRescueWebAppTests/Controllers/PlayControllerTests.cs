@@ -151,7 +151,7 @@ namespace ToTheRescueWebApplication.Controllers.Tests
         public void LoadAudioTests()
         {
             SoundDBRepository _music = new SoundDBRepository();
-            int expectedSoundID = 11;
+            int expectedSoundID = 26;
 
             Map currentMap = _map.Get(mapID);  //get map from database
             Sounds audio = _music.Get(currentMap.SoundID);  //get sound from database
@@ -717,11 +717,11 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             expected.Add("AlphabetBubblePop");
             expected.Add("AlphabetTracing");
             expected.Add("ColorSortingGame");
-            expected.Add("ShapeColoringBook");
             expected.Add("AlphabetMatching");
             expected.Add("AlphabetMatching");
             expected.Add("Typing");
             expected.Add("AlphabetMatching");
+            expected.Add("ISpy");
 
             CollectionAssert.AreEqual(expected, result);
         }

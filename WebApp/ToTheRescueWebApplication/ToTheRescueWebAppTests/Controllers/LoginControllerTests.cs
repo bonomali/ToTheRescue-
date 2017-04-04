@@ -20,9 +20,7 @@ namespace ToTheRescueWebAppTests
         public void GetProfilesforUser()
         {
             List<string> temp = new List<string>(); //put in temp array to sort
-            temp.Add("Emma");
             temp.Add("Sophia");
-            temp.Add("Lily");
 
             List<string> result = new List<string>();
             List<string> expected = temp.OrderBy(n => n).ToList();
