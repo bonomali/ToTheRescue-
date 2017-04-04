@@ -123,13 +123,13 @@ function CreateHTMLElements() {
     //the container that will hold the entire game
     var divContainer = document.getElementById("BlocksGame");
 
-    var container = document.createElement("div");
-    container.setAttribute("id", "container");
+    var pContainer = document.createElement("div");
+    pContainer.setAttribute("id", "pContainer");
 
     var question = document.createElement("p");
     question.setAttribute("id", "question");
     question.innerHTML = "Type the word:";
-    container.appendChild(question);
+    pContainer.appendChild(question);
 
     for (var i = 1; i < 7; i++) {
         var p = document.createElement("p");
@@ -137,7 +137,7 @@ function CreateHTMLElements() {
         id += i.toString();
         p.setAttribute("id", id);
         p.setAttribute("class", "letters");
-        container.appendChild(p);
+        pContainer.appendChild(p);
     }
 
     var input = document.createElement("input");
@@ -195,7 +195,7 @@ function CreateHTMLElements() {
 
     turtleContainer.appendChild(img4);
 
-    divContainer.appendChild(container);
+    divContainer.appendChild(pContainer);
     divContainer.appendChild(input);
     divContainer.appendChild(antContainer);
     divContainer.appendChild(octopusContainer);
@@ -207,7 +207,7 @@ function EndGame()
 {
     responsiveVoice.speak("Great job!", "US English Female");
 
-    document.getElementById("container").style.visibility = "hidden";
+    document.getElementById("pContainer").style.visibility = "hidden";
     document.getElementById("input").style.visibility = "hidden";
 
     var percentage = correctKeyPresses / totalKeyPresses;
@@ -256,19 +256,18 @@ function EndGame()
 }
 
 function Main() {
-    //sight words for the kids to type
-    var preKWords = ["a", "and", "big", "can", "come", "down", "find", "for", "funny",
-					"go", "help", "here", "i", "in", "is", "it", "jump", "little",
-					"look", "make", "me", "my", "not", "one", "play", "red", "run", "said",
-					"see", "the", "three", "to", "two", "up", "we", "where", "yellow", "you"];
+    var preKWords = ["A", "AND", "BIG", "CAN", "COME", "DOWN", "FIND", "FOR", "FUNNY",
+                "GO", "HELP", "HERE", "I", "IN", "IS", "IT", "JUMP", "LITTLE",
+                "LOOK", "MAKE", "ME", "MY", "NOT", "ONE", "PLAY", "RED", "RUN", "SAID",
+                "SEE", "THE", "THREE", "TO", "TWO", "UP", "WE", "WHERE", "YELLOW", "YOU"];
 
-    var kWords = ["all", "am", "are", "at", "ate", "be", "black", "brown",
-				  "but", "came", "did", "do", "eat", "four", "get", "good",
-				  "have", "he", "into", "like", "must", "new", "no", "now", "on",
-				  "our", "out", "please", "pretty", "ran", "ride", "saw", "say",
-				  "she", "so", "soon", "that", "there", "they", "this", "too", "under",
-				  "want", "was", "well", "went", "what", "white", "who", "will",
-				  "with", "yes"];
+    var kWords = ["ALL", "AM", "ARE", "AT", "ATE", "BE", "BLACK", "BROWN",
+				  "BUT", "CAME", "DID", "DO", "EAT", "FOUR", "GET", "GOOD",
+				  "HAVE", "HE", "INTO", "LIKE", "MUST", "NEW", "NO", "NOW", "ON",
+				  "OUR", "OUT", "PLEASE", "PRETTY", "RAN", "RIDE", "SAW", "SAY",
+				  "SHE", "SO", "SOON", "THAT", "THERE", "THEY", "THIS", "TOO", "UNDER",
+				  "WANT", "WAS", "WELL", "WENT", "WHAT", "WHITE", "WHO", "WILL",
+				  "WITH", "YES"];
 
     var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSong2.mp3");
     backgroundMusic.volume = "0.1";
@@ -313,6 +312,9 @@ function Main() {
     $(document).keypress(function (event) {
         totalKeyPresses++;
         var typedChar = String.fromCharCode(event.which);
+
+        //doesn't change the looks of the typed character
+        typedChar = typedChar.toUpperCase();
 
         if (IsCorrectTypedLetter(typedChar) === true) {
             correctKeyPresses++;

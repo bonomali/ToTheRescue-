@@ -87,6 +87,11 @@
         //var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
         //var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
+        window.onbeforeunload = function () {
+            responsiveVoice.cancel();
+            return null;
+        }
+
 
         function main() {
             responsiveVoice.setDefaultVoice("US English Female");
