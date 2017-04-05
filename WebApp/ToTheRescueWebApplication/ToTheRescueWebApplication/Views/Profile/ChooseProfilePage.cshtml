@@ -13,25 +13,6 @@
         <a href="Logout" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
     }
     /*********************************************************************************************************/
-
-    //I need to re-adjust the html border height based on the number of profile there are
-    if (Model.Count() <= 4)
-    {
-        @*<script type="text/javascript">
-            window.onload = function (){
-                //document.getElement("html").style.height = "100%";
-                document.getElementsByTagName("html")[0].style.height = "100%";
-            }
-        </script>*@
-    }
-    else
-    {
-        @*<script type="text/javascript">
-            window.onload = function () {
-                document.getElementsByTagName("html")[0].style.height = "auto";
-            }
-        </script>*@
-    }
 }
 
 <html>
@@ -52,19 +33,10 @@
                         var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
                         <td>
                             <div id="@("Profile" + i)" class="ProfiledDiv" onclick="ToggleColor(@i.ToString())">
-                                <text id="ProfileNames">@Model[i].ProfileName</text>
-                                <img id="Avatar" , src="@imgSrc" />
+                                <div id="nameContainer"><text id="ProfileNames">@Model[i].ProfileName</text></div>
+                                <div id="avatarContainer"><img id="Avatar" , src="@imgSrc" /></div>
                             </div>
                         </td>
-                    }
-
-                    @if (i < 4)
-                    {
-                        for (int x = i; x < 4; x++)
-                        {
-                            //make some empty cells so spacing looks normal
-                            <td>&nbsp;</td>
-                        }
                     }
                 </tr>
             }
@@ -77,8 +49,8 @@
                         var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
                         <td>
                             <div id="@("Profile" + i)" class="ProfiledDiv" onclick="ToggleColor(@i.ToString())">
-                                <text id="ProfileNames">@Model[i].ProfileName</text>
-                                <img id="Avatar" , src="@imgSrc" />
+                                <div id="nameContainer"><text id="ProfileNames">@Model[i].ProfileName</text></div>
+                                <div id="avatarContainer"><img id="Avatar" , src="@imgSrc" /></div>
                             </div>
                         </td>
                     }
@@ -90,8 +62,8 @@
                         var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
                         <td>
                             <div id="@("Profile" + x)" class="ProfiledDiv" onclick="ToggleColor(@x.ToString())">
-                                <text id="ProfileNames">@Model[x].ProfileName</text>
-                                <img id="Avatar" , src="@imgSrc" />
+                                <div id="nameContainer"><text id="ProfileNames">@Model[x].ProfileName</text></div>
+                                <div id="avatarContainer"><img id="Avatar" , src="@imgSrc" /></div>
                             </div>
                         </td>
                     }
@@ -113,7 +85,7 @@
         @*Only display the Create New Profile button when there are less than 8 profiles*@
         @if (Model.Count() < 8)
         {
-            <input type="button" class="Buttons" id="CreateNewPorifleButton" value="Create New Profile" onclick="@("window.location.href='" + @Url.Action("CreateProfilePage", "Profile") + "'");" />
+            <input type="button" class="Buttons" id="CreateNewProfileButton" value="Create New Profile" onclick="@("window.location.href='" + @Url.Action("CreateProfilePage", "Profile") + "'");" />
         }
 
         <button id="PlayButton" class="Buttons" onclick="ClickedPlay()">Play</button>
@@ -194,7 +166,7 @@
     //Display all the forms/buttons after a user clicked the delete button
     function ClickedDelete()
     {
-        var createButton = document.getElementById("CreateNewPorifleButton");
+        var createButton = document.getElementById("CreateNewProfileButton");
 
         document.getElementById("DeleteProfileButton").style.visibility = "hidden";
 
@@ -212,7 +184,7 @@
     //Displays all the button after a user clicked the cancel delete button
     function ClickedCancel()
     {
-        var createButton = document.getElementById("CreateNewPorifleButton");
+        var createButton = document.getElementById("CreateNewProfileButton");
 
         document.getElementById("DeleteProfileButton").style.visibility = "visible";
 

@@ -67,9 +67,9 @@
         var avatarDiv = document.getElementById(avatarID);
 
         //toggle the color
-        if (avatarDiv.style.border !== "thick solid red")
+        if (avatarDiv.style.border !== "medium solid red")
         {
-            avatarDiv.style.border = "thick solid red";
+            avatarDiv.style.border = "medium solid red";
 
             //show the create profile button
             document.getElementById("CreateProfileButton").style.visibility = "visible";
@@ -113,7 +113,7 @@
         {
             avatarID = "Avatar";
             avatarID = avatarID.concat(i);
-            if (document.getElementById(avatarID).style.border === "thick solid red")
+            if (document.getElementById(avatarID).style.border === "medium solid red")
             {
                 index = i;
                 break;

@@ -86,7 +86,7 @@ img {
     width: auto;
     width: 50%;
     height: 50%;
-    border: thick solid transparent;
+    border: medium solid transparent;
 }
 
 #CreateProfileButton {

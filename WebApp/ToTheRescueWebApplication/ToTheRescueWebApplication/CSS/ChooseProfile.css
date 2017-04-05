@@ -25,34 +25,44 @@ body {
 #ProfilesTable {
     width: 80%;
     margin: auto;
-    margin-left: 13%;
+    margin-left: 10%;
 }
 
 td {
     width: auto;
+    border: 3px solid black;
+    border-radius: 2%;
+    background-color: #2d8641;
 }
 
 .ProfiledDiv {
     width: 100%;
     height: 100%;
-    display: table-cell;
+    display: inline-block;
     color: white;
+    margin:auto;
 }
 
-    .ProfiledDiv #ProfileNames {
-        width: auto;
-        height: auto;
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-    }
+#nameContainer {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 20%;
+    text-align: center;
+    padding-bottom: 5%;
+}
 
-    .ProfiledDiv #Avatar {
-        /*width: auto;*/
-        /*height: 75%;*/
-        width: 50%;
-        height: 50%;
-    }
+#avatarContainer {
+    position: relative;
+    text-align: center;
+}
+
+.ProfiledDiv #Avatar {
+    width: 50%;
+    height: 50%;
+    display: block;
+    margin: auto;
+}
 
 .Buttons {
     border-radius: 20px;
@@ -69,7 +79,7 @@ td {
     }
 
 #ProfileNames {
-    font-size: 32px;
+    font-size: 25px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
@@ -98,7 +108,7 @@ td {
     visibility: hidden;
 }
 
-#CreateNewPorifleButton {
+#CreateNewProfileButton {
     position: absolute;
     left: 45%;
     visibility: visible;
@@ -161,13 +171,8 @@ td {
         width: 100%;
     }
 
-    /*.ProfiledDiv #Avatar {
-        width: 70%;
-        height: 50%;
-    }*/
-
     .ProfiledDiv #ProfileNames {
-        font-size: 100%;
+        font-size: 90%;
     }
 
     .Buttons {
@@ -216,13 +221,17 @@ td {
     }
 
     .ProfiledDiv #ProfileNames {
-        font-size: 10px;
+        font-size: 60%;
     }
 
 
     .Buttons {
         font-size: 7px;
         padding: 5px 5px;
+    }
+
+    td {
+        border: 2px solid black;
     }
 }
 
@@ -236,5 +245,17 @@ td {
     #emailText {
         font-size: 60%;
         padding-top: 5%;
+    }
+
+    .ProfiledDiv #ProfileNames {
+        font-size: 15%;
+    }
+
+    td {
+        border: 1px solid black;
+    }
+
+    #emailTextBox{
+        font-size: 50%;
     }
 }
