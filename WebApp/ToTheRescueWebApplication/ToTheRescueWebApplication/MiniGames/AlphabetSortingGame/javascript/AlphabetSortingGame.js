@@ -427,7 +427,7 @@ function Main() {
     //play the game for 1 minuet and then end the game
     setTimeout(function () {
         EndGame(false);
-    }, 120000);
+    }, 180000);
 
 }
 

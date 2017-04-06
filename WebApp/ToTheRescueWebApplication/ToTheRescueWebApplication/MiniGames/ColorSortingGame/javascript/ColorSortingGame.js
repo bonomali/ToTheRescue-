@@ -516,7 +516,7 @@ function Main()
     setTimeout(function () {
         //end the game
         StopGame();
-    }, 123500);
+    }, 183500);
 }
 
 Main();
