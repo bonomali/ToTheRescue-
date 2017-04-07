@@ -47,7 +47,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var start = function () {
     //Voice intro
-    responsiveVoice.speak("Hello! Match the same letters together to win!");
+    responsiveVoice.setDefaultVoice("US English Female");
+    responsiveVoice.speak("Hello! Click the same letters together to win!");
 
     //container needs to be created here because im too lazy to modify copy and pasted code
     container = document.createElement('div');
@@ -247,6 +248,12 @@ var checkAnswer = function () {
     letterSel2 = -1;
     setTimeout(checkWin, 2000);
 }
+
+window.onbeforeunload = function () {
+    responsiveVoice.cancel();
+    return null;
+}
+
 start();
 
 /*Universal Minigame Scaler!*/

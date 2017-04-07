@@ -113,7 +113,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var start = function () {
     //Voice intro
-    responsiveVoice.speak("Hello! Match the blue letter with the same brown letter to make a word!");   
+    responsiveVoice.setDefaultVoice("US English Female");
+    responsiveVoice.speak("Hello! Click the blue letter with the same brown letter to make a word!");   
 
     //container needs to be created here because im too lazy to modify copy and pasted code
     container = document.createElement('div');
@@ -308,6 +309,10 @@ var checkAnswer = function () {
     setTimeout(setCatLetter, 2000);
 }
 
+window.onbeforeunload = function () {
+    responsiveVoice.cancel();
+    return null;
+}
 
 start();
 

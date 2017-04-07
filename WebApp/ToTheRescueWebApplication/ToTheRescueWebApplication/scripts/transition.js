@@ -20,11 +20,6 @@ var transition = function (color) {
         var div = document.createElement('div');
         div.setAttribute('id', 'transition');
 
-        //var title = document.createElement('img');
-        //title.setAttribute('id', 'title');
-        //title.setAttribute('src', "../../Images/totherescue_title.png");
-        //title.style.visibility = 'hidden';
-
         var gif = document.createElement('img');
         gif.setAttribute('id', 'loadGif');
         gif.setAttribute('src', "../../Images/loops.gif");
@@ -32,8 +27,6 @@ var transition = function (color) {
 
         document.addEventListener('DOMContentLoaded', function () {
             gif.style.visibility = 'visible';
-            title.style.visibility = 'visible';
-            //div.appendChild(title);
             div.appendChild(gif);
             content.appendChild(div);
             document.getElementsByTagName('html')[0].appendChild(content);
