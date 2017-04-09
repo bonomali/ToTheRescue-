@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebTest Name="IdentifyShape" Id="e4a97121-d2ff-4711-8ff5-5fea1a77f896" Owner="" Priority="2147483647" Enabled="True" CssProjectStructure="" CssIteration="" Timeout="0" WorkItemIds="" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" Description="" CredentialUserName="" CredentialPassword="" PreAuthenticate="True" Proxy="default" StopOnError="False" RecordedResultFile="WebTest1.f0c62b48-223a-431d-aaa9-fddc6481c565.rec.webtestresult" ResultsLocale="">
+  <Items>
+    <Request Method="GET" Guid="359a6e0b-f0c9-47e9-a275-51fda2a8c620" Version="1.1" Url="http://totherescue.us/" ThinkTime="13" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <ExtractionRules>
+        <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractHiddenFields, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="1" DisplayName="Extract Hidden Fields" Description="Extract all hidden fields from the response and place them into the test context.">
+          <RuleParameters>
+            <RuleParameter Name="Required" Value="True" />
+            <RuleParameter Name="HtmlDecode" Value="True" />
+          </RuleParameters>
+        </ExtractionRule>
+      </ExtractionRules>
+    </Request>
+    <Request Method="GET" Guid="30683bca-d57c-4dd6-9e9c-ee1a061324a5" Version="1.1" Url="http://totherescue.us/Profile/SelectedProfile/0" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="X-Requested-With" Value="XMLHttpRequest" />
+        <Header Name="Referer" Value="http://totherescue.us/Profile/ChooseProfilePage" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="a06d0001-e4e9-4b32-be94-2d83b18f3fbd" Version="1.1" Url="http://totherescue.us/MainMenu/MainMenu" ThinkTime="3" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Referer" Value="http://totherescue.us/Profile/ChooseProfilePage" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="d4caa121-a00c-453d-a4d3-2cf24d45b3a0" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="1" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <DependentRequests>
+        <Request Method="GET" Guid="ae4b548b-1814-45e7-abac-fee721df554f" Version="1.1" Url="http://totherescue.us/Audio/backgroundMusic/bgSong3.mp3" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+          <Headers>
+            <Header Name="Accept" Value="*/*" />
+            <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+          </Headers>
+        </Request>
+      </DependentRequests>
+      <Headers>
+        <Header Name="Referer" Value="http://totherescue.us/Play/Play" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="2959edbe-4492-44e4-a188-c11035aadc0b" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="1" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="d0be64f8-acc9-4665-8e94-a2e9347506cc" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="dd803ab0-f1dd-4511-8b17-1f37f22b5698" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="3" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="8b6d9287-f954-4cf6-9d23-480185b02916" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="2" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="c4bf7d60-a790-4df8-a57f-ae0101beab50" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="43e1c313-3f5e-4aba-beac-584f5e83a06b" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="3" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="8d361821-c51a-4325-b87d-7a604c6ffb2e" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="e177cb73-aeda-4deb-a199-da358cc8ee53" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="2719f3d8-eee9-4aea-aaa5-b3cfc105d5d9" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="3" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="b79cfd56-bf7d-4414-a151-40c8210a3c21" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="74af8002-9995-4a50-b030-4643269a1f71" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="2" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="e0a98aed-9215-464f-92bd-0caefc54b256" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="1" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="122a08b0-50a8-41a3-80f6-2ce97054c48c" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="3" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="fe4878e5-377a-4b1f-9c55-a1c86871dfff" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="2" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="6727171d-40ad-4d94-9311-3cb52272512c" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+    </Request>
+    <Request Method="POST" Guid="942ad0ee-f232-47c4-bebf-8230535910b6" Version="1.1" Url="http://totherescue.us/Play/FinishMiniGame" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="X-Requested-With" Value="XMLHttpRequest" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+      <FormPostHttpBody>
+        <FormPostParameter Name="score" Value="5" RecordedValue="5" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="miniGameID" Value="6" RecordedValue="6" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="categoryID" Value="2" RecordedValue="2" CorrelationBinding="" UrlEncode="True" />
+      </FormPostHttpBody>
+    </Request>
+    <Request Method="GET" Guid="0af3ba80-49fd-473d-8b13-517a90dde227" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="2" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+    </Request>
+    <Request Method="GET" Guid="eb726a4c-e6a2-4f50-a3c8-4701d87e9441" Version="1.1" Url="http://totherescue.us/Play/MiniGame/" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Accept" Value="*/*" />
+        <Header Name="Referer" Value="http://totherescue.us/Play/MiniGame/" />
+      </Headers>
+    </Request>
+  </Items>
+  <ValidationRules>
+    <ValidationRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ValidationRuleResponseTimeGoal, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" DisplayName="Response Time Goal" Description="Validates that the response time for the request is less than or equal to the response time goal as specified on the request.  Response time goals of zero will be ignored." Level="Low" ExectuionOrder="AfterDependents">
+      <RuleParameters>
+        <RuleParameter Name="Tolerance" Value="0" />
+      </RuleParameters>
+    </ValidationRule>
+  </ValidationRules>
+</WebTest>
