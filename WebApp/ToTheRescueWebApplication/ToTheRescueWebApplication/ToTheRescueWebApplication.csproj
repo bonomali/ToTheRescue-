@@ -234,6 +234,9 @@
     <Content Include="Images\gameOver.png" />
     <Content Include="Images\greatJob.jpg" />
     <Content Include="Images\landscape.png" />
+    <Content Include="Images\launcher-icon-2x.png" />
+    <Content Include="Images\launcher-icon-3x.png" />
+    <Content Include="Images\launcher-icon-4x.png" />
     <Content Include="Images\mainmenu.jpg" />
     <Content Include="Images\menuIcon.png" />
     <Content Include="Images\optionsIcon.png" />
@@ -1094,6 +1097,7 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\ServerError.cshtml" />
     <Content Include="Views\Shared\_ErrorLayout.cshtml" />
+    <Content Include="scripts\Manifest.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -89,6 +89,10 @@ namespace ToTheRescueDataPop
                 ProductDB.WriteImage(2, "ShinyAnimals/MeerkatShiny.png", "meerkat"); //54
                 ProductDB.WriteImage(2, "ShinyAnimals/CowShiny.png", "cow"); //55
                 ProductDB.WriteImage(2, "ShinyAnimals/FrogShiny.png", "frog"); //56
+
+                ProductDB.WriteImage(3, "Maps/Ocean.png", "ocean"); //57,
+                ProductDB.WriteImage(3, "Maps/RainForest.png", "rainforest"); //58, 
+                ProductDB.WriteImage(3, "Maps/Mountain.png", "mountain"); //59,
             }
 
             if (soundIDList.Count == 0)
