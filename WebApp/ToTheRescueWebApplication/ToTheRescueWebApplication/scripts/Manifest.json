@@ -19,6 +19,6 @@
       "type": "image/png"
     }
   ],
-  "display": "standalone",
-  "orientation": "landscape"
+  "display": "fullscreen",
+	"orientation": "landscape"
 }
