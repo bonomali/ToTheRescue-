@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
 var start = function () {
     //Voice intro
     responsiveVoice.setDefaultVoice("US English Female");
-    responsiveVoice.speak("Hello! Click the blue letter with the same brown letter to make a word!");   
+    responsiveVoice.speak("Hello! Click the brown square that has the same letter as the blue square");   
 
     //container needs to be created here because im too lazy to modify copy and pasted code
     container = document.createElement('div');

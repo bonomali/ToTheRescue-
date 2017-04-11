@@ -144,9 +144,9 @@ var correctAnswer = function () {
     var prng = document.getElementById("prng");
     if (soundToggle == "False") prng.play();
     if (numberCorrect == 5) {
-        setTimeout(endGame, 3500);
+        setTimeout(endGame, 1500);
     }
-    else setTimeout(setupGame, 3500);
+    else setTimeout(setupGame, 1500);
 }
 
 var wrongAnswer = function () {
@@ -156,12 +156,13 @@ var wrongAnswer = function () {
     var woops = document.getElementById("woopsAudio");
     if (soundToggle == "False") woops.play();
     numberWrong++;// not being used yet, might factor into score/game duration
-    setTimeout(setupGame, 3500);
+    setTimeout(setupGame, 1500);
 }
 
 var beginIntro = function () {
+    document.querySelector('#contents').style.visibility = "visible";
     document.querySelector('#contents').style.visibility = "hidden";
-    document.querySelector('#intro').style.visibility = "visible";
+    //document.querySelector('#intro').style.visibility = "visible";
     document.querySelector('#endGame').style.visibility = "hidden";
     setTimeout(hideIntro, 5000);
     var clickThePic = document.getElementById("clickThePic");
@@ -172,7 +173,7 @@ var beginIntro = function () {
 var hideIntro = function () {
     var bgMusic = document.getElementById('bgMusic');
     if (musicToggle == "False") bgMusic.play();
-    document.querySelector('#intro').style.visibility = "hidden";
+    //document.querySelector('#intro').style.visibility = "hidden";
     document.querySelector('#contents').style.visibility = "visible";
 }
 
@@ -220,10 +221,10 @@ var createHtmlElement = function () {
     var divContainer = document.getElementById("BlocksGame");
     //contents of divContainer
         //intro header
-    var header = document.createElement("h1");
-    header.setAttribute("id", "intro");
-    header.setAttribute("class", "message");
-    header.innerHTML = "Greater Than, Less Than, Equal To!";
+    //var header = document.createElement("h1");
+    //header.setAttribute("id", "intro");
+    //header.setAttribute("class", "message");
+    //header.innerHTML = "Greater Than, Less Than, Equal To!";
 
         //end game header
     var header1 = document.createElement("h1");
@@ -332,17 +333,8 @@ var createHtmlElement = function () {
     audioDiv.appendChild(woopsAudio);
     audioDiv.appendChild(clickThePic);
 
-
-    //append all content 
-    //divContainer.appendChild(background);
-    //divContainer.appendChild(header);
-    //divContainer.appendChild(header1);
-    //divContainer.appendChild(contentDiv);
-    //divContainer.appendChild(leftSideContainer);
-    //divContainer.appendChild(rightSideContainer);
-    //divContainer.appendChild(audioDiv);
     contentDiv.appendChild(background);
-    contentDiv.appendChild(header);
+    //contentDiv.appendChild(header);
     contentDiv.appendChild(header1);
     contentDiv.appendChild(leftSideContainer);
     contentDiv.appendChild(rightSideContainer);
@@ -353,7 +345,6 @@ var createHtmlElement = function () {
 }
 createHtmlElement();
 beginIntro();
-
 
 
 
