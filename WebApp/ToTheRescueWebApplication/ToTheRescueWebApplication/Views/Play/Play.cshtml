@@ -4,14 +4,14 @@
 }
 @model ToTheRescueWebApplication.Models.Play.PlayModel
 
-@*<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="../../scripts/transition.js"></script>
     <script type="text/javascript">
         transition('#f0ffff');
         $(window).load(function () {
             $("#content").fadeOut("slow");
         })
-</script>*@
+</script>
 
 @{ string toggleMusic = HttpContext.Current.Session["toggleMusic"].ToString(); }
 
@@ -20,7 +20,7 @@
     <audio controls loop id="playMusic" source src="@Url.Action("LoadAudio", new { @mapID = Model.CurrentMap })" autoplay hidden="hidden"></audio>
     <script>
         var vid = document.getElementById("playMusic");
-        vid.volume = 0.05;
+        vid.volume = 0.07;
     </script>
 }
 <div class="profileInfo">

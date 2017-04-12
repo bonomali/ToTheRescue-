@@ -196,7 +196,7 @@ namespace ToTheRescueDataPop
             ProductDB.WriteMiniGames(1, file_path1 + "RhymingMatch" + file_path2 + "rhyming_match.js", "RhymingMatch", 4, 4);
             ProductDB.WriteMiniGames(2, file_path1 + "Supah_Counting" + file_path2 + "supahcounting.js", "SupahCounting", 1, 2);
             ProductDB.WriteMiniGames(1, file_path1 + "TypingGame" + file_path2 + "TypingGame.js", "Typing", 2, 2);
-            ProductDB.WriteMiniGames(2, file_path1 + "TangramGame" + file_path2 + "Tangram.js", "Tangram", 3, 4);
+            ProductDB.WriteMiniGames(2, file_path1 + "TangramGame" + file_path2 + "TangramGame.js", "Tangram", 3, 4);
             ProductDB.WriteMiniGames(2, file_path1 + "Position_Vocabulary" + file_path2 + "positionvocabulary.js", "PositionVocabulary", 4, 4);
             ProductDB.WriteMiniGames(1, file_path1 + "SightWord_Maze" + file_path2 + "sightword_maze.js", "SightWordMaze", 4, 4);
             ProductDB.WriteMiniGames(1, file_path1 + "AlphabetSortingGame" + file_path2 + "AlphabetSortingGame.js", "AlphabetMatching", 1, 2);

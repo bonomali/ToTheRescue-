@@ -22,11 +22,11 @@ namespace ToTheRescueWebApplication.Controllers
         MiniGamesDBRepository _minigame = new MiniGamesDBRepository();
         PlayModel _model = new PlayModel();  //model for view
         Options _stats = new Options();      //stats for updating difficulty after minigame
-        const int LAST_MAP = 2;     //last map in game
+        const int LAST_MAP = 5;     //last map in game
         const int FIRST_MAP = 1;    //first map in game
         const int HIGHEST_DIFF = 4; //highest diff level
         const int LOWEST_DIFF = 1;  //lowest diff level
-        const int NUM_ANIMALS = 25; //number of animals to save
+        const int NUM_ANIMALS = 48; //number of animals to save
 
         public PlayController()
         {            
