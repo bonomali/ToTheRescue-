@@ -19,7 +19,10 @@ function AskQuestion(usedArr) {
     var index = GetRandomInt(0, usedArr.length - 1);
     var count = 0;
 
-    responsiveVoice.speak(usedArr[index], "US English Female");
+    if (usedArr[index] === "IT")
+        responsiveVoice.speak("it", "US English Female");
+    else
+        responsiveVoice.speak(usedArr[index], "US English Female");
 
     for (var i = 1; i < usedArr[index].length + 1; i++) {
         var pId = "p";
@@ -259,7 +262,7 @@ function Main() {
     var preKWords = ["A", "AND", "BIG", "CAN", "COME", "DOWN", "FIND", "FOR", "FUNNY",
                 "GO", "HELP", "HERE", "I", "IN", "IS", "IT", "JUMP", "LITTLE",
                 "LOOK", "MAKE", "ME", "MY", "NOT", "ONE", "PLAY", "RED", "RUN", "SAID",
-                "SEE", "THE", "THREE", "TO", "TWO", "UP", "WE", "WHERE", "YELLOW", "YOU"];
+                "SEE", "THREE", "TO", "TWO", "UP", "WE", "WHERE", "YELLOW", "YOU"];
 
     var kWords = ["ALL", "AM", "ARE", "AT", "ATE", "BE", "BLACK", "BROWN",
 				  "BUT", "CAME", "DID", "DO", "EAT", "FOUR", "GET", "GOOD",

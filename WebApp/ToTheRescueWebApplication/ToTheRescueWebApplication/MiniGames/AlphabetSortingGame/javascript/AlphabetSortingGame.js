@@ -17,7 +17,6 @@ function Drag(ev) {
     //say the letter they are dragging
     responsiveVoice.speak(letterDiv.innerHTML, "US English Female");
 
-
     //act as if the user is dragging the shape
     setTimeout(function () {
         letterDiv.style.opacity = "0";
@@ -73,9 +72,27 @@ function Drop(ev) {
     }
 }
 
+function MakeUnDraggable() {
+    var rowOne = document.getElementsByClassName("dragRow1");
+
+    for (var i = 0; i < 13; i++) {
+        rowOne[i].removeAttribute("draggable");
+        rowOne[i].removeAttribute("ondragstart");
+    }
+
+    var rowTwo = document.getElementsByClassName("dragRow2")
+
+    for (var i = 0; i < 13; i++) {
+        rowTwo[i].removeAttribute("draggable");
+        rowTwo[i].removeAttribute("ondragstart");
+    }
+}
+
 function EndGame(finished) {
 
     endGameFuncCalls++;
+
+    MakeUnDraggable();
 
     if (endGameFuncCalls === 1) {
         if (musicToggle === "False")
@@ -424,11 +441,10 @@ function Main() {
         this.play();
     }, false);
 
-    //play the game for 1 minuet and then end the game
+    //play the game for 3 minuets and then end the game
     setTimeout(function () {
         EndGame(false);
     }, 180000);
-
 }
 
 Main();

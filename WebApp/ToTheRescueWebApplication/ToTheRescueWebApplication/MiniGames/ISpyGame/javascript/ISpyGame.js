@@ -11,6 +11,7 @@ const NUM_ANIMALS = 8;
 var index = -1;
 var animalArr = [];
 var difficulty = 1;
+var numIncorrectClicks = 0;
 var soundToggle = "False";
 var musicToggle = "False";
 var endGameFuncCalls = 0;
@@ -76,6 +77,25 @@ function Clicked(clickedAnimal) {
             soundEffect = new Audio("../../Audio/soundEffects/metallicClank.mp3");
             soundEffect.play();
         }
+
+        numIncorrectClicks++;
+
+        //if the user incorrectly clicked 3 times, resay
+        //what they are spying for
+        if (numIncorrectClicks === 3) {
+            index--;
+
+            numIncorrectClicks = 0;
+
+            setTimeout(function () {
+                if (difficulty <= 1) {
+                    GameLoopEasy();
+                }
+                else {
+                    GameLoopHard();
+                }
+            }, 1000);
+        }
     }
 
     setTimeout(function () {
@@ -108,34 +128,40 @@ function Clicked(clickedAnimal) {
 }
 
 function GameLoopHard() {
+    MakeNotClickable();
+
     index++;
 
     if (index < 8) {
         switch (animalArr[index]) {
             case ANT:
-                responsiveVoice.speak("I spy something red with antennas.", "US English Female", { onstart: MakeNotClickable, onend: MakeClickable });
+                responsiveVoice.speak("I spy something red with antennas.", "US English Female");
                 break;
             case BIRD:
-                responsiveVoice.speak("I spy something blue with small eyes.", "US English Female", { onstart: MakeNotClickable, onend: MakeClickable });
+                responsiveVoice.speak("I spy something blue with small eyes.", "US English Female");
                 break;
             case GRAPE:
-                responsiveVoice.speak("I spy something purple.", "US English Female", { onstart: MakeNotClickable, onend: MakeClickable });
+                responsiveVoice.speak("I spy something purple.", "US English Female");
                 break;
             case ELEPHANT:
-                responsiveVoice.speak("I spy something green with a trunk.", "US English Female", { onstart: MakeNotClickable, onend: MakeClickable });
+                responsiveVoice.speak("I spy something green with a trunk.", "US English Female");
                 break;
             case BEE:
-                responsiveVoice.speak("I spy something yellow that flys and can sting people.", "US English Female", { onstart: MakeNotClickable, onend: MakeClickable });
+                responsiveVoice.speak("I spy something yellow that flys and can sting people.", "US English Female");
                 break;
             case BUTTERFLY:
-                responsiveVoice.speak("I spy something red that can fly.", "US English Female", { onstart: MakeNotClickable, onend: MakeClickable });
+                responsiveVoice.speak("I spy something red that can fly.", "US English Female");
                 break;
             case FROG:
-                responsiveVoice.speak("I spy something green that leaps.", "US English Female", { onstart: MakeNotClickable, onend: MakeClickable });
+                responsiveVoice.speak("I spy something green that leaps.", "US English Female");
                 break;
             default:
-                responsiveVoice.speak("I spy something blue that has big eyes.", "US English Female", { onstart: MakeNotClickable, onend: MakeClickable });
+                responsiveVoice.speak("I spy something blue that has big eyes.", "US English Female");
         }
+
+        setTimeout(function () {
+            MakeClickable();
+        }, 2000);
     }
     else {
         //end the game
@@ -144,34 +170,40 @@ function GameLoopHard() {
 }
 
 function GameLoopEasy() {
+    MakeNotClickable();
     index++;
 
     if (index < 8) {
         switch (animalArr[index]) {
             case ANT:
-                responsiveVoice.speak("I spy a red ant.", "US English Female", { onstart: MakeNotClickable, onend: MakeClickable });
+                responsiveVoice.speak("I spy a red ant.", "US English Female");
                 break;
             case BIRD:
-                responsiveVoice.speak("I spy a blue bird with small eyes", "US English Female", { onstart: MakeNotClickable, onend: MakeClickable });
+                responsiveVoice.speak("I spy a blue bird with small eyes", "US English Female");
                 break;
             case GRAPE:
-                responsiveVoice.speak("I spy purple grapes.", "US English Female", { onstart: MakeNotClickable, onend: MakeClickable });
+                responsiveVoice.speak("I spy purple grapes.", "US English Female");
                 break;
             case ELEPHANT:
-                responsiveVoice.speak("I spy a green elephant.", "US English Female", { onstart: MakeNotClickable, onend: MakeClickable });
+                responsiveVoice.speak("I spy a green elephant.", "US English Female");
                 break;
             case BEE:
-                responsiveVoice.speak("I spy a yellow bee.", "US English Female", { onstart: MakeNotClickable, onend: MakeClickable });
+                responsiveVoice.speak("I spy a yellow bee.", "US English Female");
                 break;
             case BUTTERFLY:
-                responsiveVoice.speak("I spy a red butterfly.", "US English Female", { onstart: MakeNotClickable, onend: MakeClickable });
+                responsiveVoice.speak("I spy a red butterfly.", "US English Female");
                 break;
             case FROG:
-                responsiveVoice.speak("I spy a green frog.", "US English Female", { onstart: MakeNotClickable, onend: MakeClickable });
+                responsiveVoice.speak("I spy a green frog.", "US English Female");
                 break;
             default:
-                responsiveVoice.speak("I spy a blue owl with big eyes.", "US English Female", { onstart: MakeNotClickable, onend: MakeClickable });
+                responsiveVoice.speak("I spy a blue owl with big eyes.", "US English Female");
         }
+
+        setTimeout(function () {
+            MakeClickable();
+        }, 2000);
+
     }
     else {
         //end the game
