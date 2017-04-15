@@ -14,29 +14,58 @@
         var elephant = new Audio();
         elephant.src = "../Audio/Elephant.mp3";
         elephant.volume = 0.15;
+
         var lion = new Audio();
         lion.src = "../Audio/Lion_Roar.mp3";
         lion.volume = 0.15;
+
+        //background music to work on mobile below
+        var bgMusic = new Audio();
+        bgMusic.src = "../Audio/bensound-sunny.mp3";
+        bgMusic.volume = 0.05;
+
+        bgMusic.addEventListener('ended', function () {
+            this.currentTime = 0;
+            this.play();
+        }, false);
+
+        var evt = new MouseEvent('click', {
+            'view': window,
+            'bubbles': true,
+            'cancelable': true
+        });
+
         @if (toggleSound == "True")
         {
             <text>
                 lion.volume = 0;
                 elephant.volume = 0;
+                bgMusic.volume = 0;
             </text>
         }
+
+        window.addEventListener("click", function () {
+            bgMusic.play();
+        }, false);
+
+        window.onload = function () {
+            window.dispatchEvent(evt);
+        };
+
     </script>
     <title>@ViewBag.Title</title>
 </head>
 <body>
     @if (toggleMusic == "False")
     {
-        <audio controls loop id="menuMusic" source src="../Audio/bensound-sunny.mp3" autoplay hidden="hidden">
-        </audio>
 
-        <script>
+        @*<audio controls loop id="menuMusic" source src="../Audio/bensound-sunny.mp3" autoplay hidden="hidden">
+        </audio>*@
+
+        @*<script>
             var vid = document.getElementById("menuMusic");
             vid.volume = 0.05;
-        </script>
+        </script>*@
     }
     <h2>Main Menu</h2>
     <nav id="mainMenuNav">
