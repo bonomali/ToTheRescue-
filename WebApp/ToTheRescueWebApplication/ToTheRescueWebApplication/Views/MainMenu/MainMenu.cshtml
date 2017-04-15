@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="~/CSS/MainMenu.css" />
     @{ string toggleSound = HttpContext.Current.Session["toggleSound"].ToString(); }
     @{ string toggleMusic = HttpContext.Current.Session["toggleMusic"].ToString(); }
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
     <script>
         var elephant = new Audio();
         elephant.src = "../Audio/Elephant.mp3";
@@ -29,12 +30,6 @@
             this.play();
         }, false);
 
-        var evt = new MouseEvent('click', {
-            'view': window,
-            'bubbles': true,
-            'cancelable': true
-        });
-
         @if (toggleSound == "True")
         {
             <text>
@@ -43,13 +38,23 @@
                 bgMusic.volume = 0;
             </text>
         }
-
-        window.addEventListener("click", function () {
-            bgMusic.play();
-        }, false);
+        
+        $(document).ready(function () {
+            $(window).on("touchstart", function () {
+                bgMusic.play();
+            });
+        });
 
         window.onload = function () {
-            window.dispatchEvent(evt);
+            try 
+            {
+                $(window).trigger("touchstart");
+            }
+            catch (e)
+            {
+                console.log("Touch not supported.");
+                bgMusic.play();
+            }
         };
 
     </script>
