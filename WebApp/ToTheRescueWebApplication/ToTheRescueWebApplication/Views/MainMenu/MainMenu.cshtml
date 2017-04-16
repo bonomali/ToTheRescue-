@@ -30,6 +30,12 @@
             this.play();
         }, false);
 
+        var evt = new MouseEvent('click', {
+            'view': window,
+            'bubbles': true,
+            'cancelable': true
+        });
+
         @if (toggleSound == "True")
         {
             <text>
@@ -40,23 +46,18 @@
         }
         
         $(document).ready(function () {
-            $(window).on("touchstart", function () {
+            $(window).on("click", function () {
+                console.log(bgMusic.paused);
                 bgMusic.play();
             });
-        });
-
-        window.onload = function () {
-            try 
-            {
-                $(window).trigger("touchstart");
+            try {
+                while (bgMusic.paused)
+                    window.dispatchEvent(evt);
             }
-            catch (e)
-            {
-                console.log("Touch not supported.");
+            catch (e) {
                 bgMusic.play();
             }
-        };
-
+        });
     </script>
     <title>@ViewBag.Title</title>
 </head>
