@@ -33,6 +33,7 @@ namespace ToTheRescueWebApplication.Controllers
             TempData["profileName"] = options.profileName;
             return View(listOfAnimals);
         }
+        [OutputCache(Duration = int.MaxValue, VaryByParam = "animalID", Location = System.Web.UI.OutputCacheLocation.Client)]
         public ActionResult ShowAnimalImage (int animalID)
         {
             Animal animal = _animal.Get(animalID);
@@ -40,6 +41,7 @@ namespace ToTheRescueWebApplication.Controllers
 
             return File(image.Image, image.ImageName);
         }
+        [OutputCache(Duration = int.MaxValue, VaryByParam = "animalID", Location = System.Web.UI.OutputCacheLocation.Client)]
         public ActionResult PlayAnimalSound(int animalID)
         {
             Animal animal = _animal.Get(animalID);
