@@ -100,6 +100,7 @@ namespace ToTheRescueWebApplication.Controllers
             return _model;
         }
         //display map image
+        [OutputCache(Duration = int.MaxValue, VaryByParam = "mapID", Location = System.Web.UI.OutputCacheLocation.Client)]
         public ActionResult ShowMapImage(int mapID)
         {
             Images image = null;
@@ -116,6 +117,7 @@ namespace ToTheRescueWebApplication.Controllers
 
             return File(image.Image, image.ImageName);
         }
+        [OutputCache(Duration = int.MaxValue, VaryByParam = "AnimalID", Location = System.Web.UI.OutputCacheLocation.Client)]
         //display animal image
         public ActionResult ShowAnimalImage(int AnimalID)
         {
@@ -134,6 +136,7 @@ namespace ToTheRescueWebApplication.Controllers
             return File(image.Image, image.ImageName);
         }
         //display avatar image
+        [OutputCache(Duration = int.MaxValue, VaryByParam = "profileID", Location = System.Web.UI.OutputCacheLocation.Client)]
         public ActionResult ShowAvatarImage(int profileID)
         {
             Images image = null;
@@ -148,6 +151,7 @@ namespace ToTheRescueWebApplication.Controllers
             return File(image.Image, image.ImageName);
         }
         //play map background music
+        [OutputCache(Duration = int.MaxValue, VaryByParam = "mapID", Location = System.Web.UI.OutputCacheLocation.Client)]
         public ActionResult LoadAudio(int mapID)
         {
             Sounds audio = null;
