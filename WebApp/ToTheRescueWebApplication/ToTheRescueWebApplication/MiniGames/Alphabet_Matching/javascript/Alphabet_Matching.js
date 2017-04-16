@@ -201,7 +201,7 @@ var createElements = function () {
     backgroundMusic.loop = true;
     backgroundMusic.volume = '0.3';
 
-    if (musicToggle == "False") setTimeout(backgroundMusic.play(), 3000);
+    if (musicToggle == "False") setTimeout(function () { backgroundMusic.play(); }, 3000);
 
     backgroundMusic.addEventListener('ended', function () {
         this.currentTime = 0;
