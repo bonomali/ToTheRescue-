@@ -3,13 +3,13 @@
 
 var isSelected = false;
 var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
-var maxNumber = difficulty * 2;
 var rightSide, leftSide, selectedName;
 var numberCorrect = 0;
 var numberWrong = 0;
 var imgPath = '../../MiniGames/Number_Comparison/';
 var soundToggle;
 var musicToggle;
+var maxNumber = (difficulty = 0) ? 1 + difficulty * 2 : 3;
 
 //Wait till the browser has parsed all html and turned in to document tree.
 document.addEventListener('DOMContentLoaded', function () {
@@ -77,14 +77,14 @@ var removeChalk = function () {
 var setChalk = function () {
     
     var styling = { position: 'absolute', zIndex: '3' };
-    var sourcePath = imgPath + 'images/chalk.png';
+    var sourcePath = imgPath + 'images/Chalk.png';
     var container = 'leftSideContainer';//left container first
 
     var i, modifier = 1;
-    var x = true;
+    var x = 0;
     var side = leftSide; //start with left side
 
-    while (x) {
+    while (x < 2) {
         for (i = 0; i < side; i++) {
             if (i == 0) {
                 styling.top = '145px';
@@ -102,14 +102,12 @@ var setChalk = function () {
             modifier++;
         }
 
-        if (side == leftSide) {
+        if (x == 0) {
             modifier = 14;
             container = 'rightSideContainer';
             side = rightSide;
         }
-        else {
-            x = false;
-        }
+        x++;       
     }
 }
 
@@ -174,7 +172,7 @@ var hideIntro = function () {
     var bgMusic = document.getElementById('bgMusic');
     if (musicToggle == "False") bgMusic.play();
     //document.querySelector('#intro').style.visibility = "hidden";
-    document.querySelector('#contents').style.visibility = "visible";
+    //document.querySelector('#contents').style.visibility = "visible";
 }
 
 var adjustTrophies = function () {
@@ -415,26 +413,3 @@ $(function () {
     }
 });
 /*End Universal Minigame Scaler*/
-
-//required css adds, where #contents contains all visual elements
-
-/*
- * #BlocksGame {
-  position:absolute;
-  width: 100%;
-  left:20px;
-  top:20px;
-  right:20px;
-  bottom:20px;
-}
-#contents{
-  width:990px;
-  height:699px;
-  -ms-transform-origin: top left;
-  -webkit-transform-origin: top left;
-  transform-origin: top left;
-  -webkit-transition: all 500ms ease-in-out !important;
-  transition: all 500ms ease-in-out !important;
-  position: absolute;
-}
- */

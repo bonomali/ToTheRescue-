@@ -3,7 +3,7 @@
 
 var isSelected = false;
 var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
-var maxNumber = difficulty * 2;
+var maxNumber = (difficulty = 0) ? 1 + difficulty * 2 : 3;
 var rightSide, leftSide, selectedName;
 var numberCorrect = 0;
 var numberWrong = 0;
@@ -84,7 +84,7 @@ var setChalk = function () {
     var x = true;
     var side = leftSide; //start with left side
 
-    while (x) {
+    while (x < 2) {
         for (i = 0; i < side; i++) {
             if (i == 0) {
                 styling.top = '145px';
@@ -97,19 +97,17 @@ var setChalk = function () {
                 modifier -= 3;
                 styling.top = '285px';
             }
-            styling.left = ((modifier * 50) + 60) + 'px';          
+            styling.left = ((modifier * 50) + 60) + 'px';
             createChalk(sourcePath, styling, container);
             modifier++;
         }
 
-        if (side == leftSide) {
+        if (x == 0) {
             modifier = 14;
             container = 'rightSideContainer';
             side = rightSide;
         }
-        else {
-            x = false;
-        }
+        x++;
     }
 }
 
