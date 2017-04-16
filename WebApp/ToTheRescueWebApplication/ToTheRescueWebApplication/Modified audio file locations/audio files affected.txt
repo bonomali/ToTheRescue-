@@ -1,0 +1,27 @@
+C:\Users\lakethomason\GitHub\ToTheRescue-\Database\Data Population\testMedia\MapAudio
+
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\Audio\backgroundMusic
+
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\Audio
+
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\Images (gif)
+
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\MiniGames\Alphabet_Matching\Media\Sounds
+
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\MiniGames\Alphabet_Matching2\Media\Sounds
+
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\MiniGames\BeginningLetterSounds_Racing\sounds
+
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\MiniGames\Dino_SightWords\sounds
+
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\MiniGames\MosquitoSwat_LetterSounds\sounds
+
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\MiniGames\Number_Comparison\sounds
+
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\MiniGames\Number_ComparisonEZ\sounds
+
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\MiniGames\Opposites_Matching\sounds
+
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\MiniGames\RhymingMatch\sounds
+
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\MiniGames\SightWord_Maze\sounds

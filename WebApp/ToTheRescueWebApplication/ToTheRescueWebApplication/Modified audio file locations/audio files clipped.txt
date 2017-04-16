@@ -1,0 +1,9 @@
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\MiniGames\Alphabet_Matching\Media\Sounds
+
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\Audio
+
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\MiniGames\Alphabet_Matching2\Media\Sounds
+
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\MiniGames\RhymingMatch\sounds
+
+C:\Users\lakethomason\Documents\GitHub\ToTheRescue-\WebApp\ToTheRescueWebApplication\ToTheRescueWebApplication\MiniGames\SightWord_Maze\sounds
