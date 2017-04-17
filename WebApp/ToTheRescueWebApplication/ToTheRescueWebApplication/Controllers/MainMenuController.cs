@@ -12,7 +12,7 @@ namespace ToTheRescueWebApplication.Controllers
     {
         // GET: MainMenu
         public ActionResult MainMenu()
-        { 
+        {
             return View();
         }
     }
