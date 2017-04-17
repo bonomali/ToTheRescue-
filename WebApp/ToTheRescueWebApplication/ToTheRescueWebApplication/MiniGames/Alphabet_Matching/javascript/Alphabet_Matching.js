@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var finalScore = -5;
         document.getElementById('score').value = finalScore;
         EndofGame();
-    }, 600000);
+    }, 300000);
 });
 
 var start = function () {

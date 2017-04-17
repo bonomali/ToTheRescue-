@@ -91,7 +91,7 @@ namespace ToTheRescueDataPop
                 ProductDB.WriteImage(2, "ShinyAnimals/FrogShiny.png", "frog"); //56
 
                 ProductDB.WriteImage(3, "Maps/Ocean.png", "ocean"); //57,
-                ProductDB.WriteImage(3, "Maps/RainForest.png", "rainforest"); //58, 
+                ProductDB.WriteImage(3, "Maps/RainForest.jpg", "rainforest"); //58, 
                 ProductDB.WriteImage(3, "Maps/Mountain.png", "mountain"); //59,
             }
 

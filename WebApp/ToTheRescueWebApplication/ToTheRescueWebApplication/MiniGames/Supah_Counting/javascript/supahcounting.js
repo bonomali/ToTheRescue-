@@ -257,12 +257,18 @@
             amount: (400 - notMario.x - (notMario.width / 2))
         });
 
+        window.onbeforeunload = function () {
+            console.log("Throwing responsive voice under a bus.");
+            responsiveVoice.cancel();
+        };
+
         //They don't complete the game. 
         setTimeout(function GameOver() {
+            console.log("Game has passed two minutes: Failed.");
             responsiveVoice.speak("Good Attempt.");
             var finalScore = -5;
             document.getElementById('score').value = finalScore; 
             EndofGame(); 
-        }, 60000);
+        }, 120000);
     };
 }());

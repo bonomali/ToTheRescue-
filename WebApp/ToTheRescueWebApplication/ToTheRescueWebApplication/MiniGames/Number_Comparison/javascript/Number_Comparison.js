@@ -43,6 +43,12 @@ document.addEventListener('DOMContentLoaded', function () {
             checkAnswer();
         }
     };
+    setTimeout(function GameOver() {
+        if (soundToggle == "False") responsiveVoice.speak("Good Attempt.");
+        var finalScore = -5;
+        document.getElementById('score').value = finalScore;
+        EndofGame();
+    }, 300000);
 });
 var setupGame = function () {
 

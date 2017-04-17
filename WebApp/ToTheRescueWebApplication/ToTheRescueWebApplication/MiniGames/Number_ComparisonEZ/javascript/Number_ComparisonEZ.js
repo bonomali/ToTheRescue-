@@ -42,7 +42,12 @@ document.addEventListener('DOMContentLoaded', function () {
             checkAnswer();
         }
     };
-    
+    setTimeout(function GameOver() {
+        if (soundToggle == "False") responsiveVoice.speak("Good Attempt.");
+        var finalScore = -5;
+        document.getElementById('score').value = finalScore;
+        EndofGame();
+    }, 300000);
 });
 var setupGame = function () {
 
@@ -77,11 +82,11 @@ var removeChalk = function () {
 var setChalk = function () {
     
     var styling = { position: 'absolute', zIndex: '3' };
-    var sourcePath = imgPath + 'images/chalk.png';
+    var sourcePath = imgPath + 'images/Chalk.png';
     var container = 'leftSideContainer';//left container first
 
     var i, modifier = 1;
-    var x = true;
+    var x = 0;
     var side = leftSide; //start with left side
 
     while (x < 2) {
@@ -142,9 +147,9 @@ var correctAnswer = function () {
     var prng = document.getElementById("prng");
     if (soundToggle == "False") prng.play();
     if (numberCorrect == 5) {
-        setTimeout(endGame, 3500);
+        setTimeout(endGame, 1500);
     }
-    else setTimeout(setupGame, 3500);
+    else setTimeout(setupGame, 1500);
 }
 
 var wrongAnswer = function () {
@@ -154,7 +159,7 @@ var wrongAnswer = function () {
     var woops = document.getElementById("woopsAudio");
     if (soundToggle == "False") woops.play();
     numberWrong++;// not being used yet, might factor into score/game duration
-    setTimeout(setupGame, 3500);
+    setTimeout(setupGame, 1500);
 }
 
 var beginIntro = function () {
