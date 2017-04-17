@@ -107,6 +107,9 @@ a {
     color: orange;
 }
 
+Text {
+    margin: 0 0 0 auto;
+}
 
 #top, #bottom, #left, #right {
     background: darkgreen;
