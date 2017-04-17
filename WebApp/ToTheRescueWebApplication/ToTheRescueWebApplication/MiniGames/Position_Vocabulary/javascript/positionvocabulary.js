@@ -225,10 +225,12 @@
         };
 
         window.onbeforeunload = function () {
+            console.log("Throwing responsive voice under a bus.");
             responsiveVoice.cancel();
         };
 
         setTimeout(function GameOver() {
+            console.log("Game has passed a minute.");
             responsiveVoice.speak("Thanks for playing.");
             if (score > 5) {
                 score = 5;
