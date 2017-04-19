@@ -281,7 +281,7 @@
             buttons[i].style.marginLeft = '17%';
         }
         buttons[0].style.marginTop = '10%';
-        buttons[buttons.length - 1].style.marginTop = '30%';
+        //buttons[buttons.length - 1].style.marginTop = '30%';
         buttons[buttons.length - 1].style.marginLeft = '18%';
         buttonDone.style.height = '15%';
         buttonDone.style.width = '65%';
