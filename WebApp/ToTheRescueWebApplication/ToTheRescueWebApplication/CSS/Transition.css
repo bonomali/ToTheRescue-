@@ -12,26 +12,17 @@
 #transition
 {
     position: relative;
-    height: 400px;
-    width: 400px;
+    height: 200px;
+    width: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-#title
-{
-    height: 77px;
-    width: 350px;
-    top: 10%;
-    position: absolute;
 }
 
 #loadGif
 {
     height: 150px;
     width: 150px;
-    top: 10px;
     position: absolute;
 }
 
