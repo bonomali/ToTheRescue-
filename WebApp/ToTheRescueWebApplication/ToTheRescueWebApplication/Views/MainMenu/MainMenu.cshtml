@@ -30,13 +30,7 @@
 <body>
     @if (toggleMusic == "False")
     {
-        @*<audio controls loop id="menuMusic" source src="../Audio/bensound-sunny.mp3" autoplay hidden="hidden"></audio>
-
-            <script>
-                var vid = document.getElementById("menuMusic");
-                vid.volume = 0.05;
-            </script>*@
-
+        //make this a seperate script
         <script type="text/javascript">
             //api code
             try {
@@ -78,9 +72,6 @@
                                     return;
                                 }
                                 self.bufferList[url] = buffer;
-
-                                //this will become problematic if this works
-                                bgMusic.play();
                             });
                     };
 
@@ -90,11 +81,12 @@
 
                     request.send();
                 },
+
                 stopSoundWithUrl: function (url) {
                     if (this.playingSounds.hasOwnProperty(url)) {
                         for (var i in this.playingSounds[url]) {
                             if (this.playingSounds[url].hasOwnProperty(i))
-                                this.playingSounds[url][i].noteOff(0);
+                                this.playingSounds[url][i].stop(0);
                         }
                     }
                 }
@@ -123,7 +115,9 @@
              * WebAudioAPISound Prototype
              */
             WebAudioAPISound.prototype = {
-                play: function () {
+                play: function (object) {
+                    var obj = object;
+
                     var buffer = this.manager.bufferList[this.url];
                     //Only play if it's loaded yet
                     if (typeof buffer !== "undefined") {
@@ -135,7 +129,13 @@
                             this.manager.playingSounds[this.url] = [];
                         this.manager.playingSounds[this.url].push(source);
                     }
+                    else {
+                        setTimeout(function () {
+                            obj.play(obj);
+                        }, 500);
+                    }
                 },
+
                 stop: function () {
                     this.manager.stopSoundWithUrl(this.url);
                 },
@@ -162,9 +162,11 @@
             };
 
             //using the api
-            var bgMusic = new WebAudioAPISound("../Audio/bensound-sunny");
+            var bgMusic1 = new WebAudioAPISound("../Audio/bensound-sunny", { loop: true });
+            bgMusic1.play(bgMusic1);
+            
         </script>
-    }
+    };
     <h2>Main Menu</h2>
     <nav id="mainMenuNav">
         <ul id="navLinks">
