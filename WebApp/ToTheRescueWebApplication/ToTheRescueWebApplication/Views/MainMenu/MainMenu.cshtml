@@ -1,16 +1,16 @@
 ﻿@{
-	Layout = null;
-	ViewBag.Title = "MainMenu";
+    Layout = null;
+    ViewBag.Title = "MainMenu";
 }
 
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="viewport" content="width=device-width" />
-	<link rel="stylesheet" type="text/css" href="~/CSS/MainMenu.css" />
-	@{ string toggleSound = HttpContext.Current.Session["toggleSound"].ToString(); }
-	@{ string toggleMusic = HttpContext.Current.Session["toggleMusic"].ToString(); }
-	<script>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/CSS/MainMenu.css" />
+    @{ string toggleSound = HttpContext.Current.Session["toggleSound"].ToString(); }
+    @{ string toggleMusic = HttpContext.Current.Session["toggleMusic"].ToString(); }
+    <script>
 		var elephant = new Audio();
 		elephant.src = "../Audio/Elephant.mp3";
 		elephant.volume = 0.15;
@@ -24,25 +24,27 @@
 				elephant.volume = 0;
 			</text>
 		}
-	</script>
-	<title>@ViewBag.Title</title>
-	<link rel="manifest" href="~/scripts/Manifest.json">
-	<script>
+    </script>
+    <title>@ViewBag.Title</title>
+    <link rel="manifest" href="~/scripts/Manifest.json">
+    <script>
 	  var start = function() {
 		screen.orientation.lock('landscape-primary');
 	  }
 	  window.onload = start;
-	</script>
+    </script>
 </head>
 <body>
+    @* web audio api that allows mobile audio *@
     <script type="text/javascript" src="~/scripts/WebAudioApi.js"></script>
     @if (toggleMusic == "False")
     {
         //make this a seperate script
         <script type="text/javascript">
-            //using the api
-            var bgMusic1 = new WebAudioAPISound("../Audio/bensound-sunny", { loop: true });
-            bgMusic1.play(bgMusic1);   
+			//using the api
+            var bgMusic = new WebAudioAPISound("../Audio/bensound-sunny", { loop: true });
+            bgMusic.setVolume(5);
+			bgMusic.play(bgMusic);
         </script>
     };
     <h2>Main Menu</h2>
@@ -71,5 +73,5 @@
             <li />
         </ul>
     </nav>
-/body>
+</body>
 </html>
