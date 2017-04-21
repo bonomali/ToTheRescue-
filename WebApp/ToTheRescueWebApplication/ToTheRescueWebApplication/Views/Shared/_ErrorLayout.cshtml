@@ -7,7 +7,7 @@
     <link rel="manifest" href="~/scripts/Manifest.json">
     <script>
 	  var start = function() {
-		screen.orientation.lock('landscape-primary');
+	      screen.orientation.lock('landscape-primary').catch(function () { });
 	  }
 	  window.onload = start;
     </script>
