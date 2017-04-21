@@ -820,7 +820,6 @@
     <Content Include="MiniGames\Position_Vocabulary\images\below.png" />
     <Content Include="MiniGames\Position_Vocabulary\images\front.png" />
     <Content Include="MiniGames\Position_Vocabulary\images\left.png" />
-    <Content Include="MiniGames\Position_Vocabulary\images\Mockup.png" />
     <Content Include="MiniGames\Position_Vocabulary\images\right.png" />
     <Content Include="MiniGames\Position_Vocabulary\javascript\positionvocabulary.js" />
     <Content Include="MiniGames\RhymingMatch\images\ball.png" />
@@ -1002,7 +1001,6 @@
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="MiniGames\Supah_Counting\images\letter_10.psd" />
-    <Content Include="MiniGames\Position_Vocabulary\images\position.psd" />
     <Content Include="index.js" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\DragDropTouch.js" />

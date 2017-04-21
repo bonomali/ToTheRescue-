@@ -4,6 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link rel="manifest" href="~/scripts/Manifest.json">
+    <script>
+	  var start = function() {
+		screen.orientation.lock('landscape-primary');
+	  }
+	  window.onload = start;
+    </script>
     <style>
         html {
              height: 100%;

@@ -6,6 +6,12 @@
     <title>@ViewBag.Title</title>
     <link href="~/CSS/Login.css" rel="stylesheet" type="text/css" />
     <link rel="manifest" href="~/scripts/Manifest.json">
+    <script>
+	  var start = function() {
+		screen.orientation.lock('landscape-primary');
+	  }
+	  window.onload = start;
+    </script>
     <script src="~/index.js" defer></script>
 </head>
 <body>
