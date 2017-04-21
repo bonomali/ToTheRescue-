@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="~/CSS/Play.css">
     <link rel="stylesheet" href="~/CSS/blocksjs-0.5.11.min.css">
     <link rel="manifest" href="~/scripts/Manifest.json">
+    <script>
+	  var start = function() {
+		screen.orientation.lock('landscape-primary');
+	  }
+	  window.onload = start;
+    </script>
     <title>@ViewBag.Title</title>
     <style>
          html, body {
