@@ -52,14 +52,17 @@
 <div id="BlocksGame">
     @*Debounce funcion source*@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
-    @*Where minigame script is executed --> this may be a path to files on the server*@
+    @*Where minigame script is executed*@
     <script src="~/scripts/blockjs_framework.js"></script>
     @*Drag and drop*@
     <script src="~/scripts/DragDropTouch.js"></script>
-    @*Text To Speech. Breaks if we use a local copy. I tried.*@
+    @*Text To Speech.*@
     <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
     @*use jquery*@
     <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    @* web audio api that allows mobile audio *@
+    <script type="text/javascript" src="~/scripts/WebAudioApi.js"></script>
+
     <script id="minigameScript" src=@Model.MiniGame difficulty=@Model.Difficulty toggleSound=@Model.ToggleSound toggleMusic=@Model.ToggleMusic></script>
   
     <input type="text" id="score" style="display:none" />   @*score from minigame saved in value for tag*@

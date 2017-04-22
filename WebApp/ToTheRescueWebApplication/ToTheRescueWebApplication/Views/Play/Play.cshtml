@@ -4,6 +4,8 @@
 }
 @model ToTheRescueWebApplication.Models.Play.PlayModel
 
+@* web audio api that allows mobile audio *@
+<script type="text/javascript" src="~/scripts/WebAudioApi.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="../../scripts/transition.js"></script>
     <script type="text/javascript">
@@ -17,10 +19,10 @@
 
 @if (toggleMusic == "False")
 {
-    <audio controls loop id="playMusic" source src="@Url.Action("LoadAudio", new { @mapID = Model.CurrentMap })" autoplay hidden="hidden"></audio>
     <script>
-        var vid = document.getElementById("playMusic");
-        vid.volume = 0.07;
+        var vid = new WebAudioAPISound("@Url.Action("LoadAudio", new { @mapID = Model.CurrentMap })", {loop: true});
+        vid.setVolume(7);
+        vid.play(vid);
     </script>
 }
 <div class="profileInfo">
@@ -83,11 +85,9 @@
                 moveAvatar();
             }, 500);
 
-
             //congratulatory sound when animal saved
-            var saved = new Audio();
-            saved.src = "../../Audio/Ta_Da.mp3";
-            saved.volume = 0.2;
+            var saved = new WebAudioAPISound("../../Audio/Ta_Da.mp3");
+            saved.setVolume(20);
 
             //transfer nodes from Model into JS array
             var nodeArr = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.MapNodes));
@@ -112,7 +112,7 @@
                     url: '/Play/NewMap/',
                     success: function () {
                         $("#animalSaved").show();
-                        saved.play();
+                        saved.play(saved);
                         $("#play").hide();
                    }
                 })

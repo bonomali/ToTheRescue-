@@ -11,6 +11,13 @@ var imgPath = '../../MiniGames/Number_ComparisonEZ/';
 var soundToggle;
 var musicToggle;
 
+//for audio
+var wow = null;
+var prng = null;
+var woops = null;
+var bigGroup = null;
+var bgMusic = null;
+
 //Wait till the browser has parsed all html and turned in to document tree.
 document.addEventListener('DOMContentLoaded', function () {
     //attach event listeners to any DOM elements...
@@ -144,8 +151,8 @@ var correctAnswer = function () {
     goodJob.style.visibility = "visible";
     numberCorrect++;
     adjustTrophies();
-    var prng = document.getElementById("prng");
-    if (soundToggle == "False") prng.play();
+    
+    if (soundToggle == "False") prng.play(prng);
     if (numberCorrect == 5) {
         setTimeout(endGame, 1500);
     }
@@ -156,8 +163,8 @@ var wrongAnswer = function () {
     document.querySelector('#oops').style.visibility = "visible";
     numberCorrect = 0;
     adjustTrophies();
-    var woops = document.getElementById("woopsAudio");
-    if (soundToggle == "False") woops.play();
+    
+    if (soundToggle == "False") woops.play(woops);
     numberWrong++;// not being used yet, might factor into score/game duration
     setTimeout(setupGame, 1500);
 }
@@ -167,14 +174,13 @@ var beginIntro = function () {
     document.querySelector('#intro').style.visibility = "visible";
     document.querySelector('#endGame').style.visibility = "hidden";
     setTimeout(hideIntro, 5000);
-    var bigGroup = document.getElementById("bigGroup");
-    bigGroup.play();
+    
+    bigGroup.play(bigGroup);
     setTimeout(setupGame, 5000);
 }
 
 var hideIntro = function () {
-    var bgMusic = document.getElementById('bgMusic');
-    if (musicToggle == "False") bgMusic.play();
+    if (musicToggle == "False") bgMusic.play(bgMusic);
     document.querySelector('#intro').style.visibility = "hidden";
     document.querySelector('#contents').style.visibility = "visible";
 }
@@ -193,8 +199,7 @@ var adjustTrophies = function () {
 }
 
 var endGame = function() {
-    var wow = document.getElementById("wow");
-    if (soundToggle == "False") wow.play();
+    if (soundToggle == "False") wow.play(wow);
     removeChalk();
     document.querySelector('#contents').style.visibility = "hidden";
     document.querySelector('#endGame').style.visibility = "visible";
@@ -297,45 +302,17 @@ var createHtmlElement = function () {
     var leftSideContainer = document.createElement("div");
     leftSideContainer.setAttribute("id", "leftSideContainer");
 
-    //audio content
-    var audioDiv = document.createElement("div");
-    audioDiv.setAttribute("id", "audioDiv");
+    //audio content using the api
+    bgMusic = new WebAudioAPISound(imgPath + 'sounds/background.mp3', { loop: true });
+    bgMusic.setVolume(30);
 
-    var backgroundMusic = document.createElement('audio');
-    backgroundMusic.setAttribute('src', imgPath + 'sounds/background.mp3');
-    backgroundMusic.setAttribute('id', 'bgMusic');
-    //backgroundMusic.setAttribute('autoplay', 'autoplay');
-    backgroundMusic.loop = true;
-    backgroundMusic.volume = '0.3';
+    prng = new WebAudioAPISound(imgPath + 'sounds/prng.m4a');
 
-    backgroundMusic.addEventListener('ended', function () {
-        this.currentTime = 0;
-        this.play();
-        this.volume = '0.3';
-    }, false);//keeps background music alive
+    woops = new WebAudioAPISound(imgPath + 'sounds/woops.m4a');
 
-    var prng = document.createElement('audio');
-    prng.setAttribute('src', imgPath + 'sounds/prng.m4a');
-    prng.setAttribute('id', 'prng');
+    wow = new WebAudioAPISound(imgPath + 'sounds/wow.m4a');
 
-    var woopsAudio = document.createElement('audio');
-    woopsAudio.setAttribute('src', imgPath + 'sounds/woops.m4a');
-    woopsAudio.setAttribute('id', 'woopsAudio');
-
-    var wow = document.createElement('audio');
-    wow.setAttribute('src', imgPath + 'sounds/wow.m4a');
-    wow.setAttribute('id', 'wow');
-
-    var biggestGroup = document.createElement('audio');
-    biggestGroup.setAttribute('src', imgPath + 'sounds/tryToClickTheBiggestGroup.m4a');
-    biggestGroup.setAttribute('id', 'bigGroup');
-
-    audioDiv.appendChild(backgroundMusic);
-    audioDiv.appendChild(prng);
-    audioDiv.appendChild(wow);
-    audioDiv.appendChild(woopsAudio);
-    audioDiv.appendChild(biggestGroup);
-
+    bigGroup = new WebAudioAPISound(imgPath + 'sounds/tryToClickTheBiggestGroup.m4a');
 
     //append all content 
     divContainer.appendChild(contentDiv);
@@ -344,7 +321,6 @@ var createHtmlElement = function () {
     contentDiv.appendChild(header1);
     contentDiv.appendChild(leftSideContainer);
     contentDiv.appendChild(rightSideContainer);
-    contentDiv.appendChild(audioDiv);
 }
 createHtmlElement();
 beginIntro();

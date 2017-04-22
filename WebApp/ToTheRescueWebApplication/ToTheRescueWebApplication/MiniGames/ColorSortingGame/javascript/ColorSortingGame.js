@@ -10,7 +10,7 @@ var mostRecentDragColor = null;
 var numCorrectDrags = 0;
 var totalDrags = 0;
 
-var audio = new Audio();
+var audio = null;
 
 //ensures that the good job voice doesn't 
 //go off twice
@@ -105,8 +105,8 @@ function Drop(ev)
 		{
 		    if (soundToggle === "False") {
 		        //play the correct drop sound
-		        audio.src = "../../Audio/soundEffects/airPlaneDing.mp3";
-		        audio.play();
+		        audio = new WebAudioAPISound("../../Audio/soundEffects/airPlaneDing.mp3");
+		        audio.play(audio);
 		    }
 
 			//allow the drop to happen
@@ -127,8 +127,8 @@ function Drop(ev)
 		{
 		    if (soundToggle === "False") {
 		        //play the incorrect drop sound
-		        audio.src = "../../Audio/soundEffects/metalClang.mp3";
-		        audio.play();
+		        audio = new WebAudioAPISound("../../Audio/soundEffects/metalClang.mp3");
+		        audio.play(audio);
 		    }
 		}
 	}
@@ -481,8 +481,8 @@ function Main()
     soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
     musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
-    var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSound6(africa).mp3");
-    backgroundMusic.volume = "0.1";
+    var backgroundMusic = new WebAudioAPISound("../../Audio/backgroundMusic/bgSound6(africa).mp3", { loop: true });
+    backgroundMusic.setVolume(10);
 
     //make the html elements
     CreateHtml();
@@ -495,7 +495,7 @@ function Main()
 
         if (musicToggle === "False") {
             //play background music
-            backgroundMusic.play();
+            backgroundMusic.play(backgroundMusic);
         }
 
     };
@@ -505,12 +505,6 @@ function Main()
         responsiveVoice.cancel(); //quit doing text to speech
         return null;
     };
-
-    //reloop the audio
-    backgroundMusic.addEventListener('ended', function () {
-        this.currentTime = 0;
-        this.play();
-    }, false);
 
     //if the user didn't finish the game in 2 minuets
     setTimeout(function () {

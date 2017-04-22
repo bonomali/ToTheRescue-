@@ -24,6 +24,8 @@
 
 
 <body>
+    @* web audio api that allows mobile audio *@
+    <script type="text/javascript" src="~/scripts/WebAudioApi.js"></script>
     <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
     <div id="BlocksGame">
         @*Start Container Div*@
@@ -106,6 +108,8 @@
         }
 
         var voiceCounter = 0;
+        
+        //not sure if this will work on mobile
         function AnimalClicked(id) {
             voiceCounter++;
             var sound = document.getElementById(id);
@@ -179,11 +183,8 @@
 
         var createBackgroundMusic = function ()
         {
-            var backgroundMusic = document.createElement('audio');
-            backgroundMusic.setAttribute('src', "../Audio/Happy-Music.mp3");
-            backgroundMusic.setAttribute('id', 'bgMusic');
-            backgroundMusic.loop = true;
-            backgroundMusic.volume = '0.1';
+            var backgroundMusic = new WebAudioAPISound("../Audio/Happy-Music.mp3", { loop: true });
+            backgroundMusic.setVolume(10);
             backgroundMusic.play();
         }
 

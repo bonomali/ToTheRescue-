@@ -6,7 +6,7 @@ const PENTAGON = 4;
 const HEXAGON = 5;
 const OCTAGON = 6;
 
-var audio = new Audio();
+var audio = null;
 
 var soundToggle = "False";
 var musicToggle = "False";
@@ -492,8 +492,8 @@ function Clicked(mouseX, mouseY, shapeArr)
 		{
 		    if (soundToggle === "False") {
 		        //make a correct answer sound
-		        audio.src = "../../Audio/soundEffects/elevatorDing.mp3";
-		        audio.play();
+		        audio = new WebAudioAPISound("../../Audio/soundEffects/elevatorDing.mp3");
+		        audio.play(audio);
 		    }
 
 			numOfCorrectClicks++;
@@ -636,8 +636,8 @@ function EndGame()
 
 function Main()
 {
-    var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSong3.mp3");
-    backgroundMusic.volume = "0.1";
+    var backgroundMusic = new WebAudioAPISound("../../Audio/backgroundMusic/bgSong3.mp3", { loop: true });
+    backgroundMusic.setVolume(10);
 
     //makes the html elements needed for the game
     CreateHtmlElements();
@@ -669,12 +669,6 @@ function Main()
 		}
 	}, false);
 
-    //reloop the audio
-	backgroundMusic.addEventListener('ended', function () {
-	    this.currentTime = 0;
-	    this.play();
-	}, false);
-
     //if the user leaves the page
 	window.onbeforeunload = function () {
 	    responsiveVoice.cancel(); //quit doing text to speech
@@ -695,7 +689,7 @@ function Main()
 
 	if (musicToggle === "False") {
 	    //play background music
-	    backgroundMusic.play();
+	    backgroundMusic.play(backgroundMusic);
 	}
 	
 	//play the game for 1 minuet and then end the game

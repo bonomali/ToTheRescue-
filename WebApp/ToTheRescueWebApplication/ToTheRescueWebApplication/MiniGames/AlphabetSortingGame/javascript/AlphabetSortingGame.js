@@ -2,7 +2,7 @@ const HALF_ALPHA = 13;
 const FUlL_ALPHA = 26;
 
 var endGameFuncCalls = 0;
-var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSong2.mp3");
+var backgroundMusic = new WebAudioAPISound("../../Audio/backgroundMusic/bgSong2.mp3", { loop: true });
 
 var soundToggle = "False";
 var musicToggle = "False";
@@ -45,9 +45,8 @@ function Drop(ev) {
     if (letterBeingDragged[0] === dropAreaID[0]) {
 
         if (soundToggle === "False") {
-            var audio = new Audio();
-            audio.src = "../../Audio/soundEffects/elevatorDing.mp3";
-            audio.play();
+            var audio = new WebAudioAPISound("../../Audio/soundEffects/elevatorDing.mp3");
+            audio.play(audio);
         }
 
         //change the styling of the dragged div so it will drop nicely
@@ -96,7 +95,7 @@ function EndGame(finished) {
 
     if (endGameFuncCalls === 1) {
         if (musicToggle === "False")
-            backgroundMusic.pause();
+            backgroundMusic.stop();
 
         //temporary abc song, will get an actual audio file in the future
         responsiveVoice.speak("A, B, C, D, E, F, G, H, I, J, K, L M N O P, Q, R, S, T, U, V, W, X, Y and Z." +
@@ -105,7 +104,7 @@ function EndGame(finished) {
 
     setTimeout(function () {
         if (musicToggle === "False")
-            backgroundMusic.play();
+            backgroundMusic.play(backgroundMusic);
 
         //display the end of game stuff after the abc song is played
         EndofGame();
@@ -395,7 +394,7 @@ function CreateHtmlElements(letters) {
 }
 
 function Main() {
-    backgroundMusic.volume = "0.1";
+    backgroundMusic.setVolume(10);
 
     var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
 				   'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -431,15 +430,9 @@ function Main() {
 
         if (musicToggle === "False") {
             //play background music
-            backgroundMusic.play();
+            backgroundMusic.play(backgroundMusic);
         }
     };
-
-    //reloop the audio
-    backgroundMusic.addEventListener('ended', function () {
-        this.currentTime = 0;
-        this.play();
-    }, false);
 
     //play the game for 3 minuets and then end the game
     setTimeout(function () {

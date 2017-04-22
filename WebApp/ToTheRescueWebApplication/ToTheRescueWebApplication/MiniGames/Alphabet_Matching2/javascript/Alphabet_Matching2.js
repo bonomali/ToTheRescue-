@@ -102,20 +102,11 @@ var createElements = function () {
     cat.setAttribute('id', 'cat'); //css handles styling
     container.appendChild(cat);
 
-    //start music
-    var backgroundMusic = document.createElement('audio');
-    backgroundMusic.setAttribute('src', mediaPath + '/Sounds/backgroundMusic.mp3');
-    backgroundMusic.setAttribute('id', 'bgMusic');
-    backgroundMusic.loop = true;
-    backgroundMusic.volume = '0.3';
+    //background music using the api
+    var backgroundMusic = new WebAudioAPISound(mediaPath + '/Sounds/backgroundMusic.mp3', { loop: true });
+    backgroundMusic.setVolume(30);
 
-    if (musicToggle == "False") setTimeout(function () { backgroundMusic.play(); }, 3000);
-
-    backgroundMusic.addEventListener('ended', function () {
-        this.currentTime = 0;
-        this.play();
-        this.volume = '0.3';
-    }, false);//keeps background music alive
+    if (musicToggle == "False") setTimeout(function () { backgroundMusic.play(backgroundMusic); }, 3000);
 
     //create letter choices
     var top = 15;

@@ -1,7 +1,7 @@
 var answer = null;
 var totalClicks = 0;
 var correctClicks = 0;
-var audio = new Audio();
+var audio = null;
 
 var soundToggle = "False";
 var musicToggle = "False";
@@ -21,8 +21,8 @@ function ClickedAnswer(clickedDiv) {
     else {
         if (soundToggle === "False") {
             //make a wrong answer sound...i don't know how i feel about it
-            audio.src = "../../Audio/soundEffects/cartoonCowbell.mp3";
-            audio.play();
+            audio = new WebAudioAPISound("../../Audio/soundEffects/cartoonCowbell.mp3");
+            audio.play(audio);
         }
     }
 }
@@ -433,8 +433,8 @@ function EndGame() {
 }
 
 function Main() {
-    var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSong5(underwaterMario).mp3");
-    backgroundMusic.volume = "0.1";
+    var backgroundMusic = new WebAudioAPISound("../../Audio/backgroundMusic/bgSong5(underwaterMario).mp3", { loop: true });
+    backgroundMusic.setVolume(10);
 
     //this game doesn't have two difficulties so I am not going to do anything with this value
     var difficulty = document.getElementById("minigameScript").getAttribute("difficulty"); // only one difficulty for this game so not needed
@@ -448,18 +448,12 @@ function Main() {
 		"US English Female");
         if (musicToggle === "False") {
             //play background music
-            backgroundMusic.play();
+            backgroundMusic.play(backgroundMusic);
         }
     };
 
     window.addEventListener('resize', function () {
         MakeScalable();
-    }, false);
-
-    //reloop the audio
-    backgroundMusic.addEventListener('ended', function () {
-        this.currentTime = 0;
-        this.play();
     }, false);
 
     //if the user leaves the page

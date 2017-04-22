@@ -2,7 +2,7 @@ var totalKeyPresses = 0;
 var correctKeyPresses = 0;
 var usedArr = [];
 
-var audio = new Audio();
+var audio = null;
 
 var soundToggle = "False";
 var musicToggle = "False";
@@ -94,8 +94,8 @@ function MakeNextLetterRed() {
 
         if (soundToggle === "False") {
             //make a correct answer sound
-            audio.src = "../../Audio/soundEffects/elevatorDing.mp3";
-            audio.play();
+            audio = new WebAudioAPISound("../../Audio/soundEffects/elevatorDing.mp3");
+            audio.play(audio);
         }
 
         //allows the audio to play before the user plays the game
@@ -272,8 +272,8 @@ function Main() {
 				  "WANT", "WAS", "WELL", "WENT", "WHAT", "WHITE", "WHO", "WILL",
 				  "WITH", "YES"];
 
-    var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSong2.mp3");
-    backgroundMusic.volume = "0.1";
+    var backgroundMusic = new WebAudioAPISound("../../Audio/backgroundMusic/bgSong2.mp3", { loop: true });
+    backgroundMusic.setVolume(10);
 
     //get the game's difficulty level and modify the dataset for that difficulty level
     var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
@@ -294,14 +294,8 @@ function Main() {
 
     if (musicToggle === "False") {
         //play background music
-        backgroundMusic.play();
+        backgroundMusic.play(backgroundMusic);
     }
-
-    //reloop the audio
-    backgroundMusic.addEventListener('ended', function () {
-        this.currentTime = 0;
-        this.play();
-    }, false);
 
     document.getElementById("p1").style.color = "red";
 

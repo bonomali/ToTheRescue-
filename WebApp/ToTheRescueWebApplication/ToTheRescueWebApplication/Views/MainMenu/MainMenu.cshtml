@@ -10,13 +10,14 @@
     <link rel="stylesheet" type="text/css" href="~/CSS/MainMenu.css" />
     @{ string toggleSound = HttpContext.Current.Session["toggleSound"].ToString(); }
     @{ string toggleMusic = HttpContext.Current.Session["toggleMusic"].ToString(); }
+    <script type="text/javascript" src="~/scripts/WebAudioApi.js"></script>
     <script>
-		var elephant = new Audio();
-		elephant.src = "../Audio/Elephant.mp3";
-		elephant.volume = 0.15;
-		var lion = new Audio();
-		lion.src = "../Audio/Lion_Roar.mp3";
-		lion.volume = 0.15;
+        var elephant = new WebAudioAPISound("../Audio/Elephant.mp3");
+        elephant.setVolume(15);
+
+        var lion = new WebAudioAPISound("../Audio/Lion_Roar.mp3");
+        lion.setVolume(15);
+
 		@if (toggleSound == "True")
 		{
 			<text>
@@ -42,16 +43,16 @@
         //make this a seperate script
         <script type="text/javascript">
 			//using the api
-            var bgMusic = new WebAudioAPISound("../Audio/bensound-sunny", { loop: true });
+            var bgMusic = new WebAudioAPISound("../Audio/bensound-sunny.mp3", { loop: true });
             bgMusic.setVolume(5);
 			bgMusic.play(bgMusic);
         </script>
-    };
+    }
     <h2>Main Menu</h2>
     <nav id="mainMenuNav">
         <ul id="navLinks">
             <li>
-                <a href="@Url.Action("Play", "Play")" onmouseover="elephant.play()">Play</a>
+                <a href="@Url.Action("Play", "Play")" onmouseover="elephant.play(elephant)">Play</a>
             </li>
             <li>
                 @if (User.Identity.IsAuthenticated)
@@ -62,7 +63,7 @@
             <li>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <a href="@Url.Action("Sanctuary", "AnimalSanctuary")" onmouseover="lion.play()">Animal Sanctuary</a>
+                    <a href="@Url.Action("Sanctuary", "AnimalSanctuary")" onmouseover="lion.play(lion)">Animal Sanctuary</a>
                 }
             <li />
             <li>

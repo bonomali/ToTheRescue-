@@ -32,7 +32,7 @@ var soundToggle = "False";
 var musicToggle = "False";
 
 var mostRecentDragID = null;
-var audio = new Audio();
+var audio = null;
 var endGameFuncCalls = 0;
 
 //*********************** Generic functions used across both difficulty levels *************************************//
@@ -288,16 +288,16 @@ function DropHouse(ev) {
         else {
             if (soundToggle === "False") {
                 //make cha ching sound
-                audio.src = "../../Audio/soundEffects/chaChing.mp3";
-                audio.play();
+                audio = new WebAudioAPISound("../../Audio/soundEffects/chaChing.mp3");
+                audio.play(audio);
             }
         }
     }
     else {
         if (soundToggle === "False") {
             //make the metal clank sound
-            audio.src = "../../Audio/soundEffects/metalClang.mp3";
-            audio.play();
+            audio = new WebAudioAPISound("../../Audio/soundEffects/metalClang.mp3");
+            audio.play(audio);
         }
     }
 
@@ -697,16 +697,16 @@ function DropSquare(ev) {
         else {
             if (soundToggle === "False") {
                 //make cha ching sound, incorrect answer
-                audio.src = "../../Audio/soundEffects/chaChing.mp3";
-                audio.play();
+                audio = new WebAudioAPISound("../../Audio/soundEffects/chaChing.mp3");
+                audio.play(audio);
             }
         }
     }
     else {
         if (soundToggle === "False") {
             //make the metal clank sound
-            audio.src = "../../Audio/soundEffects/metalClang.mp3";
-            audio.play();
+            audio = new WebAudioAPISound("../../Audio/soundEffects/metalClang.mp3");
+            audio.play(audio);
         }
     }
 
@@ -1263,8 +1263,8 @@ function EndGame(finished) {
 }
 
 function Main() {
-    var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSong4.mp3");
-    backgroundMusic.volume = "0.1";
+    var backgroundMusic = new WebAudioAPISound("../../Audio/backgroundMusic/bgSong4.mp3");
+    backgroundMusic.setVolume(10);
 
     //get the game's difficulty level and modify the dataset for that difficulty level
     var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
@@ -1286,7 +1286,7 @@ function Main() {
 
     if (musicToggle === "False") {
         //play background music
-        backgroundMusic.play();
+        backgroundMusic.play(backgroundMusic);
     }
 
     //if the user leaves the page
@@ -1294,12 +1294,6 @@ function Main() {
         responsiveVoice.cancel(); //quit doing text to speech
         return null;
     };
-
-    //reloop the audio
-    backgroundMusic.addEventListener('ended', function () {
-        this.currentTime = 0;
-        this.play();
-    }, false);
 
     //if the user didn't finish the game in 2 minuets
     setTimeout(function () {

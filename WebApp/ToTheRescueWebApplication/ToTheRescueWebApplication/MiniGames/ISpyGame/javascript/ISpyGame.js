@@ -60,8 +60,8 @@ function Clicked(clickedAnimal) {
     if (clickedAnimal === animalArr[index]) {
 
         if (soundToggle === "False") {
-            soundEffect = new Audio("../../Audio/soundEffects/airPlaneDing.mp3");
-            soundEffect.play();
+            soundEffect = new WebAudioAPISound("../../Audio/soundEffects/airPlaneDing.mp3");
+            soundEffect.play(soundEffect);
         }
 
         setTimeout(function () {
@@ -74,8 +74,8 @@ function Clicked(clickedAnimal) {
     else {
         if (soundToggle === "False") {
             //make the clank sound effect
-            soundEffect = new Audio("../../Audio/soundEffects/metallicClank.mp3");
-            soundEffect.play();
+            soundEffect = new WebAudioAPISound("../../Audio/soundEffects/metallicClank.mp3");
+            soundEffect.play(soundEffect);
         }
 
         numIncorrectClicks++;
@@ -396,20 +396,14 @@ function EndGame() {
 }
 
 function Main() {
-    var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSound6(africa).mp3");
-    backgroundMusic.volume = "0.1";
+    var backgroundMusic = new WebAudioAPISound("../../Audio/backgroundMusic/bgSound6(africa).mp3", { loop: true });
+    backgroundMusic.setVolume(10);
 
     difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
     soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
     musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
     CreateHtmlElemets();
-
-    //reloop the audio
-    backgroundMusic.addEventListener('ended', function () {
-        this.currentTime = 0;
-        this.play();
-    }, false);
 
     //if the user leaves the page
     window.onbeforeunload = function () {

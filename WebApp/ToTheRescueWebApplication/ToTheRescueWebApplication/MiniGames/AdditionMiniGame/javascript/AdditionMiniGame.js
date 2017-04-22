@@ -1,6 +1,6 @@
 var soundToggle = "False";
 var musicToggle = "False";
-var audio = new Audio();
+var audio = new WebAudioAPISound("../../Audio/soundEffects/metallicClank.mp3");
 
 function SetAnswerLocations(answer) {
     var answerArr = [null, null, null, null];
@@ -120,8 +120,7 @@ function ClickedAnswer(id, AdditionGame) {
         //make a wrong answer sound...i don't know how i feel about it
         if (soundToggle === "False")
         {
-            audio.src = "../../Audio/soundEffects/metallicClank.mp3";
-            audio.play();
+            audio.play(audio);
         }
     }
 }
@@ -440,8 +439,8 @@ function EndGame(AdditionGame) {
 
 function Main() {
 
-    var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSong1.mp3");
-    backgroundMusic.volume = "0.02";
+    var backgroundMusic = new WebAudioAPISound("../../Audio/backgroundMusic/bgSong1.mp3", { loop: true });
+    backgroundMusic.setVolume(20);
 
     //object that keeps track of all the important
     //information in the game
@@ -471,12 +470,6 @@ function Main() {
         MakeScalable();
     }, false);
 
-    //reloop the audio
-    backgroundMusic.addEventListener('ended', function () {
-        this.currentTime = 0;
-        this.play();
-    }, false);
-
     //if the user leaves the page
     window.onbeforeunload = function () {
         responsiveVoice.cancel(); //quit doing text to speech
@@ -492,7 +485,7 @@ function Main() {
 
         if (musicToggle === "False") {
             //play background music
-            backgroundMusic.play();
+            backgroundMusic.play(backgroundMusic);
         }
 
         MakeScalable();

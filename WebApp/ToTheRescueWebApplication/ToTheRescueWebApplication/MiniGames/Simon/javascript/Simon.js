@@ -383,8 +383,8 @@ function EndGame() {
 }
 
 function Main() {
-    var backgroundMusic = new Audio("../../Audio/backgroundMusic/bgSong3.mp3");
-    backgroundMusic.volume = "0.1";
+    var backgroundMusic = new WebAudioAPISound("../../Audio/backgroundMusic/bgSong3.mp3", { loop: true });
+    backgroundMusic.setVolume(10);
 
     var soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound"); //True = sound off, False = sound on
     var musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic"); // I don't use sound affects in this game
@@ -398,7 +398,7 @@ function Main() {
 
         if (musicToggle === "False") {
             //play background music
-            backgroundMusic.play();
+            backgroundMusic.play(backgroundMusic);
         }
 
         responsiveVoice.OnVoiceReady = function () {

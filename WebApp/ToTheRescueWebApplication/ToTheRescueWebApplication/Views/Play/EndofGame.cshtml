@@ -7,6 +7,8 @@
     <title>EndofGame</title>
 </head>
 <body>
+    @* web audio api that allows mobile audio *@
+    <script type="text/javascript" src="~/scripts/WebAudioApi.js"></script>
     <div> 
         <img id="endOfGameGif" src="../../Images/endOfGame.gif"/>
         <button id="mainMenu" onclick="GoToMainMenu()">Main Menu</button>
@@ -23,11 +25,9 @@
             button.style.visibility = "visible";
         }
         function playAudio() {
-            var youWon = document.createElement('audio');
-            youWon.setAttribute('src', '../../Audio/youWon.m4a');
-            youWon.volume = .2;
-            youWon.play();
-            youWon.play();
+            var youWon = new WebAudioAPISound('../../Audio/youWon.m4a');
+            youWon.setVolume(20);
+            youWon.play(youWon);
         }
     </script>
 </body>
