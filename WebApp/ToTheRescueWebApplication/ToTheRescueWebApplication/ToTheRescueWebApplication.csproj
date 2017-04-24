@@ -233,9 +233,11 @@
     <Content Include="Images\AnimalSanctuaryMap.png" />
     <Content Include="Images\Back.png" />
     <Content Include="Images\Back2.png" />
+    <Content Include="Images\Back3.png" />
     <Content Include="Images\backIcon.png" />
     <Content Include="Images\endOfGame.gif" />
     <Content Include="Images\Fullscreen.png" />
+    <Content Include="Images\Fullscreen2.png" />
     <Content Include="Images\gameOver.png" />
     <Content Include="Images\greatJob.jpg" />
     <Content Include="Images\landscape.png" />
@@ -246,7 +248,9 @@
     <Content Include="Images\mainmenu.jpg" />
     <Content Include="Images\menuIcon.png" />
     <Content Include="Images\Normal.png" />
+    <Content Include="Images\Normal2.png" />
     <Content Include="Images\Options.png" />
+    <Content Include="Images\Options2.png" />
     <Content Include="Images\optionsIcon.png" />
     <Content Include="Images\Play.png" />
     <Content Include="Images\Play2.png" />
@@ -254,6 +258,7 @@
     <Content Include="Images\Profile.png" />
     <Content Include="Images\sad_puppy.png" />
     <Content Include="Images\Sanctuary.png" />
+    <Content Include="Images\Sanctuary2.png" />
     <Content Include="Images\sanctuaryIcon.png" />
     <Content Include="Images\totherescue_title.png" />
     <Content Include="Images\winter-scenery-hi.png" />
