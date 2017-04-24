@@ -18,61 +18,66 @@
         var lion = new WebAudioAPISound("../Audio/Lion_Roar.mp3");
         lion.setVolume(15);
 
-		@if (toggleSound == "True")
-		{
-			<text>
-				lion.volume = 0;
-				elephant.volume = 0;
-			</text>
-		}
+        @if (toggleSound == "True")
+        {
+            <text>
+        lion.volume = 0;
+        elephant.volume = 0;
+        </text>
+        }
     </script>
     <title>@ViewBag.Title</title>
     <link rel="manifest" href="~/scripts/Manifest.json">
     <script>
-	  var start = function() {
-	      screen.orientation.lock('landscape-primary').catch(function () { });
-	  }
-	  window.onload = start;
+        var start = function () {
+            screen.orientation.lock('landscape-primary').catch(function () { });
+        }
+        window.onload = start;
     </script>
 </head>
 <body>
+    <div id="left"></div>
+    <div id="right"></div>
+    <div id="top"></div>
+    <div id="bottom"></div>
     @* web audio api that allows mobile audio *@
     <script type="text/javascript" src="~/scripts/WebAudioApi.js"></script>
     @if (toggleMusic == "False")
     {
         //make this a seperate script
         <script type="text/javascript">
-			//using the api
+            //using the api
             var bgMusic = new WebAudioAPISound("../Audio/bensound-sunny.mp3", { loop: true });
             bgMusic.setVolume(5);
-			bgMusic.play(bgMusic);
+            bgMusic.play(bgMusic);
         </script>
     }
-    <h2>Main Menu</h2>
-    <nav id="mainMenuNav">
-        <ul id="navLinks">
-            <li>
-                <a href="@Url.Action("Play", "Play")" onmouseover="elephant.play(elephant)">Play</a>
-            </li>
-            <li>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    @Html.ActionLink("Options", "Options", "Options")
-                }
-            <li />
-            <li>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <a href="@Url.Action("Sanctuary", "AnimalSanctuary")" onmouseover="lion.play(lion)">Animal Sanctuary</a>
-                }
-            <li />
-            <li>
-                @if (!User.Identity.IsAuthenticated)
-                {
-                    <a href="@Url.Action("Login", "Login")">Home</a>
-                }
-            <li />
-        </ul>
-    </nav>
+    <div>
+        <h2>Main Menu</h2>
+        <br />
+        <br />
+        <section class="form">
+            <br />
+            <a href="@Url.Action("Play", "Play")"><p class="link" style="" onmouseover="elephant.play(elephant)"><img src="~/Images/Play.png" class="link_image" /> Play</p></a>
+            <br />
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a href="@Url.Action("Options", "Options")"><p class="link" style=""><img src="~/Images/Options.png" class="link_image" /> Options</p></a>
+                <br />
+            }
+            
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a href="@Url.Action("Sanctuary", "AnimalSanctuary")" ><p class="link" style="" onmouseover="lion.play(lion)"><img src="~/Images/Sanctuary.png" class="link_image" /> Animal Sanctuary</p></a>
+                <br />
+            }
+            
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <a href="@Url.Action("Login", "Login")"><p class="link" style=""><img src="~/Images/Logout.png" class="link_image" />Login Screen</p></a>
+                <br />
+            }
+        </section>
+    </div>
 </body>
 </html>

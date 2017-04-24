@@ -3,74 +3,81 @@
     ViewBag.Title = "Options";
     Layout = "~/Views/Shared/_OptionsLayout.cshtml";
 
-    SelectList readingDifficultyList = new SelectList(new List<Object>{
-                           new { Text = "Low Pre-Kindergarden", Value = "1" },
-                           new { Text = "High Pre-Kindergarden", Value = "2"  },
-                           new { Text = "Low Kindergarden", Value = "3" },
-                           new { Text = "High Kindergarden", Value = "4" }
-                                                                      },
-                                                                                            "value",
-                                                                                            "text",
-                                                                                             Model.ReadingDifficultyLevel);
-    SelectList mathDifficultyList = new SelectList(new List<Object>{
-                           new { Text = "Low Pre-Kindergarden", Value = "1" },
-                           new { Text = "High Pre-Kindergarden", Value = "2"  },
-                           new { Text = "Low Kindergarden", Value = "3" },
-                           new { Text = "High Kindergarden", Value = "4" }
-                                                      },
-                                                                    "value",
-                                                                    "text",
-                                                                     Model.MathDifficultyLevel);
+    SelectList readingDifficultyList = new SelectList(new List<Object>
+        {
+        new { Text = "Low Pre-Kindergarden", Value = "1" },
+        new { Text = "High Pre-Kindergarden", Value = "2"  },
+        new { Text = "Low Kindergarden", Value = "3" },
+        new { Text = "High Kindergarden", Value = "4" }
+        },
+        "value",
+        "text",
+        Model.ReadingDifficultyLevel);
+    SelectList mathDifficultyList = new SelectList(new List<Object>
+        {
+        new { Text = "Low Pre-Kindergarden", Value = "1" },
+        new { Text = "High Pre-Kindergarden", Value = "2"  },
+        new { Text = "Low Kindergarden", Value = "3" },
+        new { Text = "High Kindergarden", Value = "4" }
+        },
+        "value",
+        "text",
+        Model.MathDifficultyLevel);
     SelectList subjectFilterList = new SelectList(new List<Object>
-                        {
-                        new { Text = "Anything", Value = "Any" },
-                        new { Text = "Math Only", Value = "Math" },
-                        new { Text = "Reading Only", Value = "Reading"  },
-                        },
+        {
+        new { Text = "Anything", Value = "Any" },
+        new { Text = "Math Only", Value = "Math" },
+        new { Text = "Reading Only", Value = "Reading"  },
+        },
         "value",
         "text",
         Model.SubjectFilter);
-}
-<div id="left"></div>
-<div id="right"></div>
-<div id="top"></div>
-<div id="bottom"></div>
+    }
+    <div id="left"></div>
+    <div id="right"></div>
+    <div id="top"></div>
+    <div id="bottom"></div>
 
-<div>
-    <h2>Options for @Model.profileName</h2>
+    <div>
+        <h2>Options for @Model.profileName</h2>
 
-    <section class="form" id="loginForm">
-        @using (Html.BeginForm())
-        {
+        <section class="form" id="loginForm">
+            @using (Html.BeginForm())
+            {
             @Html.TextBoxFor(m => m.profileName, new { style = "display: none;" })
 
 
-            <Text>Toggle Sound:    </text> @Html.CheckBoxFor(m => m.toggleSound)
+            <div><label class="labels">Toggle Sound:</label> <label class="boxes">@Html.CheckBoxFor(m => m.toggleSound)</label></div>
             <br />
-            <Text>Toggle Music:     </text> @Html.CheckBoxFor(m => m.toggleMusic)
+            <div><label class="labels">Toggle Music:</label> <label class="boxes">@Html.CheckBoxFor(m => m.toggleMusic)</label></div>
             <br />
-            
-            <Text>Math Difficulty:   </text>  @Html.DropDownListFor(m => m.MathDifficultyLevel, mathDifficultyList)
+            <div><label class="labels">Math Difficulty:</label> <label class="boxes">@Html.DropDownListFor(m => m.MathDifficultyLevel, mathDifficultyList)</label></div>
             <br />
-            <Text>Reading Difficulty:    </text>  @Html.DropDownListFor(m => m.ReadingDifficultyLevel, readingDifficultyList)
+            <div><label class="labels">Reading Difficulty:</label> <label class="boxes">@Html.DropDownListFor(m => m.ReadingDifficultyLevel, readingDifficultyList)</label></div>
             <br />
-           <Text>Subject Filter:    </text>    @Html.DropDownListFor(m => m.SubjectFilter, subjectFilterList)
+            <div><label class="labels">Subject Filter:</label> <label class="boxes">@Html.DropDownListFor(m => m.SubjectFilter, subjectFilterList)</label></div>
             <br />
+            <br />
+
             <button type="submit">Apply Options</button>
-        }
-        <p class="link" style=""><a href="/Profile/ChooseProfilePage" style="">Switch Profiles</a></p>
-        <p class="link" style=""><a href="/MainMenu/MainMenu" style="">Back to Main Menu</a></p>
+            }
+            <br />
+            <a href="/MainMenu/MainMenu" style=""><p class="link" style="" id="menu"><img src="~/Images/Back.png" class="link_image" /> Back to Main Menu</p></a>
+            <br />
+            <a href="/Profile/ChooseProfilePage" style=""><p class="link" style="" id="profile"><img src="~/Images/Profile.png" class="link_image" /> Switch Profiles</p></a>
+            <br />
 
-        @using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { @id = "logoutForm" }))
-        {
-        @Html.AntiForgeryToken()
-            <p class="link" style=""><a href="Logout" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a></p>
-        }
+            @using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { @id = "logoutForm" }))
+            {
+            @Html.AntiForgeryToken()
+            <a href="Logout" onclick="document.getElementById('logoutForm').submit(); return false;"><p class="link" style="" id="logout"><img src="~/Images/Logout.png" class="link_image" /> Logout</p></a>
+            }
+            <br />
 
-        <script type="text/javascript">
-            function main() { }
-            main()
+            <script type="text/javascript">
+    function main() { }
+    main()
 
-        </script>
-    </section>
-</div>
+            </script>
+        </section>
+    </div>

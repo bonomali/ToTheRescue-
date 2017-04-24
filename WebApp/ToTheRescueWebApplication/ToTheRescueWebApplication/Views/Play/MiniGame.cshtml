@@ -10,7 +10,21 @@
     transition('#f0ffff');
     $(window).load(function () {
         $("#content").fadeOut("slow");
-    })
+    });
+    function toggleFullScreen() {
+        var doc = window.document;
+        var docEl = doc.documentElement;
+
+        var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+        var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+        if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+            requestFullScreen.call(docEl);
+        }
+        else {
+            cancelFullScreen.call(doc);
+        }
+    }
 </script>
 @* end copy *@
 <nav id="playMenu">
@@ -18,33 +32,34 @@
         <ul class="buttons">
             <li id="back">
                 <a href="~/Play/Play">
-                    <img src="~/Images/backIcon.png" class="icon" alt="Back">
+                    <img src="~/Images/Back3.png" class="icon" alt="Back">
                 </a>
-                <label class="iconLbls " id="backLbl">Back</label>
             </li>
             <li id="sanctuary">
                 @if (User.Identity.IsAuthenticated)
                 {
                     <a href="~/AnimalSanctuary/Sanctuary">
-                        <img src="~/Images/sanctuaryIcon.png" class="icon" alt="Sanctuary">
+                        <img src="~/Images/Sanctuary2.png" class="icon" alt="Sanctuary">
                     </a>
-                    <label class="iconLbls " id="sanctuaryLbl">Sanctuary</label>
                 }
             </li>
             <li id="menu">
                 <a href="~/MainMenu/MainMenu">
-                    <img src="~/Images/menuIcon.png" class="icon" alt="Menu">
+                    <img src="~/Images/Back2.png" class="icon" alt="Menu">
                 </a>
-                <label class="iconLbls " id="menuLbl">Menu</label>
             </li>
             <li id="options">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <a href="~/Options/Options">
-                        <img src="~/Images/optionsIcon.png" class="icon" alt="Options">
+                    <a href="fullscreen" onclick = "goFullscreen();">
+                        <img src="~/Images/Options2.png" class="icon" alt="Options">
                     </a>
-                    <label class="iconLbls " id="optionsLbl">Options</label>
                 }
+            </li>
+            <li id="fullscr">
+                    <a onclick="toggleFullScreen();">
+                        <img src="~/Images/Fullscreen2.png" class="icon" alt="Fullscreen">
+                    </a>
             </li>
         </ul>
     </div>

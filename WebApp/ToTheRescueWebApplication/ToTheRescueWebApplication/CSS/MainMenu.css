@@ -11,59 +11,111 @@ body {
     background-position-x: center;
     background-size: 100% 100%;
     height: 100%;
-    border: inset;
 }
-#mainMenuNav {
-    width: 100%;
-    text-align: center;
-}
-#navLinks {
-    display: inline-block;
-    list-style: none;
-    padding: 10px 10px;
-    width: 100%;
-    text-align: center;
-}
-#navLinks li {
-   padding: 2px 0;
-}
-#navLinks li:first-child {
-   padding-top: 0;
-}
-#navLinks li a {
-   text-decoration: none;
-   color: dimgrey;
-   text-shadow: 2px 2px #000;
-   font-size: 25px;
-   text-align: center;
-   font-family: Comic Sans MS, cursive, sans-serif;
-}
-#navLinks li:hover a {
-   color: darkblue;
-   font-size: 30px;
-}
+
 h2 {
     color: darkblue;
     text-shadow: 2px 2px #000;
-    font-size: 40px;
+    font-size: 70px;
     text-align: center;
     padding: 0;
     margin: 0;
     font-family: Comic Sans MS, cursive, sans-serif;
 }
-@media only screen and (min-width: 500px) {
-    body {
-    background-size: 100% 100%;
-    height: 100%;
+
+.form {
+    background-color: black;
+    opacity: .8;
+    width: 80%;
+    min-width: 320px;
+    max-width: 500px;
+    display: block;
+    padding: 15px 0 10px 0;
+    position: relative;
+    bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    align-items: center;
+    border-radius: 25px;
 }
-    h2 {
-        font-size: 75px;
+
+.link {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    position:relative;
+    width: 300px;
+    margin: auto;
+    text-align: center; 
+    vertical-align: middle;
+    overflow: visible;
+    text-decoration: none;
+    font-size: 24px;
+    font-style: normal;
+    color: floralwhite;
+    text-shadow: 1px 1px #000;
+    border-radius: 25px;
+    border-style: outset;
+    border-color: black;
+
+    height: 50px;
+
+    background-color: darkslateblue;
+    opacity: 0.9;
+}
+
+.link_image {
+    height:50px;
+
+    vertical-align: middle;
+}
+
+a {
+    color: floralwhite;
+    text-shadow: 1px 1px #000;
+    text-decoration: none;
+}
+
+#top, #bottom, #left, #right {
+    background: darkgreen;
+    position: fixed;
+}
+
+#left, #right {
+    top: 0;
+    bottom: 0;
+    width: 15px;
+}
+
+#left {
+    left: 0;
+}
+
+#right {
+    right: 0;
+}
+
+#top, #bottom {
+    left: 0;
+    right: 0;
+    height: 15px;
+}
+
+#top {
+    top: 0;
+}
+
+#bottom {
+    bottom: 0;
+}
+
+
+@media only screen and (max-width: 500px), only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    h2{
+        font-size: 40px;
     }
-    #navLinks li a {
-        font-size: 35px;
-    }
-    #navLinks li:hover a {
-        color: darkblue;
-        font-size: 45px;
+    #top, #bottom, #left, #right {
+        display: none;
     }
 }
+
+

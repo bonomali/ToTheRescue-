@@ -22,32 +22,34 @@ nav#playMenu {
     background-color: darkgreen;
     width: 10%;
     height: 100%;
-    border: 2px solid hotpink;
-    box-sizing: border-box;
     position: fixed; /* Stay in place */
     z-index: 1; /* Stay on top */
-    top: 0;
-    right: 0;
+    border-radius: 25px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
 }
 div.profileInfo {
-    background-color:lightskyblue;
-    width: 90%;
+    background-color: darkgreen;
+    width: 100%;
     height: 15%;
-    min-height: 45px;
-    border: 2px solid blue;
-    box-sizing: border-box;
+
+    border-radius: 25px;
     position: fixed;
     z-index: 1;
-    left: 0;
-    top: 0;
+    right: 0px;
+    top: 0px
+    ;
 }
 div.profileInfo label {
-    top: 3.5%;
+
+    top: 5%;
     font-size: 10px;
-    color: darkblue;
+    color: white;
+    vertical-align: middle;
     font-family: "Comic Sans MS", cursive, sans-serif;
     font-weight: bold;
-    text-shadow: 1px 1px #FFF;
+    text-shadow: 1px 1px black;
 }
 div.profileInfo label#name {
     float: left;
@@ -66,93 +68,73 @@ div.profileInfo label#subject {
 nav#playMenu ul { 
     list-style-type: none; 
 }
-.iconLbls {
-    font-size: 12px;
-    color: lightblue;
-    text-shadow: 1px 1px #000;
-    font-family: "Comic Sans MS", cursive, sans-serif;
-}
 nav#playMenu li#options { 
     position:fixed;
-    bottom: 9%;
-}
-#optionsLbl {
-    position:fixed;
-    bottom: 5%;
-    margin-left: -5%;
-    visibility: hidden;
+    bottom: 28%;
 }
 nav#playMenu li#menu { 
     position:fixed;
-    bottom: 29%;
-}
-#menuLbl {
-    position:fixed;
-    bottom: 25%;
-    margin-left: -5%;
-    visibility: hidden;
+    bottom: 46%;
 }
 nav#playMenu li#sanctuary {
     position: fixed;
-    bottom: 50%;
+    bottom: 64%;
 }
-#sanctuaryLbl {
-    position:fixed;
-    bottom: 46%;
-    margin-left: -5%;
-    visibility: hidden;
-}
+
 nav#playMenu li#play { 
     position:fixed;
-    bottom: 77%;
+    bottom: 82%;
 }
-#playLbl {
-    position:fixed;
-    bottom: 70%;
-    margin-left: -5%;
-    visibility: hidden;
-}
+
 nav#playMenu li#back { 
     position:fixed;
-    bottom: 77%;
+    bottom: 82%;
 }
-#backLbl {
+
+nav#playMenu li#fullscr { 
     position:fixed;
-    bottom: 79%;
-    margin-left: -5%;
-    visibility: hidden;
+    bottom: 10%;
 }
 .icon {
-    border:groove;
-    border-color:lightseagreen;
-    background-color:lightseagreen;
-    border-radius: 15px;
-    width: 80%;
-    min-width: 30px;
-    margin-left: -35px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    Width:80%;
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    overflow: visible;
+    text-decoration: none;
+    font-size: 24px;
+    font-style: normal;
+    color: floralwhite;
+    text-shadow: 1px 1px #000;
+    border-radius: 25px;
+    border-style: outset;
+    border-color: black;
+    
+    background-color: darkslateblue;
+    opacity: 0.9;
 }
 .icon:hover {
     background-color: hotpink;
-    width: 85%;
 }
 
 #mapCont{
-    width: 95%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
     position: absolute;
-    top: 2.5%;
-    left: 2.5%;
 }
 #container{
     position: absolute;
+
     width: 90%;
-    height: 90%;
+    height: 85%;
     top: 15%;
-    margin: 0;
-    left: 0;
+    left: 0px;  
+    bottom: 0px;
 }
 
 #mapImg{
+   border-radius: 25px 0px 25px 0px;
    width: 100%;
    height: 100%;
 }
@@ -160,7 +142,7 @@ nav#playMenu li#back {
 .mapContainer #animalImg {
     position:absolute;
     width: 5.5%;
-    height: 11%;
+    height: 12%;
     z-index:2;
 }
 .mapContainer #avatarImg {
@@ -262,27 +244,8 @@ nav#playMenu li#back {
 
     
 @media only screen and (min-width: 540px) {
-    #optionsLbl {
-        margin-left: -4.5%;
-    }
-    #menuLbl {
-        margin-left: -4%;
-    }
-    #sanctuaryLbl {
-        margin-left: -4.75%;
-    }
-    nav#playMenu li#play { 
-    bottom: 77%;
-    }
-     #backLbl {
-        bottom: 70%;
-        margin-left: -3.5%;
-    }
-    nav#playMenu li#back { 
-    bottom: 77%;
-    }
     .icon {
-        margin-left: -28px;
+        margin-left: -5px;
     }
 }
 @media only screen and (min-width: 620px) {
@@ -303,7 +266,7 @@ nav#playMenu li#back {
     }
 
     .icon {
-        margin-left: -17px;
+        margin-left: -9px;
     }
 
     #closePraise {
@@ -313,22 +276,7 @@ nav#playMenu li#back {
     #closePraise:hover {
         font-size: 70%;
     }
-    #optionsLbl {
-        visibility:visible;
-    }
-    #menuLbl {
-        visibility:visible;
-    }
-    #sanctuaryLbl {
-        visibility:visible
-    }
-    #playLbl {
-        visibility:visible;
-        margin-left: -3.5%;
-    }
-     #backLbl {
-        visibility:visible;
-    }
+
 }
 /*When screen is 1080px or larger, apply this CSS*/
 @media only screen and (min-width: 1080px) {
@@ -337,21 +285,6 @@ nav#playMenu li#back {
     }
     .iconLbls {
         font-size: 16px;
-    }
-    #optionsLbl {
-        margin-left: -5.5%;
-    }
-    #sanctuaryLbl {
-        margin-left: -6%;
-    }
-    #menuLbl {
-        margin-left: -4.5%;
-    }
-    #playLbl {
-        margin-left: -4%;
-    }
-    #backLbl {
-        margin-left: -4%;
     }
     #miniGameDone {
     left: 85%;

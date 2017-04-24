@@ -20,12 +20,13 @@ body {
     max-width: 500px;
     display: block;
     padding: 15px 0 10px 0;
-    position: relative;
+
     bottom: 30px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     align-items: center;
+    
     border-radius: 25px;
 }
 
@@ -79,8 +80,11 @@ input {
 
 .link {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    align-content: center;
+    width: 300px;
+    margin: auto;
     text-align: center;
+    vertical-align: middle;
+    overflow: visible;
     text-decoration: none;
     font-size: 24px;
     font-style: normal;
@@ -89,10 +93,9 @@ input {
     border-radius: 25px;
     border-style: outset;
     border-color: black;
-    padding: 10px;
-
-    height: 30px;
-
+    
+    height: 50px;
+    
     background-color: darkslateblue;
     opacity: 0.9;
 }
@@ -108,7 +111,7 @@ a {
 }
 
 Text {
-    margin: 0 0 0 auto;
+    margin: 0 0 0 50px;
 }
 
 #top, #bottom, #left, #right {
@@ -142,6 +145,24 @@ Text {
 
 #bottom {
     bottom: 0;
+}
+
+.link_image {
+    height:50px;
+    vertical-align: middle;
+}
+
+.inputs {
+}
+
+.boxes {
+    float:left; 
+}
+
+.labels { 
+    float:left;
+    width:200px;
+
 }
 
 @media only screen and (max-width: 500px), only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
