@@ -203,8 +203,8 @@ var adjustTrophies = function () {
 var endGame = function() {
     if (soundToggle == "False") wow.play(wow);
     removeChalk();
-    document.querySelector('#contents').style.visibility = "hidden";
-    document.querySelector('#endGame').style.visibility = "visible";
+    //document.querySelector('.trophies').style.visibility = "hidden";
+    //document.querySelector('#endGame').style.visibility = "visible";
     
     var performanceStat = 5 - numberWrong;
     if (performanceStat < -5) performanceStat = -5;
@@ -270,6 +270,7 @@ var createHtmlElement = function () {
         
         trophy.setAttribute("id", id + i);
         trophy.setAttribute("src", imgPath + "images/trophy.png");
+        trophy.setAttribute("class", "trophies");
         contentDiv.appendChild(trophy);
     }
             //greater than

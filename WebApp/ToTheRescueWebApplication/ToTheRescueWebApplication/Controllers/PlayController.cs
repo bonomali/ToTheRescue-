@@ -364,7 +364,7 @@ namespace ToTheRescueWebApplication.Controllers
                     }
                 }
                 model.MiniGameID = minigames[ranGame].ID;
-                model.MiniGame = minigames[ranGame].MiniGamePath;
+                model.MiniGame = "../../MiniGames/Number_Comparison/javascript/Number_Comparison.js"; 
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
             }
             else    //free play mode
