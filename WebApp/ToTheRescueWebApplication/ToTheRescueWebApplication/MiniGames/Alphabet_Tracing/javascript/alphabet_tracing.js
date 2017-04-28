@@ -6,6 +6,7 @@
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
     var audioClips;
     var tracingImages;
+    var audioInstructions, audioInstructions2, letterAudio, backgroundMusic, endOfGame; //audio
 
     //arrays containing paths to audio files and image files for alphabet outlines
     if (difficulty_level == 2) {
@@ -38,22 +39,39 @@
     //randomly choose index for tracing number
     var index = Math.floor((Math.random() * tracingImages.length)); //random number for array index
 
-    //play audio instructions and letter to trace
-    var audioInstructions = new Audio();
-    audioInstructions.src = '../../MiniGames/Alphabet_Tracing/sounds/' + "audio_instructions.mp3";
-    var audioInstructions2 = new Audio();
-    audioInstructions2.src = '../../MiniGames/Alphabet_Tracing/sounds/' + "audioinstructions_Part2.mp3";
-    var letterAudio = new Audio();
+    //bubble sounds
+    var createAudio = function () {
+        audioInstructions = new WebAudioAPISound('../../MiniGames/Alphabet_Tracing/sounds/' + "audio_instructions.mp3", { loop: false });
+        audioInstructions.setVolume(70);
+        audioInstructions.onEnded = instructionsEnded;
+        audioInstructions2 = new WebAudioAPISound( '../../MiniGames/Alphabet_Tracing/sounds/' + "audioinstructions_Part2.mp3", { loop: false });
+        audioInstructions.setVolume(70);
+        endOfGame = new WebAudioAPISound('../../MiniGames/Alphabet_Tracing/sounds/' + "praise_recording.mp3", { loop: false });
+        endOfGame.setVolume(70);
+        backgroundMusic = new WebAudioAPISound('../../MiniGames/Alphabet_Tracing/sounds/' + "background_music.mp3", { loop: true });
+        backgroundMusic.setVolume(20);
+        if (toggle_music == "False")
+            backgroundMusic.play(backgroundMusic);
+    }
 
-    audioInstructions.addEventListener('ended', function () {
-        letterAudio.src = audioClips[index];
-        letterAudio.play();
-    });
-    letterAudio.addEventListener('ended', function () {
-        audioInstructions2.play();
-    });
     window.onload = function () {
-        audioInstructions.play();
+        createAudio();  //call function to create audio
+        audioInstructions.play(audioInstructions);
+    }
+    //play audio instructions and letter to trace
+   
+    instructionsEnded =  function () {
+        letterAudio = new WebAudioAPISound(audioClips[index], { loop: false });
+        letterAudio.setVolume(70);
+        letterAudio.onEnded = letterEnded;
+        letterAudio.play(letterAudio);
+    };
+    letterEnded = function () {
+        audioInstructions2.play(audioInstructions2);
+    };
+    window.onload = function () {
+        createAudio();
+        audioInstructions.play(audioInstructions);
     }
 
     var curColor = '#000';          //color user is drawing with
@@ -123,9 +141,7 @@
         buttonsDiv.appendChild(buttonDone);
         buttonDone.addEventListener('click', function () {
             //Play end of game audio, save score to html element, and call end of game function
-            var endOfGame = new Audio();
-            endOfGame.src = '../../MiniGames/Alphabet_Tracing/sounds/' + "praise_recording.mp3";
-            endOfGame.play();
+            endOfGame.play(endOfGame);
             document.getElementById('score').value = 2; //save score in html element
             EndofGame(); //function displays good job message and returns to map
         });
@@ -224,7 +240,6 @@
         context.globalAlpha = 1;
         //redraw tracing image
         context.drawImage(base_image, context.canvas.width * .1, context.canvas.height * .1, context.canvas.width * .8, context.canvas.height * .8);
-
     }
     //draw the tracing image
     function drawImage() {
@@ -234,19 +249,4 @@
         }
     }
     initButtons(); //initalize buttons
-
-    //initalize and play background music
-    var backgroundMusic = new Audio();
-    backgroundMusic.src = '../../MiniGames/Alphabet_Tracing/sounds/' + "background_music.mp3";
-    if (toggle_music == "False") {
-        backgroundMusic.play();
-        backgroundMusic.volume = .1;
-    }
-    //loop background music
-    backgroundMusic.addEventListener('ended', function () {
-        if (toggle_music == "False") {
-            backgroundMusic.play();
-            backgroundMusic.volume = .1;
-        }
-    })
 }());

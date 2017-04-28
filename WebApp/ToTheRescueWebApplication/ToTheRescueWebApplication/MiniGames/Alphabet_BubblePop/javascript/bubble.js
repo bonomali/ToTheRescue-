@@ -10,6 +10,7 @@
     var soundPath = '../../MiniGames/Alphabet_BubblePop/sounds/';
     var audioClips;
     var bubbleImages;
+    var b1, b2, b3, b4, b5, b6, audioInstructions, popped, bubbles_sound, backgroundMusic, endOfGame; //audio
 
     if(difficulty_level == 2) {
         audioClips = [soundPath + "d_recording.mp3", soundPath + "j_recording.mp3", soundPath + "k_recording.mp3",
@@ -61,43 +62,43 @@
     var score = 0;
 
     //bubble sounds
-    var b1 = new Audio()
-    b1.src = audioClips[index1];
-    var b2 = new Audio()
-    b2.src = audioClips[index2];
-    var b3 = new Audio()
-    b3.src = audioClips[index3];
-    var b4 = new Audio()
-    b4.src = audioClips[index4];
-    var b5 = new Audio()
-    b5.src = audioClips[index5];
-    var b6 = new Audio()                //target letter
-    b6.src = audioClips[index6];
+    var createAudio = function () {
+        b1 = new WebAudioAPISound(audioClips[index1], { loop: false });
+        b1.setVolume(70);
+        b2 = new WebAudioAPISound(audioClips[index2], { loop: false });
+        b2.setVolume(70);
+        b3 = new WebAudioAPISound(audioClips[index3], { loop: false });
+        b3.setVolume(70);
+        b4 = new WebAudioAPISound(audioClips[index4], { loop: false });
+        b4.setVolume(70);
+        b5 = new WebAudioAPISound(audioClips[index5], { loop: false });
+        b5.setVolume(70);
+        b6 = new WebAudioAPISound(audioClips[index6], { loop: false });
+        b6.setVolume(70);
+        audioInstructions = new WebAudioAPISound(soundPath + "BubblePopInstructions.mp3", { loop: false });
+        audioInstructions.setVolume(70);
+        audioInstructions.onEnded = instructionsEnded;
+        popped = new WebAudioAPISound(soundPath + "bubble_pop.mp3", { loop: false });
+        popped.setVolume(70);
+        bubbles_sound = new WebAudioAPISound(soundPath + "bubbles.mp3", { loop: false });
+        bubbles_sound.setVolume(40);
+        endOfGame = new WebAudioAPISound(soundPath + "EndOfGame.mp3", {loop: false });
+        endOfGame.setVolume(70);
+        backgroundMusic = new WebAudioAPISound(soundPath + "background_music.mp3", { loop: true });
+        backgroundMusic.setVolume(30);
+        if(toggle_music == "False")
+            backgroundMusic.play(backgroundMusic);
+    }
 
-    var audioInstructions = new Audio();
-    audioInstructions.src = soundPath + "BubblePopInstructions.mp3"
-
-    var popped = new Audio();   //pop sound
-    popped.src = soundPath + "bubble_pop.mp3";
-
-    var bubbles_sound = new Audio();  //bubbles sound effect
-    bubbles_sound.src = soundPath + "bubbles.mp3";
-
-    //play generic instructions for game
-    audioInstructions.addEventListener('ended', function () {
-        b6.play();  //play target letter after generic instructions
-    });
     window.onload = function () {
-        audioInstructions.play();
+        createAudio();  //call function to create audio
+        audioInstructions.play(audioInstructions);
     }
 
-    //initalize and play background music
-    var backgroundMusic = new Audio();
-    backgroundMusic.src = soundPath + "background_music.mp3";
-    if (toggle_music == "False") {
-        backgroundMusic.play();
-        backgroundMusic.volume = .1;
-    }
+    //play instructions for game
+    instructionsEnded = function () {
+        b6.play(b6);  //play target letter after instructions
+    };
 
     //background image and bubble images
     images = {
@@ -171,7 +172,7 @@
 			    var i;
 			    for (i = 0; i < bubbles.length; i += 1) {
 			        if (bubbles[i].isPointInside(point) && bubbles[i].name == "targetBubble") {
-			            popped.play();
+			            popped.play(popped);
 			            bubbles[i].removeMotors();  //remove floating motion
 			            game.addMotor("alpha", {    //add fading motion
 			                object: bubbles[i],
@@ -183,15 +184,15 @@
 			        }
 			        else if (bubbles[i].isPointInside(point)) {
 			            if (bubbles[i].name == "bubble1")
-			                b1.play();
+			                b1.play(b1);
 			            else if (bubbles[i].name == "bubble2")
-			                b2.play();
+			                b2.play(b2);
 			            else if (bubbles[i].name == "bubble3")
-			                b3.play();
+			                b3.play(b3);
 			            else if (bubbles[i].name == "bubble4")
-			                b4.play();
+			                b4.play(b4);
 			            else if (bubbles[i].name == "bubble5")
-			                b5.play();
+			                b5.play(b5);
 			            score = score - 2;      //decrement score for incorrect bubble
 			        }
 			    }
@@ -262,24 +263,13 @@
         setInterval(function () {
             if (toggle_sound == "False") 
             {
-                bubbles_sound.volume = .2;
-                bubbles_sound.play();
+                bubbles_sound.play(bubbles_sound);
             }
          }, 10000);
 
-        //loop background music
-        backgroundMusic.addEventListener('ended', function () {
-            if (toggle_music == "False") {
-                backgroundMusic.play();
-                backgroundMusic.volume = .1;
-            }
-        });
-
         //end the game after time interval
         setTimeout(function GameOver() {
-            var endOfGame = new Audio();
-            endOfGame.src = soundPath + "EndOfGame.mp3";
-            endOfGame.play();
+            endOfGame.play(endOfGame);
 
             var finalScore; //calculate final score
             if (score >= 60)
