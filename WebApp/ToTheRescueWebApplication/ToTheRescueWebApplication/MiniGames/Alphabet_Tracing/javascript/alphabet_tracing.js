@@ -39,13 +39,12 @@
     //randomly choose index for tracing number
     var index = Math.floor((Math.random() * tracingImages.length)); //random number for array index
 
-    //bubble sounds
     var createAudio = function () {
         audioInstructions = new WebAudioAPISound('../../MiniGames/Alphabet_Tracing/sounds/' + "audio_instructions.mp3", { loop: false });
         audioInstructions.setVolume(70);
         audioInstructions.onEnded = instructionsEnded;
         audioInstructions2 = new WebAudioAPISound( '../../MiniGames/Alphabet_Tracing/sounds/' + "audioinstructions_Part2.mp3", { loop: false });
-        audioInstructions.setVolume(70);
+        audioInstructions2.setVolume(70);
         endOfGame = new WebAudioAPISound('../../MiniGames/Alphabet_Tracing/sounds/' + "praise_recording.mp3", { loop: false });
         endOfGame.setVolume(70);
         backgroundMusic = new WebAudioAPISound('../../MiniGames/Alphabet_Tracing/sounds/' + "background_music.mp3", { loop: true });
@@ -58,7 +57,6 @@
         createAudio();  //call function to create audio
         audioInstructions.play(audioInstructions);
     }
-    //play audio instructions and letter to trace
    
     instructionsEnded =  function () {
         letterAudio = new WebAudioAPISound(audioClips[index], { loop: false });
@@ -69,10 +67,6 @@
     letterEnded = function () {
         audioInstructions2.play(audioInstructions2);
     };
-    window.onload = function () {
-        createAudio();
-        audioInstructions.play(audioInstructions);
-    }
 
     var curColor = '#000';          //color user is drawing with
     var clickX = new Array();       //array of X-coordinates

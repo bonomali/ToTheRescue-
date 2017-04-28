@@ -6,6 +6,7 @@
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
     var audioClips;
     var tracingImages;
+    var audioInstructions, audioInstructions2, numberAudio, backgroundMusic, endOfGame; //audio
 
     if (difficulty_level == 2) {
         audioClips = [soundPath + "eleven_recording.mp3", soundPath + "twelve_recording.mp3", soundPath + "thirteen_recording.mp3",
@@ -34,23 +35,33 @@
     //randomly choose index for tracing number
     var index = Math.floor((Math.random() * tracingImages.length)); //random number for array index
 
-    //play audio instructions and number to trace
-    var audioInstructions = new Audio();
-    audioInstructions.src = soundPath + "audio_instructions.mp3";
-    var audioInstructions2 = new Audio();
-    audioInstructions2.src = soundPath + "audioinstructions_Part2.mp3";
-    var numberAudio = new Audio();
-
-    audioInstructions.addEventListener('ended', function () {
-        numberAudio.src = audioClips[index];
-        numberAudio.play();  
-    });
-    numberAudio.addEventListener('ended', function () {
-        audioInstructions2.play();
-    });
-    window.onload = function () {
-        audioInstructions.play();
+    var createAudio = function () {
+        audioInstructions = new WebAudioAPISound(soundPath + "audio_instructions.mp3", { loop: false });
+        audioInstructions.setVolume(70);
+        audioInstructions.onEnded = instructionsEnded;
+        audioInstructions2 = new WebAudioAPISound(soundPath + "audioinstructions_Part2.mp3", { loop: false });
+        audioInstructions2.setVolume(70);
+        endOfGame = new WebAudioAPISound(soundPath + "praise_recording.mp3", { loop: false });
+        endOfGame.setVolume(70);
+        backgroundMusic = new WebAudioAPISound(soundPath + "background_music.mp3", { loop: true });
+        backgroundMusic.setVolume(10);
+        if (toggle_music == "False")
+            backgroundMusic.play(backgroundMusic);
     }
+
+    window.onload = function () {
+        createAudio();  //call function to create audio
+        audioInstructions.play(audioInstructions);
+    }
+    instructionsEnded = function () {
+        numberAudio = new WebAudioAPISound(audioClips[index], { loop: false });
+        numberAudio.setVolume(80);
+        numberAudio.onEnded = numberEnded;
+        numberAudio.play(numberAudio);
+    };
+    numberEnded = function () {
+        audioInstructions2.play(audioInstructions2);
+    };
 
     var curColor = '#000';          //color user is drawing with
     var clickX = new Array();       //array of X-coordinates
@@ -119,9 +130,7 @@
         buttonsDiv.appendChild(buttonDone);
         buttonDone.addEventListener('click', function () {
             //Play end of game audio, save score to html element, and call end of game function
-            var endOfGame = new Audio();
-            endOfGame.src = soundPath + "praise_recording.mp3";
-            endOfGame.play();
+            endOfGame.play(endOfGame);
             document.getElementById('score').value = 2; //save score in html element
             EndofGame(); //function displays good job message and returns to map
         });
@@ -230,19 +239,4 @@
         }
     }
     initButtons(); //initalize buttons
-
-    //initalize and play background music
-    var backgroundMusic = new Audio();
-    backgroundMusic.src = soundPath + "background_music.mp3";
-    if (toggle_music == "False") {
-        backgroundMusic.play();
-        backgroundMusic.volume = .1;
-    }
-    //loop background music
-    backgroundMusic.addEventListener('ended', function () {
-        if (toggle_music == "False") {
-            backgroundMusic.play();
-            backgroundMusic.volume = .1;
-        }
-    })
 }());

@@ -10,6 +10,7 @@
     var soundPath = '../../MiniGames/MosquitoSwat_LetterSounds/sounds/';
     var audioClips;
     var mosquitoImages;
+    var m1, m2, m3, m4, m5, m6, audioInstructions, buzz, swat, backgroundMusic, endOfGame; //audio
 
     if (difficulty_level == 4) {
         audioClips = [soundPath + "d_sound.mp3", soundPath + "j_sound.mp3", soundPath + "k_sound.mp3", soundPath + "l_sound.mp3",
@@ -58,48 +59,47 @@
     var game, images;
     var score = 0;
 
-    //letter sounds
-    var m1 = new Audio()
-    m1.src = audioClips[index1];
-    var m2 = new Audio()
-    m2.src = audioClips[index2];
-    var m3 = new Audio()
-    m3.src = audioClips[index3];
-    var m4 = new Audio()
-    m4.src = audioClips[index4];
-    var m5 = new Audio()
-    m5.src = audioClips[index5];
-    var m6 = new Audio()                //target letter
-    m6.src = audioClips[index6];
+    var createAudio = function () {
+        m1 = new WebAudioAPISound(audioClips[index1], { loop: false });
+        m1.setVolume(80);
+        m2 = new WebAudioAPISound(audioClips[index2], { loop: false });
+        m2.setVolume(80);
+        m3 = new WebAudioAPISound(audioClips[index3], { loop: false });
+        m3.setVolume(80);
+        m4 = new WebAudioAPISound(audioClips[index4], { loop: false });
+        m4.setVolume(80);
+        m5 = new WebAudioAPISound(audioClips[index5], { loop: false });
+        m5.setVolume(80);
+        m6 = new WebAudioAPISound(audioClips[index6], { loop: false });
+        m6.setVolume(80);
+        audioInstructions = new WebAudioAPISound(soundPath + "audio_instructions.mp3", { loop: false });
+        audioInstructions.setVolume(70);
+        audioInstructions.onEnded = instructionsEnded;
+        buzz = new WebAudioAPISound(soundPath + "Mosquito_Buzzing.mp3", { loop: false });
+        buzz.setVolume(70);
+        swat = new WebAudioAPISound(soundPath + "Slap_Sound.mp3", { loop: false });
+        swat.setVolume(40);
+        endOfGame = new WebAudioAPISound(soundPath + "praise_recording.mp3", { loop: false });
+        endOfGame.setVolume(70);
+        backgroundMusic = new WebAudioAPISound(soundPath + "background_music.mp3", { loop: true });
+        backgroundMusic.setVolume(20);
+        if (toggle_music == "False")
+            backgroundMusic.play(backgroundMusic);
+    }
 
-    var audioInstructions = new Audio(); //audio instructions
-    audioInstructions.src = soundPath + "audio_instructions.mp3"
-
-    var buzz = new Audio(); //buzzing sound
-    buzz.src = soundPath + "Mosquito_Buzzing.mp3";
-    var swat = new Audio(); //swat sound for mosquito hit
-    swat.src = soundPath + "Slap_Sound.mp3";
+    window.onload = function () {
+        createAudio();  //call function to create audio
+        audioInstructions.play(audioInstructions);
+    }
 
     //play generic instructions for game
-    audioInstructions.addEventListener('ended', function () {
-        m6.play();   //play target letter after generic instructions
-    });
-    window.onload = function () {
-        audioInstructions.play();
-    }
-
-    if (toggle_sound == "False") {
-        buzz.play();
-        buzz.play();
-    }
-
-    //initalize and play background music
-    var backgroundMusic = new Audio();
-    backgroundMusic.src = soundPath + "background_music.mp3";
-    if (toggle_music == "False") {
-        backgroundMusic.play();
-        backgroundMusic.volume = .08;
-    }
+    instructionsEnded = function () {
+        m6.play(m6);   //play target letter after generic instructions
+        if (toggle_sound == "False") {
+            buzz.play(buzz);
+            buzz.play(buzz);
+        }
+    };
 
     //background image and mosquito images
     images = {
@@ -177,7 +177,7 @@
 			    var i;
 			    for (i = 0; i < mosquitoes.length; i += 1) {
 			        if (mosquitoes[i].isPointInside(point) && mosquitoes[i].name == "targetMosquito") {
-			            swat.play();    //play swatting sound
+			            swat.play(swat);    //play swatting sound
 			            showSwatter(mosquitoes[i].x, mosquitoes[i].y);  //call function to show fly swatter for correct hit
 			            mosquitoes[i].removeMotors();  //remove floating motion
 			            game.addMotor("y", {    //add dropping motion
@@ -190,15 +190,15 @@
 			        }
 			        else if (mosquitoes[i].isPointInside(point)) {
 			            if (mosquitoes[i].name == "mosquito1")
-			                m1.play();
+			                m1.play(m1);
 			            else if (mosquitoes[i].name == "mosquito2")
-			                m2.play();
+			                m2.play(m2);
 			            else if (mosquitoes[i].name == "mosquito3")
-			                m3.play();
+			                m3.play(m3);
 			            else if (mosquitoes[i].name == "mosquito4")
-			                m4.play();
+			                m4.play(m4);
 			            else if (mosquitoes[i].name == "mosquito5")
-			                m5.play();
+			                m5.play(m5);
 			            score = score - 2;      //decrement score for incorrect mosquito
 			        }
 			    }
@@ -283,21 +283,12 @@
         //play buzzing sound every 8000 ms
         setInterval(function () {
             if(toggle_sound == "False")
-                buzz.play();
+                buzz.play(buzz);
         }, 8000);
 
-        //loop background music
-        backgroundMusic.addEventListener('ended', function () {
-            if (toggle_music == "False") {
-                backgroundMusic.play();
-                backgroundMusic.volume = .08;
-            }
-        });
         //end the game after time interval
-        setTimeout(function GameOver() {
-            var endOfGame = new Audio();
-            endOfGame.src = soundPath + "praise_recording.mp3";
-            endOfGame.play();
+        setTimeout(function GameOver() {;
+            endOfGame.play(endOfGame);
 
             var finalScore; //calculate final score
             if (score >= 60)

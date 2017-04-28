@@ -4,7 +4,7 @@
     var soundPath = '../../MiniGames/Opposites_Matching/sounds/';
     var targetIndex, word1Index, word2Index;   //indicies for word cards
     var targetWord, matchingWord, correctAudio; //audio clips for repeating opposites when matched
-    var InstructionsPart1, InstructionsPart2, InstructionsPart3;
+    var InstructionsPart1, InstructionsPart2, InstructionsPart3, tryAgain, correct;
     var score = 0;
     var finalScore = 0;
 
@@ -104,11 +104,6 @@
     card3Image.style.width = '100%';
     card3Image.setAttribute('draggable', true);
 
-    var tryAgain = new Audio(); //try again audio for incorrect matching choice
-    tryAgain.src = soundPath + "tryAgain_recording.mp3";
-    var correct = new Audio();  //praise audio for correct matching choice
-    correct.src = soundPath + "praise_recording.mp3";
-
     //handle dropping action
     matchingRhyme.ondragover = function allowDrop(ev) {
         ev.preventDefault();
@@ -124,13 +119,36 @@
         if (data == "matchingImg") {        //increment score and play correct audio if correct card
             ev.target.appendChild(document.getElementById(data));
             score = score + 5;  //increment score for correct answer
-            setTimeout(function () { correct.play() }, 500);
+            setTimeout(function () { correct.play(correct) }, 500);
         }
         else {  //decrement score and play incorrect audio if incorrect card
             setTimeout(function () { tryAgain.play() }, 500);
             score = score - 2;  //decrement score for incorrect answer
         }
     }
+
+    var createAudio = function () {
+        InstructionsPart1 = new WebAudioAPISound(soundPath + "audio_instructionsPart1.mp3", { loop: false });
+        InstructionsPart1.setVolume(90);
+        InstructionsPart1.onEnded = instructions1Ended;
+        InstructionsPart3 = new WebAudioAPISound(soundPath + "audio_instructionsPart2.mp3", { loop: false });
+        InstructionsPart3.setVolume(90);
+        tryAgain = new WebAudioAPISound(soundPath + "tryAgain_recording.mp3", { loop: false });
+        tryAgain.setVolume(90);
+        correct = new WebAudioAPISound(soundPath + "praise_recording.mp3", {loop: false});
+        correct.setVolume(90);
+        correct.onEnded = correctEnded;
+        backgroundMusic = new WebAudioAPISound(soundPath + "background_music.mp3", { loop: true });
+        backgroundMusic.setVolume(5);
+        if (toggle_music == "False")
+            backgroundMusic.play(backgroundMusic);
+    }
+
+    window.onload = function () {
+        createAudio();  //call function to create audio
+        InitGame();
+    }
+
     //randomly choose and play all word cards
     function InitGame() {
         card3.appendChild(card3Image);
@@ -165,64 +183,44 @@
     }
     //play game intro and directions
     function GameIntro() {
-        InstructionsPart1 = new Audio();
-        InstructionsPart1.src = soundPath + "audio_instructionsPart1.mp3";
-        InstructionsPart2 = new Audio();
-        InstructionsPart2.src = soundsSet1[targetIndex];    //play target opposite word
-        InstructionsPart3 = new Audio();
-        InstructionsPart3.src = soundPath + "audio_instructionsPart2.mp3";
-        InstructionsPart1.addEventListener('ended', function () {
-            InstructionsPart2.play()
-        });
-        InstructionsPart2.addEventListener('ended', function () {
-            InstructionsPart3.play()
-        });
-        InstructionsPart1.play();
-    }
+        InstructionsPart1.play(InstructionsPart1);
+    };
+    instructions1Ended = function () {
+         InstructionsPart2 = new WebAudioAPISound(soundsSet1[targetIndex], { loop: false });
+         InstructionsPart2.setVolume(90);
+         InstructionsPart2.onEnded = instructions2Ended;
+         InstructionsPart2.play(InstructionsPart2)
+     };
+    instructions2Ended = function () {
+        InstructionsPart3.play(InstructionsPart3)
+    };
     //play audio to reinforce opposites match
-    targetWord = new Audio();
-    correct.addEventListener('ended', function () {
-        targetWord.src = soundsSet1[targetIndex];
-        targetWord.play();
-    });
-    correctAudio = new Audio();
-    correctAudio.src = soundPath + "oppositeOf_recording.mp3";
-    targetWord.addEventListener('ended', function () {
-        correctAudio.play();
-    });
-    matchingWord = new Audio();
-    correctAudio.addEventListener('ended', function () {
-        matchingWord.src = soundsSet2[targetIndex];
-        matchingWord.play();
-    });
-    matchingWord.addEventListener('ended', function () {
+    correctEnded = function () {
+        targetWord = new WebAudioAPISound(soundsSet1[targetIndex], { loop: false });
+        targetWord.setVolume(90);
+        targetWord.onEnded = targetEnded;
+        targetWord.play(targetWord);
+    };
+    targetEnded = function () {
+        correctAudio = new WebAudioAPISound(soundPath + "oppositeOf_recording.mp3", { loop: false });
+        correctAudio.setVolume(90);
+        correctAudio.onEnded = correctAudioEnded;
+        correctAudio.play(correctAudio);
+    };
+    correctAudioEnded = function () {
+        matchingWord = new WebAudioAPISound(soundsSet2[targetIndex], { loop: false });
+        matchingWord.setVolume(90);
+        matchingWord.onEnded = matchingEnded;
+        matchingWord.play(matchingWord);
+    };
+    matchingEnded = function () {
         setTimeout(InitGame(), 500);    //init a new game
-    });
-
-
-    window.onload = function () {
-        InitGame(); //initialize game
-    }
-
-    //initalize and play background music
-    var backgroundMusic = new Audio();
-    backgroundMusic.src = soundPath + "background_music.mp3";
-    if (toggle_music == "False") {
-        backgroundMusic.play();
-        backgroundMusic.volume = .05;
-    }
-    //loop background music
-    backgroundMusic.addEventListener('ended', function () {
-        if (toggle_music == "False") {
-            backgroundMusic.play();
-            backgroundMusic.volume = .05;
-        }
-    })
+    };
 
     setTimeout(function GameOver() {
-        InstructionsPart1.src = null  //set all insructions to null so don't play after game over
-        InstructionsPart2.src = null;
-        InstructionsPart3.src = null;
+        InstructionsPart1.setVolume(0);
+        InstructionsPart2.setVolume(0);
+        InstructionsPart3.setVolume(0);
 
         if (score >= 20)    //calculate final score
             finalScore = 5;

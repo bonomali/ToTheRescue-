@@ -13,17 +13,7 @@
     var eggs;           //slices for egg images
     var targetEgg;      //egg with correct word
     var index1, index2, index3, targetIndex;
-    var audioInstructions = new Audio(); //audio instructions
-    var audioWord = new Audio();
-    var pteroSound = new Audio();
-    var babyDino_sound = new Audio();
-    var momDino_sound = new Audio();
-    var eggCracking_sound = new Audio();
-
-    pteroSound.src = "../../MiniGames/Dino_SightWords/sounds/" + "Pterodactyl.mp3";
-    babyDino_sound.src = "../../MiniGames/Dino_SightWords/sounds/" + "babyDino_recording.mp3";
-    momDino_sound.src = "../../MiniGames/Dino_SightWords/sounds/" + "Tyrannosaurus.mp3";
-    eggCracking_sound.src = "../../MiniGames/Dino_SightWords/sounds/" + "Short_Egg_Cracking.mp3";
+    var audioInstructions, audioWord, pteroSound, babyDino_sound, momDino_sound, eggCracking_sound;
 
     //array of egg images
     eggImages = [imagePath + "at_egg.png", imagePath + "can_egg.png", imagePath + "fun_egg.png", imagePath + "go_egg.png",
@@ -78,12 +68,32 @@
     }
     generateRandom();   //generate random indexes for word eggs and create egg slices
 
-    //initalize and play background music
-    var backgroundMusic = new Audio();
-    backgroundMusic.src = "../../MiniGames/Dino_SightWords/sounds/" + "background_music.mp3";
-    if (toggle_music == "False") {
-        backgroundMusic.play();
-        backgroundMusic.volume = .15;
+    var createAudio = function () {
+        pteroSound = new WebAudioAPISound("../../MiniGames/Dino_SightWords/sounds/" + "Pterodactyl.mp3", { loop: false });
+        pteroSound.setVolume(70);
+        babyDino_sound = new WebAudioAPISound("../../MiniGames/Dino_SightWords/sounds/" + "babyDino_recording.mp3", { loop: false });
+        babyDino_sound.setVolume(70);
+        babyDino_sound.onEnded = babyEnded;
+        momDino_sound = new WebAudioAPISound("../../MiniGames/Dino_SightWords/sounds/" + "Tyrannosaurus.mp3", { loop: false });
+        momDino_sound.setVolume(70);
+        momDino_sound.onEnded = momEnded;
+        eggCracking_sound = new WebAudioAPISound("../../MiniGames/Dino_SightWords/sounds/" + "Short_Egg_Cracking.mp3", { loop: false });
+        eggCracking_sound.setVolume(70);
+        eggCracking_sound.onEnded = eggEnded;
+        audioInstructions = new WebAudioAPISound("../../MiniGames/Dino_SightWords/sounds/" + "audioInstructions_recording.mp3", { loop: false });
+        audioInstructions.setVolume(70);
+        audioInstructions.onEnded = instructionsEnded;
+        endOfGame = new WebAudioAPISound("../../MiniGames/Dino_SightWords/sounds/" + "praise_recording.mp3", { loop: false });
+        endOfGame.setVolume(70);
+        backgroundMusic = new WebAudioAPISound("../../MiniGames/Dino_SightWords/sounds/" + "background_music.mp3", { loop: true });
+        backgroundMusic.setVolume(20);
+        if (toggle_music == "False")
+            backgroundMusic.play(backgroundMusic);
+    }
+
+    window.onload = function () {
+        createAudio();  //call function to create audio
+        audioInstructions.play(audioInstructions);
     }
 
     images = {
@@ -181,8 +191,7 @@
         //play audio instructions
         playAudioInstructions = function () {
             //play audio instructions and audio of each word
-            audioInstructions.src = "../../MiniGames/Dino_SightWords/sounds/" + "audioInstructions_recording.mp3";
-            audioInstructions.play();
+            audioInstructions.play(audioInstructions);
         },
         //destroy egg slices and remove from memory
         destroyEggs = function () {
@@ -198,8 +207,8 @@
                     correct = true;
 
                     if (toggle_sound == "True")
-                        eggCracking_sound.volume = 0;
-                    eggCracking_sound.play();
+                        eggCracking_sound.setVolume(0);
+                    eggCracking_sound.play(eggCracking_sound);
                     game.stage.addView(hatching);   //add hatched egg to view
                     hatching.x = wordEggs[i].x;
                     hatching.y = wordEggs[i].y;
@@ -209,12 +218,21 @@
                 {
                     wordAudio = new Audio();    //play word audio for incorrect choice
                     if (wordEggs[i].name == "egg1")
-                        wordAudio.src = wordSounds[index1];
+                    {
+                        wordAudio = new WebAudioAPISound(wordSounds[index1], { loop: false });
+                        wordAudio.setVolume(70);
+                    }
                     else if (wordEggs[i].name == "egg2")
-                        wordAudio.src = wordSounds[index2];
+                    {
+                        wordAudio = new WebAudioAPISound(wordSounds[index2], { loop: false });
+                        wordAudio.setVolume(70);
+                    }
                     else
-                        wordAudio.src = wordSounds[index3];
-                    wordAudio.play()
+                    {
+                        wordAudio = new WebAudioAPISound(wordSounds[index3], { loop: false });
+                        wordAudio.setVolume(70);
+                    }
+                    wordAudio.play(wordAudio)
                     score = score - 2;  //decrement for wrong answer
                 }
             }
@@ -222,37 +240,43 @@
         //add an event listener for egg taps
         game.controller.addEventListener("tap", eggTapped);
         loadEggImages();         //load egg images
-        window.onload = function () {
-            playAudioInstructions(); //play audio instructions
-        }
 
         setInterval(function () {
             if(toggle_sound == "False")
-                pteroSound.play();
+                pteroSound.play(pteroSound);
         }, 15000);
 
-        audioInstructions.addEventListener('ended', function () {
+        instructionsEnded = function () {
             if (targetIndex == 0)
-                audioWord.src = wordSounds[index1];
+            {
+                audioWord = new WebAudioAPISound(wordSounds[index1], { loop: false });
+                audioWord.setVolume(70);
+            }
             else if (targetIndex == 1)
-                audioWord.src = wordSounds[index2];
+            {
+                audioWord = new WebAudioAPISound(wordSounds[index2], { loop: false });
+                audioWord.setVolume(70);
+            }
             else
-                audioWord.src = wordSounds[index3];
+            {
+                audioWord = new WebAudioAPISound(wordSounds[index3], { loop: false });
+                audioWord.setVolume(70);
+            }
            
-            audioWord.play();   //play target word after generic instructions
-        });
-        eggCracking_sound.addEventListener('ended', function () {
+            audioWord.play(audioWord);   //play target word after generic instructions
+        };
+        eggEnded = function () {
             hatching.setSlice("hatched");   //show hatched egg
             if (toggle_sound == "True")
-                babyDino_sound.volume = 0;
-            babyDino_sound.play();   //play baby dino sound after egg cracking sound
-        });
-        babyDino_sound.addEventListener('ended', function () {
+                babyDino_sound.setVolume(0);
+            babyDino_sound.play(babyDino_sound);   //play baby dino sound after egg cracking sound
+        };
+        babyEnded = function () {
             if (toggle_sound == "True")
                 momDino_sound.volume = 0;
             momDino_sound.play();   //play mom dino sound after baby
-        });
-        momDino_sound.addEventListener('ended', function () {
+        };
+        momEnded = function () {
             destroyEggs();
             wordEggs.length = 0;    //clear word eggs list
             game.stage.removeView(hatching);
@@ -260,26 +284,16 @@
             generateRandom();
             loadEggImages();
             playAudioInstructions();
-        })
-    };
-
-    //loop background music
-    backgroundMusic.addEventListener('ended', function () {
-        if (toggle_music == "False") {
-            backgroundMusic.play();
-            backgroundMusic.volume = .15;
         }
-    });
+    };
 
     //end the game after time interval
     setTimeout(function GameOver() {
-        audioInstructions.src = null;   //set sounds to null so don't play after game over
-        babyDino_sound.src = null;
-        momDino_sound.src = null;
+        audioInstructions.setVolume(0);   //set sounds to null so don't play after game over
+        babyDino_sound.setVolume(0);
+        momDino_sound.setVolume(0);
 
-        var endOfGame = new Audio();
-        endOfGame.src = "../../MiniGames/Dino_SightWords/sounds/" + "praise_recording.mp3";
-        endOfGame.play();
+        endOfGame.play(endOfGame);
 
         var finalScore; //calculate final score
         if (score >= 30)
