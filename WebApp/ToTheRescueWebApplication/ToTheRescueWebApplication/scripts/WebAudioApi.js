@@ -115,10 +115,15 @@ WebAudioAPISound.prototype = {
     translateVolume: function (volume, inverse) {
         return inverse ? volume * 100 : volume / 100;
     },
+
+    //set this equal to a function that handles what you want
+    //to do once the audio ended
+    onEnded: null,
+
     makeSource: function (buffer) {
         var source = this.manager.context.createBufferSource();
+        source.onended = this.onEnded;
         var gainNode = this.manager.context.createGain();
-        //gainNode.gain.value = this.volume;
         gainNode.gain.value = this.volume ? this.volume : 0.5
         source.buffer = buffer;
         source.connect(gainNode);

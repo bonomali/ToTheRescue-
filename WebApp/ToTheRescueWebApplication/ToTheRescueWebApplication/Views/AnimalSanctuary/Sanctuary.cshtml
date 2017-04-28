@@ -185,7 +185,7 @@
         {
             var backgroundMusic = new WebAudioAPISound("../Audio/Happy-Music.mp3", { loop: true });
             backgroundMusic.setVolume(10);
-            backgroundMusic.play();
+            backgroundMusic.play(backgroundMusic);
         }
 
         main();
