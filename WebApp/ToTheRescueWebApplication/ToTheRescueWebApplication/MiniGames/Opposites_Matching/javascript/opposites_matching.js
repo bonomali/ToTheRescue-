@@ -122,7 +122,7 @@
             setTimeout(function () { correct.play(correct) }, 500);
         }
         else {  //decrement score and play incorrect audio if incorrect card
-            setTimeout(function () { tryAgain.play() }, 500);
+            setTimeout(function () { tryAgain.play(tryAgain) }, 500);
             score = score - 2;  //decrement score for incorrect answer
         }
     }

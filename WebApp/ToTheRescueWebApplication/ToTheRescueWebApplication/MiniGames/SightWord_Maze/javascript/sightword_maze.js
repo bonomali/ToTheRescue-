@@ -4,12 +4,7 @@
     var soundPath = '../../MiniGames/SightWord_Maze/sounds/';
     var counter = -1;   //keep track of which word in maze the pup is on
     var score = 0;
-    var audioInstructions = new Audio();
-    audioInstructions.src = soundPath + "audio_instructions.mp3";
-    var endOfGame = new Audio();
-    var correctWord = new Audio();
-    var wrongWay = new Audio();
-    wrongWay.src = soundPath + "bark.mp3";
+    var audioInstructions, endOfGame, correctWord, wrongWay;
 
     words = ["at", "can", "in", "big", "me", "not", "on", "see", "the", "up"];
     wordSounds = [soundPath + "at_recording.mp3", soundPath + "can_recording.mp3", soundPath + "in_recording.mp3",
@@ -17,11 +12,46 @@
         soundPath + "on_recording.mp3", soundPath + "see_recording.mp3", soundPath + "the_recording.mp3",
         soundPath + "up_recording.mp3"];
       
+    var createAudio = function () {
+        audioInstructions = new WebAudioAPISound(soundPath + "audio_instructions.mp3", { loop: false });
+        audioInstructions.setVolume(70);
+        audioInstructions.onEnded = instructionsEnded;
+        wrongWay = new WebAudioAPISound(soundPath + "bark.mp3", { loop: false });
+        wrongWay.setVolume(70);
+        endOfGame = new WebAudioAPISound(soundPath + "puppy_barking.mp3", { loop: false });
+        endOfGame.setVolume(70);
+        endOfGame.onEnded = gameEnded;
+        backgroundMusic = new WebAudioAPISound(soundPath + "happy_backgroundMusic.mp3", { loop: true });
+        backgroundMusic.setVolume(10);
+        if (toggle_music == "False")
+            backgroundMusic.play(backgroundMusic);
+    }
+
+    window.onload = function () {
+        createAudio();  //call function to create audio
+        audioInstructions.play(audioInstructions);
+    }
+
+    instructionsEnded = function () {
+        correctWord.play(correctWord);
+    };
+
+    //handle game over logic, score, call game over div
+    gameEnded = function () {
+        var finalScore = -5;
+        if (score > 80) { finalScore = 5; }
+        else if (score > 60) { finalScore = 3; }
+        else if (score > 40) { finalScore = 0; }
+
+        document.getElementById('score').value = finalScore; //save score in html element
+        EndofGame(); //function displays good job message and returns to map
+    };
 
     //randomly select indecies for target word and for three other words for maze
     var targetIndex = Math.floor((Math.random() * words.length)); //random number for array index
     var targetWord = words[targetIndex];    //target word for maze
-    correctWord.src = wordSounds[targetIndex];  //sound of target word
+    correctWord = new WebAudioAPISound(wordSounds[targetIndex], { loop: false });
+    correctWord.setVolume(70);
 
     var index1 = Math.floor((Math.random() * words.length)); //random number for array index
     while (index1 == targetIndex)
@@ -425,7 +455,7 @@
             dog.style.left = '20%';
             dog.style.top = '87%';
             counter = 18;
-            correctWord.play();
+            correctWord.play(correctWord);
             score = score + 5;
         }
     });
@@ -434,7 +464,7 @@
             dog.style.top = '87%';
             dog.style.left = '35%';
             counter = 17;
-            correctWord.play();
+            correctWord.play(correctWord);
             score = score + 5;
         }
     });
@@ -443,7 +473,7 @@
             dog.style.top = '87%';
             dog.style.left = '50%';
             counter = 16;
-            correctWord.play();
+            correctWord.play(correctWord);
             score = score + 5;
         }
     });
@@ -452,7 +482,7 @@
             dog.style.left = '62%';
             dog.style.top = '82%';
             counter = 15;
-            correctWord.play();
+            correctWord.play(correctWord);
             score = score + 5;
         }
     });
@@ -461,7 +491,7 @@
             dog.style.left = '47%';
             dog.style.top = '70%';
             counter = 14;
-            correctWord.play();
+            correctWord.play(correctWord);
             score = score + 5;
         }
     });
@@ -470,7 +500,7 @@
             dog.style.left = '62%';
             dog.style.top = '64%';
             counter = 13;
-            correctWord.play();
+            correctWord.play(correctWord);
             score = score + 5;
         }
     });
@@ -479,7 +509,7 @@
             dog.style.left = '77%';
             dog.style.top = '64%';
             counter = 12;
-            correctWord.play();
+            correctWord.play(correctWord);
             score = score + 5;
         }
     });
@@ -489,7 +519,7 @@
             dog.style.left = '77%';
             dog.style.top = '50%';
             counter = 11;
-            correctWord.play();
+            correctWord.play(correctWord);
             score = score + 5;
         }
     });
@@ -498,6 +528,7 @@
             dog.style.left = '62%';
             dog.style.top = '50%';
             counter = 10;
+            correctWord.play(correctWord);
         }
     });
     $(text9).click(function () {
@@ -505,7 +536,7 @@
             dog.style.left = '47%';
             dog.style.top = '50%';
             counter = 9;
-            correctWord.play();
+            correctWord.play(correctWord);
             score = score + 5;
         }
     });
@@ -514,7 +545,7 @@
             dog.style.left = '47%';
             dog.style.top = '33%';
             counter = 8;
-            correctWord.play();
+            correctWord.play(correctWord);
             score = score + 5;
         }
     });
@@ -523,7 +554,7 @@
             dog.style.left = '47%';
             dog.style.top = '15%';
             counter = 7;
-            correctWord.play();
+            correctWord.play(correctWord);
             score = score + 5;
         }
     });
@@ -532,7 +563,7 @@
             dog.style.left = '25%';
             dog.style.top = '15%';
             counter = 6;
-            correctWord.play();
+            correctWord.play(correctWord);
             score = score + 5;
         }
     });
@@ -541,7 +572,7 @@
             dog.style.left = '5%';
             dog.style.top = '15%';
             counter = 5;
-            correctWord.play();
+            correctWord.play(correctWord);
             score = score + 5;
         }
     });
@@ -551,7 +582,7 @@
             dog.style.left = '5%';
             dog.style.top = '1%';
             counter = 4;
-            correctWord.play();
+            correctWord.play(correctWord);
             score = score + 5;
         }
     });
@@ -560,7 +591,7 @@
             dog.style.left = '25%';
             dog.style.top = '1%';
             counter = 3;
-            correctWord.play();
+            correctWord.play(correctWord);
             score = score + 5;
         }
     });
@@ -569,7 +600,7 @@
             dog.style.left = '45%';
             dog.style.top = '1%';
             counter = 2;
-            correctWord.play();
+            correctWord.play(correctWord);
             score = score + 5;
         }
     });
@@ -577,58 +608,25 @@
         if (counter == 2) {
             dog.style.left = '80%';
             dog.style.top = '3%';
-            endOfGame.src = soundPath + "puppy_barking.mp3";
-            endOfGame.play();
+            endOfGame.play(endOfGame);
         }
     });
     $(text23).click(function () {
         if (counter == 12) {
             score = score - 10;
-            wrongWay.play();
+            wrongWay.play(wrongWay);
         }
     });
     $(text22).click(function () {
         if (counter == 11) {
             score = score - 10;
-            wrongWay.play();
+            wrongWay.play(wrongWay);
         }
     });
     $(text30).click(function () {
         if (counter == 8 || counter == 7) {
             score = score - 10;
-            wrongWay.play();
+            wrongWay.play(wrongWay);
         }
     });
-
-    endOfGame.addEventListener("ended", function () {
-        var finalScore = -5;
-        if (score > 80) { finalScore = 5; }
-        else if (score > 60) { finalScore = 3; }
-        else if (score > 40) { finalScore = 0; }
-
-        document.getElementById('score').value = finalScore; //save score in html element
-        EndofGame(); //function displays good job message and returns to map
-    });
-
-    window.onload = function () {
-        audioInstructions.play();
-    }
-    audioInstructions.addEventListener("ended", function() {
-        correctWord.play();
-    });
-
-    //initalize and play background music
-    var backgroundMusic = new Audio();
-    backgroundMusic.src = soundPath + "happy_backgroundMusic.mp3";
-    if (toggle_music == "False") {
-        backgroundMusic.play();
-        backgroundMusic.volume = .075;
-    }
-    //loop background music
-    backgroundMusic.addEventListener('ended', function () {
-        if (toggle_music == "False") {
-            backgroundMusic.play();
-            backgroundMusic.volume = .075;
-        }
-    })
 }());

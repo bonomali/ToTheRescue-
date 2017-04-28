@@ -2,10 +2,7 @@
     var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
     var imagePath = '../../MiniGames/Shape_ColoringBook/images/';
     var soundPath = '../../MiniGames/Shape_ColoringBook/sounds/';
-    var audioInstructions = new Audio();
-    audioInstructions.src = soundPath + "audioInstructions.mp3";
-    var audioInstructions2 = new Audio();
-    audioInstructions2.src = soundPath + "audioinstructions_Part2.mp3";
+    var audioInstructions, audioInstructions2, numberAudio, backgroundMusic, endOfGame; //audio
 
     //arrays containing paths to audio files and image files for shape outlines
     var audioClips = [soundPath + "circle_recording.mp3", soundPath + "diamond_recording.mp3", soundPath + "heart_recording.mp3",
@@ -25,26 +22,49 @@
     //randomly choose index for coloring shape
     var index = Math.floor((Math.random() * ShapeImages.length)); //random number for array index
     
-    //play audio shape name and fact if applicable
-    var shapeName = new Audio();
-    shapeName.src = audioClips[index];
-    var shapeFact = new Audio();
+    var createAudio = function () {
+        audioInstructions = new WebAudioAPISound(soundPath + "audioInstructions.mp3", { loop: false });
+        audioInstructions.setVolume(70);
+        audioInstructions.onEnded = instructionsEnded;
+        audioInstructions2 = new WebAudioAPISound(soundPath + "audioInstructions_Part2.mp3", { loop: false });
+        audioInstructions2.setVolume(70);
+        endOfGame = new WebAudioAPISound(soundPath + "praise_recording.mp3", { loop: false });
+        endOfGame.setVolume(70);
+        endOfGame.onEnded = endGameEnded;
+        backgroundMusic = new WebAudioAPISound(soundPath + "background_music.mp3", { loop: true });
+        backgroundMusic.setVolume(10);
+        if (toggle_music == "False")
+            backgroundMusic.play(backgroundMusic);
+    }
 
-    audioInstructions.addEventListener('ended', function () { shapeName.play() })
-    shapeName.addEventListener('ended', function () {
+    window.onload = function () {
+        createAudio();  //call function to create audio
+        audioInstructions.play(audioInstructions);
+    }
+    instructionsEnded = function () {
+        shapeName = new WebAudioAPISound(audioClips[index], { loop: false });
+        shapeName.setVolume(80);
+        shapeName.onEnded = shapeNameEnded;
+        shapeName.play(shapeName);
+    };
+    shapeNameEnded = function () {
         if (audioFact[index] != null) {
-            shapeFact.src = audioFact[index];
-            shapeFact.play();  //play shape fact after shape name (if applicable)
+            shapeFact = new WebAudioAPISound(audioFact[index], { loop: false });
+            shapeFact.setVolume(80);
+            shapeFact.onEnded = shapeFactEnded;
+            shapeFact.play(shapeFact);
         }
         else
-            audioInstructions2.play();
-    });
-    shapeFact.addEventListener('ended', function () {
-        audioInstructions2.play();
-    });
-    window.onload = function () {
-        audioInstructions.play();
-    }
+            audioInstructions2.play(audioInstructions2);
+    };
+    shapeFactEnded = function () {
+        audioInstructions2.play(audioInstructions2);
+    };
+    endGameEnded = function () {
+        repeatName = new WebAudioAPISound(audioClips[index], { loop: false });
+        repeatName.setVolume(80);
+        repeatName.play(repeatName);
+    };
 
     var colorPurple = '#cb3594';
     var colorGreen = '#659b41';
@@ -56,7 +76,7 @@
     var toolEraser = 'eraser';
     var toolCrayon = 'crayon';
     var toolMarker = 'marker';
-    var tool = new Audio(); //audio to play when a tool is selected
+    var tool;                       //audio to play when a tool is selected
     var curColor = colorPurple;     //current color user is drawing with
     var clickColor = new Array();   //array of colors for clicks
     var curTool = toolCrayon;       //current tool user is drawing with
@@ -113,8 +133,9 @@
         buttonPurple.setAttribute('class', 'toolButton');
         buttonsDiv.appendChild(buttonPurple);
         buttonPurple.addEventListener('click', function () {
-            tool.src = soundPath + 'purple_recording.mp3';
-            tool.play();
+            tool = new WebAudioAPISound(soundPath + 'purple_recording.mp3', { loop: false });
+            tool.setVolume(70);
+            tool.play(tool);
             curColor = colorPurple;
             if (curTool == toolEraser)  //change tool back to crayon if eraser
                 curTool = toolCrayon;
@@ -127,8 +148,9 @@
         buttonGreen.setAttribute('class', 'toolButton');
         buttonsDiv.appendChild(buttonGreen);
         buttonGreen.addEventListener('click', function () {
-            tool.src = soundPath + 'green_recording.mp3';
-            tool.play();
+            tool = new WebAudioAPISound(soundPath + 'green_recording.mp3', { loop: false });
+            tool.setVolume(70);
+            tool.play(tool);
             curColor = colorGreen;
             if (curTool == toolEraser)  //change tool back to crayon if eraser
                 curTool = toolCrayon;
@@ -142,8 +164,9 @@
         buttonYellow.setAttribute('class', 'toolButton');
         buttonsDiv.appendChild(buttonYellow);
         buttonYellow.addEventListener('click', function () {
-            tool.src = soundPath + 'yellow_recording.mp3';
-            tool.play();
+            tool = new WebAudioAPISound(soundPath + 'yellow_recording.mp3', { loop: false });
+            tool.setVolume(70);
+            tool.play(tool);
             curColor = colorYellow;
             if (curTool == toolEraser)  //change tool back to crayon if eraser
                 curTool = toolCrayon;
@@ -156,8 +179,9 @@
         buttonBlue.setAttribute('class', 'toolButton');
         buttonsDiv.appendChild(buttonBlue);
         buttonBlue.addEventListener('click', function () {
-            tool.src = soundPath + 'blue_recording.mp3';
-            tool.play();
+            tool = new WebAudioAPISound(soundPath + 'blue_recording.mp3', { loop: false });
+            tool.setVolume(70);
+            tool.play(tool);
             curColor = colorBlue;
             if (curTool == toolEraser)  //change tool back to crayon if eraser
                 curTool = toolCrayon;
@@ -171,8 +195,9 @@
         buttonBlack.setAttribute('class', 'toolButton');
         buttonsDiv.appendChild(buttonBlack);
         buttonBlack.addEventListener('click', function () {
-            tool.src = soundPath + 'black_recording.mp3';
-            tool.play();
+            tool = new WebAudioAPISound(soundPath + 'black_recording.mp3', { loop: false });
+            tool.setVolume(70);
+            tool.play(tool);
             curColor = colorBlack;
             if (curTool == toolEraser)  //change tool back to crayon if eraser
                 curTool = toolCrayon;
@@ -186,8 +211,9 @@
         buttonOrange.setAttribute('class', 'toolButton');
         buttonsDiv.appendChild(buttonOrange);
         buttonOrange.addEventListener('click', function () {
-            tool.src = soundPath + 'orange_recording.mp3';
-            tool.play();
+            tool = new WebAudioAPISound(soundPath + 'orange_recording.mp3', { loop: false });
+            tool.setVolume(70);
+            tool.play(tool);
             curColor = colorOrange;
             if (curTool == toolEraser)  //change tool back to crayon if eraser
                 curTool = toolCrayon;
@@ -201,8 +227,9 @@
         buttonRed.setAttribute('class', 'toolButton');
         buttonsDiv.appendChild(buttonRed);
         buttonRed.addEventListener('click', function () {
-            tool.src = soundPath + 'red_recording.mp3';
-            tool.play();
+            tool = new WebAudioAPISound(soundPath + 'red_recording.mp3', { loop: false });
+            tool.setVolume(70);
+            tool.play(tool);
             curColor = colorRed;
             if (curTool == toolEraser)  //change tool back to crayon if eraser
                 curTool = toolCrayon;
@@ -216,8 +243,9 @@
         buttonCrayon.setAttribute('class', 'toolButton');
         buttonsDiv.appendChild(buttonCrayon);
         buttonCrayon.addEventListener('click', function () {
-            tool.src = soundPath + 'crayon_recording.mp3';
-            tool.play();
+            tool = new WebAudioAPISound(soundPath + 'crayon_recording.mp3', { loop: false });
+            tool.setVolume(70);
+            tool.play(tool);
             curTool = toolCrayon;
         });
         buttonCrayon.style.backgroundImage = 'url(' + imagePath + 'crayon-image.jpg)';
@@ -229,8 +257,9 @@
         buttonMarker.setAttribute('class', 'toolButton');
         buttonsDiv.appendChild(buttonMarker);
         buttonMarker.addEventListener('click', function () {
-            tool.src = soundPath + 'marker_recording.mp3';
-            tool.play();
+            tool = new WebAudioAPISound(soundPath + 'marker_recording.mp3', { loop: false });
+            tool.setVolume(70);
+            tool.play(tool);
             curTool = toolMarker;
         });
         buttonMarker.style.backgroundImage = 'url(' + imagePath + 'marker-image.jpg)';
@@ -242,8 +271,9 @@
         buttonEraser.setAttribute('class', 'toolButton');
         buttonsDiv.appendChild(buttonEraser);
         buttonEraser.addEventListener('click', function () {
-            tool.src = soundPath + 'eraser_recording.mp3';
-            tool.play();
+            tool = new WebAudioAPISound(soundPath + 'eraser_recording.mp3', { loop: false });
+            tool.setVolume(70);
+            tool.play(tool);
             curTool = toolEraser;
         });
         buttonEraser.style.backgroundImage = 'url(' + imagePath + 'eraser-image.png)';
@@ -255,14 +285,7 @@
         buttonsDiv.appendChild(buttonDone);
         buttonDone.addEventListener('click', function () {
             //Play end of game audio, save score to html element, and call end of game function
-            var endOfGame = new Audio();
-            endOfGame.src = soundPath + "praise_recording.mp3";
-            endOfGame.addEventListener('ended', function () {
-                var repeatName = new Audio();
-                repeatName.src = audioClips[index];
-                repeatName.play();
-            });
-            endOfGame.play();
+            endOfGame.play(endOfGame);
             document.getElementById('score').value = 2; //save score in html element
             EndofGame(); //function displays good job message and returns to map
         });
@@ -391,19 +414,4 @@
         }
     }
     initButtons(); //initalize buttons
-
-    //initalize and play background music
-    var backgroundMusic = new Audio();
-    backgroundMusic.src = soundPath + "background_music.mp3";
-    if (toggle_music == "False") {
-        backgroundMusic.play();
-        backgroundMusic.volume = .15;
-    }
-    //loop background music
-    backgroundMusic.addEventListener('ended', function () {
-        if (toggle_music == "False") {
-            backgroundMusic.play();
-            backgroundMusic.volume = .15;
-        }
-    })
 }());
