@@ -4,7 +4,6 @@
 
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
     var toggle_sound = document.getElementById('minigameScript').getAttribute('toggleSound');
-    var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
 
     var imagePath = "../../MiniGames/BeginningLetterSounds_Racing/images/";
     var soundPath = "../../MiniGames/BeginningLetterSounds_Racing/sounds/";
@@ -15,7 +14,14 @@
     var targetFlag;     //flag with correct word
     var index1, index2, index3, targetIndex;
     var f;  //flag slices
-    var letterSound, word1Audio, word2Audio, word3Audio, audioInstructions, carRacingAudio, carRevvingAudio, endAudio, tappedAudio;
+    var letterSound = new Audio();       //beginning letter sound audio
+    var word1Audio = new Audio();        //first word audio
+    var word2Audio = new Audio();        //second word audio
+    var word3Audio = new Audio();        //third word audio
+    var audioInstructions = new Audio(); //audio instructions
+    var carRacingAudio = new Audio();    //racing sound as car moves
+    var carRevvingAudio = new Audio();   //revving sound when light changes
+    var endAudio = new Audio();          //audio after round of game
 
     if (difficulty_level == 4) {
         //array of flag images
@@ -84,29 +90,6 @@
         targetFlag = f.getSlice("flag" + (targetIndex + 1));
     }
     generateRandom();   //generate random indexes for word flags and create flag slices
-
-    //create audio
-    var createAudio = function () {
-        audioInstructions = new WebAudioAPISound(soundPath + "audio_instructions.mp3", { loop: false });
-        audioInstructions.setVolume(70);
-        audioInstructions.onEnded = instructionsEnded;
-        carRevvingAudio = new WebAudioAPISound(soundPath + "revving_sound.mp3", { loop: false });
-        carRevvingAudio.setVolume(60);
-        carRacingAudio = new WebAudioAPISound(soundPath + "racing_sound.mp3", { loop: false });
-        carRacingAudio.setVolume(60);
-        endAudio = new WebAudioAPISound(soundPath + "endOfRace.mp3", { loop: false });
-        endAudio.setVolume(70);
-        endAudio.onEnded = audioEnded;
-        backgroundMusic = new WebAudioAPISound(soundPath + "background_music.mp3", { loop: true });
-        backgroundMusic.setVolume(10);
-        if (toggle_music == "False")
-            backgroundMusic.play(backgroundMusic);
-    }
-
-    window.onload = function () {
-        createAudio();  //call function to create audio
-        audioInstructions.play(audioInstructions);  //play instructions
-    }
 
     images = {
         width: 1100,
@@ -209,7 +192,8 @@
         //play audio insturctions
         playAudioInstructions = function () {
             //play audio instructions and audio of each word
-            audioInstructions.play(audioInstructions);
+            audioInstructions.src = soundPath + "audio_instructions.mp3";
+            audioInstructions.play();
         },
 
         //destroy flag slices and remove from memory
@@ -220,14 +204,16 @@
         //handle click on word flags
         flagTapped = function (point) {
             var correct = false;
+            carRevvingAudio.src = soundPath + "revving_sound.mp3";
+            var tappedAudio = new Audio();
 
             haltFlags();    //stop flag sounds and animations if user clicks ahead
 
             for (var i = 0; i < flags.length && correct == false; i++) {
                 //if the target flag is clicked: increment score, change color of light, destroy old flags, generate new flags
                 if (flags[i].isPointInside(point) && flags[i].name == targetFlag.name) {
-                    if(toggle_sound == "False")
-                        carRevvingAudio.play(carRevvingAudio);
+                    if (toggle_sound == "False")
+                        carRevvingAudio.play();
                     score = score + 5;
                     correct = true;
                     if (light.getSlice().name === "red")
@@ -251,35 +237,26 @@
                 else {
                     //play word audio for tapped flag
                     if (flags[i].isPointInside(point) && flags[i].name == "flag1")
-                    {
-                        tappedAudio = new WebAudioAPISound(wordSounds[index1], { loop: false });
-                        tappedAudio.setVolume(70);
-                        tappedAudio.play(tappedAudio);
-                    }
+                        tappedAudio.src = wordSounds[index1];
                     else if (flags[i].isPointInside(point) && flags[i].name == "flag2")
-                    {
-                        tappedAudio = new WebAudioAPISound(wordSounds[index2], { loop: false });
-                        tappedAudio.setVolume(70);
-                        tappedAudio.play(tappedAudio);
-                    }
+                        tappedAudio.src = wordSounds[index2];
                     else if (flags[i].isPointInside(point) && flags[i].name == "flag3")
-                    {
-                        tappedAudio = new WebAudioAPISound(wordSounds[index3], { loop: false });
-                        tappedAudio.setVolume(70);
-                        tappedAudio.play(tappedAudio);
-                    }
+                        tappedAudio.src = wordSounds[index3];
                 }
             }
             //if not target flag, provide encouragement and sound reminder
             if (correct == false) {
                 score = score - 2;  //decrement score for wrong answer
             }
+            if (tappedAudio != null)
+                tappedAudio.play();
         },
 
         //race car along screen
         moveCar = function () {
             if (toggle_sound == "False") {
-                carRacingAudio.play(carRacingAudio);
+                carRacingAudio.src = soundPath + "racing_sound.mp3"
+                carRacingAudio.play();
             }
 
             game.addMotor("x", {    //move car along x-axis until off screen
@@ -293,7 +270,8 @@
 
         //display racing flags and play praise audio after round
         roundOver = function () {
-            endAudio.play(endAudio);
+            endAudio.src = soundPath + "endOfRace.mp3";
+            endAudio.play();
 
             //display end of race checkered flag
             endFlag = BLOCKS.slice(images.checkeredFlag);
@@ -307,13 +285,13 @@
             //determine if game over or go to next round
             if ((score < 8 && counter >= 2) || counter == 5) {
                 var finalScore; //determine final score
-                if(score >= 45)
+                if (score >= 45)
                     finalScore = 5;
-                else if(score >= 30)
+                else if (score >= 30)
                     finalScore = 3;
-                else if(score >= 20)
+                else if (score >= 20)
                     finalScore = 0;
-                else if(score < 20)
+                else if (score < 20)
                     finalScore = -5;
 
                 car.destroy();      //destroy car and remove from memory
@@ -336,71 +314,55 @@
 
         //stops execution of flag sounds and motors if user clicks ahead
         haltFlags = function () {
-            //word1Audio.setVolume(-1);
-            //word2Audio.setVolume(-1);
+            word1Audio.pause();
+            word2Audio.pause();
         }
 
         //add an event listener for flag taps
         game.controller.addEventListener("tap", flagTapped);
-
-        //play words in sequential order after target letter played
-        letterEnded = function () {
-            word1Audio = new WebAudioAPISound(wordSounds[index1], { loop: false });
-            word1Audio.setVolume(70);
-            word1Audio.onEnded = word1Ended;
-            word1Audio.play(word1Audio);
+        //add event listeners for audio sounds
+        audioInstructions.addEventListener('ended', function () {
+            if (targetIndex == 0)
+                letterSound.src = letterSounds[index1];
+            else if (targetIndex == 1)
+                letterSound.src = letterSounds[index2];
+            else
+                letterSound.src = letterSounds[index3];
+            letterSound.play();
+        });
+        letterSound.addEventListener('ended', function () {
+            word1Audio.src = wordSounds[index1];
+            word1Audio.play()
             game.addMotor('angle', {
                 object: flag1,
                 duration: 800,
                 amount: 360
             })
-        };
-        word1Ended = function () {
-            word2Audio = new WebAudioAPISound(wordSounds[index2], { loop: false });
-            word2Audio.setVolume(70);
-            word2Audio.onEnded = word2Ended;
-            word2Audio.play(word2Audio)
+        });
+        word1Audio.addEventListener('ended', function () {
+            word2Audio.src = wordSounds[index2];
+            word2Audio.play()
             game.addMotor('angle', {
                 object: flag2,
                 duration: 800,
                 amount: 360
             })
-        };
-        word2Ended = function () {
-            word3Audio = new WebAudioAPISound(wordSounds[index3], { loop: false });
-            word3Audio.setVolume(70);
-            word3Audio.play(word3Audio)
+        });
+        word2Audio.addEventListener('ended', function () {
+            word3Audio.src = wordSounds[index3];
+            word3Audio.play()
             game.addMotor('angle', {
                 object: flag3,
                 duration: 800,
                 amount: 360
             })
-        };
-
-        //add event listeners for audio sounds
-        instructionsEnded = function () {
-            if (targetIndex == 0) {
-                letterSound = new WebAudioAPISound(letterSounds[index1], { loop: false });
-                letterSound.setVolume(70);
-                letterSound.onEnded = letterEnded;
-            }
-            else if (targetIndex == 1) {
-                letterSound = new WebAudioAPISound(letterSounds[index2], { loop: false });
-                letterSound.setVolume(70);
-                letterSound.onEnded = letterEnded;
-            }
-            else {
-                letterSound = new WebAudioAPISound(letterSounds[index3], { loop: false });
-                letterSound.setVolume(70);
-                letterSound.onEnded = letterEnded;
-            }
-            letterSound.play(letterSound);
-        };
-        audioEnded = function () {
+        });
+        endAudio.addEventListener('ended', function () {
             endFlag.destroy();  //destroy racing flags
             checkGameOver();    //check for game over or start new round
-        };
+        });
 
         loadFlagImages();        //load flag images
+        playAudioInstructions(); //play audio instructions
     };
 }());
