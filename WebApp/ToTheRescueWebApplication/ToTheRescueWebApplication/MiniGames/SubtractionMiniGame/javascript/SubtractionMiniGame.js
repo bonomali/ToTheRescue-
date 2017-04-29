@@ -447,7 +447,7 @@ function EndGame(SubtractionGame) {
 function Main() {
 
     var backgroundMusic = new WebAudioAPISound("../../Audio/backgroundMusic/bgSong4.mp3", { loop: true });
-    backgroundMusic.setVolume(0.1); 
+    backgroundMusic.setVolume(20); 
 
     //object that keeps track of all the important
     //information in the game

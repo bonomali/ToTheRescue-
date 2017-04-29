@@ -94,21 +94,22 @@ function EndGame(finished) {
     MakeUnDraggable();
 
     if (endGameFuncCalls === 1) {
+
+        var abcSong = new WebAudioAPISound("../../Audio/soundEffects/abcSong.mp3");
+        abcSong.setVolume(70);
+
+        abcSong.onEnded = function () {
+            if (musicToggle === "False")
+                backgroundMusic.play();
+            responsiveVoice.speak("Great Job!", "US English Female");
+            EndofGame();
+        }
+
         if (musicToggle === "False")
             backgroundMusic.stop();
 
-        //temporary abc song, will get an actual audio file in the future
-        responsiveVoice.speak("A, B, C, D, E, F, G, H, I, J, K, L M N O P, Q, R, S, T, U, V, W, X, Y and Z." +
-         "now I know my A B C's, next time will you sing with me!", "US English Female");
+        abcSong.play(abcSong);
     }
-
-    setTimeout(function () {
-        if (musicToggle === "False")
-            backgroundMusic.play(backgroundMusic);
-
-        //display the end of game stuff after the abc song is played
-        EndofGame();
-    }, 15000);
 
     var returnVal = 0;
 

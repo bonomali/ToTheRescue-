@@ -443,6 +443,10 @@ function Main() {
 
     CreateHtmlElements();
 
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        document.getElementById("header").style.fontSize = "150%";
+    }
+
     responsiveVoice.OnVoiceReady = function () {
         responsiveVoice.speak("Click the box that has the correct number of sea creatures.",
 		"US English Female");

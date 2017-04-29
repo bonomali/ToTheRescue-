@@ -405,6 +405,11 @@ function Main() {
 
     CreateHtmlElemets();
 
+    if (musicToggle === "False") {
+        //play background music
+        backgroundMusic.play(backgroundMusic);
+    }
+
     //if the user leaves the page
     window.onbeforeunload = function () {
         responsiveVoice.cancel(); //quit doing text to speech
@@ -412,11 +417,6 @@ function Main() {
     };
 
     window.onload = function () {
-        if (musicToggle === "False") {
-            //play background music
-            backgroundMusic.play();
-        }
-
         //play the instructions
         responsiveVoice.OnVoiceReady = function () {
             Shuffle(animalArr);

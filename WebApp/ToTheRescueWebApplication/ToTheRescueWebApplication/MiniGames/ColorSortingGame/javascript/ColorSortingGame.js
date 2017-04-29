@@ -487,6 +487,10 @@ function Main()
     //make the html elements
     CreateHtml();
 
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        document.getElementById("header").style.fontSize = "100%";
+    }
+
     window.onload = function () {
         //play the instructions
         responsiveVoice.OnVoiceReady = function () {

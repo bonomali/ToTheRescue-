@@ -213,7 +213,8 @@ function MakeShapes(difficulty) {
 
         IsClicked: function (mouseX, mouseY) {
             //true if clicked in the shape, false if not
-            return Math.sqrt((mouseX - this.x) * (mouseX - this.x) + (mouseY - this.y) * (mouseY - this.y)) < this.radius;
+
+            return Math.sqrt((mouseX - this.x) * (mouseX - this.x) + (mouseY - this.y) * (mouseY - this.y)) <= this.radius;
         }
     };
 
@@ -488,7 +489,7 @@ function Clicked(mouseX, mouseY, shapeArr)
 		else
 			tempY = mouseY - shapeArr[i].yIncrement;
 		
-		if ((shapeArr[i].IsClicked(mouseX, mouseY) && shapeArr[i].currentShape) === true || (shapeArr[i].IsClicked(tempX, tempY) && shapeArr[i].currentShape) === true)
+		if ((shapeArr[i].IsClicked(tempX, tempY) && shapeArr[i].currentShape) === true || (shapeArr[i].IsClicked(mouseX, mouseY) && shapeArr[i].currentShape) === true)
 		{
 		    if (soundToggle === "False") {
 		        //make a correct answer sound
@@ -647,7 +648,13 @@ function Main()
     var ctx = null;
 
     canvas = document.getElementById("canvas");
-	ctx = canvas.getContext("2d");
+    ctx = canvas.getContext("2d");
+
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        canvas.style.width = "76%";
+        canvas.style.marginLeft = "7%";
+        canvas.style.marginTop = "-1%";
+    }
 	
     //get the game's difficulty level and modify the dataset for that difficulty level
 	var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
