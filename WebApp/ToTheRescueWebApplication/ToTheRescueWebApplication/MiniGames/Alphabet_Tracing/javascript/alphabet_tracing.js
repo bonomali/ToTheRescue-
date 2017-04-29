@@ -2,6 +2,7 @@
     var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
     var imagePath = '../../MiniGames/Alphabet_Tracing/images/';
     var soundPath = '../../MiniGames/Alphabet_BubblePop/sounds/';
+    var soundPath2 = '../../MiniGames/Alphabet_Tracing/sounds/';
 
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
     var audioClips;
@@ -39,31 +40,34 @@
     //randomly choose index for tracing number
     var index = Math.floor((Math.random() * tracingImages.length)); //random number for array index
 
+    //create audio
     var createAudio = function () {
-        audioInstructions = new WebAudioAPISound('../../MiniGames/Alphabet_Tracing/sounds/' + "audio_instructions.mp3", { loop: false });
+        audioInstructions = new WebAudioAPISound(soundPath2 + "audio_instructions.mp3", { loop: false });
         audioInstructions.setVolume(70);
         audioInstructions.onEnded = instructionsEnded;
-        audioInstructions2 = new WebAudioAPISound( '../../MiniGames/Alphabet_Tracing/sounds/' + "audioinstructions_Part2.mp3", { loop: false });
+        audioInstructions2 = new WebAudioAPISound(soundPath2 + "audioinstructions_Part2.mp3", { loop: false });
         audioInstructions2.setVolume(70);
-        endOfGame = new WebAudioAPISound('../../MiniGames/Alphabet_Tracing/sounds/' + "praise_recording.mp3", { loop: false });
+        endOfGame = new WebAudioAPISound(soundPath2 + "praise_recording.mp3", { loop: false });
         endOfGame.setVolume(70);
-        backgroundMusic = new WebAudioAPISound('../../MiniGames/Alphabet_Tracing/sounds/' + "background_music.mp3", { loop: true });
-        backgroundMusic.setVolume(20);
+        backgroundMusic = new WebAudioAPISound(soundPath2 + "background_music.mp3", { loop: true });
+        backgroundMusic.setVolume(5);
         if (toggle_music == "False")
             backgroundMusic.play(backgroundMusic);
     }
 
     window.onload = function () {
         createAudio();  //call function to create audio
-        audioInstructions.play(audioInstructions);
+        audioInstructions.play(audioInstructions);  //play instructions
     }
-   
+    
+    //play audio of letter to trace
     instructionsEnded =  function () {
         letterAudio = new WebAudioAPISound(audioClips[index], { loop: false });
         letterAudio.setVolume(70);
         letterAudio.onEnded = letterEnded;
         letterAudio.play(letterAudio);
     };
+    //play second part of audio instructions
     letterEnded = function () {
         audioInstructions2.play(audioInstructions2);
     };

@@ -4,7 +4,7 @@
     var soundPath = '../../MiniGames/Pairs_Matching/sounds/';
     var targetIndex, word1Index, word2Index;   //indicies for word cards
     var targetWord, matchingWord, correctAudio; //audio clips for repeating pair when matched
-    var InstructionsPart1, InstructionsPart2, InstructionsPart3, tryAgain, correct;
+    var InstructionsPart1, InstructionsPart2, InstructionsPart3, tryAgain, correct;  //audio
     var score = 0;
     var finalScore = 0;
 
@@ -127,6 +127,7 @@
         }
     }
 
+    //create audio
     var createAudio = function () {
         InstructionsPart1 = new WebAudioAPISound(soundPath + "audio_instructionsPart1.mp3", { loop: false });
         InstructionsPart1.setVolume(90);
@@ -146,7 +147,7 @@
 
     window.onload = function () {
         createAudio();  //call function to create audio
-        InitGame();
+        InitGame();     //call function to initialize game and play instructions
     }
 
     //randomly choose and play all word cards
@@ -181,25 +182,36 @@
 
         GameIntro();    //call function to play directions
     }
+
     //play game intro and directions
     function GameIntro() {
         InstructionsPart1.play(InstructionsPart1);
+        correct.setVolume(-1);
+        tryAgain.setVolume(-1);
     };
+
+    //play target pair word (second part of instructions)
     instructions1Ended = function () {
         InstructionsPart2 = new WebAudioAPISound(soundsSet1[targetIndex], { loop: false });
         InstructionsPart2.setVolume(90);
         InstructionsPart2.onEnded = instructions2Ended;
         InstructionsPart2.play(InstructionsPart2)
     };
+
+    //play final part of instructions
     instructions2Ended = function () {
         InstructionsPart3.play(InstructionsPart3)
+        correct.setVolume(90);
+        tryAgain.setVolume(90);
     };
-    //play audio to reinforce opposites match
+
+    //play audio to reinforce pair match
     correctEnded = function () {
         targetWord = new WebAudioAPISound(soundsSet1[targetIndex], { loop: false });
         targetWord.setVolume(90);
         targetWord.onEnded = targetEnded;
         targetWord.play(targetWord);
+        tryAgain.setVolume(-1);
     };
     targetEnded = function () {
         correctAudio = new WebAudioAPISound(soundPath + "goesWith_recording.mp3", { loop: false });
@@ -212,14 +224,17 @@
         matchingWord.setVolume(90);
         matchingWord.onEnded = matchingEnded;
         matchingWord.play(matchingWord);
+        tryAgain.setVolume(90);
     };
+
     matchingEnded = function () {
         setTimeout(InitGame(), 500);    //init a new game
     };
+
     setTimeout(function GameOver() {
-        InstructionsPart1.setVolume(0);
-        InstructionsPart2.setVolume(0);
-        InstructionsPart3.setVolume(0);
+        InstructionsPart1.setVolume(-1);
+        InstructionsPart2.setVolume(-1);
+        InstructionsPart3.setVolume(-1);
 
         if (score >= 20)    //calculate final score
             finalScore = 5;

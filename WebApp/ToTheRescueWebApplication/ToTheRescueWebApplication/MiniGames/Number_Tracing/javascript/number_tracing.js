@@ -9,6 +9,7 @@
     var audioInstructions, audioInstructions2, numberAudio, backgroundMusic, endOfGame; //audio
 
     if (difficulty_level == 2) {
+        //arrays containing paths to audio files and image files for number outlines
         audioClips = [soundPath + "eleven_recording.mp3", soundPath + "twelve_recording.mp3", soundPath + "thirteen_recording.mp3",
              soundPath + "fourteen_recording.mp3", soundPath + "fifteen_recording.mp3", soundPath + "sixteen_recording.mp3",
              soundPath + "seventeen_recording.mp3", soundPath + "eighteen_recording.mp3", soundPath + "nineteen_recording.mp3",
@@ -35,6 +36,7 @@
     //randomly choose index for tracing number
     var index = Math.floor((Math.random() * tracingImages.length)); //random number for array index
 
+    //create audio
     var createAudio = function () {
         audioInstructions = new WebAudioAPISound(soundPath + "audio_instructions.mp3", { loop: false });
         audioInstructions.setVolume(70);
@@ -51,14 +53,18 @@
 
     window.onload = function () {
         createAudio();  //call function to create audio
-        audioInstructions.play(audioInstructions);
+        audioInstructions.play(audioInstructions); //play instructions
     }
+
+    //play audio of number to trace
     instructionsEnded = function () {
         numberAudio = new WebAudioAPISound(audioClips[index], { loop: false });
         numberAudio.setVolume(80);
         numberAudio.onEnded = numberEnded;
         numberAudio.play(numberAudio);
     };
+
+    //play second part of audio instructions
     numberEnded = function () {
         audioInstructions2.play(audioInstructions2);
     };

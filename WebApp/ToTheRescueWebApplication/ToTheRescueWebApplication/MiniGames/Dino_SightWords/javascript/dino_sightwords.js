@@ -7,13 +7,14 @@
 
     var imagePath = "../../MiniGames/Dino_SightWords/images/";
     var soundPath = "../../MiniGames/BeginningLetterSounds_Racing/sounds/";
+    var soundPath2 = "../../MiniGames/Dino_SightWords/sounds/";
     var game, images;
     var score = 0;      //player's score
     var counter = 0;    //count number of loops through game
     var eggs;           //slices for egg images
     var targetEgg;      //egg with correct word
     var index1, index2, index3, targetIndex;
-    var audioInstructions, audioWord, pteroSound, babyDino_sound, momDino_sound, eggCracking_sound;
+    var audioInstructions, audioWord, pteroSound, babyDino_sound, momDino_sound, eggCracking_sound; //audio
 
     //array of egg images
     eggImages = [imagePath + "at_egg.png", imagePath + "can_egg.png", imagePath + "fun_egg.png", imagePath + "go_egg.png",
@@ -69,23 +70,23 @@
     generateRandom();   //generate random indexes for word eggs and create egg slices
 
     var createAudio = function () {
-        pteroSound = new WebAudioAPISound("../../MiniGames/Dino_SightWords/sounds/" + "Pterodactyl.mp3", { loop: false });
+        pteroSound = new WebAudioAPISound(soundPath2 + "Pterodactyl.mp3", { loop: false });
         pteroSound.setVolume(70);
-        babyDino_sound = new WebAudioAPISound("../../MiniGames/Dino_SightWords/sounds/" + "babyDino_recording.mp3", { loop: false });
+        babyDino_sound = new WebAudioAPISound(soundPath2 + "babyDino_recording.mp3", { loop: false });
         babyDino_sound.setVolume(70);
         babyDino_sound.onEnded = babyEnded;
-        momDino_sound = new WebAudioAPISound("../../MiniGames/Dino_SightWords/sounds/" + "Tyrannosaurus.mp3", { loop: false });
+        momDino_sound = new WebAudioAPISound(soundPath2 + "Tyrannosaurus.mp3", { loop: false });
         momDino_sound.setVolume(70);
         momDino_sound.onEnded = momEnded;
-        eggCracking_sound = new WebAudioAPISound("../../MiniGames/Dino_SightWords/sounds/" + "Short_Egg_Cracking.mp3", { loop: false });
+        eggCracking_sound = new WebAudioAPISound(soundPath2 + "Short_Egg_Cracking.mp3", { loop: false });
         eggCracking_sound.setVolume(70);
         eggCracking_sound.onEnded = eggEnded;
-        audioInstructions = new WebAudioAPISound("../../MiniGames/Dino_SightWords/sounds/" + "audioInstructions_recording.mp3", { loop: false });
+        audioInstructions = new WebAudioAPISound(soundPath2 + "audioInstructions_recording.mp3", { loop: false });
         audioInstructions.setVolume(70);
         audioInstructions.onEnded = instructionsEnded;
-        endOfGame = new WebAudioAPISound("../../MiniGames/Dino_SightWords/sounds/" + "praise_recording.mp3", { loop: false });
+        endOfGame = new WebAudioAPISound(soundPath2 + "praise_recording.mp3", { loop: false });
         endOfGame.setVolume(70);
-        backgroundMusic = new WebAudioAPISound("../../MiniGames/Dino_SightWords/sounds/" + "background_music.mp3", { loop: true });
+        backgroundMusic = new WebAudioAPISound(soundPath2 + "background_music.mp3", { loop: true });
         backgroundMusic.setVolume(20);
         if (toggle_music == "False")
             backgroundMusic.play(backgroundMusic);
@@ -93,7 +94,7 @@
 
     window.onload = function () {
         createAudio();  //call function to create audio
-        audioInstructions.play(audioInstructions);
+        audioInstructions.play(audioInstructions);  //play audio instuctions
     }
 
     images = {
@@ -241,39 +242,35 @@
         game.controller.addEventListener("tap", eggTapped);
         loadEggImages();         //load egg images
 
+        //play pterodactyl sound effect
         setInterval(function () {
             if(toggle_sound == "False")
                 pteroSound.play(pteroSound);
         }, 15000);
 
+        //play target word after beginning part of instructions
         instructionsEnded = function () {
             if (targetIndex == 0)
-            {
                 audioWord = new WebAudioAPISound(wordSounds[index1], { loop: false });
-                audioWord.setVolume(70);
-            }
             else if (targetIndex == 1)
-            {
                 audioWord = new WebAudioAPISound(wordSounds[index2], { loop: false });
-                audioWord.setVolume(70);
-            }
+ 
             else
-            {
                 audioWord = new WebAudioAPISound(wordSounds[index3], { loop: false });
-                audioWord.setVolume(70);
-            }
-           
-            audioWord.play(audioWord);   //play target word after generic instructions
+
+            audioWord.setVolume(70);
+            audioWord.play(audioWord);   
         };
+
         eggEnded = function () {
             hatching.setSlice("hatched");   //show hatched egg
             if (toggle_sound == "True")
-                babyDino_sound.setVolume(0);
+                babyDino_sound.setVolume(-1);
             babyDino_sound.play(babyDino_sound);   //play baby dino sound after egg cracking sound
         };
         babyEnded = function () {
             if (toggle_sound == "True")
-                momDino_sound.volume = 0;
+                momDino_sound.setVolume(-1);
             momDino_sound.play();   //play mom dino sound after baby
         };
         momEnded = function () {
@@ -289,9 +286,11 @@
 
     //end the game after time interval
     setTimeout(function GameOver() {
-        audioInstructions.setVolume(0);   //set sounds to null so don't play after game over
-        babyDino_sound.setVolume(0);
-        momDino_sound.setVolume(0);
+        audioInstructions.setVolume(-1); 
+        babyDino_sound.setVolume(-1);
+        momDino_sound.setVolume(-1);
+        eggCracking_sound.setVolume(-1);
+        audioWord.setVolume(-1);
 
         endOfGame.play(endOfGame);
 

@@ -12,7 +12,8 @@
     var bubbleImages;
     var b1, b2, b3, b4, b5, b6, audioInstructions, popped, bubbles_sound, backgroundMusic, endOfGame; //audio
 
-    if(difficulty_level == 2) {
+    if (difficulty_level == 2) {
+        //arrays containing paths to audio files and image files for bubbles
         audioClips = [soundPath + "d_recording.mp3", soundPath + "j_recording.mp3", soundPath + "k_recording.mp3",
             soundPath + "l_recording.mp3", soundPath + "n_recording.mp3", soundPath + "q_recording.mp3",
             soundPath + "u_recording.mp3", soundPath + "v_recording.mp3", soundPath + "w_recording.mp3",
@@ -92,10 +93,9 @@
 
     window.onload = function () {
         createAudio();  //call function to create audio
-        audioInstructions.play(audioInstructions);
+        audioInstructions.play(audioInstructions); //play instructions
     }
 
-    //play instructions for game
     instructionsEnded = function () {
         b6.play(b6);  //play target letter after instructions
     };

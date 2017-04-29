@@ -13,6 +13,7 @@
     var m1, m2, m3, m4, m5, m6, audioInstructions, buzz, swat, backgroundMusic, endOfGame; //audio
 
     if (difficulty_level == 4) {
+        //arrays containing paths to audio files and image files for mosquitoes
         audioClips = [soundPath + "d_sound.mp3", soundPath + "j_sound.mp3", soundPath + "k_sound.mp3", soundPath + "l_sound.mp3",
             soundPath + "n_sound.mp3", soundPath + "q_sound.mp3", soundPath + "u_sound.mp3", soundPath + "v_sound.mp3",
             soundPath + "w_sound.mp3", soundPath + "x_sound.mp3", soundPath + "y_sound.mp3", soundPath + "z_sound.mp3",
@@ -59,6 +60,7 @@
     var game, images;
     var score = 0;
 
+    //create audio
     var createAudio = function () {
         m1 = new WebAudioAPISound(audioClips[index1], { loop: false });
         m1.setVolume(80);
@@ -76,7 +78,7 @@
         audioInstructions.setVolume(70);
         audioInstructions.onEnded = instructionsEnded;
         buzz = new WebAudioAPISound(soundPath + "Mosquito_Buzzing.mp3", { loop: false });
-        buzz.setVolume(70);
+        buzz.setVolume(50);
         swat = new WebAudioAPISound(soundPath + "Slap_Sound.mp3", { loop: false });
         swat.setVolume(40);
         endOfGame = new WebAudioAPISound(soundPath + "praise_recording.mp3", { loop: false });
@@ -89,12 +91,12 @@
 
     window.onload = function () {
         createAudio();  //call function to create audio
-        audioInstructions.play(audioInstructions);
+        audioInstructions.play(audioInstructions); //play instructions
     }
 
-    //play generic instructions for game
     instructionsEnded = function () {
         m6.play(m6);   //play target letter after generic instructions
+        //buzzing sound effect
         if (toggle_sound == "False") {
             buzz.play(buzz);
             buzz.play(buzz);

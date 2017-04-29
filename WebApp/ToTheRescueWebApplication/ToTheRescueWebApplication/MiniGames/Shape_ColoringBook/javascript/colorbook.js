@@ -22,6 +22,7 @@
     //randomly choose index for coloring shape
     var index = Math.floor((Math.random() * ShapeImages.length)); //random number for array index
     
+    //create audio
     var createAudio = function () {
         audioInstructions = new WebAudioAPISound(soundPath + "audioInstructions.mp3", { loop: false });
         audioInstructions.setVolume(70);
@@ -39,30 +40,38 @@
 
     window.onload = function () {
         createAudio();  //call function to create audio
-        audioInstructions.play(audioInstructions);
+        audioInstructions.play(audioInstructions); //play instructions
     }
+
+    //play name of shape audio
     instructionsEnded = function () {
         shapeName = new WebAudioAPISound(audioClips[index], { loop: false });
-        shapeName.setVolume(80);
+        shapeName.setVolume(70);
         shapeName.onEnded = shapeNameEnded;
         shapeName.play(shapeName);
     };
+
+    //play shape fact if applicable, if not, play second part of instructions
     shapeNameEnded = function () {
         if (audioFact[index] != null) {
             shapeFact = new WebAudioAPISound(audioFact[index], { loop: false });
-            shapeFact.setVolume(80);
+            shapeFact.setVolume(70);
             shapeFact.onEnded = shapeFactEnded;
             shapeFact.play(shapeFact);
         }
         else
             audioInstructions2.play(audioInstructions2);
     };
+
+    //play second part of instructions after shape fact
     shapeFactEnded = function () {
         audioInstructions2.play(audioInstructions2);
     };
+
+    //repeat name of shape after game over praise
     endGameEnded = function () {
         repeatName = new WebAudioAPISound(audioClips[index], { loop: false });
-        repeatName.setVolume(80);
+        repeatName.setVolume(70);
         repeatName.play(repeatName);
     };
 
@@ -175,6 +184,7 @@
         buttonYellow.style.backgroundSize = 'cover';
         var linebreak3 = document.createElement('br');
         buttonsDiv.appendChild(linebreak3);
+
         var buttonBlue = document.createElement('button');
         buttonBlue.setAttribute('class', 'toolButton');
         buttonsDiv.appendChild(buttonBlue);
