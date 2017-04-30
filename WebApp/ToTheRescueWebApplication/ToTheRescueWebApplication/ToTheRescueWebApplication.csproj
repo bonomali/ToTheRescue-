@@ -327,6 +327,8 @@
     <Content Include="MiniGames\Number_ComparisonEZ\sounds\tryToClickTheBiggestGroup.m4a" />
     <Content Include="MiniGames\Number_ComparisonEZ\sounds\woops.m4a" />
     <Content Include="MiniGames\Number_ComparisonEZ\sounds\wow.m4a" />
+    <Content Include="MiniGames\Number_Find\CSS\Number_Find.css" />
+    <Content Include="MiniGames\Number_Find\javascript\Number_Find.js" />
     <Content Include="MiniGames\Number_Tracing\sounds\audioInstructions_Part2.mp3" />
     <Content Include="MiniGames\Shape_ColoringBook\sounds\audioInstructions_Part2.mp3" />
     <Content Include="scripts\blockjs_framework.js" />
@@ -1152,6 +1154,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="MiniGames\Alphabet_Matching2\Media\" />
     <Folder Include="MiniGames\Alphabet_Matching\Media\" />
+    <Folder Include="MiniGames\Number_Find\images\" />
+    <Folder Include="MiniGames\Number_Find\sounds\" />
     <Folder Include="MiniGames\Position_Vocabulary\sounds\" />
     <Folder Include="MiniGames\Supah_Counting\sounds\" />
     <Folder Include="Views\AnimalRepository\" />

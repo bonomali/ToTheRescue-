@@ -201,8 +201,8 @@ var adjustTrophies = function () {
 var endGame = function() {
     if (soundToggle == "False") wow.play(wow);
     removeChalk();
-    document.querySelector('#contents').style.visibility = "hidden";
-    document.querySelector('#endGame').style.visibility = "visible";
+    //document.querySelector('#contents').style.visibility = "hidden";
+    //document.querySelector('#endGame').style.visibility = "visible";
     
     var performanceStat = 5 - numberWrong;
     if (performanceStat < -5) performanceStat = -5;
