@@ -365,6 +365,7 @@ namespace ToTheRescueWebApplication.Controllers
                 }
                 model.MiniGameID = minigames[ranGame].ID; 
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
+                model.MiniGame = minigames[ranGame].MiniGamePath;
             }
             else    //free play mode
             {
