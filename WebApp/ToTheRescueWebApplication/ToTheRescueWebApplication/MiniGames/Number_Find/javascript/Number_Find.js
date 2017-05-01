@@ -51,7 +51,10 @@ var initializeVars = function () {
     //set the nums to be found for the game
     for (var i = 0; i < maxNumber; i++)
     {
-        numsToFind[i] = Math.floor(Math.random() * 100) + 1;
+        var rand = Math.floor(Math.random() * 100) + 1;
+        for (var k = 0; k < i; k++)
+            if (numsToFind[k] != numsToFind[i])
+                numsToFind[i] = i;
     }
     //set the cat expression pictures
     catPics = [imgPath + "default.png", imgPath + "disapointed.png"
