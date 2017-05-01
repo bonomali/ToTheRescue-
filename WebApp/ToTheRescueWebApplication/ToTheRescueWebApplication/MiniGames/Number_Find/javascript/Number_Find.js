@@ -17,6 +17,7 @@ var numsFound;
 var maxNumber;
 var isSelected;
 var selectedNum;
+var performanceStat;
 
 
 var main = function () {
@@ -37,6 +38,7 @@ var initializeVars = function () {
         : maxNumber = 5 + (difficulty * 2);
     isSelected = false;
     selectedNum = 0;
+    performanceStat = 5;
 
     //setting sound/music toggles
     soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound");
@@ -232,7 +234,7 @@ var initializeEventHandlers = function () {
 
 var createHandler = function(tileDiv)
 {
-    tileDiv.addEventListener("click", function () {
+    tileDiv.addEventListener("click", function() {
         if (!isSelected) {
             imgClicked(parseInt(tileDiv.lastChild.innerHTML));
         }
@@ -241,33 +243,60 @@ var createHandler = function(tileDiv)
 
 var imgClicked = function (num)
 {
+    if (!checkIfClickable(num)) return;
+    isSelected = true;
     showNumber(num);
     setCatPic(4);
 
     //if correct
     if (numsToFind[numsFound] == num)
     {
-        setTimeout(function () { 
+        //document.getElementById("tileDiv" + num).removeEventListener("click", tileClicked);
+        setTimeout(function () {
             setCatPic(2);
-            setTimeout(function () { 
-                setCatPic(0);
-            }, 1200);
             numsFound++;
             document.getElementById("tile" + num).src = imgPath + "yellowSquare.png";
+
+            setTimeout(function () {
+                checkWin();
+                setCatPic(0);
+                isSelected = false;
+            }, 1200);
+
             initializeNumToBeFound();
         }, 1000);
         //play some audio congrats and shit
     }
     else //if wrong 
     {
+        performanceStat--;
         setTimeout(function () {
             if ((Math.floor(Math.random() * 3)) == 0)
                 setCatPic(3) //surprised cat
             else
                 setCatPic(1); //dissapointed cat
             hideNumber(num);
-            setTimeout(function () { setCatPic(0); }, 1200);
+            setTimeout(function () {
+                setCatPic(0);
+                isSelected = false;
+            }, 1200);
         }, 1500);
+    }
+}
+
+var checkIfClickable = function (num) {
+    var tileDiv = document.getElementById("tileDiv" + num).lastChild.style.visibility;
+    if (tileDiv === "visible")
+        return false;
+    else
+        return true;
+}
+
+var checkWin = function () {
+    if (numsFound === maxNumber) {
+        if (performanceStat < -5) performanceStat = -5;
+        document.getElementById("score").value = performanceStat;
+        EndofGame();
     }
 }
 
