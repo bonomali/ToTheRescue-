@@ -330,7 +330,9 @@
     <Content Include="MiniGames\Number_Find\CSS\Number_Find.css" />
     <Content Include="MiniGames\Number_Find\javascript\Number_Find.js" />
     <Content Include="MiniGames\Number_Tracing\sounds\audioInstructions_Part2.mp3" />
+    <Content Include="MiniGames\Position_Vocabulary\sounds\land_1.mp3" />
     <Content Include="MiniGames\Shape_ColoringBook\sounds\audioInstructions_Part2.mp3" />
+    <Content Include="MiniGames\Supah_Counting\sounds\menu.mp3" />
     <Content Include="scripts\blockjs_framework.js" />
     <Content Include="MiniGames\Alphabet_BubblePop\javascript\bubble.js" />
     <Content Include="MiniGames\Alphabet_BubblePop\sounds\a_recording.mp3" />
@@ -1156,8 +1158,6 @@
     <Folder Include="MiniGames\Alphabet_Matching\Media\" />
     <Folder Include="MiniGames\Number_Find\images\" />
     <Folder Include="MiniGames\Number_Find\sounds\" />
-    <Folder Include="MiniGames\Position_Vocabulary\sounds\" />
-    <Folder Include="MiniGames\Supah_Counting\sounds\" />
     <Folder Include="Views\AnimalRepository\" />
   </ItemGroup>
   <PropertyGroup>

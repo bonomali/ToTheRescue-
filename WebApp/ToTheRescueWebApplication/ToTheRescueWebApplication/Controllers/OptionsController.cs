@@ -61,7 +61,7 @@ namespace ToTheRescueWebApplication.Controllers
 
         public ActionResult EnteredEmail(string email)
         {
-            if (email == (string)Session["userEmail"])
+            if (email.ToUpper() == ((string)Session["userEmail"]).ToUpper())
             {
                 return RedirectToAction("InnerOptions");
             }

@@ -58,8 +58,11 @@
             <div><label class="labels">Subject Filter:</label> <label class="boxes">@Html.DropDownListFor(m => m.SubjectFilter, subjectFilterList)</label></div>
             <br />
             <br />
-
             <button type="submit">Apply Options</button>
+            }
+            @if (@HttpContext.Current.Request.UrlReferrer.AbsolutePath == "/Options/InnerOptions")
+            {
+                <h5 id="emailText" style="color:red;"> Settings Applied</h5>
             }
             <br />
             <a href="/MainMenu/MainMenu" style=""><p class="link" style="" id="menu"><img src="~/Images/Back.png" class="link_image" /> Back to Main Menu</p></a>

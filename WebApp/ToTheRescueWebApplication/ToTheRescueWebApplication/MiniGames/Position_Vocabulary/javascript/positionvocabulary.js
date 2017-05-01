@@ -6,6 +6,7 @@
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
     var imagePath = '../../MiniGames/Position_Vocabulary/images/';
     var audioPath = '../../MiniGames/Position_Vocabulary/sounds/';
+    var backgroundMusic;
     var position = {};
     var positionPlacement;
     var score = 0;
@@ -216,17 +217,25 @@
         bg.layer = game.layers[0];
         game.stage.addView(bg);
         
+        setupBoard();
+
+        backgroundMusic = new WebAudioAPISound(audioPath + "land_1.mp3", { loop: true });
+        backgroundMusic.setVolume(10);
+        if (musicToggle === "False") {
+            //play background music
+            backgroundMusic.play(backgroundMusic);
+        }
 
         responsiveVoice.OnVoiceReady = function () {
             console.log("speech time?");
             responsiveVoice.setDefaultVoice("US English Female");
-            setupBoard();
             game.controller.addEventListener("tap", gameTapped);
         };
 
         window.onbeforeunload = function () {
             console.log("Throwing responsive voice under a bus.");
             responsiveVoice.cancel();
+            return null;
         };
 
         setTimeout(function GameOver() {

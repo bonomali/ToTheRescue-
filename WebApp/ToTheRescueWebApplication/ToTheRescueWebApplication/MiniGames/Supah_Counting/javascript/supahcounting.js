@@ -6,6 +6,7 @@
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
     var imagePath = '../../MiniGames/Supah_Counting/images/';
     var audioPath = '../../MiniGames/Supah_Counting/sounds/';
+    var backgroundMusic;
     var numbers;
     var numberPlacement;
     var score = 5;
@@ -231,6 +232,14 @@
 
         game.controller.addEventListener("tap", gameTapped);
 
+        
+        backgroundMusic = new WebAudioAPISound(audioPath + "menu.mp3", { loop: true });
+        backgroundMusic.setVolume(10);
+        if (musicToggle === "False") {
+            //play background music
+            backgroundMusic.play(backgroundMusic);
+        }
+
         responsiveVoice.OnVoiceReady = function () {
             console.log("speech time?");
             responsiveVoice.speak("Oh no, not-mario is stuck. Build a bridge for him to get across by clicking the blocks in order, starting at 1.");
@@ -260,6 +269,7 @@
         window.onbeforeunload = function () {
             console.log("Throwing responsive voice under a bus.");
             responsiveVoice.cancel();
+            return null;
         };
 
         //They don't complete the game. 

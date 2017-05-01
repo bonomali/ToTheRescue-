@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "Options";
     Layout = "~/Views/Shared/_OptionsLayout.cshtml";
+
+    String redirect = @HttpContext.Current.Request.UrlReferrer.AbsolutePath;
 }
 <div id="left"></div>
 <div id="right"></div>
@@ -12,7 +14,12 @@
 <body id="OptionsBody">
     <h2>Options for @Model.profileName</h2>
     <section class="form" id="loginForm">
-        <h5 id="emailText" ,>Please enter your email to access Options:</h5>
+        <h5 id="emailText"> Please enter your email to access Options:</h5>
+        @if (@HttpContext.Current.Request.UrlReferrer.AbsolutePath == "/Options/Options")
+        {
+            <h5 id="emailText" style="color:red;"> Wrong Email Entered. Try Again.</h5>
+        }
+
         <input type="text" , id="emailTextBox" />
         <input type="submit" class="Buttons" value="Continue" id="CheckEmail" onclick="CheckEmail()" />
         <br />
