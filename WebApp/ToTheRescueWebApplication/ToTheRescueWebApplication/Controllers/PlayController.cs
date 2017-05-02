@@ -377,6 +377,7 @@ namespace ToTheRescueWebApplication.Controllers
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
                 model.Difficulty = 0;   //difficulty doesn't apply to free play mode
+                model.MiniGame = "../../MiniGames/Number_Find/javascript/Number_Find.js";
             }
             model.ToggleSound = Convert.ToString((bool)Session["toggleSound"]); //set model's toggle value for sound
             model.ToggleMusic = Convert.ToString((bool)Session["toggleMusic"]); //set model's toggle value for music

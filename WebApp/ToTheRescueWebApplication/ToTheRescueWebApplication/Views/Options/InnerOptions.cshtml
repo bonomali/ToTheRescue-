@@ -46,16 +46,16 @@
             {
             @Html.TextBoxFor(m => m.profileName, new { style = "display: none;" })
 
-
-            <div><label class="labels">Toggle Sound:</label> <label class="boxes">@Html.CheckBoxFor(m => m.toggleSound)</label></div>
-            <br />
-            <div><label class="labels">Toggle Music:</label> <label class="boxes">@Html.CheckBoxFor(m => m.toggleMusic)</label></div>
-            <br />
             <div><label class="labels">Math Difficulty:</label> <label class="boxes">@Html.DropDownListFor(m => m.MathDifficultyLevel, mathDifficultyList)</label></div>
             <br />
             <div><label class="labels">Reading Difficulty:</label> <label class="boxes">@Html.DropDownListFor(m => m.ReadingDifficultyLevel, readingDifficultyList)</label></div>
             <br />
             <div><label class="labels">Subject Filter:</label> <label class="boxes">@Html.DropDownListFor(m => m.SubjectFilter, subjectFilterList)</label></div>
+            <br />
+            <div><label class="labels">Toggle Sound:</label> <label class="checkbox">@Html.CheckBoxFor(m => m.toggleSound)</label></div>
+            <br />
+            <div><label class="labels">Toggle Music:</label> <label class="checkbox">@Html.CheckBoxFor(m => m.toggleMusic)</label></div>
+            <br />
             <br />
             <br />
             <button type="submit">Apply Options</button>
