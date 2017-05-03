@@ -56,8 +56,6 @@
             <br />
             <div><label class="labels">Toggle Music:</label> <label class="checkbox">@Html.CheckBoxFor(m => m.toggleMusic)</label></div>
             <br />
-            <br />
-            <br />
             <button type="submit">Apply Options</button>
             }
             @if (@HttpContext.Current.Request.UrlReferrer.AbsolutePath == "/Options/InnerOptions")
@@ -65,7 +63,7 @@
                 <h5 id="emailText" style="color:red;"> Settings Applied</h5>
             }
             <br />
-            <a href="/MainMenu/MainMenu" style=""><p class="link" style="" id="menu"><img src="~/Images/Back.png" class="link_image" /> Back to Main Menu</p></a>
+            <a href="/MainMenu/MainMenu" style=""><p class="link" style="" id="menu"><img src="~/Images/Back.png" class="link_image" /> Back To Main Menu </p></a>
             <br />
             <a href="/Profile/ChooseProfilePage" style=""><p class="link" style="" id="profile"><img src="~/Images/Profile.png" class="link_image" /> Switch Profiles</p></a>
             <br />

@@ -43,7 +43,7 @@ h2 {
 .link {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     position:relative;
-    width: 300px;
+    width: 275px;
     margin: auto;
     text-align: center; 
     vertical-align: middle;
@@ -57,14 +57,14 @@ h2 {
     border-style: outset;
     border-color: black;
 
-    height: 50px;
+    height: 30px;
 
     background-color: darkslateblue;
     opacity: 0.9;
 }
 
 .link_image {
-    height:50px;
+    height:30px;
 
     vertical-align: middle;
 }
@@ -75,9 +75,8 @@ a {
     text-decoration: none;
 }
 
-#top, #bottom, #left, #right {
-    background: darkgreen;
-    position: fixed;
+p:hover {
+    color: orange;
 }
 
 #left, #right {
@@ -118,4 +117,14 @@ a {
     }
 }
 
+@media only screen and (min-width: 560px) {
+    .link {
+    width: 300px;
+    font-size: 24px;    
+    height: 50px;
+    }
+    .link_image {
+    height:50px;
+    }
+}
 

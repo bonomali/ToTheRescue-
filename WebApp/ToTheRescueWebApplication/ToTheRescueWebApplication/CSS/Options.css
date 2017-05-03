@@ -16,26 +16,25 @@ body {
     background-color: black;
     opacity: .8;
     width: 80%;
-    min-width: 320px;
+    min-width: 125px;
     max-width: 500px;
     display: block;
-    padding: 15px 0 10px 0;
-
-    bottom: 30px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     align-items: center;
-    
+    padding-top: 1px;
     border-radius: 25px;
+    margin-top: -15px;
 }
 
 h2 {
-    font-size: 50px;
+    font-size: 30px;
     text-shadow: 4px 4px darkgreen;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: orangered;
     text-align: center;
+    margin-top: -15px;
 }
 
 
@@ -52,7 +51,7 @@ input {
     background-color: #f6f6f6;
     opacity: 0.8;
     color: black;
-    font-size: 18px;
+    font-size: 12px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     padding: 3px 0;
     margin: 3px 0;
@@ -78,13 +77,13 @@ input {
 
 .link {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    width: 300px;
+    width: 200px;
     margin: auto;
     text-align: center;
     vertical-align: middle;
     overflow: visible;
     text-decoration: none;
-    font-size: 24px;
+    font-size: 12px;
     font-style: normal;
     color: floralwhite;
     text-shadow: 1px 1px #000;
@@ -92,7 +91,7 @@ input {
     border-style: outset;
     border-color: black;
     
-    height: 50px;
+    height: 30px;
     
     background-color: darkslateblue;
     opacity: 0.9;
@@ -104,17 +103,12 @@ a {
     text-decoration: none;
 }
 
-.link:hover a {
+p:hover {
     color: orange;
 }
 
 Text {
     margin: 0 0 0 50px;
-}
-
-#top, #bottom, #left, #right {
-    background: darkgreen;
-    position: fixed;
 }
 
 #left, #right {
@@ -146,29 +140,83 @@ Text {
 }
 
 .link_image {
-    height:50px;
+    height:30px;
     vertical-align: middle;
 }
 
-.inputs {
-}
-
 .boxes {
-    float:left; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 .checkbox {
-    margin: 2px 0px;
-    width: 200px;
-    float: left;
-    margin-left: -95px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .labels { 
-    float:left;
+    text-align: center;
     min-width:250px;
-    display: inline-block;
-    text-align: right;
+    display: inline-block;   
     padding-right: 5px;
+}
+
+@media only screen and (min-width: 560px) {
+    h2 {
+        font-size: 35px;
+    }
+}
+@media only screen and (min-width: 560px) {
+    .form {
+    min-width: 320px;
+    max-width: 500px;
+    padding: 15px 0 10px 0;
+    bottom: 30px;
+    }
+    h2 {
+    font-size: 50px;
+    }
+    .link {
+    width: 300px;
+    font-size: 24px;    
+    height: 50px;
+    }
+    input {
+        font-size: 18px;
+    }
+    .link_image {
+    height:50px;
+    }
+    .labels { 
+    float: left;
+    min-width:250px;
+    padding-right: 10px;
     margin-top: 2px;
     margin-bottom: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    text-align: right;
+    }
+    .boxes {
+        float: left;
+    } 
+    .checkbox {
+    margin: 2px 0px;
+    min-width: 300px;
+    float: left;
+    margin-left: -145px;
+    }
+    button {
+        margin-top: 10px;
+    }
+}
+@media only screen and (min-width: 900px) {
+    #top, #bottom, #left, #right {
+        background: darkgreen;
+        position: fixed;
+    }
+    h2 {
+    margin-top: 20px;
+    }
 }
