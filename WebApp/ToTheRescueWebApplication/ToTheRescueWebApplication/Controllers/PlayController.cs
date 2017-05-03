@@ -29,7 +29,7 @@ namespace ToTheRescueWebApplication.Controllers
         const int NUM_ANIMALS = 48; //number of animals to save
 
         public PlayController()
-        {            
+        {
         }
         // GET: Play
         // Set values from database to model, pass into Play/Map view
@@ -88,7 +88,7 @@ namespace ToTheRescueWebApplication.Controllers
             }
             else     //set model for free play mode
             {
-                _model.ProfileName = "Free Play";   
+                _model.ProfileName = "Free Play";
                 _model.GradeLevel = "All";
                 _model.Subject = "All";
                 _model.CurrentMap = (int)Session["fp_mapID"];
@@ -286,7 +286,7 @@ namespace ToTheRescueWebApplication.Controllers
             }
         }
         //get the number of the current node for profile
-        public int GetCurrentNode ()
+        public int GetCurrentNode()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -358,19 +358,20 @@ namespace ToTheRescueWebApplication.Controllers
                         }
                     }
                     loopCounter++;       //increment number of times through loop
-                    if (loopCounter == 50) //Ensure that game doesn't get stuck in endless loop if not enough minigames
+                    if (loopCounter >= 50) //Ensure that game doesn't get stuck in endless loop if not enough minigames
                     {
                         played = false;
                     }
+
                     //choose a different minigame if device is mobile and chosen game isn't mobile friendly
                     //letter sound racing, typing, tangram
-                    if(Request.Browser.IsMobileDevice && (minigames[ranGame].ID == 18 || minigames[ranGame].ID == 19
+                    if (DetectMobile() && (minigames[ranGame].ID == 18 || minigames[ranGame].ID == 19
                         || minigames[ranGame].ID == 4))
                     {
                         played = true;
                     }
                 }
-                model.MiniGameID = minigames[ranGame].ID; 
+                model.MiniGameID = minigames[ranGame].ID;
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
                 model.MiniGame = minigames[ranGame].MiniGamePath;
             }
@@ -381,7 +382,7 @@ namespace ToTheRescueWebApplication.Controllers
 
                 //choose a different minigame if device is mobile and chosen game isn't mobile friendly
                 //letter sound racing, typing, tangram
-                while (Request.Browser.IsMobileDevice && (minigames[ranGame].ID == 18 || minigames[ranGame].ID == 19
+                while (DetectMobile() && (minigames[ranGame].ID == 18 || minigames[ranGame].ID == 19
                     || minigames[ranGame].ID == 4))
                 {
                     ranGame = random.Next(1, minigames.Count()) - 1; //generate an index between 1 and num of games
@@ -397,6 +398,26 @@ namespace ToTheRescueWebApplication.Controllers
             model.ToggleMusic = Convert.ToString((bool)Session["toggleMusic"]); //set model's toggle value for music
 
             return View(model);
+        }
+        //Function to detect if user is play on a mobile device
+        //Return true if mobile device
+        public bool DetectMobile()
+        {
+            bool isMobile = false;
+            bool isAndroid = false;
+
+            //detect if user on android device
+            var userAgent = Request.UserAgent;
+            if (userAgent != null)
+            {
+                if (userAgent.ToLower().Contains("android"))
+                    isAndroid = true;
+            }
+            //detect if user on mobile device
+            if (Request.Browser.IsMobileDevice || isAndroid)
+                isMobile = true;
+
+            return isMobile;
         }
     }
 }
