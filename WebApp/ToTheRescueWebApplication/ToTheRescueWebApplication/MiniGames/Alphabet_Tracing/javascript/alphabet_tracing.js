@@ -138,6 +138,7 @@
         buttonDone.setAttribute('class', 'toolButton');
         buttonsDiv.appendChild(buttonDone);
         buttonDone.addEventListener('click', function () {
+            audioInstructions2.setVolume(.1);
             //Play end of game audio, save score to html element, and call end of game function
             endOfGame.play(endOfGame);
             document.getElementById('score').value = 2; //save score in html element

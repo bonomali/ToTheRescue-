@@ -2,7 +2,7 @@
     var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
     var imagePath = '../../MiniGames/Shape_ColoringBook/images/';
     var soundPath = '../../MiniGames/Shape_ColoringBook/sounds/';
-    var audioInstructions, audioInstructions2, numberAudio, backgroundMusic, endOfGame; //audio
+    var audioInstructions, audioInstructions2, backgroundMusic, endOfGame; //audio
 
     //arrays containing paths to audio files and image files for shape outlines
     var audioClips = [soundPath + "circle_recording.mp3", soundPath + "diamond_recording.mp3", soundPath + "heart_recording.mp3",
@@ -294,6 +294,7 @@
         buttonDone.setAttribute('class', 'toolButton');
         buttonsDiv.appendChild(buttonDone);
         buttonDone.addEventListener('click', function () {
+            audioInstructions2.setVolume(.1);
             //Play end of game audio, save score to html element, and call end of game function
             endOfGame.play(endOfGame);
             document.getElementById('score').value = 2; //save score in html element

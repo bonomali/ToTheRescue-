@@ -265,12 +265,12 @@
         eggEnded = function () {
             hatching.setSlice("hatched");   //show hatched egg
             if (toggle_sound == "True")
-                babyDino_sound.setVolume(-1);
+                babyDino_sound.setVolume(.1);
             babyDino_sound.play(babyDino_sound);   //play baby dino sound after egg cracking sound
         };
         babyEnded = function () {
             if (toggle_sound == "True")
-                momDino_sound.setVolume(-1);
+                momDino_sound.setVolume(.1);
             momDino_sound.play();   //play mom dino sound after baby
         };
         momEnded = function () {
@@ -286,11 +286,11 @@
 
     //end the game after time interval
     setTimeout(function GameOver() {
-        audioInstructions.setVolume(-1); 
-        babyDino_sound.setVolume(-1);
-        momDino_sound.setVolume(-1);
-        eggCracking_sound.setVolume(-1);
-        audioWord.setVolume(-1);
+        audioInstructions.setVolume(.1); 
+        babyDino_sound.setVolume(.1);
+        momDino_sound.setVolume(.1);
+        eggCracking_sound.setVolume(.1);
+        audioWord.setVolume(.1);
 
         endOfGame.play(endOfGame);
 

@@ -134,10 +134,9 @@
         InstructionsPart1.onEnded = instructions1Ended;
         InstructionsPart3 = new WebAudioAPISound(soundPath + "audio_instructionsPart2.mp3", { loop: false });
         InstructionsPart3.setVolume(90);
+        InstructionsPart3.onEnded = instructions3Ended;
         tryAgain = new WebAudioAPISound(soundPath + "tryAgain_recording.mp3", { loop: false });
-        tryAgain.setVolume(90);
         correct = new WebAudioAPISound(soundPath + "praise_recording.mp3", { loop: false });
-        correct.setVolume(90);
         correct.onEnded = correctEnded;
         backgroundMusic = new WebAudioAPISound(soundPath + "background_music.mp3", { loop: true });
         backgroundMusic.setVolume(5);
@@ -180,14 +179,14 @@
             index1 = Math.floor((Math.random() * cardCoord.length));
         card1.style.marginLeft = cardCoord[index1]; //randomly set location of second word card
 
+        correct.setVolume(.1);
+        tryAgain.setVolume(.1);
         GameIntro();    //call function to play directions
     }
 
     //play game intro and directions
     function GameIntro() {
         InstructionsPart1.play(InstructionsPart1);
-        correct.setVolume(-1);
-        tryAgain.setVolume(-1);
     };
     instructions1Ended = function () {
         InstructionsPart2 = new WebAudioAPISound(soundsSet1[targetIndex], { loop: false });
@@ -197,19 +196,22 @@
     };
     instructions2Ended = function () {
         InstructionsPart3.play(InstructionsPart3);
+    };
+    //reset volume after instructions over
+    instructions3Ended = function () {
         correct.setVolume(90);
         tryAgain.setVolume(90);
     };
-
     //play audio to reinforce rhyming match
     correctEnded = function () {
         targetWord = new WebAudioAPISound(soundsSet1[targetIndex], { loop: false });
         targetWord.setVolume(90);
         targetWord.onEnded = targetEnded;
         targetWord.play(targetWord);
-        tryAgain.setVolume(-1);
+        tryAgain.setVolume(.1);
     };
     targetEnded = function () {
+        correct.setVolume(.1);
         correctAudio = new WebAudioAPISound(soundPath + "rhymesWith_recording.mp3", { loop: false });
         correctAudio.setVolume(90);
         correctAudio.onEnded = correctAudioEnded;
@@ -220,16 +222,15 @@
         matchingWord.setVolume(90);
         matchingWord.onEnded = matchingEnded;
         matchingWord.play(matchingWord);
-        tryAgain.setVolume(90);
     };
     matchingEnded = function () {
         setTimeout(InitGame(), 500);    //init a new game
     };
 
     setTimeout(function GameOver() {
-        InstructionsPart1.setVolume(-1);
-        InstructionsPart2.setVolume(-1);
-        InstructionsPart3.setVolume(-1);
+        InstructionsPart1.setVolume(.1);
+        InstructionsPart2.setVolume(.1);
+        InstructionsPart3.setVolume(.1);
 
         if (score >= 20)    //calculate final score
             finalScore = 5;
