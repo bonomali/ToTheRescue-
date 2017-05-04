@@ -18,6 +18,9 @@ var maxNumber;
 var isSelected;
 var selectedNum;
 var performanceStat;
+var bgMusic;
+var intro;
+var prng;
 
 
 var main = function () {
@@ -39,6 +42,12 @@ var initializeVars = function () {
     isSelected = false;
     selectedNum = 0;
     performanceStat = 5;
+    intro = new WebAudioAPISound('../../MiniGames/Number_Find/sounds/mrKitty.m4a');
+    prng = new WebAudioAPISound('../../MiniGames/Number_Find/sounds/prng.m4a');
+    bgMusic = new WebAudioAPISound('../../MiniGames/Number_Find/sounds/background_music.mp3'
+        , { loop: true });
+    bgMusic.setVolume(30);
+    prng.setVolume(25);
 
     //setting sound/music toggles
     soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound");
@@ -51,10 +60,18 @@ var initializeVars = function () {
     //set the nums to be found for the game
     for (var i = 0; i < maxNumber; i++)
     {
+        //get random number
         var rand = Math.floor(Math.random() * 100) + 1;
-        for (var k = 0; k < i; k++)
-            while (numsToFind[k] == rand)
-                numsToFind[k] = Math.floor(Math.random() * 100) + 1;
+
+        //loop through available list of numbers already set 
+        for (var k = 0; k < i; k++) {
+            //if a the rand matches a previous number
+            while (numsToFind[k] == rand) {
+                rand = Math.floor(Math.random() * 100) + 1;
+                k = 0; //restart the loop for reassurance
+            }
+        }
+        numsToFind[i] = rand;
     }
     //set the cat expression pictures
     catPics = [imgPath + "default.png", imgPath + "disapointed.png"
@@ -122,7 +139,6 @@ var createHTMLElements = function () {
     var number = document.createElement('p');
     number.setAttribute('id', 'numberToFind');
 
-    //var node = document.createTextNode();
     tileDiv.appendChild(number);
     container.appendChild(tileDiv);
 
@@ -131,21 +147,13 @@ var createHTMLElements = function () {
     cat.setAttribute('id', 'cat');
     container.appendChild(cat);
 
-    //set background sound
-    var backgroundMusic =
-        new WebAudioAPISound('../../MiniGames/Number_Find/sounds/background.mp3'
-        , { loop: true });
-    backgroundMusic.setVolume(30);
-    if (musicToggle) setTimeout(function ()
-        { backgroundMusic.play(backgroundMusic); }, 3000);
-
     document.getElementById("BlocksGame").appendChild(container);
 
 }
 
 var setupGame = function () {
-    //set cat to default
-    setCatPic(0);
+    //begin instructions, background music, set cat pic
+    beginIntro();
 
     //place an empty tile grid
     initializeGrid();
@@ -161,6 +169,14 @@ var setupGame = function () {
 
     //set the event handlers for the nums to be found
     initializeEventHandlers();
+
+}
+
+var beginIntro = function () {
+    setCatPic(0);
+    if (soundToggle) intro.play(intro);
+    if (musicToggle) setTimeout(function ()
+    { bgMusic.play(bgMusic); }, 3500);
 
 }
 
@@ -256,6 +272,7 @@ var imgClicked = function (num)
     {
         //document.getElementById("tileDiv" + num).removeEventListener("click", tileClicked);
         setTimeout(function () {
+            if (soundToggle) prng.play(prng);
             setCatPic(2);
             numsFound++;
             document.getElementById("tile" + num).src = imgPath + "yellowSquare.png";
@@ -264,7 +281,7 @@ var imgClicked = function (num)
                 checkWin();
                 setCatPic(0);
                 isSelected = false;
-            }, 1200);
+            }, 1000);
 
             initializeNumToBeFound();
         }, 1000);
