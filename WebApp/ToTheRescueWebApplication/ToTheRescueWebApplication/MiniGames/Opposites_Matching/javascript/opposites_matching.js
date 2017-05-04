@@ -119,6 +119,7 @@
         if (data == "matchingImg") {        //increment score and play correct audio if correct card
             ev.target.appendChild(document.getElementById(data));
             score = score + 5;  //increment score for correct answer
+            tryAgain.setVolume(.1);
             setTimeout(function () { correct.play(correct) }, 500);
         }
         else {  //decrement score and play incorrect audio if incorrect card
@@ -208,7 +209,6 @@
         targetWord.setVolume(90);
         targetWord.onEnded = targetEnded;
         targetWord.play(targetWord);
-        tryAgain.setVolume(.1);
     };
     targetEnded = function () {
         correct.setVolume(.1);

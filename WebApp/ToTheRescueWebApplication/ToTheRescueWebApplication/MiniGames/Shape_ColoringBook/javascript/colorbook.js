@@ -23,7 +23,7 @@
     var index = Math.floor((Math.random() * ShapeImages.length)); //random number for array index
     
     //create audio
-    var createAudio = function () {
+    createAudio = function () {
         audioInstructions = new WebAudioAPISound(soundPath + "audioInstructions.mp3", { loop: false });
         audioInstructions.setVolume(70);
         audioInstructions.onEnded = instructionsEnded;
@@ -32,6 +32,7 @@
         endOfGame = new WebAudioAPISound(soundPath + "praise_recording.mp3", { loop: false });
         endOfGame.setVolume(70);
         endOfGame.onEnded = endGameEnded;
+        
         backgroundMusic = new WebAudioAPISound(soundPath + "background_music.mp3", { loop: true });
         backgroundMusic.setVolume(10);
         if (toggle_music == "False")
@@ -46,8 +47,8 @@
     //play name of shape audio
     instructionsEnded = function () {
         shapeName = new WebAudioAPISound(audioClips[index], { loop: false });
-        shapeName.setVolume(70);
         shapeName.onEnded = shapeNameEnded;
+        shapeName.setVolume(70);
         shapeName.play(shapeName);
     };
 

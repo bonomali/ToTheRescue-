@@ -30,6 +30,7 @@
     window.onload = function () {
         createAudio();  //call function to create audio
         audioInstructions.play(audioInstructions);
+        correctWord.setVolume(.1);
     }
 
     instructionsEnded = function () {
@@ -52,7 +53,6 @@
     var targetIndex = Math.floor((Math.random() * words.length)); //random number for array index
     var targetWord = words[targetIndex];    //target word for maze
     correctWord = new WebAudioAPISound(wordSounds[targetIndex], { loop: false });
-    correctWord.setVolume(.1);
 
     var index1 = Math.floor((Math.random() * words.length)); //random number for array index
     while (index1 == targetIndex)

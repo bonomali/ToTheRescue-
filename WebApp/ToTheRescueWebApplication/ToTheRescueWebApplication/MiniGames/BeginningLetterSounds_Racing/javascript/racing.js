@@ -4,6 +4,7 @@
 
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
     var toggle_sound = document.getElementById('minigameScript').getAttribute('toggleSound');
+    var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
 
     var imagePath = "../../MiniGames/BeginningLetterSounds_Racing/images/";
     var soundPath = "../../MiniGames/BeginningLetterSounds_Racing/sounds/";
@@ -22,6 +23,9 @@
     var carRacingAudio = new Audio();    //racing sound as car moves
     var carRevvingAudio = new Audio();   //revving sound when light changes
     var endAudio = new Audio();          //audio after round of game
+    var backgroundMusic = new Audio();
+    backgroundMusic.src = soundPath + "background_music.mp3";
+    backgroundMusic.volume = .2;
 
     if (difficulty_level == 4) {
         //array of flag images
@@ -194,6 +198,9 @@
             //play audio instructions and audio of each word
             audioInstructions.src = soundPath + "audio_instructions.mp3";
             audioInstructions.play();
+
+            if(toggle_music == "False")
+                backgroundMusic.play();
         },
 
         //destroy flag slices and remove from memory
@@ -361,6 +368,10 @@
             endFlag.destroy();  //destroy racing flags
             checkGameOver();    //check for game over or start new round
         });
+        //loop background music
+        backgroundMusic.addEventListener('ended', function () {
+            backgroundMusic.play();
+        })
 
         loadFlagImages();        //load flag images
         playAudioInstructions(); //play audio instructions

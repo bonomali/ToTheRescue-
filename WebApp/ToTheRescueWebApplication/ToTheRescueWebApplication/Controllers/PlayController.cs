@@ -382,8 +382,8 @@ namespace ToTheRescueWebApplication.Controllers
 
                 //choose a different minigame if device is mobile and chosen game isn't mobile friendly
                 //letter sound racing, typing, tangram
-                while (DetectMobile() && (minigames[ranGame].ID == 18 || minigames[ranGame].ID == 19
-                    || minigames[ranGame].ID == 4))
+                while (DetectMobile() && (minigames[ranGame].ID == 18 || minigames[ranGame].ID == 19 ||
+                    minigames[ranGame].ID == 4))
                 {
                     ranGame = random.Next(1, minigames.Count()) - 1; //generate an index between 1 and num of games
                 }
