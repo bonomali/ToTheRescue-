@@ -1263,7 +1263,7 @@ function EndGame(finished) {
 }
 
 function Main() {
-    var backgroundMusic = new WebAudioAPISound("../../Audio/backgroundMusic/bgSong4.mp3");
+    var backgroundMusic = new WebAudioAPISound("../../Audio/backgroundMusic/bgSong4.mp3", { loop: true });
     backgroundMusic.setVolume(10);
 
     //get the game's difficulty level and modify the dataset for that difficulty level

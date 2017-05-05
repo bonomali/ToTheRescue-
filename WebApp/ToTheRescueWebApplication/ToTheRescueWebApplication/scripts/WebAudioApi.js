@@ -70,7 +70,7 @@ var WebAudioAPISound = function (url, options) {
         if (options.hasOwnProperty(i))
             this.settings[i] = options[i];
     }
-    //this.url = url + '.mp3';
+
     this.url = url;
     window.webAudioAPISoundManager = window.webAudioAPISoundManager || new WebAudioAPISoundManager(window.audioContext);
     this.manager = window.webAudioAPISoundManager;
