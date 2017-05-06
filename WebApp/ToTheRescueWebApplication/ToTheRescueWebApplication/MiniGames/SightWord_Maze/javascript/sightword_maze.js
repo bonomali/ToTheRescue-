@@ -11,7 +11,7 @@
         soundPath + "big_recording.mp3", soundPath + "me_recording.mp3", soundPath + "not_recording.mp3",
         soundPath + "on_recording.mp3", soundPath + "see_recording.mp3", soundPath + "the_recording.mp3",
         soundPath + "up_recording.mp3"];
-      
+
     var createAudio = function () {
         audioInstructions = new WebAudioAPISound(soundPath + "audio_instructions.mp3", { loop: false });
         audioInstructions.setVolume(70);
@@ -69,230 +69,239 @@
     blocksDiv.style.width = '88%';
     blocksDiv.style.height = '100%';
     blocksDiv.style.marginLeft = '1%';
-    blocksDiv.style.backgroundImage = "url(" + imagePath + "maze.png)";
-    blocksDiv.style.backgroundRepeat = "no-repeat";
-    blocksDiv.style.backgroundSize = "cover";
+
+    var backgroundDiv = document.createElement("div");
+    backgroundDiv.style.width = "100%";
+    backgroundDiv.style.height = "100%";
+    backgroundDiv.style.position = "absolute";
+    blocksDiv.appendChild(backgroundDiv);
+
+    var backgroundImg = document.createElement("img");
+    backgroundImg.src = imagePath + "maze.png";
+    backgroundImg.style.width = "100%";
+    backgroundImg.style.height = "100%";
+    backgroundDiv.appendChild(backgroundImg);
 
     //create dog image element
     var dog = document.createElement('img');
     dog.setAttribute('id', 'dog');
     dog.src = imagePath + "dog.png";
-    blocksDiv.appendChild(dog);
+    backgroundDiv.appendChild(dog);
     dog.style.position = "absolute";
     dog.style.width = '6%';
 
     //create target word elements
-    var text1 = document.createElement('p');
+    var text1 = document.createElement("div");
     text1.setAttribute('class', 'word');
-    blocksDiv.appendChild(text1);
+    backgroundDiv.appendChild(text1);
     text1.innerHTML = targetWord;
- 
-    var text2 = document.createElement('p');
+
+    var text2 = document.createElement("div");
     text2.setAttribute('class', 'word');
-    blocksDiv.appendChild(text2);
+    backgroundDiv.appendChild(text2);
     text2.innerHTML = targetWord;
 
-    var text3 = document.createElement('p');
+    var text3 = document.createElement("div");
     text3.setAttribute('class', 'word');
-    blocksDiv.appendChild(text3);
+    backgroundDiv.appendChild(text3);
     text3.innerHTML = targetWord;
 
-    var text4 = document.createElement('p');
+    var text4 = document.createElement("div");
     text4.setAttribute('class', 'word');
-    blocksDiv.appendChild(text4);
+    backgroundDiv.appendChild(text4);
     text4.innerHTML = targetWord;
 
-    var text5 = document.createElement('p');
+    var text5 = document.createElement("div");
     text5.setAttribute('class', 'word');
-    blocksDiv.appendChild(text5);
+    backgroundDiv.appendChild(text5);
     text5.innerHTML = targetWord;
 
-    var text6 = document.createElement('p');
+    var text6 = document.createElement("div");
     text6.setAttribute('class', 'word');
-    blocksDiv.appendChild(text6);
+    backgroundDiv.appendChild(text6);
     text6.innerHTML = targetWord;
 
-    var text7 = document.createElement('p');
+    var text7 = document.createElement("div");
     text7.setAttribute('class', 'word');
-    blocksDiv.appendChild(text7);
+    backgroundDiv.appendChild(text7);
     text7.innerHTML = targetWord;
 
-    var text8 = document.createElement('p');
+    var text8 = document.createElement("div");
     text8.setAttribute('class', 'word');
-    blocksDiv.appendChild(text8);
+    backgroundDiv.appendChild(text8);
     text8.innerHTML = targetWord;
 
-    var text9 = document.createElement('p');
+    var text9 = document.createElement("div");
     text9.setAttribute('class', 'word');
-    blocksDiv.appendChild(text9);
+    backgroundDiv.appendChild(text9);
     text9.innerHTML = targetWord;
 
-    var text10 = document.createElement('p');
+    var text10 = document.createElement("div");
     text10.setAttribute('class', 'word');
-    blocksDiv.appendChild(text10);
+    backgroundDiv.appendChild(text10);
     text10.innerHTML = targetWord;
 
-    var text11 = document.createElement('p');
+    var text11 = document.createElement("div");
     text11.setAttribute('class', 'word');
-    blocksDiv.appendChild(text11);
+    backgroundDiv.appendChild(text11);
     text11.innerHTML = targetWord;
 
-    var text12 = document.createElement('p');
+    var text12 = document.createElement("div");
     text12.setAttribute('class', 'word');
-    blocksDiv.appendChild(text12);
+    backgroundDiv.appendChild(text12);
     text12.innerHTML = targetWord;
 
-    var text13 = document.createElement('p');
+
+    var text13 = document.createElement("div");
     text13.setAttribute('class', 'word');
-    blocksDiv.appendChild(text13);
+    backgroundDiv.appendChild(text13);
     text13.innerHTML = targetWord;
 
-    var text14 = document.createElement('p');
+    var text14 = document.createElement("div");
     text14.setAttribute('class', 'word');
-    blocksDiv.appendChild(text14);
+    backgroundDiv.appendChild(text14);
     text14.innerHTML = targetWord;
 
-    var text15 = document.createElement('p');
+    var text15 = document.createElement("div");
     text15.setAttribute('class', 'word');
-    blocksDiv.appendChild(text15);
+    backgroundDiv.appendChild(text15);
     text15.innerHTML = targetWord;
 
-    var text16 = document.createElement('p');
+    var text16 = document.createElement("div");
     text16.setAttribute('class', 'word');
-    blocksDiv.appendChild(text16);
+    backgroundDiv.appendChild(text16);
     text16.innerHTML = targetWord;
 
-    var text17 = document.createElement('p');
+    var text17 = document.createElement("div");
     text17.setAttribute('class', 'word');
-    blocksDiv.appendChild(text17);
+    backgroundDiv.appendChild(text17);
     text17.innerHTML = targetWord;
 
-    var text18 = document.createElement('p');
+    var text18 = document.createElement("div");
     text18.setAttribute('class', 'word');
-    blocksDiv.appendChild(text18);
+    backgroundDiv.appendChild(text18);
     text18.innerHTML = targetWord;
 
 
     //create other words for maze
-    var text19 = document.createElement('p');
+    var text19 = document.createElement("div");
     text19.setAttribute('class', 'word');
-    blocksDiv.appendChild(text19);
+    backgroundDiv.appendChild(text19);
     text19.innerHTML = words[index1];
 
-    var text20 = document.createElement('p');
+    var text20 = document.createElement("div");
     text20.setAttribute('class', 'word');
-    blocksDiv.appendChild(text20);
+    backgroundDiv.appendChild(text20);
     text20.innerHTML = words[index2];
 
-    var text21 = document.createElement('p');
+    var text21 = document.createElement("div");
     text21.setAttribute('class', 'word');
-    blocksDiv.appendChild(text21);
+    backgroundDiv.appendChild(text21);
     text21.innerHTML = words[index3];
 
-    var text22 = document.createElement('p');
+    var text22 = document.createElement("div");
     text22.setAttribute('class', 'word');
-    blocksDiv.appendChild(text22);
+    backgroundDiv.appendChild(text22);
     text22.innerHTML = words[index1];
 
-    var text23 = document.createElement('p');
+    var text23 = document.createElement("div");
     text23.setAttribute('class', 'word');
-    blocksDiv.appendChild(text23);
+    backgroundDiv.appendChild(text23);
     text23.innerHTML = words[index2];
 
-    var text24 = document.createElement('p');
+    var text24 = document.createElement("div");
     text24.setAttribute('class', 'word');
-    blocksDiv.appendChild(text24);
+    backgroundDiv.appendChild(text24);
     text24.innerHTML = words[index3];
 
-    var text25 = document.createElement('p');
+    var text25 = document.createElement("div");
     text25.setAttribute('class', 'word');
-    blocksDiv.appendChild(text25);
+    backgroundDiv.appendChild(text25);
     text25.innerHTML = words[index1];
 
-    var text26 = document.createElement('p');
+    var text26 = document.createElement("div");
     text26.setAttribute('class', 'word');
-    blocksDiv.appendChild(text26);
+    backgroundDiv.appendChild(text26);
     text26.innerHTML = words[index2];
 
-    var text27 = document.createElement('p');
+    var text27 = document.createElement("div");
     text27.setAttribute('class', 'word');
-    blocksDiv.appendChild(text27);
+    backgroundDiv.appendChild(text27);
     text27.innerHTML = words[index3];
 
-    var text28 = document.createElement('p');
+    var text28 = document.createElement("div");
     text28.setAttribute('class', 'word');
-    blocksDiv.appendChild(text28);
+    backgroundDiv.appendChild(text28);
     text28.innerHTML = words[index1];
 
-    var text29 = document.createElement('p');
+    var text29 = document.createElement("div");
     text29.setAttribute('class', 'word');
-    blocksDiv.appendChild(text29);
+    backgroundDiv.appendChild(text29);
     text29.innerHTML = words[index2];
 
-    var text30 = document.createElement('p');
+    var text30 = document.createElement("div");
     text30.setAttribute('class', 'word');
-    blocksDiv.appendChild(text30);
+    backgroundDiv.appendChild(text30);
     text30.innerHTML = words[index3];
 
-    var text31 = document.createElement('p');
+    var text31 = document.createElement("div");
     text31.setAttribute('class', 'word');
-    blocksDiv.appendChild(text31);
+    backgroundDiv.appendChild(text31);
     text31.innerHTML = words[index1];
 
-    var text32 = document.createElement('p');
+    var text32 = document.createElement("div");
     text32.setAttribute('class', 'word');
-    blocksDiv.appendChild(text32);
+    backgroundDiv.appendChild(text32);
     text32.innerHTML = words[index2];
 
-    var text33 = document.createElement('p');
+    var text33 = document.createElement("div");
     text33.setAttribute('class', 'word');
-    blocksDiv.appendChild(text33);
+    backgroundDiv.appendChild(text33);
     text33.innerHTML = words[index3];
 
-    var text34 = document.createElement('p');
+    var text34 = document.createElement("div");
     text34.setAttribute('class', 'word');
-    blocksDiv.appendChild(text34);
+    backgroundDiv.appendChild(text34);
     text34.innerHTML = words[index1];
 
-    var text35 = document.createElement('p');
+    var text35 = document.createElement("div");
     text35.setAttribute('class', 'word');
-    blocksDiv.appendChild(text35);
+    backgroundDiv.appendChild(text35);
     text35.innerHTML = words[index2];
 
-    var text36 = document.createElement('p');
+    var text36 = document.createElement("div");
     text36.setAttribute('class', 'word');
-    blocksDiv.appendChild(text36);
+    backgroundDiv.appendChild(text36);
     text36.innerHTML = words[index3];
 
-    var text37 = document.createElement('p');
+    var text37 = document.createElement("div");
     text37.setAttribute('class', 'word');
-    blocksDiv.appendChild(text37);
+    backgroundDiv.appendChild(text37);
     text37.innerHTML = words[index1];
 
-    var text38 = document.createElement('p');
+    var text38 = document.createElement("div");
     text38.setAttribute('class', 'word');
-    blocksDiv.appendChild(text38);
+    backgroundDiv.appendChild(text38);
     text38.innerHTML = words[index2];
 
-    var text39 = document.createElement('p');
+    var text39 = document.createElement("div");
     text39.setAttribute('class', 'word');
-    blocksDiv.appendChild(text39);
+    backgroundDiv.appendChild(text39);
     text39.innerHTML = words[index3];
 
-    var text40 = document.createElement('p');
+    var text40 = document.createElement("div");
     text40.setAttribute('class', 'word');
-    blocksDiv.appendChild(text40);
+    backgroundDiv.appendChild(text40);
     text40.innerHTML = words[index1];
 
-    var text41 = document.createElement('p');
+    var text41 = document.createElement("div");
     text41.setAttribute('class', 'word');
-    blocksDiv.appendChild(text41);
+    backgroundDiv.appendChild(text41);
     text41.innerHTML = words[index2];
 
     //set style for words
     var wordsList = document.getElementsByClassName('word');
-    for (var i = 0; i < wordsList.length; i++)
-    {
+    for (var i = 0; i < wordsList.length; i++) {
         wordsList[i].style.position = "absolute";
         wordsList[i].style.fontSize = "150%";
         wordsList[i].style.color = '#00F';
@@ -324,43 +333,43 @@
 
     //set position of target words
     text1.style.left = '65%';
-    text1.style.top = '1%';
+    text1.style.top = '3%';
 
     text2.style.left = '45%';
-    text2.style.top = '1%';
-  
+    text2.style.top = '3%';
+
     text3.style.left = '25%';
-    text3.style.top = '1%';
+    text3.style.top = '3%';
 
     text4.style.left = '5%';
-    text4.style.top = '1%';
+    text4.style.top = '3%';
 
     text5.style.left = '5%';
-    text5.style.top = '15%';
+    text5.style.top = '17.5%';
 
     text6.style.left = '25%';
-    text6.style.top = '15%';
+    text6.style.top = '17.5%';
 
     text7.style.left = '47%';
-    text7.style.top = '15%';
+    text7.style.top = '17.5%';
 
     text8.style.left = '47%';
     text8.style.top = '33%';
 
     text9.style.left = '47%';
-    text9.style.top = '50%';
+    text9.style.top = '53%';
 
     text10.style.left = '62%';
-    text10.style.top = '50%';
-    
+    text10.style.top = '53%';
+
     text11.style.left = '77%';
-    text11.style.top = '50%';
+    text11.style.top = '53%';
 
     text12.style.left = '77%';
-    text12.style.top = '64%';
+    text12.style.top = '67%';
 
     text13.style.left = '62%';
-    text13.style.top = '64%';
+    text13.style.top = '67%';
 
     text14.style.left = '47%';
     text14.style.top = '70%';
@@ -369,31 +378,31 @@
     text15.style.top = '82%';
 
     text16.style.left = '50%';
-    text16.style.top = '87%';
+    text16.style.top = '90%';
 
     text17.style.left = '35%';
-    text17.style.top = '87%';
+    text17.style.top = '90%';
 
     text18.style.left = '20%';
-    text18.style.top = '87%';
+    text18.style.top = '90%';
 
     text19.style.left = '62%';
-    text19.style.top = '15%';
+    text19.style.top = '17.5%';
 
     text20.style.left = '62%';
-    text20.style.top = '32%';
+    text20.style.top = '35%';
 
     text21.style.left = '77%';
-    text21.style.top = '15%';
+    text21.style.top = '17.5%';
 
     text22.style.left = '77%';
     text22.style.top = '32%';
 
     text23.style.left = '77%';
-    text23.style.top = '80%';
+    text23.style.top = '83%';
 
     text24.style.left = '85%';
-    text24.style.top = '87%';
+    text24.style.top = '90%';
 
     text25.style.left = '92%';
     text25.style.top = '80%';
@@ -408,16 +417,16 @@
     text28.style.top = '32%';
 
     text29.style.left = '93%';
-    text29.style.top = '15%';
+    text29.style.top = '17.5%';
 
     text30.style.left = '35%';
-    text30.style.top = '28%';
+    text30.style.top = '31%';
 
     text31.style.left = '20%';
-    text31.style.top = '28%';
+    text31.style.top = '31%';
 
     text32.style.left = '5%';
-    text32.style.top = '28%';
+    text32.style.top = '31%';
 
     text33.style.left = '35%';
     text33.style.top = '47%';
@@ -426,25 +435,25 @@
     text34.style.top = '65%';
 
     text35.style.left = '28%';
-    text35.style.top = '74%';
+    text35.style.top = '77.5%';
 
     text36.style.left = '15%';
-    text36.style.top = '74%';
+    text36.style.top = '77.5%';
 
     text37.style.left = '4%';
-    text37.style.top = '74%';
+    text37.style.top = '77.5%';
 
     text38.style.left = '4%';
     text38.style.top = '58%';
 
     text39.style.left = '4%';
-    text39.style.top = '42%';
+    text39.style.top = '45%';
 
     text40.style.left = '22%';
-    text40.style.top = '42%';
+    text40.style.top = '45%';
 
     text41.style.left = '22%';
-    text41.style.top = '58%';
+    text41.style.top = '60%';
 
     dog.style.left = '5%';
     dog.style.top = '90%';
