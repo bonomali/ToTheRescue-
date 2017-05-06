@@ -2,7 +2,7 @@
     //set correct margin for div
     document.getElementById('BlocksGame').style.marginLeft = '-5%';
 
-
+    var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
     var imagePath = '../../MiniGames/Supah_Counting/images/';
     var audioPath = '../../MiniGames/Supah_Counting/sounds/';
@@ -269,7 +269,6 @@
         window.onbeforeunload = function () {
             console.log("Throwing responsive voice under a bus.");
             responsiveVoice.cancel();
-            return null;
         };
 
         //They don't complete the game. 
