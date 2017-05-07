@@ -94,6 +94,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Controllers\AnimalSanctuaryTests.cs" />
     <Compile Include="Controllers\PlayControllerTests.cs" />
     <Compile Include="Controllers\ProfileControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
