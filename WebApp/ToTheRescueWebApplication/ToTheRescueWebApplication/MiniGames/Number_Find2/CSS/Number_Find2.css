@@ -1,0 +1,84 @@
+﻿#BlocksGame {
+  width: 100%;
+}
+
+#container {
+  width: 1500px;
+  height: 842px;
+  -ms-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 500ms ease-in-out !important;
+  transition: all 500ms ease-in-out !important;
+}
+
+.gridTileDiv {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    z-index: 6;
+}
+
+.gridTile {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    z-index: 5;
+}
+
+.numberOnTile {
+    position: relative;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 30px;
+    color: gold;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index: 10;
+    top: -7%;
+}
+
+#numberToFind {
+    position: relative;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 40px;
+    color: gold;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    top: -14%;
+    z-index: 10;
+}
+
+#numToBeFoundDiv {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    top: 554px;
+    left: 347px;
+    z-index: 6;
+}
+
+
+#tileToFind {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 554px;
+    left: 347px;
+    z-index: 4;
+}
+
+#background {
+    position: absolute;
+    width: 1500px;
+    height: 842px;
+}
+
+#cat {
+    position: absolute;
+    top: 250px;
+    left: 15px;
+}
