@@ -63,22 +63,22 @@
     //create audio
     var createAudio = function () {
         m1 = new WebAudioAPISound(audioClips[index1], { loop: false });
-        m1.setVolume(80);
+        m1.setVolume(90);
         m2 = new WebAudioAPISound(audioClips[index2], { loop: false });
-        m2.setVolume(80);
+        m2.setVolume(90);
         m3 = new WebAudioAPISound(audioClips[index3], { loop: false });
-        m3.setVolume(80);
+        m3.setVolume(90);
         m4 = new WebAudioAPISound(audioClips[index4], { loop: false });
-        m4.setVolume(80);
+        m4.setVolume(90);
         m5 = new WebAudioAPISound(audioClips[index5], { loop: false });
-        m5.setVolume(80);
+        m5.setVolume(90);
         m6 = new WebAudioAPISound(audioClips[index6], { loop: false });
-        m6.setVolume(80);
+        m6.setVolume(90);
         audioInstructions = new WebAudioAPISound(soundPath + "audio_instructions.mp3", { loop: false });
         audioInstructions.setVolume(70);
         audioInstructions.onEnded = instructionsEnded;
         buzz = new WebAudioAPISound(soundPath + "Mosquito_Buzzing.mp3", { loop: false });
-        buzz.setVolume(50);
+        buzz.setVolume(20);
         swat = new WebAudioAPISound(soundPath + "Slap_Sound.mp3", { loop: false });
         swat.setVolume(40);
         endOfGame = new WebAudioAPISound(soundPath + "praise_recording.mp3", { loop: false });
