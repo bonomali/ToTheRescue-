@@ -234,8 +234,8 @@
 
         
         backgroundMusic = new WebAudioAPISound(audioPath + "menu.mp3", { loop: true });
-        backgroundMusic.setVolume(10);
-        if (musicToggle === "False") {
+        backgroundMusic.setVolume(5);
+        if (toggle_music === "False") {
             //play background music
             backgroundMusic.play(backgroundMusic);
         }

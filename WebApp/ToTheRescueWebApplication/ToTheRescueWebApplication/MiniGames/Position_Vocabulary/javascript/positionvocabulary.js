@@ -220,8 +220,8 @@
         setupBoard();
 
         backgroundMusic = new WebAudioAPISound(audioPath + "land_1.mp3", { loop: true });
-        backgroundMusic.setVolume(10);
-        if (musicToggle === "False") {
+        backgroundMusic.setVolume(5);
+        if (toggle_music === "False") {
             //play background music
             backgroundMusic.play(backgroundMusic);
         }
