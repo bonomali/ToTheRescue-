@@ -418,20 +418,18 @@ function Main() {
 
     window.onload = function () {
         //play the instructions
-        responsiveVoice.OnVoiceReady = function () {
-            Shuffle(animalArr);
+        Shuffle(animalArr);
 
-            responsiveVoice.speak("Click the thing you are spying for.", "US English Female");
+        responsiveVoice.speak("Click the thing you are spying for.", "US English Female");
 
-            setTimeout(function () {
-                if (difficulty <= 1) {
-                    GameLoopEasy();
-                }
-                else {
-                    GameLoopHard();
-                }
-            }, 4000);
-        };
+        setTimeout(function () {
+            if (difficulty <= 1) {
+                GameLoopEasy();
+            }
+            else {
+                GameLoopHard();
+            }
+        }, 4000);
     };
 
     for (var i = 0; i < NUM_ANIMALS; i++) {
