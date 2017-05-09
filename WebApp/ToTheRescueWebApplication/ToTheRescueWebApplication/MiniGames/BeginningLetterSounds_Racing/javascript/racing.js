@@ -195,6 +195,8 @@
 
         //play audio insturctions
         playAudioInstructions = function () {
+            word1Audio.pause();
+            word2Audio.pause();
             //play audio instructions and audio of each word
             audioInstructions.src = soundPath + "audio_instructions.mp3";
             audioInstructions.play();
@@ -321,6 +323,8 @@
 
         //stops execution of flag sounds and motors if user clicks ahead
         haltFlags = function () {
+            audioInstructions.pause();
+            letterSound.pause();
             word1Audio.pause();
             word2Audio.pause();
         }
