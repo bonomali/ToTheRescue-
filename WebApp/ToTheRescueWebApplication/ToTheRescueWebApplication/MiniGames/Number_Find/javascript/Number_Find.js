@@ -250,7 +250,7 @@ var initializeVars = function () {
         var finalScore = -5;
         document.getElementById('score').value = finalScore;
         EndofGame();
-    }, 300000);
+    }, 120000);
 }
 
 var createHTMLElements = function () {

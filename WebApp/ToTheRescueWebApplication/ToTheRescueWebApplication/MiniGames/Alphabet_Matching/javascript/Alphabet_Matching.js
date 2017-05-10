@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var finalScore = -5;
         document.getElementById('score').value = finalScore;
         EndofGame();
-    }, 300000);
+    }, 120000);
 });
 
 var start = function () {
@@ -199,7 +199,7 @@ var createElements = function () {
     var backgroundMusic = new WebAudioAPISound(mediaPath + '/Sounds/backgroundMusic.mp3', { loop: true });
     backgroundMusic.setVolume(30);
 
-    if (musicToggle == "False") setTimeout(function () { backgroundMusic.play(backgroundMusic); }, 3000);
+    if (musicToggle == "False") setTimeout(function () { backgroundMusic.play(backgroundMusic); }, 5000);
 }
 
 var setupGame = function () {

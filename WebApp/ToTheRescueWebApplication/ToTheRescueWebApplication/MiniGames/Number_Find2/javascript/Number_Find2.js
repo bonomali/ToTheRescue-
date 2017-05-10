@@ -82,7 +82,7 @@ var initializeVars = function () {
         var finalScore = -5;
         document.getElementById('score').value = finalScore;
         EndofGame();
-    }, 300000);
+    }, 120000);
 }
 
 var createHTMLElements = function () {
@@ -176,7 +176,6 @@ var beginIntro = function () {
     if (soundToggle) intro.play(intro);
     if (musicToggle) setTimeout(function ()
     { bgMusic.play(bgMusic); }, 3500);
-
 }
 
 var initializeGrid = function () {

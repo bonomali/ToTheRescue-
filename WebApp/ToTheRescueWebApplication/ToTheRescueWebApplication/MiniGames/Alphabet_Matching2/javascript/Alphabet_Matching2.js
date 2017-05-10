@@ -5,9 +5,8 @@
 
 //global path variables
 
-var generalPath = "../../MiniGames/Alphabet_Matching2"; //  ../../MiniGames/Alphabet_Matching2
-var mediaPath = generalPath + "/Media"; //to test in browser, had to change from ../../MiniGames/Alphabet_Matching2/Media
-var sightWords = [];
+var generalPath = "../../MiniGames/Alphabet_Matching2"; 
+var mediaPath = generalPath + "/Media";
 var sightWord = -1;
 var lettersMatched;
 
@@ -41,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var finalScore = -5;
         document.getElementById('score').value = finalScore;
         EndofGame();
-    }, 300000);
+    }, 120000);
     
 });//event listener
 

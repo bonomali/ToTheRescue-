@@ -3,7 +3,7 @@
 
 var isSelected = false;
 var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
-var maxNumber = (difficulty = 0) ? 1 + difficulty * 2 : 3;
+var maxNumber = (difficulty == 0) ? 3 : 1 + difficulty * 2;
 var rightSide, leftSide, selectedName;
 var numberCorrect = 0;
 var numberWrong = 0;
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var finalScore = -5;
         document.getElementById('score').value = finalScore;
         EndofGame();
-    }, 300000);
+    }, 120000);
 });
 var setupGame = function () {
 
@@ -171,7 +171,7 @@ var wrongAnswer = function () {
 
 var beginIntro = function () {
     document.querySelector('#contents').style.visibility = "hidden";
-    document.querySelector('#intro').style.visibility = "visible";
+    document.querySelector('#intro').style.visibility = "hidden";
     document.querySelector('#endGame').style.visibility = "hidden";
     setTimeout(hideIntro, 5000);
     

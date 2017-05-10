@@ -9,7 +9,7 @@ var numberWrong = 0;
 var imgPath = '../../MiniGames/Number_Comparison/';
 var soundToggle;
 var musicToggle;
-var maxNumber = (difficulty = 0) ? 1 + difficulty * 2 : 3;
+var maxNumber = (difficulty == 0) ? 3 : 1 + difficulty * 2;
 
 //for audio
 var wow = null;
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var finalScore = -5;
         document.getElementById('score').value = finalScore;
         EndofGame();
-    }, 300000);
+    }, 120000);
 });
 var setupGame = function () {
 
