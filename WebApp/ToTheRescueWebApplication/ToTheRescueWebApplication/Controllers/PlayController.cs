@@ -340,7 +340,7 @@ namespace ToTheRescueWebApplication.Controllers
                 List<int> playedgames = _minigame.GetListRecentlyPlayed((int)Session["profileID"]);
 
                 //randomly choose a minigame that isn't in list of recently played, assign a minigame to the model
-                int ranGame = random.Next(1, minigames.Count()) - 1; //generate an index between 1 and num of playable games
+                int ranGame = random.Next(1, minigames.Count() + 1) - 1; //generate an index between 1 and num of playable games
 
                 //continue generating random gameID while recently played game is randomly selected
                 bool played = true;
@@ -353,7 +353,7 @@ namespace ToTheRescueWebApplication.Controllers
                         if (minigames[ranGame].ID == playedgames[i])
                         {
                             //generate an index between 1 and num of playable games
-                            ranGame = random.Next(1, minigames.Count()) - 1;
+                            ranGame = random.Next(1, minigames.Count() + 1) - 1;
                             played = true;
                         }
                     }
@@ -378,14 +378,14 @@ namespace ToTheRescueWebApplication.Controllers
             else    //free play mode
             {
                 minigames = _minigame.GetAllMinigames(); //get a list of all minigames from database
-                int ranGame = random.Next(1, minigames.Count()) - 1; //generate an index between 1 and num of games
+                int ranGame = random.Next(1, minigames.Count() + 1) - 1; //generate an index between 1 and num of games
 
                 //choose a different minigame if device is mobile and chosen game isn't mobile friendly
                 //letter sound racing, typing, tangram
                 while (DetectMobile() && (minigames[ranGame].ID == 18 || minigames[ranGame].ID == 19 ||
                     minigames[ranGame].ID == 4))
                 {
-                    ranGame = random.Next(1, minigames.Count()) - 1; //generate an index between 1 and num of games
+                    ranGame = random.Next(1, minigames.Count() + 1) - 1; //generate an index between 1 and num of games
                 }
 
                 model.MiniGameID = minigames[ranGame].ID;
