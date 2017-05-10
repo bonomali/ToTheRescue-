@@ -29,128 +29,6 @@ var main = function () {
     setupGame();
 }
 
-var initializeVars = function () {
-    //grab the difficulty
-    difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
-
-    //setting some helper variables
-    imgPath = '../../MiniGames/Number_Find/images/';
-    var finalScore = 0;
-    numsFound = 0;
-    (difficulty == 0) ? maxNumber = 5
-        : maxNumber = 5 + (difficulty * 2);
-    isSelected = false;
-    selectedNum = 0;
-    performanceStat = 5;
-    intro = new WebAudioAPISound('../../MiniGames/Number_Find/sounds/mrKitty.m4a');
-    prng = new WebAudioAPISound('../../MiniGames/Number_Find/sounds/prng.m4a');
-    bgMusic = new WebAudioAPISound('../../MiniGames/Number_Find/sounds/background_music.mp3'
-        , { loop: true });
-    bgMusic.setVolume(30);
-    prng.setVolume(25);
-
-    //setting sound/music toggles
-    soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound");
-    musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
-    
-    //changing string values to more manageable int values
-    (soundToggle == "False") ? soundToggle = 1 : soundToggle = 0;
-    (musicToggle == "False") ? musicToggle = 1 : musicToggle = 0;
-
-    //set the nums to be found for the game
-    for (var i = 0; i < maxNumber; i++)
-    {
-        //get random number
-        var rand = Math.floor(Math.random() * 100) + 1;
-
-        //loop through available list of numbers already set 
-        for (var k = 0; k < i; k++) {
-            //if a the rand matches a previous number
-            while (numsToFind[k] == rand) {
-                rand = Math.floor(Math.random() * 100) + 1;
-                k = 0; //restart the loop for reassurance
-            }
-        }
-        numsToFind[i] = rand;
-    }
-    //set the cat expression pictures
-    catPics = [imgPath + "default.png", imgPath + "disapointed.png"
-        , imgPath + "pleased.png", imgPath + "surprised.png", imgPath + "oo.png"];
-
-    //set the minigame timeout 
-    setTimeout(function GameOver() {
-        if (soundToggle) responsiveVoice.speak("Good Attempt.");
-        var finalScore = -5;
-        document.getElementById('score').value = finalScore;
-        EndofGame();
-    }, 300000);
-}
-
-var createHTMLElements = function () {
-    //create encapsulating container
-    container = document.createElement('div');
-    container.setAttribute('id', 'container');
-
-    //reference css
-    var fileRef = document.createElement("link");
-    fileRef.setAttribute("rel", "stylesheet");
-    fileRef.setAttribute("type", "text/css");
-    fileRef.setAttribute("href", "../../MiniGames/Number_Find/CSS/Number_Find.css");
-    document.getElementsByTagName("head")[0].appendChild(fileRef);
-
-    //set background img
-    var background = document.createElement("img");
-    background.setAttribute("id", "background");
-    background.setAttribute("src", imgPath + "background.png");
-    container.appendChild(background);
-
-
-    //create the empty number grid and numbers divs
-    for (var i = 1; i <= 100; i++) {
-        var tileDiv = document.createElement('div');
-        tileDiv.setAttribute('id', 'tileDiv' + i);
-        tileDiv.setAttribute('class', 'gridTileDiv');
-
-        var wordLetter = document.createElement('img');
-        wordLetter.setAttribute('id', 'tile' + i);
-        wordLetter.setAttribute('class', 'gridTile');
-        
-        var number = document.createElement('p');
-        var node = document.createTextNode(i);
-        number.setAttribute('id', 'number' + i);
-        number.setAttribute('class', 'numberOnTile');
-        number.appendChild(node);
-
-
-        tileDiv.appendChild(number);
-        container.appendChild(tileDiv);
-        container.appendChild(wordLetter)
-    }
-
-    //create tile to be found in grid
-    var numToBeMatched = document.createElement('img');
-    numToBeMatched.setAttribute('id', 'tileToFind');
-    container.appendChild(numToBeMatched);
-
-    //create number to be found 
-    var tileDiv = document.createElement('div');
-    tileDiv.setAttribute('id', 'numToBeFoundDiv');
-
-    var number = document.createElement('p');
-    number.setAttribute('id', 'numberToFind');
-
-    tileDiv.appendChild(number);
-    container.appendChild(tileDiv);
-
-    //create cat
-    var cat = document.createElement('img');
-    cat.setAttribute('id', 'cat');
-    container.appendChild(cat);
-
-    document.getElementById("BlocksGame").appendChild(container);
-
-}
-
 var setupGame = function () {
     //begin instructions, background music, set cat pic
     beginIntro();
@@ -270,7 +148,6 @@ var imgClicked = function (num)
     //if correct
     if (numsToFind[numsFound] == num)
     {
-        //document.getElementById("tileDiv" + num).removeEventListener("click", tileClicked);
         setTimeout(function () {
             if (soundToggle) prng.play(prng);
             setCatPic(2);
@@ -320,11 +197,128 @@ var checkWin = function () {
     }
 }
 
+var initializeVars = function () {
+    //grab the difficulty
+    difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
+
+    //setting some helper variables
+    imgPath = '../../MiniGames/Number_Find/images/';
+    var finalScore = 0;
+    numsFound = 0;
+    (difficulty == 0) ? maxNumber = 5
+        : maxNumber = 5 + (difficulty * 2);
+    isSelected = false;
+    selectedNum = 0;
+    performanceStat = 5;
+    intro = new WebAudioAPISound('../../MiniGames/Number_Find/sounds/mrKitty.m4a');
+    prng = new WebAudioAPISound('../../MiniGames/Number_Find/sounds/prng.m4a');
+    bgMusic = new WebAudioAPISound('../../MiniGames/Number_Find/sounds/background_music.mp3'
+        , { loop: true });
+    bgMusic.setVolume(30);
+    prng.setVolume(25);
+
+    //setting sound/music toggles
+    soundToggle = document.getElementById("minigameScript").getAttribute("toggleSound");
+    musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
+
+    //changing string values to more manageable int values
+    (soundToggle == "False") ? soundToggle = 1 : soundToggle = 0;
+    (musicToggle == "False") ? musicToggle = 1 : musicToggle = 0;
+
+    //set the nums to be found for the game
+    for (var i = 0; i < maxNumber; i++) {
+        //get random number
+        var rand = Math.floor(Math.random() * 100) + 1;
+
+        //loop through available list of numbers already set 
+        for (var k = 0; k < i; k++) {
+            //if a the rand matches a previous number
+            while (numsToFind[k] == rand) {
+                rand = Math.floor(Math.random() * 100) + 1;
+                k = 0; //restart the loop for reassurance
+            }
+        }
+        numsToFind[i] = rand;
+    }
+    //set the cat expression pictures
+    catPics = [imgPath + "default.png", imgPath + "disapointed.png"
+        , imgPath + "pleased.png", imgPath + "surprised.png", imgPath + "oo.png"];
+
+    //set the minigame timeout 
+    setTimeout(function GameOver() {
+        if (soundToggle) responsiveVoice.speak("Good Attempt.");
+        var finalScore = -5;
+        document.getElementById('score').value = finalScore;
+        EndofGame();
+    }, 300000);
+}
+
+var createHTMLElements = function () {
+    //create encapsulating container
+    container = document.createElement('div');
+    container.setAttribute('id', 'container');
+
+    //reference css
+    var fileRef = document.createElement("link");
+    fileRef.setAttribute("rel", "stylesheet");
+    fileRef.setAttribute("type", "text/css");
+    fileRef.setAttribute("href", "../../MiniGames/Number_Find/CSS/Number_Find.css");
+    document.getElementsByTagName("head")[0].appendChild(fileRef);
+
+    //set background img
+    var background = document.createElement("img");
+    background.setAttribute("id", "background");
+    background.setAttribute("src", imgPath + "background.png");
+    container.appendChild(background);
+
+
+    //create the empty number grid and numbers divs
+    for (var i = 1; i <= 100; i++) {
+        var tileDiv = document.createElement('div');
+        tileDiv.setAttribute('id', 'tileDiv' + i);
+        tileDiv.setAttribute('class', 'gridTileDiv');
+
+        var wordLetter = document.createElement('img');
+        wordLetter.setAttribute('id', 'tile' + i);
+        wordLetter.setAttribute('class', 'gridTile');
+
+        var number = document.createElement('p');
+        var node = document.createTextNode(i);
+        number.setAttribute('id', 'number' + i);
+        number.setAttribute('class', 'numberOnTile');
+        number.appendChild(node);
+
+
+        tileDiv.appendChild(number);
+        container.appendChild(tileDiv);
+        container.appendChild(wordLetter)
+    }
+
+    //create tile to be found in grid
+    var numToBeMatched = document.createElement('img');
+    numToBeMatched.setAttribute('id', 'tileToFind');
+    container.appendChild(numToBeMatched);
+
+    //create number to be found 
+    var tileDiv = document.createElement('div');
+    tileDiv.setAttribute('id', 'numToBeFoundDiv');
+
+    var number = document.createElement('p');
+    number.setAttribute('id', 'numberToFind');
+
+    tileDiv.appendChild(number);
+    container.appendChild(tileDiv);
+
+    //create cat
+    var cat = document.createElement('img');
+    cat.setAttribute('id', 'cat');
+    container.appendChild(cat);
+
+    document.getElementById("BlocksGame").appendChild(container);
+
+}
+
 main();
-//window.onbeforeunload = function () {
-//    responsiveVoice.cancel();
-//    return null;
-//}
 
 /*Universal Minigame Scaler!*/
 var pageWidth, pageHeight;
