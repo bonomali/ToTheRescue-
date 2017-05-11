@@ -1,0 +1,180 @@
+html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden; 
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    background-color: #6D7993;
+}
+
+#BlocksGame {
+    height: 100%;
+    width: 90%;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+#header {
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+#pizzaDiv {
+    position: absolute;
+    left: 0;
+    width: 60%;
+    height: 94.5%;
+}
+
+#pizzaImgDiv {
+    position: absolute;
+    margin: auto;
+    width: 75%;
+    height: 90%;
+    top: 5%;
+    left: 17%;
+}
+
+.divToppings {
+    position: absolute;
+    width: 15%;
+    height: 15%;
+}
+
+#d1 {
+    left: 22%;
+    top: 15%;
+}
+
+#d2 {
+    left: 45%;
+    top: 10%;
+}
+
+#d3 {
+    left: 67%;
+    top: 20%;
+}
+
+#d4 {
+    left: 73%;
+    top: 40%;
+}
+
+#d5 {
+    left: 70%;
+    top: 60%;
+}
+
+#d6 {
+    left: 52%;
+    top: 75%;
+}
+
+#d7 {
+    left: 30%;
+    top: 70%;
+}
+
+#d8 {
+    left: 12%;
+    top: 55%;
+}
+
+#d9 {
+    left: 10%;
+    top: 34%;
+}
+
+#d10 {
+    left: 43%;
+    top: 30%;
+}
+
+#d11 {
+    left: 52%;
+    top: 48%;
+}
+
+#d12 {
+    left: 32%;
+    top: 48%;
+}
+
+#numbersDiv {
+    position: absolute;
+    left: 60%;
+    width: 20%;
+    height: 94.5%;
+}
+
+.numbers {
+    margin-left: 30%;
+    height: 21%;
+    width: 68%;
+    margin-top: 5%;
+    text-align: center;
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    float: left;
+}
+
+#n1 {
+    margin-top: 1%;
+}
+
+#toppingsDiv {
+    position: absolute;
+    left: 80%;
+    width: 20%;
+    height: 94.5%;
+}
+
+.toppings {
+    height: 21%;
+    width: 68%;
+    margin-top: 5%;
+    float: left;
+}
+
+#pepperoni {
+    margin-top: 1%;
+}
+
+@media only screen and (max-width: 860px) {
+    #pizzaImgDiv {
+        width: 70%;
+        height: 85%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #pizzaImgDiv {
+        width: 65%;
+        height: 80%;
+    }
+
+    #header {
+        font-size: 150%;
+    }
+
+    .toppings {
+        height: 19%;
+        width: 66%;
+    }
+
+    .numbers {
+        height: 19%;
+        width: 66%;
+    }
+}

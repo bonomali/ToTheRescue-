@@ -207,6 +207,7 @@
     <Content Include="Audio\Lion_Roar.mp3" />
     <Content Include="Audio\soundEffects\abcSong.mp3" />
     <Content Include="Audio\soundEffects\airPlaneDing.mp3" />
+    <Content Include="Audio\soundEffects\blop.mp3" />
     <Content Include="Audio\soundEffects\cartoonCowbell.mp3" />
     <Content Include="Audio\soundEffects\chaChing.mp3" />
     <Content Include="Audio\soundEffects\elevatorDing.mp3" />
@@ -348,6 +349,13 @@
     <Content Include="MiniGames\Number_Find\sounds\mrKitty.m4a" />
     <Content Include="MiniGames\Number_Find\sounds\prng.m4a" />
     <Content Include="MiniGames\Number_Tracing\sounds\audioInstructions_Part2.mp3" />
+    <Content Include="MiniGames\PizzaCounting\css\PizzaCounting.css" />
+    <Content Include="MiniGames\PizzaCounting\img\mushroom.png" />
+    <Content Include="MiniGames\PizzaCounting\img\olives.png" />
+    <Content Include="MiniGames\PizzaCounting\img\pepper.png" />
+    <Content Include="MiniGames\PizzaCounting\img\pepperoni.png" />
+    <Content Include="MiniGames\PizzaCounting\img\pizza.png" />
+    <Content Include="MiniGames\PizzaCounting\javascript\PizzaCounting.js" />
     <Content Include="MiniGames\Position_Vocabulary\sounds\land_1.mp3" />
     <Content Include="MiniGames\Shape_ColoringBook\sounds\audioInstructions_Part2.mp3" />
     <Content Include="MiniGames\Supah_Counting\sounds\menu.mp3" />
