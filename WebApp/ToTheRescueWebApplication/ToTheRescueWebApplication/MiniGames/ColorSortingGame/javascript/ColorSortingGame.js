@@ -67,7 +67,7 @@ function Drag(ev)
 		
 }
 
-//Allows the actual dorp to happen
+//Allows the actual drop to happen
 function Drop(ev) 
 {
     var targetColor = '';
@@ -110,7 +110,6 @@ function Drop(ev)
 		    }
 
 			//allow the drop to happen
-			ev.preventDefault();
 			var data = ev.dataTransfer.getData("content");
 			ev.target.appendChild(document.getElementById(data));
 			
@@ -125,6 +124,7 @@ function Drop(ev)
 		}
 		else
 		{
+		    //allow the drop to happen
 		    if (soundToggle === "False") {
 		        //play the incorrect drop sound
 		        audio = new WebAudioAPISound("../../Audio/soundEffects/metalClang.mp3");
@@ -132,6 +132,7 @@ function Drop(ev)
 		    }
 		}
 	}
+	ev.preventDefault();
 	mostRecentDragColor = null;
 }
 

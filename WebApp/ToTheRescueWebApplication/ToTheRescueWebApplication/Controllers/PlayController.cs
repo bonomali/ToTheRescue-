@@ -370,6 +370,11 @@ namespace ToTheRescueWebApplication.Controllers
                     {
                         played = true;
                     }
+
+                    //if the browser isn't chrome and tangram is played
+                    if (!IsBrowserChrome() && minigames[ranGame].ID == 19)
+                        played = true;
+
                 }
                 model.MiniGameID = minigames[ranGame].ID;
                 model.CategoryID = minigames[ranGame].MiniGameCategoryID;
@@ -379,11 +384,11 @@ namespace ToTheRescueWebApplication.Controllers
             {
                 minigames = _minigame.GetAllMinigames(); //get a list of all minigames from database
                 int ranGame = random.Next(1, minigames.Count() + 1) - 1; //generate an index between 1 and num of games
-
+  
                 //choose a different minigame if device is mobile and chosen game isn't mobile friendly
                 //letter sound racing, typing, tangram
-                while (DetectMobile() && (minigames[ranGame].ID == 18 || minigames[ranGame].ID == 19 ||
-                    minigames[ranGame].ID == 4))
+                while ((DetectMobile() && (minigames[ranGame].ID == 18 || minigames[ranGame].ID == 19 ||
+                    minigames[ranGame].ID == 4)) || (!IsBrowserChrome() && minigames[ranGame].ID == 19))
                 {
                     ranGame = random.Next(1, minigames.Count() + 1) - 1; //generate an index between 1 and num of games
                 }
@@ -418,6 +423,21 @@ namespace ToTheRescueWebApplication.Controllers
                 isMobile = true;
 
             return isMobile;
+        }
+
+        //Returns true if the browser is chrome, returns false if browser is not chrome
+        public bool IsBrowserChrome()
+        {
+            bool chrome = false;
+            var userAgent = Request.UserAgent;
+
+            if (userAgent != null)
+            {
+                if (userAgent.ToLower().Contains("chrome"))
+                    chrome = true;
+            }
+
+            return chrome;
         }
     }
 }

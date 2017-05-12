@@ -276,7 +276,7 @@ function DropHouse(ev) {
     }
     //correct angle, allow the drop
     if (correctRotation === true) {
-        ev.preventDefault();
+        //ev.preventDefault();
         var data = ev.dataTransfer.getData("content");
         ev.target.appendChild(document.getElementById(data));
         ToggleDroppedAndEmpty(mostRecentDragID, dropAreaName);
@@ -300,7 +300,7 @@ function DropHouse(ev) {
             audio.play(audio);
         }
     }
-
+    ev.preventDefault();
     document.getElementById(mostRecentDragID).style.opacity = "1";
 }
 
@@ -604,6 +604,7 @@ function DropSquare(ev) {
     var correctRotation = false;
     var dropAreaName = "";
 
+    ev.preventDefault();
     //if you're trying to drop into a rhombus
     if (/^rhombus/.test(ev.target.id) === true && rhombusDropAreaEmpty === true) {
         //make sure you were dragging a rhombus to begin with
@@ -685,7 +686,6 @@ function DropSquare(ev) {
     }
     //correct angle, allow the drop
     if (correctRotation === true) {
-        ev.preventDefault();
         var data = ev.dataTransfer.getData("content");
         ev.target.appendChild(document.getElementById(data));
         ToggleDroppedAndEmpty(mostRecentDragID, dropAreaName);
@@ -709,7 +709,7 @@ function DropSquare(ev) {
             audio.play(audio);
         }
     }
-
+    
     document.getElementById(mostRecentDragID).style.opacity = "1";
 }
 
