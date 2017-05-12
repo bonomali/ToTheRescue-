@@ -16,7 +16,7 @@
     var ranHives = [];
     var hiveList = [];
     var score = 0;
-    var buzzing_sound, instructions, praise;
+    var buzzing_sound, instructions, praise, try_again;
 
     //difficulty level 2
     if (difficulty == 2) {
@@ -57,6 +57,8 @@
         instructions.onEnded = instructionsEnded;
         praise = new WebAudioAPISound(soundPath + "praise_recording.mp3", { loop: false });
         praise.onEnded = praiseEnded;
+        try_again = new WebAudioAPISound(soundPath + "tryAgain_recording.mp3", { loop: false });
+        try_again.setVolume(70);
         backgroundMusic = new WebAudioAPISound(soundPath + "background_music.mp3", { loop: true });
         backgroundMusic.setVolume(10);
         if (toggle_music == "False")
@@ -247,12 +249,13 @@
                 found = true;
                 bee.x = hiveList[i].x;
                 bee.y = hiveList[i].y;
-                praise.play(praise); 
+                praise.play(praise);
             }
         }
         if (found == false) {
             for (var i = 0; i < hiveList.length; i++) {
                 if (hiveList[i].isPointInside(point)) {
+                    try_again.play(try_again);
                     score = score - 2;  //decrement score for incorrect sign
                 }
             }
@@ -319,7 +322,7 @@
     //end the game
     setTimeout(function GameOver() {
         var finalScore; //calculate final score
-        instructions.volume = .1;
+        instructions.stop();
         var gameOverAudio = new WebAudioAPISound(soundPath + "gameOver_recording.mp3", { loop: false });
         gameOverAudio.setVolume(70);
         gameOverAudio.play(gameOverAudio);
