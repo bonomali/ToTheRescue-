@@ -14,8 +14,8 @@ body {
 }
 main#map {
     background-color: lightblue;
-    width: 70%;
-    height: 60%;
+    width: 69%;
+    height: 59%;
 }
 nav#playMenu {
     background-color: darkgreen;
@@ -97,11 +97,9 @@ nav#playMenu li#fullscr {
 }
 .icon {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    position: relative;
-    right: 20%;
-    Width:100%;
-    min-width:50px;
-    margin-left: 0px;
+    position: fixed;
+    right: 1%;
+    width: 8%;
     text-align: center;
     vertical-align: middle;
     overflow: visible;
@@ -237,9 +235,6 @@ nav#playMenu li#fullscr {
     #gameOver {
         left: 25%;
     }
-    .icon{
-        right: 100%;
-    }
 }
 @media only screen and (min-width: 620px) {
     div.profileInfo label {
@@ -270,9 +265,6 @@ nav#playMenu li#fullscr {
 @media only screen and (min-width: 1080px) {
     div.profileInfo label {
         font-size: 24px;
-    }
-    .iconLbls {
-        font-size: 16px;
     }
     #miniGameDone {
     left: 85%;

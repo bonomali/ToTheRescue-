@@ -147,7 +147,7 @@ CREATE FUNCTION GrabAnimals
 	(@profileID int)
 	RETURNS TABLE
 RETURN 	
-   (SELECT Funfact, Images, Sound, Active, Shiny
+   (SELECT Animals.AnimalID, Funfact, Images.ImageID, Sounds.SoundID, Active, Shiny
 	FROM ProfileAnimals
 	JOIN Animals on ProfileAnimals.AnimalID = Animals.AnimalID
 	JOIN Images on Animals.ImageID = Images.ImageID
