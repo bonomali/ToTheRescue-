@@ -121,7 +121,9 @@ function ClickedPep() {
         var id = GetDivId();
 
         var img = document.createElement("img");
-        img.setAttribute("src", imgSrc + "pepperoni.png")
+        img.setAttribute("src", imgSrc + "pepperoni.png");
+        img.style.width = "100%";
+        img.style.height = "100%";
 
         document.getElementById(id).appendChild(img);
 
@@ -146,7 +148,9 @@ function ClickedGreen() {
         var id = GetDivId();
 
         var img = document.createElement("img");
-        img.setAttribute("src", imgSrc + "pepper.png")
+        img.setAttribute("src", imgSrc + "pepper.png");
+        img.style.width = "100%";
+        img.style.height = "100%";
 
         document.getElementById(id).appendChild(img);
 
@@ -169,7 +173,9 @@ function ClickedOlive() {
         var id = GetDivId();
 
         var img = document.createElement("img");
-        img.setAttribute("src", imgSrc + "olives.png")
+        img.setAttribute("src", imgSrc + "olives.png");
+        img.style.width = "100%";
+        img.style.height = "100%";
 
         document.getElementById(id).appendChild(img);
 
@@ -192,7 +198,9 @@ function ClickedShroom() {
         var id = GetDivId();
 
         var img = document.createElement("img");
-        img.setAttribute("src", imgSrc + "mushroom.png")
+        img.setAttribute("src", imgSrc + "mushroom.png");
+        img.style.width = "100%";
+        img.style.height = "100%";
 
         document.getElementById(id).appendChild(img);
 
@@ -380,6 +388,8 @@ function CreateHtmlElements() {
     var pizzaImg = document.createElement("img");
     pizzaImg.setAttribute("id", "pizzaImg");
     pizzaImg.setAttribute("src", imgSrc + "pizza.png");
+    pizzaImg.style.width = "100%";
+    pizzaImg.style.height = "100%";
     pizzaImgDiv.appendChild(pizzaImg);
 
     for (var i = 0; i < 12; i++) {
@@ -423,6 +433,8 @@ function CreateHtmlElements() {
 
     var pImg = document.createElement("img");
     pImg.setAttribute("src", imgSrc + "pepperoni.png");
+    pImg.style.width = "100%";
+    pImg.style.height = "100%";
     pepperoni.appendChild(pImg);
 
     var greenPepper = document.createElement("div");
@@ -432,6 +444,8 @@ function CreateHtmlElements() {
 
     var gImg = document.createElement("img");
     gImg.setAttribute("src", imgSrc + "pepper.png");
+    gImg.style.width = "100%";
+    gImg.style.height = "100%";
     greenPepper.appendChild(gImg);
 
     var olives = document.createElement("div");
@@ -441,6 +455,8 @@ function CreateHtmlElements() {
 
     var oImg = document.createElement("img");
     oImg.setAttribute("src", imgSrc + "olives.png");
+    oImg.style.width = "100%";
+    oImg.style.height = "100%";
     olives.appendChild(oImg);
 
     var mushrooms = document.createElement("div");
@@ -450,6 +466,8 @@ function CreateHtmlElements() {
 
     var mImg = document.createElement("img");
     mImg.setAttribute("src", imgSrc + "mushroom.png");
+    mImg.style.width = "100%";
+    mImg.style.height = "100%";
     mushrooms.appendChild(mImg);
 
     divContainer.appendChild(header);
@@ -460,7 +478,7 @@ function CreateHtmlElements() {
 
 function EndGame() {
     responsiveVoice.speak("Great job!", "US English Female");
-
+    MakeNotClickable();
     var percentage = numCorrect / numAttempted;
 
     var returnVal = null;
