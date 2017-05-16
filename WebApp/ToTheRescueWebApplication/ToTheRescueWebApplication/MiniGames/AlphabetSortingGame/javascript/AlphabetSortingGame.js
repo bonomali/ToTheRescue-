@@ -96,7 +96,7 @@ function EndGame(finished) {
     if (endGameFuncCalls === 1) {
 
         var abcSong = new WebAudioAPISound("../../Audio/soundEffects/abcSong.mp3");
-        abcSong.setVolume(70);
+        abcSong.setVolume(75);
 
         abcSong.onEnded = function () {
             if (musicToggle === "False")
@@ -395,7 +395,7 @@ function CreateHtmlElements(letters) {
 }
 
 function Main() {
-    backgroundMusic.setVolume(10);
+    backgroundMusic.setVolume(20);
 
     var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
 				   'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
