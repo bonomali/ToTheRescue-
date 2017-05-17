@@ -109,6 +109,9 @@
         var mq = window.matchMedia("(min-width: 900px)");
         mq.addListener(WidthChange);
         WidthChange(mq);
+        var mq2 = window.matchMedia("(min-width: 550px)");
+        mq2.addListener(SmallScreen);
+        SmallScreen(mq2);
     }
 
     // media query change to handle narrower screens
@@ -129,6 +132,16 @@
             card2.appendChild(card2Image);
             card3.appendChild(card3Image);
         }
+    }
+
+    // media query change to handle smaller screens
+    function SmallScreen(mq2) {
+            card1.style.marginTop = '30%';
+            card2.style.marginTop = '30%';
+            card3.style.marginTop = '30%';
+            card1.appendChild(card1Image);
+            card2.appendChild(card2Image);
+            card3.appendChild(card3Image);
     }
 
     //handle dropping action
