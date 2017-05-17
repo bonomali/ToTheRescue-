@@ -5,6 +5,7 @@
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
     var toggle_sound = document.getElementById('minigameScript').getAttribute('toggleSound');
     var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
+    var playing = true;     //keep track of if game is still playable
 
     var imagePath = '../../MiniGames/Alphabet_Bubblepop/images/';
     var soundPath = '../../MiniGames/Alphabet_BubblePop/sounds/';
@@ -171,7 +172,7 @@
 			gameTapped = function (point) {
 			    var i;
 			    for (i = 0; i < bubbles.length; i += 1) {
-			        if (bubbles[i].isPointInside(point) && bubbles[i].name == "targetBubble") {
+			        if (bubbles[i].isPointInside(point) && bubbles[i].name == "targetBubble" && playing == true) {
 			            popped.play(popped);
 			            bubbles[i].removeMotors();  //remove floating motion
 			            game.addMotor("alpha", {    //add fading motion
@@ -182,7 +183,7 @@
 			            score = score + 5;      //increment score for correct bubble
 			            game.addTicker(popBubble, 500, bubbles[i]); //call function to pop bubble
 			        }
-			        else if (bubbles[i].isPointInside(point)) {
+			        else if (bubbles[i].isPointInside(point) && playing == true) {
 			            if (bubbles[i].name == "bubble1")
 			                b1.play(b1);
 			            else if (bubbles[i].name == "bubble2")
@@ -269,6 +270,7 @@
 
         //end the game after time interval
         setTimeout(function GameOver() {
+            playing = false;
             endOfGame.play(endOfGame);
 
             var finalScore; //calculate final score

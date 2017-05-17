@@ -4,6 +4,7 @@
 
     var toggle_sound = document.getElementById('minigameScript').getAttribute('toggleSound');
     var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
+    var playing = true;     //keep track of if game playable
 
     var imagePath = "../../MiniGames/Dino_SightWords/images/";
     var soundPath = "../../MiniGames/BeginningLetterSounds_Racing/sounds/";
@@ -203,7 +204,7 @@
             var correct = false;
             for (var i = 0; i < wordEggs.length && correct == false; i++) {
                 //if the target egg is clicked: increment score, hatch egg, destroy old eggs, generate new eggs
-                if (wordEggs[i].isPointInside(point) && wordEggs[i].name == targetEgg.name) {
+                if (wordEggs[i].isPointInside(point) && wordEggs[i].name == targetEgg.name && playing == true) {
                     score = score + 5;  //increment score
                     correct = true;
 
@@ -215,7 +216,7 @@
                     hatching.y = wordEggs[i].y;
                     wordEggs[i].x = -200;
                 } 
-                else if (wordEggs[i].isPointInside(point) && wordEggs[i].name != targetEgg.name)
+                else if (wordEggs[i].isPointInside(point) && wordEggs[i].name != targetEgg.name && playing == true)
                 {
                     wordAudio = new Audio();    //play word audio for incorrect choice
                     if (wordEggs[i].name == "egg1")
@@ -286,6 +287,7 @@
 
     //end the game after time interval
     setTimeout(function GameOver() {
+        playing = false;
         audioInstructions.setVolume(.1); 
         babyDino_sound.setVolume(.1);
         momDino_sound.setVolume(.1);

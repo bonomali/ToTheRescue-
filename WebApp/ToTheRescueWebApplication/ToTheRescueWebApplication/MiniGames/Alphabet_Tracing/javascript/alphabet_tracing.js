@@ -8,6 +8,7 @@
     var audioClips;
     var tracingImages;
     var audioInstructions, audioInstructions2, letterAudio, backgroundMusic, endOfGame; //audio
+    var playing = true;     //keep track of if game is playable
 
     //arrays containing paths to audio files and image files for alphabet outlines
     if (difficulty_level == 2) {
@@ -138,11 +139,14 @@
         buttonDone.setAttribute('class', 'toolButton');
         buttonsDiv.appendChild(buttonDone);
         buttonDone.addEventListener('click', function () {
-            audioInstructions2.setVolume(.1);
-            //Play end of game audio, save score to html element, and call end of game function
-            endOfGame.play(endOfGame);
-            document.getElementById('score').value = 2; //save score in html element
-            EndofGame(); //function displays good job message and returns to map
+            if (playing == true) {
+                audioInstructions2.setVolume(.1);
+                //Play end of game audio, save score to html element, and call end of game function
+                endOfGame.play(endOfGame);
+                document.getElementById('score').value = 2; //save score in html element
+                EndofGame(); //function displays good job message and returns to map
+                playing = false;
+            }
         });
         buttonDone.style.backgroundImage = 'url(' + imagePath + 'done-image.jpg)';
         buttonDone.style.backgroundSize = 'cover';

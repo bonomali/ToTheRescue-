@@ -5,6 +5,7 @@
     var toggle_sound = document.getElementById('minigameScript').getAttribute('toggleSound');
     var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
+    var playing = true; //keep track of if game is playable
 
     var imagePath = '../../MiniGames/MosquitoSwat_LetterSounds/images/';
     var soundPath = '../../MiniGames/MosquitoSwat_LetterSounds/sounds/';
@@ -178,7 +179,7 @@
 			gameTapped = function (point) {
 			    var i;
 			    for (i = 0; i < mosquitoes.length; i += 1) {
-			        if (mosquitoes[i].isPointInside(point) && mosquitoes[i].name == "targetMosquito") {
+			        if (mosquitoes[i].isPointInside(point) && mosquitoes[i].name == "targetMosquito" && playing == true) {
 			            swat.play(swat);    //play swatting sound
 			            showSwatter(mosquitoes[i].x, mosquitoes[i].y);  //call function to show fly swatter for correct hit
 			            mosquitoes[i].removeMotors();  //remove floating motion
@@ -190,7 +191,7 @@
 			            score = score + 5;      //increment score for correct mosquito
 			            game.addTicker(dropMosquito, 500, mosquitoes[i]); //call function to drop mosquito
 			        }
-			        else if (mosquitoes[i].isPointInside(point)) {
+			        else if (mosquitoes[i].isPointInside(point) && playing == true) {
 			            if (mosquitoes[i].name == "mosquito1")
 			                m1.play(m1);
 			            else if (mosquitoes[i].name == "mosquito2")
@@ -289,7 +290,8 @@
         }, 8000);
 
         //end the game after time interval
-        setTimeout(function GameOver() {;
+        setTimeout(function GameOver() {
+            playing = false;
             endOfGame.play(endOfGame);
 
             var finalScore; //calculate final score

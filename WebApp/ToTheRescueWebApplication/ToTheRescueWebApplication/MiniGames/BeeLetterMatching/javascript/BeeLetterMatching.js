@@ -6,6 +6,7 @@
     var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
     var toggle_sound = document.getElementById('minigameScript').getAttribute('toggleSound');
     var difficulty = document.getElementById('minigameScript').getAttribute('difficulty');
+    var playing = true; //keep track of if game is currently playable or over
 
     var imagePath = "../../MiniGames/BeeLetterMatching/images/";
     var soundPath = "../../MiniGames/BeeLetterMatching/sounds/";
@@ -17,6 +18,7 @@
     var hiveList = [];
     var score = 0;
     var buzzing_sound, instructions, praise, try_again;
+    var praise_played = false;
 
     //difficulty level 2
     if (difficulty == 2) {
@@ -235,6 +237,8 @@
             targetHive = hive2.getSlice().name;
         else
             targetHive = hive3.getSlice().name;
+
+        praise_played = false;
     },
 
     //handle hive tapped events
@@ -249,10 +253,13 @@
                 found = true;
                 bee.x = hiveList[i].x;
                 bee.y = hiveList[i].y;
-                praise.play(praise);
             }
         }
-        if (found == false) {
+        if (found == true && praise_played == false) {
+            praise.play(praise);
+            praise_played = true;
+        }
+        if (found == false && playing == true) {
             for (var i = 0; i < hiveList.length; i++) {
                 if (hiveList[i].isPointInside(point)) {
                     try_again.play(try_again);
@@ -295,10 +302,12 @@
     }, 10000);
 
     praiseEnded = function () {
-        gameSet();  //generate new random hives
-        bee.y = 50; //reset bee's position
-        bee.x = game.width / 2 - 50;
-        instructions.play(instructions);    //play audio instructions
+        if (playing == true) {
+            gameSet();  //generate new random hives
+            bee.y = 50; //reset bee's position
+            bee.x = game.width / 2 - 50;
+            instructions.play(instructions);    //play audio instructions
+        }
     };
 
     //play audio of letter
@@ -321,6 +330,7 @@
     }
     //end the game
     setTimeout(function GameOver() {
+        playing = false;
         var finalScore; //calculate final score
         instructions.stop();
         var gameOverAudio = new WebAudioAPISound(soundPath + "gameOver_recording.mp3", { loop: false });
