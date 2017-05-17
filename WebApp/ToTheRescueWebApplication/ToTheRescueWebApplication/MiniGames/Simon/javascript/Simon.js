@@ -356,6 +356,7 @@ function CreateHtmlElements() {
 
 function EndGame() {
     responsiveVoice.speak("Great job!", "US English Female");
+    MakeNotClickable();
 
     var returnVal = null;
 

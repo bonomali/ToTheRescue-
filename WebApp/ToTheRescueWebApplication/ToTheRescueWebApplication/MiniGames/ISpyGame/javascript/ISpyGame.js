@@ -56,6 +56,7 @@ function MakeClickable() {
 
 function Clicked(clickedAnimal) {
     var soundEffect;
+    MakeNotClickable();
 
     if (clickedAnimal === animalArr[index]) {
 

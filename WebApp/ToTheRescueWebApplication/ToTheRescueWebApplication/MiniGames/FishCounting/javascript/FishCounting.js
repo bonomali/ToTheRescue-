@@ -6,6 +6,18 @@ var audio = null;
 var soundToggle = "False";
 var musicToggle = "False";
 
+function MakeNotClickable() {
+    document.getElementById("answerOne").onclick = null;
+    document.getElementById("answerTwo").onclick = null;
+    document.getElementById("answerThree").onclick = null;
+}
+
+function MakeClickable() {
+    document.getElementById("answerOne").onclick = function () { ClickedAnswer(answerOne); };
+    document.getElementById("answerTwo").onclick = function () { ClickedAnswer(answerTwo); };
+    document.getElementById("answerThree").onclick = function () { ClickedAnswer(answerThree); };
+}
+
 function GetRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -16,6 +28,7 @@ function ClickedAnswer(clickedDiv) {
 
     if (clickedDiv.innerHTML === answer.toString()) {
         correctClicks++;
+        MakeNotClickable();
         GameLoop();
     }
     else {
@@ -139,9 +152,8 @@ function SetAnswerContent(waitTime) {
                 answerDivs[0].innerHTML = answer + 1;
             }
         }
+        MakeClickable();
     }, waitTime * 1000);
-
-
 }
 
 function ResetFish() {
@@ -165,6 +177,7 @@ function ResetFish() {
 }
 
 function GameLoop() {
+    MakeNotClickable();
     ResetFish();
 
     answer = GetRandomInt(0, 9);
@@ -357,17 +370,14 @@ function CreateHtmlElements() {
     var answerOne = document.createElement("div");
     answerOne.setAttribute("id", "answerOne");
     answerOne.setAttribute("class", "answers");
-    answerOne.setAttribute("onClick", "ClickedAnswer(answerOne)");
 
     var answerTwo = document.createElement("div");
     answerTwo.setAttribute("id", "answerTwo");
     answerTwo.setAttribute("class", "answers");
-    answerTwo.setAttribute("onClick", "ClickedAnswer(answerTwo)");
 
     var answerThree = document.createElement("div");
     answerThree.setAttribute("id", "answerThree");
     answerThree.setAttribute("class", "answers");
-    answerThree.setAttribute("onClick", "ClickedAnswer(answerThree)");
 
     answerContainer.appendChild(answerOne);
     answerContainer.appendChild(answerTwo);
@@ -380,12 +390,7 @@ function CreateHtmlElements() {
 
 function EndGame() {
     responsiveVoice.speak("Great job!", "US English Female");
-    var answerAreas = document.getElementsByClassName("answers");
-    var fish = document.getElementsByClassName("fish");
-
-    for (var i = 0; i < 3; i++) {
-        answerAreas[i].onclick = null;
-    }
+    MakeNotClickable();
 
     var percentage = correctClicks / totalClicks;
 

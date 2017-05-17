@@ -440,7 +440,7 @@ function EndGame(AdditionGame) {
 function Main() {
 
     var backgroundMusic = new WebAudioAPISound("../../Audio/backgroundMusic/bgSong1.mp3", { loop: true });
-    backgroundMusic.setVolume(20);
+    backgroundMusic.setVolume(10);
 
     //object that keeps track of all the important
     //information in the game
