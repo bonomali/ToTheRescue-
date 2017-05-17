@@ -7,6 +7,7 @@
     var InstructionsPart1, InstructionsPart2, InstructionsPart3, tryAgain, correct;  //audio
     var score = 0;
     var finalScore = 0;
+    var playing = true;     //keep track of if game still playable
 
     //sets of pair words and corresponding sounds
     var wordsSet1 = [imagePath + "fireman.png", imagePath + "ambulance.png", imagePath + "bird.png", imagePath + "hammer.png", imagePath + "hat.png",
@@ -103,6 +104,32 @@
     card3Image.style.height = '100%';
     card3Image.style.width = '100%';
     card3Image.setAttribute('draggable', true);
+
+    if (matchMedia) {
+        var mq = window.matchMedia("(min-width: 900px)");
+        mq.addListener(WidthChange);
+        WidthChange(mq);
+    }
+
+    // media query change to handle narrower screens
+    function WidthChange(mq) {
+        if (!mq.matches && window.innerHeight > 250) {
+            card1.style.marginTop = '45%';
+            card2.style.marginTop = '45%';
+            card3.style.marginTop = '45%';
+            card1.appendChild(card1Image);
+            card2.appendChild(card2Image);
+            card3.appendChild(card3Image);
+        }
+        else {
+            card1.style.marginTop = '30%';
+            card2.style.marginTop = '30%';
+            card3.style.marginTop = '30%';
+            card1.appendChild(card1Image);
+            card2.appendChild(card2Image);
+            card3.appendChild(card3Image);
+        }
+    }
 
     //handle dropping action
     matchingRhyme.ondragover = function allowDrop(ev) {
@@ -229,10 +256,12 @@
     };
 
     matchingEnded = function () {
-        setTimeout(InitGame(), 500);    //init a new game
+        if(playing == true)
+            setTimeout(InitGame(), 500);    //init a new game
     };
 
     setTimeout(function GameOver() {
+        playing = false;
         InstructionsPart1.setVolume(.1);
         InstructionsPart2.setVolume(.1);
         InstructionsPart3.setVolume(.1);

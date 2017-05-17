@@ -2,6 +2,7 @@
     var toggle_music = document.getElementById('minigameScript').getAttribute('toggleMusic');
     var imagePath = '../../MiniGames/Number_Tracing/images/';
     var soundPath = '../../MiniGames/Number_Tracing/sounds/';
+    var playing = true;     //keep track of if game playable
 
     var difficulty_level = document.getElementById('minigameScript').getAttribute('difficulty');
     var audioClips;
@@ -135,11 +136,14 @@
         buttonDone.setAttribute('class', 'toolButton');
         buttonsDiv.appendChild(buttonDone);
         buttonDone.addEventListener('click', function () {
-            audioInstructions2.setVolume(.1);
-            //Play end of game audio, save score to html element, and call end of game function
-            endOfGame.play(endOfGame);
-            document.getElementById('score').value = 2; //save score in html element
-            EndofGame(); //function displays good job message and returns to map
+            if (playing == true) {
+                audioInstructions2.setVolume(.1);
+                //Play end of game audio, save score to html element, and call end of game function
+                endOfGame.play(endOfGame);
+                document.getElementById('score').value = 2; //save score in html element
+                EndofGame(); //function displays good job message and returns to map
+                playing = false;
+            }
         });
         buttonDone.style.backgroundImage = 'url(' + imagePath + 'done-image.jpg)';
         buttonDone.style.backgroundSize = 'cover';
