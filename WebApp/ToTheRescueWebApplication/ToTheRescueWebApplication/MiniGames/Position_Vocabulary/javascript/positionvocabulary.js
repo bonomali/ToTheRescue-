@@ -225,11 +225,10 @@
             //play background music
             backgroundMusic.play(backgroundMusic);
         }
-
+        game.controller.addEventListener("tap", gameTapped);
         responsiveVoice.OnVoiceReady = function () {
             console.log("speech time?");
             responsiveVoice.setDefaultVoice("US English Female");
-            game.controller.addEventListener("tap", gameTapped);
         };
 
         window.onbeforeunload = function () {
