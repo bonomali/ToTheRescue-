@@ -140,7 +140,7 @@
             },
             wiggleRight = function (crate) { game.addMotor("rotate", { object: crate, duration: 100, amount: 5 }); },
             wiggleLeft = function (crate) { game.addMotor("rotate", { object: crate, duration: 100, amount: -5 }); },
-            cratePlay = function () { crateSound.play(crateSound); },
+            cratePlay = function () { if (toggle_sound == "False") { crateSound.play(crateSound); }},
             ghostSad = function (ghost) { ghost.setSlice("2"); };
             addGhosts = function () {
             var ghost;
