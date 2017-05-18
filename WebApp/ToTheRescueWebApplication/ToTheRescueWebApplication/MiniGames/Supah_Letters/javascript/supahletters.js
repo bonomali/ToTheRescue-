@@ -93,8 +93,11 @@
             }),
             gameTapped = function (point) {
                 var i;
-                if (coin.isPointInside(point)) {
+                if (coin.isPointInside(point) | crate.isPointInside(point)) {
                     responsiveVoice.speak("NotMario's coins have the letter " + coin.name);
+                }
+                else if (notMario.isPointInside(point)) {
+                    responsiveVoice.speak("NotMario thanks you for helping him.");
                 }
                 else {
                     for (i = (index - 1) ; i < coinTiles.length; i += 1) {
@@ -133,6 +136,7 @@
                         }
                     }
                 }
+
             },
             wiggleRight = function (crate) { game.addMotor("rotate", { object: crate, duration: 100, amount: 5 }); },
             wiggleLeft = function (crate) { game.addMotor("rotate", { object: crate, duration: 100, amount: -5 }); },
