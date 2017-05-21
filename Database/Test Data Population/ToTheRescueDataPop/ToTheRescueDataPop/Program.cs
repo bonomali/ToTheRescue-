@@ -147,6 +147,7 @@ namespace ToTheRescueDataPop
             ProductDB.WriteMiniGames(2, file_path1 + "Position_Vocabulary" + file_path2 + "positionvocabulary.js", "PositionVocabulary", 4, 4);
             ProductDB.WriteMiniGames(1, file_path1 + "SightWord_Maze" + file_path2 + "sightword_maze.js", "SightWordMaze", 4, 4);
             ProductDB.WriteMiniGames(1, file_path1 + "AlphabetSortingGame" + file_path2 + "AlphabetSortingGame.js", "AlphabetMatching", 1, 2);
+            ProductDB.WriteMiniGames(2, file_path1 + "PetShopCounting" + file_path2 + "petshop_counting.js", "PetShopCounting", 1, 2);
 
             //Animals
             Console.WriteLine("Uploading Animals.");
