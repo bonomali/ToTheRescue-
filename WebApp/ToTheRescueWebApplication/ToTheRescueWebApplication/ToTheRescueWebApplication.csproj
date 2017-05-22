@@ -647,6 +647,13 @@
     <Content Include="MiniGames\PetShopCounting\sounds\round6_recording.mp3" />
     <Content Include="MiniGames\PetShopCounting\sounds\round7_recording.mp3" />
     <Content Include="MiniGames\PetShopCounting\sounds\tryAgain_recording.mp3" />
+    <Content Include="MiniGames\PatternCompletion\css\PatternCompletion.css" />
+    <Content Include="MiniGames\PatternCompletion\img\happyEmoji.png" />
+    <Content Include="MiniGames\PatternCompletion\img\questionMark.png" />
+    <Content Include="MiniGames\PatternCompletion\img\sadEmoji.png" />
+    <Content Include="MiniGames\PatternCompletion\img\star.png" />
+    <Content Include="MiniGames\PatternCompletion\img\thinkingEmoji.png" />
+    <Content Include="MiniGames\PatternCompletion\javascript\PatternCompletion.js" />
     <Content Include="MiniGames\PizzaCounting\css\PizzaCounting.css" />
     <Content Include="MiniGames\PizzaCounting\img\mushroom.png" />
     <Content Include="MiniGames\PizzaCounting\img\olives.png" />

@@ -1,0 +1,74 @@
+html{
+    height: 100%;
+	width: 100%;
+	/* overflow: hidden; */
+}
+
+ body{
+    height: 100%;
+	width: 100%;
+	margin: auto;
+	background-color: #3b5998;
+}
+
+ #BlocksGame {
+    height: 100%;
+    width: 90%;
+}
+
+#header{
+	text-align: center;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	color: white;
+}
+
+#contentContainer{
+	left:0;
+	position:absolute;
+	width:100%;
+	height: 94.5%;
+}
+
+#patternContainer{
+	width: 90%;
+	height: 25%;
+	background-color: #8b9dc3;
+	position: absolute;
+	border: 2px solid;
+	border-radius: 25px;
+	top: 10%;
+	left: 5%;
+}
+
+.pattern{
+	width: 11%;
+	height: 80%;
+	margin-left: 1%;
+	margin-top: 1.25%;
+	float:left;
+}
+
+#p1{
+	margin-left: 2.5%;
+}
+
+.bottomRow{
+	top: 53%;
+	position: absolute;
+	width: 15%;
+	height: 30%;
+}
+
+#square{
+	left: 10%;
+}
+
+#emoji{
+	left: 45%;
+}
+
+#triangle{
+	left: 75%;
+}
