@@ -10,9 +10,9 @@ var soundToggle = "False";
 var musicToggle = "False";
 var ding = new WebAudioAPISound("../../Audio/soundEffects/airPlaneDing.mp3");
 var clank = new WebAudioAPISound("../../Audio/soundEffects/metallicClank.mp3");
+var numEndGameCalls = 0;
 
-function ZeroPattern()
-{
+function ZeroPattern() {
     document.getElementById("i1").src = tangramImgSrc + "square.png";
     document.getElementById("i2").src = tangramImgSrc + "square.png";
     document.getElementById("i3").src = tangramImgSrc + "square.png";
@@ -20,86 +20,80 @@ function ZeroPattern()
     document.getElementById("i5").src = tangramImgSrc + "square.png";
     document.getElementById("i6").src = tangramImgSrc + "square.png";
     document.getElementById("i7").src = tangramImgSrc + "square.png";
-	document.getElementById("i8").src = patternImgSrc + "questionMark.png";	
-	answer = "square";
+    document.getElementById("i8").src = patternImgSrc + "questionMark.png";
+    answer = "square";
 }
 
-function FirstPattern()
-{
+function FirstPattern() {
     document.getElementById("i1").src = tangramImgSrc + "square.png";
     document.getElementById("i2").src = tangramImgSrc + "greenTri.png";
     document.getElementById("i3").src = tangramImgSrc + "square.png";
     document.getElementById("i4").src = tangramImgSrc + "greenTri.png";
-	document.getElementById("i5").src = tangramImgSrc + "square.png";
-	document.getElementById("i6").src = tangramImgSrc + "greenTri.png";
-	document.getElementById("i7").src = tangramImgSrc + "square.png";
-	document.getElementById("i8").src = patternImgSrc + "questionMark.png";
-	answer = "greenTri";
+    document.getElementById("i5").src = tangramImgSrc + "square.png";
+    document.getElementById("i6").src = tangramImgSrc + "greenTri.png";
+    document.getElementById("i7").src = tangramImgSrc + "square.png";
+    document.getElementById("i8").src = patternImgSrc + "questionMark.png";
+    answer = "greenTri";
 }
 
-function SecondPattern()
-{
+function SecondPattern() {
     document.getElementById("i1").src = tangramImgSrc + "greenTri.png";
     document.getElementById("i2").src = tangramImgSrc + "square.png";
-	document.getElementById("i3").src = tangramImgSrc + "greenTri.png";
-	document.getElementById("i4").src = tangramImgSrc + "square.png";
-	document.getElementById("i5").src = tangramImgSrc + "greenTri.png";
-	document.getElementById("i6").src = tangramImgSrc + "square.png";
-	document.getElementById("i7").src = tangramImgSrc + "greenTri.png";
-	document.getElementById("i8").src = patternImgSrc + "questionMark.png";
-	answer = "square";	
+    document.getElementById("i3").src = tangramImgSrc + "greenTri.png";
+    document.getElementById("i4").src = tangramImgSrc + "square.png";
+    document.getElementById("i5").src = tangramImgSrc + "greenTri.png";
+    document.getElementById("i6").src = tangramImgSrc + "square.png";
+    document.getElementById("i7").src = tangramImgSrc + "greenTri.png";
+    document.getElementById("i8").src = patternImgSrc + "questionMark.png";
+    answer = "square";
 }
 
-function ThirdPattern()
-{
+function ThirdPattern() {
     document.getElementById("i1").src = tangramImgSrc + "square.png";
     document.getElementById("i2").src = tangramImgSrc + "square.png";
     document.getElementById("i3").src = tangramImgSrc + "greenTri.png";
     document.getElementById("i4").src = tangramImgSrc + "greenTri.png";
-	document.getElementById("i5").src = tangramImgSrc + "square.png";
-	document.getElementById("i6").src = tangramImgSrc + "square.png";
-	document.getElementById("i7").src = tangramImgSrc + "greenTri.png";
-	document.getElementById("i8").src = patternImgSrc + "questionMark.png";
-	answer = "greenTri";
+    document.getElementById("i5").src = tangramImgSrc + "square.png";
+    document.getElementById("i6").src = tangramImgSrc + "square.png";
+    document.getElementById("i7").src = tangramImgSrc + "greenTri.png";
+    document.getElementById("i8").src = patternImgSrc + "questionMark.png";
+    answer = "greenTri";
 }
 
-function FourthPattern()
-{
+function FourthPattern() {
     document.getElementById("i1").src = tangramImgSrc + "square.png";
     document.getElementById("i2").src = tangramImgSrc + "greenTri.png";
     document.getElementById("i3").src = tangramImgSrc + "greenTri.png";
     document.getElementById("i4").src = tangramImgSrc + "greenTri.png";
-	document.getElementById("i5").src = tangramImgSrc + "square.png";
-	document.getElementById("i6").src = tangramImgSrc + "greenTri.png";
-	document.getElementById("i7").src = tangramImgSrc + "greenTri.png";
-	document.getElementById("i8").src = patternImgSrc + "questionMark.png";
-	answer = "greenTri";
+    document.getElementById("i5").src = tangramImgSrc + "square.png";
+    document.getElementById("i6").src = tangramImgSrc + "greenTri.png";
+    document.getElementById("i7").src = tangramImgSrc + "greenTri.png";
+    document.getElementById("i8").src = patternImgSrc + "questionMark.png";
+    answer = "greenTri";
 }
 
-function FifthPattern()
-{
+function FifthPattern() {
     document.getElementById("i1").src = tangramImgSrc + "square.png";
     document.getElementById("i2").src = tangramImgSrc + "greenTri.png";
     document.getElementById("i3").src = patternImgSrc + "star.png";
-	document.getElementById("i4").src = tangramImgSrc + "square.png";
-	document.getElementById("i5").src = tangramImgSrc + "greenTri.png";
-	document.getElementById("i6").src = patternImgSrc + "star.png";
-	document.getElementById("i7").src = tangramImgSrc + "square.png";
-	document.getElementById("i8").src = patternImgSrc + "questionMark.png";
-	answer = "greenTri";
+    document.getElementById("i4").src = tangramImgSrc + "square.png";
+    document.getElementById("i5").src = tangramImgSrc + "greenTri.png";
+    document.getElementById("i6").src = patternImgSrc + "star.png";
+    document.getElementById("i7").src = tangramImgSrc + "square.png";
+    document.getElementById("i8").src = patternImgSrc + "questionMark.png";
+    answer = "greenTri";
 }
 
-function SixthPattern()
-{
+function SixthPattern() {
     document.getElementById("i1").src = tangramImgSrc + "greenTri.png";
     document.getElementById("i2").src = tangramImgSrc + "greenTri.png";
     document.getElementById("i3").src = tangramImgSrc + "greenTri.png";
     document.getElementById("i4").src = tangramImgSrc + "square.png";
-	document.getElementById("i5").src = tangramImgSrc + "greenTri.png";
-	document.getElementById("i6").src = tangramImgSrc + "greenTri.png";
-	document.getElementById("i7").src = tangramImgSrc + "greenTri.png";
-	document.getElementById("i8").src = patternImgSrc + "questionMark.png";
-	answer = "square";
+    document.getElementById("i5").src = tangramImgSrc + "greenTri.png";
+    document.getElementById("i6").src = tangramImgSrc + "greenTri.png";
+    document.getElementById("i7").src = tangramImgSrc + "greenTri.png";
+    document.getElementById("i8").src = patternImgSrc + "questionMark.png";
+    answer = "square";
 }
 
 /**
@@ -116,142 +110,145 @@ function Shuffle(a) {
     }
 }
 
-function MakeNotClickable()
-{
-	document.getElementById("square").onclick = null;
-	document.getElementById("triangle").onclick = null;
-}	
-
-function MakeClickable()
-{
-	document.getElementById("square").onclick = function () {ClickedAnswer("square");};
-	document.getElementById("triangle").onclick = function () {ClickedAnswer("greenTri");};
+function MakeNotClickable() {
+    document.getElementById("square").onclick = null;
+    document.getElementById("triangle").onclick = null;
 }
 
-function CreatePattern()
-{
-	var questionMark = document.getElementById("i8");
-	var emoji = document.getElementById("emojiImg");
-	emoji.src = patternImgSrc + "thinkingEmoji.png";
-	questionMark.src = patternImgSrc + "questionMark.png";
-	
-	MakeClickable();
-	//shows what pattern comes next
-	 switch (patternOrderArray[currIndex])
-		{
-			case 0:
-				ZeroPattern();
-			break;
-			case 1:
-				FirstPattern();
-			break;
-			case 2:
-				SecondPattern();
-			break;
-			case 3:
-				ThirdPattern();
-			break;
-			case 4:
-				FourthPattern();
-			break;
-			case 5:
-				FifthPattern()
-			break;
-			case 6:
-				SixthPattern();
-			break;
-			case 7:
-				MakeNotClickable();
-				EndGame();
-			break;
-			default:
-				console.log("error");
-		}
+function MakeClickable() {
+    document.getElementById("square").onclick = function () { ClickedAnswer("square"); };
+    document.getElementById("triangle").onclick = function () { ClickedAnswer("greenTri"); };
 }
 
-function ClickedAnswer(attempt)
-{
-	var questionMark = document.getElementById("i8");
-	var emoji = document.getElementById("emojiImg");
-	numAttempts++;
-	MakeNotClickable();
-	
-	if (attempt === answer)
-	{
-		var tempSrc = answer;
-		tempSrc += ".png";
-		
-		//play sound effect
-		currIndex++;
-		emoji.src = patternImgSrc + "happyEmoji.png";
-		questionMark.src = tangramImgSrc + tempSrc;
-		setTimeout(CreatePattern, 1500);
-	}
-	else
-	{
-		//play sound effect
-		emoji.src = patternImgSrc + "sadEmoji.png";
-		setTimeout(function(){
-		    emoji.src = patternImgSrc + "thinkingEmoji.png";
-			MakeClickable();
-		}, 1500)
-	}
+function CreatePattern() {
+    var questionMark = document.getElementById("i8");
+    var emoji = document.getElementById("emojiImg");
+    emoji.src = patternImgSrc + "thinkingEmoji.png";
+    questionMark.src = patternImgSrc + "questionMark.png";
+
+    MakeClickable();
+    //shows what pattern comes next
+    switch (patternOrderArray[currIndex]) {
+        case 0:
+            ZeroPattern();
+            break;
+        case 1:
+            FirstPattern();
+            break;
+        case 2:
+            SecondPattern();
+            break;
+        case 3:
+            ThirdPattern();
+            break;
+        case 4:
+            FourthPattern();
+            break;
+        case 5:
+            FifthPattern()
+            break;
+        case 6:
+            SixthPattern();
+            break;
+        case 7:
+            MakeNotClickable();
+            EndGame();
+            break;
+        default:
+            console.log("error");
+    }
 }
 
-function EndGame()
-{
-	responsiveVoice.speak("Great job!", "US English Female");
-	MakeNotClickable();
-	document.getElementById("patternContainer").style.visibility = "hidden";
-	document.getElementById("emojiImg").src = patternImgSrc + "happyEmoji.png";
-	
-	var percentage = currIndex + 1 / numAttempts;
+function ClickedAnswer(attempt) {
+    var questionMark = document.getElementById("i8");
+    var emoji = document.getElementById("emojiImg");
+    numAttempts++;
+    MakeNotClickable();
 
-    var returnVal = null;
+    if (attempt === answer) {
+        var tempSrc = answer;
+        tempSrc += ".png";
 
-    if (percentage >= 0.10 && percentage <= 0.20) {
-        returnVal = -4;
-    }
-    else if (percentage > 0.20 && percentage <= 0.30) {
-        returnVal = -3;
-    }
-    else if (percentage > 0.30 && percentage <= 0.40) {
-        returnVal = -2;
-    }
-    else if (percentage > 0.40 && percentage <= 0.50) {
-        returnVal = 0;
-    }
-    else if (percentage > 0.50 && percentage <= 0.60) {
-        returnVal = 1;
-    }
-    else if (percentage > 0.60 && percentage <= 0.70) {
-        returnVal = 2;
-    }
-    else if (percentage > 0.70 && percentage <= 0.80) {
-        returnVal = 3;
-    }
-    else if (percentage > 0.80 && percentage <= 0.90) {
-        returnVal = 4;
-    }
-    else if (percentage > 0.90 && percentage <= 0.95) {
-        returnVal = 5;
-    }
-    else if (percentage < 0.10) {
-        returnVal = -5;
+        //play good effect
+        if (soundToggle === "False") {
+            ding.play(ding);
+        }
+
+        currIndex++;
+        emoji.src = patternImgSrc + "happyEmoji.png";
+        questionMark.src = tangramImgSrc + tempSrc;
+        setTimeout(CreatePattern, 1500);
     }
     else {
-        returnVal = 5;
+        if (soundToggle === "False") {
+            //play clank effect
+            clank.play(clank);
+        }
+
+        emoji.src = patternImgSrc + "sadEmoji.png";
+        setTimeout(function () {
+            emoji.src = patternImgSrc + "thinkingEmoji.png";
+            MakeClickable();
+        }, 1500)
     }
-
-    if (numAttempts === 0)
-        returnVal = 0;
-
-    document.getElementById("score").value = returnVal;
-    EndofGame(); //function displays good job message and returns to map
 }
 
-function CreateHtmlElements()
-{
+function EndGame() {
+    numEndGameCalls++;
+
+    if (numEndGameCalls === 1) {
+        responsiveVoice.speak("Great job!", "US English Female");
+        MakeNotClickable();
+        document.getElementById("patternContainer").style.visibility = "hidden";
+        document.getElementById("emojiImg").src = patternImgSrc + "happyEmoji.png";
+
+        var percentage = currIndex + 1 / numAttempts;
+
+        var returnVal = null;
+
+        if (percentage >= 0.10 && percentage <= 0.20) {
+            returnVal = -4;
+        }
+        else if (percentage > 0.20 && percentage <= 0.30) {
+            returnVal = -3;
+        }
+        else if (percentage > 0.30 && percentage <= 0.40) {
+            returnVal = -2;
+        }
+        else if (percentage > 0.40 && percentage <= 0.50) {
+            returnVal = 0;
+        }
+        else if (percentage > 0.50 && percentage <= 0.60) {
+            returnVal = 1;
+        }
+        else if (percentage > 0.60 && percentage <= 0.70) {
+            returnVal = 2;
+        }
+        else if (percentage > 0.70 && percentage <= 0.80) {
+            returnVal = 3;
+        }
+        else if (percentage > 0.80 && percentage <= 0.90) {
+            returnVal = 4;
+        }
+        else if (percentage > 0.90 && percentage <= 0.95) {
+            returnVal = 5;
+        }
+        else if (percentage < 0.10) {
+            returnVal = -5;
+        }
+        else {
+            returnVal = 5;
+        }
+
+        if (numAttempts === 0)
+            returnVal = 0;
+
+        document.getElementById("score").value = returnVal;
+        EndofGame(); //function displays good job message and returns to map
+    }
+}
+
+function CreateHtmlElements() {
     //set up the CSS file needed for this minigame
     var fileRef = document.createElement("link");
     fileRef.setAttribute("rel", "stylesheet");
@@ -275,8 +272,7 @@ function CreateHtmlElements()
     var patternContainer = document.createElement("div");
     patternContainer.setAttribute("id", "patternContainer");
 
-    for (var i = 1; i < 8; i++)
-    {
+    for (var i = 1; i < 8; i++) {
         var pid = "p";
         var iid = "i";
         pid += i.toString();
@@ -355,8 +351,7 @@ function CreateHtmlElements()
     divContainer.appendChild(triangle);
 }
 
-function Main()
-{
+function Main() {
     var difficulty = document.getElementById("minigameScript").getAttribute("difficulty");
 
     //get the sound
@@ -364,33 +359,36 @@ function Main()
     musicToggle = document.getElementById("minigameScript").getAttribute("toggleMusic");
 
     CreateHtmlElements();
-	for (var i = 0; i < NUM_PATTERNS; i++)
-	{
-		patternOrderArray[i] = i;
-	}
-	
+    for (var i = 0; i < NUM_PATTERNS; i++) {
+        patternOrderArray[i] = i;
+    }
+
     //NEED TO DO BACKGROUND MUSIC AND MUSIC TOGGLES AND SOUND EFFECTS ON CORRECT AND WRONG
-	var backgroundMusic = new WebAudioAPISound("../../Audio/backgroundMusic/bgSong3.mp3", { loop: true });
-	backgroundMusic.setVolume(10);
+    var backgroundMusic = new WebAudioAPISound("../../Audio/backgroundMusic/bgSong3.mp3", { loop: true });
+    backgroundMusic.setVolume(10);
 
-	window.onload = function () {
-	    if (musicToggle === "False") {
-	        //play background music
-	        backgroundMusic.play(backgroundMusic);
-	    }
+    window.onload = function () {
+        if (musicToggle === "False") {
+            //play background music
+            backgroundMusic.play(backgroundMusic);
+        }
 
-		responsiveVoice.speak("Patterns are sets of things that repeat. Pick the shape to complete the pattern.", "US English Female");
-		//Patterns are sets of pictures that repeat
-		//pick the picture to complete the pattern
-		Shuffle(patternOrderArray);
-		patternOrderArray[NUM_PATTERNS] = 7;
-		CreatePattern();
-		MakeNotClickable();
-		
-		setTimeout(function(){
-			MakeClickable();
-		}, 4500);
-	}	
+        responsiveVoice.speak("Patterns are sets of things that repeat. Pick the shape to complete the pattern.", "US English Female");
+        Shuffle(patternOrderArray);
+        patternOrderArray[NUM_PATTERNS] = 7;
+        CreatePattern();
+        MakeNotClickable();
+
+        setTimeout(function () {
+            MakeClickable();
+        }, 4500);
+    }
+
+    //if the user didn't finish the game in 2 minuets
+    setTimeout(function () {
+        MakeNotClickable();
+        EndGame();
+    }, 120000);
 }
 
 Main();
