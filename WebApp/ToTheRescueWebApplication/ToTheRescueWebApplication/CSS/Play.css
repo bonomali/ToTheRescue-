@@ -1,22 +1,24 @@
-﻿html{
+﻿html {
     background-color: darkblue;
-
     position: absolute;
     width: 100%;
     height: 100%;
     touch-action: none; /*prevents page swiping for touch*/
 }
-body {  
+
+body {
     position: absolute;
     width: 100%;
     height: 100%;
     margin: 0;
 }
+
 main#map {
     background-color: lightblue;
     width: 69%;
     height: 59%;
 }
+
 nav#playMenu {
     background-color: darkgreen;
     margin: auto;
@@ -29,77 +31,84 @@ nav#playMenu {
     right: 0px;
     bottom: 0px;
 }
+
 div.profileInfo {
     background-color: darkgreen;
     width: 100%;
     height: 15%;
-
     border-radius: 25px;
     position: fixed;
     z-index: 1;
     right: 0px;
-    top: 0px
-    ;
+    top: 0px;
 }
-div.profileInfo label {
 
-    top: 5%;
-    font-size: 10px;
-    color: white;
-    vertical-align: middle;
-    font-family: "Comic Sans MS", cursive, sans-serif;
-    font-weight: bold;
-    text-shadow: 1px 1px black;
+    div.profileInfo label {
+        top: 5%;
+        font-size: 10px;
+        color: white;
+        vertical-align: middle;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+        font-weight: bold;
+        text-shadow: 1px 1px black;
+    }
+
+        div.profileInfo label#name {
+            float: left;
+            position: fixed;
+            left: 1%;
+        }
+
+        div.profileInfo label#level {
+            float: left;
+            position: fixed;
+            left: 32%;
+        }
+
+        div.profileInfo label#subject {
+            position: fixed;
+            left: 68%;
+        }
+
+nav#playMenu ul {
+    list-style-type: none;
 }
-div.profileInfo label#name {
-    float: left;
+
+nav#playMenu li#options {
     position: fixed;
-    left: 1%;
+    bottom: 19%;
 }
-div.profileInfo label#level {
-    float: left;
+
+nav#playMenu li#menu {
     position: fixed;
-    left: 32%;
+    bottom: 45%;
 }
-div.profileInfo label#subject {
-    position: fixed;
-    left: 68%;
-}
-nav#playMenu ul { 
-    list-style-type: none; 
-}
-nav#playMenu li#options { 
-    position:fixed;
-    bottom: 28%;
-}
-nav#playMenu li#menu { 
-    position:fixed;
-    bottom: 46%;
-}
+
 nav#playMenu li#sanctuary {
     position: fixed;
-    bottom: 64%;
+    top: 28%;
 }
 
-nav#playMenu li#play { 
-    position:fixed;
+nav#playMenu li#play {
+    position: fixed;
+    top: 1%;
+}
+
+nav#playMenu li#back {
+    position: fixed;
     bottom: 82%;
 }
 
-nav#playMenu li#back { 
-    position:fixed;
-    bottom: 82%;
-}
-
-nav#playMenu li#fullscr { 
-    position:fixed;
+nav#playMenu li#fullscr {
+    position: fixed;
     bottom: 10%;
 }
+
 .icon {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     position: fixed;
     right: 1%;
-    width: 8%;
+    width: 7%;
     text-align: center;
     vertical-align: middle;
     overflow: visible;
@@ -111,63 +120,67 @@ nav#playMenu li#fullscr {
     border-radius: 25px;
     border-style: outset;
     border-color: black;
-    
     background-color: darkslateblue;
     opacity: 0.9;
 }
-.icon:hover {
-    background-color: hotpink;
-}
 
-#mapCont{
+    .icon:hover {
+        background-color: hotpink;
+    }
+
+#mapCont {
     width: 100%;
     height: 100%;
     position: absolute;
 }
-#container{
-    position: absolute;
 
+#container {
+    position: absolute;
     width: 90%;
     height: 85%;
     top: 15%;
-    left: 0px;  
+    left: 0px;
     bottom: 0px;
 }
 
-#mapImg{
-   border-radius: 25px 0px 25px 0px;
-   width: 100%;
-   height: 100%;
+#mapImg {
+    border-radius: 25px 0px 25px 0px;
+    width: 100%;
+    height: 100%;
 }
 
 .mapContainer #animalImg {
-    position:absolute;
+    position: absolute;
     width: 5.5%;
     height: 12%;
-    z-index:2;
+    z-index: 2;
 }
+
 .mapContainer #avatarImg {
-    position:absolute;
+    position: absolute;
     width: 6%;
     height: 12%;
     z-index: 2;
 }
+
 #animalSaved {
-    position:relative;
+    position: relative;
     left: 30%;
     margin-top: 10%;
     width: 40%;
-    height: 50%;  
+    height: 50%;
     background-color: darkgreen;
     z-index: 3;
     border-radius: 25px;
 }
+
 #praise {
     text-align: center;
     color: lightblue;
     text-shadow: 1px 1px #000;
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
+
 #savedAnimalImg {
     display: block;
     margin-left: auto;
@@ -219,15 +232,31 @@ nav#playMenu li#fullscr {
     font-size: 50%;
 }
 
-#closePraise:hover {
-    background-color: lightpink;
-    font-size: 60%;
-}
+    #closePraise:hover {
+        background-color: lightpink;
+        font-size: 60%;
+    }
 
 @media only screen and (max-width: 800px) {
     #gameOver {
         font-size: 150%;
         min-height: 200px;
+    }
+
+    nav#playMenu li#options {
+        bottom: 19%;
+    }
+
+    nav#playMenu li#menu {
+        bottom: 43%;
+    }
+
+    nav#playMenu li#sanctuary {
+        top: 33%;
+    }
+
+    nav#playMenu li#play {
+        top: 10%;
     }
 }
 
@@ -236,37 +265,59 @@ nav#playMenu li#fullscr {
         left: 25%;
     }
 }
+
 @media only screen and (min-width: 620px) {
     div.profileInfo label {
         font-size: 14px;
     }
 
-    div.profileInfo label#name {
-        left: 3%;
-    }
+        div.profileInfo label#name {
+            left: 3%;
+        }
 
-    div.profileInfo label#level {
-        left: 35%;
-    }
+        div.profileInfo label#level {
+            left: 35%;
+        }
 
-    div.profileInfo label#subject {
-        left: 70%;
-    }
+        div.profileInfo label#subject {
+            left: 70%;
+        }
+
     #closePraise {
         font-size: 60%;
     }
 
-    #closePraise:hover {
-        font-size: 70%;
-    }
-
+        #closePraise:hover {
+            font-size: 70%;
+        }
 }
 /*When screen is 1080px or larger, apply this CSS*/
 @media only screen and (min-width: 1080px) {
     div.profileInfo label {
         font-size: 24px;
     }
+
     #miniGameDone {
-    left: 85%;
+        left: 85%;
+    }
+}
+
+/*allow icons to resize properly*/
+@media only screen and (max-height: 500px) {
+    .icon {
+        width: 6%;
+    }
+}
+
+@media only screen and (max-height: 400px) {
+    .icon {
+        width: 4%;
+    }
+}
+
+
+@media only screen and (max-height: 250px) {
+    .icon {
+        width: 3%;
     }
 }
