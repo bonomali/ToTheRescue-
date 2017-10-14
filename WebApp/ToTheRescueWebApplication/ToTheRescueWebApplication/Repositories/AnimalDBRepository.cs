@@ -60,8 +60,8 @@ namespace ToTheRescueWebApplication.Repositories
                             animal.FunFact = reader["FunFact"].ToString();
                             animal.ImageID = (int)reader["ImageID"];
                             animal.SoundID = (int)reader["SoundID"];
-                            animal.ShinyBit = (bool)reader["Shiny"];
-                            animal.ActiveBit = (bool)reader["Active"];
+                            animal.ShinyBit = reader.GetBoolean("Shiny");
+                            animal.ActiveBit = reader.GetBoolean("Active");
                             animalList.Add(animal);
                         }
                     }

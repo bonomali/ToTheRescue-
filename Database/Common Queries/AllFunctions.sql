@@ -88,16 +88,7 @@ RETURN(SELECT ProfileName, AvatarID, ReadingDifficultyLevel, MathDifficultyLevel
 * provided ProfileID
 ************************************************************/
 DROP FUNCTION GetProfileAvatar
-
-CREATE FUNCTION GetProfileAvatar
-				(@profileID3 INT)
-				RETURNS TABLE
-
-RETURN(SELECT Images
-		FROM Images 
-		INNER JOIN Profiles
-		ON Images.ImageID = Profiles.AvatarID
-		WHERE Profiles.ProfileID = @profileID3);
+use totherescue;
 
 
 /************************************************************
@@ -141,17 +132,6 @@ RETURN
 ***********************************************************************/
 DROP FUNCTION GrabAnimals;
 
-
-CREATE FUNCTION GrabAnimals
-	(@profileID int)
-	RETURNS TABLE
-RETURN 	
-   (SELECT Animals.AnimalID, Funfact, Images.ImageID, Sounds.SoundID, Active, Shiny
-	FROM ProfileAnimals
-	JOIN Animals on ProfileAnimals.AnimalID = Animals.AnimalID
-	JOIN Images on Animals.ImageID = Images.ImageID
-	JOIN Sounds on Animals.SoundID = Sounds.SoundID
-	WHERE ProfileAnimals.ProfileID = @profileID);
 
 /**********************************************************************
 * Purpose: Grabs the information about a MiniGame. 

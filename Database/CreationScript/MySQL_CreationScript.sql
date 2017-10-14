@@ -141,14 +141,14 @@ THEN
   END IF;
 END$$
 DELIMITER ;
-
+DROP TRIGGER Three_MiniGame_Trigger
 DELIMITER $$
 CREATE TRIGGER Three_MiniGame_Trigger
 	 BEFORE INSERT ON ProfileProgressHistory
 	 FOR EACH ROW
 BEGIN
 	IF (EXISTS (SELECT MiniGameID FROM ProfileProgressHistory
-				HAVING COUNT(PPH.MiniGameID) >= 3))
+				HAVING COUNT(MiniGameID) >= 3))
 THEN
 		DELETE FROM ProfileProgressHistory
 		WHERE ProfileID = 

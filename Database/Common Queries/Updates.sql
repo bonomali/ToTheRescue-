@@ -1,4 +1,4 @@
---totherescue 
+-- totherescue 
 /**********************************************************************
 * Purpose: Updates history when a user finishes a minigame. 
 ***********************************************************************/
@@ -129,9 +129,9 @@ END
 DELIMITER $$ 
 CREATE PROCEDURE proc_DeleteProfileAnimal(ProfileID int,AnimalID int)
 BEGIN
-	DELETE TOP (1)
-	FROM ProfileAnimals
+	DELETE FROM ProfileAnimals
 	WHERE ProfileID = ProfileID AND AnimalID = AnimalID
+    LIMIT 1;
 END
 
 /**********************************************************************
