@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Web;
 using ToTheRescueWebApplication.Code;
@@ -15,16 +15,16 @@ namespace ToTheRescueWebApplication.Repositories
         public Nodes Get(int id)
         {
             Nodes node = new Nodes();
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand command = new SqlCommand())
+                using (MySqlCommand command = new MySqlCommand())
                 {
                     command.Connection = connection;
                     command.CommandText = "SELECT * FROM Nodes WHERE NodeID=@ID";
                     command.Parameters.AddWithValue("@ID", id);
                     command.Connection.Open();
 
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -43,16 +43,16 @@ namespace ToTheRescueWebApplication.Repositories
         {
             List<Nodes> n = new List<Nodes>();
 
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand command = new SqlCommand())
+                using (MySqlCommand command = new MySqlCommand())
                 {
                     command.Connection = connection;
                     command.CommandText = "SELECT * FROM Nodes WHERE MapID=@ID";
                     command.Parameters.AddWithValue("@ID", mapID);
                     command.Connection.Open();
 
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {

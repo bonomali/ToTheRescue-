@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
@@ -16,14 +16,14 @@ namespace ToTheRescueWebApplication.Repositories
         public Options Get(int id)
         {
             Options returnable = new Options();
-            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                SqlCommand cmd = null;
+                MySqlCommand cmd = null;
 
                 try
                 {
-                    cmd = new SqlCommand("SELECT ProfileName, ToggleSound, ToggleMusic, MathDifficultyLevel, MathPerformanceStat, ReadingDifficultyLevel, ReadingPerformanceStat, SubjectFilter, AvatarID FROM profiles WHERE ProfileID = " + id + ";");
-                    SqlDataReader reader;
+                    cmd = new MySqlCommand("SELECT ProfileName, ToggleSound, ToggleMusic, MathDifficultyLevel, MathPerformanceStat, ReadingDifficultyLevel, ReadingPerformanceStat, SubjectFilter, AvatarID FROM profiles WHERE ProfileID = " + id + ";");
+                    MySqlDataReader reader;
 
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
@@ -70,11 +70,11 @@ namespace ToTheRescueWebApplication.Repositories
 
         public void UpdateToggleSound(Options entity)
         {
-            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand("proc_UpdateToggleSound", connection))
+                    using (MySqlCommand cmd = new MySqlCommand("proc_UpdateToggleSound", connection))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@ProfileID", entity.profileID);
@@ -97,11 +97,11 @@ namespace ToTheRescueWebApplication.Repositories
 
         public void UpdateToggleMusic(Options entity)
         {
-            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand("proc_UpdateToggleMusic", connection))
+                    using (MySqlCommand cmd = new MySqlCommand("proc_UpdateToggleMusic", connection))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@ProfileID", entity.profileID);
@@ -124,11 +124,11 @@ namespace ToTheRescueWebApplication.Repositories
 
         public void UpdateDifficulty(Options entity)
         {
-            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand("proc_UpdateDifficulty", connection))
+                    using (MySqlCommand cmd = new MySqlCommand("proc_UpdateDifficulty", connection))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@ProfileID", entity.profileID);
@@ -152,11 +152,11 @@ namespace ToTheRescueWebApplication.Repositories
 
         public void UpdateFilter(Options entity)
         {
-            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand("proc_UpdateSubjectFilter", connection))
+                    using (MySqlCommand cmd = new MySqlCommand("proc_UpdateSubjectFilter", connection))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         if (entity.SubjectFilter == null)   

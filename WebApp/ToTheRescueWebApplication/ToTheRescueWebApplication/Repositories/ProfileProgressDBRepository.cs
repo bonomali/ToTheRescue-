@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Web;
 using ToTheRescueWebApplication.Code;
@@ -15,16 +15,16 @@ namespace ToTheRescueWebApplication.Repositories
         public ProfileProgress Get(int id)
         {
             ProfileProgress prog = new ProfileProgress();
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand command = new SqlCommand())
+                using (MySqlCommand command = new MySqlCommand())
                 {
                     command.Connection = connection;
                     command.CommandText = "SELECT * FROM ProfileProgress WHERE ProfileID=@ID";
                     command.Parameters.AddWithValue("@ID", id);
                     command.Connection.Open();
 
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -41,9 +41,9 @@ namespace ToTheRescueWebApplication.Repositories
         //update profile's current node
         public void UpdateCurrentNode(int profileID)
         {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("proc_UpdateProgressNode", connection))
+                using (MySqlCommand cmd = new MySqlCommand("proc_UpdateProgressNode", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ProfileID", profileID);
@@ -55,9 +55,9 @@ namespace ToTheRescueWebApplication.Repositories
         //update profile's current map
         public void UpdateCurrentMap(int profileID, int currentMap, int newAnimal)
         {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand())
+                using (MySqlCommand cmd = new MySqlCommand())
                 {
                     cmd.Connection = connection;
                     cmd.CommandText = "UPDATE ProfileProgress SET CurrentMap=@NewMap, CurrentNode=@NewNode, AnimalID=@newAnimal WHERE ProfileID=@ProfileID";
@@ -74,9 +74,9 @@ namespace ToTheRescueWebApplication.Repositories
         //add rescued animalID to ProfileAnimals table for the profile, by ProfileID
         public void RescueAnimal(int profileID, int animalID)
         {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("proc_InsertProfileAnimal", connection))
+                using (MySqlCommand cmd = new MySqlCommand("proc_InsertProfileAnimal", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ProfileID", profileID);
@@ -89,9 +89,9 @@ namespace ToTheRescueWebApplication.Repositories
         //Add an entry for new profile in ProfileProgress table, assign map, current node, and an animal to rescue
         public void AddProfileProgress(int profileID, int newAnimal)
         {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand())
+                using (MySqlCommand cmd = new MySqlCommand())
                 {
                     cmd.Connection = connection;
                     cmd.CommandText = "INSERT INTO ProfileProgress(ProfileID, CurrentMap, CurrentNode, AnimalID) VALUES(@ProfileID, @NewMap, @NewNode, @newAnimal)";

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
@@ -100,11 +100,11 @@ namespace ToTheRescueWebApplication.Repositories
         ***********************************************************************/
         public void Save(Profile entity)
         {
-            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand("proc_AddNewProfile", connection))
+                    using (MySqlCommand cmd = new MySqlCommand("proc_AddNewProfile", connection))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
@@ -135,18 +135,18 @@ namespace ToTheRescueWebApplication.Repositories
         ***********************************************************************/
         public void GetProfileAvatar(Profile prof)
         {
-            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand();
+                    MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = connection;
                     cmd.CommandText = "SELECT Images FROM dbo.GetProfileAvatar(@profileID);";
-                    cmd.Parameters.Add(new SqlParameter("@profileID", System.Data.SqlDbType.Int));
+                    cmd.Parameters.Add(new MySqlParameter("@profileID", System.Data.SqlDbType.Int));
                     cmd.Parameters["@profileID"].Value = prof.ID;
 
                     connection.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
+                    MySqlDataReader reader = cmd.ExecuteReader();
 
                     if (reader.Read() == false)
                         throw new Exception("Unable to read image.");
@@ -174,11 +174,11 @@ namespace ToTheRescueWebApplication.Repositories
         public void DeleteProfile(int profileID)
         {
             //Delete that profileID out of the database
-            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand("proc_DeleteProfile", connection))
+                    using (MySqlCommand cmd = new MySqlCommand("proc_DeleteProfile", connection))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@ProfileID", profileID);
@@ -204,20 +204,20 @@ namespace ToTheRescueWebApplication.Repositories
         public List<Byte[]> GetAllProfileAvatars()
         {
             List<Byte[]> allAvatars = new List<byte[]>();
-            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand();
+                    MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = connection;
                     cmd.CommandText = "SELECT Images FROM Images WHERE ImageClass = @imgClass;";
-                    cmd.Parameters.Add(new SqlParameter("@imgClass", System.Data.SqlDbType.Int));
+                    cmd.Parameters.Add(new MySqlParameter("@imgClass", System.Data.SqlDbType.Int));
 
 
                     cmd.Parameters["@imgClass"].Value = AVTAR_IMAGE_CLASS;
 
                     connection.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
+                    MySqlDataReader reader = cmd.ExecuteReader();
 
                     if (reader.Read() == false)
                         throw new Exception("Unable to read image.");

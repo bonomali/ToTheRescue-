@@ -1,7 +1,8 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Web;
 using ToTheRescueWebApplication.Code;
@@ -13,16 +14,16 @@ namespace ToTheRescueWebApplication.Repositories
         public Animal Get(int id)
         {
             Animal animal = new Animal();
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand command = new SqlCommand())
+                using (MySqlCommand command = new MySqlCommand())
                 {
                     command.Connection = connection;
                     command.CommandText = "SELECT * FROM Animals WHERE AnimalID=@ID";
                     command.Parameters.AddWithValue("@ID", id);
                     command.Connection.Open();
 
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -40,16 +41,16 @@ namespace ToTheRescueWebApplication.Repositories
         public List<Animal> GetList(int profileID)
         {
             List<Animal> animalList = new List<Animal>();
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand command = new SqlCommand())
+                using (MySqlCommand command = new MySqlCommand())
                 {
                     command.Connection = connection;
                     command.CommandText = "SELECT * FROM GrabAnimals(@ID)";
                     command.Parameters.AddWithValue("@ID", profileID);
                     command.Connection.Open();
 
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {

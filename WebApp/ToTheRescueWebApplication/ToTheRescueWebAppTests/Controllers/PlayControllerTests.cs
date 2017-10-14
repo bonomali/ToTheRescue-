@@ -15,7 +15,7 @@ using System.Web.Mvc;
 using ToTheRescueWebApplication.Code;
 using System.Web.Script.Serialization;
 using ToTheRescueWebApplication.Repositories;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data;
 
@@ -172,9 +172,9 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             int result = progess.CurrentNode;
 
             //Restore current node back to original value   
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand())
+                using (MySqlCommand cmd = new MySqlCommand())
                 {
                     cmd.Connection = connection;
                     cmd.CommandText = "UPDATE ProfileProgress SET CurrentNode=@NewNode WHERE ProfileID=@ProfileID";
@@ -511,9 +511,9 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             int ProfileID = 0;
 
             //Create a new profile
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("proc_AddNewProfile", connection))
+                using (MySqlCommand cmd = new MySqlCommand("proc_AddNewProfile", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@UserID", UserID);
@@ -525,9 +525,9 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             }
 
             //Query database to retrieve ProfileID of new profile
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand())
+                using (MySqlCommand cmd = new MySqlCommand())
                 {
                     cmd.Connection = connection;
                     cmd.CommandText = "SELECT * FROM Profiles WHERE UserID=@UserID AND ProfileName=@ProfileName";
@@ -535,7 +535,7 @@ namespace ToTheRescueWebApplication.Controllers.Tests
                     cmd.Parameters.AddWithValue("@ProfileName", ProfileName);
                     cmd.Connection.Open();
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -559,9 +559,9 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             p = _progress.Get(ProfileID);   //get profile progress again
 
             //Delete added profile from database
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("proc_DeleteProfile", connection))
+                using (MySqlCommand cmd = new MySqlCommand("proc_DeleteProfile", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ProfileID", ProfileID);
@@ -597,9 +597,9 @@ namespace ToTheRescueWebApplication.Controllers.Tests
             }
 
             //Query database to retrieve recently saved AnimalID from ProfileAnimals by AnimalID and ProfileID
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand())
+                using (MySqlCommand cmd = new MySqlCommand())
                 {
                     cmd.Connection = connection;
                     cmd.CommandText = "SELECT * FROM ProfileAnimals WHERE ProfileID=@ProfileID AND AnimalID=@AnimalID";
@@ -607,7 +607,7 @@ namespace ToTheRescueWebApplication.Controllers.Tests
                     cmd.Parameters.AddWithValue("@AnimalID", savedAnimal);
                     cmd.Connection.Open();
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {

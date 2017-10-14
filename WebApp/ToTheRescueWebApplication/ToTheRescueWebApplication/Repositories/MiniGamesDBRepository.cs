@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Web;
 using ToTheRescueWebApplication.Code;
@@ -16,9 +16,9 @@ namespace ToTheRescueWebApplication.Repositories
         {
             List<MiniGame> miniGames = new List<MiniGame>();
 
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand command = new SqlCommand())
+                using (MySqlCommand command = new MySqlCommand())
                 {
                     command.Connection = connection;
                     command.CommandText = "SELECT * FROM MiniGames WHERE MiniGameCategoryID=@categoryID AND MinDifficulty <= @difficulty AND MaxDifficulty >= @difficulty";
@@ -26,7 +26,7 @@ namespace ToTheRescueWebApplication.Repositories
                     command.Parameters.AddWithValue("@difficulty", difficulty);
                     command.Connection.Open();
 
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -51,16 +51,16 @@ namespace ToTheRescueWebApplication.Repositories
         {
             List<int> miniGames = new List<int>();
 
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand command = new SqlCommand())
+                using (MySqlCommand command = new MySqlCommand())
                 {
                     command.Connection = connection;
                     command.CommandText = "SELECT MiniGameID FROM ProfileProgressHistory WHERE ProfileID=@profileID";
                     command.Parameters.AddWithValue("@ProfileID", profileID);
                     command.Connection.Open();
 
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -76,15 +76,15 @@ namespace ToTheRescueWebApplication.Repositories
         {
             List<MiniGame> miniGames = new List<MiniGame>();
 
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand command = new SqlCommand())
+                using (MySqlCommand command = new MySqlCommand())
                 {
                     command.Connection = connection;
                     command.CommandText = "SELECT * FROM MiniGames";
                     command.Connection.Open();
 
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -107,9 +107,9 @@ namespace ToTheRescueWebApplication.Repositories
         //add recently played minigame to list of recently played minigames
         public void UpdateRecentlyPlayedMiniGames(int profileID, int miniGameID)
         {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("proc_UpdateProgressHistory", connection))
+                using (MySqlCommand cmd = new MySqlCommand("proc_UpdateProgressHistory", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ProfileID", profileID);
@@ -122,9 +122,9 @@ namespace ToTheRescueWebApplication.Repositories
         //update the reading and math performance statistics
         public void UpdatePerformanceStats(int profileID, float readingStat, float mathStat)
         {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("proc_UpdatePerformanceStats", connection))
+                using (MySqlCommand cmd = new MySqlCommand("proc_UpdatePerformanceStats", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ProfileID", profileID);

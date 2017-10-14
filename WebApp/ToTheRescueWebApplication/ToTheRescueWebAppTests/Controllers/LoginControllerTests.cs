@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,17 +26,17 @@ namespace ToTheRescueWebAppTests
             List<string> expected = temp.OrderBy(n => n).ToList();
             temp.Clear();   //clear list
 
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
                 int userID = 0;
-                using (SqlCommand command = new SqlCommand())
+                using (MySqlCommand command = new MySqlCommand())
                 {
                     command.Connection = connection;
                     command.CommandText = "SELECT UserID FROM dbo.AspNetUsers WHERE Email = @email";
                     command.Parameters.AddWithValue("@email", "stephanie.vetter@oit.edu");
                     command.Connection.Open();
 
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -46,7 +46,7 @@ namespace ToTheRescueWebAppTests
                 }
                 connection.Close();
 
-                using (SqlCommand command = new SqlCommand())
+                using (MySqlCommand command = new MySqlCommand())
                 {
                     string name = null;
                     command.Connection = connection;
@@ -54,7 +54,7 @@ namespace ToTheRescueWebAppTests
                     command.Parameters.AddWithValue("@id", userID);
                     command.Connection.Open();
 
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {

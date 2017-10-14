@@ -6,7 +6,7 @@ using System.IO;
 using System.Web.SessionState;
 using System.Reflection;
 using Moq;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Data;
 using System.Configuration;
 using ToTheRescueWebApplication.Controllers;

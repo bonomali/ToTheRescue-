@@ -6,7 +6,7 @@ using System.IO;
 using System.Web.SessionState;
 using System.Reflection;
 using Moq;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Data;
 using System.Configuration;
 
@@ -61,17 +61,17 @@ namespace ToTheRescueWebApplication.Controllers.Tests
         ***********************************************************************/
         private void DeleteProfileOutOfDatabase()
         {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                SqlCommand cmd = null;
+                MySqlCommand cmd = null;
 
                 try
                 {
-                    cmd = new SqlCommand("DELETE FROM Profiles WHERE ProfileName = @profileName;");
+                    cmd = new MySqlCommand("DELETE FROM Profiles WHERE ProfileName = @profileName;");
 
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
-                    cmd.Parameters.Add(new SqlParameter("@profileName", System.Data.SqlDbType.VarChar));
+                    cmd.Parameters.Add(new MySqlParameter("@profileName", System.Data.SqlDbType.VarChar));
 
                     cmd.Parameters["@profileName"].Value = "testProf";
 

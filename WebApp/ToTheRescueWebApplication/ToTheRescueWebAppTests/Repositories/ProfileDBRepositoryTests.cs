@@ -6,7 +6,7 @@ using System.Web;
 using System.IO;
 using System.Web.SessionState;
 using System.Reflection;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data;
 
@@ -62,17 +62,17 @@ namespace ToTheRescueWebApplication.Repositories.Tests
         ***********************************************************************/
         private void DeleteProfileOutOfDatabase()
         {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                SqlCommand cmd = null;
+                MySqlCommand cmd = null;
 
                 try
                 {
-                    cmd = new SqlCommand("DELETE FROM Profiles WHERE ProfileName = @profileName;");
+                    cmd = new MySqlCommand("DELETE FROM Profiles WHERE ProfileName = @profileName;");
 
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
-                    cmd.Parameters.Add(new SqlParameter("@profileName", System.Data.SqlDbType.VarChar));
+                    cmd.Parameters.Add(new MySqlParameter("@profileName", System.Data.SqlDbType.VarChar));
 
                     cmd.Parameters["@profileName"].Value = "testProf";
 
@@ -99,22 +99,22 @@ namespace ToTheRescueWebApplication.Repositories.Tests
         public int GetTestProfProfileID()
         {
             int id = -1;
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                SqlCommand cmd = null;
+                MySqlCommand cmd = null;
 
                 try
                 {
-                    cmd = new SqlCommand("SELECT ProfileID FROM Profiles WHERE ProfileName = @profileName;");
+                    cmd = new MySqlCommand("SELECT ProfileID FROM Profiles WHERE ProfileName = @profileName;");
 
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
-                    cmd.Parameters.Add(new SqlParameter("@profileName", System.Data.SqlDbType.VarChar));
+                    cmd.Parameters.Add(new MySqlParameter("@profileName", System.Data.SqlDbType.VarChar));
 
                     cmd.Parameters["@profileName"].Value = "testProf";
 
                     connection.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
+                    MySqlDataReader reader = cmd.ExecuteReader();
 
                     if (reader.Read() == false)
                         throw new Exception("Unable to read image.");
