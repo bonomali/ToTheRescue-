@@ -32,7 +32,7 @@ namespace ToTheRescueWebAppTests
                 using (MySqlCommand command = new MySqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = "SELECT UserID FROM dbo.AspNetUsers WHERE Email = @email";
+                    command.CommandText = "SELECT UserID FROM AspNetUsers WHERE Email = @email";
                     command.Parameters.AddWithValue("@email", "stephanie.vetter@oit.edu");
                     command.Connection.Open();
 
@@ -50,7 +50,7 @@ namespace ToTheRescueWebAppTests
                 {
                     string name = null;
                     command.Connection = connection;
-                    command.CommandText = "SELECT ProfileName FROM dbo.Profiles WHERE UserID = @id";
+                    command.CommandText = "SELECT ProfileName FROM Profiles WHERE UserID = @id";
                     command.Parameters.AddWithValue("@id", userID);
                     command.Connection.Open();
 

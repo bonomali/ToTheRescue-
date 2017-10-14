@@ -194,3 +194,24 @@ BEGIN
 	SubjectFilter = SubjectFilter
 	WHERE ProfileID = ProfileID;
 END
+
+DELIMITER $$
+CREATE PROCEDURE GetProfileAvatar(profileID3 INT)
+BEGIN
+		(SELECT Images
+		FROM Images 
+		INNER JOIN Profiles
+		ON Images.ImageID = Profiles.AvatarID
+		WHERE Profiles.ProfileID = profileID3);
+END
+
+DELIMITER $$
+CREATE PROCEDURE GrabAnimals(profileID int)
+BEGIN
+   (SELECT Animals.AnimalID, Funfact, Images.ImageID, Sounds.SoundID, Active, Shiny
+	FROM ProfileAnimals
+	JOIN Animals on ProfileAnimals.AnimalID = Animals.AnimalID
+	JOIN Images on Animals.ImageID = Images.ImageID
+	JOIN Sounds on Animals.SoundID = Sounds.SoundID
+	WHERE ProfileAnimals.ProfileID = profileID);
+END

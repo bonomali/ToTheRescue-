@@ -6,6 +6,7 @@ using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Web;
 using ToTheRescueWebApplication.Code;
+using System.Data;
 
 namespace ToTheRescueWebApplication.Repositories
 {
@@ -31,7 +32,7 @@ namespace ToTheRescueWebApplication.Repositories
                             animal.FunFact = reader["FunFact"].ToString();
                             animal.ImageID = (int)reader["ImageID"];
                             animal.SoundID = (int)reader["SoundID"];
-                            animal.ShinyBit = (bool)reader["Shiny"];
+                            animal.ShinyBit = reader.GetBoolean("Shiny");
                         }
                     }
                 }
@@ -43,12 +44,12 @@ namespace ToTheRescueWebApplication.Repositories
             List<Animal> animalList = new List<Animal>();
             using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                using (MySqlCommand command = new MySqlCommand())
+                using (MySqlCommand command = new MySqlCommand("GrabAnimals", connection))
                 {
-                    command.Connection = connection;
-                    command.CommandText = "SELECT * FROM GrabAnimals(@ID)";
-                    command.Parameters.AddWithValue("@ID", profileID);
-                    command.Connection.Open();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@profileID", profileID);
+                    connection.Open();
+                    command.ExecuteNonQuery();
 
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {

@@ -29,14 +29,14 @@ namespace ToTheRescueWebApplication.Repositories
                     cmd.Connection = connection;
 
                     connection.Open();
-                    reader = cmd.ExecuteReader(); ;
+                    reader = cmd.ExecuteReader();
 
                     if (reader.Read())
                     {
                         returnable.profileID = id;
                         returnable.profileName = reader["ProfileName"].ToString();
-                        returnable.toggleSound = (bool)reader["ToggleSound"];
-                        returnable.toggleMusic = (bool)reader["ToggleMusic"];
+                        returnable.toggleSound = reader.GetBoolean("ToggleSound");
+                        returnable.toggleMusic = reader.GetBoolean("ToggleMusic");
                         returnable.MathDifficultyLevel = (int)reader["MathDifficultyLevel"];
                         returnable.MathPerformanceStat = (float)reader.GetDouble(4);
                         returnable.ReadingDifficultyLevel = (int)reader["ReadingDifficultyLevel"];
@@ -164,7 +164,7 @@ namespace ToTheRescueWebApplication.Repositories
                             entity.SubjectFilter = "";
                         }
                         cmd.Parameters.AddWithValue("@ProfileID", entity.profileID);
-                        cmd.Parameters.AddWithValue("@Filter", entity.SubjectFilter);
+                        cmd.Parameters.AddWithValue("@Fil", entity.SubjectFilter);
                         connection.Open();
                         cmd.ExecuteNonQuery();
                     }

@@ -15,9 +15,9 @@ using System.Web.Mvc;
 using ToTheRescueWebApplication.Code;
 using System.Web.Script.Serialization;
 using ToTheRescueWebApplication.Repositories;
-using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace ToTheRescueWebApplication.Controllers.Tests
 {

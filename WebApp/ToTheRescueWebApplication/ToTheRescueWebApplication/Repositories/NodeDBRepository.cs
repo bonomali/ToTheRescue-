@@ -60,8 +60,8 @@ namespace ToTheRescueWebApplication.Repositories
 
                             node.ID = (int)reader["NodeID"];
                             node.MapID = (int)reader["MapID"];
-                            node.XCoordinate = (double)reader["XCoordinate"];
-                            node.YCoordinate = (double)reader["YCoordinate"];
+                            node.XCoordinate = reader.GetDouble("XCoordinate");
+                            node.YCoordinate = reader.GetDouble("YCoordinate");
 
                             n.Add(node);
                         }

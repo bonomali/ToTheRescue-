@@ -139,21 +139,22 @@ namespace ToTheRescueWebApplication.Repositories
             {
                 try
                 {
-                    MySqlCommand cmd = new MySqlCommand();
-                    cmd.Connection = connection;
-                    cmd.CommandText = "SELECT Images FROM dbo.GetProfileAvatar(@profileID);";
-                    cmd.Parameters.Add(new MySqlParameter("@profileID", System.Data.SqlDbType.Int));
-                    cmd.Parameters["@profileID"].Value = prof.ID;
+                    using (MySqlCommand cmd = new MySqlCommand("GetProfileAvatar", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@profileID3", prof.ID);
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
 
-                    connection.Open();
-                    MySqlDataReader reader = cmd.ExecuteReader();
+                        MySqlDataReader reader = cmd.ExecuteReader();
 
-                    if (reader.Read() == false)
-                        throw new Exception("Unable to read image.");
+                        if (reader.Read() == false)
+                            throw new Exception("Unable to read image.");
 
-                    prof.Avatar = (Byte[])reader[0];
+                        prof.Avatar = (Byte[])reader[0];
 
-                    reader.Close();
+                        reader.Close();
+                    }
                 }
                 catch (Exception e)
                 {

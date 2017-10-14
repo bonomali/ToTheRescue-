@@ -6,9 +6,9 @@ using System.IO;
 using System.Web.SessionState;
 using System.Reflection;
 using Moq;
-using MySql.Data.MySqlClient;
 using System.Data;
 using System.Configuration;
+using MySql.Data.MySqlClient;
 
 namespace ToTheRescueWebApplication.Controllers.Tests
 {
