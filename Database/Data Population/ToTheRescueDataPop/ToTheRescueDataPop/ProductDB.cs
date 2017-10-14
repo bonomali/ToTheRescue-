@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
@@ -14,19 +15,21 @@ namespace ToTheRescueDataPop
         //public static string CODE_PATH = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\miniGameCode\\");
         static string DB_USER_NAME = "";
         static string DB_USER_PWD = "";
-        public static SqlConnection GetConnection()
+        public static MySqlConnection GetConnection()
         {
-            SqlConnection connection = new SqlConnection();
+            /*SqlConnection connection = new SqlConnection();
             connection.ConnectionString =
                 "Data Source=aura.students.cset.oit.edu" +
                 ";Initial Catalog=" + DB_USER_NAME +
                 ";Integrated Security=False" +
-                ";User ID=" + DB_USER_NAME + ";Password=" + DB_USER_PWD;
+                ";User ID=" + DB_USER_NAME + ";Password=" + DB_USER_PWD;*/
+            MySqlConnection connection = new MySqlConnection(
+                "Server=localhost;Database=totherescue;UID="+DB_USER_NAME+";Password="+DB_USER_PWD);
             return connection;
         }
         public static void WriteImage(int ImageClass, string ImagePath, string ImageName) 
         {
-            SqlConnection connection = null;
+            MySqlConnection connection = null;
             try
             {
                 // 1. Read image from file
@@ -46,10 +49,10 @@ namespace ToTheRescueDataPop
                 // 2. Write image to database
                 connection = GetConnection();
 
-                SqlCommand command = new SqlCommand();
+                MySqlCommand command = new MySqlCommand();
                 command.Connection = connection;
                 command.CommandText =
-                    "INSERT INTO dbo.Images (ImageClass, ImageName, Images) " +
+                    "INSERT INTO Images (ImageClass, ImageName, Images) " +
                     "VALUES (@ImageClass, @ImageName, @ProductImage)";
 
                 command.Parameters.AddWithValue("@ImageClass", ImageClass);
@@ -74,7 +77,7 @@ namespace ToTheRescueDataPop
    
         public static void WriteSound(int SoundClass, string SoundPath, string SoundName)
         {
-            SqlConnection connection = null;
+            MySqlConnection connection = null;
             try
             {
                 // 1. Read sound from file
@@ -94,10 +97,10 @@ namespace ToTheRescueDataPop
                 // 2. Write sound to database
                 connection = GetConnection();
 
-                SqlCommand command = new SqlCommand();
+                MySqlCommand command = new MySqlCommand();
                 command.Connection = connection;
                 command.CommandText =
-                    "INSERT INTO dbo.Sounds (SoundClass, SoundName, Sound) " +
+                    "INSERT INTO Sounds (SoundClass, SoundName, Sound) " +
                     "VALUES (@SoundClass, @SoundName, @SoundImage)";
 
                 command.Parameters.AddWithValue("@SoundClass", SoundClass);
@@ -121,16 +124,16 @@ namespace ToTheRescueDataPop
         }
         public static void WriteMiniGames(int CategoryID, string JSFilePath, string GameName, int MinDifficulty, int MaxDifficulty)
         {
-            SqlConnection connection = null;
+            MySqlConnection connection = null;
             try
             {
                 connection = GetConnection();
 
-                SqlCommand command = new SqlCommand();
+                MySqlCommand command = new MySqlCommand();
                 command.Connection = connection;
 
                 command.CommandText =
-                "INSERT INTO dbo.MiniGames (MiniGameCategoryID, MiniGamePath, MiniGameName, MinDifficulty, MaxDifficulty) " +
+                "INSERT INTO MiniGames (MiniGameCategoryID, MiniGamePath, MiniGameName, MinDifficulty, MaxDifficulty) " +
                 "VALUES (@GameCategory, @GamePath, @GameName, @MinDifficulty, @MaxDifficulty)";
 
                 command.Parameters.AddWithValue("@GameCategory", CategoryID);
@@ -155,19 +158,19 @@ namespace ToTheRescueDataPop
         }
         public static List<int> GetImageIDList()
         {
-            SqlConnection connection = null;
+            MySqlConnection connection = null;
             try
             {
                 connection = GetConnection();
 
-                SqlCommand command = new SqlCommand();
+                MySqlCommand command = new MySqlCommand();
                 command.Connection = connection;
                 command.CommandText = 
                     "SELECT ImageID FROM Images " +
                     "ORDER BY ImageID"; 
 
                 connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
+                MySqlDataReader reader = command.ExecuteReader();
 
                 List<int> imageIDList = new List<int>();
                 while (reader.Read())
@@ -193,19 +196,19 @@ namespace ToTheRescueDataPop
         }
         public static List<int> GetSoundIDList()
         {
-            SqlConnection connection = null;
+            MySqlConnection connection = null;
             try
             {
                 connection = GetConnection();
 
-                SqlCommand command = new SqlCommand();
+                MySqlCommand command = new MySqlCommand();
                 command.Connection = connection;
                 command.CommandText =
                     "SELECT SoundID FROM Sounds " +
                     "ORDER BY SoundID";
 
                 connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
+                MySqlDataReader reader = command.ExecuteReader();
 
                 List<int> soundIDList = new List<int>();
                 while (reader.Read())
@@ -232,7 +235,7 @@ namespace ToTheRescueDataPop
 
         public static void WriteSQL(string path)
         {
-            SqlConnection connection = null;
+            MySqlConnection connection = null;
             try
             {
                 string script = File.ReadAllText(path);
@@ -247,7 +250,7 @@ namespace ToTheRescueDataPop
                 {
                     if (commandString.Trim() != "")
                     {
-                        using (var command = new SqlCommand(commandString, connection))
+                        using (var command = new MySqlCommand(commandString, connection))
                         {
                             command.ExecuteNonQuery();
                         }

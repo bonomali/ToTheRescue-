@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -38,18 +39,18 @@ namespace ToTheRescueWebApplication.Repositories
         {
             List<Profile> profiles = new List<Profile>();
 
-            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Aura"].ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["LocalMySqlServer"].ConnectionString))
             {
-                SqlCommand cmd = null;
+                MySqlCommand cmd = null;
 
                 try
                 {
-                    cmd = new SqlCommand("SELECT ProfileName, ProfileID FROM Profiles WHERE UserID = @userID;");
-                    SqlDataReader reader;
+                    cmd = new MySqlCommand("SELECT ProfileName, ProfileID FROM Profiles WHERE UserID = @userID;");
+                    MySqlDataReader reader;
 
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
-                    cmd.Parameters.Add(new SqlParameter("@userID", System.Data.SqlDbType.Int));
+                    cmd.Parameters.Add(new MySqlParameter("@userID", System.Data.SqlDbType.Int));
 
                     //use the session variable to get the userID and assign it to the userID sql parameter
                     cmd.Parameters["@userID"].Value = (int)_ctx.Session["userID"];

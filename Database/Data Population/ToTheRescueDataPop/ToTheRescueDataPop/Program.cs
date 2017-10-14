@@ -151,7 +151,7 @@ namespace ToTheRescueDataPop
 
             string path;
             //users
-            Console.WriteLine("Uploading Users.");
+            /*Console.WriteLine("Uploading Users.");
             path = Path.Combine(Environment.CurrentDirectory, "AspNetUsers.sql");
             Console.WriteLine(path);
             ProductDB.WriteSQL(path);
@@ -160,7 +160,7 @@ namespace ToTheRescueDataPop
             Console.WriteLine("Uploading Profiles.");
             path = Path.Combine(Environment.CurrentDirectory, "Profiles.sql");
             Console.WriteLine(path);
-            ProductDB.WriteSQL(path);
+            ProductDB.WriteSQL(path);*/
 
             //maps
             Console.WriteLine("Uploading Maps.");
@@ -217,10 +217,10 @@ namespace ToTheRescueDataPop
             ProductDB.WriteSQL(path); 
             
             //ProfileProgress
-            Console.WriteLine("Uploading ProfileProgress.");
+            /*Console.WriteLine("Uploading ProfileProgress.");
             path = Path.Combine(Environment.CurrentDirectory, "ProfileProgress.sql");
             Console.WriteLine(path);
-            ProductDB.WriteSQL(path);
+            ProductDB.WriteSQL(path);*/
             
             Console.WriteLine("-----Done!-----");
         }

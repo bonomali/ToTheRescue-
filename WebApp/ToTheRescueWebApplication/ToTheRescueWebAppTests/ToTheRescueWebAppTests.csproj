@@ -109,9 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <Content Include="ConnectionStrings.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="ConnectionStrings.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="LoadTests\25NonGameSmokeTest.loadtest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
