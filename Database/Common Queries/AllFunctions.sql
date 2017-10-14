@@ -4,7 +4,7 @@
 		Returns: table
 ***********************************************************************/
 DROP FUNCTION func_GetPrevMiniGames;
-GO
+
 CREATE FUNCTION func_GetPrevMiniGames
 		(@profileID INT)
 		RETURNS TABLE
@@ -12,7 +12,7 @@ CREATE FUNCTION func_GetPrevMiniGames
 RETURN(SELECT MiniGameID
 	FROM ProfileProgressHistory
 	WHERE ProfileID = @profileID);
-GO
+
 
 /**********************************************************************
 * Purpose: This function gets the image and sound for a map. 
@@ -20,7 +20,7 @@ GO
 		Returns: table
 ***********************************************************************/
 DROP FUNCTION func_GetMapMedia;
-GO
+
 CREATE FUNCTION func_GetMapMedia
 		(@mapID INT)
 		RETURNS TABLE
@@ -30,7 +30,7 @@ RETURN(SELECT Images, Sound
 		JOIN Images ON Maps.ImageID = Images.ImageID
 		JOIN Sounds ON Maps.SoundID = Sounds.SoundID
 	WHERE Maps.MapID = @mapID);
-GO
+
 
 /**********************************************************************
 * Purpose: This function gets the nodes for the current map.
@@ -38,7 +38,7 @@ GO
 		Returns: table
 ***********************************************************************/
 DROP FUNCTION func_GetMapNodes
-GO
+
 CREATE FUNCTION func_GetMapNodes
 		(@mapID INT)
 		RETURNS TABLE
@@ -47,7 +47,7 @@ RETURN(SELECT NodeID, XCoordinate, YCoordinate
 		FROM Maps
 			JOIN Nodes ON Maps.MapID = Nodes.MapID
 		WHERE Maps.MapID = @mapID);
-GO
+
 
 /**********************************************************************
 * Purpose: This function gets a profile's current map, 
@@ -55,8 +55,8 @@ GO
 * the current map (Essentially the information in the ProfileProgress 
 * table).
 ***********************************************************************/
-DROP FUNCTION func_GetProfileProgressInfo
-GO
+DROP FUNCTION func_GetProfileProgressInfo;
+
 CREATE FUNCTION func_GetProfileProgressInfo
 	(@profileID int)
 	RETURNS TABLE
@@ -64,14 +64,14 @@ RETURN
 (SELECT CurrentMap, CurrentNode, AnimalID
 FROM ProfileProgress
 WHERE ProfileID = @profileID);
-GO
+
 
 /************************************************************
 * This Function returns the profile row associated with the 
 * provided ProfileID
 ************************************************************/
-DROP FUNCTION GetProfile
-GO
+DROP FUNCTION GetProfile;
+
 CREATE FUNCTION GetProfile
 				(@profileID2 INT)
 				RETURNS TABLE
@@ -81,14 +81,14 @@ RETURN(SELECT ProfileName, AvatarID, ReadingDifficultyLevel, MathDifficultyLevel
 			,SubjectFilter, ToggleSound, ToggleMusic
 		FROM Profiles
 		WHERE ProfileID = @profileID2);
-GO
+
 
 /************************************************************
 * This Function returns the avatar associated with the  
 * provided ProfileID
 ************************************************************/
 DROP FUNCTION GetProfileAvatar
-GO
+
 CREATE FUNCTION GetProfileAvatar
 				(@profileID3 INT)
 				RETURNS TABLE
@@ -98,14 +98,14 @@ RETURN(SELECT Images
 		INNER JOIN Profiles
 		ON Images.ImageID = Profiles.AvatarID
 		WHERE Profiles.ProfileID = @profileID3);
-GO
+
 
 /************************************************************
 * This Function returns the the current animal a user is trying 
 * to save associated with the provided ProfileID
 ************************************************************/
 DROP FUNCTION GetCurrentAnimal
-GO
+
 CREATE FUNCTION GetCurrentAnimal
 				(@profileID4 INT)
 				RETURNS TABLE
@@ -119,14 +119,14 @@ RETURN(SELECT Images
 		INNER JOIN Images
 		ON Animals.ImageID = Images.ImageID
 		WHERE Profiles.ProfileID = @profileID4);
-GO
+
 
 /**********************************************************************
 * Purpose: Grabs the nodes for the current map.
 ***********************************************************************/
 DROP FUNCTION GrabMapNodes;
 
-GO
+
 CREATE FUNCTION GrabMapNodes
 	(@mapID int)
 	RETURNS TABLE
@@ -134,15 +134,14 @@ RETURN
    (SELECT NodeID, XCoordinate, YCoordinate
 	FROM Maps
 	JOIN Nodes on Maps.MapID = Nodes.MapID
-	WHERE Maps.MapID = @mapID)
-GO
+	WHERE Maps.MapID = @mapID);
 
 /**********************************************************************
 * Purpose: Grabs all of the animals in a profile's sanctuary. 
 ***********************************************************************/
 DROP FUNCTION GrabAnimals;
 
-GO
+
 CREATE FUNCTION GrabAnimals
 	(@profileID int)
 	RETURNS TABLE
@@ -152,8 +151,7 @@ RETURN
 	JOIN Animals on ProfileAnimals.AnimalID = Animals.AnimalID
 	JOIN Images on Animals.ImageID = Images.ImageID
 	JOIN Sounds on Animals.SoundID = Sounds.SoundID
-	WHERE ProfileAnimals.ProfileID = @profileID)
-GO
+	WHERE ProfileAnimals.ProfileID = @profileID);
 
 /**********************************************************************
 * Purpose: Grabs the information about a MiniGame. 
@@ -169,7 +167,7 @@ WHERE Minigames.MiniGameID = @minigameID;
 
 DROP FUNCTION GrabMiniGame;
 
-GO
+
 CREATE FUNCTION GrabMiniGame
 	(@minigameID int)
 	RETURNS TABLE
@@ -177,13 +175,13 @@ RETURN
    (SELECT MiniGameCode, MiniGameName
 	FROM Minigames
 	WHERE Minigames.MiniGameID = @minigameID)
-GO
+
 
 /**********************************************************************
 * Purpose: Grabs the media for a MiniGame.
 ***********************************************************************/
-USE ToTheRescue;  
-GO  
+USE totherescue;  
+  
 CREATE PROCEDURE proc_UpdateProgressHistory  
     @MiniGameID int,
 	@Difficulty int
@@ -192,4 +190,3 @@ AS
 	FROM Minigames
 	JOIN MiniGameMedia on Minigames.MiniGameID = MiniGameMedia.MiniGameID
 	WHERE Minigames.MiniGameID = @MiniGameID AND (Difficulty = @Difficulty OR Difficulty IS NULL);
-GO
